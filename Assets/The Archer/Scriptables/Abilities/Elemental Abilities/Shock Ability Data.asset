@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dff0c9a9f1ddab4885c4813f805f12c, type: 3}
+  m_Name: Shock Ability Data
+  m_EditorClassIdentifier: 
+  type: 15
+  prerequisites: 
+  rarity: 1
+  isRepeatedAbiltiy: 0
+  isEndgameAbility: 0
+  title: Shock
+  description: Attacks have a chance to shock enemies
+  icon: {fileID: 21300000, guid: 3ec3b43a7dd49f045af3ff067ceddf3d, type: 3}
+  prefab: {fileID: 8451893333612301729, guid: 5ae5c2c35ed99504c8f9371a37096a3e, type: 3}
+  levels:
+  - effectDuration: 3
+    shockSpreadProjectulePrefab: {fileID: 6595354339571705485, guid: ade4fe354a56e804494cb09ae3fef543, type: 3}
+    shockSpreadRadius: 4
+    shockSpreadDamageMultiplier: 0.4
+    arrowDamageMultiplier: 0.8
+    effectDealsDamageOverTime: 1
+    effectDamageMultiplier: 0.2
+    effectDamageInterval: 0.8

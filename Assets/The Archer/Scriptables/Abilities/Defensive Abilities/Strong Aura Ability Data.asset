@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4fdceea361b8af47aa6bf3c71a86315, type: 3}
+  m_Name: Strong Aura Ability Data
+  m_EditorClassIdentifier: 
+  type: 64
+  prerequisites: 
+  rarity: 3
+  isRepeatedAbiltiy: 0
+  isEndgameAbility: 0
+  title: Strong Aura
+  description: Gain a force field that damages and weakens enemies
+  icon: {fileID: 21300000, guid: e52850f6851715e4aaabe314ba5d844a, type: 3}
+  prefab: {fileID: 8421697985616023347, guid: 4998c816d193a244995b11aaac47eb6a, type: 3}
+  levels:
+  - attackDamageMultiplier: 0.9
+    abilityRadius: 5
+    enemyDamageReceivedMultiplierInsideRadius: 1.5
+    enemyDamageMultiplierWhenEntering: 0.5

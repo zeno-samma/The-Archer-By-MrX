@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4abdb76b483815d4f99333e4c71fa0d8, type: 3}
+  m_Name: Ignite Enhancement Ability Data
+  m_EditorClassIdentifier: 
+  type: 20
+  prerequisites: 100000002b000000
+  rarity: 2
+  isRepeatedAbiltiy: 0
+  isEndgameAbility: 0
+  title: Ignite Enhancement
+  description: Ignition does more damage
+  icon: {fileID: 21300000, guid: 0d62b36f7c6d26b4c8e168d00f9a4ba5, type: 3}
+  prefab: {fileID: 3086984643109053193, guid: 1298289b94aa77d45a728d6b62e29780, type: 3}
+  levels:
+  - igniteDamageMultiplier: 1.5
+    arrowSpeedMultiplier: 1.5

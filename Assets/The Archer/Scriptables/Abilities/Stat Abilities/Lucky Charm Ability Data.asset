@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d27a58686a5e13f4c94d6a070c868530, type: 3}
+  m_Name: Lucky Charm Ability Data
+  m_EditorClassIdentifier: 
+  type: 33
+  rarity: 1
+  isRepeatedAbiltiy: 0
+  isEndgameAbility: 0
+  title: Lucky Charm
+  description: Heal pickups can increase max HP
+  icon: {fileID: 21300000, guid: bd3613637d1cf4d4fbf436d556f33d77, type: 3}
+  prefab: {fileID: 17520651253286138, guid: 1264d250207d51242b835898800ccc05, type: 3}
+  levels:
+  - maxHPMultiplier: 1.1
+    chance: 0.2

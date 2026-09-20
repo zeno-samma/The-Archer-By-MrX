@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f649708d8f1f29f4fbc5c394c7affd09, type: 3}
+  m_Name: Four Leaf Clover Ability Data
+  m_EditorClassIdentifier: 
+  type: 34
+  rarity: 1
+  isRepeatedAbiltiy: 0
+  isEndgameAbility: 0
+  title: Four Leaf Clover
+  description: Increase your luck while getting new abilities and dodging attacks
+  icon: {fileID: 21300000, guid: 53b0b169c785a4042959b2d7100680e9, type: 3}
+  prefab: {fileID: 7547525819666031367, guid: de050a2c4ec0f544fbfd1a4922f037e1, type: 3}
+  levels:
+  - additionalLuckLevels: 1
+    dodgeChancePercent: 8

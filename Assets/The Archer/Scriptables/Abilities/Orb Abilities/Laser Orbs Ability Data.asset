@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25de1eab5c922d448a37162a631b3962, type: 3}
+  m_Name: Laser Orbs Ability Data
+  m_EditorClassIdentifier: 
+  type: 55
+  prerequisites: 
+  rarity: 2
+  isRepeatedAbiltiy: 0
+  isEndgameAbility: 0
+  title: Laser Orbs
+  description: Gain circling laser orbs
+  icon: {fileID: 21300000, guid: 90966637827c7ec47b540b60e92d1dbb, type: 3}
+  prefab: {fileID: 2729836033721482760, guid: 539ec73b79d65724d9d60ae4bb48ce9b, type: 3}
+  levels:
+  - orbDamageMultiplier: 0.6
+    laserDamageMultiplier: 0.5
+    laserActiveDuration: 2
+    laserDisabledDuration: 4

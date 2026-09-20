@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a754f895e7ed0ec4496094a2646864cc, type: 3}
+  m_Name: Cure Ability Data
+  m_EditorClassIdentifier: 
+  type: 61
+  prerequisites: 
+  rarity: 1
+  isRepeatedAbiltiy: 0
+  isEndgameAbility: 0
+  title: Cure
+  description: Heal up fully and increase max HP
+  icon: {fileID: 21300000, guid: 4a8392fa189a4444882b6f846f80bde2, type: 3}
+  prefab: {fileID: 6124954983107399293, guid: 1e17281a22544b147adc77b9cb9160c8, type: 3}
+  levels:
+  - maxHPMultiplier: 1.2
+    maxHealthProportionHeal: 1

@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65455e05bc4fdeb46947643c7ec44c17, type: 3}
+  m_Name: Minor Power Boost Ability Data
+  m_EditorClassIdentifier: 
+  type: 29
+  rarity: 0
+  isRepeatedAbiltiy: 0
+  isEndgameAbility: 0
+  title: Minor Power Boost
+  description: Slightly increase attack damage
+  icon: {fileID: 21300000, guid: 3f102a773063c30468d19ab7cc7a24ad, type: 3}
+  prefab: {fileID: 1736691562250478760, guid: c414918c7bd3eb24e878633372816488, type: 3}
+  levels:
+  - attackDamageMultiplier: 1.1
+  - attackDamageMultiplier: 1.2
+  - attackDamageMultiplier: 1.3
+  - attackDamageMultiplier: 1.4
+  - attackDamageMultiplier: 1.5

@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d294d613fc81d3549ab6c6077a8509a9, type: 3}
+  m_Name: Drop Database
+  m_EditorClassIdentifier: 
+  drop:
+  - dropType: 0
+    prefab: {fileID: 6496447180071690553, guid: 509e468ed929d0442ab6fa605b9d8f1a, type: 3}
+    initialPoolSize: 5
+    maxDroppedCount: -1
+    canPickUpManually: 1
+    waveEndAutomaticPickUp: 0
+    roomEndAutomaticPickUp: 1
+  - dropType: 1
+    prefab: {fileID: 2212154720169660543, guid: 9dc94baa0ad0378469e1f66a45810d77, type: 3}
+    initialPoolSize: 5
+    maxDroppedCount: -1
+    canPickUpManually: 1
+    waveEndAutomaticPickUp: 0
+    roomEndAutomaticPickUp: 0
+  - dropType: 2
+    prefab: {fileID: 2212154720169660543, guid: 4b01c762b05550a4eac5e2dea6a92c41, type: 3}
+    initialPoolSize: 5
+    maxDroppedCount: -1
+    canPickUpManually: 1
+    waveEndAutomaticPickUp: 0
+    roomEndAutomaticPickUp: 0
+  - dropType: 3
+    prefab: {fileID: 6496447180071690553, guid: 87b3dc4a326d0324297cc20c2e1918fd, type: 3}
+    initialPoolSize: 50
+    maxDroppedCount: -1
+    canPickUpManually: 0
+    waveEndAutomaticPickUp: 1
+    roomEndAutomaticPickUp: 0
+  - dropType: 4
+    prefab: {fileID: 6496447180071690553, guid: c183b143994beb04092c516d4489025e, type: 3}
+    initialPoolSize: 2
+    maxDroppedCount: -1
+    canPickUpManually: 0
+    waveEndAutomaticPickUp: 1
+    roomEndAutomaticPickUp: 0

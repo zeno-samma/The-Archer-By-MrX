@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 769fa92bb0cfae144a6e1ed363b4470c, type: 3}
+  m_Name: Testing Database
+  m_EditorClassIdentifier: 
+  presets:
+  - name: Orbs
+    enabledInEditor: 0
+    enabledInBuild: 0
+    abilities:
+    - abilityType: 50
+      level: 0
+    - abilityType: 51
+      level: 0
+    - abilityType: 53
+      level: 0
+    - abilityType: 49
+      level: 0
+    - abilityType: 52
+      level: 0
+    - abilityType: 55
+      level: 0
+    - abilityType: 56
+      level: 0
+  - name: Spirits
+    enabledInEditor: 0
+    enabledInBuild: 0
+    abilities:
+    - abilityType: 48
+      level: 0
+    - abilityType: 44
+      level: 0
+    - abilityType: 45
+      level: 0
+    - abilityType: 42
+      level: 0
+    - abilityType: 43
+      level: 0
+  - name: Arrows
+    enabledInEditor: 0
+    enabledInBuild: 0
+    abilities:
+    - abilityType: 0
+      level: 1
+    - abilityType: 1
+      level: 1
+    - abilityType: 7
+      level: 1
+    - abilityType: 13
+      level: 0
+    - abilityType: 10
+      level: 1

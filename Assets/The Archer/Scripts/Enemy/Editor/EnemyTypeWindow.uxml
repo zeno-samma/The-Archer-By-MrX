@@ -1,0 +1,9 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <Style src="project://database/Assets/The Archer/Scripts/Enemy/Editor/EnemyType.uss?fileID=7433441132597879392&amp;guid=23fb57bfeb4a5794f958c06789888255&amp;type=3#EnemyType" />
+    <ui:ScrollView name="ScrollView" />
+    <ui:VisualElement name="Buttons" style="flex-grow: 1; opacity: 1; flex-direction: row; flex-shrink: 0; flex-wrap: nowrap; align-items: flex-start; align-self: center;">
+        <ui:Button text="Add" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Add_Button" />
+        <ui:Button text="Reset" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Reset_Button" />
+        <ui:Button text="Save" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Save_Button" />
+    </ui:VisualElement>
+</ui:UXML>

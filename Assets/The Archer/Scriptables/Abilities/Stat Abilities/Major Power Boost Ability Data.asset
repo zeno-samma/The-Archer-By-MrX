@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84c8b7db31cc9ad498ae65cd371dbbd5, type: 3}
+  m_Name: Major Power Boost Ability Data
+  m_EditorClassIdentifier: 
+  type: 40
+  prerequisites: 
+  rarity: 3
+  isRepeatedAbiltiy: 1
+  isEndgameAbility: 0
+  title: Major Power Boost
+  description: Increase attack damage
+  icon: {fileID: 21300000, guid: 07fb1f455dfe9054fba08d5a8e96e037, type: 3}
+  prefab: {fileID: 1736691562250478760, guid: 4d9ac6c6be5f5e7438385bfbac41504b, type: 3}
+  levels:
+  - attackDamageMultiplier: 1.3
+  - attackDamageMultiplier: 1.6
+  - attackDamageMultiplier: 1.9
+  - attackDamageMultiplier: 2.2
+  - attackDamageMultiplier: 2.5

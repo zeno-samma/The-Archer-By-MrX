@@ -1,0 +1,967 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06a6c6fa64f487d409866454f3abbed3, type: 3}
+  m_Name: Enemies Database
+  m_EditorClassIdentifier: 
+  enemies:
+  - name: Cauldron
+    prefab: {fileID: 446584557187707321, guid: 8be0132bf1279e34fa2a01ef73919aad, type: 3}
+    icon: {fileID: 21300000, guid: e31e2b57c448feb4398a4b60cc198e09, type: 3}
+    enemyType: 0
+    isBoss: 0
+    drops:
+    - dropType: 3
+      itemData: {fileID: 0}
+      hpZones:
+      - hp: 1
+        dropAmount:
+          value: 0
+          min: 3
+          max: 4
+          propertyType: 1
+        chance: 100
+      selectedZoneId: 0
+    - dropType: 0
+      itemData: {fileID: 0}
+      hpZones:
+      - hp: 0.15
+        dropAmount:
+          value: 1
+          min: 0
+          max: 0
+          propertyType: 0
+        chance: 12
+      - hp: 0.25106952
+        dropAmount:
+          value: 1
+          min: 0
+          max: 0
+          propertyType: 0
+        chance: 8
+      - hp: 0.29946524
+        dropAmount:
+          value: 1
+          min: 0
+          max: 0
+          propertyType: 0
+        chance: 4
+      - hp: 0.29946524
+        dropAmount:
+          value: 1
+          min: 0
+          max: 0
+          propertyType: 0
+        chance: 2
+      selectedZoneId: 0
+  - name: Jelly
+    prefab: {fileID: 446584557187707321, guid: d1ec7d25140df2542b214e985d37757a, type: 3}
+    icon: {fileID: 21300000, guid: 2b593a765fdd40b4d9e1363b0f24747b, type: 3}
+    enemyType: 1
+    isBoss: 0
+    drops:
+    - dropType: 3
+      itemData: {fileID: 0}
+      hpZones:
+      - hp: 1
+        dropAmount:
+          value: 0
+          min: 3
+          max: 4
+          propertyType: 1
+        chance: 100
+      selectedZoneId: 0
+    - dropType: 0
+      itemData: {fileID: 0}
+      hpZones:
+      - hp: 0.15
+        dropAmount:
+          value: 1
+          min: 0
+          max: 0
+          propertyType: 0
+        chance: 12
+      - hp: 0.25106952
+        dropAmount:
+          value: 1
+          min: 0
+          max: 0
+          propertyType: 0
+        chance: 8
+      - hp: 0.29946524
+        dropAmount:
+          value: 1
+          min: 0
+          max: 0
+          propertyType: 0
+        chance: 4
+      - hp: 0.29946524
+        dropAmount:
+          value: 1
+          min: 0
+          max: 0
+          propertyType: 0
+        chance: 2
+      selectedZoneId: 0
+  - name: Plant
+    prefab: {fileID: 446584557187707321, guid: 6f798abf39369ac4d922509ea87aa2d6, type: 3}
+    icon: {fileID: 21300000, guid: 95b2fc5910488b040a89054c3c46dd03, type: 3}
+    enemyType: 2
+    isBoss: 0
+    drops:
+    - dropType: 3
+      itemData: {fileID: 0}
+      hpZones:
+      - hp: 1
+        dropAmount:
+          value: 0
+          min: 3
+          max: 4
+          propertyType: 1
+        chance: 100
+      selectedZoneId: 0
+    - dropType: 0
+      itemData: {fileID: 0}
+      hpZones:
+      - hp: 0.15
+        dropAmount:
+          value: 1
+          min: 0
+          max: 0
+          propertyType: 0
+        chance: 12
+      - hp: 0.25106952
+        dropAmount:
+          value: 1
+          min: 0
+          max: 0
+          propertyType: 0
+        chance: 8
+      - hp: 0.29946524
+        dropAmount:
+          value: 1
+          min: 0
+          max: 0
+          propertyType: 0
+        chance: 4
+      - hp: 0.29946524
+        dropAmount:
+          value: 1
+          min: 0
+          max: 0
+          propertyType: 0
+        chance: 2
+      selectedZoneId: 0
+  - name: Wasp
+    prefab: {fileID: 446584557187707321, guid: 63edb409da45d1847844853d87213186, type: 3}
+    icon: {fileID: 21300000, guid: 73e8a28fcbed5d14ab4d5fb4e2baae0f, type: 3}
+    enemyType: 3
+    isBoss: 0
+    drops:
+    - dropType: 3
+      itemData: {fileID: 0}
+      hpZones:
+      - hp: 1
+        dropAmount:
+          value: 0
+          min: 3
+          max: 4
+          propertyType: 1
+        chance: 100
+      selectedZoneId: 0
+    - dropType: 0
+      itemData: {fileID: 0}
+      hpZones:
+      - hp: 0.15
+        dropAmount:
+          value: 1
+          min: 0
+          max: 0
+          propertyType: 0
+        chance: 12
+      - hp: 0.25106952
+        dropAmount:
+          value: 1
+          min: 0
+          max: 0
+          propertyType: 0
+        chance: 8
+      - hp: 0.29946524
+        dropAmount:
+          value: 1
+          min: 0
+          max: 0
+          propertyType: 0
+        chance: 4
+      - hp: 0.29946524
+        dropAmount:
+          value: 1
+          min: 0
+          max: 0
+          propertyType: 0
+        chance: 2
+      selectedZoneId: 0
+  - name: Eye
+    prefab: {fileID: 446584557187707321, guid: b4b2cdb1560a581469667cf398e55825, type: 3}
+    icon: {fileID: 21300000, guid: c937c468b400b624280d123d42804961, type: 3}
+    enemyType: 4
+    isBoss: 0
+    drops:
+    - dropType: 3
+      itemData: {fileID: 0}
+      hpZones:
+      - hp: 1
+        dropAmount:
+          value: 0
+          min: 3
+          max: 4
+          propertyType: 1
+        chance: 100
+      selectedZoneId: 0
+    - dropType: 0
+      itemData: {fileID: 0}
+      hpZones:
+      - hp: 0.15
+        dropAmount:
+          value: 1
+          min: 0
+          max: 0
+          propertyType: 0
+        chance: 12
+      - hp: 0.25106952
+        dropAmount:
+          value: 1
+          min: 0
+          max: 0
+          propertyType: 0
+        chance: 8
+      - hp: 0.29946524
+        dropAmount:
+          value: 1
+          min: 0
+          max: 0
+          propertyType: 0
+        chance: 4
+      - hp: 0.29946524
+        dropAmount:
+          value: 1
+          min: 0
+          max: 0
+          propertyType: 0
+        chance: 2
+      selectedZoneId: 0
+  - name: Slime
+    prefab: {fileID: 446584557187707321, guid: 51c8d89a945b43c4a816434062b15329, type: 3}
+    icon: {fileID: 21300000, guid: 05f378ff9ca9db843a4a433d68edd596, type: 3}
+    enemyType: 5
+    isBoss: 0
+    drops:
+    - dropType: 3
+      itemData: {fileID: 0}
+      hpZones:
+      - hp: 1
+        dropAmount:
+          value: 0
+          min: 3
+          max: 4
+          propertyType: 1
+        chance: 100
+      selectedZoneId: 0
+    - dropType: 0
+      itemData: {fileID: 0}
+      hpZones:
+      - hp: 0.15
+        dropAmount:
+          value: 1
+          min: 0
+          max: 0
+          propertyType: 0
+        chance: 12
+      - hp: 0.25106952
+        dropAmount:
+          value: 1
+          min: 0
+          max: 0
+          propertyType: 0
+        chance: 8
+      - hp: 0.29946524
+        dropAmount:
+          value: 1
+          min: 0
+          max: 0
+          propertyType: 0
+        chance: 4
+      - hp: 0.29946524
+        dropAmount:
+          value: 1
+          min: 0
+          max: 0
+          propertyType: 0
+        chance: 2
+      selectedZoneId: 0
+  - name: Smaller Slime
+    prefab: {fileID: 446584557187707321, guid: 97eed333342930a48b96c5a7c692feed, type: 3}
+    icon: {fileID: 927218344, guid: 536453615bf1d8a4f95dfe5667611a71, type: 3}
+    enemyType: 6
+    isBoss: 0
+    drops:
+    - dropType: 3
+      itemData: {fileID: 0}
+      hpZones:
+      - hp: 1
+        dropAmount:
+          value: 0
+          min: 1
+          max: 2
+          propertyType: 1
+        chance: 100
+      selectedZoneId: 0
+    - dropType: 0
+      itemData: {fileID: 0}
+      hpZones:
+      - hp: 0.15
+        dropAmount:
+          value: 1
+          min: 0
+          max: 0
+          propertyType: 0
+        chance: 12
+      - hp: 0.25106952
+        dropAmount:
+          value: 1
+          min: 0
+          max: 0
+          propertyType: 0
+        chance: 8
+      - hp: 0.29946524
+        dropAmount:
+          value: 1
+          min: 0
+          max: 0
+          propertyType: 0
+        chance: 4
+      - hp: 0.29946524
+        dropAmount:
+          value: 1
+          min: 0
+          max: 0
+          propertyType: 0
+        chance: 2
+      selectedZoneId: 0
+  - name: Smallest Slime
+    prefab: {fileID: 446584557187707321, guid: 41a7c6856a63efb4ea45508ca47e4069, type: 3}
+    icon: {fileID: 1368760249, guid: 536453615bf1d8a4f95dfe5667611a71, type: 3}
+    enemyType: 7
+    isBoss: 0
+    drops:
+    - dropType: 3
+      itemData: {fileID: 0}
+      hpZones:
+      - hp: 1
+        dropAmount:
+          value: 1
+          min: 1
+          max: 1
+          propertyType: 0
+        chance: 100
+      selectedZoneId: 0
+    - dropType: 0
+      itemData: {fileID: 0}
+      hpZones:
+      - hp: 0.15
+        dropAmount:
+          value: 1
+          min: 0
+          max: 0
+          propertyType: 0
+        chance: 12
+      - hp: 0.25106952
+        dropAmount:
+          value: 1
+          min: 0
+          max: 0
+          propertyType: 0
+        chance: 8
+      - hp: 0.29946524
+        dropAmount:
+          value: 1
+          min: 0
+          max: 0
+          propertyType: 0
+        chance: 4
+      - hp: 0.29946524
+        dropAmount:
+          value: 1
+          min: 0
+          max: 0
+          propertyType: 0
+        chance: 2
+      selectedZoneId: 0
+  - name: Bomb
+    prefab: {fileID: 446584557187707321, guid: 6130125ef5610b24d875f971f5a0f452, type: 3}
+    icon: {fileID: 21300000, guid: ffaff7503c18e2b4a9aeac496cdacdcd, type: 3}
+    enemyType: 8
+    isBoss: 0
+    drops:
+    - dropType: 3
+      itemData: {fileID: 0}
+      hpZones:
+      - hp: 1
+        dropAmount:
+          value: 0
+          min: 3
+          max: 4
+          propertyType: 1
+        chance: 100
+      selectedZoneId: 0
+    - dropType: 0
+      itemData: {fileID: 0}
+      hpZones:
+      - hp: 0.15
+        dropAmount:
+          value: 1
+          min: 0
+          max: 0
+          propertyType: 0
+        chance: 12
+      - hp: 0.25106952
+        dropAmount:
+          value: 1
+          min: 0
+          max: 0
+          propertyType: 0
+        chance: 8
+      - hp: 0.29946524
+        dropAmount:
+          value: 1
+          min: 0
+          max: 0
+          propertyType: 0
+        chance: 4
+      - hp: 0.29946524
+        dropAmount:
+          value: 1
+          min: 0
+          max: 0
+          propertyType: 0
+        chance: 2
+      selectedZoneId: 0
+  - name: Pumpkin
+    prefab: {fileID: 446584557187707321, guid: 5c50fd9c9b0b896459564f40484833d7, type: 3}
+    icon: {fileID: 21300000, guid: 271f9249c4fb3154f83fd2c8bb56f057, type: 3}
+    enemyType: 9
+    isBoss: 0
+    drops:
+    - dropType: 3
+      itemData: {fileID: 0}
+      hpZones:
+      - hp: 1
+        dropAmount:
+          value: 0
+          min: 3
+          max: 4
+          propertyType: 1
+        chance: 100
+      selectedZoneId: 0
+    - dropType: 0
+      itemData: {fileID: 0}
+      hpZones:
+      - hp: 0.15
+        dropAmount:
+          value: 1
+          min: 0
+          max: 0
+          propertyType: 0
+        chance: 12
+      - hp: 0.25106952
+        dropAmount:
+          value: 1
+          min: 0
+          max: 0
+          propertyType: 0
+        chance: 8
+      - hp: 0.29946524
+        dropAmount:
+          value: 1
+          min: 0
+          max: 0
+          propertyType: 0
+        chance: 4
+      - hp: 0.29946524
+        dropAmount:
+          value: 1
+          min: 0
+          max: 0
+          propertyType: 0
+        chance: 2
+      selectedZoneId: 0
+  - name: Bat
+    prefab: {fileID: 446584557187707321, guid: 30cae36b74da2c641a014605e0e48243, type: 3}
+    icon: {fileID: 21300000, guid: ad02f219c3f2b314c84fa30a8fccf6a8, type: 3}
+    enemyType: 10
+    isBoss: 0
+    drops:
+    - dropType: 3
+      itemData: {fileID: 0}
+      hpZones:
+      - hp: 1
+        dropAmount:
+          value: 0
+          min: 3
+          max: 4
+          propertyType: 1
+        chance: 100
+      selectedZoneId: 0
+    - dropType: 0
+      itemData: {fileID: 0}
+      hpZones:
+      - hp: 0.15
+        dropAmount:
+          value: 1
+          min: 0
+          max: 0
+          propertyType: 0
+        chance: 12
+      - hp: 0.25106952
+        dropAmount:
+          value: 1
+          min: 0
+          max: 0
+          propertyType: 0
+        chance: 8
+      - hp: 0.29946524
+        dropAmount:
+          value: 1
+          min: 0
+          max: 0
+          propertyType: 0
+        chance: 4
+      - hp: 0.29946524
+        dropAmount:
+          value: 1
+          min: 0
+          max: 0
+          propertyType: 0
+        chance: 2
+      selectedZoneId: 0
+  - name: Hand
+    prefab: {fileID: 446584557187707321, guid: 8aee31e58147e02429a8987b0405304a, type: 3}
+    icon: {fileID: 21300000, guid: d6f52aba5c7bc124682daa3d14cdc2e7, type: 3}
+    enemyType: 11
+    isBoss: 0
+    drops:
+    - dropType: 3
+      itemData: {fileID: 0}
+      hpZones:
+      - hp: 1
+        dropAmount:
+          value: 0
+          min: 3
+          max: 4
+          propertyType: 1
+        chance: 100
+      selectedZoneId: 0
+    - dropType: 0
+      itemData: {fileID: 0}
+      hpZones:
+      - hp: 0.15
+        dropAmount:
+          value: 1
+          min: 0
+          max: 0
+          propertyType: 0
+        chance: 12
+      - hp: 0.25106952
+        dropAmount:
+          value: 1
+          min: 0
+          max: 0
+          propertyType: 0
+        chance: 8
+      - hp: 0.29946524
+        dropAmount:
+          value: 1
+          min: 0
+          max: 0
+          propertyType: 0
+        chance: 4
+      - hp: 0.29946524
+        dropAmount:
+          value: 1
+          min: 0
+          max: 0
+          propertyType: 0
+        chance: 2
+      selectedZoneId: 0
+  - name: Mole
+    prefab: {fileID: 446584557187707321, guid: c0d4ece069958e744bf35834b08cfb0a, type: 3}
+    icon: {fileID: 21300000, guid: d6f52aba5c7bc124682daa3d14cdc2e7, type: 3}
+    enemyType: 12
+    isBoss: 0
+    drops:
+    - dropType: 3
+      itemData: {fileID: 0}
+      hpZones:
+      - hp: 1
+        dropAmount:
+          value: 0
+          min: 3
+          max: 4
+          propertyType: 1
+        chance: 100
+      selectedZoneId: 0
+    - dropType: 0
+      itemData: {fileID: 0}
+      hpZones:
+      - hp: 0.15
+        dropAmount:
+          value: 1
+          min: 0
+          max: 0
+          propertyType: 0
+        chance: 12
+      - hp: 0.25106952
+        dropAmount:
+          value: 1
+          min: 0
+          max: 0
+          propertyType: 0
+        chance: 8
+      - hp: 0.29946524
+        dropAmount:
+          value: 1
+          min: 0
+          max: 0
+          propertyType: 0
+        chance: 4
+      - hp: 0.29946524
+        dropAmount:
+          value: 1
+          min: 0
+          max: 0
+          propertyType: 0
+        chance: 2
+      selectedZoneId: 0
+  - name: Spike
+    prefab: {fileID: 446584557187707321, guid: bcf9257da05e9094694f695d9f3362ac, type: 3}
+    icon: {fileID: 21300000, guid: d6f52aba5c7bc124682daa3d14cdc2e7, type: 3}
+    enemyType: 15
+    isBoss: 0
+    drops:
+    - dropType: 3
+      itemData: {fileID: 0}
+      hpZones:
+      - hp: 1
+        dropAmount:
+          value: 0
+          min: 3
+          max: 4
+          propertyType: 1
+        chance: 100
+      selectedZoneId: 0
+    - dropType: 0
+      itemData: {fileID: 0}
+      hpZones:
+      - hp: 0.15
+        dropAmount:
+          value: 1
+          min: 0
+          max: 0
+          propertyType: 0
+        chance: 12
+      - hp: 0.25106952
+        dropAmount:
+          value: 1
+          min: 0
+          max: 0
+          propertyType: 0
+        chance: 8
+      - hp: 0.29946524
+        dropAmount:
+          value: 1
+          min: 0
+          max: 0
+          propertyType: 0
+        chance: 4
+      - hp: 0.29946524
+        dropAmount:
+          value: 1
+          min: 0
+          max: 0
+          propertyType: 0
+        chance: 2
+      selectedZoneId: 0
+  - name: Trap
+    prefab: {fileID: 446584557187707321, guid: 814dfcc2eaac88f4c877fd9b19816c9d, type: 3}
+    icon: {fileID: 21300000, guid: d6f52aba5c7bc124682daa3d14cdc2e7, type: 3}
+    enemyType: 13
+    isBoss: 0
+    drops:
+    - dropType: 3
+      itemData: {fileID: 0}
+      hpZones:
+      - hp: 1
+        dropAmount:
+          value: 0
+          min: 3
+          max: 4
+          propertyType: 1
+        chance: 100
+      selectedZoneId: 0
+    - dropType: 0
+      itemData: {fileID: 0}
+      hpZones:
+      - hp: 0.15
+        dropAmount:
+          value: 1
+          min: 0
+          max: 0
+          propertyType: 0
+        chance: 12
+      - hp: 0.25106952
+        dropAmount:
+          value: 1
+          min: 0
+          max: 0
+          propertyType: 0
+        chance: 8
+      - hp: 0.29946524
+        dropAmount:
+          value: 1
+          min: 0
+          max: 0
+          propertyType: 0
+        chance: 4
+      - hp: 0.29946524
+        dropAmount:
+          value: 1
+          min: 0
+          max: 0
+          propertyType: 0
+        chance: 2
+      selectedZoneId: 0
+  - name: Candle
+    prefab: {fileID: 446584557187707321, guid: 425517735954fb048b9dcac694dcd713, type: 3}
+    icon: {fileID: 21300000, guid: d6f52aba5c7bc124682daa3d14cdc2e7, type: 3}
+    enemyType: 14
+    isBoss: 0
+    drops:
+    - dropType: 3
+      itemData: {fileID: 0}
+      hpZones:
+      - hp: 1
+        dropAmount:
+          value: 0
+          min: 3
+          max: 4
+          propertyType: 1
+        chance: 100
+      selectedZoneId: 0
+    - dropType: 0
+      itemData: {fileID: 0}
+      hpZones:
+      - hp: 0.15
+        dropAmount:
+          value: 1
+          min: 0
+          max: 0
+          propertyType: 0
+        chance: 12
+      - hp: 0.25106952
+        dropAmount:
+          value: 1
+          min: 0
+          max: 0
+          propertyType: 0
+        chance: 8
+      - hp: 0.29946524
+        dropAmount:
+          value: 1
+          min: 0
+          max: 0
+          propertyType: 0
+        chance: 4
+      - hp: 0.29946524
+        dropAmount:
+          value: 1
+          min: 0
+          max: 0
+          propertyType: 0
+        chance: 2
+      selectedZoneId: 0
+  - name: Queen Wasp
+    prefab: {fileID: 446584557187707321, guid: a8d5e8e04a81cf64198e8baf807bc6e9, type: 3}
+    icon: {fileID: 21300000, guid: 2eff4521ecaf02b45b1e34864bc7e56b, type: 3}
+    enemyType: 100
+    isBoss: 1
+    drops:
+    - dropType: 3
+      itemData: {fileID: 0}
+      hpZones:
+      - hp: 1
+        dropAmount:
+          value: 0
+          min: 12
+          max: 16
+          propertyType: 1
+        chance: 100
+      selectedZoneId: 0
+    - dropType: 0
+      itemData: {fileID: 0}
+      hpZones:
+      - hp: 1
+        dropAmount:
+          value: 1
+          min: 0
+          max: 0
+          propertyType: 0
+        chance: 100
+      selectedZoneId: 0
+  - name: Mighty Cactus
+    prefab: {fileID: 2981994498690380285, guid: 385cd8a0107d0614888c6947b82fe78b, type: 3}
+    icon: {fileID: 21300000, guid: 5ddde231d7071d44a8bdf4ab7c702e45, type: 3}
+    enemyType: 101
+    isBoss: 1
+    drops:
+    - dropType: 3
+      itemData: {fileID: 0}
+      hpZones:
+      - hp: 1
+        dropAmount:
+          value: 0
+          min: 12
+          max: 16
+          propertyType: 1
+        chance: 100
+      selectedZoneId: 0
+    - dropType: 0
+      itemData: {fileID: 0}
+      hpZones:
+      - hp: 1
+        dropAmount:
+          value: 1
+          min: 0
+          max: 0
+          propertyType: 0
+        chance: 100
+      selectedZoneId: 0
+  - name: Cursed Totem
+    prefab: {fileID: 446584557187707321, guid: c7a78230581b266448a85b11142bf10a, type: 3}
+    icon: {fileID: 21300000, guid: 5a210609568c15142856a1f7f013d965, type: 3}
+    enemyType: 102
+    isBoss: 1
+    drops:
+    - dropType: 3
+      itemData: {fileID: 0}
+      hpZones:
+      - hp: 1
+        dropAmount:
+          value: 0
+          min: 12
+          max: 16
+          propertyType: 1
+        chance: 100
+      selectedZoneId: 0
+    - dropType: 0
+      itemData: {fileID: 0}
+      hpZones:
+      - hp: 1
+        dropAmount:
+          value: 1
+          min: 0
+          max: 0
+          propertyType: 0
+        chance: 100
+      selectedZoneId: 0
+  - name: Ice Slime
+    prefab: {fileID: 446584557187707321, guid: fbb7e0c0d11c1d74c939f42597b58e31, type: 3}
+    icon: {fileID: 21300000, guid: d6f52aba5c7bc124682daa3d14cdc2e7, type: 3}
+    enemyType: 103
+    isBoss: 1
+    drops:
+    - dropType: 3
+      itemData: {fileID: 0}
+      hpZones:
+      - hp: 1
+        dropAmount:
+          value: 0
+          min: 12
+          max: 16
+          propertyType: 1
+        chance: 100
+      selectedZoneId: 0
+    - dropType: 0
+      itemData: {fileID: 0}
+      hpZones:
+      - hp: 1
+        dropAmount:
+          value: 1
+          min: 0
+          max: 0
+          propertyType: 0
+        chance: 100
+      selectedZoneId: 0
+  - name: Mysterious Mask
+    prefab: {fileID: 2301113974221449785, guid: 85531ce98431f454a83be2e4188664f3, type: 3}
+    icon: {fileID: 21300000, guid: d6f52aba5c7bc124682daa3d14cdc2e7, type: 3}
+    enemyType: 104
+    isBoss: 1
+    drops:
+    - dropType: 3
+      itemData: {fileID: 0}
+      hpZones:
+      - hp: 1
+        dropAmount:
+          value: 0
+          min: 12
+          max: 16
+          propertyType: 1
+        chance: 100
+      selectedZoneId: 0
+    - dropType: 0
+      itemData: {fileID: 0}
+      hpZones:
+      - hp: 1
+        dropAmount:
+          value: 1
+          min: 0
+          max: 0
+          propertyType: 0
+        chance: 100
+      selectedZoneId: 0
+  - name: Ancient Golem
+    prefab: {fileID: 2301113974221449785, guid: 7d9f990dbfab9634e9dd514e68725704, type: 3}
+    icon: {fileID: 21300000, guid: d6f52aba5c7bc124682daa3d14cdc2e7, type: 3}
+    enemyType: 105
+    isBoss: 1
+    drops:
+    - dropType: 3
+      itemData: {fileID: 0}
+      hpZones:
+      - hp: 1
+        dropAmount:
+          value: 0
+          min: 12
+          max: 16
+          propertyType: 1
+        chance: 100
+      selectedZoneId: 0
+    - dropType: 0
+      itemData: {fileID: 0}
+      hpZones:
+      - hp: 1
+        dropAmount:
+          value: 1
+          min: 0
+          max: 0
+          propertyType: 0
+        chance: 100
+      selectedZoneId: 0

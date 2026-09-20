@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d5d8077250c7be408f2dd53faa8df4c, type: 3}
+  m_Name: Fire Orbs Ability Data
+  m_EditorClassIdentifier: 
+  type: 51
+  prerequisites: 
+  rarity: 0
+  isRepeatedAbiltiy: 0
+  isEndgameAbility: 0
+  title: Fire Orbs
+  description: Gain circling fire orbs
+  icon: {fileID: 21300000, guid: abf444745e356c0469c4dc4f1bfa59d7, type: 3}
+  prefab: {fileID: 2729836033721482760, guid: 8da83c7ac23d73541951a11c837d3cc0, type: 3}
+  levels:
+  - orbDamageMultiplier: 0.5
+    effectDuration: 3
+    effectDealsDamageOverTime: 1
+    effectDamageMultiplier: 0.2
+    effectDamageInterval: 1

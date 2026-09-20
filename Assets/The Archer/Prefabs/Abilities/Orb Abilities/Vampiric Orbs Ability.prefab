@@ -1,0 +1,230 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2729836033721482760
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5319755047515309904}
+  - component: {fileID: 823478838357313436}
+  m_Layer: 0
+  m_Name: Vampiric Orbs Ability
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5319755047515309904
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2729836033721482760}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 8314135909440529876}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &823478838357313436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2729836033721482760}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 684544912608e1444bbc8b01c32656f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  axisTransform: {fileID: 8314135909440529876}
+  orbs:
+  - {fileID: 1778572818815664727}
+  - {fileID: 1527953895011045500}
+--- !u!1 &6134023063440492763
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8314135909440529876}
+  m_Layer: 0
+  m_Name: Axis
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8314135909440529876
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6134023063440492763}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.7, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 3440641392643217638}
+  - {fileID: 2460441391615150797}
+  m_Father: {fileID: 5319755047515309904}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &3879492918953192414
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8314135909440529876}
+    m_Modifications:
+    - target: {fileID: 1725868397049848083, guid: 3de6c875c3e9f464da4267d350d87180, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1725868397049848083, guid: 3de6c875c3e9f464da4267d350d87180, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1725868397049848083, guid: 3de6c875c3e9f464da4267d350d87180, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1725868397049848083, guid: 3de6c875c3e9f464da4267d350d87180, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1725868397049848083, guid: 3de6c875c3e9f464da4267d350d87180, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1725868397049848083, guid: 3de6c875c3e9f464da4267d350d87180, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1725868397049848083, guid: 3de6c875c3e9f464da4267d350d87180, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1725868397049848083, guid: 3de6c875c3e9f464da4267d350d87180, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1725868397049848083, guid: 3de6c875c3e9f464da4267d350d87180, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1725868397049848083, guid: 3de6c875c3e9f464da4267d350d87180, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5015388132234395745, guid: 3de6c875c3e9f464da4267d350d87180, type: 3}
+      propertyPath: m_Name
+      value: Vampiric Orb (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3de6c875c3e9f464da4267d350d87180, type: 3}
+--- !u!114 &1527953895011045500 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2369697943840619426, guid: 3de6c875c3e9f464da4267d350d87180, type: 3}
+  m_PrefabInstance: {fileID: 3879492918953192414}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f1d1bbb4960dab44b201f0ff4b2b2a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &2460441391615150797 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1725868397049848083, guid: 3de6c875c3e9f464da4267d350d87180, type: 3}
+  m_PrefabInstance: {fileID: 3879492918953192414}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &4056645091442014709
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8314135909440529876}
+    m_Modifications:
+    - target: {fileID: 1725868397049848083, guid: 3de6c875c3e9f464da4267d350d87180, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1725868397049848083, guid: 3de6c875c3e9f464da4267d350d87180, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1725868397049848083, guid: 3de6c875c3e9f464da4267d350d87180, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1725868397049848083, guid: 3de6c875c3e9f464da4267d350d87180, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1725868397049848083, guid: 3de6c875c3e9f464da4267d350d87180, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1725868397049848083, guid: 3de6c875c3e9f464da4267d350d87180, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1725868397049848083, guid: 3de6c875c3e9f464da4267d350d87180, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1725868397049848083, guid: 3de6c875c3e9f464da4267d350d87180, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1725868397049848083, guid: 3de6c875c3e9f464da4267d350d87180, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1725868397049848083, guid: 3de6c875c3e9f464da4267d350d87180, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5015388132234395745, guid: 3de6c875c3e9f464da4267d350d87180, type: 3}
+      propertyPath: m_Name
+      value: Vampiric Orb
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3de6c875c3e9f464da4267d350d87180, type: 3}
+--- !u!114 &1778572818815664727 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2369697943840619426, guid: 3de6c875c3e9f464da4267d350d87180, type: 3}
+  m_PrefabInstance: {fileID: 4056645091442014709}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f1d1bbb4960dab44b201f0ff4b2b2a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &3440641392643217638 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1725868397049848083, guid: 3de6c875c3e9f464da4267d350d87180, type: 3}
+  m_PrefabInstance: {fileID: 4056645091442014709}
+  m_PrefabAsset: {fileID: 0}

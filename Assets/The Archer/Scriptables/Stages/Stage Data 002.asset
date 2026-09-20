@@ -1,0 +1,2704 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aeafde8d26bd5bd40955f29d8b654d41, type: 3}
+  m_Name: Stage Data 002
+  m_EditorClassIdentifier: 
+  dataVersion: 1
+  stageId: 3cfe8430-5523-463b-a5e0-b28b49278e35
+  stageImage: {fileID: 21300000, guid: 835fd53e229f40f4abdeb6fac765d85d, type: 3}
+  stageName: Ancient Temple
+  showStageObjective: 1
+  stageObjective: Survive 33 waves of enemies
+  stageMusic: {fileID: 11400000, guid: b1ff3aeba1a032048b384624765ff9df, type: 2}
+  showAbilitySelector: 1
+  enemyDamageMulitplier: 1
+  enemyDamageMultiplierRoomStep: 0.1
+  enemyDamageMultiplierWaveStep: 0.05
+  enemyHPMulitplier: 1
+  enemyHPMultiplierRoomStep: 0.1
+  enemyHPMultiplierWaveStep: 0.05
+  unlockDescription: To unlock this stage complete the previous stage or purchase
+    this one dirrectly
+  unlockConditions:
+  - rid: 1864345643964956698
+  - rid: 1864345711341994001
+  rooms:
+  - prefabs:
+    - prefab: {fileID: 6195235661905902216, guid: efdc917c9d45eab49a2572677e5eea4d, type: 3}
+      transformData:
+        position: {x: 0, y: 0, z: 0}
+        rotation: {x: 0, y: 0, z: 0, w: 1}
+        localScale: {x: 1, y: 1, z: 1}
+    waves:
+    - enemySpawns:
+      - enemyType: 6
+        transformData:
+          position: {x: -3.02, y: 0, z: 4.97}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 6
+        transformData:
+          position: {x: 3, y: 0, z: 5}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      chestSpawns: []
+      groupId: 0
+      waveDropExpericence: 15
+      waveDropGold: 12
+      rewards:
+      - currencyId: gold
+        amount: 12
+      customWaveEndDelay: -1
+      icon: {fileID: 21300000, guid: 58996b765bd63c6408fa88c9b9db2418, type: 3}
+      waveMusic: {fileID: 0}
+    - enemySpawns:
+      - enemyType: 3
+        transformData:
+          position: {x: 4.41, y: 0, z: 5.93}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 3
+        transformData:
+          position: {x: 0, y: 0, z: 3.6400003}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 3
+        transformData:
+          position: {x: -4.5, y: 0, z: 6.06}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      chestSpawns: []
+      groupId: 0
+      waveDropExpericence: 15
+      waveDropGold: 14
+      rewards:
+      - currencyId: gold
+        amount: 14
+      customWaveEndDelay: -1
+      icon: {fileID: 21300000, guid: 58996b765bd63c6408fa88c9b9db2418, type: 3}
+      waveMusic: {fileID: 0}
+    - enemySpawns:
+      - enemyType: 3
+        transformData:
+          position: {x: 4.61, y: 0, z: -0.001}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 3
+        transformData:
+          position: {x: -4.62, y: 0, z: -0.02}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 3
+        transformData:
+          position: {x: 0.01, y: 0, z: 6.47}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 6
+        transformData:
+          position: {x: -3.41, y: 0, z: 3.39}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 6
+        transformData:
+          position: {x: 3.37, y: 0, z: 3.39}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      chestSpawns: []
+      groupId: 0
+      waveDropExpericence: 20
+      waveDropGold: 20
+      rewards:
+      - currencyId: gold
+        amount: 20
+      customWaveEndDelay: -1
+      icon: {fileID: 21300000, guid: 58996b765bd63c6408fa88c9b9db2418, type: 3}
+      waveMusic: {fileID: 0}
+    - enemySpawns:
+      - enemyType: 5
+        transformData:
+          position: {x: 0, y: 0, z: 7.68}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 5
+        transformData:
+          position: {x: 0, y: 0, z: -6.94}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      chestSpawns: []
+      groupId: 0
+      waveDropExpericence: 20
+      waveDropGold: 25
+      rewards:
+      - currencyId: gold
+        amount: 25
+      customWaveEndDelay: -1
+      icon: {fileID: 21300000, guid: 58996b765bd63c6408fa88c9b9db2418, type: 3}
+      waveMusic: {fileID: 0}
+    - enemySpawns: []
+      chestSpawns:
+      - chestType: 1
+        transformData:
+          position: {x: 0, y: 0, z: 0}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+      groupId: 0
+      waveDropExpericence: 0
+      waveDropGold: 0
+      rewards:
+      - currencyId: gold
+        amount: 0
+      customWaveEndDelay: -1
+      icon: {fileID: 21300000, guid: 2255ca2025c73a34abad2b46cb834311, type: 3}
+      waveMusic: {fileID: 0}
+    - enemySpawns:
+      - enemyType: 8
+        transformData:
+          position: {x: 4.44, y: 0, z: -5.59}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 8
+        transformData:
+          position: {x: -4.49, y: 0, z: -5.59}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 15
+        transformData:
+          position: {x: 0, y: 0, z: 5.52}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      chestSpawns: []
+      groupId: 0
+      waveDropExpericence: 20
+      waveDropGold: 25
+      rewards:
+      - currencyId: gold
+        amount: 25
+      customWaveEndDelay: -1
+      icon: {fileID: 21300000, guid: 58996b765bd63c6408fa88c9b9db2418, type: 3}
+      waveMusic: {fileID: 0}
+    - enemySpawns:
+      - enemyType: 15
+        transformData:
+          position: {x: -3.77, y: 0, z: 3.74}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 7
+        transformData:
+          position: {x: 4.98, y: 0, z: 3.48}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 7
+        transformData:
+          position: {x: 2.35, y: 0, z: 5.73}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 7
+        transformData:
+          position: {x: -4.67, y: 0, z: -4.93}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 7
+        transformData:
+          position: {x: -2.33, y: 0, z: -7.14}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 15
+        transformData:
+          position: {x: 4.12, y: 0, z: -4.11}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      chestSpawns: []
+      groupId: 0
+      waveDropExpericence: 25
+      waveDropGold: 25
+      rewards:
+      - currencyId: gold
+        amount: 25
+      customWaveEndDelay: -1
+      icon: {fileID: 21300000, guid: 58996b765bd63c6408fa88c9b9db2418, type: 3}
+      waveMusic: {fileID: 0}
+    - enemySpawns:
+      - enemyType: 15
+        transformData:
+          position: {x: 0.01, y: 0, z: 3.95}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 1
+        transformData:
+          position: {x: 4.1, y: 0, z: 9.22}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 1
+        transformData:
+          position: {x: -3.98, y: 0, z: 9.22}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      chestSpawns: []
+      groupId: 0
+      waveDropExpericence: 25
+      waveDropGold: 30
+      rewards:
+      - currencyId: gold
+        amount: 30
+      customWaveEndDelay: -1
+      icon: {fileID: 21300000, guid: 58996b765bd63c6408fa88c9b9db2418, type: 3}
+      waveMusic: {fileID: 0}
+    - enemySpawns:
+      - enemyType: 15
+        transformData:
+          position: {x: 0.01, y: 0, z: 6.29}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 3
+        transformData:
+          position: {x: -4.05, y: 0, z: -5.05}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 3
+        transformData:
+          position: {x: 4.02, y: 0, z: -5.05}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 6
+        transformData:
+          position: {x: -3.93, y: 0, z: 4.8499994}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 6
+        transformData:
+          position: {x: 4.35, y: 0, z: 4.8499994}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      chestSpawns: []
+      groupId: 0
+      waveDropExpericence: 25
+      waveDropGold: 35
+      rewards:
+      - currencyId: gold
+        amount: 35
+      customWaveEndDelay: -1
+      icon: {fileID: 21300000, guid: 58996b765bd63c6408fa88c9b9db2418, type: 3}
+      waveMusic: {fileID: 0}
+    - enemySpawns: []
+      chestSpawns:
+      - chestType: 0
+        transformData:
+          position: {x: 0, y: 0, z: 0}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+      groupId: 0
+      waveDropExpericence: 0
+      waveDropGold: 0
+      rewards:
+      - currencyId: gold
+        amount: 0
+      customWaveEndDelay: -1
+      icon: {fileID: 21300000, guid: 75d429118cd8b784892af7359e302742, type: 3}
+      waveMusic: {fileID: 0}
+    - enemySpawns:
+      - enemyType: 102
+        transformData:
+          position: {x: 0, y: 0, z: 7.23}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop:
+          - dropType: 4
+            itemData: {fileID: 11400000, guid: 6cd5a72badbd219478cfbff02fc3a38e, type: 2}
+            hpZones:
+            - hp: 1
+              dropAmount:
+                value: 1
+                min: 0
+                max: 1
+                propertyType: 0
+              chance: 100
+            selectedZoneId: 0
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      chestSpawns: []
+      groupId: 0
+      waveDropExpericence: 80
+      waveDropGold: 100
+      rewards:
+      - currencyId: gold
+        amount: 100
+      customWaveEndDelay: -1
+      icon: {fileID: 21300000, guid: ed6ade05153dc7c42a0e4023c705af01, type: 3}
+      waveMusic: {fileID: 11400000, guid: d4ecab5b2d071fc4aa298f085174c5b7, type: 2}
+    - enemySpawns:
+      - enemyType: 3
+        transformData:
+          position: {x: -4.98, y: 0, z: 0}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 3
+        transformData:
+          position: {x: -0.11, y: 0, z: 4.68}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 3
+        transformData:
+          position: {x: 4.96, y: 0, z: 0.49}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 3
+        transformData:
+          position: {x: -0.03, y: 0, z: -4.67}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      chestSpawns: []
+      groupId: 0
+      waveDropExpericence: 25
+      waveDropGold: 40
+      rewards:
+      - currencyId: gold
+        amount: 40
+      customWaveEndDelay: -1
+      icon: {fileID: 21300000, guid: 58996b765bd63c6408fa88c9b9db2418, type: 3}
+      waveMusic: {fileID: 0}
+    - enemySpawns:
+      - enemyType: 15
+        transformData:
+          position: {x: -3.84, y: 0, z: -4.77}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 15
+        transformData:
+          position: {x: 3.81, y: 0, z: -4.77}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 2
+        transformData:
+          position: {x: 0, y: 0, z: 9.76}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      chestSpawns: []
+      groupId: 0
+      waveDropExpericence: 25
+      waveDropGold: 45
+      rewards:
+      - currencyId: gold
+        amount: 45
+      customWaveEndDelay: -1
+      icon: {fileID: 21300000, guid: 58996b765bd63c6408fa88c9b9db2418, type: 3}
+      waveMusic: {fileID: 0}
+    - enemySpawns:
+      - enemyType: 2
+        transformData:
+          position: {x: 0, y: 0, z: 6.56}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 2
+        transformData:
+          position: {x: 0, y: 0, z: -6.25}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 8
+        transformData:
+          position: {x: 5.02, y: 0, z: 3.41}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 8
+        transformData:
+          position: {x: -4.91, y: 0, z: 3.41}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      chestSpawns: []
+      groupId: 0
+      waveDropExpericence: 25
+      waveDropGold: 45
+      rewards:
+      - currencyId: gold
+        amount: 45
+      customWaveEndDelay: -1
+      icon: {fileID: 21300000, guid: 58996b765bd63c6408fa88c9b9db2418, type: 3}
+      waveMusic: {fileID: 0}
+    - enemySpawns:
+      - enemyType: 2
+        transformData:
+          position: {x: 4.46, y: 0, z: -6.38}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 2
+        transformData:
+          position: {x: -4.6, y: 0, z: -6.38}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 10
+        transformData:
+          position: {x: -3.97, y: 0, z: 10.1}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 10
+        transformData:
+          position: {x: 4.01, y: 0, z: 10.1}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      chestSpawns: []
+      groupId: 0
+      waveDropExpericence: 30
+      waveDropGold: 50
+      rewards:
+      - currencyId: gold
+        amount: 50
+      customWaveEndDelay: -1
+      icon: {fileID: 21300000, guid: 58996b765bd63c6408fa88c9b9db2418, type: 3}
+      waveMusic: {fileID: 0}
+    - enemySpawns: []
+      chestSpawns:
+      - chestType: 1
+        transformData:
+          position: {x: 0, y: 0, z: 0}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+      groupId: 0
+      waveDropExpericence: 0
+      waveDropGold: 0
+      rewards:
+      - currencyId: gold
+        amount: 0
+      customWaveEndDelay: -1
+      icon: {fileID: 21300000, guid: 2255ca2025c73a34abad2b46cb834311, type: 3}
+      waveMusic: {fileID: 0}
+    - enemySpawns:
+      - enemyType: 5
+        transformData:
+          position: {x: 0, y: 0, z: 6.33}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 5
+        transformData:
+          position: {x: 0, y: 0, z: -6.96}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 0
+        transformData:
+          position: {x: -4.21, y: 0, z: 11.01}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 0
+        transformData:
+          position: {x: 4.3, y: 0, z: 10.94}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      chestSpawns: []
+      groupId: 0
+      waveDropExpericence: 30
+      waveDropGold: 50
+      rewards:
+      - currencyId: gold
+        amount: 50
+      customWaveEndDelay: -1
+      icon: {fileID: 21300000, guid: 58996b765bd63c6408fa88c9b9db2418, type: 3}
+      waveMusic: {fileID: 0}
+    - enemySpawns:
+      - enemyType: 3
+        transformData:
+          position: {x: 5.03, y: 0, z: 3.1}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 3
+        transformData:
+          position: {x: -4.53, y: 0, z: -6.16}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 8
+        transformData:
+          position: {x: -4.85, y: 0, z: 2.98}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 8
+        transformData:
+          position: {x: 4.8, y: 0, z: -5.86}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 13
+        transformData:
+          position: {x: 0, y: 0, z: 8.71}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      chestSpawns: []
+      groupId: 0
+      waveDropExpericence: 30
+      waveDropGold: 55
+      rewards:
+      - currencyId: gold
+        amount: 55
+      customWaveEndDelay: -1
+      icon: {fileID: 21300000, guid: 58996b765bd63c6408fa88c9b9db2418, type: 3}
+      waveMusic: {fileID: 0}
+    - enemySpawns:
+      - enemyType: 8
+        transformData:
+          position: {x: 3.52, y: 0, z: 5.44}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 8
+        transformData:
+          position: {x: -3.64, y: 0, z: 5.44}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 2
+        transformData:
+          position: {x: 0, y: 0, z: 10.02}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 13
+        transformData:
+          position: {x: -4.87, y: 0, z: -6.84}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 13
+        transformData:
+          position: {x: 5.15, y: 0, z: -6.99}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      chestSpawns: []
+      groupId: 0
+      waveDropExpericence: 30
+      waveDropGold: 55
+      rewards:
+      - currencyId: gold
+        amount: 55
+      customWaveEndDelay: -1
+      icon: {fileID: 21300000, guid: 58996b765bd63c6408fa88c9b9db2418, type: 3}
+      waveMusic: {fileID: 0}
+    - enemySpawns:
+      - enemyType: 13
+        transformData:
+          position: {x: -4.87, y: 0, z: 3.59}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 13
+        transformData:
+          position: {x: 5.15, y: 0, z: 3.4400005}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 13
+        transformData:
+          position: {x: 0, y: 0, z: 10.43}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 9
+        transformData:
+          position: {x: -4.78, y: 0, z: -6.72}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 9
+        transformData:
+          position: {x: 5.06, y: 0, z: -6.72}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      chestSpawns: []
+      groupId: 0
+      waveDropExpericence: 30
+      waveDropGold: 60
+      rewards:
+      - currencyId: gold
+        amount: 60
+      customWaveEndDelay: -1
+      icon: {fileID: 21300000, guid: 58996b765bd63c6408fa88c9b9db2418, type: 3}
+      waveMusic: {fileID: 0}
+    - enemySpawns: []
+      chestSpawns:
+      - chestType: 0
+        transformData:
+          position: {x: 0, y: 0, z: 0}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+      groupId: 0
+      waveDropExpericence: 0
+      waveDropGold: 0
+      rewards:
+      - currencyId: gold
+        amount: 0
+      customWaveEndDelay: -1
+      icon: {fileID: 21300000, guid: 75d429118cd8b784892af7359e302742, type: 3}
+      waveMusic: {fileID: 0}
+    - enemySpawns:
+      - enemyType: 100
+        transformData:
+          position: {x: 0, y: 0, z: 4.19}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop:
+          - dropType: 4
+            itemData: {fileID: 11400000, guid: 1e4141be0563eb94ab5bdde2bda5db8a, type: 2}
+            hpZones:
+            - hp: 1
+              dropAmount:
+                value: 1
+                min: 0
+                max: 1
+                propertyType: 0
+              chance: 100
+            selectedZoneId: 0
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      chestSpawns: []
+      groupId: 0
+      waveDropExpericence: 100
+      waveDropGold: 150
+      rewards:
+      - currencyId: gold
+        amount: 150
+      customWaveEndDelay: -1
+      icon: {fileID: 21300000, guid: ed6ade05153dc7c42a0e4023c705af01, type: 3}
+      waveMusic: {fileID: 11400000, guid: d4ecab5b2d071fc4aa298f085174c5b7, type: 2}
+    - enemySpawns:
+      - enemyType: 12
+        transformData:
+          position: {x: -3.88, y: 0, z: 9.23}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 12
+        transformData:
+          position: {x: 3.91, y: 0, z: 9.23}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      chestSpawns: []
+      groupId: 0
+      waveDropExpericence: 30
+      waveDropGold: 60
+      rewards:
+      - currencyId: gold
+        amount: 60
+      customWaveEndDelay: -1
+      icon: {fileID: 21300000, guid: 58996b765bd63c6408fa88c9b9db2418, type: 3}
+      waveMusic: {fileID: 0}
+    - enemySpawns:
+      - enemyType: 12
+        transformData:
+          position: {x: 0, y: 0, z: 3.4}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 4
+        transformData:
+          position: {x: -5.06, y: 0, z: 0}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 4
+        transformData:
+          position: {x: 5.04, y: 0, z: 0}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 1
+        transformData:
+          position: {x: 0, y: 0, z: 10.35}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      chestSpawns: []
+      groupId: 0
+      waveDropExpericence: 30
+      waveDropGold: 55
+      rewards:
+      - currencyId: gold
+        amount: 55
+      customWaveEndDelay: -1
+      icon: {fileID: 21300000, guid: 58996b765bd63c6408fa88c9b9db2418, type: 3}
+      waveMusic: {fileID: 0}
+    - enemySpawns:
+      - enemyType: 12
+        transformData:
+          position: {x: -3.88, y: 0, z: 0.19}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 12
+        transformData:
+          position: {x: 3.91, y: 0, z: 0.18999958}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 3
+        transformData:
+          position: {x: 0, y: 0, z: 7.87}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 3
+        transformData:
+          position: {x: 0, y: 0, z: -7.02}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      chestSpawns: []
+      groupId: 0
+      waveDropExpericence: 30
+      waveDropGold: 60
+      rewards:
+      - currencyId: gold
+        amount: 60
+      customWaveEndDelay: -1
+      icon: {fileID: 21300000, guid: 58996b765bd63c6408fa88c9b9db2418, type: 3}
+      waveMusic: {fileID: 0}
+    - enemySpawns:
+      - enemyType: 12
+        transformData:
+          position: {x: -0.01, y: 0, z: 5.53}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 13
+        transformData:
+          position: {x: -4.14, y: 0, z: -4.61}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 13
+        transformData:
+          position: {x: 5.0499997, y: 0, z: 4.2799997}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 8
+        transformData:
+          position: {x: 3.67, y: 0, z: -4.53}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 8
+        transformData:
+          position: {x: -5.11, y: 0, z: 4.21}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      chestSpawns: []
+      groupId: 0
+      waveDropExpericence: 30
+      waveDropGold: 65
+      rewards:
+      - currencyId: gold
+        amount: 65
+      customWaveEndDelay: -1
+      icon: {fileID: 21300000, guid: 58996b765bd63c6408fa88c9b9db2418, type: 3}
+      waveMusic: {fileID: 0}
+    - enemySpawns: []
+      chestSpawns:
+      - chestType: 2
+        transformData:
+          position: {x: 0, y: 0, z: 0}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+      groupId: 0
+      waveDropExpericence: 0
+      waveDropGold: 0
+      rewards:
+      - currencyId: gold
+        amount: 0
+      customWaveEndDelay: -1
+      icon: {fileID: 21300000, guid: b0210b46056e1c44ba640bcef14213c2, type: 3}
+      waveMusic: {fileID: 0}
+    - enemySpawns:
+      - enemyType: 10
+        transformData:
+          position: {x: 0, y: 0, z: 8.73}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 10
+        transformData:
+          position: {x: -4.29, y: 0, z: 4.13}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 10
+        transformData:
+          position: {x: 4.53, y: 0, z: 4.28}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 15
+        transformData:
+          position: {x: 0, y: 0, z: 4.57}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 15
+        transformData:
+          position: {x: -4.2, y: 0, z: -5.24}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 15
+        transformData:
+          position: {x: 4.07, y: 0, z: -5.24}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      chestSpawns: []
+      groupId: 0
+      waveDropExpericence: 30
+      waveDropGold: 65
+      rewards:
+      - currencyId: gold
+        amount: 65
+      customWaveEndDelay: -1
+      icon: {fileID: 21300000, guid: 58996b765bd63c6408fa88c9b9db2418, type: 3}
+      waveMusic: {fileID: 0}
+    - enemySpawns:
+      - enemyType: 5
+        transformData:
+          position: {x: -3.45, y: 0, z: 9.87}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 5
+        transformData:
+          position: {x: 0, y: 0, z: 8.27}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 5
+        transformData:
+          position: {x: 3.41, y: 0, z: 9.65}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 8
+        transformData:
+          position: {x: -3.85, y: 0, z: -6.24}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 8
+        transformData:
+          position: {x: 0, y: 0, z: -4.51}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 8
+        transformData:
+          position: {x: 3.99, y: 0, z: -6.14}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 9
+        transformData:
+          position: {x: -4.51, y: 0, z: 5.11}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 9
+        transformData:
+          position: {x: 4.52, y: 0, z: 5.11}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      chestSpawns: []
+      groupId: 0
+      waveDropExpericence: 30
+      waveDropGold: 80
+      rewards:
+      - currencyId: gold
+        amount: 80
+      customWaveEndDelay: -1
+      icon: {fileID: 21300000, guid: 58996b765bd63c6408fa88c9b9db2418, type: 3}
+      waveMusic: {fileID: 0}
+    - enemySpawns:
+      - enemyType: 11
+        transformData:
+          position: {x: 3.8, y: 0, z: 8.29}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 11
+        transformData:
+          position: {x: -4.65, y: 0, z: -8.81}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 1
+        transformData:
+          position: {x: -3.96, y: 0, z: 4.13}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 1
+        transformData:
+          position: {x: 4.36, y: 0, z: -4.62}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 2
+        transformData:
+          position: {x: 0, y: 0, z: 10.5}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      chestSpawns: []
+      groupId: 0
+      waveDropExpericence: 35
+      waveDropGold: 65
+      rewards:
+      - currencyId: gold
+        amount: 65
+      customWaveEndDelay: -1
+      icon: {fileID: 21300000, guid: 58996b765bd63c6408fa88c9b9db2418, type: 3}
+      waveMusic: {fileID: 0}
+    - enemySpawns:
+      - enemyType: 14
+        transformData:
+          position: {x: 0, y: 0, z: 8.95}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 0
+        transformData:
+          position: {x: 4.56, y: 0, z: -7.99}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 0
+        transformData:
+          position: {x: -4.55, y: 0, z: -7.89}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 4
+        transformData:
+          position: {x: -4.46, y: 0, z: -0.35}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 4
+        transformData:
+          position: {x: 4.51, y: 0, z: -0.35}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      chestSpawns: []
+      groupId: 0
+      waveDropExpericence: 35
+      waveDropGold: 80
+      rewards:
+      - currencyId: gold
+        amount: 80
+      customWaveEndDelay: -1
+      icon: {fileID: 21300000, guid: 58996b765bd63c6408fa88c9b9db2418, type: 3}
+      waveMusic: {fileID: 0}
+    - enemySpawns: []
+      chestSpawns:
+      - chestType: 0
+        transformData:
+          position: {x: 0, y: 0, z: 0}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+      groupId: 0
+      waveDropExpericence: 0
+      waveDropGold: 0
+      rewards:
+      - currencyId: gold
+        amount: 0
+      customWaveEndDelay: -1
+      icon: {fileID: 21300000, guid: 75d429118cd8b784892af7359e302742, type: 3}
+      waveMusic: {fileID: 0}
+    - enemySpawns:
+      - enemyType: 105
+        transformData:
+          position: {x: 0, y: 0, z: 3.81}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop:
+          - dropType: 4
+            itemData: {fileID: 11400000, guid: 99ecfef48e542bc428f246820f9c1a88, type: 2}
+            hpZones:
+            - hp: 1
+              dropAmount:
+                value: 1
+                min: 0
+                max: 1
+                propertyType: 0
+              chance: 100
+            selectedZoneId: 0
+          - dropType: 4
+            itemData: {fileID: 11400000, guid: 05fc01e43df2b3641b29d22045226a30, type: 2}
+            hpZones:
+            - hp: 1
+              dropAmount:
+                value: 1
+                min: 0
+                max: 1
+                propertyType: 0
+              chance: 100
+            selectedZoneId: 0
+          dropOverrides: []
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      chestSpawns: []
+      groupId: 0
+      waveDropExpericence: 0
+      waveDropGold: 250
+      rewards:
+      - currencyId: gold
+        amount: 250
+      customWaveEndDelay: -1
+      icon: {fileID: 21300000, guid: ed6ade05153dc7c42a0e4023c705af01, type: 3}
+      waveMusic: {fileID: 11400000, guid: d4ecab5b2d071fc4aa298f085174c5b7, type: 2}
+    playerSpawnPoint: {x: 0, y: 0, z: 0}
+    groupId: 0
+    roomMusic: {fileID: 0}
+    firstWaveStartDelay: 0
+    delayBetweenWaves: 0
+    delayBeforeExitSpawn: 0
+    cameraMovementType: 2
+    cameraConfinementPolygon:
+    - {x: -0.0022212565, y: -5.4985514}
+    - {x: -0.0012296215, y: 6.2380495}
+  references:
+    version: 2
+    RefIds:
+    - rid: 1864345643964956698
+      type: {class: PurchasedCondition, ns: OctoberStudio, asm: Assembly-CSharp}
+      data:
+        cost: 500
+    - rid: 1864345711341994001
+      type: {class: PreviousStageCompletedCondition, ns: OctoberStudio, asm: Assembly-CSharp}
+      data:
+        name: Previous Stage Completed

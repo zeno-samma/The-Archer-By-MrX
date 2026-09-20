@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3ac58adca6e2284a9466bbf025d3902, type: 3}
+  m_Name: Poison Ability Data
+  m_EditorClassIdentifier: 
+  type: 17
+  prerequisites: 
+  rarity: 1
+  isRepeatedAbiltiy: 0
+  isEndgameAbility: 0
+  title: Poison
+  description: Attacks have a chance to poison enemies
+  icon: {fileID: 21300000, guid: 5de4941a4887b34408d5e9c7474c8208, type: 3}
+  prefab: {fileID: 8451893333612301729, guid: e15c417535e9162408146dd97c617fbd, type: 3}
+  levels:
+  - effectDuration: 3
+    targetDamageReductionMultiplier: 0.6
+    arrowDamageMultiplier: 0.8
+    effectDealsDamageOverTime: 1
+    effectDamageMultiplier: 0.2
+    effectDamageInterval: 0.9

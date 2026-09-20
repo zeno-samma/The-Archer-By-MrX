@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74888a41333ac424e8d4f963fd9a9bb7, type: 3}
+  m_Name: Boss Slayer Ability Data
+  m_EditorClassIdentifier: 
+  type: 26
+  rarity: 0
+  isRepeatedAbiltiy: 0
+  isEndgameAbility: 0
+  title: Boss Slayer
+  description: Hit bosses with more power
+  icon: {fileID: 21300000, guid: 0059ba3bcce82b94d8caae3ecc43dad2, type: 3}
+  prefab: {fileID: 620372930915919912, guid: e2619de80f3f41e42bebe8969169a925, type: 3}
+  levels:
+  - damageToBossesMultiplier: 1.2

@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 791e9621a1c3e2944bd4280d2ac467eb, type: 3}
+  m_Name: Freeze Spirit Ability Data
+  m_EditorClassIdentifier: 
+  type: 45
+  rarity: 0
+  isRepeatedAbiltiy: 0
+  isEndgameAbility: 0
+  title: Freeze Spirit
+  description: Summon a friendly freeze spirit
+  icon: {fileID: 21300000, guid: 85f5ce58243aba7479581a38f3d61584, type: 3}
+  prefab: {fileID: 8552318045336574574, guid: 38cd7d32f7b070747b98da17a3d2281f, type: 3}
+  levels:
+  - spiritAttackDelay: 2
+    spiritDamageMultiplier: 0.5
+    effectDuration: 3
+    targetSpeedMultiplier: 0
+    effectDealsDamageOverTime: 0
+    effectDamageMultiplier: 0
+    effectDamageInterval: 0

@@ -1,0 +1,73 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d3250629fc4e60489cc1ae523d60177, type: 3}
+  m_Name: Perfect Stance Ability Data
+  m_EditorClassIdentifier: 
+  type: 71
+  prerequisites: 
+  rarity: 2
+  isRepeatedAbiltiy: 0
+  isEndgameAbility: 0
+  title: Perfect Stance
+  description: 'Attack speed is increased while standing still for some time '
+  icon: {fileID: 21300000, guid: be7866d9fcc5d32498ee947ba9424edb, type: 3}
+  prefab: {fileID: 1775812239651013677, guid: ce35378fe655f034690ab3e3d46b24f0, type: 3}
+  levels:
+  - timeDamageMultiplierCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0.05770718
+        outSlope: 0.05770718
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.022630835
+      - serializedVersion: 3
+        time: 5
+        value: 1.5
+        inSlope: 0.1544229
+        outSlope: 0.1544229
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.019330502
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    timeAttackSpeedMultiplierCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0.05770718
+        outSlope: 0.05770718
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.022630835
+      - serializedVersion: 3
+        time: 5
+        value: 1.5
+        inSlope: 0.1544229
+        outSlope: 0.1544229
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.019330502
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    perfectStanceParticleShowTime: 1

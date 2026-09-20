@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c93d69fb5b2e534db1be529f062be09, type: 3}
+  m_Name: Major Health Boost Ability Data
+  m_EditorClassIdentifier: 
+  type: 39
+  prerequisites: 
+  rarity: 3
+  isRepeatedAbiltiy: 1
+  isEndgameAbility: 0
+  title: Major Health Boost
+  description: Increase max HP
+  icon: {fileID: 21300000, guid: bb34610f552037041860d02e85acaf0b, type: 3}
+  prefab: {fileID: 1736691562250478760, guid: fb26bbb1c18a8174285c2704d1335611, type: 3}
+  levels:
+  - maxHPMultiplier: 1.5
+  - maxHPMultiplier: 1.8
+  - maxHPMultiplier: 2.1
+  - maxHPMultiplier: 2.4
+  - maxHPMultiplier: 2.7

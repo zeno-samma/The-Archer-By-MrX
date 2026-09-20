@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2895ca68c9edb504a8ad6c99edc37a3c, type: 3}
+  m_Name: Rear Shot Ability Data
+  m_EditorClassIdentifier: 
+  type: 1
+  rarity: 0
+  isRepeatedAbiltiy: 0
+  isEndgameAbility: 0
+  title: Rear Shot
+  description: 'Shoot additional projectile from behind '
+  icon: {fileID: 21300000, guid: d357bf5669c5f4849872f68d4d08e713, type: 3}
+  prefab: {fileID: 2119472561704035394, guid: 75d0c421d37533142a8e4428b62f05fc, type: 3}
+  levels:
+  - backArrowsCount: 1
+    backArrowsDamageMultiplier: 1
+  - backArrowsCount: 2
+    backArrowsDamageMultiplier: 0.8

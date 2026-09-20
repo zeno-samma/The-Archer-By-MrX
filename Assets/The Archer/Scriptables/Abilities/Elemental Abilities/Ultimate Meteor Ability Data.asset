@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53cd118fae6c9cf4d9b93295f615ea6f, type: 3}
+  m_Name: Ultimate Meteor Ability Data
+  m_EditorClassIdentifier: 
+  type: 24
+  rarity: 3
+  isRepeatedAbiltiy: 0
+  isEndgameAbility: 0
+  title: Ultimate Meteor
+  description: Cast devastating meteors that fall from above
+  icon: {fileID: 21300000, guid: 9327e7a4c80fb63478c880d475579537, type: 3}
+  prefab: {fileID: 860765915133764670, guid: 590a7ec62a79820469d8eb98a3f74264, type: 3}
+  levels:
+  - meteorSpawnDelay: 2
+    meteorDamageMultiplier: 0.7

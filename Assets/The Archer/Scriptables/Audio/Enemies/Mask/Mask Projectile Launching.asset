@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93f465082f700f847a630201a9bbd46b, type: 3}
+  m_Name: Mask Projectile Launching
+  m_EditorClassIdentifier: 
+  audioGroup: 0
+  audioDataType: 0
+  cooldown:
+    value: 0.1
+    min: 0
+    max: 1
+    propertyType: 0
+  samples:
+  - clip: {fileID: 8300000, guid: 4b43bba93a114fd46a93a733f3ab5f67, type: 3}
+    volume:
+      value: 1
+      min: 0
+      max: 0
+      propertyType: 0
+    pitch:
+      value: 1
+      min: 0.7
+      max: 1
+      propertyType: 0
+    chance: 1
+  isPitchCurveActive: 1
+  pitchCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.86227417
+      inSlope: 0.85782045
+      outSlope: 0.85782045
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.38909912
+      value: 1.1960514
+      inSlope: 0.85782045
+      outSlope: 0.85782045
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  pitchResetCooldown: 0

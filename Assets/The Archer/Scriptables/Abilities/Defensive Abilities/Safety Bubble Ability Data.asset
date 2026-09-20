@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ede4cc8367ea4d64db7400280a0f5daa, type: 3}
+  m_Name: Safety Bubble Ability Data
+  m_EditorClassIdentifier: 
+  type: 65
+  rarity: 3
+  isRepeatedAbiltiy: 0
+  isEndgameAbility: 0
+  title: Safety Bubble
+  description: Cast a bubble that absorbs one hit
+  icon: {fileID: 21300000, guid: b43fcd7e8d43b9a44a1cc15ea0f88599, type: 3}
+  prefab: {fileID: 995275648422531454, guid: 7ef3eef7538d69b46bb752092cf7c534, type: 3}
+  levels:
+  - hitsToDisableProtection: 1

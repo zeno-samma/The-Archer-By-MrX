@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7905b146704a8c14dbfb64359d9c2680, type: 3}
+  m_Name: Critical Strike Ability Data
+  m_EditorClassIdentifier: 
+  type: 32
+  rarity: 1
+  isRepeatedAbiltiy: 0
+  isEndgameAbility: 0
+  title: Critical Strike
+  description: Attacks can deal devastating damage
+  icon: {fileID: 21300000, guid: 66e9ae4cfacb98648bf4bf598d1c4274, type: 3}
+  prefab: {fileID: 1277869261955460665, guid: 038bd36950a05684ebec438bcdf559b1, type: 3}
+  levels:
+  - critDamageMultiplier: 1.5
+    critChanceIncreasePercent: 25

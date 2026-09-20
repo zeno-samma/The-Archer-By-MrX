@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 069241912c196b44cb21a0309e8e9f2a, type: 3}
+  m_Name: Wand Animations Set
+  m_EditorClassIdentifier: 
+  movementAnimationSpeed: 5
+  weaponAnimationsSetType: 1
+  animations:
+  - name: Hero Run
+    animationClip: {fileID: -4441542756391112126, guid: dbc9b7be0116b5e4fbddce9f8609b2cc, type: 3}
+  - name: Hero Walk
+    animationClip: {fileID: 8860141715844457815, guid: c7453938eb85aa540be011eb381a76e4, type: 3}
+  - name: Hero Shoot
+    animationClip: {fileID: -996190602707623679, guid: d42c3113024b2bc44bc5f2ef9af9ddbd, type: 3}
+  - name: Hero Idle
+    animationClip: {fileID: -5252816984213320552, guid: 1ea44dd779b508f498f89db70b99bfca, type: 3}
+  - name: Hero Defeat
+    animationClip: {fileID: 8784278156133277033, guid: 1976c8e9a50557e4b9fe68de04110104, type: 3}
+  - name: Hero Revive
+    animationClip: {fileID: -2919142679728832081, guid: 0b03d4f8e9fc0124985173487d867bb7, type: 3}
+  - name: Hero Run No Weapon
+    animationClip: {fileID: 6200578666267062213, guid: 2ef138a56c75c364b9b9255bd3c72c82, type: 3}
+  - name: Hero Walk No Weapon
+    animationClip: {fileID: -3419257869308726280, guid: 94d02a3fb2a0f5441aa94a1122442fcc, type: 3}
+  - name: Hero Idle No Weapon
+    animationClip: {fileID: -5252816984213320552, guid: 1ea44dd779b508f498f89db70b99bfca, type: 3}
+  runtimeAnimatorController: {fileID: 9100000, guid: 24de25138c0c65043b3bb6ff2c90073e, type: 2}
+  attackAnimationLength: 0.833

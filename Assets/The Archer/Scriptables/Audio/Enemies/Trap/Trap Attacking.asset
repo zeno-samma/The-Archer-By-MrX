@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93f465082f700f847a630201a9bbd46b, type: 3}
+  m_Name: Trap Attacking
+  m_EditorClassIdentifier: 
+  audioDataType: 0
+  cooldown:
+    value: 0
+    min: 0
+    max: 1
+    propertyType: 0
+  samples:
+  - clip: {fileID: 8300000, guid: 106976df4becf7446a79f1d177c1ea6d, type: 3}
+    volume:
+      value: 1
+      min: 0.5
+      max: 0.6
+      propertyType: 0
+    pitch:
+      value: 1
+      min: 1
+      max: 1.2
+      propertyType: 1
+    chance: 0.5
+  isPitchCurveActive: 0
+  pitchCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: -0.0071907146
+      value: 0.99937236
+      inSlope: 0.030762676
+      outSlope: 0.030762676
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.86768115
+    - serializedVersion: 3
+      time: 0.50123596
+      value: 1.3906955
+      inSlope: 2.4799297
+      outSlope: 2.4799297
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.06159529
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  pitchResetCooldown: 0

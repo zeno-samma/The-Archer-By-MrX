@@ -1,0 +1,83 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93f465082f700f847a630201a9bbd46b, type: 3}
+  m_Name: Slime Generic
+  m_EditorClassIdentifier: 
+  audioDataType: 1
+  cooldown:
+    value: 0
+    min: 0
+    max: 1
+    propertyType: 0
+  samples:
+  - clip: {fileID: 8300000, guid: e74d4511b34c25e47808149b6f186eae, type: 3}
+    volume:
+      value: 1
+      min: 0.5
+      max: 0.6
+      propertyType: 0
+    pitch:
+      value: 0
+      min: 0.9
+      max: 1.3
+      propertyType: 1
+    chance: 0.5
+  - clip: {fileID: 8300000, guid: 5f3c2fe0eda0c1f4bacb6b6744b30652, type: 3}
+    volume:
+      value: 1
+      min: 0.5
+      max: 0.6
+      propertyType: 0
+    pitch:
+      value: 0
+      min: 0.9
+      max: 1.3
+      propertyType: 1
+    chance: 0.5
+  - clip: {fileID: 8300000, guid: 2ed0ac48b96cc214a8d1d5b2a9a2ad2c, type: 3}
+    volume:
+      value: 1
+      min: 0.5
+      max: 0.6
+      propertyType: 0
+    pitch:
+      value: 0
+      min: 0.9
+      max: 1.3
+      propertyType: 1
+    chance: 0.5
+  isPitchCurveActive: 0
+  pitchCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: -0.0071907146
+      value: 0.99937236
+      inSlope: 0.030762676
+      outSlope: 0.030762676
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.86768115
+    - serializedVersion: 3
+      time: 0.50123596
+      value: 1.3906955
+      inSlope: 2.4799297
+      outSlope: 2.4799297
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.06159529
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  pitchResetCooldown: 0

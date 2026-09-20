@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36d3b836181b43648ba3d70244b2d519, type: 3}
+  m_Name: Attack Speed Upgrade
+  m_EditorClassIdentifier: 
+  dataVersion: 1
+  upgradeType: 6
+  icon: {fileID: 21300000, guid: f45acd4509f38074781c034f863829b5, type: 3}
+  title: Rapid Strikes
+  description: 'Increases attack speed,
+
+    letting you strike faster'
+  statsText: '{0}><color=#75F05F>{1}</color>'
+  initialValue: 0
+  prefab: {fileID: 3646608285076175882, guid: 2e2bac52054f61d4fb728d70850b2070, type: 3}
+  devStartLevel: -1
+  levels:
+  - cost: 100
+    price:
+      currencyId: gold
+      amount: 100
+    value: 1.05
+  - cost: 250
+    price:
+      currencyId: gold
+      amount: 250
+    value: 1.1
+  - cost: 600
+    price:
+      currencyId: gold
+      amount: 600
+    value: 1.15
+  - cost: 1200
+    price:
+      currencyId: gold
+      amount: 1200
+    value: 1.2
+  - cost: 2400
+    price:
+      currencyId: gold
+      amount: 2400
+    value: 1.25

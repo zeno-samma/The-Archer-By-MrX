@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82a185959224dc44fbe281f70f28c1c9, type: 3}
+  m_Name: Painful Power Ability Data
+  m_EditorClassIdentifier: 
+  type: 67
+  prerequisites: 
+  rarity: 0
+  isRepeatedAbiltiy: 0
+  isEndgameAbility: 0
+  title: Painful Power
+  description: Gain power after getting hit
+  icon: {fileID: 21300000, guid: df14c848c128d5440b5846d72060571e, type: 3}
+  prefab: {fileID: 7632223066130574508, guid: 66c7e271cb642cd47a2270e9c2721198, type: 3}
+  levels:
+  - attackDamageMultiplier: 1.5
+    abilityDuration: 5

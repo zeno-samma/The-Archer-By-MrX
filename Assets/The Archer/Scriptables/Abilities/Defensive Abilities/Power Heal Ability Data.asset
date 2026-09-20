@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 379bfe9559c97df45ab0b4c554a19a79, type: 3}
+  m_Name: Power Heal Ability Data
+  m_EditorClassIdentifier: 
+  type: 60
+  rarity: 1
+  isRepeatedAbiltiy: 0
+  isEndgameAbility: 0
+  title: Power Heal
+  description: Health pickups have a chance to increase power
+  icon: {fileID: 21300000, guid: 7dcff816eb4d9f74eb065c8b12214e41, type: 3}
+  prefab: {fileID: 6464303919095957855, guid: 1f196ccf1a34ca34994fcf9eb3583005, type: 3}
+  levels:
+  - attackDamageMultiplier: 1.1
+    chance: 0.5

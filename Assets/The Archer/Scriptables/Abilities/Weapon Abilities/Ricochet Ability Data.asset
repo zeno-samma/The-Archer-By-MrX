@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5ab35ac86970c149bca7dcc1259551d, type: 3}
+  m_Name: Ricochet Ability Data
+  m_EditorClassIdentifier: 
+  type: 7
+  prerequisites: 
+  rarity: 1
+  isRepeatedAbiltiy: 0
+  isEndgameAbility: 0
+  title: Ricochet
+  description: Projectiles bounce off enemies
+  icon: {fileID: 21300000, guid: a9e8ca1453e5f4f45a72f14b7ae6d928, type: 3}
+  prefab: {fileID: 2119472561704035394, guid: 1aedde51d36ee0140b37ee7e2d2af74c, type: 3}
+  levels:
+  - arrowRicochetCount: 1
+    eachRicochetDamageMultiplier: 0.4
+  - arrowRicochetCount: 2
+    eachRicochetDamageMultiplier: 0.5
+  - arrowRicochetCount: 2
+    eachRicochetDamageMultiplier: 0.6

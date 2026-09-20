@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5869cf4d5a675784080fa5cf0e536a0f, type: 3}
+  m_Name: Fire Spirit Ability Data
+  m_EditorClassIdentifier: 
+  type: 43
+  rarity: 0
+  isRepeatedAbiltiy: 0
+  isEndgameAbility: 0
+  title: Fire Spirit
+  description: 'Summon a friendly fire spirit '
+  icon: {fileID: 21300000, guid: 06f9fe552cda0804f815175530ca5566, type: 3}
+  prefab: {fileID: 8552318045336574574, guid: ee5458a0b47464f4084e10bee94792dd, type: 3}
+  levels:
+  - spiritAttackDelay: 2
+    spiritDamageMultiplier: 0.5
+    effectDuration: 3
+    effectDealsDamageOverTime: 1
+    effectDamageMultiplier: 0.2
+    effectDamageInterval: 1

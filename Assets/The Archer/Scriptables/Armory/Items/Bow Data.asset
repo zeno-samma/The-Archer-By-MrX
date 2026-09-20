@@ -1,0 +1,126 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0d9783eacba5724294b5811eacda531, type: 3}
+  m_Name: Bow Data
+  m_EditorClassIdentifier: 
+  dataVersion: 1
+  guid: 08c949c12aad82946b69bc0cb17dc513
+  itemType: 0
+  itemName: Signature Bow
+  icon: {fileID: 21300000, guid: 62107eb3b627fa449af8c087b23d5eeb, type: 3}
+  isDefaultItem: 1
+  isUnlockedByDefault: 1
+  itemLevels:
+  - cost: 0
+    price:
+      currencyId: gold
+      amount: 0
+    itemRarity: 0
+    stats:
+    - statType: 0
+      value: 10
+      isVisibleOnUI: 1
+    attachedAbilities: 
+  - cost: 100
+    price:
+      currencyId: gold
+      amount: 100
+    itemRarity: 0
+    stats:
+    - statType: 0
+      value: 15
+      isVisibleOnUI: 1
+    attachedAbilities: 
+  - cost: 200
+    price:
+      currencyId: gold
+      amount: 200
+    itemRarity: 1
+    stats:
+    - statType: 0
+      value: 20
+      isVisibleOnUI: 1
+    attachedAbilities: 
+  - cost: 300
+    price:
+      currencyId: gold
+      amount: 300
+    itemRarity: 1
+    stats:
+    - statType: 0
+      value: 25
+      isVisibleOnUI: 1
+    attachedAbilities: 
+  - cost: 500
+    price:
+      currencyId: gold
+      amount: 500
+    itemRarity: 1
+    stats:
+    - statType: 0
+      value: 30
+      isVisibleOnUI: 1
+    attachedAbilities: 
+  - cost: 800
+    price:
+      currencyId: gold
+      amount: 800
+    itemRarity: 2
+    stats:
+    - statType: 0
+      value: 35
+      isVisibleOnUI: 1
+    - statType: 2
+      value: 1.02
+      isVisibleOnUI: 1
+    attachedAbilities: 
+  - cost: 1200
+    price:
+      currencyId: gold
+      amount: 1200
+    itemRarity: 2
+    stats:
+    - statType: 0
+      value: 40
+      isVisibleOnUI: 1
+    - statType: 2
+      value: 1.04
+      isVisibleOnUI: 1
+    attachedAbilities: 
+  - cost: 1800
+    price:
+      currencyId: gold
+      amount: 1800
+    itemRarity: 3
+    stats:
+    - statType: 0
+      value: 45
+      isVisibleOnUI: 1
+    - statType: 2
+      value: 1.06
+      isVisibleOnUI: 1
+    attachedAbilities: 
+  - cost: 2400
+    price:
+      currencyId: gold
+      amount: 2400
+    itemRarity: 3
+    stats:
+    - statType: 0
+      value: 50
+      isVisibleOnUI: 1
+    - statType: 2
+      value: 1.08
+      isVisibleOnUI: 1
+    attachedAbilities: 
+  weaponPrefab: {fileID: 1044178681556612849, guid: 63845f9746a5f2f4ea82f15f5cc8ebc7, type: 3}
+  isRightHandWeapon: 0

@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a3a2488a4ec498498afd5368fce88ef, type: 3}
+  m_Name: Rare Coins Ability Data
+  m_EditorClassIdentifier: 
+  type: 77
+  prerequisites: 
+  rarity: 1
+  isRepeatedAbiltiy: 1
+  isEndgameAbility: 1
+  title: Rare Coins
+  description: Gain a fair amount of coins
+  icon: {fileID: 21300000, guid: f2f8c0f5223182b40a4c4484d0793e8b, type: 3}
+  prefab: {fileID: 8939368275750760295, guid: bd0debbd24f8cc147b581f301ae4bde3, type: 3}
+  levels:
+  - amountOfCoins: 40

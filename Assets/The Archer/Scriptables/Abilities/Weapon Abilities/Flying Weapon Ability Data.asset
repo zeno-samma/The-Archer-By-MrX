@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c387b2e3fd47ed947825c6263d099f99, type: 3}
+  m_Name: Flying Weapon Ability Data
+  m_EditorClassIdentifier: 
+  type: 9
+  rarity: 2
+  isRepeatedAbiltiy: 0
+  isEndgameAbility: 0
+  title: Flying Weapon
+  description: Weapon flies and attacks on its own, but loses some of its power and
+    speed
+  icon: {fileID: 21300000, guid: 03b4d191f40271943b13455b53879b38, type: 3}
+  prefab: {fileID: 8830949994475401333, guid: 455bea3eb69105847846186adf7907ff, type: 3}
+  levels:
+  - attackSpeedMultiplier: 0.7
+    attackDamageMultiplier: 0.8
