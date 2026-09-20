@@ -1,8 +1,12 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 using UnityEditor.PackageManager;
 using UnityEditor.PackageManager.Requests;
+using UnityEditor.Rendering;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 namespace OctoberStudio.PipelineSwitcher
 {
@@ -32,6 +36,11 @@ namespace OctoberStudio.PipelineSwitcher
                 EditorPrefs.SetBool(STARTED_INSTALLING_URP, false);
                 SwitchToURP();
             }
+
+            if(EditorPrefs.GetBool(STARTED_UNPACKING_URP_SHADERS, false))
+            {
+                EditorApplication.delayCall += FinishUnpacking;
+            }
         }
 
         protected virtual void OnGUI()
@@ -54,13 +63,18 @@ namespace OctoberStudio.PipelineSwitcher
             if (EditorPrefs.GetBool(FINISHED_SWITCHING, false) && urpInstalled && packageUnpacked)
             {
                 EditorGUILayout.LabelField("Switching to URP Finished");
+
+                if(GUILayout.Button("Convert Materials"))
+                {
+                    var upgraders = new List<MaterialUpgrader> { new OctoberMaterialUpgrader(), new OctoberScrollingParticleMaterialUpgrader() };
+                    MaterialUpgrader.UpgradeProjectFolder(upgraders, "Upgrading October materials...", MaterialUpgrader.UpgradeFlags.None);
+                }
                 return;
             }
 
             if (!IsURPInstalled())
             {
                 EditorGUILayout.HelpBox("Press Button below to switch from Built-in renderer to URP. This tool will download and install URP Package from Package Manager, unpack URP versions of October shaders, and convert materials to work with URP", MessageType.Info);
-                EditorGUILayout.HelpBox("We recomend saving the project in a version control system before proceeding", MessageType.Warning);
                 EditorGUILayout.HelpBox("Do not close this window until the conversion is complete!", MessageType.Warning);
                 if (GUILayout.Button("Switch to URP"))
                 {
@@ -96,7 +110,7 @@ namespace OctoberStudio.PipelineSwitcher
 
         protected virtual bool IsURPPackageUnpacked()
         {
-            return Type.GetType("OctoberStudio.StandardParticlesScrollingShaderGUIURP") != null;
+            return Type.GetType("OctoberStudio.StandardParticlesScrollingShaderGUI") != null;
         }
 
         protected virtual void InstallURP()
@@ -129,6 +143,33 @@ namespace OctoberStudio.PipelineSwitcher
             else if (addRequest.Status >= StatusCode.Failure)
             {
                 Debug.LogError("Failed to install URP: " + addRequest.Error.message);
+            }
+        }
+
+        public virtual void FinishSwitching()
+        {
+            EditorPrefs.SetBool(STARTED_UNPACKING_URP_SHADERS, false);
+            EditorPrefs.SetBool(FINISHED_SWITCHING, true);
+        }
+
+        protected virtual void FinishUnpacking()
+        {
+            GraphicsSettings.defaultRenderPipeline = AssetDatabase.LoadAssetAtPath<RenderPipelineAsset>("Assets/The Archer/Scriptables/URP/Universal Render Pipeline Asset.asset");
+            FinishSwitching();
+
+            string[] guids = AssetDatabase.FindAssets("t:Material");
+
+            var materials = guids
+                .Select(guid => AssetDatabase.LoadAssetAtPath<Material>(AssetDatabase.GUIDToAssetPath(guid)))
+                .Where(mat => mat != null)
+                .ToList();
+
+            var octoberUpgrader = new OctoberMaterialUpgrader();
+            var particleUpgrader = new OctoberScrollingParticleMaterialUpgrader();
+            var upgraders = new List<MaterialUpgrader> { new OctoberMaterialUpgrader(), new OctoberScrollingParticleMaterialUpgrader() };
+            foreach (var material in materials)
+            {
+                MaterialUpgrader.Upgrade(material, upgraders, MaterialUpgrader.UpgradeFlags.None);
             }
         }
     }
