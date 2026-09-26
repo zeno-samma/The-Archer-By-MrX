@@ -186,15 +186,15 @@ namespace OctoberStudio
 
             if (TestingData != null && TestingData.IsActive)
             {
-                InitStageFromTestingData();
+                InitStageFromTestingData();// Khởi tạo phòng chơi từ dữ liệu thử nghiệm
             }
             else if (ContinuePlayingSave.HasUnfinishedStageData)
             {
-                InitStageFromUnfinishedSession();
+                InitStageFromUnfinishedSession();// Khởi tạo phòng chơi từ phiên chơi chưa hoàn thành
             }
             else
             {
-                InitStageFromStart();
+                InitStageFromStart();// Quyết định khởi tạo phòng chơi từ đầu
             }
 
             if (Room.CurrentWave.WaveMusic != null)
@@ -329,7 +329,7 @@ namespace OctoberStudio
 
         #endregion
 
-        public static void OnExitReached(RoomExitBehavior roomExitBehavior)
+        public static void OnExitReached(RoomExitBehavior roomExitBehavior)//người chơi đã đi đến cổng thoát
         {
             CurrentRoomIndex++;
 
@@ -379,7 +379,7 @@ namespace OctoberStudio
             }
         }
 
-        public static void OnHeroDied()
+        public static void OnHeroDied()// người chơi đã chết
         {
             if (!Player.TryToRevive())
             {
@@ -398,7 +398,7 @@ namespace OctoberStudio
             instance.gameScreen.StageFailedScreen.Show();
         }
 
-        public static void RecalculateEnemyMultipliers()
+        public static void RecalculateEnemyMultipliers()//tính toán lại các hệ số nhân sát thương và máu của kẻ thù
         {
             EnemyDamageMultiplier = StageData.EnemyDamageMultiplier +
                 StageData.EnemyDamageMultiplierRoomStep * CurrentRoomIndex +
@@ -409,7 +409,7 @@ namespace OctoberStudio
                 StageData.EnemyHPMultiplierWaveStep * Room.CurrentWaveIndex;
         }
 
-        public static void ReturnToMainMenu()
+        public static void ReturnToMainMenu()//quay lại menu chính
         {
             GameController.UpgradesManager.OnStageUnloaded();
 

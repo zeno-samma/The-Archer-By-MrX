@@ -169,7 +169,7 @@ namespace OctoberStudio
             }
         }
 
-        public static void LoadStage()
+        public static void LoadStage()//Bắt đầu load stage, khi load xong sẽ lưu lại save
         {
             instance.StartCoroutine(StageLoadingCoroutine());
 
@@ -187,9 +187,10 @@ namespace OctoberStudio
 
         private static IEnumerator StageLoadingCoroutine()
         {
-            yield return LoadAsyncScene(SceneSettings.LoadingScene.SceneName, LoadSceneMode.Additive);
-            yield return UnloadAsyncScene(SceneSettings.MainMenuScene.SceneName);
-            yield return LoadAsyncScene(SceneSettings.GameScene.SceneName, LoadSceneMode.Single);
+            Debug.Log("Loading Stage...");
+            yield return LoadAsyncScene(SceneSettings.LoadingScene.SceneName, LoadSceneMode.Additive);//Load loading scene
+            yield return UnloadAsyncScene(SceneSettings.MainMenuScene.SceneName);//Unload main menu scene
+            yield return LoadAsyncScene(SceneSettings.GameScene.SceneName, LoadSceneMode.Single);//Load game scene
         }
 
         private static IEnumerator MainMenuLoadingCoroutine()
@@ -214,6 +215,7 @@ namespace OctoberStudio
 
         private static IEnumerator LoadAsyncScene(string sceneName, LoadSceneMode loadSceneMode)
         {
+            // Debug.Log($"Loading scene {sceneName}...");
             var asyncLoad = SceneManager.LoadSceneAsync(sceneName, loadSceneMode);
             asyncLoad.allowSceneActivation = false;
             //wait until the asynchronous scene fully loads

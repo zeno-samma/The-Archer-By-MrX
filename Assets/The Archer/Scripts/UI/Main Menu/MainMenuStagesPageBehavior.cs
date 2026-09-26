@@ -42,7 +42,7 @@ namespace OctoberStudio.UI
 
         protected PurchasedCondition PurchaseCondition { get; set; }
 
-        protected override void Start()
+        protected override void Start()// bắt đầu khi trang được hiển thị
         {
             base.Start();
 
