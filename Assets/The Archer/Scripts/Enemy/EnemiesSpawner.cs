@@ -28,7 +28,7 @@ namespace OctoberStudio.Enemy
             boosSpawnPool = new PoolComponent<EnemySpawnPointBehavior>(bossSpawnPointPrefab, 2);
         }
 
-        public virtual void Init(StageData stageData)
+        public virtual void Init(StageData stageData)//khoi tao cac pool cho tung loai enemy va chest trong stage
         {
             foreach (var room in stageData.Rooms)
             {
