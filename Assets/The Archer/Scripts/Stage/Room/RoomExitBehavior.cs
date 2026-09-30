@@ -20,7 +20,6 @@ namespace OctoberStudio
 
         [Space]
         [SerializeField] protected Image nextRoomPreviewImage;
-
         public virtual void Init(bool spawnEnabled, Sprite nextRoomPreview = null)
         {
             trigger.enabled = spawnEnabled;

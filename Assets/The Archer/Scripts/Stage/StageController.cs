@@ -341,29 +341,27 @@ namespace OctoberStudio
 
                 DropManager.GrantPickedUpItems();
                 GameScreen.StageCompleteScreen.Show();
-                Debug.Log("Người chơi đã hoàn thành tất cả các phòng trong giai đoạn");
+                // Debug.Log("Người chơi đã hoàn thành tất cả các phòng trong giai đoạn");
+                // 3. Hoặc đọc lại biến lưu trữ ở bất kỳ đâu/bất kỳ lúc nào về sau
+                // float recordedTime = ConsoleTimer.Instance.GetElapsedTime("Wave_1");
+                ConsoleTimer.Instance.LogAllResults();
             }
             else
             {
                 // Debug.Log("Thoát khỏi phòng: " + CurrentRoomIndex);
                 GameScreen.FadeInOut(LoadNextRoom, null);
+                // 2. Dừng khi kết thúc phiên và lấy giá trị ra ngay
+                // float finalTime = ConsoleTimer.Instance.StopTimer("Wave_1");
+                // Debug.Log("Thời gian hoàn thành Wave 1: " + finalTime.ToString("F2") + "s");
             }
         }
 
         protected static void LoadNextRoom()
         {
-            // =========================
-            // // Bắt đầu đếm cho Wave 1
-            // ConsoleTimer.Instance.StartTimer("Wave_1");
-
-            // // Bắt đầu đếm cho một sự kiện khác song song
-            // ConsoleTimer.Instance.StartTimer("Boss_Fight");
-
-            // // Dừng luồng tương ứng khi hoàn thành
-            // ConsoleTimer.Instance.StopTimer("Wave_1");
-            // ConsoleTimer.Instance.StopTimer("Boss_Fight");
             // ==========================
-            Debug.Log("Phòng tiếp theo: " + CurrentRoomIndex + " Loại phòng: " + Room.CurrentWave.Icon.name + " Bắt đầu đếm thời gian: ");
+            // Debug.Log("Phòng tiếp theo: " + CurrentRoomIndex + " Loại phòng: " + Room.CurrentWave.Icon.name + " Bắt đầu đếm thời gian: ");
+            // 1. Bắt đầu phiên đếm
+            // ConsoleTimer.Instance.StartTimer("Wave_1");
             RoomBuilder.ClearRoom();
             DropManager.HideAllDrop();
             // We've already incremented CurrentRoomIndex in OnExitReached method
@@ -398,7 +396,9 @@ namespace OctoberStudio
             if (!Player.TryToRevive())
             {
                 onDefeat?.Invoke();
-                Debug.Log("Người chơi đã chết");
+                // Debug.Log("Người chơi đã chết");
+                // float recordedTime = ConsoleTimer.Instance.GetElapsedTime("Wave_1");
+                // Debug.Log("Thời gian hoàn thành Wave 1: " + recordedTime.ToString("F2") + "s");
                 DropManager.GrantPickedUpItems();
                 instance.gameScreen.StageFailedScreen.Show();
             }

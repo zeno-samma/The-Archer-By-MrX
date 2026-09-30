@@ -38,6 +38,8 @@ namespace OctoberStudio
 
         protected ContinuePlayingSave ContinuePlayingSave { get; set; }
 
+        public float RoomId = 0f; // ID cho phiên đếm thời gian
+
         protected virtual void Awake()
         {
             StageController.RegisterRoom(this);
@@ -78,6 +80,11 @@ namespace OctoberStudio
             IsLoaded = true;
 
             onRoomStarted?.Invoke();
+            // Debug.Log("OnRoomStarted");
+            RoomId++;
+            Debug.Log($"Room: {RoomId}");
+            // 1. Bắt đầu phiên đếm
+            ConsoleTimer.Instance.StartTimer("Room " + CurrentWave.Icon.name + " " + RoomId);
         }
 
         protected virtual void OnAbilitySelectorClosed()
@@ -350,7 +357,9 @@ namespace OctoberStudio
         protected virtual void EndRoom()
         {
             onRoomEnded?.Invoke();
-
+            // Debug.Log("OnRoomEnded - Hoàn thành"+ Wave);
+            float finalTime = ConsoleTimer.Instance.StopTimer("Room " + CurrentWave.Icon.name + " " + RoomId);
+            Debug.Log($"Room: {CurrentWave.Icon.name + " " + RoomId} - Clear: {finalTime:F2}s");
             if (exits.Count == 0 || StageController.IsLastRoom)
             {
                 StageController.OnExitReached(null);
