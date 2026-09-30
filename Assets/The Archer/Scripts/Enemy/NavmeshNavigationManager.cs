@@ -29,7 +29,7 @@ namespace OctoberStudio
                 navMeshSurface.BuildNavMesh();
             }
 
-            Debug.Log("NavMesh built successfully.");
+            // Debug.Log("NavMesh built successfully.");
 
             var triangles = UnityEngine.AI.NavMesh.CalculateTriangulation();
             navigationMesh = new Mesh();

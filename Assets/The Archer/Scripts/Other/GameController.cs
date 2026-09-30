@@ -187,7 +187,7 @@ namespace OctoberStudio
 
         private static IEnumerator StageLoadingCoroutine()
         {
-            Debug.Log("Loading Stage...");
+            // Debug.Log("Loading Stage...");
             yield return LoadAsyncScene(SceneSettings.LoadingScene.SceneName, LoadSceneMode.Additive);//Load loading scene
             yield return UnloadAsyncScene(SceneSettings.MainMenuScene.SceneName);//Unload main menu scene
             yield return LoadAsyncScene(SceneSettings.GameScene.SceneName, LoadSceneMode.Single);//Load game scene

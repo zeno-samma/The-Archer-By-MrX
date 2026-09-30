@@ -339,19 +339,20 @@ namespace OctoberStudio
 
                 DropManager.GrantPickedUpItems();
                 GameScreen.StageCompleteScreen.Show();
+                Debug.Log("Người chơi đã hoàn thành tất cả các phòng trong giai đoạn");
             }
             else
             {
+                // Debug.Log("Thoát khỏi phòng: " + CurrentRoomIndex);
                 GameScreen.FadeInOut(LoadNextRoom, null);
             }
         }
 
         protected static void LoadNextRoom()
         {
+            Debug.Log("Phòng tiếp theo " + CurrentRoomIndex + " Bắt đầu đếm thời gian: ");
             RoomBuilder.ClearRoom();
-
             DropManager.HideAllDrop();
-
             // We've already incremented CurrentRoomIndex in OnExitReached method
             var nextRoomData = RoomsShuffler.GetActiveRoomData();
             Room.Init(nextRoomData, -1, false, false, false);
@@ -384,7 +385,7 @@ namespace OctoberStudio
             if (!Player.TryToRevive())
             {
                 onDefeat?.Invoke();
-
+                Debug.Log("Người chơi đã chết");
                 DropManager.GrantPickedUpItems();
                 instance.gameScreen.StageFailedScreen.Show();
             }
@@ -416,6 +417,7 @@ namespace OctoberStudio
             onDefeat = null;
 
             GameController.LoadMainMenu();
+            // Debug.Log("Người chơi đã quay lại menu chính");
         }
     }
 }
