@@ -250,9 +250,11 @@ namespace OctoberStudio
                         gameScreen.ShowSideUI();
                     }
                 });
-            } else
+            }
+            else
             {
-                EasingManager.DoNextFrame(() => {
+                EasingManager.DoNextFrame(() =>
+                {
                     if (shouldShowAbilitySelector)
                     {
                         gameScreen.AbiltiesSelector.Open();
@@ -350,7 +352,18 @@ namespace OctoberStudio
 
         protected static void LoadNextRoom()
         {
-            Debug.Log("Phòng tiếp theo " + CurrentRoomIndex + " Bắt đầu đếm thời gian: ");
+            // =========================
+            // // Bắt đầu đếm cho Wave 1
+            // ConsoleTimer.Instance.StartTimer("Wave_1");
+
+            // // Bắt đầu đếm cho một sự kiện khác song song
+            // ConsoleTimer.Instance.StartTimer("Boss_Fight");
+
+            // // Dừng luồng tương ứng khi hoàn thành
+            // ConsoleTimer.Instance.StopTimer("Wave_1");
+            // ConsoleTimer.Instance.StopTimer("Boss_Fight");
+            // ==========================
+            Debug.Log("Phòng tiếp theo: " + CurrentRoomIndex + " Loại phòng: " + Room.CurrentWave.Icon.name + " Bắt đầu đếm thời gian: ");
             RoomBuilder.ClearRoom();
             DropManager.HideAllDrop();
             // We've already incremented CurrentRoomIndex in OnExitReached method
