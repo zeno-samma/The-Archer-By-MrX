@@ -18,7 +18,7 @@ MonoBehaviour:
   itemName: Ceremonial Wand
   icon: {fileID: 21300000, guid: f6381df618c33f148af69c84db65c3f5, type: 3}
   isDefaultItem: 0
-  isUnlockedByDefault: 1
+  isUnlockedByDefault: 0
   itemLevels:
   - cost: 100
     price:
@@ -95,7 +95,7 @@ MonoBehaviour:
     - statType: 2
       value: 1.04
       isVisibleOnUI: 1
-    attachedAbilities: 12000000
+    attachedAbilities: 12000000i
   - cost: 1800
     price:
       currencyId: gold
@@ -108,7 +108,7 @@ MonoBehaviour:
     - statType: 2
       value: 1.06
       isVisibleOnUI: 1
-    attachedAbilities: 12000000
+    attachedAbilities: 12000000i
   - cost: 2400
     price:
       currencyId: gold
@@ -121,6 +121,6 @@ MonoBehaviour:
     - statType: 2
       value: 1.08
       isVisibleOnUI: 1
-    attachedAbilities: 18000000
+    attachedAbilities: 18000000i
   weaponPrefab: {fileID: 1044178681556612849, guid: 30e7b752012b94040ae8a2ed756bb422, type: 3}
   isRightHandWeapon: 1

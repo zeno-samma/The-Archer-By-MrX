@@ -83,8 +83,8 @@ namespace OctoberStudio
             {
                 Debug.Log($"- {item.Key}: {item.Value:F2} giây");
                 totalElapsedTime+= item.Value;
-                Debug.Log($"Tổng thời gian: {totalElapsedTime:F2} giây");
             }
+            Debug.Log($"Tổng thời gian: {totalElapsedTime:F2} giây");
             Debug.Log("===============================================================");
         }
         /// <summary>
