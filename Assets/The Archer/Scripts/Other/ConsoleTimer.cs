@@ -13,6 +13,7 @@ namespace OctoberStudio
         private Dictionary<string, float> timerResults = new Dictionary<string, float>();
 
         private bool hasReportedThisRun = false; // Cờ chặn tổng hợp nhiều lần
+        private float totalElapsedTime = 0f; // Biến lưu tổng thời gian
         private void Awake()
         {
             if (Instance == null) Instance = this;
@@ -81,6 +82,8 @@ namespace OctoberStudio
             foreach (var item in timerResults)
             {
                 Debug.Log($"- {item.Key}: {item.Value:F2} giây");
+                totalElapsedTime+= item.Value;
+                Debug.Log($"Tổng thời gian: {totalElapsedTime:F2} giây");
             }
             Debug.Log("===============================================================");
         }
