@@ -12,6 +12,7 @@ namespace OctoberStudio
         // Lưu trữ giá trị thời gian (giây) theo ID để tra cứu sau
         private Dictionary<string, float> timerResults = new Dictionary<string, float>();
 
+        private bool hasReportedThisRun = false; // Cờ chặn tổng hợp nhiều lần
         private void Awake()
         {
             if (Instance == null) Instance = this;
@@ -82,6 +83,48 @@ namespace OctoberStudio
                 Debug.Log($"- {item.Key}: {item.Value:F2} giây");
             }
             Debug.Log("===============================================================");
+        }
+        /// <summary>
+        /// Gọi hàm này mỗi khi bắt đầu một Lượt Chơi mới (Game mới / Room 1)
+        /// </summary>
+        public void ResetSession()
+        {
+            hasReportedThisRun = false;
+            // timerResults.Clear();
+        }
+        /// <summary>
+        /// Tổng hợp kết quả phiên chơi (chỉ chạy duy nhất 1 lần cho sự kiện xảy ra trước)
+        /// </summary>
+        public void ReportSessionResult(string message)
+        {
+            // Nếu đã xuất báo cáo trước đó trong lượt chơi này -> Chặn ngay
+            if (hasReportedThisRun)
+            {
+                Debug.Log("Đã có thông báo tổng hợp rồi, bỏ qua sự kiện: " + message);
+                return;
+            }
+
+            // Đánh dấu đã báo cáo
+            hasReportedThisRun = true;
+
+            // 1. In lý do kết thúc
+            switch (message)
+            {
+                case "Die":
+                    Debug.Log($"===> KẾT THÚC: Người chơi chết tại phòng {StageController.Room.RoomId}");
+                    break;
+                case "FinishAllRoom":
+                    Debug.Log("===> KẾT THÚC: Người chơi đã phá đảo toàn bộ phòng!");
+                    break;
+                case "BackToMenu":
+                    Debug.Log("===> KẾT THÚC: Người chơi chủ động thoát về Menu");
+                    break;
+                default:
+                    Debug.Log("===> KẾT THÚC: " + message);
+                    break;
+            }
+            // 2. In toàn bộ danh sách thời gian các phòng
+            LogAllResults();
         }
     }
 

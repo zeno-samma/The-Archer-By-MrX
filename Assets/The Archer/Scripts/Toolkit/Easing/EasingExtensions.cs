@@ -60,7 +60,14 @@ namespace OctoberStudio.Easing
         {
             Vector3 startScale = transform.localScale;
 
-            return new VectorEasingCoroutine3(startScale, targetScale, duration, delay, (scale) => transform.localScale = scale);
+            return new VectorEasingCoroutine3(startScale, targetScale, duration, delay,
+            scale =>
+            {
+                if (transform != null)
+                {
+                    transform.localScale = scale;
+                }
+            });
         }
 
         public static void StopIfExists(this IEasingCoroutine coroutine)

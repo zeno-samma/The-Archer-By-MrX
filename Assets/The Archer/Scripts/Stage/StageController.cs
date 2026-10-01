@@ -344,7 +344,8 @@ namespace OctoberStudio
                 // Debug.Log("Người chơi đã hoàn thành tất cả các phòng trong giai đoạn");
                 // 3. Hoặc đọc lại biến lưu trữ ở bất kỳ đâu/bất kỳ lúc nào về sau
                 // float recordedTime = ConsoleTimer.Instance.GetElapsedTime("Wave_1");
-                ConsoleTimer.Instance.LogAllResults();
+                // ConsoleTimer.Instance.LogAllResults();//Phát event hoàn thành tất cả các phòng
+                ConsoleTimer.Instance.ReportSessionResult("FinishAllRoom");
             }
             else
             {
@@ -401,7 +402,8 @@ namespace OctoberStudio
                 // Debug.Log("Thời gian hoàn thành Wave 1: " + recordedTime.ToString("F2") + "s");
                 DropManager.GrantPickedUpItems();
                 instance.gameScreen.StageFailedScreen.Show();
-                ConsoleTimer.Instance.LogAllResults();
+                // ConsoleTimer.Instance.LogAllResults();==> Phát event chết và cho biết chết ở phòng nào
+                ConsoleTimer.Instance.ReportSessionResult("Die");
             }
         }
 
@@ -432,7 +434,8 @@ namespace OctoberStudio
 
             GameController.LoadMainMenu();
             // Debug.Log("Người chơi đã quay lại menu chính");
-            ConsoleTimer.Instance.LogAllResults();
+            // ConsoleTimer.Instance.LogAllResults();//===Phát event quay lại menu chính
+            ConsoleTimer.Instance.ReportSessionResult("BackToMenu");
         }
     }
 }

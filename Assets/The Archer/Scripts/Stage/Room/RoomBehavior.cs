@@ -83,8 +83,10 @@ namespace OctoberStudio
             // Debug.Log("OnRoomStarted");
             RoomId++;
             Debug.Log($"Room: {RoomId}");
+            ConsoleTimer.Instance.ResetSession();
             // 1. Bắt đầu phiên đếm
             ConsoleTimer.Instance.StartTimer("Room " + CurrentWave.Icon.name + " " + RoomId);
+            
         }
 
         protected virtual void OnAbilitySelectorClosed()
