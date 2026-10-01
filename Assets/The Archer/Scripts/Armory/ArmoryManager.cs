@@ -51,14 +51,14 @@ namespace OctoberStudio
                 var itemSave = itemSaves[i];
 
                 var data = database.GetItem(itemSave.Id);
-                if(data != null && itemSave.Level >= data.ItemLevelCount)
+                if (data != null && itemSave.Level >= data.ItemLevelCount)
                 {
                     itemSave.Level = data.ItemLevelCount - 1;
                 }
 
                 if (itemSave.IsEquipped)
                 {
-                    if(data == null)
+                    if (data == null)
                     {
                         save.RemoveItem(itemSave.Id);
 
@@ -108,7 +108,7 @@ namespace OctoberStudio
         {
             var abilities = new List<AbilityType>();
 
-            foreach(var itemData in EquippedItems.Values)
+            foreach (var itemData in EquippedItems.Values)
             {
                 var itemSave = save.GetItem(itemData.Id);
                 var itemLevel = itemData.GetItemLevel(itemSave.Level);
@@ -254,12 +254,24 @@ namespace OctoberStudio
 
         public virtual void UnlockItem(ItemData itemData)
         {
-            save.AddItem(itemData.Id);
+            // save.AddItem(itemData.Id);
+            if (itemData != null)
+            {
+                UnlockItem(itemData.Id);
+            }
         }
 
         public virtual void UnlockItem(string id)
         {
-            save.AddItem(id);
+            // save.AddItem(id);
+            var itemSave = save.AddItem(id);
+
+            // Đăng ký sự kiện lắng nghe ngay khi item được mở khóa
+            if (itemSave != null)
+            {
+                itemSave.OnItemEquipped -= OnItemEquippedEventFired; // Hủy đăng ký cũ nếu có để tránh bị duplicate
+                itemSave.OnItemEquipped += OnItemEquippedEventFired; // Đăng ký sự kiện mới
+            }
         }
 
         public virtual HeroSaveData GetHeroSave(string id)
@@ -330,7 +342,7 @@ namespace OctoberStudio
         {
             EquippedItems.TryGetValue(itemType, out ItemData itemData);
 
-            if(itemData == null)
+            if (itemData == null)
             {
                 return null;
             }
