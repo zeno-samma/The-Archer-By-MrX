@@ -401,6 +401,7 @@ namespace OctoberStudio
                 // Debug.Log("Thời gian hoàn thành Wave 1: " + recordedTime.ToString("F2") + "s");
                 DropManager.GrantPickedUpItems();
                 instance.gameScreen.StageFailedScreen.Show();
+                ConsoleTimer.Instance.LogAllResults();
             }
         }
 
@@ -431,6 +432,7 @@ namespace OctoberStudio
 
             GameController.LoadMainMenu();
             // Debug.Log("Người chơi đã quay lại menu chính");
+            ConsoleTimer.Instance.LogAllResults();
         }
     }
 }
