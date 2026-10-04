@@ -236,20 +236,15 @@ namespace OctoberStudio.Drop
             position.y += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
             position.height -= EditorGUIUtility.singleLineHeight;
 
-            var dropType = (DropType)dropTypeProperty.intValue;
-            if (dropType == DropType.Item)
+            var dropType = (DropType) dropTypeProperty.intValue;
+            if (dropType == DropType.Item) 
             {
-                var itemDataProperty = property.FindPropertyRelative("itemData");
-                var itemDataPosition = new Rect(position);
-                itemDataPosition.height = EditorGUIUtility.singleLineHeight;
-                EditorGUI.PropertyField(itemDataPosition, itemDataProperty);
+                OnItemDropGUI(position, property);
+            } else
+            {
+                OnNotItemDropGUI(position, property);
+            }
 
-                // Đẩy layout xuống để có chỗ vẽ HP Zone
-                position.y += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
-                position.height -= EditorGUIUtility.singleLineHeight;
-            }/*  */
-            // LUÔN LUÔN vẽ thanh HP Zones và Chance
-            OnNotItemDropGUI(position, property);
             EditorGUI.EndProperty();
         }
 
@@ -304,18 +299,17 @@ namespace OctoberStudio.Drop
 
                 EditorGUI.DrawRect(rect, new Color(0.1f, 0.1f, 0.1f, 1f));
 
-                if (selectedId == i)
+                if(selectedId == i)
                 {
                     EditorGUI.DrawRect(rect.Shrink(1), new Color(0.3f, 0.3f, 0.3f, 1f));
-                }
-                else
+                } else
                 {
                     EditorGUI.DrawRect(rect.Shrink(1), new Color(0.2f, 0.2f, 0.2f, 1f));
                 }
 
                 EditorGUI.LabelField(rect, i.ToString(), textStyle);
 
-                if (Event.current.type == EventType.MouseDown && Event.current.button == 0 && rect.Contains(Event.current.mousePosition))
+                if(Event.current.type == EventType.MouseDown && Event.current.button == 0 && rect.Contains(Event.current.mousePosition))
                 {
                     selectedId = i;
                 }
@@ -328,18 +322,16 @@ namespace OctoberStudio.Drop
 
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {
-            // Chiều cao mặc định của thanh HP Zone và Chance
-            float height = EditorGUIUtility.singleLineHeight * 3 + EditorGUIUtility.standardVerticalSpacing * 3 + 54;
-
             var dropTypeProperty = property.FindPropertyRelative("dropType");
-
-            // Cộng thêm khoảng trống nếu có ô Item Data
-            if (dropTypeProperty.intValue == (int)DropType.Item)
+            if(dropTypeProperty.intValue == (int)DropType.Item)
             {
-                height += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
+                return EditorGUIUtility.singleLineHeight * 2 + EditorGUIUtility.standardVerticalSpacing;
+            }
+            else
+            {
+                return EditorGUIUtility.singleLineHeight * 3 + EditorGUIUtility.standardVerticalSpacing * 3 + 54;
             }
 
-            return height;
         }
     }
 }
