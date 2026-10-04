@@ -513,6 +513,8 @@ namespace OctoberStudio.Enemy
 
         public virtual void Drop(float experience)
         {
+            // Đặt dòng này lên trên cùng để xem hàm có được gọi tới không
+            Debug.Log($"[TỔNG KIỂM TRA DROP] Quái: {gameObject.name} | Gọi hàm Drop: CÓ | UseDrop: {UseDrop}");
             if (!UseDrop) return;
 
             int counter = 0;
@@ -531,7 +533,8 @@ namespace OctoberStudio.Enemy
                 }
 
                 var chance = data.GetChance(StageController.Player.NormalizedHP);
-
+                // Thêm dòng này vào:
+                Debug.Log($"[BOSS OVERRIDE DEBUG] Loại: {data.DropType} | Tỉ lệ: {chance}%");
                 if (chance <= 0) continue;
 
                 if (data.DropType == DropType.XPGem && droppedExperience) continue;

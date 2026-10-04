@@ -23,6 +23,7 @@ namespace OctoberStudio
 
         public float GetChance(float hpProportion)
         {
+
             if (hpZones.Count == 0) return 0f;
             if (hpZones.Count == 1) return hpZones[0].Chance;
 
@@ -33,6 +34,7 @@ namespace OctoberStudio
                 hpSum += hpZones[i].HP;
                 if (hpProportion < hpSum)
                 {
+                    Debug.Log($"[BOSS OVERRIDE DEBUG] Loại: {dropType} | Tỉ lệ: {hpZones[i].Chance}%");
                     return hpZones[i].Chance;
                 }
             }
