@@ -175,7 +175,6 @@ namespace OctoberStudio.Drop
 
         protected virtual void SpawnItemIndicator(ItemData itemData)
         {
-            // Debug.Log("Báo văn bản cho vật phẩm: " + itemData.ItemName);
             var indicator = StageController.GameScreen.WorldSpaceTextManager.SpawnText(StageController.Player.transform, Vector2.zero, itemData.ItemName, WorldSpaceTextType.ItemPickUp);
 
             if (indicator is ItemTextIndicatorBehavior itemText)

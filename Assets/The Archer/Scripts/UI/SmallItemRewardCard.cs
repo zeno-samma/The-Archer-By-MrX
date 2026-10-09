@@ -12,7 +12,6 @@ namespace OctoberStudio.UI
 
         public void SetItem(ItemData itemData)
         {
-            Debug.Log("4");
             var itemLevel = itemData.GetItemLevel(0);
             var itemRarity = itemLevel.ItemRarity;
             var itemType = itemData.ItemType;
