@@ -34,6 +34,7 @@ namespace OctoberStudio.UI
 
         public virtual void SetItem(ItemData item)
         {
+            // Debug.Log($"Set item text indicator: {item.ItemName}");
             var level = GameController.ArmoryManager.GetNextItemLevel(item.Id);
 
             if (level != null)

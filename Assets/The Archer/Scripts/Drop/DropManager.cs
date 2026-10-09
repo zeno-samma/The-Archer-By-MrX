@@ -173,7 +173,7 @@ namespace OctoberStudio.Drop
             return new ItemDropSaveData(stageIndex, realRoomIndex, realWaveIndex, itemId);
         }
 
-        protected virtual void SpawnItemIndicator(ItemData itemData)
+        protected virtual void SpawnItemIndicator(ItemData itemData) //sinh ra thông báo khi nhặt được item
         {
             var indicator = StageController.GameScreen.WorldSpaceTextManager.SpawnText(StageController.Player.transform, Vector2.zero, itemData.ItemName, WorldSpaceTextType.ItemPickUp);
 
@@ -186,7 +186,7 @@ namespace OctoberStudio.Drop
             }
         }
 
-        protected virtual void OnItemTextIndicatorHidden(TextIndicatorBehavior indicator)
+        protected virtual void OnItemTextIndicatorHidden(TextIndicatorBehavior indicator) //on khi thông báo nhặt item biến mất
         {
             indicator.onIndicatorHidden -= OnItemTextIndicatorHidden;
 

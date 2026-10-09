@@ -396,6 +396,7 @@ namespace OctoberStudio
 
         public virtual ItemRarityData GetItemRarityData(ItemRarityType itemRarity)
         {
+            // Debug.Log($"Lấy dữ liệu độ hiếm của vật phẩm ở manager: {itemRarity}");
             return database.GetItemRarityData(itemRarity);
         }
     }

@@ -45,6 +45,7 @@ namespace OctoberStudio.UI.Armory
 
         protected virtual void InitRarityVisuals(ItemRarityType rarityType)
         {
+            // Debug.Log($"Init rarity visuals: {rarityType}");
             var rarityData = GetRarityData(rarityType);
 
             rarityImage.sprite = rarityData.backgroundSprite;
