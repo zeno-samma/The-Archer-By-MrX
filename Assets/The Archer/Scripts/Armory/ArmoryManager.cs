@@ -390,12 +390,14 @@ namespace OctoberStudio
         }
 
         public virtual ItemTypeData GetItemTypeData(ItemType itemType)
-        {
+        {   
+            // Debug.Log($"Lấy dữ liệu loại vật phẩm: {itemType}");
             return database.GetItemTypeData(itemType);
         }
 
         public virtual ItemRarityData GetItemRarityData(ItemRarityType itemRarity)
         {
+            // Debug.Log($"Lấy dữ liệu độ hiếm vật phẩm: {itemRarity}");
             return database.GetItemRarityData(itemRarity);
         }
     }

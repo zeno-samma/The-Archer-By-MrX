@@ -74,11 +74,13 @@ namespace OctoberStudio.Armory
 
         public virtual ItemRarityData GetItemRarityData(ItemRarityType rarityType)
         {
+            // Debug.Log($"Tìm thấy độ hiếm: {rarityType}");
             return itemRarities.FirstOrDefault(rarity => rarity.RarityType == rarityType);
         }
 
         public virtual ItemTypeData GetItemTypeData(ItemType itemType)
         {
+            // Debug.Log($"Tìm thấy loại vật phẩm: {itemType}");
             return itemTypes.FirstOrDefault(type => type.ItemType == itemType);
         }
 
