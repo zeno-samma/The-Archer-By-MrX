@@ -523,25 +523,42 @@ namespace OctoberStudio.Enemy
             for (int i = 0; i < Data.Drops.Count; i++)
             {
                 var data = Data.Drops[i];
+                bool isWinnerFromPool = false; // Đánh dấu vật phẩm đã được quay trúng
 
                 if (OverrideData != null)
                 {
                     if (OverrideData.RemoveDrop.Contains(data.DropType)) continue;
 
                     var dropOverride = GetOverride(data.DropType);
-                    if (dropOverride != null) data = dropOverride;
+                    if (dropOverride != null)
+                    {
+                        data = dropOverride;
+
+                        // Nếu có nhiều cấu hình Item, đánh dấu để bỏ qua check tỉ lệ lần 2
+                        if (data.DropType == DropType.Item)
+                        {
+                            int itemCount = 0;
+                            for (int k = 0; k < OverrideData.DropOverrides.Count; k++)
+                            {
+                                if (OverrideData.DropOverrides[k].DropType == DropType.Item) itemCount++;
+                            }
+                            if (itemCount > 1) isWinnerFromPool = true;
+                        }
+                    }
                 }
 
                 var chance = data.GetChance(StageController.Player.NormalizedHP);
-                // Thêm dòng này vào:
-                Debug.Log($"[BOSS OVERRIDE DEBUG] Quái: {gameObject.name} | Loại: {data.DropType} | Tỉ lệ: {chance}%");
-                if (chance <= 0) continue;
 
+                if (!isWinnerFromPool && chance <= 0) continue;
                 if (data.DropType == DropType.XPGem && droppedExperience) continue;
 
-                if (chance >= 100 || Random.value * 100 <= chance)
+                // ÉP RỚT 100% nếu là vật phẩm thắng vòng quay, ngược lại dùng Random cũ
+                if (isWinnerFromPool || chance >= 100 || Random.value * 100 <= chance)
                 {
                     var amount = data.GetDropAmount(StageController.Player.NormalizedHP).Value;
+
+                    Debug.Log($"[BOSS OVERRIDE DEBUG] Quái: {gameObject.name} | Loại: {data.DropType} | Tỉ lệ: {chance}%");
+                    // ... (Phần for bên trong giữ nguyên hoàn toàn)
                     for (int j = 0; j < amount; j++)
                     {
                         var delay = counter * 0.1f;
@@ -552,7 +569,6 @@ namespace OctoberStudio.Enemy
                         if (drop is XPDropBehavior gem)
                         {
                             gem.XPAmount = experience / amount;
-
                             droppedExperience = true;
                         }
                         else if (drop is ItemDropBehavior item)
@@ -572,7 +588,6 @@ namespace OctoberStudio.Enemy
                     var data = OverrideData.AdditionalDrop[i];
 
                     var chance = data.GetChance(StageController.Player.NormalizedHP);
-                    Debug.Log($"[BOSS OVERRIDE DEBUG] Quái: {gameObject.name} | Loại: {data.DropType} | Tỉ lệ: {chance}%");
                     if (chance <= 0) continue;
 
                     if (data.DropType == DropType.XPGem && droppedExperience) continue;
@@ -620,12 +635,39 @@ namespace OctoberStudio.Enemy
         {
             if (OverrideData == null) return null;
 
+            // 1. Gom tất cả Override cùng loại (Ví dụ: 4 loại Item phẩm chất khác nhau)
+            var validOverrides = new List<EnemyDropData>();
             for (int i = 0; i < OverrideData.DropOverrides.Count; i++)
             {
-                var data = OverrideData.DropOverrides[i];
-                if (data.DropType == dropType) return data;
+                if (OverrideData.DropOverrides[i].DropType == dropType)
+                {
+                    validOverrides.Add(OverrideData.DropOverrides[i]);
+                }
             }
-            return null;
+
+            if (validOverrides.Count == 0) return null;
+            if (validOverrides.Count == 1) return validOverrides[0];
+
+            // 2. Quay số chọn 1 vật phẩm duy nhất dựa trên tổng Chance
+            float totalChance = 0;
+            foreach (var drop in validOverrides)
+            {
+                totalChance += drop.GetChance(StageController.Player.NormalizedHP);
+            }
+
+            float roll = Random.Range(0f, totalChance);
+            float currentSum = 0;
+
+            foreach (var drop in validOverrides)
+            {
+                currentSum += drop.GetChance(StageController.Player.NormalizedHP);
+                if (roll <= currentSum)
+                {
+                    return drop; // Trả về vật phẩm trúng giải
+                }
+            }
+
+            return validOverrides[0];
         }
 
         protected virtual void OnTriggerEnter(Collider other)

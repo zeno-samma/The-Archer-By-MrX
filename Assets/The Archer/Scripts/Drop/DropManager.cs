@@ -58,7 +58,7 @@ namespace OctoberStudio.Drop
 
         public virtual void GrantPickedUpItems()
         {
-            for(int i = 0; i < PickedUpItems.Count; i++)
+            for (int i = 0; i < PickedUpItems.Count; i++)
             {
                 var itemData = PickedUpItems[i];
 
@@ -134,12 +134,13 @@ namespace OctoberStudio.Drop
             drop.onPickedUp -= OnDropPickedUp;
             dropList.Remove(drop);
 
-            if(drop is ItemDropBehavior itemDrop)
+            if (drop is ItemDropBehavior itemDrop)
             {
                 if (HasAliveIndicators)
                 {
                     itemsQueue.Enqueue(itemDrop.ItemData);
-                } else
+                }
+                else
                 {
                     SpawnItemIndicator(itemDrop.ItemData);
                 }
@@ -151,11 +152,14 @@ namespace OctoberStudio.Drop
             ContinuePlayingSave.SavePickedUpItems(PickedUpItems.ToArray());
         }
 
-        public virtual bool CanDropItem(EnemyDropData itemDropData)
+        public virtual bool CanDropItem(EnemyDropData itemDropData)// Nếu muốn cho Boss rớt đồ farm nhiều lần thì bỏ qua check Save của template cũ
         {
-            var testSave = CreateItemDropSaveData(itemDropData.ItemData);
-
-            return !StageSave.HasDroppedBefore(testSave);
+            Debug.Log("Tắt cơ chế 1 lần rớt đồ của Boss để có thể rớt đồ farm nhiều lần");
+            // Bỏ qua check Save của template cũ để Boss có thể rớt đồ farm được nhiều lần
+            // var testSave = CreateItemDropSaveData(itemDropData.ItemData);
+            // return !StageSave.HasDroppedBefore(testSave);
+            ///Mới================================
+            return true;
         }
 
         public virtual ItemDropSaveData CreateItemDropSaveData(ItemData itemData)
@@ -190,7 +194,7 @@ namespace OctoberStudio.Drop
         {
             indicator.onIndicatorHidden -= OnItemTextIndicatorHidden;
 
-            if(itemsQueue.Count > 0)
+            if (itemsQueue.Count > 0)
             {
                 SpawnItemIndicator(itemsQueue.Dequeue());
             }

@@ -1108,7 +1108,7 @@ MonoBehaviour:
           additionalDrop: []
           dropOverrides:
           - dropType: 4
-            itemData: {fileID: 11400000, guid: e1093f8aabc234e43ab790916cbb9b83, type: 2}
+            itemData: {fileID: 11400000, guid: 7d55e348da0b5bc4ab9feef578bc4553, type: 2}
             hpZones:
             - hp: 1
               dropAmount:
@@ -1116,7 +1116,40 @@ MonoBehaviour:
                 min: 0
                 max: 1
                 propertyType: 0
-              chance: 100
+              chance: 60
+            selectedZoneId: 0
+          - dropType: 4
+            itemData: {fileID: 11400000, guid: 0ef7171caaa209040b477bbd6aa697fc, type: 2}
+            hpZones:
+            - hp: 1
+              dropAmount:
+                value: 1
+                min: 0
+                max: 1
+                propertyType: 0
+              chance: 60
+            selectedZoneId: 0
+          - dropType: 4
+            itemData: {fileID: 11400000, guid: f8118b1ecc1b3cc40b62961df49ec361, type: 2}
+            hpZones:
+            - hp: 1
+              dropAmount:
+                value: 1
+                min: 0
+                max: 1
+                propertyType: 0
+              chance: 60
+            selectedZoneId: 0
+          - dropType: 4
+            itemData: {fileID: 11400000, guid: 6df8965eb4702dd4a9fae96130e5a755, type: 2}
+            hpZones:
+            - hp: 1
+              dropAmount:
+                value: 1
+                min: 0
+                max: 1
+                propertyType: 0
+              chance: 60
             selectedZoneId: 0
           removeDrop: 
           overrideHP: 0

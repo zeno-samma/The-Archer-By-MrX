@@ -38,300 +38,62 @@ MonoBehaviour:
     - prefab: {fileID: 6195235661905902216, guid: c3c5119fc67c80e4ea7102f657587a8c, type: 3}
       transformData:
         position: {x: 0, y: 0, z: 0}
-        rotation: {x: -0, y: -0, z: -0, w: 1}
-        localScale: {x: 1, y: 1, z: 1}
-    - prefab: {fileID: 4980151850167981429, guid: ff6a39d0c99fe3945a580e145c793039, type: 3}
-      transformData:
-        position: {x: -4, y: 0, z: 0}
-        rotation: {x: -0, y: -0, z: -0, w: 1}
-        localScale: {x: 1, y: 1, z: 1}
-    - prefab: {fileID: 4980151850167981429, guid: ff6a39d0c99fe3945a580e145c793039, type: 3}
-      transformData:
-        position: {x: 4, y: 0, z: 0}
-        rotation: {x: -0, y: -0, z: -0, w: 1}
-        localScale: {x: 1, y: 1, z: 1}
-    waves:
-    - enemySpawns:
-      - enemyType: 14
-        transformData:
-          position: {x: -2.3000002, y: 0, z: 4.1800003}
-          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
-          localScale: {x: 1, y: 1, z: 1}
-        overrideData:
-          additionalDrop: []
-          dropOverrides: []
-          removeDrop: 
-          overrideHP: 0
-          hp:
-            value: 100
-            min: 0
-            max: 1
-            propertyType: 0
-          overrideDamage: 0
-          damage:
-            value: 1
-            min: 0
-            max: 1
-            propertyType: 0
-      - enemyType: 14
-        transformData:
-          position: {x: 2.33, y: 0, z: 4.1800003}
-          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
-          localScale: {x: 1, y: 1, z: 1}
-        overrideData:
-          additionalDrop: []
-          dropOverrides: []
-          removeDrop: 
-          overrideHP: 0
-          hp:
-            value: 100
-            min: 0
-            max: 1
-            propertyType: 0
-          overrideDamage: 0
-          damage:
-            value: 1
-            min: 0
-            max: 1
-            propertyType: 0
-      - enemyType: 8
-        transformData:
-          position: {x: -1.39, y: 0, z: 0.8299999}
-          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
-          localScale: {x: 1, y: 1, z: 1}
-        overrideData:
-          additionalDrop:
-          - dropType: 4
-            itemData: {fileID: 11400000, guid: e1093f8aabc234e43ab790916cbb9b83, type: 2}
-            hpZones: []
-            selectedZoneId: 0
-          dropOverrides: []
-          removeDrop: 
-          overrideHP: 0
-          hp:
-            value: 100
-            min: 0
-            max: 1
-            propertyType: 0
-          overrideDamage: 0
-          damage:
-            value: 1
-            min: 0
-            max: 1
-            propertyType: 0
-      - enemyType: 8
-        transformData:
-          position: {x: 1.27, y: 0, z: 0.83}
-          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
-          localScale: {x: 1, y: 1, z: 1}
-        overrideData:
-          additionalDrop:
-          - dropType: 4
-            itemData: {fileID: 11400000, guid: fbbf6a0246540094cbcf9c70c1f5f29e, type: 2}
-            hpZones: []
-            selectedZoneId: 0
-          dropOverrides: []
-          removeDrop: 
-          overrideHP: 0
-          hp:
-            value: 100
-            min: 0
-            max: 1
-            propertyType: 0
-          overrideDamage: 0
-          damage:
-            value: 1
-            min: 0
-            max: 1
-            propertyType: 0
-      chestSpawns: []
-      groupId: 0
-      waveDropExpericence: 30
-      waveDropGold: 10
-      rewards:
-      - currencyId: gold
-        amount: 10
-      customWaveEndDelay: -1
-      icon: {fileID: 21300000, guid: 58996b765bd63c6408fa88c9b9db2418, type: 3}
-      waveMusic: {fileID: 0}
-    playerSpawnPoint: {x: 0.01257813, y: 0, z: -7.9082575}
-    groupId: 0
-    roomMusic: {fileID: 0}
-    firstWaveStartDelay: 0
-    delayBetweenWaves: 1
-    delayBeforeExitSpawn: 0
-    cameraMovementType: 2
-    cameraConfinementPolygon:
-    - {x: -0.0007107407, y: -5.5105786}
-    - {x: -0.00044718385, y: 6.044464}
-  - prefabs:
-    - prefab: {fileID: 6195235661905902216, guid: c3c5119fc67c80e4ea7102f657587a8c, type: 3}
-      transformData:
-        position: {x: 0, y: 0, z: 0}
-        rotation: {x: -0, y: -0, z: -0, w: 1}
-        localScale: {x: 1, y: 1, z: 1}
-    - prefab: {fileID: 8939336831038993434, guid: faf8510cc3147134487dc59cd30193f6, type: 3}
-      transformData:
-        position: {x: -4.52, y: 0, z: 0}
-        rotation: {x: -0, y: -0, z: -0, w: 1}
-        localScale: {x: 1, y: 1, z: 1}
-    - prefab: {fileID: 8939336831038993434, guid: faf8510cc3147134487dc59cd30193f6, type: 3}
-      transformData:
-        position: {x: 4.31, y: 0, z: 0}
-        rotation: {x: -0, y: -0, z: -0, w: 1}
-        localScale: {x: 1, y: 1, z: 1}
-    - prefab: {fileID: 8939336831038993434, guid: faf8510cc3147134487dc59cd30193f6, type: 3}
-      transformData:
-        position: {x: -4.5, y: 0, z: -6.02}
-        rotation: {x: -0, y: -0, z: -0, w: 1}
-        localScale: {x: 1, y: 1, z: 1}
-    - prefab: {fileID: 8939336831038993434, guid: faf8510cc3147134487dc59cd30193f6, type: 3}
-      transformData:
-        position: {x: 4.3, y: 0, z: -6.02}
-        rotation: {x: -0, y: -0, z: -0, w: 1}
-        localScale: {x: 1, y: 1, z: 1}
-    - prefab: {fileID: 8939336831038993434, guid: faf8510cc3147134487dc59cd30193f6, type: 3}
-      transformData:
-        position: {x: -4.53, y: 0, z: 6.43}
-        rotation: {x: -0, y: -0, z: -0, w: 1}
-        localScale: {x: 1, y: 1, z: 1}
-    - prefab: {fileID: 8939336831038993434, guid: faf8510cc3147134487dc59cd30193f6, type: 3}
-      transformData:
-        position: {x: 4.3, y: 0, z: 6.43}
-        rotation: {x: -0, y: -0, z: -0, w: 1}
-        localScale: {x: 1, y: 1, z: 1}
-    waves:
-    - enemySpawns:
-      - enemyType: 14
-        transformData:
-          position: {x: -2.3, y: 0, z: 4.39}
-          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
-          localScale: {x: 1, y: 1, z: 1}
-        overrideData:
-          additionalDrop: []
-          dropOverrides: []
-          removeDrop: 
-          overrideHP: 0
-          hp:
-            value: 100
-            min: 0
-            max: 1
-            propertyType: 0
-          overrideDamage: 0
-          damage:
-            value: 1
-            min: 0
-            max: 1
-            propertyType: 0
-      - enemyType: 14
-        transformData:
-          position: {x: 2.24, y: 0, z: 4.39}
-          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
-          localScale: {x: 1, y: 1, z: 1}
-        overrideData:
-          additionalDrop: []
-          dropOverrides: []
-          removeDrop: 
-          overrideHP: 0
-          hp:
-            value: 100
-            min: 0
-            max: 1
-            propertyType: 0
-          overrideDamage: 0
-          damage:
-            value: 1
-            min: 0
-            max: 1
-            propertyType: 0
-      - enemyType: 15
-        transformData:
-          position: {x: 0, y: 0, z: 0}
-          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
-          localScale: {x: 1, y: 1, z: 1}
-        overrideData:
-          additionalDrop: []
-          dropOverrides: []
-          removeDrop: 
-          overrideHP: 0
-          hp:
-            value: 100
-            min: 0
-            max: 1
-            propertyType: 0
-          overrideDamage: 0
-          damage:
-            value: 1
-            min: 0
-            max: 1
-            propertyType: 0
-      chestSpawns: []
-      groupId: 0
-      waveDropExpericence: 20
-      waveDropGold: 15
-      rewards:
-      - currencyId: gold
-        amount: 15
-      customWaveEndDelay: -1
-      icon: {fileID: 21300000, guid: 58996b765bd63c6408fa88c9b9db2418, type: 3}
-      waveMusic: {fileID: 0}
-    playerSpawnPoint: {x: 0.01257813, y: 0, z: -7.9082575}
-    groupId: 1
-    roomMusic: {fileID: 0}
-    firstWaveStartDelay: 0
-    delayBetweenWaves: 0
-    delayBeforeExitSpawn: 0
-    cameraMovementType: 2
-    cameraConfinementPolygon:
-    - {x: -0.0007107407, y: -5.5105786}
-    - {x: -0.00044718385, y: 6.044464}
-  - prefabs:
-    - prefab: {fileID: 6195235661905902216, guid: c3c5119fc67c80e4ea7102f657587a8c, type: 3}
-      transformData:
-        position: {x: 0, y: 0, z: 0}
-        rotation: {x: 0, y: 0, z: 0, w: 1}
-        localScale: {x: 1, y: 1, z: 1}
-    waves:
-    - enemySpawns: []
-      chestSpawns:
-      - chestType: 0
-        transformData:
-          position: {x: 0, y: 0, z: 0}
-          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
-          localScale: {x: 1, y: 1, z: 1}
-      groupId: 0
-      waveDropExpericence: 0
-      waveDropGold: 0
-      rewards: []
-      customWaveEndDelay: 0
-      icon: {fileID: 21300000, guid: 75d429118cd8b784892af7359e302742, type: 3}
-      waveMusic: {fileID: 0}
-    playerSpawnPoint: {x: 0.01257813, y: 0, z: -7.9082575}
-    groupId: 0
-    roomMusic: {fileID: 0}
-    firstWaveStartDelay: 0
-    delayBetweenWaves: 0
-    delayBeforeExitSpawn: 0
-    cameraMovementType: 2
-    cameraConfinementPolygon:
-    - {x: -0.0007107407, y: -5.5105786}
-    - {x: -0.00044718385, y: 6.044464}
-  - prefabs:
-    - prefab: {fileID: 6195235661905902216, guid: c3c5119fc67c80e4ea7102f657587a8c, type: 3}
-      transformData:
-        position: {x: 0, y: 0, z: 0}
         rotation: {x: 0, y: 0, z: 0, w: 1}
         localScale: {x: 1, y: 1, z: 1}
     waves:
     - enemySpawns:
-      - enemyType: 104
+      - enemyType: 101
         transformData:
           position: {x: 0, y: 0, z: 0}
           rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
           localScale: {x: 1, y: 1, z: 1}
         overrideData:
           additionalDrop: []
-          dropOverrides: []
+          dropOverrides:
+          - dropType: 4
+            itemData: {fileID: 11400000, guid: 6df8965eb4702dd4a9fae96130e5a755, type: 2}
+            hpZones:
+            - hp: 1
+              dropAmount:
+                value: 1
+                min: 0
+                max: 0
+                propertyType: 0
+              chance: 15
+            selectedZoneId: 0
+          - dropType: 4
+            itemData: {fileID: 11400000, guid: f8118b1ecc1b3cc40b62961df49ec361, type: 2}
+            hpZones:
+            - hp: 1
+              dropAmount:
+                value: 1
+                min: 0
+                max: 0
+                propertyType: 0
+              chance: 20
+            selectedZoneId: 0
+          - dropType: 4
+            itemData: {fileID: 11400000, guid: 0ef7171caaa209040b477bbd6aa697fc, type: 2}
+            hpZones:
+            - hp: 1
+              dropAmount:
+                value: 1
+                min: 0
+                max: 0
+                propertyType: 0
+              chance: 25
+            selectedZoneId: 0
+          - dropType: 4
+            itemData: {fileID: 11400000, guid: 7d55e348da0b5bc4ab9feef578bc4553, type: 2}
+            hpZones:
+            - hp: 1
+              dropAmount:
+                value: 1
+                min: 0
+                max: 0
+                propertyType: 0
+              chance: 35
+            selectedZoneId: 0
           removeDrop: 
           overrideHP: 0
           hp:
