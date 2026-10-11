@@ -14,10 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   items:
   - {fileID: 11400000, guid: fbbf6a0246540094cbcf9c70c1f5f29e, type: 2}
-  - {fileID: 11400000, guid: 7d55e348da0b5bc4ab9feef578bc4553, type: 2}
-  - {fileID: 11400000, guid: 0ef7171caaa209040b477bbd6aa697fc, type: 2}
-  - {fileID: 11400000, guid: f8118b1ecc1b3cc40b62961df49ec361, type: 2}
-  - {fileID: 11400000, guid: 6df8965eb4702dd4a9fae96130e5a755, type: 2}
   - {fileID: 11400000, guid: 08c949c12aad82946b69bc0cb17dc513, type: 2}
   - {fileID: 11400000, guid: e1093f8aabc234e43ab790916cbb9b83, type: 2}
   - {fileID: 11400000, guid: 05fc01e43df2b3641b29d22045226a30, type: 2}
@@ -25,30 +21,45 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 055db092f857e844c8da9bb37241b531, type: 2}
   - {fileID: 11400000, guid: 99ecfef48e542bc428f246820f9c1a88, type: 2}
   - {fileID: 11400000, guid: 6cd5a72badbd219478cfbff02fc3a38e, type: 2}
+  - {fileID: 11400000, guid: 7d55e348da0b5bc4ab9feef578bc4553, type: 2}
+  - {fileID: 11400000, guid: 0ef7171caaa209040b477bbd6aa697fc, type: 2}
+  - {fileID: 11400000, guid: f8118b1ecc1b3cc40b62961df49ec361, type: 2}
+  - {fileID: 11400000, guid: 6df8965eb4702dd4a9fae96130e5a755, type: 2}
+  - {fileID: 11400000, guid: 69bb4e8dde8db3746a42c3485b07c738, type: 2}
   heroes:
   - {fileID: 11400000, guid: 2e9d303330860cc49b302ce693b4142e, type: 2}
   - {fileID: 11400000, guid: cac0e516b6d94f74c987f267d29b901b, type: 2}
   itemRarities:
   - rarityType: 0
+    mainColor: {r: 1, g: 1, b: 1, a: 1}
+    secondaryColor: {r: 0.9607844, g: 0.9607844, b: 0.9607844, a: 1}
+    wideBorderBackground: {fileID: 21300000, guid: e6f180205ee916d4fbd6a19ed97ae319, type: 3}
+    narrowBorderBackground: {fileID: 21300000, guid: 16f156281746ec04ca2ffefd29a49cb4, type: 3}
+  - rarityType: 1
     mainColor: {r: 0.19215687, g: 0.8117647, b: 0.2901961, a: 1}
     secondaryColor: {r: 0.70980394, g: 1, b: 0.25882354, a: 1}
     wideBorderBackground: {fileID: 21300000, guid: b998cf71e68a6ec4091a8450d9e06ec9, type: 3}
-    narrowBorderBackground: {fileID: 21300000, guid: fed63a774760ceb4b92bc0ac7c3a5574, type: 3}
-  - rarityType: 1
+    narrowBorderBackground: {fileID: 21300000, guid: 010167760710b744cbf939e31e6605b7, type: 3}
+  - rarityType: 2
     mainColor: {r: 0.3529412, g: 0.7176471, b: 1, a: 1}
     secondaryColor: {r: 0.5647059, g: 0.8862746, b: 0.9921569, a: 1}
     wideBorderBackground: {fileID: 21300000, guid: 8fe9b4b5d828070408dea74ff36ad7bc, type: 3}
-    narrowBorderBackground: {fileID: 21300000, guid: d7c6f060bc05f9f46ac7e881daf1fc2c, type: 3}
-  - rarityType: 2
+    narrowBorderBackground: {fileID: 21300000, guid: 61fcfc1dc19db0d4eaaacfaf327fb146, type: 3}
+  - rarityType: 3
     mainColor: {r: 0.6627451, g: 0.49803925, b: 1, a: 1}
     secondaryColor: {r: 0.8196079, g: 0.654902, b: 1, a: 1}
     wideBorderBackground: {fileID: 21300000, guid: c9255d2855ad0e047b9477c139524e3e, type: 3}
-    narrowBorderBackground: {fileID: 21300000, guid: acf7a4ccd6a3b874db3e3f1026854089, type: 3}
-  - rarityType: 3
+    narrowBorderBackground: {fileID: 21300000, guid: fb1c4d6bc48a0094cb762c44995bd065, type: 3}
+  - rarityType: 4
     mainColor: {r: 1, g: 0.70980394, b: 0.14901961, a: 1}
     secondaryColor: {r: 1, g: 0.854902, b: 0.38823533, a: 1}
     wideBorderBackground: {fileID: 21300000, guid: 846cf2e50fee0fe4fa2458344238e79f, type: 3}
-    narrowBorderBackground: {fileID: 21300000, guid: 76ae721882c1f9f4fb5b722789968613, type: 3}
+    narrowBorderBackground: {fileID: 21300000, guid: d0a65a6623474e24f8a6049a29134457, type: 3}
+  - rarityType: 5
+    mainColor: {r: 0.8627452, g: 0.07843138, b: 0.2352941, a: 1}
+    secondaryColor: {r: 0.8627452, g: 0.1921569, b: 0.1960784, a: 1}
+    wideBorderBackground: {fileID: 21300000, guid: e6f180205ee916d4fbd6a19ed97ae319, type: 3}
+    narrowBorderBackground: {fileID: 21300000, guid: abf98d1dc7c1c74419e33a2695e82ebf, type: 3}
   itemTypes:
   - itemType: 0
     itemTypeIcon: {fileID: 21300000, guid: 8c8f83a007844734997183e452a1ca9d, type: 3}
