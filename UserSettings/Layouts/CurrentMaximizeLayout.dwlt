@@ -24,7 +24,7 @@ MonoBehaviour:
   m_MinSize: {x: 400, y: 112}
   m_MaxSize: {x: 32384, y: 16192}
   vertical: 0
-  controlID: 29736
+  controlID: 17
   draggingID: 0
 --- !u!114 &2
 MonoBehaviour:
@@ -155,7 +155,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 112}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 1
-  controlID: 29737
+  controlID: 18
   draggingID: 0
 --- !u!114 &4
 MonoBehaviour:
@@ -182,7 +182,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 56}
   m_MaxSize: {x: 24288, y: 8096}
   vertical: 0
-  controlID: 29738
+  controlID: 19
   draggingID: 0
 --- !u!114 &5
 MonoBehaviour:
@@ -1036,7 +1036,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 3
     m_Folders:
-    - Assets/The Archer/Models/Heroes/Ranger/Animation_Pack
+    - Assets/The Archer/Scripts/Armory
     m_Globs: []
     m_ProductIds: 
     m_AnyWithAssetOrigin: 0
@@ -1047,25 +1047,20 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/The Archer/Models/Heroes/Ranger/Animation_Pack
+  - Assets/The Archer/Scripts/Armory
   m_LastFoldersGridSize: 16
   m_LastProjectPath: D:\0._BACKUP_UNITY\MY_GAME_BASIC\The-Archer-By-MrX
   m_LockTracker:
     m_IsLocked: 0
   m_LastLocalAssetsSearchArea: 3
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 183}
+    scrollPos: {x: 0, y: 930.36804}
     m_SelectedIDs:
-    - m_rawData: 1099511670216
+    - m_rawData: 1099511670215
     m_LastClickedID:
-      m_rawData: 1099511670216
+      m_rawData: 1099511670215
     m_ExpandedIDs:
     - m_rawData: 0
-    - m_rawData: 1099511669886
-    - m_rawData: 1099511669887
-    - m_rawData: 1099511669888
-    - m_rawData: 1099511669889
-    - m_rawData: 1099511669890
     - m_rawData: 1099511669891
     - m_rawData: 1099511669892
     - m_rawData: 1099511669893
@@ -1087,8 +1082,14 @@ MonoBehaviour:
     - m_rawData: 1099511669909
     - m_rawData: 1099511669910
     - m_rawData: 1099511669911
-    - m_rawData: 1099511670194
-    - m_rawData: 1099511670264
+    - m_rawData: 1099511669912
+    - m_rawData: 1099511669913
+    - m_rawData: 1099511669914
+    - m_rawData: 1099511669915
+    - m_rawData: 1099511669916
+    - m_rawData: 1099511669917
+    - m_rawData: 1099511670159
+    - m_rawData: 1099511670215
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1122,11 +1123,6 @@ MonoBehaviour:
       m_rawData: 0
     m_ExpandedIDs:
     - m_rawData: 0
-    - m_rawData: 1099511669886
-    - m_rawData: 1099511669887
-    - m_rawData: 1099511669888
-    - m_rawData: 1099511669889
-    - m_rawData: 1099511669890
     - m_rawData: 1099511669891
     - m_rawData: 1099511669892
     - m_rawData: 1099511669893
@@ -1148,8 +1144,12 @@ MonoBehaviour:
     - m_rawData: 1099511669909
     - m_rawData: 1099511669910
     - m_rawData: 1099511669911
-    - m_rawData: 1099511670194
-    - m_rawData: 1099511670264
+    - m_rawData: 1099511669912
+    - m_rawData: 1099511669913
+    - m_rawData: 1099511669914
+    - m_rawData: 1099511669915
+    - m_rawData: 1099511669916
+    - m_rawData: 1099511669917
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1177,11 +1177,10 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs:
-    - m_rawData: 20890720977394
+    m_SelectedInstanceIDs: []
     m_LastClickedEntityId:
-      m_rawData: 20890720977394
-    m_HadKeyboardFocusLastEvent: 1
+      m_rawData: 0
+    m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs:
     - m_rawData: 16492674463592
     - m_rawData: 1099511672166
@@ -1571,7 +1570,7 @@ MonoBehaviour:
     m_CachedPref: 281.85712
     m_ControlHash: -371814159
     m_PrefName: Preview_InspectorPreview
-  m_LastVerticalScrollValue: 651.4285
+  m_LastVerticalScrollValue: 0
   m_GlobalObjectId: 
   m_InspectorMode: 0
   m_LockTracker:

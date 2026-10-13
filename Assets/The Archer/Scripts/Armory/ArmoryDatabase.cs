@@ -72,15 +72,13 @@ namespace OctoberStudio.Armory
             return set.AnimationsSet;
         }
 
-        public virtual ItemRarityData GetItemRarityData(ItemRarityType rarityType) //get thông tin về độ hiếm của item dựa trên rarityType
+        public virtual ItemRarityData GetItemRarityData(ItemRarityType rarityType)
         {
-            // Debug.Log($"Lấy thông tin độ hiếm ở database: {rarityType}");
             return itemRarities.FirstOrDefault(rarity => rarity.RarityType == rarityType);
         }
 
         public virtual ItemTypeData GetItemTypeData(ItemType itemType)
         {
-            // Debug.Log($"Lấy thông tin loại item ở database: {itemType}");
             return itemTypes.FirstOrDefault(type => type.ItemType == itemType);
         }
 
@@ -114,6 +112,14 @@ namespace OctoberStudio.Armory
 
             weaponAnimationSetData.Validate(this);
         }
+
+#if UNITY_EDITOR
+        public virtual void AddClonedHero(HeroData newHero, HeroData originalHero)
+        {
+            heroes.Add(newHero);
+            weaponAnimationSetData.AddClonedHero(newHero, originalHero);
+        }
+#endif
     }
 
     [System.Serializable]

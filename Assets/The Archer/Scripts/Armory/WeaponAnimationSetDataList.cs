@@ -40,5 +40,24 @@ namespace OctoberStudio.Armory
             UnityEditor.EditorUtility.SetDirty(database);
 #endif
         }
+
+#if UNITY_EDITOR
+        public virtual void AddClonedHero(HeroData newHero, HeroData oldHero)
+        {
+            var list = new List<WeaponAnimationSetData>(weaponAnimationSets);
+
+            var oldSets = list.FindAll((set) => set.HeroId == oldHero.Id);
+
+            if (oldSets == null || oldSets.Count == 0) return;
+
+            foreach (var oldSet in oldSets)
+            {
+                var newSet = oldSet.Clone(newHero.Id);
+                list.Add(newSet);
+            }
+
+            weaponAnimationSets = list.ToArray();
+        }
+#endif
     }
 }
