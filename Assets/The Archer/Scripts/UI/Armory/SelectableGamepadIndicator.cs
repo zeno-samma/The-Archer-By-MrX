@@ -17,6 +17,7 @@ namespace OctoberStudio
 
         public void OnSelect(BaseEventData eventData)
         {
+            
             if (GameController.InputManager.ActiveInput == InputType.Gamepad)
             {
                 gamepadIndicator.SetActive(true);

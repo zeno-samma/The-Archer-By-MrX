@@ -106,11 +106,13 @@ namespace OctoberStudio.UI.Armory
                     var itemSave = GameController.ArmoryManager.GetEquippedItemSave(slot.ItemType);
 
                     card.SetData(data, itemSave);
+                    // // --- BẮT ĐẦU DEBUG ---
+                    // Debug.Log($"[DEBUG] Slot: {slot.SlotRect.name} | AnchoredPos: {slot.SlotRect.anchoredPosition} | WorldPos: {slot.SlotRect.position} | SizeDelta: {slot.SlotRect.sizeDelta}");
                     card.RectTransform.anchoredPosition = slot.SlotRect.anchoredPosition;
                     card.RectTransform.sizeDelta = slot.SlotRect.sizeDelta;
-
                     card.transform.position = slot.SlotRect.position;
-
+                    // Debug.Log($"[DEBUG] Card sau khi gán -> AnchoredPos: {card.RectTransform.anchoredPosition} | WorldPos: {card.transform.position}");
+                    // // --- KẾT THÚC DEBUG ---
                     equippedCards.Add(card);
 
                     if (slot.ItemType == ItemType.Weapon)
