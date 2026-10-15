@@ -13,6 +13,12 @@ namespace OctoberStudio.UI
         [Space]
         [SerializeField] protected StageDatabase stageDatabase;
         [SerializeField] protected ArmoryHeroPanel heroPanel;
+        [SerializeField] protected ArmoryTabsPanel tabsPanel;
+        [SerializeField] protected ItemsGridBehavior itemsGrid;
+        [SerializeField] protected HeroesGridBehavior heroesGrid;
+        [SerializeField] protected ArmoryTabBehavior itemsTab;
+        [SerializeField] protected ArmoryTabBehavior heroesTab;
+
         public StageDatabase StageDatabase => stageDatabase;
 
         [Header("Stage Data")]
@@ -46,6 +52,7 @@ namespace OctoberStudio.UI
 
         protected override void Start()// bắt đầu khi trang được hiển thị
         {
+            
             base.Start();
 
             InitSaves();
@@ -62,8 +69,7 @@ namespace OctoberStudio.UI
             stageSelector.Init(this);
 
             AddListenersToButtons();
-            heroPanel.ShowSlots();
-            heroPanel.Init();
+            heroPanel.gameObject.SetActive(false);
         }
 
         protected virtual void InitSaves()
@@ -301,13 +307,8 @@ namespace OctoberStudio.UI
         protected override void OnMoveCenterFinished()
         {
             base.OnMoveCenterFinished();
-            heroPanel.Init();
-            
-            // itemsGrid.Clear();
-            // heroesGrid.Clear();
-            // tabsPanel.Clear();
 
-            // Debug.Log("MoveCenter of MainMenuStagesPageBehavior finished");
+            Debug.Log("Click stage");
             if (!GameController.MainMenuScreenBehavior.ContinuePlayingPopup.IsOpen)
             {
                 var linePosition = playButtonShineLine.anchoredPosition;
@@ -318,19 +319,28 @@ namespace OctoberStudio.UI
                 SubscribeToInputEvents();
                 SelectPlayButton();
             }
+            
+            // itemsTab.Init(true);
+            // heroesTab.Init(false);
+
+            // heroPanel.Init();
+            // itemsGrid.Init();
+            // heroesGrid.Init();
+
+            // itemsGrid.SpawnCenter();
+
+            // itemsGrid.gameObject.SetActive(true);
+            // heroesGrid.gameObject.SetActive(false);
         }
 
         public override void OnMoveFinished()
         {
-            Debug.Log("OnMoveFinished");
-            base.OnMoveFinished();
-
+            Debug.Log("Stage OnMoveFinished");
             // heroPanel.Clear();
-
             // itemsGrid.Clear();
             // heroesGrid.Clear();
             // tabsPanel.Clear();
-
+            base.OnMoveFinished();
             UnsubscribeFromInputEvents();
         }
 

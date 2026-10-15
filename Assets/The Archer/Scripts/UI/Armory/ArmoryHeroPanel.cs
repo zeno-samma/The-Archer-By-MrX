@@ -49,6 +49,7 @@ namespace OctoberStudio.UI.Armory
             GameController.ArmoryManager.OnItemEquipmentChanged += OnItemEquipmentChanged;
             GameController.ArmoryManager.OnSelectedHeroChanged += OnSelectedHeroChanged;
 
+
             InitSlots();
 
             RecalculateStats();
@@ -223,7 +224,6 @@ namespace OctoberStudio.UI.Armory
             heroPreviewBehavior.Clear();
 
             ClearSlots();
-
             GameController.ArmoryManager.OnItemEquipmentChanged -= OnItemEquipmentChanged;
             GameController.ArmoryManager.OnSelectedHeroChanged -= OnSelectedHeroChanged;
         }

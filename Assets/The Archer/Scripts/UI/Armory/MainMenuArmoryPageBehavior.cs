@@ -58,9 +58,9 @@ namespace OctoberStudio.UI
             heroPanel.HideSlots();
         }
 
-        public override void MoveCenter()
+        public override void MoveCenter()//Sau khi click vào nút Armory thì sẽ thực hiện MoveCenter để hiển thị Armory
         {
-            // Debug.Log("Vào trung tâm");
+            Debug.Log("Click Armory");
             base.MoveCenter();
 
             itemsTab.Init(true);
@@ -74,10 +74,11 @@ namespace OctoberStudio.UI
 
             itemsGrid.gameObject.SetActive(true);
             heroesGrid.gameObject.SetActive(false);
-
+            tabsPanel.Init();
+            
             RecalculateSelection();//thực hiện tính toán lại các lựa chọn để đảm bảo rằng các nút điều hướng được thiết lập đúng cách.
 
-            tabsPanel.Init();
+            
         }
 
         protected virtual void RecalculateSelection()
@@ -121,9 +122,9 @@ namespace OctoberStudio.UI
             }
         }
 
-        public override void OnMoveFinished()
+        public override void OnMoveFinished()///Sau khi kết thúc clear toàn bộ thông tin liên quan đến heropanel
         {
-            Debug.Log("Finish");
+            Debug.Log("Armory OnMoveFinished");
             base.OnMoveFinished();
 
             heroPanel.Clear();
