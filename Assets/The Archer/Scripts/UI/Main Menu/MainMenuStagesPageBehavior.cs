@@ -1,5 +1,6 @@
 using OctoberStudio.Easing;
 using OctoberStudio.Input;
+using OctoberStudio.UI.Armory;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -11,6 +12,7 @@ namespace OctoberStudio.UI
     {
         [Space]
         [SerializeField] protected StageDatabase stageDatabase;
+        [SerializeField] protected ArmoryHeroPanel heroPanel;
         public StageDatabase StageDatabase => stageDatabase;
 
         [Header("Stage Data")]
@@ -60,6 +62,8 @@ namespace OctoberStudio.UI
             stageSelector.Init(this);
 
             AddListenersToButtons();
+            heroPanel.ShowSlots();
+            heroPanel.Init();
         }
 
         protected virtual void InitSaves()
@@ -297,7 +301,13 @@ namespace OctoberStudio.UI
         protected override void OnMoveCenterFinished()
         {
             base.OnMoveCenterFinished();
+            heroPanel.Init();
+            
+            // itemsGrid.Clear();
+            // heroesGrid.Clear();
+            // tabsPanel.Clear();
 
+            // Debug.Log("MoveCenter of MainMenuStagesPageBehavior finished");
             if (!GameController.MainMenuScreenBehavior.ContinuePlayingPopup.IsOpen)
             {
                 var linePosition = playButtonShineLine.anchoredPosition;
@@ -312,7 +322,14 @@ namespace OctoberStudio.UI
 
         public override void OnMoveFinished()
         {
+            Debug.Log("OnMoveFinished");
             base.OnMoveFinished();
+
+            // heroPanel.Clear();
+
+            // itemsGrid.Clear();
+            // heroesGrid.Clear();
+            // tabsPanel.Clear();
 
             UnsubscribeFromInputEvents();
         }

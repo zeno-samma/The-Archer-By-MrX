@@ -60,13 +60,13 @@ namespace OctoberStudio.UI
 
         public override void MoveCenter()
         {
+            // Debug.Log("Vào trung tâm");
             base.MoveCenter();
 
             itemsTab.Init(true);
             heroesTab.Init(false);
 
             heroPanel.Init();
-
             itemsGrid.Init();
             heroesGrid.Init();
 
@@ -75,7 +75,7 @@ namespace OctoberStudio.UI
             itemsGrid.gameObject.SetActive(true);
             heroesGrid.gameObject.SetActive(false);
 
-            RecalculateSelection();
+            RecalculateSelection();//thực hiện tính toán lại các lựa chọn để đảm bảo rằng các nút điều hướng được thiết lập đúng cách.
 
             tabsPanel.Init();
         }
@@ -123,15 +123,14 @@ namespace OctoberStudio.UI
 
         public override void OnMoveFinished()
         {
+            Debug.Log("Finish");
             base.OnMoveFinished();
 
             heroPanel.Clear();
             itemsGrid.Clear();
             heroesGrid.Clear();
-
             tabsPanel.Clear();
         }
-
         protected override void OnMoveCenterFinished()
         {
             base.OnMoveCenterFinished();

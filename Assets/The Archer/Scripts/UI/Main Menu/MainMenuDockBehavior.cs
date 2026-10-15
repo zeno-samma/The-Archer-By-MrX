@@ -53,7 +53,6 @@ namespace OctoberStudio.UI
         protected virtual void OnPageSelected(MainMenuPageType pageType)
         {
             SelectedPage = pageType;
-
             for (int i = 0; i < dockItems.Count; i++)
             {
                 if (dockItems[i].PageType != pageType)
@@ -100,7 +99,6 @@ namespace OctoberStudio.UI
         protected virtual void OnTriggersPerformed(UnityEngine.InputSystem.InputAction.CallbackContext ctx)
         {
             if (!IsDockEnabled) return;
-
             var selectedIndex = GetDockItemIndex(SelectedPage);
 
             var value = ctx.ReadValue<float>();

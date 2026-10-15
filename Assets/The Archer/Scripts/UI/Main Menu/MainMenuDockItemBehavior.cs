@@ -48,7 +48,7 @@ namespace OctoberStudio.UI
                 pageNameText.DoAlpha(1, 0.2f);
             }
         }
-
+        // phương thức này được gọi khi một item khác được chọn, và item này sẽ bị bỏ chọn. Nó sẽ thay đổi trạng thái IsSelected thành false, và thực hiện các hiệu ứng chuyển đổi kích thước và vị trí của icon, cũng như làm mờ text của tên trang.
         public virtual void Deselect()
         {
             if (IsSelected)
