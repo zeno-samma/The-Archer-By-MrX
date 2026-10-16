@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 
 namespace OctoberStudio.UI.Armory
 {
@@ -33,21 +34,45 @@ namespace OctoberStudio.UI.Armory
         protected float statsPanelPadding;
         protected float statsPanelSpacing;
 
+        private EntityId debugPanelId;
+
+        private void Awake()
+        {
+            debugPanelId = GetEntityId();
+        }
+        private void OnDestroy()
+        {
+            // Debug.Log($"[HERO UNSUBSCRIBE DESTROY] ID: {debugPanelId}");
+
+            if (GameController.ArmoryManager != null)
+            {
+                GameController.ArmoryManager.OnItemEquipmentChanged
+                    -= OnItemEquipmentChanged;
+
+                GameController.ArmoryManager.OnSelectedHeroChanged
+                    -= OnSelectedHeroChanged;
+            }
+        }
         protected virtual void Start()
         {
             cardsPool = new PoolComponent<ItemCardBehavior>(itemCardPrefab, slots.Count, cardsParent);
 
             statsPanelSpacing = hpLabel.RectTransform.anchoredPosition.x - damageLabel.RectTransform.anchoredPosition.x - damageLabel.Width;
             statsPanelPadding = (statsPanelRect.sizeDelta.x - damageLabel.Width - hpLabel.Width - statsPanelSpacing) / 2f;
+            // DebugPanel("START");
         }
 
         public virtual void Init()
         {
+            // DebugPanel("INIT");
             heroPreviewBehavior.Clear();
             heroPreviewBehavior.Show();
 
             GameController.ArmoryManager.OnItemEquipmentChanged += OnItemEquipmentChanged;
             GameController.ArmoryManager.OnSelectedHeroChanged += OnSelectedHeroChanged;
+            // Debug.Log($"[HERO SUBSCRIBE] ID: {debugPanelId} | Frame: {Time.frameCount}");
+            // GameController.ArmoryManager.OnItemEquipmentChanged -= OnItemEquipmentChanged;
+            // GameController.ArmoryManager.OnSelectedHeroChanged -= OnSelectedHeroChanged;
 
 
             InitSlots();
@@ -56,7 +81,28 @@ namespace OctoberStudio.UI.Armory
 
             SetSlotsScale(1f);
         }
+        private void DebugEquipment(string state)
+        {
+            foreach (var slot in slots)
+            {
+                var item = GameController.ArmoryManager
+                    .GetEquippedItemData(slot.ItemType);
 
+                // Debug.Log(
+                //     $"[EQUIPMENT] {state}" +
+                //     $" | Panel: {GetEntityId()}" +
+                //     $" | Type: {slot.ItemType}" +
+                //     $" | Item: {(item != null ? item.Id.ToString() : "NULL")}" +
+                //     $" | Frame: {Time.frameCount}"
+                // );
+            }
+        }
+
+        private IEnumerator DebugNextFrame()
+        {
+            yield return null;
+            // DebugEquipment("NEXT FRAME");
+        }
         protected virtual void OnSelectedHeroChanged()
         {
             RecalculateStats();
@@ -64,11 +110,37 @@ namespace OctoberStudio.UI.Armory
 
         protected virtual void OnItemEquipmentChanged()
         {
+            // Debug.Log("[EQUIP] EVENT RECEIVED");
+            // Debug.Log($"[EQUIP CALLBACK] ID: {debugPanelId} | Alive: {this != null}");
+            // DebugEquipment("BEFORE REFRESH");
             InitSlots();
 
             RecalculateStats();
+            // DebugEquipment("AFTER REFRESH");
+            StartCoroutine(DebugNextFrame());
         }
+        private void DebugPanel(string action)
+        {
+            int destroyed = 0;
 
+            foreach (var card in equippedCards)
+            {
+                if (card == null)
+                    destroyed++;
+            }
+
+            // Debug.Log(
+            //     $"[HERO PANEL] {action}" +
+            //     $" | Name: {name}" +
+            //     $" | ID: {GetEntityId()}" +
+            //     $" | Frame: {Time.frameCount}" +
+            //     $" | Active: {gameObject.activeInHierarchy}" +
+            //     $" | Pool: {(cardsPool == null ? "NULL" : "OK")}" +
+            //     $" | Cards: {equippedCards.Count}" +
+            //     $" | Destroyed: {destroyed}" +
+            //     $" | CardsParentID: {(cardsParent != null ? cardsParent.GetEntityId() : 0)}"
+            // );
+        }
         protected virtual void RecalculateStats()
         {
             var heroLevel = GameController.ArmoryManager.GetEquippedHeroLevel();
@@ -221,15 +293,18 @@ namespace OctoberStudio.UI.Armory
 
         public virtual void Clear()
         {
+            // DebugPanel("CLEAR SLOTS");
             heroPreviewBehavior.Clear();
 
             ClearSlots();
+            // Debug.Log($"[HERO UNSUBSCRIBE CLEAR] ID: {debugPanelId} | Frame: {Time.frameCount}");
             GameController.ArmoryManager.OnItemEquipmentChanged -= OnItemEquipmentChanged;
             GameController.ArmoryManager.OnSelectedHeroChanged -= OnSelectedHeroChanged;
         }
 
         protected virtual void ClearSlots()
         {
+            // DebugPanel("CLEAR SLOTS");
             foreach (var card in equippedCards)
             {
                 card.gameObject.SetActive(false);

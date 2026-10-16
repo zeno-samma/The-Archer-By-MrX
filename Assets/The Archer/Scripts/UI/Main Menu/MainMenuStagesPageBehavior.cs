@@ -52,7 +52,7 @@ namespace OctoberStudio.UI
 
         protected override void Start()// bắt đầu khi trang được hiển thị
         {
-            
+
             base.Start();
 
             InitSaves();
@@ -69,7 +69,7 @@ namespace OctoberStudio.UI
             stageSelector.Init(this);
 
             AddListenersToButtons();
-            heroPanel.gameObject.SetActive(false);
+            // heroPanel.gameObject.SetActive(false);
         }
 
         protected virtual void InitSaves()
@@ -99,7 +99,7 @@ namespace OctoberStudio.UI
             if (!ContinuePlayingSave.HasUnfinishedStageData || ContinuePlayingSave.HP <= 0)
             {
                 var lastUnlockedStageId = GetLastUnlockedStageId();
-                if(lastUnlockedStageId >= StageDatabase.StagesAmount)
+                if (lastUnlockedStageId >= StageDatabase.StagesAmount)
                 {
                     lastUnlockedStageId = StageDatabase.StagesAmount - 1;
                 }
@@ -130,7 +130,7 @@ namespace OctoberStudio.UI
 
         protected virtual int GetLastUnlockedStageId()
         {
-            for(int i = StageDatabase.StagesAmount - 1; i >= 0; i--)
+            for (int i = StageDatabase.StagesAmount - 1; i >= 0; i--)
             {
                 var stageData = StageDatabase.GetStageData(i);
                 if (StageSave.IsStageUnlocked(stageData)) return i;
@@ -147,7 +147,7 @@ namespace OctoberStudio.UI
             {
                 var stageData = StageDatabase.GetStageData(i);
 
-                if(CheckStageUnlockStatus(stageData, i))
+                if (CheckStageUnlockStatus(stageData, i))
                 {
                     unlocked = true;
                 }
@@ -161,11 +161,11 @@ namespace OctoberStudio.UI
         {
             if (StageSave.IsStageUnlocked(stageData)) return false;
 
-            for(int i = 0; i < stageData.UnlockConditions.Count; i++)
+            for (int i = 0; i < stageData.UnlockConditions.Count; i++)
             {
                 var condition = stageData.UnlockConditions[i];
 
-                if(condition.IsMet(stageDatabase, stageIndex, StageSave))
+                if (condition.IsMet(stageDatabase, stageIndex, StageSave))
                 {
                     StageSave.UnlockStage(stageData);
                     return true;
@@ -175,7 +175,7 @@ namespace OctoberStudio.UI
             // If the stage does not have conditions, we use default PreviousStageCompletedCondition
             if (stageData.UnlockConditions.Count == 0)
             {
-                if(new PreviousStageCompletedCondition().IsMet(stageDatabase, stageIndex, StageSave))
+                if (new PreviousStageCompletedCondition().IsMet(stageDatabase, stageIndex, StageSave))
                 {
                     StageSave.UnlockStage(stageData);
                     return true;
@@ -207,7 +207,8 @@ namespace OctoberStudio.UI
             if (purchaseButton != null)
             {
                 InitButtonsWithPurchaseButton(stageData);
-            } else
+            }
+            else
             {
                 InitButtonsWithoutPurchaseButton(stageData);
             }
@@ -239,7 +240,8 @@ namespace OctoberStudio.UI
             if (StageSave.IsStageUnlocked(stageData))
             {
                 infoButton.gameObject.SetActive(false);
-            } else
+            }
+            else
             {
                 infoButton.gameObject.SetActive(true);
                 infoGamepadIndicator.gameObject.SetActive(GameController.InputManager.ActiveInput == InputType.Gamepad);
@@ -308,7 +310,7 @@ namespace OctoberStudio.UI
         {
             base.OnMoveCenterFinished();
 
-            Debug.Log("Click stage");
+            // Debug.Log("Click stage");
             if (!GameController.MainMenuScreenBehavior.ContinuePlayingPopup.IsOpen)
             {
                 var linePosition = playButtonShineLine.anchoredPosition;
@@ -319,7 +321,8 @@ namespace OctoberStudio.UI
                 SubscribeToInputEvents();
                 SelectPlayButton();
             }
-            
+            // Debug.Log("[STAGE] Init Hero Panel");
+            heroPanel.Init();
             // itemsTab.Init(true);
             // heroesTab.Init(false);
 
@@ -335,7 +338,8 @@ namespace OctoberStudio.UI
 
         public override void OnMoveFinished()
         {
-            Debug.Log("Stage OnMoveFinished");
+            // Debug.Log("[STAGE] Clear Hero Panel");
+            heroPanel.Clear();
             // heroPanel.Clear();
             // itemsGrid.Clear();
             // heroesGrid.Clear();
@@ -351,12 +355,13 @@ namespace OctoberStudio.UI
 
             GameController.MainMenuScreenBehavior.EnableDock();
 
-            if(GameController.InputManager.ActiveInput == InputType.Gamepad)
+            if (GameController.InputManager.ActiveInput == InputType.Gamepad)
             {
-                if(purchaseButton != null && purchaseButton.gameObject.activeSelf)
+                if (purchaseButton != null && purchaseButton.gameObject.activeSelf)
                 {
                     if (purchaseButton.ButtonEnabled) SelectPurchaseButton();
-                } else
+                }
+                else
                 {
                     if (playButton.interactable) SelectPlayButton();
                 }
@@ -487,7 +492,7 @@ namespace OctoberStudio.UI
 
             settingsGamepadIndicator.SetActive(inputType == InputType.Gamepad);
 
-            if(infoButton != null && infoButton.gameObject.activeSelf) 
+            if (infoButton != null && infoButton.gameObject.activeSelf)
             {
                 infoGamepadIndicator.SetActive(inputType == InputType.Gamepad);
             }

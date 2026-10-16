@@ -60,7 +60,7 @@ namespace OctoberStudio.UI
 
         public override void MoveCenter()//Sau khi click vào nút Armory thì sẽ thực hiện MoveCenter để hiển thị Armory
         {
-            Debug.Log("Click Armory");
+            // Debug.Log("Click Armory");
             base.MoveCenter();
 
             itemsTab.Init(true);
@@ -124,7 +124,7 @@ namespace OctoberStudio.UI
 
         public override void OnMoveFinished()///Sau khi kết thúc clear toàn bộ thông tin liên quan đến heropanel
         {
-            Debug.Log("Armory OnMoveFinished");
+            // Debug.Log("Armory OnMoveFinished");
             base.OnMoveFinished();
 
             heroPanel.Clear();

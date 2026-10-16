@@ -139,6 +139,30 @@ namespace OctoberStudio
 
         protected virtual void OnItemEquippedEventFired(ItemSaveData itemSaveData, bool isEquipped)
         {
+            // ==================Debug=========================
+            // Debug.Log(
+            //     $"[MANAGER EQUIP] Frame: {Time.frameCount}" +
+            //     $" | Subscribers: {OnItemEquipmentChanged?.GetInvocationList().Length ?? 0}");
+            // var handlers = OnItemEquipmentChanged?.GetInvocationList();
+            // if (handlers != null)
+            // {
+            //     foreach (var handler in handlers)
+            //     {
+            //         string status = "MANAGED";
+
+            //         if (handler.Target is UnityEngine.Object obj)
+            //         {
+            //             status = obj == null ? "DESTROYED" : "ALIVE";
+            //         }
+
+            //         Debug.Log(
+            //             $"[SUBSCRIBER] " +
+            //             $"{handler.Method.DeclaringType?.Name}." +
+            //             $"{handler.Method.Name} | {status}"
+            //         );
+            //     }
+            // }
+            // ============================
             var itemData = database.GetItem(itemSaveData.Id);
             var itemType = itemData.ItemType;
             if (isEquipped)

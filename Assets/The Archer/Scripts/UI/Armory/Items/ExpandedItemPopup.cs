@@ -202,6 +202,7 @@ namespace OctoberStudio.UI.Armory
 
         protected override void OnSelectButtonClicked()
         {
+            // Debug.Log($"[EQUIP BUTTON] Clicked | Frame: {Time.frameCount}");
             GameController.AudioManager.PlayButtonClick();
             SaveData.IsEquipped = !SaveData.IsEquipped;
 
@@ -218,6 +219,7 @@ namespace OctoberStudio.UI.Armory
                     EventSystem.current.SetSelectedGameObject(null);
                 }
             }
+            // Debug.Log("[EQUIP] BUTTON FINISHED");
         }
 
         protected override void OnUpgradeButtonClicked()
