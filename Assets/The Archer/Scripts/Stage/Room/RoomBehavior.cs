@@ -82,7 +82,7 @@ namespace OctoberStudio
             onRoomStarted?.Invoke();
             // Debug.Log("OnRoomStarted");
             RoomId++;
-            Debug.Log($"Room: {RoomId}");
+            // Debug.Log($"Room: {RoomId}");
             ConsoleTimer.Instance.ResetSession();
             // 1. Bắt đầu phiên đếm
             ConsoleTimer.Instance.StartTimer("Room " + CurrentWave.Icon.name + " " + RoomId);
@@ -361,7 +361,7 @@ namespace OctoberStudio
             onRoomEnded?.Invoke();
             // Debug.Log("OnRoomEnded - Hoàn thành"+ Wave);
             float finalTime = ConsoleTimer.Instance.StopTimer("Room " + CurrentWave.Icon.name + " " + RoomId);
-            Debug.Log($"Room: {CurrentWave.Icon.name + " " + RoomId} - Clear: {finalTime:F2}s");
+            // Debug.Log($"Room: {CurrentWave.Icon.name + " " + RoomId} - Clear: {finalTime:F2}s");
             if (exits.Count == 0 || StageController.IsLastRoom)
             {
                 StageController.OnExitReached(null);
