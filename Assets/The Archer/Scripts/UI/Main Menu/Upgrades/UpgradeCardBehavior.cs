@@ -120,7 +120,7 @@ namespace OctoberStudio.UI
             }
             else
             {
-                upgradeLevelText.text = $"LVL {UpgradeLevel + 1}";
+                upgradeLevelText.text = $"Lv. {UpgradeLevel + 1}";
                 var currencyId = Data.GetLevel(UpgradeLevel).Price.CurrencyId;
                 Currency = GameController.CurrenciesManager.GetCurrency(currencyId, false);
             }

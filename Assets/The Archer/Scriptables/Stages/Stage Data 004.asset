@@ -1,0 +1,133 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aeafde8d26bd5bd40955f29d8b654d41, type: 3}
+  m_Name: Stage Data 004
+  m_EditorClassIdentifier: Assembly-CSharp::OctoberStudio.StageData
+  dataVersion: 1
+  stageId: 85f05bc3-8feb-4b9b-bef4-ef025ec84e5e
+  stageImage: {fileID: 21300000, guid: 0ecb267e29e41b0429af5079375fd5a3, type: 3}
+  stageName: Secret Chambers
+  showStageObjective: 1
+  stageObjective: Clear all 28 rooms of enemies
+  stageMusic: {fileID: 11400000, guid: b1ff3aeba1a032048b384624765ff9df, type: 2}
+  showAbilitySelector: 1
+  enemyDamageMulitplier: 1
+  enemyDamageMultiplierRoomStep: 0.06
+  enemyDamageMultiplierWaveStep: 0.01
+  enemyHPMulitplier: 1
+  enemyHPMultiplierRoomStep: 0.07
+  enemyHPMultiplierWaveStep: 0.01
+  unlockDescription: 
+  unlockConditions:
+  - rid: 7368865748368752735
+  abilityRerollPrice:
+    currencyId: gold
+    amount: 200
+  nextAbilityRerollMultiplier: 2
+  rooms:
+  - prefabs:
+    - prefab: {fileID: 6195235661905902216, guid: c3c5119fc67c80e4ea7102f657587a8c, type: 3}
+      transformData:
+        position: {x: 0, y: 0, z: 0}
+        rotation: {x: 0, y: 0, z: 0, w: 1}
+        localScale: {x: 1, y: 1, z: 1}
+    waves:
+    - enemySpawns:
+      - enemyType: 101
+        transformData:
+          position: {x: 0, y: 0, z: 0}
+          rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          additionalDrop: []
+          dropOverrides:
+          - dropType: 4
+            itemData: {fileID: 11400000, guid: 6df8965eb4702dd4a9fae96130e5a755, type: 2}
+            hpZones:
+            - hp: 1
+              dropAmount:
+                value: 1
+                min: 0
+                max: 0
+                propertyType: 0
+              chance: 15
+            selectedZoneId: 0
+          - dropType: 4
+            itemData: {fileID: 11400000, guid: f8118b1ecc1b3cc40b62961df49ec361, type: 2}
+            hpZones:
+            - hp: 1
+              dropAmount:
+                value: 1
+                min: 0
+                max: 0
+                propertyType: 0
+              chance: 20
+            selectedZoneId: 0
+          - dropType: 4
+            itemData: {fileID: 11400000, guid: 0ef7171caaa209040b477bbd6aa697fc, type: 2}
+            hpZones:
+            - hp: 1
+              dropAmount:
+                value: 1
+                min: 0
+                max: 0
+                propertyType: 0
+              chance: 25
+            selectedZoneId: 0
+          - dropType: 4
+            itemData: {fileID: 11400000, guid: 08c949c12aad82946b69bc0cb17dc513, type: 2}
+            hpZones:
+            - hp: 1
+              dropAmount:
+                value: 1
+                min: 0
+                max: 0
+                propertyType: 0
+              chance: 35
+            selectedZoneId: 0
+          removeDrop: 
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      chestSpawns: []
+      groupId: 0
+      waveDropExpericence: 0
+      waveDropGold: 0
+      rewards: []
+      customWaveEndDelay: 0
+      icon: {fileID: 21300000, guid: ed6ade05153dc7c42a0e4023c705af01, type: 3}
+      waveMusic: {fileID: 11400000, guid: d4ecab5b2d071fc4aa298f085174c5b7, type: 2}
+    playerSpawnPoint: {x: 0.01257813, y: 0, z: -7.9082575}
+    groupId: 0
+    roomMusic: {fileID: 0}
+    firstWaveStartDelay: 0
+    delayBetweenWaves: 0
+    delayBeforeExitSpawn: 0
+    cameraMovementType: 2
+    cameraConfinementPolygon:
+    - {x: -0.0007107407, y: -5.5105786}
+    - {x: -0.00044718385, y: 6.044464}
+  references:
+    version: 2
+    RefIds:
+    - rid: 7368865748368752735
+      type: {class: AlwaysUnlockedCondition, ns: OctoberStudio, asm: Assembly-CSharp}
+      data: 
