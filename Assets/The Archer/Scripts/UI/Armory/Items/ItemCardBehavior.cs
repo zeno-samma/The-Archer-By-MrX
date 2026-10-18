@@ -26,9 +26,19 @@ namespace OctoberStudio.UI.Armory
 
             RectTransform = GetComponent<RectTransform>();
         }
-
+        private void OnDestroy()
+        {
+            if (SaveData != null)
+            {
+                SaveData.OnItemLevelChanged -= OnItemLevelChanged;
+            }
+        }
         public virtual void SetData(ItemData data, ItemSaveData saveData)
         {
+            if (SaveData != null)
+            {
+                SaveData.OnItemLevelChanged -= OnItemLevelChanged;
+            }
             ItemData = data;
             SaveData = saveData;
 
@@ -47,6 +57,11 @@ namespace OctoberStudio.UI.Armory
 
         protected virtual void OnItemLevelChanged(ItemSaveData saveData, int level)
         {
+            Debug.Log(
+    $"[ITEM LEVEL] Frame: {Time.frameCount}" +
+    $" | CardAlive: {this != null}" +
+    $" | Level: {level}"
+);
             ItemLevel = ItemData.GetItemLevel(level);
             levelText.text = (level + 1).ToString();
             InitRarityVisuals(ItemLevel.ItemRarity);
