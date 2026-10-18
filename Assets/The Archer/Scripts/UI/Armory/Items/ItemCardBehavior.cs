@@ -57,11 +57,6 @@ namespace OctoberStudio.UI.Armory
 
         protected virtual void OnItemLevelChanged(ItemSaveData saveData, int level)
         {
-            Debug.Log(
-    $"[ITEM LEVEL] Frame: {Time.frameCount}" +
-    $" | CardAlive: {this != null}" +
-    $" | Level: {level}"
-);
             ItemLevel = ItemData.GetItemLevel(level);
             levelText.text = (level + 1).ToString();
             InitRarityVisuals(ItemLevel.ItemRarity);
