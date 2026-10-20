@@ -1,13 +1,13 @@
-using OctoberStudio.Abilities;
-using OctoberStudio.Abilities.UI;
-using OctoberStudio.Easing;
-using OctoberStudio.Extensions;
+using MrX.Abilities;
+using MrX.Abilities.UI;
+using MrX.Easing;
+using MrX.Extensions;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace OctoberStudio.UI
+namespace MrX.UI
 {
     public class HPChestUI : MonoBehaviour
     {

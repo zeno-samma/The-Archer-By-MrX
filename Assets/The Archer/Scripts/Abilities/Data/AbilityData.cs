@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace OctoberStudio.Abilities
+namespace MrX.Abilities
 {
     public abstract class AbilityData : ScriptableObject
     {

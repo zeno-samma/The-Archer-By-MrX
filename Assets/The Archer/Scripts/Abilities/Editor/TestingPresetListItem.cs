@@ -1,9 +1,9 @@
-using OctoberStudio.Abilities;
-using OctoberStudio.StageCreator;
+using MrX.Abilities;
+using MrX.StageCreator;
 using UnityEditor;
 using UnityEngine;
 
-namespace OctoberStudio
+namespace MrX
 {
     public class TestingPresetListItem : ListItem
     {

@@ -1,9 +1,9 @@
-using OctoberStudio.Audio;
-using OctoberStudio.Extensions;
+using MrX.Audio;
+using MrX.Extensions;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace OctoberStudio.Projectile
+namespace MrX.Projectile
 {
     public class SimpleProjectile : AbstractProjectile
     {
@@ -122,6 +122,9 @@ namespace OctoberStudio.Projectile
         public virtual void ResetOverrides()
         {
             Target = null;
+            TargetToIgnore = null;
+            IsPiercingEnabled = false;
+            IgnoresObstacles = false;
             Lifetime = lifetime;
             Speed = speed;
             Magnetism = magnetism;

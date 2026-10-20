@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace MrX.Abilities
 {
-    [CreateAssetMenu(fileName = "MysticCoins Ability Data", menuName = "October/Abilities/Endgame Abilities/MysticCoins")]
+    [CreateAssetMenu(fileName = "MysticCoins Ability Data", menuName = "MrX Studio/Abilities/Endgame Abilities/MysticCoins")]
     public class MysticCoinsAbilityData : GenericAbilityData<MysticCoinsAbilityLevel>
     {
         protected virtual void Awake()

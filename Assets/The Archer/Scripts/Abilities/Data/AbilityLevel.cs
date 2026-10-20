@@ -1,4 +1,4 @@
-namespace OctoberStudio.Abilities
+namespace MrX.Abilities
 {
     [System.Serializable]
     public abstract class AbilityLevel

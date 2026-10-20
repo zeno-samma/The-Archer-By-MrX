@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace OctoberStudio
+namespace MrX
 {
-    [CreateAssetMenu(menuName = "October/Stage/Stage Database", fileName = "Stage Database")]
+    [CreateAssetMenu(menuName = "MrX Studio/Stage/Stage Database", fileName = "Stage Database")]
     public class StageDatabase : ScriptableObject
     {
         [SerializeField] protected StageData[] stages;

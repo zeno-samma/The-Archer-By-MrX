@@ -1,10 +1,12 @@
 using System.Collections.Generic;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 using UnityEngine;
 
-namespace OctoberStudio.Currency
+namespace MrX.Currency
 {
-    [CreateAssetMenu(fileName = "Currencies Database", menuName = "October/Currencies Database")]
+    [CreateAssetMenu(fileName = "Currencies Database", menuName = "MrX Studio/Currencies Database")]
     public class CurrenciesDatabase : ScriptableObject
     {
         [SerializeField] protected List<CurrencyData> currencies;

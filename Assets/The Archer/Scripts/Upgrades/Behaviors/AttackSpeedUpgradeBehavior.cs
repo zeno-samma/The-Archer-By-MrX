@@ -1,4 +1,4 @@
-namespace OctoberStudio.Upgrades
+namespace MrX.Upgrades
 {
     public class AttackSpeedUpgradeBehavior : UpgradeBehavior
     {
@@ -20,7 +20,7 @@ namespace OctoberStudio.Upgrades
 
         public override void Clear()
         {
-            StageController.Player.Stats.AttackSpeedStat.AddMultiplier(attackSpeedMultiplier);
+            StageController.Player.Stats.AttackSpeedStat.RemoveMultiplier(attackSpeedMultiplier);
             base.Clear();
         }
     }

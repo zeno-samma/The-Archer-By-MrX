@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace MrX.Abilities
 {
-    [CreateAssetMenu(fileName = "Quick Shot Ability Data", menuName = "October/Abilities/Weapon Abilities/Quick Shot")]
+    [CreateAssetMenu(fileName = "Quick Shot Ability Data", menuName = "MrX Studio/Abilities/Weapon Abilities/Quick Shot")]
     public class QuickShotAbilityData : GenericAbilityData<QuickShotAbilityLevel>
     {
         protected virtual void Awake()

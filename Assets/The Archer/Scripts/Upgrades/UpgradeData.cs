@@ -1,12 +1,12 @@
-using OctoberStudio.Currency;
+using MrX.Currency;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace OctoberStudio.Upgrades
+namespace MrX.Upgrades
 {
-    [CreateAssetMenu(fileName = "Upgrade", menuName = "October/Upgrades/Upgrade")]
+    [CreateAssetMenu(fileName = "Upgrade", menuName = "MrX Studio/Upgrades/Upgrade")]
     public class UpgradeData : ScriptableObject
     {
         [SerializeField, HideInInspector] protected int dataVersion;

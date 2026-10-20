@@ -1,4 +1,4 @@
-﻿namespace OctoberStudio.Abilities
+﻿namespace MrX.Abilities
 {
     public class GnomeFormAbilityBehavior : AbilityBehavior<GnomeFormAbilityData, GnomeFormAbilityLevel>
     {

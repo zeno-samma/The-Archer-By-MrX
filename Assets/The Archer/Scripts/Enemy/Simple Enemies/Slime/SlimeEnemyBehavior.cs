@@ -1,9 +1,9 @@
-using OctoberStudio.Audio;
-using OctoberStudio.Extensions;
+using MrX.Audio;
+using MrX.Extensions;
 using System.Collections;
 using UnityEngine;
 
-namespace OctoberStudio.Enemy
+namespace MrX.Enemy
 {
     public class SlimeEnemyBehavior : EnemyBehavior
     {

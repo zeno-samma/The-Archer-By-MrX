@@ -1,9 +1,9 @@
-using OctoberStudio.Extensions;
-using OctoberStudio.Pool;
-using OctoberStudio.Projectile;
+using MrX.Extensions;
+using MrX.Pool;
+using MrX.Projectile;
 using UnityEngine;
 
-namespace OctoberStudio.StatusEffects
+namespace MrX.StatusEffects
 {
     public class ShockStatusEffect : StatusEffect
     {

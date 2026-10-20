@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace MrX.Abilities
 {
-    [CreateAssetMenu(fileName = "Four Leaf Clover Ability Data", menuName = "October/Abilities/Stat Abilities/Four Leaf Clover")]
+    [CreateAssetMenu(fileName = "Four Leaf Clover Ability Data", menuName = "MrX Studio/Abilities/Stat Abilities/Four Leaf Clover")]
     public class FourLeafCloverAbilityData : GenericAbilityData<FourLeafCloverAbilityLevel>
     {
         protected virtual void Awake()

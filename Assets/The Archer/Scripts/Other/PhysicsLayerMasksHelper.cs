@@ -1,14 +1,14 @@
-using OctoberStudio.Audio;
-using OctoberStudio.Currency;
-using OctoberStudio.Input;
-using OctoberStudio.Save;
-using OctoberStudio.UI;
-using OctoberStudio.Upgrades;
-using OctoberStudio.Vibration;
+using MrX.Audio;
+using MrX.Currency;
+using MrX.Input;
+using MrX.Save;
+using MrX.UI;
+using MrX.Upgrades;
+using MrX.Vibration;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace OctoberStudio
+namespace MrX
 {
     public static class PhysicsLayerMasksHelper
     {

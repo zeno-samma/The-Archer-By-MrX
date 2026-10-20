@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace OctoberStudio.Upgrades
+namespace MrX.Upgrades
 {
-    [CreateAssetMenu(fileName = "Upgrades", menuName = "October/Upgrades/Upgrades Database")]
+    [CreateAssetMenu(fileName = "Upgrades", menuName = "MrX Studio/Upgrades/Upgrades Database")]
     public class UpgradesDatabase : ScriptableObject
     {
         [SerializeField] protected List<UpgradeData> upgrades;

@@ -1,8 +1,8 @@
-﻿using OctoberStudio.Projectile;
+﻿using MrX.Projectile;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace MrX.Abilities
 {
     public class UltimateOrbsAbilityBehavior : AbilityBehavior<UltimateOrbsAbilityData, UltimateOrbsAbilityLevel>, IOrbsAbility
     {

@@ -1,8 +1,8 @@
-using OctoberStudio.Extensions;
+using MrX.Extensions;
 using UnityEditor;
 using UnityEngine;
 
-namespace OctoberStudio.Currency
+namespace MrX.Currency
 {
     [CustomPropertyDrawer(typeof(CurrencyId))]
     public class CurrencyIdPropertyDrawer : PropertyDrawer

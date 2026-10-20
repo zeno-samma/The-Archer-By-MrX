@@ -1,6 +1,6 @@
-﻿using OctoberStudio.StatusEffects;
+﻿using MrX.StatusEffects;
 
-namespace OctoberStudio.Abilities
+namespace MrX.Abilities
 {
     public class FreezeAbilityBehavior : AbilityBehavior<FreezeAbilityData, FreezeAbilityLevel>
     {

@@ -1,7 +1,7 @@
-using OctoberStudio.Extensions;
+using MrX.Extensions;
 using System.Collections.Generic;
 
-namespace OctoberStudio
+namespace MrX
 {
     public class RoomsShuffler
     {

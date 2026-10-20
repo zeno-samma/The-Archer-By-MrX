@@ -1,4 +1,4 @@
-namespace OctoberStudio.Upgrades
+namespace MrX.Upgrades
 {
     public class BaseHPUpgradeBehavior : UpgradeBehavior
     {
@@ -20,7 +20,7 @@ namespace OctoberStudio.Upgrades
 
         public override void Clear()
         {
-            StageController.Player.Stats.MaxHPStat.AddMultiplier(maxHPMultiplier);
+            StageController.Player.Stats.MaxHPStat.RemoveMultiplier(maxHPMultiplier);
             base.Clear();
         }
     }

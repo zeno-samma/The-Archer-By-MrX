@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace OctoberStudio.UI
+namespace MrX.UI
 {
     [RequireComponent(typeof(Button))]
     public class HighlightableSelectableUI : MonoBehaviour, ISelectHandler, IDeselectHandler

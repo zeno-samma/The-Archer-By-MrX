@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace MrX.Abilities
 {
-    [CreateAssetMenu(fileName = "Close Combat Ability Data", menuName = "October/Abilities/Weapon Abilities/Close Combat")]
+    [CreateAssetMenu(fileName = "Close Combat Ability Data", menuName = "MrX Studio/Abilities/Weapon Abilities/Close Combat")]
     public class CloseCombatAbilityData : GenericAbilityData<CloseCombatAbilityLevel>
     {
         protected virtual void Awake()

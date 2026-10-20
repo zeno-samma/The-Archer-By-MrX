@@ -2,7 +2,7 @@
 // Modified by OctoberStudio.
 // Licensed under the Unity Companion License (see https://unity3d.com/legal/licenses/unity-companion-license)
 
-Shader "October/Particles/Standard Unlit Scrolling URP"
+Shader "MrX/Particles/Standard Unlit Scrolling URP"
 {
     Properties
     {
@@ -443,5 +443,5 @@ Shader "October/Particles/Standard Unlit Scrolling URP"
     }
 
     FallBack "Hidden/Universal Render Pipeline/FallbackError"
-    CustomEditor "OctoberStudio.StandardParticlesScrollingShaderGUIURP"
+    CustomEditor "MrX.StandardParticlesScrollingShaderGUIURP"
 }

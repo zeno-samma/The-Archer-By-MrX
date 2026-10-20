@@ -1,9 +1,9 @@
-using OctoberStudio.Audio;
-using OctoberStudio.Extensions;
+using MrX.Audio;
+using MrX.Extensions;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace OctoberStudio.Projectile
+namespace MrX.Projectile
 {
     public class IceSphereBehavior : SimpleProjectile
     {

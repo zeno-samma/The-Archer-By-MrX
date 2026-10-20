@@ -1,9 +1,9 @@
-﻿using OctoberStudio.Projectile;
-using OctoberStudio.StatusEffects;
+﻿using MrX.Projectile;
+using MrX.StatusEffects;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace MrX.Abilities
 {
     public class PoisonOrbsAbilityBehavior : AbilityBehavior<PoisonOrbsAbilityData, PoisonOrbsAbilityLevel>, IOrbsAbility
     {

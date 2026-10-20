@@ -1,9 +1,9 @@
-using OctoberStudio.Easing;
-using OctoberStudio.Extensions;
+using MrX.Easing;
+using MrX.Extensions;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace OctoberStudio.UI
+namespace MrX.UI
 {
     public class MainMenuPageBehavior : MonoBehaviour
     {
@@ -20,6 +20,13 @@ namespace OctoberStudio.UI
         protected IEasingCoroutine moveEasingCoroutine;
         protected IEasingCoroutine alphaEasingCoroutine;
 
+        public void PrepareInitialState(bool visible)
+        {
+            canvas.enabled = visible;
+            canvasGroup.alpha = visible ? 1 : 0;
+            canvasGroup.interactable = canvasGroup.blocksRaycasts = visible;
+        }
+
         protected virtual void Awake()
         {
             canvasScaler = GetComponentInParent<CanvasScaler>();
@@ -27,19 +34,13 @@ namespace OctoberStudio.UI
 
         protected virtual void Start()
         {
-            var resolution = canvasScaler.referenceResolution;
-
-            var aspectRatio = Camera.main.aspect;
-            width = resolution.x;
-
-            if (canvasScaler.matchWidthOrHeight == 1)
-            {
-                width = resolution.y * aspectRatio;
-            }
+            width = pageRect.rect.width;
         }
 
         public virtual void MoveLeft()
         {
+            width = ((RectTransform)pageRect.parent).rect.width;
+            canvasGroup.interactable = canvasGroup.blocksRaycasts = false;
             var offsetMin = new Vector2(-width, 0);
             var offsetMax = new Vector2(-width, 0);
 
@@ -52,6 +53,8 @@ namespace OctoberStudio.UI
 
         public virtual void MoveRight()
         {
+            width = ((RectTransform)pageRect.parent).rect.width;
+            canvasGroup.interactable = canvasGroup.blocksRaycasts = false;
             var offsetMin = new Vector2(width, 0);
             var offsetMax = new Vector2(width, 0);
 
@@ -64,6 +67,7 @@ namespace OctoberStudio.UI
 
         public virtual void MoveCenter()
         {
+            canvasGroup.interactable = canvasGroup.blocksRaycasts = true;
             moveEasingCoroutine.StopIfExists();
             alphaEasingCoroutine.StopIfExists();
 
@@ -78,6 +82,7 @@ namespace OctoberStudio.UI
 
         public virtual void SpawnLeft()
         {
+            width = ((RectTransform)pageRect.parent).rect.width;
             var offsetMin = new Vector2(-width, 0);
             var offsetMax = new Vector2(-width, 0);
             pageRect.SetStretchedOffset(offsetMin, offsetMax);
@@ -88,6 +93,7 @@ namespace OctoberStudio.UI
 
         public virtual void SpawnRight()
         {
+            width = ((RectTransform)pageRect.parent).rect.width;
             var offsetMin = new Vector2(width, 0);
             var offsetMax = new Vector2(width, 0);
             pageRect.SetStretchedOffset(offsetMin, offsetMax);

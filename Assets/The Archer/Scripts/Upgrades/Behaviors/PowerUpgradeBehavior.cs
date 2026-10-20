@@ -1,4 +1,4 @@
-namespace OctoberStudio.Upgrades
+namespace MrX.Upgrades
 {
     public class PowerUpgradeBehavior : UpgradeBehavior
     {
@@ -20,7 +20,7 @@ namespace OctoberStudio.Upgrades
 
         public override void Clear()
         {
-            StageController.Player.Stats.AttackDamageStat.AddMultiplier(attackDamagedMultiplier);
+            StageController.Player.Stats.AttackDamageStat.RemoveMultiplier(attackDamagedMultiplier);
             base.Clear();
         }
     }

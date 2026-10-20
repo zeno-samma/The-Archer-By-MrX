@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace OctoberStudio.Particles
+namespace MrX.Particles
 {
     public class ParticleDisablerBehavior : MonoBehaviour
     {

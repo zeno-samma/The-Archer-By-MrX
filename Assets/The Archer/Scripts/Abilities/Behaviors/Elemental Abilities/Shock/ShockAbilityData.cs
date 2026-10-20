@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace MrX.Abilities
 {
-    [CreateAssetMenu(fileName = "Shock Ability Data", menuName = "October/Abilities/Elemental Abilities/Shock")]
+    [CreateAssetMenu(fileName = "Shock Ability Data", menuName = "MrX Studio/Abilities/Elemental Abilities/Shock")]
     public class ShockAbilityData : GenericAbilityData<ShockAbilityLevel>
     {
         protected virtual void Awake()

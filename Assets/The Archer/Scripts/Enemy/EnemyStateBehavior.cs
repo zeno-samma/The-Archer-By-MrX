@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace OctoberStudio.Enemy.State
+namespace MrX.Enemy.State
 {
     public abstract class EnemyStateBehavior : MonoBehaviour
     {

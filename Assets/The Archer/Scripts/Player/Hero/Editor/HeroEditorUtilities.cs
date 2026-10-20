@@ -1,9 +1,9 @@
-using OctoberStudio.Armory;
+using MrX.Armory;
 using UnityEditor;
 using UnityEditor.VersionControl;
 using UnityEngine;
 
-namespace OctoberStudio
+namespace MrX
 {
     public static class HeroEditorUtilities
     {

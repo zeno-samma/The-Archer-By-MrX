@@ -1,8 +1,8 @@
-using OctoberStudio.Input;
-using OctoberStudio.Save;
+using MrX.Input;
+using MrX.Save;
 using UnityEngine;
 
-namespace OctoberStudio
+namespace MrX
 {
     public class InputSave : ISave
     {

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace OctoberStudio
+namespace MrX
 {
     public class CameraTarget : MonoBehaviour
     {

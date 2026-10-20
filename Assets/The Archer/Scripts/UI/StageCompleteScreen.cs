@@ -1,14 +1,14 @@
-using OctoberStudio.Audio;
-using OctoberStudio.Easing;
-using OctoberStudio.Extensions;
-using OctoberStudio.Input;
-using OctoberStudio.Pool;
+using MrX.Audio;
+using MrX.Easing;
+using MrX.Extensions;
+using MrX.Input;
+using MrX.Pool;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace OctoberStudio.UI
+namespace MrX.UI
 {
     public class StageCompleteScreen : MonoBehaviour
     {
@@ -83,6 +83,8 @@ namespace OctoberStudio.UI
 
         public virtual void Show()
         {
+            if (IsOpen) return;
+            StageController.FinalizeRunRewards();
             gameObject.SetActive(true);
 
             if (!isInitialized)
@@ -92,15 +94,7 @@ namespace OctoberStudio.UI
 
             GameController.AudioManager.PlayAudio(successSound);
 
-            var pickedUpItems = StageController.DropManager.PickedUpItems;
-            pickedUpItems.Sort((item1, item2) =>
-            {
-                var level1 = GameController.ArmoryManager.GetItemLevel(item1.ItemId);
-                var level2 = GameController.ArmoryManager.GetItemLevel(item2.ItemId);
-
-                return level2.ItemRarity.CompareTo(level1.ItemRarity);
-            });
-
+            var pickedUpItems = StageController.DropManager.ResultItems;
             EasingManager.DoTimeScale(0, 0.3f);
 
             continueButton.enabled = false;
@@ -127,12 +121,13 @@ namespace OctoberStudio.UI
             for (int i = 0; i < currencies.Count; i++)
             {
                 var currency = currencies[i];
-                if (currency.Amount > 0)
+                int earned; StageController.DropManager.ResultCurrencies.TryGetValue(currency.Data.ID, out earned);
+                if (earned > 0)
                 {
 
                     var card = currencyRewardCards[currency];
                     card.gameObject.SetActive(true);
-                    card.SetAmount(currency.Amount);
+                    card.SetAmount(earned);
                     card.Show(0.7f + counter * 0.05f);
 
                     counter++;
@@ -141,11 +136,11 @@ namespace OctoberStudio.UI
 
             for (int i = 0; i < pickedUpItems.Count; i++)
             {
-                var item = GameController.ArmoryManager.GetItemData(pickedUpItems[i].ItemId);
+                var item = pickedUpItems[i];
 
                 var card = cardsPool.GetEntity();
-                card.SetItem(item);
-                card.SetAmount(1);
+                card.SetReward(item);
+
 
                 card.Show(0.7f + (counter + i) * 0.05f);
             }
@@ -168,7 +163,7 @@ namespace OctoberStudio.UI
             EventSystem.current.SetSelectedGameObject(continueButton.gameObject);
             GameController.InputManager.onInputChanged += OnInputChanged;
 
-            ContinuePlayingSave.Disable();
+
 
             IsOpen = true;
         }

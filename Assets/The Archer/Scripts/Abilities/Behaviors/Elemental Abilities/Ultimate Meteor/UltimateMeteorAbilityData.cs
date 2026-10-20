@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace MrX.Abilities
 {
-    [CreateAssetMenu(fileName = "UltimateMeteor Ability Data", menuName = "October/Abilities/Elemental Abilities/UltimateMeteor")]
+    [CreateAssetMenu(fileName = "UltimateMeteor Ability Data", menuName = "MrX Studio/Abilities/Elemental Abilities/UltimateMeteor")]
     public class UltimateMeteorAbilityData : GenericAbilityData<UltimateMeteorAbilityLevel>
     {
         protected virtual void Awake()

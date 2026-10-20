@@ -6,7 +6,7 @@ using UnityEditor.iOS.Xcode;
 #endif
 using System.IO;
 
-namespace OctoberStudio
+namespace MrX
 {
     public static class IOSPostBuild
     {

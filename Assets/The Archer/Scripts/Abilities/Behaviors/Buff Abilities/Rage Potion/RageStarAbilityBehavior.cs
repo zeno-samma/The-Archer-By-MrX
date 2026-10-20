@@ -1,9 +1,9 @@
-﻿using OctoberStudio.Drop;
+﻿using MrX.Drop;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace MrX.Abilities
 {
     public class RageStarAbilityBehavior : AbilityBehavior<RageStarAbilityData, RageStarAbilityLevel>
     {

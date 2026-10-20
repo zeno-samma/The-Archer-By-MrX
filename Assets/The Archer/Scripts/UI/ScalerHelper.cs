@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace OctoberStudio.UI
+namespace MrX.UI
 {
     [RequireComponent(typeof(CanvasScaler))]
     public class ScalerHelper : MonoBehaviour

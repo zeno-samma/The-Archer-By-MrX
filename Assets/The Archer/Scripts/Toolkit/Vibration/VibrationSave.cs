@@ -1,7 +1,7 @@
-using OctoberStudio.Save;
+using MrX.Save;
 using UnityEngine;
 
-namespace OctoberStudio.Vibration
+namespace MrX.Vibration
 {
     public class VibrationSave : ISave
     {

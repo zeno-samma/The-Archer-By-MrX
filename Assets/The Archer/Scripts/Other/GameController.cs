@@ -1,15 +1,15 @@
-using OctoberStudio.Currency;
+using MrX.Currency;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace OctoberStudio
+namespace MrX
 {
-    using OctoberStudio.Audio;
-    using OctoberStudio.Easing;
-    using OctoberStudio.Input;
-    using OctoberStudio.UI;
-    using OctoberStudio.Upgrades;
+    using MrX.Audio;
+    using MrX.Easing;
+    using MrX.Input;
+    using MrX.UI;
+    using MrX.Upgrades;
     using Save;
     using Vibration;
 
@@ -21,11 +21,15 @@ namespace OctoberStudio
 
         public static ISaveManager SaveManager { get; protected set; }
         public static ICurrenciesManager CurrenciesManager { get; protected set; }
+        public static MenuEconomyService MenuEconomy { get; private set; }
+        private static bool loadingStage;
         public static IVibrationManager VibrationManager { get; protected set; }
         public static IAudioManager AudioManager { get; protected set; }
         public static IInputManager InputManager { get; protected set; }
         public static IUpgradesManager UpgradesManager { get; protected set; }
         public static ArmoryManager ArmoryManager { get; protected set; }
+        public static Quests.DailyQuestsManager DailyQuestsManager { get; private set; }
+        public static Achievements.AchievementsManager AchievementsManager { get; private set; }
 
         public static MainMenuScreenBehavior MainMenuScreenBehavior { get; protected set; }
 
@@ -44,11 +48,15 @@ namespace OctoberStudio
 
             SaveManager = null;
             CurrenciesManager = null;
+            MenuEconomy = null;
+            loadingStage = false;
             VibrationManager = null;
             AudioManager = null;
             InputManager = null;
             UpgradesManager = null;
             ArmoryManager = null;
+            DailyQuestsManager = null;
+            AchievementsManager = null;
 
             MainMenuScreenBehavior = null;
         }
@@ -136,7 +144,23 @@ namespace OctoberStudio
         {
             SaveManager.GetSave<StageSave>("Stage").Init();
 
+            var dailyQuestsDatabase = Resources.Load<Quests.DailyQuestsDatabase>(Quests.DailyQuestsDatabase.ResourcePath);
+            if (dailyQuestsDatabase != null)
+            {
+                DailyQuestsManager = gameObject.AddComponent<Quests.DailyQuestsManager>();
+                DailyQuestsManager.Initialize(dailyQuestsDatabase);
+            }
+
             EasingManager.DoNextFrame(ChechForTesting);
+            var achievementsDatabase = Resources.Load<Achievements.AchievementsDatabase>(Achievements.AchievementsDatabase.ResourcePath);
+            if (achievementsDatabase != null)
+            {
+                AchievementsManager = gameObject.AddComponent<Achievements.AchievementsManager>();
+                AchievementsManager.Initialize(achievementsDatabase);
+                EasingManager.DoNextFrame(() => AchievementsManager.RestoreKnownProgress(
+                    SaveManager.GetSave<StageSave>("Stage"), SaveManager.GetSave<ArmorySave>("Armory"),
+                    SaveManager.GetSave<UpgradesSave>("Upgrades Save")));
+            }
 
 #if UNITY_WEBGL && !UNITY_EDITOR
             InputManager.InputAsset.UI.Click.performed += MusicStartWebGL;
@@ -169,8 +193,32 @@ namespace OctoberStudio
             }
         }
 
-        public static void LoadStage()//Bắt đầu load stage, khi load xong sẽ lưu lại save
+        public static void InitializeMenuEconomy(ICurrenciesManager wallets)
         {
+            MenuEconomy = new MenuEconomyService(Resources.Load<MenuEconomySettings>(MenuEconomySettings.ResourcePath), wallets, SaveManager);
+        }
+
+        public static bool TryStartNewRun(StageData stage)
+        {
+            if (instance == null || loadingStage || stage == null || MenuEconomy == null) return false;
+            var stages = SaveManager.GetSave<StageSave>("Stage");
+            if (!stages.IsStageUnlocked(stage)) return false;
+            // Set the transition guard before wallet events can reenter the start path.
+            loadingStage = true;
+            if (!MenuEconomy.TrySpendForNewRun(stage.EnergyCost)) { loadingStage = false; return false; }
+            SaveManager.GetSave<ContinuePlayingSave>("Continue Playing").Disable();
+            CurrenciesManager.ApplyGameplayAmounts();
+            stages.IncrementStageAttempts(stage);
+            instance.StartCoroutine(StageLoadingCoroutine());
+            SaveManager.Save(false);
+            return true;
+        }
+
+        // Resume and explicit Editor testing keep their existing prepaid entry path.
+        public static void LoadStage()
+        {
+            if (instance == null || loadingStage) return;
+            loadingStage = true;
             instance.StartCoroutine(StageLoadingCoroutine());
 
             SaveManager.Save(false);
@@ -178,11 +226,12 @@ namespace OctoberStudio
 
         public static void LoadMainMenu()
         {
-            CurrenciesManager.ApplyGameplayAmounts();
+            bool settled = StageController.IsLoaded && StageController.IsResultFinalized;
+            if (!settled) CurrenciesManager.ApplyGameplayAmounts();
 
             if (instance != null) instance.StartCoroutine(MainMenuLoadingCoroutine());
 
-            SaveManager.Save(false);
+            if (!settled) SaveManager.Save(false);
         }
 
         private static IEnumerator StageLoadingCoroutine()
@@ -198,6 +247,8 @@ namespace OctoberStudio
             yield return LoadAsyncScene(SceneSettings.LoadingScene.SceneName, LoadSceneMode.Additive);
             yield return UnloadAsyncScene(SceneSettings.GameScene.SceneName);
             yield return LoadAsyncScene(SceneSettings.MainMenuScene.SceneName, LoadSceneMode.Single);
+
+            loadingStage = false;
 
             AudioManager.PlayMainMusic();
         }

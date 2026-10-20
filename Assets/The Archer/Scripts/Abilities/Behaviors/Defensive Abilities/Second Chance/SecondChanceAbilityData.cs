@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace MrX.Abilities
 {
-    [CreateAssetMenu(fileName = "SecondChance Ability Data", menuName = "October/Abilities/Defensive Abilities/SecondChance")]
+    [CreateAssetMenu(fileName = "SecondChance Ability Data", menuName = "MrX Studio/Abilities/Defensive Abilities/SecondChance")]
     public class SecondChanceAbilityData : GenericAbilityData<SecondChanceAbilityLevel>
     {
         protected virtual void Awake()

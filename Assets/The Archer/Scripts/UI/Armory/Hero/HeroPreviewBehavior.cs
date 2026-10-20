@@ -1,14 +1,15 @@
-using OctoberStudio.Armory;
-using OctoberStudio.Player;
-using OctoberStudio.Weapon;
+using MrX.Armory;
+using MrX.Player;
+using MrX.Weapon;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace OctoberStudio.UI
+namespace MrX.UI
 {
     public class HeroPreviewBehavior : MonoBehaviour
     {
         [SerializeField] protected RawImage rawImage;
+        [SerializeField] private AspectRatioFitter previewAspect;
         [SerializeField] protected GameObject heroPreviewPrefab;
         [SerializeField] protected Vector3 previewPosition = new Vector3(100, 100, -100);
         [SerializeField] protected Vector3 previewRotation = new Vector3(0, 180, 0);
@@ -35,6 +36,7 @@ namespace OctoberStudio.UI
             previewCamera.targetTexture = renderTexture;
 
             rawImage.texture = renderTexture;
+            if (previewAspect) previewAspect.aspectRatio = (float)renderTexture.width / renderTexture.height;
 
             heroPreview.gameObject.SetActive(false);
         }

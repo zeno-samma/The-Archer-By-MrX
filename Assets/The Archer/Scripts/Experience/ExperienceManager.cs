@@ -1,10 +1,10 @@
-using OctoberStudio.Audio;
-using OctoberStudio.Easing;
+using MrX.Audio;
+using MrX.Easing;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace OctoberStudio
+namespace MrX
 {
     public class ExperienceManager : MonoBehaviour
     {

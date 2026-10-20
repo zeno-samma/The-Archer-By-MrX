@@ -1,7 +1,7 @@
-using OctoberStudio.Save;
+using MrX.Save;
 using UnityEngine;
 
-namespace OctoberStudio.Audio
+namespace MrX.Audio
 {
     public class AudioSave : ISave
     {

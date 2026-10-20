@@ -1,4 +1,4 @@
-namespace OctoberStudio.Pool
+namespace MrX.Pool
 {
     public abstract class AbstractPool
     {

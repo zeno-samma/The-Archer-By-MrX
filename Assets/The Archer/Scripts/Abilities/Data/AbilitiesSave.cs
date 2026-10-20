@@ -1,9 +1,9 @@
-using OctoberStudio.Save;
+using MrX.Save;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace MrX.Abilities
 {
     [System.Serializable]
     public class AbilitiesSave : ISave

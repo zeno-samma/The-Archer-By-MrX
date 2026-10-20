@@ -1,9 +1,9 @@
-using OctoberStudio.Armory;
-using OctoberStudio.StatusEffects;
-using OctoberStudio.Weapon;
+using MrX.Armory;
+using MrX.StatusEffects;
+using MrX.Weapon;
 using UnityEngine;
 
-namespace OctoberStudio.Player
+namespace MrX.Player
 {
     public interface IHeroBehavior
     {

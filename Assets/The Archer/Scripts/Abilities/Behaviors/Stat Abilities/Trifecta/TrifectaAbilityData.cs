@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace MrX.Abilities
 {
-    [CreateAssetMenu(fileName = "Trifecta Ability Data", menuName = "October/Abilities/Stat Abilities/Trifecta")]
+    [CreateAssetMenu(fileName = "Trifecta Ability Data", menuName = "MrX Studio/Abilities/Stat Abilities/Trifecta")]
     public class TrifectaAbilityData : GenericAbilityData<TrifectaAbilityLevel>
     {
         protected virtual void Awake()

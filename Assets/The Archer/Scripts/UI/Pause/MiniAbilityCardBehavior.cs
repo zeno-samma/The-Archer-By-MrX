@@ -1,8 +1,8 @@
-using OctoberStudio.Abilities;
+using MrX.Abilities;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace OctoberStudio.UI
+namespace MrX.UI
 {
     public class MiniAbilityCardBehavior : MonoBehaviour
     {

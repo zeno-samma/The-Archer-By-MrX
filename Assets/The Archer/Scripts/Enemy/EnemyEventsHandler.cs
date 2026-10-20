@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace OctoberStudio.Enemy
+namespace MrX.Enemy
 {
     public class EnemyEventsHandler : MonoBehaviour
     {

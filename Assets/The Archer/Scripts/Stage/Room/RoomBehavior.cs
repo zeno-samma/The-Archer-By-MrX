@@ -1,13 +1,13 @@
-using OctoberStudio.Easing;
-using OctoberStudio.Enemy;
-using OctoberStudio.Extensions;
+using MrX.Easing;
+using MrX.Enemy;
+using MrX.Extensions;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace OctoberStudio
+namespace MrX
 {
     public class RoomBehavior : MonoBehaviour
     {
@@ -358,6 +358,12 @@ namespace OctoberStudio
 
         protected virtual void EndRoom()
         {
+            var completion = StageController.CurrentRoomIndex + 1;
+            if (ContinuePlayingSave.AchievementRoomWatermark < completion)
+            {
+                ContinuePlayingSave.AchievementRoomWatermark = completion;
+                GameController.AchievementsManager?.Record(Achievements.AchievementMetric.RoomsCompleted);
+            }
             onRoomEnded?.Invoke();
             // Debug.Log("OnRoomEnded - Hoàn thành"+ Wave);
             float finalTime = ConsoleTimer.Instance.StopTimer("Room " + CurrentWave.Icon.name + " " + RoomId);
@@ -420,7 +426,13 @@ namespace OctoberStudio
         {
             enemy.UnsubscribeOnDefeat(OnEnemyDefeated);
 
-            aliveEnemies.Remove(enemy);
+            if (aliveEnemies.Remove(enemy))
+            {
+                GameController.DailyQuestsManager?.Record(Quests.DailyQuestType.DefeatEnemies);
+                GameController.AchievementsManager?.Record(Achievements.AchievementMetric.EnemiesDefeated);
+                if (enemy.Data != null && enemy.Data.IsBoss)
+                    GameController.AchievementsManager?.Record(Achievements.AchievementMetric.BossesDefeated);
+            }
 
             var experiencePerWave = CurrentWave.WaveDropExperience;
             var experiencePerEnemy = experiencePerWave / CurrentWave.EnemySpawns.Count;

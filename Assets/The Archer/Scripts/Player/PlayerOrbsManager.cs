@@ -1,8 +1,8 @@
-using OctoberStudio.Abilities;
+using MrX.Abilities;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace OctoberStudio
+namespace MrX
 {
     public class PlayerOrbsManager : MonoBehaviour
     {

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace OctoberStudio.Player
+namespace MrX.Player
 {
     public class HeroEventsHandler : MonoBehaviour
     {

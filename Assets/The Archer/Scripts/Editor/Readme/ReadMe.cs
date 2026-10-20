@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace OctoberStudio.ReadMe
+namespace MrX.ReadMe
 {
     [CreateAssetMenu]
     public class ReadMe : ScriptableObject

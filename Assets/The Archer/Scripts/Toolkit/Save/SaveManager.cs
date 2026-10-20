@@ -8,7 +8,7 @@ using UnityEngine.Events;
 using System.Runtime.InteropServices;
 #endif
 
-namespace OctoberStudio.Save
+namespace MrX.Save
 {
     [DefaultExecutionOrder(-100)]
     public class SaveManager : MonoBehaviour, ISaveManager
@@ -36,7 +36,11 @@ namespace OctoberStudio.Save
 
         public event UnityAction OnSaveLoaded;
 
-        private Coroutine saveCoroutine;
+        private bool savePending;
+        public bool IsGameplayWriteDeferred { get; private set; }
+        public void BeginGameplayBatch() { IsGameplayWriteDeferred = true; }
+        public void CommitGameplayBatch() { IsGameplayWriteDeferred = false; Save(false); }
+        private Thread activeSaveThread;
 
         protected bool isSaving = false;
 
@@ -201,27 +205,30 @@ namespace OctoberStudio.Save
 
         private IEnumerator SaveCoroutine(bool multithreading = false)
         {
-            while (isSaving)
-            {
-                yield return null;
-            }
-
             isSaving = true;
-
+            do
+            {
+            savePending = false;
             if (multithreading)
             {
                 var completed = false;
                 Exception threadException = null;
+                var saveFileName = Application.isEditor ? SAVE_FILE_NAME_EDITOR : SAVE_FILE_NAME;
+#if UNITY_6000_6_OR_NEWER
+                // Snapshot on the main thread; the worker only writes this immutable
+                // snapshot to its captured path, even when a verification session ends.
+                var snapshot = JsonUtility.ToJson(SaveDatabase);
+                var snapshotPath = SerializationHelper.GetPersistentFilePath(saveFileName);
+#endif
 
-                Thread saveThread = new Thread(() =>
+                activeSaveThread = new Thread(() =>
                 {
                     try
                     {
-                        var saveFileName = Application.isEditor ? SAVE_FILE_NAME_EDITOR : SAVE_FILE_NAME;
 #if !UNITY_6000_6_OR_NEWER
                         SerializationHelper.SerializePersistent(SaveDatabase, saveFileName, useJsonSerialization);
 #else
-                        SerializationHelper.SerializePersistent(SaveDatabase, saveFileName);
+                        System.IO.File.WriteAllText(snapshotPath, snapshot);
 #endif
                     }
                     catch (Exception e)
@@ -230,13 +237,14 @@ namespace OctoberStudio.Save
                     }
                     finally
                     {
-                        completed = true;
+                        Volatile.Write(ref completed, true);
                     }
                 });
 
-                saveThread.Start();
+                activeSaveThread.Start();
 
-                yield return new WaitUntil(() => completed);
+                yield return new WaitUntil(() => Volatile.Read(ref completed));
+                activeSaveThread = null;
 
                 if (threadException != null)
                 {
@@ -261,14 +269,17 @@ namespace OctoberStudio.Save
             }
 
             Debug.Log("Save file is updated");
-
+            } while (savePending);
             isSaving = false;
-            saveCoroutine = null;
         }
 
         private void ForceSave()
         {
             if (SaveDatabase == null) return;
+            // A previous worker must finish before the final snapshot, otherwise
+            // its older data could overwrite the last synchronous save on exit.
+            if (activeSaveThread != null && activeSaveThread.IsAlive) activeSaveThread.Join();
+            activeSaveThread = null;
             SaveDatabase.Flush();
 
             if (saveType == SaveType.PlayerPrefs)
@@ -306,6 +317,7 @@ namespace OctoberStudio.Save
         public void Save(bool multithreading = false)
         {
             if (SaveDatabase == null) return;
+            if (IsGameplayWriteDeferred) return;
             SaveDatabase.Flush();
 
             if (saveType == SaveType.PlayerPrefs)
@@ -321,7 +333,8 @@ namespace OctoberStudio.Save
                 WebGLSave(SaveDatabase, SAVE_FILE_NAME);
                 Debug.Log("Save file is updated");
 #else
-                if (saveCoroutine == null) saveCoroutine = StartCoroutine(SaveCoroutine(multithreading));
+                savePending = true;
+                if (!isSaving) StartCoroutine(SaveCoroutine(multithreading));
 #endif
             }
         }

@@ -1,10 +1,15 @@
-using OctoberStudio.Save;
+using MrX.Save;
 using UnityEngine;
 
-namespace OctoberStudio
+namespace MrX
 {
     public class ContinuePlayingSave : ISave
     {
+        [SerializeField] private string runToken;
+        public string RunToken => string.IsNullOrEmpty(runToken) ? runToken = System.Guid.NewGuid().ToString("N") : runToken;
+        [SerializeField] private string stageContentId;
+        public string StageContentId => stageContentId;
+        public void RememberStage(string contentId) { stageContentId = contentId; }
         [SerializeField] protected bool hasUnfinishedStageData;
         public bool HasUnfinishedStageData { get => hasUnfinishedStageData; protected set => hasUnfinishedStageData = value; }
 
@@ -13,6 +18,8 @@ namespace OctoberStudio
 
         [SerializeField] protected int activeRoomId;
         [SerializeField] protected int activeWaveId;
+        [SerializeField] private int achievementRoomWatermark;
+        public int AchievementRoomWatermark { get => achievementRoomWatermark; set => achievementRoomWatermark = value; }
 
         [SerializeField] protected int xpLevel;
         [SerializeField] protected float xp;
@@ -66,10 +73,13 @@ namespace OctoberStudio
 
         public virtual void Disable()
         {
+            runToken = null;
+            stageContentId = null;
             HasUnfinishedStageData = false;
 
             ActiveRoomId = 0;
             ActiveWaveId = 0;
+            achievementRoomWatermark = 0;
 
             XPLevel = 0;
             XP = 0;

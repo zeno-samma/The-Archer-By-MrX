@@ -1,9 +1,9 @@
-using OctoberStudio.Audio;
+using MrX.Audio;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
-namespace OctoberStudio
+namespace MrX
 {
     public class RoomExitBehavior : MonoBehaviour
     {

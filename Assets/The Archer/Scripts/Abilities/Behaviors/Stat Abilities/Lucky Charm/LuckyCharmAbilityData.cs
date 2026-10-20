@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace MrX.Abilities
 {
-    [CreateAssetMenu(fileName = "Lucky Charm Ability Data", menuName = "October/Abilities/Stat Abilities/Lucky Charm")]
+    [CreateAssetMenu(fileName = "Lucky Charm Ability Data", menuName = "MrX Studio/Abilities/Stat Abilities/Lucky Charm")]
     public class LuckyCharmAbilityData : GenericAbilityData<LuckyCharmAbilityLevel>
     {
         protected virtual void Awake()

@@ -1,10 +1,10 @@
-using OctoberStudio.Input;
+using MrX.Input;
 using UnityEngine;
 #if UNITY_WEBGL
 using UnityEngine.InputSystem.WebGL;
 #endif
 
-namespace OctoberStudio.Vibration
+namespace MrX.Vibration
 {
     public class VibrationManager : MonoBehaviour, IVibrationManager
     {

@@ -1,7 +1,7 @@
-using OctoberStudio.Easing;
+using MrX.Easing;
 using UnityEngine;
 
-namespace OctoberStudio
+namespace MrX
 {
     public class ProtectiveBubbleBehavior : MonoBehaviour
     {

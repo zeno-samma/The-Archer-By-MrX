@@ -1,7 +1,7 @@
-using OctoberStudio.Easing;
+using MrX.Easing;
 using UnityEngine;
 
-namespace OctoberStudio.UI
+namespace MrX.UI
 {
     public class HorizontalSelectable : MonoBehaviour
     {

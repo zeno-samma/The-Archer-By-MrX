@@ -1,9 +1,9 @@
-using OctoberStudio.Abilities;
+using MrX.Abilities;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace OctoberStudio.UI.Armory
+namespace MrX.UI.Armory
 {
     public class ArmoryAbilityCard : MonoBehaviour
     {

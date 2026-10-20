@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace MrX.Abilities
 {
-    [CreateAssetMenu(fileName = "Sniper Ability Data", menuName = "October/Abilities/Weapon Abilities/Sniper")]
+    [CreateAssetMenu(fileName = "Sniper Ability Data", menuName = "MrX Studio/Abilities/Weapon Abilities/Sniper")]
     public class SniperAbilityData : GenericAbilityData<SniperAbilityLevel>
     {
         protected virtual void Awake()

@@ -1,8 +1,8 @@
 using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace MrX.Abilities
 {
-    [CreateAssetMenu(fileName = "Bouncy Shot Ability Data", menuName = "October/Abilities/Weapon Abilities/Bouncy Shot")]
+    [CreateAssetMenu(fileName = "Bouncy Shot Ability Data", menuName = "MrX Studio/Abilities/Weapon Abilities/Bouncy Shot")]
     public class BouncyShotAbilityData : GenericAbilityData<BouncyShotAbilityLevel>
     {
         protected virtual void Awake()

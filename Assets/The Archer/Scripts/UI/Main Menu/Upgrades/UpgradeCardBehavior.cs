@@ -1,5 +1,5 @@
-using OctoberStudio.Input;
-using OctoberStudio.Upgrades;
+using MrX.Input;
+using MrX.Upgrades;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-namespace OctoberStudio.UI
+namespace MrX.UI
 {
     public class UpgradeCardBehavior : Selectable
     {

@@ -1,8 +1,8 @@
 using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace MrX.Abilities
 {
-    [CreateAssetMenu(fileName = "Diagonal Shot Ability Data", menuName = "October/Abilities/Weapon Abilities/Diagonal Shot")]
+    [CreateAssetMenu(fileName = "Diagonal Shot Ability Data", menuName = "MrX Studio/Abilities/Weapon Abilities/Diagonal Shot")]
     public class DiagonalShotAbilityData : GenericAbilityData<DiagonalShotAbilityLevel>
     {
         protected virtual void Awake()

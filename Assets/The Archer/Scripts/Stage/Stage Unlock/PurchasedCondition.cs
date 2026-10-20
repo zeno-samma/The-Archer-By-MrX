@@ -1,10 +1,11 @@
-using OctoberStudio.Currency;
+using MrX.Currency;
 using UnityEngine;
 
-namespace OctoberStudio
+namespace MrX
 {
     [System.Serializable]
     [UnlockCondition("Purchased")]
+    [UnityEngine.Scripting.APIUpdating.MovedFrom(true, "OctoberStudio", "Assembly-CSharp", "PurchasedCondition")]
     public class PurchasedCondition : StageUnlockCondition
     {
         [SerializeField] protected CurrencyId currency = "gold";

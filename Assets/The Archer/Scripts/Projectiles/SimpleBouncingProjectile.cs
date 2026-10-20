@@ -1,7 +1,7 @@
-using OctoberStudio.Extensions;
+using MrX.Extensions;
 using UnityEngine;
 
-namespace OctoberStudio.Projectile
+namespace MrX.Projectile
 {
     public class SimpleBouncingProjectile : SimpleProjectile
     {

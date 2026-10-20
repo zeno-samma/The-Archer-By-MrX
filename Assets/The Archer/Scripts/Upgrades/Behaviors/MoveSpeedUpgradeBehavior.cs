@@ -1,4 +1,4 @@
-namespace OctoberStudio.Upgrades
+namespace MrX.Upgrades
 {
     public class MoveSpeedUpgradeBehavior : UpgradeBehavior
     {
@@ -20,7 +20,7 @@ namespace OctoberStudio.Upgrades
 
         public override void Clear()
         {
-            StageController.Player.Stats.MovementSpeedStat.AddMultiplier(moveSpeedMultiplier);
+            StageController.Player.Stats.MovementSpeedStat.RemoveMultiplier(moveSpeedMultiplier);
             base.Clear();
         }
     }

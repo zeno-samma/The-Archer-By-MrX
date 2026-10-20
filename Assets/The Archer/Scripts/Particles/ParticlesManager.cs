@@ -1,8 +1,8 @@
-using OctoberStudio.Pool;
+using MrX.Pool;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace OctoberStudio.Particles
+namespace MrX.Particles
 {
     public class ParticlesManager : MonoBehaviour
     {

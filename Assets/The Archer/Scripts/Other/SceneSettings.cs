@@ -1,8 +1,8 @@
 using UnityEngine;
 
-namespace OctoberStudio
+namespace MrX
 {
-    [CreateAssetMenu(fileName = "SceneSettings", menuName = "October/Scene Settings", order = 1)]
+    [CreateAssetMenu(fileName = "SceneSettings", menuName = "MrX Studio/Scene Settings", order = 1)]
     public class SceneSettings : ScriptableObject
     {
         [SerializeField] protected SceneWrapper mainMenuScene;
@@ -20,7 +20,7 @@ namespace OctoberStudio
             UnityEditor.EditorUtility.SetDirty(this); // Mark asset dirty for saving
 
             // Dynamically call editor-only method
-            var editorType = System.Type.GetType("OctoberStudio.DefaultSceneLoader, Assembly-CSharp-Editor");
+            var editorType = System.Type.GetType("MrX.DefaultSceneLoader, Assembly-CSharp-Editor");
             if (editorType != null)
             {
                 var method = editorType.GetMethod("OnSceneSettingsChanged", System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.NonPublic);

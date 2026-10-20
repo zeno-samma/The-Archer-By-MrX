@@ -1,4 +1,4 @@
-namespace OctoberStudio.Projectile
+namespace MrX.Projectile
 {
     public enum ProjectileType
     {

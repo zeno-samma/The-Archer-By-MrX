@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace OctoberStudio.Currency
+namespace MrX.Currency
 {
     /// <summary>
     /// Interface for extending the asset with a custom currency system.

@@ -1,7 +1,7 @@
-﻿using OctoberStudio.Easing;
+﻿using MrX.Easing;
 using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace MrX.Abilities
 {
     public class SpiritLordAbilityBehavior : AbilityBehavior<SpiritLordAbilityData, SpiritLordAbilityLevel>
     {

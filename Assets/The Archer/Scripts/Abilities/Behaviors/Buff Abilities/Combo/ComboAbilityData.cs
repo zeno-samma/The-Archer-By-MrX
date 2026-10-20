@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace MrX.Abilities
 {
-    [CreateAssetMenu(fileName = "Combo Ability Data", menuName = "October/Abilities/Buff Abilities/Combo")]
+    [CreateAssetMenu(fileName = "Combo Ability Data", menuName = "MrX Studio/Abilities/Buff Abilities/Combo")]
     public class ComboAbilityData : GenericAbilityData<ComboAbilityLevel>
     {
         protected virtual void Awake()

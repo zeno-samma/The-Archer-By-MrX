@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-namespace OctoberStudio.StageCreator
+namespace MrX.StageCreator
 {
     public class RoomPrefabsOverridesIndicator
     {

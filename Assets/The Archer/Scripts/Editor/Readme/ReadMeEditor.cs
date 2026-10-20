@@ -1,8 +1,8 @@
-using OctoberStudio.PipelineSwitcher;
+using MrX.PipelineSwitcher;
 using UnityEditor;
 using UnityEngine;
 
-namespace OctoberStudio.ReadMe
+namespace MrX.ReadMe
 {
     [CustomEditor(typeof(ReadMe))]
     public class ReadMeEditor : Editor

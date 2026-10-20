@@ -1,10 +1,10 @@
-using OctoberStudio.Save;
+using MrX.Save;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace OctoberStudio.StageCreator
+namespace MrX.StageCreator
 {
     public class RoomPanel
     {
@@ -61,7 +61,7 @@ namespace OctoberStudio.StageCreator
             var tooltip = GUI.enabled ?
                 "Start playmode with and automatically enter selected room" :
                 "Default Scene Loader is disabled. Starting play mode will not load necessary systems and will break the game. \n" +
-                "To enable Default Scene Loader, use 'Tools -> October -> Default Scene Loader Enabled'";
+                "To enable Default Scene Loader, use 'Tools -> MrX Studio -> Default Scene Loader Enabled'";
 
             if (GUILayout.Button(new GUIContent("Test Room", tooltip), GUILayout.Width(172)))
             {

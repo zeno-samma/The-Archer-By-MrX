@@ -1,8 +1,8 @@
-using OctoberStudio.Enemy;
+using MrX.Enemy;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace OctoberStudio
+namespace MrX
 {
     public class TargetRingBehavior : MonoBehaviour
     {

@@ -1,11 +1,11 @@
-using OctoberStudio.Audio;
+using MrX.Audio;
 
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
 using UnityEngine;
 
-namespace OctoberStudio
+namespace MrX
 {
     [System.Serializable]
     public class RoomData

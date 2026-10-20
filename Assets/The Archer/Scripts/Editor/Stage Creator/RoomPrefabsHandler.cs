@@ -1,4 +1,4 @@
-using OctoberStudio.Enemy;
+using MrX.Enemy;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEditor;
@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
-namespace OctoberStudio.StageCreator
+namespace MrX.StageCreator
 {
     public class RoomPrefabsHandler
     {

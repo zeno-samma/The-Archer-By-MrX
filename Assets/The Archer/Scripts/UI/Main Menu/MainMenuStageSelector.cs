@@ -1,13 +1,14 @@
 using TMPro;
 using UnityEngine;
 
-namespace OctoberStudio.UI
+namespace MrX.UI
 {
     public class MainMenuStageSelector : HorizontalSelector<MainMenuStageIcon>
     {
         [Space]
         [SerializeField] protected TMP_Text stageNameText;
         [SerializeField] protected TMP_Text stageNumberText;
+        [SerializeField] private GameObject editorStagePreview;
 
         protected MainMenuStagesPageBehavior Page { get; set; }
 
@@ -18,6 +19,7 @@ namespace OctoberStudio.UI
 
         public void Init(MainMenuStagesPageBehavior page)
         {
+            if (editorStagePreview) editorStagePreview.SetActive(false);
             Page = page;
 
             stageDatabase = page.StageDatabase;
@@ -81,9 +83,9 @@ namespace OctoberStudio.UI
 
         protected virtual void OnDestroy()
         {
-            UnsubscribeFromInputEvents();
+            if (GameController.InputManager != null) UnsubscribeFromInputEvents();
 
-            stageSave.onSelectedStageChanged -= InitStage;
+            if (stageSave != null) stageSave.onSelectedStageChanged -= InitStage;
         }
     }
 }

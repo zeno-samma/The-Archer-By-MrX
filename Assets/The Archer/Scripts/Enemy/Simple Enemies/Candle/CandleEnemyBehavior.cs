@@ -1,11 +1,11 @@
-﻿using OctoberStudio.Audio;
-using OctoberStudio.Easing;
-using OctoberStudio.Extensions;
-using OctoberStudio.StatusEffects;
+﻿using MrX.Audio;
+using MrX.Easing;
+using MrX.Extensions;
+using MrX.StatusEffects;
 using System.Collections;
 using UnityEngine;
 
-namespace OctoberStudio.Enemy
+namespace MrX.Enemy
 {
     public class CandleEnemyBehavior : EnemyBehavior
     {

@@ -1,4 +1,4 @@
-﻿namespace OctoberStudio.Abilities
+﻿namespace MrX.Abilities
 {
     public class LegendaryHealAbilityBehavior : AbilityBehavior<LegendaryHealAbilityData, LegendaryHealAbilityLevel>
     {

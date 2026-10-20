@@ -1,8 +1,8 @@
-using OctoberStudio.UI.Armory;
+using MrX.UI.Armory;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace OctoberStudio.UI
+namespace MrX.UI
 {
     public class MainMenuScreenBehavior : MonoBehaviour
     {
@@ -22,6 +22,7 @@ namespace OctoberStudio.UI
 
         public MainMenuPageType CurrentPageType => CurrentPage.PageType;
         public MainMenuPageBehavior CurrentPage { get; protected set; }
+        public bool IsDockEnabled => dockBehavior.IsDockEnabled;
 
         public ExpandedUpgradePopup ExpandedUpgradePopup => expandedUpgradePopup;
         public ExpandedHeroPopup ExpandedHeroPopup => expandedHeroPopup;
@@ -33,15 +34,34 @@ namespace OctoberStudio.UI
 
         protected virtual void Awake()
         {
-            CurrentPage = pages.Find(page => page.PageType == defaultPageType);
+            CurrentPage = pages.Find(page => page.PageType == defaultPageType)
+                ?? pages.Find(page => page.PageType == MainMenuPageType.Stages)
+                ?? pages[0];
 
             GameController.RegisterMainMenuScreenBehavior(this);
+            foreach (var page in pages) page.PrepareInitialState(page == CurrentPage);
+        }
+
+        public virtual bool OpenPage(MainMenuPageType pageType)
+        {
+            if (!pages.Exists(page => page.PageType == pageType)) return false;
+            return dockBehavior.TrySelectPage(pageType);
+        }
+
+        public virtual bool OpenHeroUpgrades()
+        {
+            if (!OpenPage(MainMenuPageType.Armory)) return false;
+            var armory = CurrentPage as MainMenuArmoryPageBehavior;
+            if (armory != null) armory.OpenHeroesTab();
+            return armory != null;
         }
 
         protected virtual void Start()
         {
-            dockBehavior.Init(defaultPageType);
+            dockBehavior.Init(CurrentPage.PageType);
             dockBehavior.onPageSelected += OnPageSelected;
+            if (CurrentPage.PageType != defaultPageType)
+                Easing.EasingManager.DoNextFrame(() => OpenPage(defaultPageType));
         }
 
         protected virtual void OnPageSelected(MainMenuPageType pageType)
@@ -54,6 +74,7 @@ namespace OctoberStudio.UI
             var currentIndex = dockBehavior.GetDockItemIndex(CurrentPageType);
             var targetIndex = dockBehavior.GetDockItemIndex(pageType);
             var targetPage = pages.Find(page => page.PageType == pageType);
+            if (targetPage == null || targetIndex < 0) return;
 
             if (targetIndex > currentIndex)
             {

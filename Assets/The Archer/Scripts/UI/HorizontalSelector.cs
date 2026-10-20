@@ -1,10 +1,10 @@
-using OctoberStudio.Pool;
+using MrX.Pool;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-namespace OctoberStudio.UI
+namespace MrX.UI
 {
     public abstract class HorizontalSelector<T> : MonoBehaviour where T : HorizontalSelectable
     {

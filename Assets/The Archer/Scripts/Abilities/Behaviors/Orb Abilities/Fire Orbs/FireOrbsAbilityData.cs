@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace MrX.Abilities
 {
-    [CreateAssetMenu(fileName = "Fire Orbs Ability Data", menuName = "October/Abilities/Orb Abilities/Fire Orbs")]
+    [CreateAssetMenu(fileName = "Fire Orbs Ability Data", menuName = "MrX Studio/Abilities/Orb Abilities/Fire Orbs")]
     public class FireOrbsAbilityData : GenericAbilityData<FireOrbsAbilityLevel>
     {
         protected virtual void Awake()

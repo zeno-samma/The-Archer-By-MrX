@@ -2,7 +2,7 @@ using System.Linq;
 using UnityEditor;
 using UnityEditor.IMGUI.Controls;
 
-namespace OctoberStudio
+namespace MrX
 {
     public class EnumDropdown : AdvancedDropdown
     {

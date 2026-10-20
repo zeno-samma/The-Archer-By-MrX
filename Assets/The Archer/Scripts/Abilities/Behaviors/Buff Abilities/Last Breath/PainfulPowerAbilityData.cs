@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace MrX.Abilities
 {
-    [CreateAssetMenu(fileName = "Painfull Power Ability Data", menuName = "October/Abilities/Buff Abilities/Painfull Power")]
+    [CreateAssetMenu(fileName = "Painfull Power Ability Data", menuName = "MrX Studio/Abilities/Buff Abilities/Painfull Power")]
     public class PainfulPowerAbilityData : GenericAbilityData<PainfulPowerAbilityLevel>
     {
         protected virtual void Awake()

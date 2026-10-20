@@ -1,9 +1,9 @@
-using OctoberStudio.Currency;
+using MrX.Currency;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-namespace OctoberStudio.UI
+namespace MrX.UI
 {
     public class CostButtonBehavior : MonoBehaviour
     {

@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace MrX.Abilities
 {
-    [CreateAssetMenu(fileName = "RagePotion Ability Data", menuName = "October/Abilities/Buff Abilities/RagePotion")]
+    [CreateAssetMenu(fileName = "RagePotion Ability Data", menuName = "MrX Studio/Abilities/Buff Abilities/RagePotion")]
     public class RageStarAbilityData : GenericAbilityData<RageStarAbilityLevel>
     {
         protected virtual void Awake()

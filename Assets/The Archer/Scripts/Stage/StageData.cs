@@ -1,9 +1,9 @@
-using OctoberStudio.Audio;
-using OctoberStudio.Currency;
+using MrX.Audio;
+using MrX.Currency;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace OctoberStudio
+namespace MrX
 {
     public class StageData : ScriptableObject
     {
@@ -18,6 +18,10 @@ namespace OctoberStudio
 
         [SerializeField] protected string stageName;
         public string StageName => stageName;
+
+        [Header("Run Energy")]
+        [SerializeField, Min(0)] protected int energyCost = 5;
+        public int EnergyCost => Mathf.Max(0, energyCost);
 
         [SerializeField] protected bool showStageObjective = true;
         public bool ShowStageObjective => showStageObjective;

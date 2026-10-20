@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace MrX.Abilities
 {
-    [CreateAssetMenu(fileName = "Protector Ability Data", menuName = "October/Abilities/Defensive Abilities/Protector")]
+    [CreateAssetMenu(fileName = "Protector Ability Data", menuName = "MrX Studio/Abilities/Defensive Abilities/Protector")]
     public class ProtectorAbilityData : GenericAbilityData<ProtectorAbilityLevel>
     {
         protected virtual void Awake()

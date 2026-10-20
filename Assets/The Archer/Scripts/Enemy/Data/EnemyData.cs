@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace OctoberStudio.Enemy
+namespace MrX.Enemy
 {
     [System.Serializable]
     public class EnemyData
@@ -17,6 +17,8 @@ namespace OctoberStudio.Enemy
 
         [SerializeField] bool isBoss;
         public bool IsBoss => isBoss;
+        [SerializeField] protected Rewards.BossChestRewards bossChestRewards;
+        public Rewards.BossChestRewards BossChestRewards => bossChestRewards;
 
         [SerializeField] protected List<EnemyDropData> drops;
         public List<EnemyDropData> Drops => drops;

@@ -1,9 +1,9 @@
-using OctoberStudio.Upgrades;
+using MrX.Upgrades;
 using System.Diagnostics.CodeAnalysis;
 using UnityEditor;
 using UnityEngine;
 
-namespace OctoberStudio.Armory
+namespace MrX.Armory
 {
     public class VersionAssetProcessor : AssetModificationProcessor
     {

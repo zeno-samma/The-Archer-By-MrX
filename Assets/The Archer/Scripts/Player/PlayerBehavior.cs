@@ -1,15 +1,15 @@
-using OctoberStudio.Armory;
-using OctoberStudio.Easing;
-using OctoberStudio.Enemy;
-using OctoberStudio.Extensions;
-using OctoberStudio.Player;
-using OctoberStudio.StatusEffects;
-using OctoberStudio.Weapon;
+using MrX.Armory;
+using MrX.Easing;
+using MrX.Enemy;
+using MrX.Extensions;
+using MrX.Player;
+using MrX.StatusEffects;
+using MrX.Weapon;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace OctoberStudio
+namespace MrX
 {
     public class PlayerBehavior : MonoBehaviour, IProjectileTarget
     {

@@ -1,0 +1,1094 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 103b54e5a1e61a345b4385bdc908abbe, type: 3}
+  m_Name: Menu Translations
+  m_EditorClassIdentifier: Assembly-CSharp::MrX.Localization.MenuTranslations
+  latinFont: {fileID: 11400000, guid: ab631cdd622aa3f4aa8ee7e223d7d076, type: 2}
+  entries:
+  - english: START
+    vietnamese: "B\u1EAET \u0110\u1EA6U"
+    spanish: JUGAR
+    portuguese: JOGAR
+    french: JOUER
+  - english: Possible Rewards
+    vietnamese: "Ph\u1EA7n th\u01B0\u1EDFng c\xF3 th\u1EC3 nh\u1EADn"
+    spanish: Recompensas posibles
+    portuguese: "Recompensas poss\xEDveis"
+    french: "R\xE9compenses possibles"
+  - english: Stage {0}
+    vietnamese: "M\xE0n {0}"
+    spanish: Fase {0}
+    portuguese: Fase {0}
+    french: Niveau {0}
+  - english: 'Attempts Made: {0}'
+    vietnamese: "S\u1ED1 l\u1EA7n th\u1EED: {0}"
+    spanish: 'Intentos: {0}'
+    portuguese: 'Tentativas: {0}'
+    french: 'Tentatives : {0}'
+  - english: Attempts Made {0}
+    vietnamese: "S\u1ED1 l\u1EA7n th\u1EED {0}"
+    spanish: Intentos {0}
+    portuguese: Tentativas {0}
+    french: Tentatives {0}
+  - english: LUCKY WHEEL
+    vietnamese: "V\xD2NG QUAY MAY M\u1EAEN"
+    spanish: RULETA DE LA SUERTE
+    portuguese: RODA DA SORTE
+    french: ROUE DE LA CHANCE
+  - english: GEM CHEST
+    vietnamese: "R\u01AF\u01A0NG \u0110\xC1 QU\xDD"
+    spanish: COFRE DE GEMAS
+    portuguese: "BA\xDA DE GEMAS"
+    french: COFFRE DE GEMMES
+  - english: LANGUAGE
+    vietnamese: "NG\xD4N NG\u1EEE"
+    spanish: IDIOMA
+    portuguese: IDIOMA
+    french: LANGUE
+  - english: "LANGUAGE \xB7 {0}"
+    vietnamese: "NG\xD4N NG\u1EEE \xB7 {0}"
+    spanish: "IDIOMA \xB7 {0}"
+    portuguese: "IDIOMA \xB7 {0}"
+    french: "LANGUE \xB7 {0}"
+  - english: HOME
+    vietnamese: "TRANG CH\u1EE6"
+    spanish: INICIO
+    portuguese: "IN\xCDCIO"
+    french: ACCUEIL
+  - english: JOURNEY
+    vietnamese: "H\xC0NH TR\xCCNH"
+    spanish: AVENTURA
+    portuguese: JORNADA
+    french: AVENTURE
+  - english: ARMORY
+    vietnamese: "TRANG B\u1ECA"
+    spanish: ARSENAL
+    portuguese: ARSENAL
+    french: ARSENAL
+  - english: HEROES
+    vietnamese: "ANH H\xD9NG"
+    spanish: "H\xC9ROES"
+    portuguese: "HER\xD3IS"
+    french: "H\xC9ROS"
+  - english: STAGE
+    vietnamese: "M\xC0N CH\u01A0I"
+    spanish: FASES
+    portuguese: FASES
+    french: NIVEAUX
+  - english: UPGRADES
+    vietnamese: "N\xC2NG C\u1EA4P"
+    spanish: MEJORAS
+    portuguese: MELHORIAS
+    french: "AM\xC9LIORATIONS"
+  - english: UPGRADE
+    vietnamese: "N\xC2NG C\u1EA4P"
+    spanish: MEJORAR
+    portuguese: MELHORAR
+    french: "AM\xC9LIORER"
+  - english: FORGE
+    vietnamese: "R\xC8N \u0110\xDAC"
+    spanish: FORJA
+    portuguese: FORJA
+    french: FORGE
+  - english: QUESTS
+    vietnamese: "NHI\u1EC6M V\u1EE4"
+    spanish: MISIONES
+    portuguese: "MISS\xD5ES"
+    french: "QU\xCATES"
+  - english: ACHIEVEMENTS
+    vietnamese: "TH\xC0NH T\u1EF0U"
+    spanish: LOGROS
+    portuguese: CONQUISTAS
+    french: "SUCC\xC8S"
+  - english: DAILY QUESTS
+    vietnamese: "NHI\u1EC6M V\u1EE4 H\u1EB0NG NG\xC0Y"
+    spanish: MISIONES DIARIAS
+    portuguese: "MISS\xD5ES DI\xC1RIAS"
+    french: "QU\xCATES QUOTIDIENNES"
+  - english: Gold
+    vietnamese: "V\xE0ng"
+    spanish: Oro
+    portuguese: Ouro
+    french: Or
+  - english: Gems
+    vietnamese: "\u0110\xE1 qu\xFD"
+    spanish: Gemas
+    portuguese: Gemas
+    french: Gemmes
+  - english: Iron
+    vietnamese: "S\u1EAFt"
+    spanish: Hierro
+    portuguese: Ferro
+    french: Fer
+  - english: Wood
+    vietnamese: "G\u1ED7"
+    spanish: Madera
+    portuguese: Madeira
+    french: Bois
+  - english: Leather
+    vietnamese: Da
+    spanish: Cuero
+    portuguese: Couro
+    french: Cuir
+  - english: CONTINUE
+    vietnamese: "TI\u1EBEP T\u1EE4C"
+    spanish: CONTINUAR
+    portuguese: CONTINUAR
+    french: CONTINUER
+  - english: REWARD RECEIVED
+    vietnamese: "\u0110\xC3 NH\u1EACN TH\u01AF\u1EDENG"
+    spanish: RECOMPENSA RECIBIDA
+    portuguese: RECOMPENSA RECEBIDA
+    french: "R\xC9COMPENSE RE\xC7UE"
+  - english: Reward
+    vietnamese: "Ph\u1EA7n th\u01B0\u1EDFng"
+    spanish: Recompensa
+    portuguese: Recompensa
+    french: "R\xE9compense"
+  - english: Not enough gems.
+    vietnamese: "Kh\xF4ng \u0111\u1EE7 \u0111\xE1 qu\xFD."
+    spanish: No hay gemas suficientes.
+    portuguese: Gemas insuficientes.
+    french: Gemmes insuffisantes.
+  - english: '{0} GEM
+
+      SPIN'
+    vietnamese: "{0} \u0110\xC1 QU\xDD\nQUAY"
+    spanish: '{0} GEMAS
+
+      GIRAR'
+    portuguese: '{0} GEMAS
+
+      GIRAR'
+    french: '{0} GEMMES
+
+      TOURNER'
+  - english: '{0} GEM
+
+      OPEN CHEST'
+    vietnamese: "{0} \u0110\xC1 QU\xDD\nM\u1EDE R\u01AF\u01A0NG"
+    spanish: '{0} GEMAS
+
+      ABRIR COFRE'
+    portuguese: "{0} GEMAS\nABRIR BA\xDA"
+    french: '{0} GEMMES
+
+      OUVRIR'
+  - english: One reward per purchase. Chances shown on the right.
+    vietnamese: "M\u1ED7i l\u01B0\u1EE3t nh\u1EADn m\u1ED9t ph\u1EA7n th\u01B0\u1EDFng. T\u1EC9 l\u1EC7 \u1EDF b\xEAn ph\u1EA3i."
+    spanish: Una recompensa por compra. Probabilidades a la derecha.
+    portuguese: "Uma recompensa por compra. Chances \xE0 direita."
+    french: "Une r\xE9compense par achat. Chances \xE0 droite."
+  - english: Revealing your reward...
+    vietnamese: "\u0110ang m\u1EDF ph\u1EA7n th\u01B0\u1EDFng..."
+    spanish: Revelando recompensa...
+    portuguese: Revelando recompensa...
+    french: "R\xE9v\xE9lation en cours..."
+  - english: Secret Chambers
+    vietnamese: "M\u1EADt th\u1EA5t"
+    spanish: "C\xE1maras secretas"
+    portuguese: "C\xE2maras secretas"
+    french: "Chambres secr\xE8tes"
+  - english: Ancient Temple
+    vietnamese: "\u0110\u1EC1n c\u1ED5"
+    spanish: Templo antiguo
+    portuguese: Templo antigo
+    french: Temple antique
+  - english: Secrets Pyramid
+    vietnamese: "Kim t\u1EF1 th\xE1p b\xED \u1EA9n"
+    spanish: "Pir\xE1mide secreta"
+    portuguese: "Pir\xE2mide secreta"
+    french: "Pyramide secr\xE8te"
+  - english: Forgotten Tombs
+    vietnamese: "L\u0103ng m\u1ED9 l\xE3ng qu\xEAn"
+    spanish: Tumbas olvidadas
+    portuguese: "T\xFAmulos esquecidos"
+    french: "Tombeaux oubli\xE9s"
+  - english: Ranger  Lv.{0}
+    vietnamese: "Cung th\u1EE7  C\u1EA5p {0}"
+    spanish: Explorador  Nv.{0}
+    portuguese: Patrulheiro  Nv.{0}
+    french: "R\xF4deur  Niv.{0}"
+  - english: STATS
+    vietnamese: "CH\u1EC8 S\u1ED0"
+    spanish: "ESTAD\xCDSTICAS"
+    portuguese: ATRIBUTOS
+    french: STATISTIQUES
+  - english: INVENTORY
+    vietnamese: "T\xDAI \u0110\u1ED2"
+    spanish: INVENTARIO
+    portuguese: "INVENT\xC1RIO"
+    french: INVENTAIRE
+  - english: DETAILS  >
+    vietnamese: "CHI TI\u1EBET  >"
+    spanish: DETALLES  >
+    portuguese: DETALHES  >
+    french: "D\xC9TAILS  >"
+  - english: ALL
+    vietnamese: "T\u1EA4T C\u1EA2"
+    spanish: TODO
+    portuguese: TODOS
+    french: TOUT
+  - english: SWITCH HERO
+    vietnamese: "\u0110\u1ED4I ANH H\xD9NG"
+    spanish: "CAMBIAR H\xC9ROE"
+    portuguese: "TROCAR HER\xD3I"
+    french: "CHANGER DE H\xC9ROS"
+  - english: EQUIPMENT FORGE
+    vietnamese: "R\xC8N TRANG B\u1ECA"
+    spanish: FORJA DE EQUIPO
+    portuguese: FORJA DE EQUIPAMENTO
+    french: "FORGE D'\xC9QUIPEMENT"
+  - english: MATERIALS
+    vietnamese: "NGUY\xCAN LI\u1EC6U"
+    spanish: MATERIALES
+    portuguese: MATERIAIS
+    french: "MAT\xC9RIAUX"
+  - english: CLAIM
+    vietnamese: "NH\u1EACN"
+    spanish: RECLAMAR
+    portuguese: RESGATAR
+    french: "R\xC9CLAMER"
+  - english: CLAIMED
+    vietnamese: "\u0110\xC3 NH\u1EACN"
+    spanish: RECIBIDO
+    portuguese: RECEBIDO
+    french: "RE\xC7U"
+  - english: GO
+    vietnamese: "\u0110I \u0110\u1EBEN"
+    spanish: IR
+    portuguese: IR
+    french: ALLER
+  - english: OWNED
+    vietnamese: "\u0110\xC3 S\u1EDE H\u1EEEU"
+    spanish: EN PROPIEDAD
+    portuguese: ADQUIRIDO
+    french: "POSS\xC9D\xC9"
+  - english: ENERGY
+    vietnamese: "N\u0102NG L\u01AF\u1EE2NG"
+    spanish: "ENERG\xCDA"
+    portuguese: ENERGIA
+    french: "\xC9NERGIE"
+  - english: FULL
+    vietnamese: "\u0110\xC3 \u0110\u1EA6Y"
+    spanish: LLENA
+    portuguese: CHEIA
+    french: PLEINE
+  - english: RECOVERS IN {0}
+    vietnamese: "H\u1ED2I SAU {0}"
+    spanish: RECARGA EN {0}
+    portuguese: RECARGA EM {0}
+    french: RECHARGE DANS {0}
+  - english: 'RUN COST: {0} ENERGY'
+    vietnamese: "V\xC0O M\xC0N: {0} N\u0102NG L\u01AF\u1EE2NG"
+    spanish: "COSTE: {0} ENERG\xCDA"
+    portuguese: 'CUSTO: {0} ENERGIA'
+    french: "CO\xDBT : {0} \xC9NERGIE"
+  - english: BUY ENERGY
+    vietnamese: "MUA N\u0102NG L\u01AF\u1EE2NG"
+    spanish: "COMPRAR ENERG\xCDA"
+    portuguese: COMPRAR ENERGIA
+    french: "ACHETER DE L'\xC9NERGIE"
+  - english: BUY GOLD
+    vietnamese: "MUA V\xC0NG"
+    spanish: COMPRAR ORO
+    portuguese: COMPRAR OURO
+    french: ACHETER DE L'OR
+  - english: +{0} ENERGY
+    vietnamese: "+{0} N\u0102NG L\u01AF\u1EE2NG"
+    spanish: "+{0} ENERG\xCDA"
+    portuguese: +{0} ENERGIA
+    french: "+{0} \xC9NERGIE"
+  - english: +{0} GOLD
+    vietnamese: "+{0} V\xC0NG"
+    spanish: +{0} ORO
+    portuguese: +{0} OURO
+    french: +{0} OR
+  - english: '{0} GEMS'
+    vietnamese: "{0} \u0110\xC1 QU\xDD"
+    spanish: '{0} GEMAS'
+    portuguese: '{0} GEMAS'
+    french: '{0} GEMMES'
+  - english: BUY
+    vietnamese: MUA
+    spanish: COMPRAR
+    portuguese: COMPRAR
+    french: ACHETER
+  - english: Purchase complete!
+    vietnamese: "Mua th\xE0nh c\xF4ng!"
+    spanish: "\xA1Compra completada!"
+    portuguese: "Compra conclu\xEDda!"
+    french: "Achat effectu\xE9 !"
+  - english: Purchase unavailable.
+    vietnamese: "Kh\xF4ng th\u1EC3 mua l\xFAc n\xE0y."
+    spanish: Compra no disponible.
+    portuguese: "Compra indispon\xEDvel."
+    french: Achat indisponible.
+  - english: Not enough energy space for this pack.
+    vietnamese: "Kh\xF4ng \u0111\u1EE7 ch\u1ED7 ch\u1EE9a cho g\xF3i n\u0103ng l\u01B0\u1EE3ng n\xE0y."
+    spanish: "No hay espacio para este paquete de energ\xEDa."
+    portuguese: "Sem espa\xE7o para este pacote de energia."
+    french: "Capacit\xE9 insuffisante pour ce lot d'\xE9nergie."
+  - english: Not enough energy. Wait for recovery or buy more with gems.
+    vietnamese: "Kh\xF4ng \u0111\u1EE7 n\u0103ng l\u01B0\u1EE3ng. Ch\u1EDD h\u1ED3i ph\u1EE5c ho\u1EB7c mua th\xEAm b\u1EB1ng \u0111\xE1 qu\xFD."
+    spanish: "Energ\xEDa insuficiente. Espera o compra m\xE1s con gemas."
+    portuguese: Energia insuficiente. Aguarde ou compre mais com gemas.
+    french: "\xC9nergie insuffisante. Attendez ou achetez-en avec des gemmes."
+  - english: PERMANENT UPGRADES
+    vietnamese: "N\xC2NG C\u1EA4P V\u0128NH VI\u1EC4N"
+    spanish: MEJORAS PERMANENTES
+    portuguese: MELHORIAS PERMANENTES
+    french: "AM\xC9LIORATIONS PERMANENTES"
+  - english: PLAYER STATS
+    vietnamese: "CH\u1EC8 S\u1ED0 NH\xC2N V\u1EACT"
+    spanish: "ESTAD\xCDSTICAS DEL H\xC9ROE"
+    portuguese: "ATRIBUTOS DO HER\xD3I"
+    french: "STATISTIQUES DU H\xC9ROS"
+  - english: ATK
+    vietnamese: "C\xD4NG"
+    spanish: ATQ
+    portuguese: ATQ
+    french: ATQ
+  - english: HP
+    vietnamese: "M\xC1U"
+    spanish: VIDA
+    portuguese: VIDA
+    french: PV
+  - english: CRIT
+    vietnamese: "CH\xCD M\u1EA0NG"
+    spanish: "CR\xCDTICO"
+    portuguese: "CR\xCDTICO"
+    french: CRITIQUE
+  - english: SPEED
+    vietnamese: "T\u1ED0C \u0110\u1ED8"
+    spanish: VELOCIDAD
+    portuguese: VELOCIDADE
+    french: VITESSE
+  - english: ASPD
+    vietnamese: "T\u1ED0C \u0110\xC1NH"
+    spanish: VEL. ATAQUE
+    portuguese: VEL. ATAQUE
+    french: VIT. ATTAQUE
+  - english: CRIT Rate
+    vietnamese: "T\u1EC9 l\u1EC7 ch\xED m\u1EA1ng"
+    spanish: "Prob. cr\xEDtica"
+    portuguese: "Chance cr\xEDtica"
+    french: Taux critique
+  - english: ATK Speed
+    vietnamese: "T\u1ED1c \u0111\xE1nh"
+    spanish: Vel. ataque
+    portuguese: Vel. ataque
+    french: Vitesse d'attaque
+  - english: Move Speed
+    vietnamese: "T\u1ED1c di chuy\u1EC3n"
+    spanish: Vel. movimiento
+    portuguese: Vel. movimento
+    french: "Vitesse de d\xE9placement"
+  - english: HP Recovery
+    vietnamese: "H\u1ED3i m\xE1u"
+    spanish: "Recuperaci\xF3n de vida"
+    portuguese: "Recupera\xE7\xE3o de vida"
+    french: "R\xE9cup\xE9ration de PV"
+  - english: Damage Taken
+    vietnamese: "S\xE1t th\u01B0\u01A1ng nh\u1EADn"
+    spanish: "Da\xF1o recibido"
+    portuguese: Dano recebido
+    french: "D\xE9g\xE2ts subis"
+  - english: Rapid Strikes
+    vietnamese: "\u0110\xF2n \u0111\xE1nh nhanh"
+    spanish: "Golpes r\xE1pidos"
+    portuguese: "Golpes r\xE1pidos"
+    french: Frappes rapides
+  - english: Vitality Boost
+    vietnamese: "T\u0103ng sinh l\u1EF1c"
+    spanish: Vitalidad mejorada
+    portuguese: Vigor extra
+    french: "Vitalit\xE9 accrue"
+  - english: Critical Chance
+    vietnamese: "T\u1EC9 l\u1EC7 ch\xED m\u1EA1ng"
+    spanish: "Probabilidad cr\xEDtica"
+    portuguese: "Chance cr\xEDtica"
+    french: Chance critique
+  - english: Dodge Chance
+    vietnamese: "T\u1EC9 l\u1EC7 n\xE9 tr\xE1nh"
+    spanish: Probabilidad de esquiva
+    portuguese: Chance de esquiva
+    french: Chance d'esquive
+  - english: Wave Recovery
+    vietnamese: "H\u1ED3i ph\u1EE5c sau \u0111\u1EE3t"
+    spanish: "Recuperaci\xF3n por oleada"
+    portuguese: "Recupera\xE7\xE3o por onda"
+    french: "R\xE9cup\xE9ration par vague"
+  - english: Agility Boost
+    vietnamese: "T\u0103ng nhanh nh\u1EB9n"
+    spanish: Agilidad mejorada
+    portuguese: Agilidade extra
+    french: "Agilit\xE9 accrue"
+  - english: Power Surge
+    vietnamese: "B\xF9ng n\u1ED5 s\u1EE9c m\u1EA1nh"
+    spanish: Aumento de poder
+    portuguese: Surto de poder
+    french: "Surcro\xEEt de puissance"
+  - english: Revival
+    vietnamese: "H\u1ED3i sinh"
+    spanish: "Resurrecci\xF3n"
+    portuguese: "Ressurrei\xE7\xE3o"
+    french: "R\xE9surrection"
+  - english: Fortified Armor
+    vietnamese: "Gi\xE1p ki\xEAn c\u1ED1"
+    spanish: Armadura reforzada
+    portuguese: "Armadura refor\xE7ada"
+    french: "Armure renforc\xE9e"
+  - english: Increases attack speed, letting you strike faster
+    vietnamese: "T\u0103ng t\u1ED1c \u0111\xE1nh, gi\xFAp b\u1EA1n t\u1EA5n c\xF4ng nhanh h\u01A1n"
+    spanish: "Aumenta la velocidad de ataque para golpear m\xE1s r\xE1pido"
+    portuguese: "Aumenta a velocidade de ataque para golpear mais r\xE1pido"
+    french: Augmente la vitesse d'attaque pour frapper plus vite
+  - english: Increases your maximum HP
+    vietnamese: "T\u0103ng m\xE1u t\u1ED1i \u0111a c\u1EE7a b\u1EA1n"
+    spanish: "Aumenta tu vida m\xE1xima"
+    portuguese: "Aumenta sua vida m\xE1xima"
+    french: Augmente vos PV maximaux
+  - english: Increases your chance to deal critical hits
+    vietnamese: "T\u0103ng t\u1EC9 l\u1EC7 g\xE2y \u0111\xF2n ch\xED m\u1EA1ng"
+    spanish: "Aumenta tu probabilidad de golpe cr\xEDtico"
+    portuguese: "Aumenta sua chance de acerto cr\xEDtico"
+    french: Augmente vos chances de coup critique
+  - english: Increases your chance to dodge incoming attacks
+    vietnamese: "T\u0103ng t\u1EC9 l\u1EC7 n\xE9 \u0111\xF2n t\u1EA5n c\xF4ng"
+    spanish: Aumenta tu probabilidad de esquivar ataques
+    portuguese: Aumenta sua chance de desviar de ataques
+    french: Augmente vos chances d'esquiver les attaques
+  - english: Restores a small portion of your max HP at the end of each wave
+    vietnamese: "H\u1ED3i m\u1ED9t ph\u1EA7n m\xE1u t\u1ED1i \u0111a sau m\u1ED7i \u0111\u1EE3t qu\xE1i"
+    spanish: "Recupera parte de tu vida m\xE1xima al terminar cada oleada"
+    portuguese: "Recupera parte da vida m\xE1xima ao fim de cada onda"
+    french: "R\xE9cup\xE8re une partie de vos PV maximaux apr\xE8s chaque vague"
+  - english: Increases your movement speed
+    vietnamese: "T\u0103ng t\u1ED1c \u0111\u1ED9 di chuy\u1EC3n"
+    spanish: Aumenta tu velocidad de movimiento
+    portuguese: Aumenta sua velocidade de movimento
+    french: "Augmente votre vitesse de d\xE9placement"
+  - english: Increases your attack damage
+    vietnamese: "T\u0103ng s\xE1t th\u01B0\u01A1ng t\u1EA5n c\xF4ng"
+    spanish: "Aumenta tu da\xF1o de ataque"
+    portuguese: Aumenta seu dano de ataque
+    french: "Augmente vos d\xE9g\xE2ts d'attaque"
+  - english: Revives you instead of dying
+    vietnamese: "Cho ph\xE9p h\u1ED3i sinh khi b\u1ECB h\u1EA1 g\u1EE5c"
+    spanish: Te permite revivir al morir
+    portuguese: Permite reviver ao morrer
+    french: "Vous permet de ressusciter \xE0 la mort"
+  - english: Reduces incoming damage
+    vietnamese: "Gi\u1EA3m s\xE1t th\u01B0\u01A1ng nh\u1EADn v\xE0o"
+    spanish: "Reduce el da\xF1o recibido"
+    portuguese: Reduz o dano recebido
+    french: "R\xE9duit les d\xE9g\xE2ts subis"
+  - english: Preview includes equipped gear and permanent upgrades.
+    vietnamese: "Xem tr\u01B0\u1EDBc g\u1ED3m trang b\u1ECB \u0111ang m\u1EB7c v\xE0 n\xE2ng c\u1EA5p v\u0129nh vi\u1EC5n."
+    spanish: La vista previa incluye equipo y mejoras permanentes.
+    portuguese: "A pr\xE9via inclui equipamento e melhorias permanentes."
+    french: "L'aper\xE7u inclut l'\xE9quipement port\xE9 et les am\xE9liorations permanentes."
+  - english: Upgrade complete!
+    vietnamese: "N\xE2ng c\u1EA5p th\xE0nh c\xF4ng!"
+    spanish: "\xA1Mejora completada!"
+    portuguese: "Melhoria conclu\xEDda!"
+    french: "Am\xE9lioration effectu\xE9e !"
+  - english: Not enough gold.
+    vietnamese: "Kh\xF4ng \u0111\u1EE7 v\xE0ng."
+    spanish: No tienes suficiente oro.
+    portuguese: Ouro insuficiente.
+    french: Or insuffisant.
+  - english: Upgrade unavailable. Please check the current level.
+    vietnamese: "Kh\xF4ng th\u1EC3 n\xE2ng c\u1EA5p. H\xE3y ki\u1EC3m tra c\u1EA5p hi\u1EC7n t\u1EA1i."
+    spanish: Mejora no disponible. Revisa el nivel actual.
+    portuguese: "Melhoria indispon\xEDvel. Confira o n\xEDvel atual."
+    french: "Am\xE9lioration indisponible. V\xE9rifiez le niveau actuel."
+  - english: MAX LEVEL
+    vietnamese: "C\u1EA4P T\u1ED0I \u0110A"
+    spanish: "NIVEL M\xC1XIMO"
+    portuguese: "N\xCDVEL M\xC1XIMO"
+    french: NIVEAU MAXIMUM
+  - english: MAX
+    vietnamese: "T\u1ED0I \u0110A"
+    spanish: "M\xC1X."
+    portuguese: "M\xC1X."
+    french: MAX.
+  - english: Lv. {0}
+    vietnamese: "C\u1EA5p {0}"
+    spanish: Nv. {0}
+    portuguese: Nv. {0}
+    french: Niv. {0}
+  - english: Lv. {0} MAX
+    vietnamese: "C\u1EA5p {0} T\u1ED0I \u0110A"
+    spanish: "Nv. {0} M\xC1X."
+    portuguese: "Nv. {0} M\xC1X."
+    french: Niv. {0} MAX.
+  - english: Lv. {0} > Lv. {1}
+    vietnamese: "C\u1EA5p {0} > C\u1EA5p {1}"
+    spanish: Nv. {0} > Nv. {1}
+    portuguese: Nv. {0} > Nv. {1}
+    french: Niv. {0} > Niv. {1}
+  - english: '{0} GOLD
+
+      UPGRADE'
+    vietnamese: "{0} V\xC0NG\nN\xC2NG C\u1EA4P"
+    spanish: '{0} ORO
+
+      MEJORAR'
+    portuguese: '{0} OURO
+
+      MELHORAR'
+    french: "{0} OR\nAM\xC9LIORER"
+  - english: YOUR JOURNEY
+    vietnamese: "H\xC0NH TR\xCCNH C\u1EE6A B\u1EA0N"
+    spanish: TU AVENTURA
+    portuguese: SUA JORNADA
+    french: VOTRE AVENTURE
+  - english: OVERALL COMPLETION
+    vietnamese: "TI\u1EBEN \u0110\u1ED8 T\u1ED4NG"
+    spanish: PROGRESO TOTAL
+    portuguese: PROGRESSO TOTAL
+    french: PROGRESSION TOTALE
+  - english: Complete challenges to earn rewards and show your progress!
+    vietnamese: "Ho\xE0n th\xE0nh th\u1EED th\xE1ch \u0111\u1EC3 nh\u1EADn th\u01B0\u1EDFng v\xE0 ghi d\u1EA5u h\xE0nh tr\xECnh!"
+    spanish: "\xA1Completa desaf\xEDos para ganar premios y mostrar tu progreso!"
+    portuguese: "Complete desafios para ganhar pr\xEAmios e mostrar seu progresso!"
+    french: "Relevez des d\xE9fis pour gagner des r\xE9compenses et montrer vos progr\xE8s !"
+  - english: Complete challenges and claim your rewards.
+    vietnamese: "Ho\xE0n th\xE0nh th\u1EED th\xE1ch v\xE0 nh\u1EADn ph\u1EA7n th\u01B0\u1EDFng."
+    spanish: "Completa desaf\xEDos y reclama tus premios."
+    portuguese: "Complete desafios e resgate seus pr\xEAmios."
+    french: "Relevez les d\xE9fis et r\xE9clamez vos r\xE9compenses."
+  - english: Adventure
+    vietnamese: "Phi\xEAu l\u01B0u"
+    spanish: Aventura
+    portuguese: Aventura
+    french: Aventure
+  - english: Battle
+    vietnamese: "Chi\u1EBFn \u0111\u1EA5u"
+    spanish: Batalla
+    portuguese: Batalha
+    french: Combat
+  - english: Collection
+    vietnamese: "S\u01B0u t\u1EADp"
+    spanish: "Colecci\xF3n"
+    portuguese: "Cole\xE7\xE3o"
+    french: Collection
+  - english: Achievement
+    vietnamese: "Th\xE0nh t\u1EF1u"
+    spanish: Logro
+    portuguese: Conquista
+    french: "Succ\xE8s"
+  - english: Complete this challenge.
+    vietnamese: "Ho\xE0n th\xE0nh th\u1EED th\xE1ch n\xE0y."
+    spanish: "Completa este desaf\xEDo."
+    portuguese: Complete este desafio.
+    french: "Relevez ce d\xE9fi."
+  - english: 'Reward received: +{0} GOLD'
+    vietnamese: "\u0110\xE3 nh\u1EADn: +{0} V\xC0NG"
+    spanish: 'Premio recibido: +{0} ORO'
+    portuguese: "Pr\xEAmio recebido: +{0} OURO"
+    french: "R\xE9compense re\xE7ue : +{0} OR"
+  - english: 'Reward received: +{0} GEM'
+    vietnamese: "\u0110\xE3 nh\u1EADn: +{0} \u0110\xC1 QU\xDD"
+    spanish: 'Premio recibido: +{0} GEMA'
+    portuguese: "Pr\xEAmio recebido: +{0} GEMA"
+    french: "R\xE9compense re\xE7ue : +{0} GEMME"
+  - english: This reward has already been claimed.
+    vietnamese: "Ph\u1EA7n th\u01B0\u1EDFng n\xE0y \u0111\xE3 \u0111\u01B0\u1EE3c nh\u1EADn."
+    spanish: Ya has reclamado este premio.
+    portuguese: "Este pr\xEAmio j\xE1 foi resgatado."
+    french: "Cette r\xE9compense a d\xE9j\xE0 \xE9t\xE9 r\xE9clam\xE9e."
+  - english: Reward unavailable. Complete the challenge and check the reward currency.
+    vietnamese: "Ch\u01B0a th\u1EC3 nh\u1EADn. H\xE3y ho\xE0n th\xE0nh th\u1EED th\xE1ch v\xE0 ki\u1EC3m tra ti\u1EC1n th\u01B0\u1EDFng."
+    spanish: "Premio no disponible. Completa el desaf\xEDo y revisa la moneda."
+    portuguese: "Pr\xEAmio indispon\xEDvel. Complete o desafio e confira a moeda."
+    french: "R\xE9compense indisponible. Terminez le d\xE9fi et v\xE9rifiez la monnaie."
+  - english: A New Journey
+    vietnamese: "H\xE0nh tr\xECnh m\u1EDBi"
+    spanish: Un nuevo viaje
+    portuguese: Uma nova jornada
+    french: Un nouveau voyage
+  - english: Explorer
+    vietnamese: "Nh\xE0 th\xE1m hi\u1EC3m"
+    spanish: Explorador
+    portuguese: Explorador
+    french: Explorateur
+  - english: Pathfinder
+    vietnamese: "Ng\u01B0\u1EDDi m\u1EDF l\u1ED1i"
+    spanish: Pionero
+    portuguese: Desbravador
+    french: "\xC9claireur"
+  - english: Adventure Veteran {0}
+    vietnamese: "Nh\xE0 phi\xEAu l\u01B0u k\u1EF3 c\u1EF1u {0}"
+    spanish: Veterano aventurero {0}
+    portuguese: Veterano de aventuras {0}
+    french: "Aventurier v\xE9t\xE9ran {0}"
+  - english: World Explorer {0}
+    vietnamese: "Nh\xE0 th\xE1m hi\u1EC3m th\u1EBF gi\u1EDBi {0}"
+    spanish: Explorador del mundo {0}
+    portuguese: Explorador do mundo {0}
+    french: Explorateur du monde {0}
+  - english: Dungeon Pathfinder {0}
+    vietnamese: "Ng\u01B0\u1EDDi m\u1EDF l\u1ED1i h\u1EA7m ng\u1EE5c {0}"
+    spanish: Pionero de mazmorras {0}
+    portuguese: Desbravador de masmorras {0}
+    french: "\xC9claireur de donjons {0}"
+  - english: First Victory
+    vietnamese: "Chi\u1EBFn th\u1EAFng \u0111\u1EA7u ti\xEAn"
+    spanish: Primera victoria
+    portuguese: "Primeira vit\xF3ria"
+    french: "Premi\xE8re victoire"
+  - english: Boss Challenger
+    vietnamese: "Th\xE1ch \u0111\u1EA5u tr\xF9m"
+    spanish: Desafiante de jefes
+    portuguese: Desafiante de chefes
+    french: "D\xE9fi des boss"
+  - english: Monster Hunter {0}
+    vietnamese: "Th\u1EE3 s\u0103n qu\xE1i {0}"
+    spanish: Cazador de monstruos {0}
+    portuguese: "Ca\xE7ador de monstros {0}"
+    french: Chasseur de monstres {0}
+  - english: Boss Slayer {0}
+    vietnamese: "K\u1EBB di\u1EC7t tr\xF9m {0}"
+    spanish: Verdugo de jefes {0}
+    portuguese: Matador de chefes {0}
+    french: Tueur de boss {0}
+  - english: Finder's Fortune
+    vietnamese: "May m\u1EAFn t\xECm \u0111\u1ED3"
+    spanish: Fortuna del buscador
+    portuguese: Sorte do explorador
+    french: Fortune du chercheur
+  - english: First Collection
+    vietnamese: "B\u1ED9 s\u01B0u t\u1EADp \u0111\u1EA7u ti\xEAn"
+    spanish: "Primera colecci\xF3n"
+    portuguese: "Primeira cole\xE7\xE3o"
+    french: "Premi\xE8re collection"
+  - english: Treasure Hunter
+    vietnamese: "Th\u1EE3 s\u0103n kho b\xE1u"
+    spanish: Cazatesoros
+    portuguese: "Ca\xE7ador de tesouros"
+    french: "Chasseur de tr\xE9sors"
+  - english: Loot Collector {0}
+    vietnamese: "Ng\u01B0\u1EDDi nh\u1EB7t chi\u1EBFn l\u1EE3i ph\u1EA9m {0}"
+    spanish: "Recolector de bot\xEDn {0}"
+    portuguese: "Coletor de esp\xF3lios {0}"
+    french: Collecteur de butin {0}
+  - english: Armory Collector {0}
+    vietnamese: "Nh\xE0 s\u01B0u t\u1EADp trang b\u1ECB {0}"
+    spanish: Coleccionista de equipo {0}
+    portuguese: Colecionador de equipamentos {0}
+    french: "Collectionneur d'\xE9quipement {0}"
+  - english: Treasure Seeker {0}
+    vietnamese: "Ng\u01B0\u1EDDi t\xECm kho b\xE1u {0}"
+    spanish: Buscatesoros {0}
+    portuguese: Buscador de tesouros {0}
+    french: "Chercheur de tr\xE9sors {0}"
+  - english: Growing Stronger
+    vietnamese: "Ng\xE0y c\xE0ng m\u1EA1nh"
+    spanish: "Cada vez m\xE1s fuerte"
+    portuguese: Cada vez mais forte
+    french: Toujours plus fort
+  - english: Better Equipment
+    vietnamese: "Trang b\u1ECB t\u1ED1t h\u01A1n"
+    spanish: Mejor equipo
+    portuguese: Equipamento melhor
+    french: "Meilleur \xE9quipement"
+  - english: Lasting Power
+    vietnamese: "S\u1EE9c m\u1EA1nh b\u1EC1n v\u1EEFng"
+    spanish: Poder duradero
+    portuguese: Poder duradouro
+    french: Puissance durable
+  - english: Hero Training {0}
+    vietnamese: "Hu\u1EA5n luy\u1EC7n anh h\xF9ng {0}"
+    spanish: "Entrenamiento de h\xE9roe {0}"
+    portuguese: "Treino de her\xF3i {0}"
+    french: "Entra\xEEnement du h\xE9ros {0}"
+  - english: Equipment Master {0}
+    vietnamese: "B\u1EADc th\u1EA7y trang b\u1ECB {0}"
+    spanish: Maestro del equipo {0}
+    portuguese: Mestre de equipamentos {0}
+    french: "Ma\xEEtre de l'\xE9quipement {0}"
+  - english: Permanent Power {0}
+    vietnamese: "S\u1EE9c m\u1EA1nh v\u0129nh vi\u1EC5n {0}"
+    spanish: Poder permanente {0}
+    portuguese: Poder permanente {0}
+    french: Puissance permanente {0}
+  - english: Complete {0} stages.
+    vietnamese: "Ho\xE0n th\xE0nh {0} m\xE0n."
+    spanish: Completa {0} fases.
+    portuguese: Conclua {0} fases.
+    french: Terminez {0} niveaux.
+  - english: Complete {0} different stages.
+    vietnamese: "Ho\xE0n th\xE0nh {0} m\xE0n kh\xE1c nhau."
+    spanish: Completa {0} fases diferentes.
+    portuguese: Conclua {0} fases diferentes.
+    french: "Terminez {0} niveaux diff\xE9rents."
+  - english: Complete {0} rooms.
+    vietnamese: "Ho\xE0n th\xE0nh {0} ph\xF2ng."
+    spanish: Completa {0} salas.
+    portuguese: Conclua {0} salas.
+    french: Terminez {0} salles.
+  - english: Defeat {0} monsters.
+    vietnamese: "Ti\xEAu di\u1EC7t {0} qu\xE1i."
+    spanish: Derrota a {0} monstruos.
+    portuguese: Derrote {0} monstros.
+    french: "\xC9liminez {0} monstres."
+  - english: Defeat {0} bosses.
+    vietnamese: "Ti\xEAu di\u1EC7t {0} tr\xF9m."
+    spanish: Derrota a {0} jefes.
+    portuguese: Derrote {0} chefes.
+    french: "\xC9liminez {0} boss."
+  - english: Pick up {0} equipment drops.
+    vietnamese: "Nh\u1EB7t {0} trang b\u1ECB r\u01A1i."
+    spanish: Recoge {0} objetos de equipo.
+    portuguese: Colete {0} equipamentos.
+    french: "Ramassez {0} \xE9quipements."
+  - english: Own {0} different equipment items.
+    vietnamese: "S\u1EDF h\u1EEFu {0} trang b\u1ECB kh\xE1c nhau."
+    spanish: Posee {0} equipos diferentes.
+    portuguese: Possua {0} equipamentos diferentes.
+    french: "Poss\xE9dez {0} \xE9quipements diff\xE9rents."
+  - english: Open {0} stage treasure chests.
+    vietnamese: "M\u1EDF {0} r\u01B0\u01A1ng trong m\xE0n."
+    spanish: Abre {0} cofres de fase.
+    portuguese: "Abra {0} ba\xFAs de fase."
+    french: Ouvrez {0} coffres de niveau.
+  - english: Gain {0} hero levels through upgrades.
+    vietnamese: "N\xE2ng t\u1ED5ng c\u1ED9ng {0} c\u1EA5p anh h\xF9ng."
+    spanish: "Mejora {0} niveles de h\xE9roe."
+    portuguese: "Melhore {0} n\xEDveis de her\xF3i."
+    french: "Am\xE9liorez le h\xE9ros de {0} niveaux."
+  - english: Gain {0} equipment levels.
+    vietnamese: "N\xE2ng t\u1ED5ng c\u1ED9ng {0} c\u1EA5p trang b\u1ECB."
+    spanish: Mejora {0} niveles de equipo.
+    portuguese: "Melhore {0} n\xEDveis de equipamento."
+    french: "Am\xE9liorez l'\xE9quipement de {0} niveaux."
+  - english: Purchase {0} permanent upgrade levels.
+    vietnamese: "Mua {0} c\u1EA5p n\xE2ng c\u1EA5p v\u0129nh vi\u1EC5n."
+    spanish: Compra {0} niveles de mejoras permanentes.
+    portuguese: "Compre {0} n\xEDveis de melhorias permanentes."
+    french: "Achetez {0} niveaux d'am\xE9liorations permanentes."
+  - english: CRAFTING RESULT
+    vietnamese: "K\u1EBET QU\u1EA2 R\xC8N"
+    spanish: RESULTADO DE FORJA
+    portuguese: RESULTADO DA FORJA
+    french: "R\xC9SULTAT DE FORGE"
+  - english: Equipment
+    vietnamese: "Trang b\u1ECB"
+    spanish: Equipo
+    portuguese: Equipamento
+    french: "\xC9quipement"
+  - english: Equipment level +1
+    vietnamese: "Trang b\u1ECB c\u1EA5p +1"
+    spanish: Equipo nivel +1
+    portuguese: "Equipamento n\xEDvel +1"
+    french: "\xC9quipement niveau +1"
+  - english: EQUIPMENT RECIPES
+    vietnamese: "C\xD4NG TH\u1EE8C TRANG B\u1ECA"
+    spanish: RECETAS DE EQUIPO
+    portuguese: RECEITAS DE EQUIPAMENTO
+    french: "RECETTES D'\xC9QUIPEMENT"
+  - english: '{0} / {1} EQUIPMENT RECIPES'
+    vietnamese: "{0} / {1} C\xD4NG TH\u1EE8C"
+    spanish: '{0} / {1} RECETAS'
+    portuguese: '{0} / {1} RECEITAS'
+    french: '{0} / {1} RECETTES'
+  - english: Collect fragments and materials to craft new equipment.
+    vietnamese: "Thu th\u1EADp m\u1EA3nh gh\xE9p v\xE0 nguy\xEAn li\u1EC7u \u0111\u1EC3 r\xE8n trang b\u1ECB m\u1EDBi."
+    spanish: "Re\xFAne fragmentos y materiales para forjar equipo nuevo."
+    portuguese: "Re\xFAna fragmentos e materiais para forjar novos equipamentos."
+    french: "Rassemblez fragments et mat\xE9riaux pour forger de l'\xE9quipement."
+  - english: Each equipment recipe uses its own fragments.
+    vietnamese: "M\u1ED7i trang b\u1ECB s\u1EED d\u1EE5ng m\u1EA3nh gh\xE9p ri\xEAng."
+    spanish: Cada receta usa sus propios fragmentos.
+    portuguese: "Cada receita usa seus pr\xF3prios fragmentos."
+    french: Chaque recette utilise ses propres fragments.
+  - english: No crafting recipes
+    vietnamese: "Kh\xF4ng c\xF3 c\xF4ng th\u1EE9c r\xE8n"
+    spanish: No hay recetas
+    portuguese: Sem receitas de forja
+    french: Aucune recette de forge
+  - english: OWNED - Upgrade in Stage / Armory
+    vietnamese: "\u0110\xC3 C\xD3 - N\xE2ng c\u1EA5p t\u1EA1i Stage / Kho \u0111\u1ED3"
+    spanish: "ADQUIRIDO - Mejora en Fase / Armer\xEDa"
+    portuguese: ADQUIRIDO - Melhore em Fase / Arsenal
+    french: "POSS\xC9D\xC9 - Am\xE9liorez dans Niveau / Arsenal"
+  - english: CRAFT NEW EQUIPMENT - Lv.1
+    vietnamese: "R\xC8N TRANG B\u1ECA M\u1EDAI - C\u1EA5p 1"
+    spanish: FORJAR EQUIPO NUEVO - Nv.1
+    portuguese: FORJAR NOVO EQUIPAMENTO - Nv.1
+    french: "FORGER UN \xC9QUIPEMENT - Niv.1"
+  - english: Recipe unavailable
+    vietnamese: "C\xF4ng th\u1EE9c ch\u01B0a kh\u1EA3 d\u1EE5ng"
+    spanish: Receta no disponible
+    portuguese: "Receita indispon\xEDvel"
+    french: Recette indisponible
+  - english: NEW
+    vietnamese: "M\u1EDAI"
+    spanish: NUEVO
+    portuguese: NOVO
+    french: NOUVEAU
+  - english: Configure recipes in ItemData
+    vietnamese: "Thi\u1EBFt l\u1EADp c\xF4ng th\u1EE9c trong ItemData"
+    spanish: Configura recetas en ItemData
+    portuguese: Configure receitas em ItemData
+    french: Configurez les recettes dans ItemData
+  - english: 'FRAGMENTS: {0} / {1}'
+    vietnamese: "M\u1EA2NH GH\xC9P: {0} / {1}"
+    spanish: 'FRAGMENTOS: {0} / {1}'
+    portuguese: 'FRAGMENTOS: {0} / {1}'
+    french: 'FRAGMENTS : {0} / {1}'
+  - english: No recipe selected
+    vietnamese: "Ch\u01B0a ch\u1ECDn c\xF4ng th\u1EE9c"
+    spanish: Ninguna receta seleccionada
+    portuguese: Nenhuma receita selecionada
+    french: "Aucune recette s\xE9lectionn\xE9e"
+  - english: 'Success Rate: 100%'
+    vietnamese: "T\u1EC9 l\u1EC7 th\xE0nh c\xF4ng: 100%"
+    spanish: "Probabilidad de \xE9xito: 100%"
+    portuguese: 'Chance de sucesso: 100%'
+    french: "Chance de r\xE9ussite : 100%"
+  - english: Upgrade levels in Stage / Armory
+    vietnamese: "N\xE2ng c\u1EA5p t\u1EA1i Stage / Kho \u0111\u1ED3"
+    spanish: "Mejora en Fase / Armer\xEDa"
+    portuguese: Melhore em Fase / Arsenal
+    french: "Am\xE9liorez dans Niveau / Arsenal"
+  - english: Equipment bag full - expand in Armory
+    vietnamese: "T\xFAi trang b\u1ECB \u0111\u1EA7y - m\u1EDF r\u1ED9ng t\u1EA1i Kho \u0111\u1ED3"
+    spanish: "Bolsa llena - ampl\xEDala en Armer\xEDa"
+    portuguese: Bolsa cheia - expanda no Arsenal
+    french: Sac plein - agrandissez-le dans l'Arsenal
+  - english: Collect this equipment's fragments
+    vietnamese: "Thu th\u1EADp m\u1EA3nh c\u1EE7a trang b\u1ECB n\xE0y"
+    spanish: "Re\xFAne fragmentos de este equipo"
+    portuguese: "Re\xFAna fragmentos deste equipamento"
+    french: "Rassemblez les fragments de cet \xE9quipement"
+  - english: Not enough crafting materials
+    vietnamese: "Kh\xF4ng \u0111\u1EE7 nguy\xEAn li\u1EC7u r\xE8n"
+    spanish: Materiales insuficientes
+    portuguese: Materiais insuficientes
+    french: "Mat\xE9riaux insuffisants"
+  - english: Already in your Armory
+    vietnamese: "\u0110\xE3 c\xF3 trong kho trang b\u1ECB"
+    spanish: "Ya est\xE1 en tu Armer\xEDa"
+    portuguese: "J\xE1 est\xE1 no seu Arsenal"
+    french: "D\xE9j\xE0 dans votre Arsenal"
+  - english: Unlock equipment - Lv.1
+    vietnamese: "M\u1EDF kh\xF3a trang b\u1ECB - C\u1EA5p 1"
+    spanish: Desbloquear equipo - Nv.1
+    portuguese: Desbloquear equipamento - Nv.1
+    french: "D\xE9bloquer l'\xE9quipement - Niv.1"
+  - english: Crafted! Your new equipment is available in Armory.
+    vietnamese: "R\xE8n th\xE0nh c\xF4ng! Trang b\u1ECB m\u1EDBi \u0111\xE3 c\xF3 trong Kho \u0111\u1ED3."
+    spanish: "\xA1Forjado! Tu equipo nuevo est\xE1 en Armer\xEDa."
+    portuguese: "Forjado! Seu novo equipamento est\xE1 no Arsenal."
+    french: "Forg\xE9 ! Votre \xE9quipement est dans l'Arsenal."
+  - english: Already owned. Upgrade this equipment in Stage / Armory.
+    vietnamese: "\u0110\xE3 s\u1EDF h\u1EEFu. N\xE2ng c\u1EA5p trang b\u1ECB t\u1EA1i Stage / Kho \u0111\u1ED3."
+    spanish: "Ya lo tienes. Mej\xF3ralo en Fase / Armer\xEDa."
+    portuguese: "J\xE1 adquirido. Melhore em Fase / Arsenal."
+    french: "D\xE9j\xE0 poss\xE9d\xE9. Am\xE9liorez-le dans Niveau / Arsenal."
+  - english: Crafting not completed. Check fragments and materials.
+    vietnamese: "Ch\u01B0a r\xE8n \u0111\u01B0\u1EE3c. Ki\u1EC3m tra m\u1EA3nh gh\xE9p v\xE0 nguy\xEAn li\u1EC7u."
+    spanish: Forja incompleta. Revisa fragmentos y materiales.
+    portuguese: Forja incompleta. Confira fragmentos e materiais.
+    french: "Forge inachev\xE9e. V\xE9rifiez les fragments et mat\xE9riaux."
+  - english: Signature Bow
+    vietnamese: "Cung \u0111\u1EB7c tr\u01B0ng"
+    spanish: Arco distintivo
+    portuguese: "Arco caracter\xEDstico"
+    french: "Arc embl\xE9matique"
+  - english: Cross bow
+    vietnamese: "N\u1ECF"
+    spanish: Ballesta
+    portuguese: Besta
+    french: "Arbal\xE8te"
+  - english: Ceremonial Wand
+    vietnamese: "\u0110\u0169a ph\xE9p nghi l\u1EC5"
+    spanish: Vara ceremonial
+    portuguese: Varinha cerimonial
+    french: "Baguette c\xE9r\xE9monielle"
+  - english: Milanese Plate
+    vietnamese: "Gi\xE1p Milan"
+    spanish: Coraza milanesa
+    portuguese: Armadura milanesa
+    french: Armure milanaise
+  - english: Commander's Heavy Armor
+    vietnamese: "Tr\u1ECDng gi\xE1p ch\u1EC9 huy"
+    spanish: Armadura pesada del comandante
+    portuguese: Armadura pesada do comandante
+    french: Armure lourde du commandant
+  - english: Revival Plate
+    vietnamese: "Gi\xE1p h\u1ED3i sinh"
+    spanish: "Coraza de resurrecci\xF3n"
+    portuguese: "Armadura da ressurrei\xE7\xE3o"
+    french: "Armure de r\xE9surrection"
+  - english: Dragon's Breath Plate
+    vietnamese: "Gi\xE1p h\u01A1i th\u1EDF r\u1ED3ng"
+    spanish: "Coraza de aliento de drag\xF3n"
+    portuguese: "Armadura do sopro de drag\xE3o"
+    french: Armure du souffle du dragon
+  - english: Sturdy Armor
+    vietnamese: "Gi\xE1p v\u1EEFng ch\u1EAFc"
+    spanish: Armadura resistente
+    portuguese: Armadura robusta
+    french: Armure robuste
+  - english: Mysterious Cloak
+    vietnamese: "\xC1o cho\xE0ng b\xED \u1EA9n"
+    spanish: Capa misteriosa
+    portuguese: Manto misterioso
+    french: "Cape myst\xE9rieuse"
+  - english: Wizard Hat
+    vietnamese: "M\u0169 ph\xE1p s\u01B0"
+    spanish: Sombrero de mago
+    portuguese: "Chap\xE9u de mago"
+    french: Chapeau de mage
+  - english: Helmet of Swiftness
+    vietnamese: "M\u0169 nhanh nh\u1EB9n"
+    spanish: Yelmo de rapidez
+    portuguese: Elmo da rapidez
+    french: "Casque de c\xE9l\xE9rit\xE9"
+  - english: Aquamarine Ring
+    vietnamese: "Nh\u1EABn ng\u1ECDc bi\u1EC3n"
+    spanish: Anillo de aguamarina
+    portuguese: "Anel de \xE1gua-marinha"
+    french: Anneau d'aigue-marine
+  - english: Amethyst Ring
+    vietnamese: "Nh\u1EABn th\u1EA1ch anh t\xEDm"
+    spanish: Anillo de amatista
+    portuguese: Anel de ametista
+    french: "Anneau d'am\xE9thyste"
+  - english: DAILY ADVENTURE
+    vietnamese: "PHI\xCAU L\u01AFU H\u1EB0NG NG\xC0Y"
+    spanish: AVENTURA DIARIA
+    portuguese: "AVENTURA DI\xC1RIA"
+    french: AVENTURE QUOTIDIENNE
+  - english: Complete daily missions to earn great rewards!
+    vietnamese: "Ho\xE0n th\xE0nh nhi\u1EC7m v\u1EE5 h\u1EB1ng ng\xE0y \u0111\u1EC3 nh\u1EADn ph\u1EA7n th\u01B0\u1EDFng!"
+    spanish: "\xA1Completa misiones diarias y gana premios!"
+    portuguese: "Complete miss\xF5es di\xE1rias e ganhe pr\xEAmios!"
+    french: "Terminez les missions quotidiennes pour gagner des r\xE9compenses !"
+  - english: Clear any stage {0} times
+    vietnamese: "Ho\xE0n th\xE0nh m\xE0n b\u1EA5t k\u1EF3 {0} l\u1EA7n"
+    spanish: Completa cualquier fase {0} veces
+    portuguese: Conclua qualquer fase {0} vezes
+    french: Terminez un niveau {0} fois
+  - english: Complete stages in Adventure mode.
+    vietnamese: "Ho\xE0n th\xE0nh c\xE1c m\xE0n phi\xEAu l\u01B0u."
+    spanish: Completa fases en modo Aventura.
+    portuguese: Conclua fases no modo Aventura.
+    french: Terminez des niveaux du mode Aventure.
+  - english: Defeat {0} monsters
+    vietnamese: "Ti\xEAu di\u1EC7t {0} qu\xE1i"
+    spanish: Derrota a {0} monstruos
+    portuguese: Derrote {0} monstros
+    french: "\xC9liminez {0} monstres"
+  - english: Defeat any monsters in stages.
+    vietnamese: "Ti\xEAu di\u1EC7t qu\xE1i trong c\xE1c m\xE0n."
+    spanish: Derrota monstruos en las fases.
+    portuguese: Derrote monstros nas fases.
+    french: "\xC9liminez des monstres dans les niveaux."
+  - english: Collect {0} item drops
+    vietnamese: "Nh\u1EB7t {0} v\u1EADt ph\u1EA9m r\u01A1i"
+    spanish: Recoge {0} objetos
+    portuguese: Colete {0} itens
+    french: Ramassez {0} objets
+  - english: Pick up equipment dropped by monsters.
+    vietnamese: "Nh\u1EB7t trang b\u1ECB r\u01A1i t\u1EEB qu\xE1i."
+    spanish: Recoge equipo que suelten los monstruos.
+    portuguese: Colete equipamento deixado por monstros.
+    french: "Ramassez l'\xE9quipement laiss\xE9 par les monstres."
+  - english: Log in to the game
+    vietnamese: "\u0110\u0103ng nh\u1EADp v\xE0o game"
+    spanish: "Inicia sesi\xF3n en el juego"
+    portuguese: Entre no jogo
+    french: Connectez-vous au jeu
+  - english: Come back and start your adventure!
+    vietnamese: "Quay l\u1EA1i v\xE0 b\u1EAFt \u0111\u1EA7u h\xE0nh tr\xECnh!"
+    spanish: "\xA1Vuelve y comienza tu aventura!"
+    portuguese: Volte e comece sua aventura!
+    french: Revenez commencer votre aventure !
+  - english: Upgrade any hero {0} time
+    vietnamese: "N\xE2ng c\u1EA5p anh h\xF9ng b\u1EA5t k\u1EF3 {0} l\u1EA7n"
+    spanish: "Mejora cualquier h\xE9roe {0} vez"
+    portuguese: "Melhore qualquer her\xF3i {0} vez"
+    french: "Am\xE9liorez un h\xE9ros {0} fois"
+  - english: Make your heroes stronger in Armory.
+    vietnamese: "N\xE2ng s\u1EE9c m\u1EA1nh anh h\xF9ng trong Kho \u0111\u1ED3."
+    spanish: "Fortalece a tus h\xE9roes en Armer\xEDa."
+    portuguese: "Fortale\xE7a seus her\xF3is no Arsenal."
+    french: "Renforcez vos h\xE9ros dans l'Arsenal."
+  - english: Resets in {0}h {1}m
+    vietnamese: "\u0110\u1EB7t l\u1EA1i sau {0} gi\u1EDD {1} ph\xFAt"
+    spanish: Se reinicia en {0} h {1} min
+    portuguese: Reinicia em {0} h {1} min
+    french: "R\xE9initialisation dans {0} h {1} min"
+  - english: 'Daily Progress
+
+      <size=150%>{0} / {1}</size>'
+    vietnamese: "Ti\u1EBFn \u0111\u1ED9 ng\xE0y\n<size=150%>{0} / {1}</size>"
+    spanish: 'Progreso diario
+
+      <size=150%>{0} / {1}</size>'
+    portuguese: "Progresso di\xE1rio\n<size=150%>{0} / {1}</size>"
+    french: "Progr\xE8s du jour\n<size=150%>{0} / {1}</size>"
+  - english: 'Daily Progress
+
+      {0} / {1}'
+    vietnamese: "Ti\u1EBFn \u0111\u1ED9 ng\xE0y\n{0} / {1}"
+    spanish: 'Progreso diario
+
+      {0} / {1}'
+    portuguese: "Progresso di\xE1rio\n{0} / {1}"
+    french: "Progr\xE8s du jour\n{0} / {1}"
+  - english: DONE
+    vietnamese: "\u0110\xC3 XONG"
+    spanish: HECHO
+    portuguese: "CONCLU\xCDDO"
+    french: "TERMIN\xC9"
+  - english: Complete quests to unlock the chest rewards above.
+    vietnamese: "Ho\xE0n th\xE0nh nhi\u1EC7m v\u1EE5 \u0111\u1EC3 m\u1EDF c\xE1c r\u01B0\u01A1ng th\u01B0\u1EDFng ph\xEDa tr\xEAn."
+    spanish: Completa misiones para desbloquear los cofres de arriba.
+    portuguese: "Complete miss\xF5es para liberar os ba\xFAs acima."
+    french: "Terminez les missions pour d\xE9bloquer les coffres ci-dessus."
+  - english: Reward unavailable. Please try again.
+    vietnamese: "Ch\u01B0a th\u1EC3 nh\u1EADn th\u01B0\u1EDFng. Vui l\xF2ng th\u1EED l\u1EA1i."
+    spanish: "Premio no disponible. Int\xE9ntalo de nuevo."
+    portuguese: "Pr\xEAmio indispon\xEDvel. Tente novamente."
+    french: "R\xE9compense indisponible. R\xE9essayez."
+  - english: 'Chest reward received: +{0} GOLD'
+    vietnamese: "\u0110\xE3 nh\u1EADn th\u01B0\u1EDFng r\u01B0\u01A1ng: +{0} V\xC0NG"
+    spanish: 'Premio del cofre: +{0} ORO'
+    portuguese: "Pr\xEAmio do ba\xFA: +{0} OURO"
+    french: "R\xE9compense du coffre : +{0} OR"
+  - english: 'Chest reward received: +{0} GEM'
+    vietnamese: "\u0110\xE3 nh\u1EADn th\u01B0\u1EDFng r\u01B0\u01A1ng: +{0} \u0110\xC1 QU\xDD"
+    spanish: 'Premio del cofre: +{0} GEMA'
+    portuguese: "Pr\xEAmio do ba\xFA: +{0} GEMA"
+    french: "R\xE9compense du coffre : +{0} GEMME"
+  - english: Complete more quests to unlock this chest.
+    vietnamese: "Ho\xE0n th\xE0nh th\xEAm nhi\u1EC7m v\u1EE5 \u0111\u1EC3 m\u1EDF r\u01B0\u01A1ng n\xE0y."
+    spanish: "Completa m\xE1s misiones para abrir este cofre."
+    portuguese: "Complete mais miss\xF5es para abrir este ba\xFA."
+    french: Terminez plus de missions pour ouvrir ce coffre.
+  - english: 'PURCHASES LEFT TODAY: {0} / {1}'
+    vietnamese: "L\u01AF\u1EE2T MUA C\xD2N L\u1EA0I: {0} / {1}"
+    spanish: 'COMPRAS RESTANTES: {0} / {1}'
+    portuguese: 'COMPRAS RESTANTES: {0} / {1}'
+    french: 'ACHATS RESTANTS : {0} / {1}'
+  - english: Daily energy purchase limit reached.
+    vietnamese: "\u0110\xE3 h\u1EBFt l\u01B0\u1EE3t mua n\u0103ng l\u01B0\u1EE3ng h\xF4m nay."
+    spanish: "L\xEDmite diario de compras de energ\xEDa alcanzado."
+    portuguese: "Limite di\xE1rio de compras de energia atingido."
+    french: "Limite quotidien d'achats d'\xE9nergie atteint."

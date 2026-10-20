@@ -2,7 +2,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace OctoberStudio
+namespace MrX
 {
     [CustomPropertyDrawer(typeof(Int))]
     public class IntPropertyDrawer : PropertyDrawer

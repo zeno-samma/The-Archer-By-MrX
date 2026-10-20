@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace MrX.Abilities
 {
-    [CreateAssetMenu(fileName = "Abilities Database", menuName = "October/Abilities/Database")]
+    [CreateAssetMenu(fileName = "Abilities Database", menuName = "MrX Studio/Abilities/Database")]
     public class AbilitiesDatabase : ScriptableObject
     {
         [SerializeField] protected List<AbilityData> abilities;

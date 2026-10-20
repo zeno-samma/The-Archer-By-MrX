@@ -1,9 +1,9 @@
-using OctoberStudio.Audio;
-using OctoberStudio.Easing;
+using MrX.Audio;
+using MrX.Easing;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace OctoberStudio.Projectile
+namespace MrX.Projectile
 {
     public class IceCrystalBehavior : AbstractProjectile
     {

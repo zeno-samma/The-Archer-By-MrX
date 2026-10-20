@@ -1,12 +1,12 @@
-using OctoberStudio.Abilities;
-using OctoberStudio.Armory;
-using OctoberStudio.Extensions;
+using MrX.Abilities;
+using MrX.Armory;
+using MrX.Extensions;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace OctoberStudio.UI.Armory
+namespace MrX.UI.Armory
 {
     public class ExpandedHeroPopup : ExpandedArmoryPopup
     {

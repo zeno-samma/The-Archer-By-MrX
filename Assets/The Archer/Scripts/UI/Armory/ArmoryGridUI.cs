@@ -1,11 +1,11 @@
-using OctoberStudio.Easing;
-using OctoberStudio.Extensions;
-using OctoberStudio.Pool;
+using MrX.Easing;
+using MrX.Extensions;
+using MrX.Pool;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace OctoberStudio.UI.Armory
+namespace MrX.UI.Armory
 {
     public class ArmoryGridUI<T> : MonoBehaviour where T : ArmoryCardBehavior
     {

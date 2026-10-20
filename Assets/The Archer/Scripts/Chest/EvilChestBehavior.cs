@@ -1,9 +1,9 @@
-using OctoberStudio.Abilities;
+using MrX.Abilities;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace OctoberStudio
+namespace MrX
 {
     public class EvilChestBehavior : ChestBehavior
     {

@@ -8,7 +8,7 @@ using UnityEditor;
 using UnityEditor.Rendering.Universal.ShaderGUI;
 using UnityEngine;
 
-namespace OctoberStudio
+namespace MrX
 {
     public class StandardParticlesScrollingShaderGUIURP : BaseShaderGUI
     {

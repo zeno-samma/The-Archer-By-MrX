@@ -1,8 +1,8 @@
-using OctoberStudio.Armory;
+using MrX.Armory;
 using UnityEditor;
 using UnityEngine;
 
-namespace OctoberStudio
+namespace MrX
 {
     [CustomEditor(typeof(HeroData), true)]
     public class HeroDataEditor : Editor

@@ -1,8 +1,8 @@
-﻿using OctoberStudio.Easing;
-using OctoberStudio.StatusEffects;
+﻿using MrX.Easing;
+using MrX.StatusEffects;
 using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace MrX.Abilities
 {
     public class PoisonSpiritAbilityBehavior : AbilityBehavior<PoisonSpiritAbilityData, PoisonSpiritAbilityLevel>
     {

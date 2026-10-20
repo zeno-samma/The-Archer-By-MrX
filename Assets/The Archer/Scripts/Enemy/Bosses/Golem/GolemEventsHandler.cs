@@ -1,4 +1,4 @@
-namespace OctoberStudio.Enemy
+namespace MrX.Enemy
 {
     public class GolemEventsHandler : EnemyEventsHandler
     {

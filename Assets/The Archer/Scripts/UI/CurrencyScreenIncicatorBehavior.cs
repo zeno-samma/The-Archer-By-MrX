@@ -1,7 +1,7 @@
-using OctoberStudio.UI;
+using MrX.UI;
 using UnityEngine;
 
-namespace OctoberStudio.Currency
+namespace MrX.Currency
 {
     public class CurrencyScreenIncicatorBehavior : ScalingLabelBehavior
     {
@@ -43,7 +43,7 @@ namespace OctoberStudio.Currency
 
         protected virtual void OnDestroy()
         {
-            Currency.OnAmountChanged -= OnAmountChanged;
+            if (Currency != null) Currency.OnAmountChanged -= OnAmountChanged;
         }
     }
 }

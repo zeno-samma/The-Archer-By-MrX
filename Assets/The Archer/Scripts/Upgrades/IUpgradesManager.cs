@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace OctoberStudio.Upgrades
+namespace MrX.Upgrades
 {
     public interface IUpgradesManager
     {

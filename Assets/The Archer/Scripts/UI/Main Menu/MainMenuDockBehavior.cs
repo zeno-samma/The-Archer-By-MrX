@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace OctoberStudio.UI
+namespace MrX.UI
 {
     public class MainMenuDockBehavior : MonoBehaviour
     {
@@ -17,6 +17,52 @@ namespace OctoberStudio.UI
 
         public bool IsDockEnabled { get; set; } = true;
 
+#if UNITY_EDITOR
+        public virtual void RegisterDailyQuests(Sprite icon)
+        { RegisterPageSlot(MainMenuPageType.DailyQuests, "QUESTS", icon, "ui_5"); }
+
+        public virtual void RegisterAchievements(Sprite icon)
+        { RegisterPageSlot(MainMenuPageType.Achievements, "ACHIEVEMENTS", icon, "ui_6"); }
+
+        public virtual void RegisterForge(Sprite icon)
+        { RegisterPageSlot(MainMenuPageType.Forge, "FORGE", icon, "ui_4"); }
+
+        private void RegisterPageSlot(MainMenuPageType type, string title, Sprite icon, string slotSprite)
+        {
+            if (dockItems.Exists(item => item.PageType == type)) return;
+            // The existing scroll-art slot is a visual placeholder, not a registered
+            // tab. Replace that slot instead of appending a seventh layout cell.
+            Transform placeholder = null;
+            foreach (var image in GetComponentsInChildren<UnityEngine.UI.Image>(true))
+            {
+                if (image.sprite == null || image.sprite.name != slotSprite) continue;
+                placeholder = image.transform;
+                while (placeholder.parent != transform && placeholder.parent != null) placeholder = placeholder.parent;
+                break;
+            }
+            var questTab = Instantiate(dockItems[dockItems.Count - 1], dockItems[0].transform.parent);
+            if (placeholder != null)
+            {
+                questTab.transform.SetSiblingIndex(placeholder.GetSiblingIndex());
+                placeholder.gameObject.SetActive(false);
+            }
+            questTab.gameObject.SetActive(true);
+            questTab.Configure(type, title, icon);
+            dockItems.Add(questTab);
+        }
+
+#endif
+
+        public virtual bool TrySelectPage(MainMenuPageType pageType)
+        {
+            if (!IsDockEnabled) return false;
+            var item = dockItems.Find(tab => tab.PageType == pageType);
+            if (item == null) return false;
+            item.Select();
+            OnPageSelected(pageType);
+            return true;
+        }
+
         protected virtual void Start()
         {
             GameController.InputManager.onInputChanged += OnInputChanged;
@@ -25,6 +71,7 @@ namespace OctoberStudio.UI
 
         public virtual void Init(MainMenuPageType firstPageType)
         {
+            UnityEngine.UI.LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)transform);
             dockItems.Sort((a, b) => a.transform.position.x.CompareTo(b.transform.position.x));
 
             for (int i = 0; i < dockItems.Count; i++)

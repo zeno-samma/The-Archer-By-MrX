@@ -1,7 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace OctoberStudio.Audio
+namespace MrX.Audio
 {
     [CustomEditor(typeof(AudioData))]
     public class AudioDataEditor : Editor

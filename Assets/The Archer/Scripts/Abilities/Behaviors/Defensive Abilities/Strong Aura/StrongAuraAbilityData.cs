@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace MrX.Abilities
 {
-    [CreateAssetMenu(fileName = "StrongAura Ability Data", menuName = "October/Abilities/Defensive Abilities/StrongAura")]
+    [CreateAssetMenu(fileName = "StrongAura Ability Data", menuName = "MrX Studio/Abilities/Defensive Abilities/StrongAura")]
     public class StrongAuraAbilityData : GenericAbilityData<StrongAuraAbilityLevel>
     {
         protected virtual void Awake()

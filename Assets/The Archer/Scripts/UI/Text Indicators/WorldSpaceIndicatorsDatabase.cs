@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace OctoberStudio.UI
+namespace MrX.UI
 {
-    [CreateAssetMenu(fileName = "World Space Indicators Database", menuName = "October/UI/World Space Indicators Database")]
+    [CreateAssetMenu(fileName = "World Space Indicators Database", menuName = "MrX Studio/UI/World Space Indicators Database")]
     public class WorldSpaceIndicatorsDatabase : ScriptableObject
     {
         [SerializeField] protected List<WorldSpaceIndicatorData> indicators;

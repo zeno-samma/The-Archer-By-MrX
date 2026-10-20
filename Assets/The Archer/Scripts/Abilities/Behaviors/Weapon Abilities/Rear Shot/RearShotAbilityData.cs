@@ -1,8 +1,8 @@
 using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace MrX.Abilities
 {
-    [CreateAssetMenu(fileName = "Rear Shot Ability Data", menuName = "October/Abilities/Weapon Abilities/Rear Shot")]
+    [CreateAssetMenu(fileName = "Rear Shot Ability Data", menuName = "MrX Studio/Abilities/Weapon Abilities/Rear Shot")]
     public class RearShotAbilityData : GenericAbilityData<RearShotAbilityLevel>
     {
         protected virtual void Awake()

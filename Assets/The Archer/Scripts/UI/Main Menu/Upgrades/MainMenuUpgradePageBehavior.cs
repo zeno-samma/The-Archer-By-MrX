@@ -1,12 +1,12 @@
-using OctoberStudio.Easing;
-using OctoberStudio.Pool;
-using OctoberStudio.Upgrades;
+using MrX.Easing;
+using MrX.Pool;
+using MrX.Upgrades;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace OctoberStudio.UI
+namespace MrX.UI
 {
     public class MainMenuUpgradePageBehavior : MainMenuPageBehavior
     {

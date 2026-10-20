@@ -1,10 +1,10 @@
-using OctoberStudio.Easing;
-using OctoberStudio.Extensions;
-using OctoberStudio.Upgrades;
+using MrX.Easing;
+using MrX.Extensions;
+using MrX.Upgrades;
 using TMPro;
 using UnityEngine;
 
-namespace OctoberStudio.UI
+namespace MrX.UI
 {
     public class UpgradeDescriptionBlock : MonoBehaviour
     {

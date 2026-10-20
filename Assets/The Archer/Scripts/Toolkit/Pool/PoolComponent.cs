@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace OctoberStudio.Pool
+namespace MrX.Pool
 {
     public class PoolComponent<T> : Pool<T> where T : Component
     {

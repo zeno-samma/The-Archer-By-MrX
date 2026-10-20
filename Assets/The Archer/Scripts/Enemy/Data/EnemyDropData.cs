@@ -1,10 +1,12 @@
-using OctoberStudio.Armory;
-using OctoberStudio.Drop;
+using MrX.Armory;
+using MrX.Drop;
 using System.Collections.Generic;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 using UnityEngine;
 
-namespace OctoberStudio
+namespace MrX
 {
     [System.Serializable]
     public class EnemyDropData
@@ -32,9 +34,8 @@ namespace OctoberStudio
             for(int i = 0; i < hpZones.Count; i++)
             {
                 hpSum += hpZones[i].HP;
-                if (hpProportion < hpSum)
+                if (hpProportion < hpSum || i == hpZones.Count - 1)
                 {
-                    Debug.Log($"[BOSS OVERRIDE DEBUG] Loại: {dropType} | Tỉ lệ: {hpZones[i].Chance}%");
                     return hpZones[i].Chance;
                 }
             }
@@ -52,7 +53,7 @@ namespace OctoberStudio
             for (int i = 0; i < hpZones.Count; i++)
             {
                 hpSum += hpZones[i].HP;
-                if (hpProportion < hpSum)
+                if (hpProportion < hpSum || i == hpZones.Count - 1)
                 {
                     return hpZones[i].DropAmount;
                 }

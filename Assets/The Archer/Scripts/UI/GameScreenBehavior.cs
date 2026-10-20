@@ -1,12 +1,12 @@
-using OctoberStudio.Abilities.UI;
-using OctoberStudio.Easing;
-using OctoberStudio.Enemy;
-using OctoberStudio.Extensions;
+using MrX.Abilities.UI;
+using MrX.Easing;
+using MrX.Enemy;
+using MrX.Extensions;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-namespace OctoberStudio.UI
+namespace MrX.UI
 {
     public class GameScreenBehavior : MonoBehaviour
     {
@@ -75,6 +75,14 @@ namespace OctoberStudio.UI
         {
             pauseButton.transform.DoLocalScale(Vector3.zero, 0.3f).SetUnscaledTime(true).SetEasing(EasingType.CubicIn);
             goldIndicatorRect.DoLocalScale(Vector3.zero, 0.3f).SetUnscaledTime(true).SetEasing(EasingType.CubicIn);
+        }
+
+        public void PrepareForResult()
+        {
+            abilitySelector.CancelForResult();
+            pauseWindow.gameObject.SetActive(false);
+            evilChestUI.gameObject.SetActive(false); hpChestUI.gameObject.SetActive(false);
+            HideSideUI();
         }
 
         public virtual void ShowSideUI()

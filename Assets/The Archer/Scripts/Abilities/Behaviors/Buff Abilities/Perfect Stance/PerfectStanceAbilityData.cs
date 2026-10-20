@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace MrX.Abilities
 {
-    [CreateAssetMenu(fileName = "PerfectStance Ability Data", menuName = "October/Abilities/Buff Abilities/PerfectStance")]
+    [CreateAssetMenu(fileName = "PerfectStance Ability Data", menuName = "MrX Studio/Abilities/Buff Abilities/PerfectStance")]
     public class PerfectStanceAbilityData : GenericAbilityData<PerfectStanceAbilityLevel>
     {
         protected virtual void Awake()

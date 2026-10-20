@@ -1,9 +1,9 @@
-using OctoberStudio.Easing;
+using MrX.Easing;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace OctoberStudio
+namespace MrX
 {
     public class RenderersHandler : MonoBehaviour
     {

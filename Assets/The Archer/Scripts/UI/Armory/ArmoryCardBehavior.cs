@@ -1,10 +1,10 @@
-using OctoberStudio.Armory;
+using MrX.Armory;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace OctoberStudio.UI.Armory
+namespace MrX.UI.Armory
 {
     public abstract class ArmoryCardBehavior : MonoBehaviour
     {

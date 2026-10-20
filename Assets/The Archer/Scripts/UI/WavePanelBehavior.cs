@@ -1,9 +1,9 @@
-using OctoberStudio.Easing;
-using OctoberStudio.Pool;
+using MrX.Easing;
+using MrX.Pool;
 using System.Collections;
 using UnityEngine;
 
-namespace OctoberStudio.UI
+namespace MrX.UI
 {
     public class WavePanelBehavior : MonoBehaviour
     {

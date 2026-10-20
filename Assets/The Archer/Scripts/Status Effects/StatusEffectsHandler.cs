@@ -1,9 +1,9 @@
-using OctoberStudio.Extensions;
+using MrX.Extensions;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace OctoberStudio.StatusEffects
+namespace MrX.StatusEffects
 {
     public class StatusEffectsHandler : MonoBehaviour
     {

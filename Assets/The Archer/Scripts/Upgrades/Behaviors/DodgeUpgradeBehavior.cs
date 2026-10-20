@@ -1,4 +1,4 @@
-namespace OctoberStudio.Upgrades
+namespace MrX.Upgrades
 {
     public class DodgeUpgradeBehavior : UpgradeBehavior
     {

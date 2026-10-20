@@ -1,8 +1,8 @@
-using OctoberStudio.Enemy;
+using MrX.Enemy;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace OctoberStudio.StatusEffects
+namespace MrX.StatusEffects
 {
     public class EnemyStatusEffectsManager : MonoBehaviour
     {

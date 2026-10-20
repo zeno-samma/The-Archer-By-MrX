@@ -1,11 +1,11 @@
-using OctoberStudio.Abilities;
+using MrX.Abilities;
 using System.Collections.Generic;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
 using UnityEngine;
 
-namespace OctoberStudio
+namespace MrX
 {
     [System.Serializable]
     public class TestingPreset

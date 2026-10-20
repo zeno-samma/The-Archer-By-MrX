@@ -1,9 +1,9 @@
-using OctoberStudio.Extensions;
+using MrX.Extensions;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace MrX.Abilities
 {
     public class AbilitiesManager : MonoBehaviour
     {
@@ -175,7 +175,7 @@ namespace OctoberStudio.Abilities
 
             if (selectedRarity != AbilityRarity.Legendary && Random.value * 100 < StageController.Player.Stats.ChanceToIncreaseRarity)
             {
-                selectedRarity = selectedRarity++;
+                selectedRarity++;
             }
 
             return GetAbilitiesForSelector(selectedRarity);

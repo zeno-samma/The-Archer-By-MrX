@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace OctoberStudio.UI
+namespace MrX.UI
 {
     public class TextIndicatorBehavior : MonoBehaviour
     {

@@ -1,12 +1,12 @@
-using OctoberStudio.Easing;
-using OctoberStudio.Input;
-using OctoberStudio.UI.Armory;
+using MrX.Easing;
+using MrX.Input;
+using MrX.UI.Armory;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace OctoberStudio.UI
+namespace MrX.UI
 {
     public class MainMenuStagesPageBehavior : MainMenuPageBehavior
     {
@@ -76,6 +76,10 @@ namespace OctoberStudio.UI
         {
             StageSave = GameController.SaveManager.GetSave<StageSave>("Stage");
             ContinuePlayingSave = GameController.SaveManager.GetSave<ContinuePlayingSave>("Continue Playing");
+            // Migrate legacy runs before resetting the menu selection.
+            if (ContinuePlayingSave.HasUnfinishedStageData && string.IsNullOrEmpty(ContinuePlayingSave.StageContentId))
+                ContinuePlayingSave.RememberStage(StageDatabase.GetStageData(Mathf.Clamp(StageSave.SelectedStageId,0,StageDatabase.StagesAmount-1)).StageId);
+            StageSave.SetSelectedStageId(0);
         }
 
         protected virtual void AddListenersToButtons()
@@ -98,13 +102,7 @@ namespace OctoberStudio.UI
         {
             if (!ContinuePlayingSave.HasUnfinishedStageData || ContinuePlayingSave.HP <= 0)
             {
-                var lastUnlockedStageId = GetLastUnlockedStageId();
-                if (lastUnlockedStageId >= StageDatabase.StagesAmount)
-                {
-                    lastUnlockedStageId = StageDatabase.StagesAmount - 1;
-                }
-
-                StageSave.SetSelectedStageId(lastUnlockedStageId);
+                StageSave.SetSelectedStageId(0);
 
                 SubscribeToInputEvents();
                 EventSystem.current.SetSelectedGameObject(playButton.gameObject);
@@ -409,6 +407,12 @@ namespace OctoberStudio.UI
             stageSelector.SubscribeToInputEvents();
         }
 
+        public void SetLanguageModalInput(bool blocked)
+        {
+            if (blocked) UnsubscribeFromInputEvents();
+            else if (GameController.MainMenuScreenBehavior.CurrentPage == this) SubscribeToInputEvents();
+        }
+
         protected virtual void UnsubscribeFromInputEvents()
         {
             GameController.InputManager.onInputChanged -= OnInputChanged;
@@ -420,14 +424,11 @@ namespace OctoberStudio.UI
 
         protected virtual void OnPlayerButtonClicked()
         {
+            var screen = GameController.MainMenuScreenBehavior;
+            if (!screen.IsDockEnabled || screen.CurrentPage != this) return;
             GameController.AudioManager.PlayButtonClick();
-
-            ContinuePlayingSave.Disable();
-            GameController.CurrenciesManager.ApplyGameplayAmounts();
-
-            StageSave.IncrementStageAttempts(StageDatabase.GetStageData(StageSave.SelectedStageId));
-
-            GameController.LoadStage();
+            if (!GameController.TryStartNewRun(StageDatabase.GetStageData(StageSave.SelectedStageId)))
+                GetComponentInChildren<MenuEconomyPanel>(true)?.ShowInsufficientEnergy();
         }
 
         protected virtual void OnPurchaseButtonClicked()

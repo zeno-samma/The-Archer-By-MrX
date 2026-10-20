@@ -1,9 +1,9 @@
-using OctoberStudio.Easing;
-using OctoberStudio.Extensions;
+using MrX.Easing;
+using MrX.Extensions;
 using TMPro;
 using UnityEngine;
 
-namespace OctoberStudio
+namespace MrX
 {
     public class HealthbarBehavior : MonoBehaviour
     {

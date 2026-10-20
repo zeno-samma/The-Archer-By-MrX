@@ -1,10 +1,10 @@
-using OctoberStudio.Extensions;
-using OctoberStudio.StatusEffects;
+using MrX.Extensions;
+using MrX.StatusEffects;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace OctoberStudio
+namespace MrX
 {
     public class SpiritBehavior : MonoBehaviour
     {

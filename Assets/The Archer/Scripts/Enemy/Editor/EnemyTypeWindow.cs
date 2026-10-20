@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UIElements;
 
-namespace OctoberStudio.Enemy
+namespace MrX.Enemy
 {
     public class EnemyTypeWindow : EditorWindow
     {
@@ -184,7 +184,7 @@ namespace OctoberStudio.Enemy
         protected virtual void UpdateEnum(string path)
         {
             var enumText = new System.Text.StringBuilder();
-            enumText.Append("namespace OctoberStudio.Enemy");
+            enumText.Append("namespace MrX.Enemy");
             enumText.AppendLine();
             enumText.Append("{");
             enumText.AppendLine();

@@ -1,18 +1,31 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Screen = UnityEngine.Device.Screen;
 
-namespace OctoberStudio.UI
+namespace MrX.UI
 {
     public class SafeAreaManager : MonoBehaviour
     {
-        [SerializeField] List<RectTransform> screens;
+        [SerializeField] List<RectTransform> screens = new List<RectTransform>();
+        private Rect previousSafeArea;
+        private Vector2 previousSize;
+
+        private void Update()
+        {
+            if (previousSafeArea != Screen.safeArea || previousSize != new Vector2(Screen.width,Screen.height)) ApplySafeArea();
+        }
 
         public void Awake()
         {
+            ApplySafeArea();
+        }
+
+        private void ApplySafeArea()
+        {
             var rect = Screen.safeArea;
 
-            rect.x = 0;
-            rect.width = Screen.width;
+            previousSafeArea = rect;
+            previousSize = new Vector2(Screen.width,Screen.height);
 
             if (Screen.width > 0 && Screen.height > 0)
             {

@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 
-namespace OctoberStudio
+namespace MrX
 {
     public class WaitUntilTrue : IEnumerator
     {

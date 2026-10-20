@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace OctoberStudio
+namespace MrX
 {
     public class NavmeshNavigationHandler : NavigationHandler
     {

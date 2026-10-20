@@ -1,8 +1,8 @@
-using OctoberStudio.Abilities;
-using OctoberStudio.Easing;
-using OctoberStudio.Extensions;
-using OctoberStudio.Input;
-using OctoberStudio.Pool;
+using MrX.Abilities;
+using MrX.Easing;
+using MrX.Extensions;
+using MrX.Input;
+using MrX.Pool;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -10,7 +10,7 @@ using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace OctoberStudio.UI.Armory
+namespace MrX.UI.Armory
 {
     public abstract class ExpandedArmoryPopup : MonoBehaviour
     {

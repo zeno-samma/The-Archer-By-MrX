@@ -8,7 +8,7 @@ using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.Rendering;
 
-namespace OctoberStudio.PipelineSwitcher
+namespace MrX.PipelineSwitcher
 {
     public class PipelineSwitcherWindow : EditorWindow
     {
@@ -21,11 +21,11 @@ namespace OctoberStudio.PipelineSwitcher
         protected AddRequest addRequest;
         protected double startTime;
 
-        [MenuItem("Tools/October/Pipeline Switcher")]
+        [MenuItem("Tools/MrX Studio/Pipeline Switcher")]
         public static void OpenWindow()
         {
             PipelineSwitcherWindow wnd = GetWindow<PipelineSwitcherWindow>();
-            wnd.titleContent = new GUIContent("Pipeline Switcher");
+            wnd.titleContent = new GUIContent("MrX Studio | Pipeline Switcher");
             wnd.minSize = new Vector2(300, 200);
         }
 
@@ -66,15 +66,15 @@ namespace OctoberStudio.PipelineSwitcher
 
                 if(GUILayout.Button("Convert Materials"))
                 {
-                    var upgraders = new List<MaterialUpgrader> { new OctoberMaterialUpgrader(), new OctoberScrollingParticleMaterialUpgrader() };
-                    MaterialUpgrader.UpgradeProjectFolder(upgraders, "Upgrading October materials...", MaterialUpgrader.UpgradeFlags.None);
+                    var upgraders = new List<MaterialUpgrader> { new MrXMaterialUpgrader(), new MrXScrollingParticleMaterialUpgrader() };
+                    MaterialUpgrader.UpgradeProjectFolder(upgraders, "Upgrading MrX materials...", MaterialUpgrader.UpgradeFlags.None);
                 }
                 return;
             }
 
             if (!IsURPInstalled())
             {
-                EditorGUILayout.HelpBox("Press Button below to switch from Built-in renderer to URP. This tool will download and install URP Package from Package Manager, unpack URP versions of October shaders, and convert materials to work with URP", MessageType.Info);
+                EditorGUILayout.HelpBox("Press Button below to switch from Built-in renderer to URP. This tool will download and install URP Package from Package Manager, unpack URP versions of MrX shaders, and convert materials to work with URP", MessageType.Info);
                 EditorGUILayout.HelpBox("Do not close this window until the conversion is complete!", MessageType.Warning);
                 if (GUILayout.Button("Switch to URP"))
                 {
@@ -82,7 +82,7 @@ namespace OctoberStudio.PipelineSwitcher
                 }
             } else if (!IsURPPackageUnpacked())
             {
-                EditorGUILayout.HelpBox("The URP Package is already installed from Package Manager. Press Button below unpack URP versions of October shaders, and convert materials to work with URP", MessageType.Info);
+                EditorGUILayout.HelpBox("The URP Package is already installed from Package Manager. Press Button below unpack URP versions of MrX shaders, and convert materials to work with URP", MessageType.Info);
                 EditorGUILayout.HelpBox("Do not close this window until the conversion is complete!", MessageType.Warning);
                 if (GUILayout.Button("Unpack URP shaders"))
                 {
@@ -110,7 +110,7 @@ namespace OctoberStudio.PipelineSwitcher
 
         protected virtual bool IsURPPackageUnpacked()
         {
-            return Type.GetType("OctoberStudio.StandardParticlesScrollingShaderGUI") != null;
+            return Type.GetType("MrX.StandardParticlesScrollingShaderGUI") != null;
         }
 
         protected virtual void InstallURP()
@@ -164,9 +164,9 @@ namespace OctoberStudio.PipelineSwitcher
                 .Where(mat => mat != null)
                 .ToList();
 
-            var octoberUpgrader = new OctoberMaterialUpgrader();
-            var particleUpgrader = new OctoberScrollingParticleMaterialUpgrader();
-            var upgraders = new List<MaterialUpgrader> { new OctoberMaterialUpgrader(), new OctoberScrollingParticleMaterialUpgrader() };
+            var mrxUpgrader = new MrXMaterialUpgrader();
+            var particleUpgrader = new MrXScrollingParticleMaterialUpgrader();
+            var upgraders = new List<MaterialUpgrader> { new MrXMaterialUpgrader(), new MrXScrollingParticleMaterialUpgrader() };
             foreach (var material in materials)
             {
                 MaterialUpgrader.Upgrade(material, upgraders, MaterialUpgrader.UpgradeFlags.None);

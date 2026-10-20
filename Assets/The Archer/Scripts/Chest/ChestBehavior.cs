@@ -1,9 +1,9 @@
-using OctoberStudio.Audio;
+using MrX.Audio;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace OctoberStudio
+namespace MrX
 {
     public abstract class ChestBehavior : MonoBehaviour
     {
@@ -28,6 +28,7 @@ namespace OctoberStudio
         [SerializeField] protected AudioData chestSpawnSound;
 
         public UnityAction<ChestBehavior> onHidden;
+        private bool achievementOpenRecorded;
 
         protected virtual void Awake()
         {
@@ -36,6 +37,7 @@ namespace OctoberStudio
 
         public virtual void Spawn(ChestSpawnData chestSpawnData)
         {
+            achievementOpenRecorded = false;
             chestSpawnData.TransformData.ApplyTo(transform);
         }
 
@@ -86,6 +88,9 @@ namespace OctoberStudio
 
         public virtual void OnOpenAnimationEndedEventFired()
         {
+            if (achievementOpenRecorded) return;
+            achievementOpenRecorded = true;
+            GameController.AchievementsManager?.Record(Achievements.AchievementMetric.ChestsOpened);
             StartCoroutine(OpenCoroutine());
         }
 

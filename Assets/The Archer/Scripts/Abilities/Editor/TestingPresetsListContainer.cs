@@ -1,10 +1,10 @@
-using OctoberStudio.Abilities;
-using OctoberStudio.StageCreator;
+using MrX.Abilities;
+using MrX.StageCreator;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace OctoberStudio
+namespace MrX
 {
     public class TestingPresetsListContainer
     {

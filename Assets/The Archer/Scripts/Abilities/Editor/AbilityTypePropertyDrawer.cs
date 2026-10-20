@@ -4,7 +4,7 @@ using UnityEditor;
 using UnityEditor.IMGUI.Controls;
 using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace MrX.Abilities
 {
     [CustomPropertyDrawer(typeof(AbilityType))]
     public class AbilityTypePropertyDrawer : PropertyDrawer

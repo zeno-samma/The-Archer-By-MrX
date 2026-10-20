@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace OctoberStudio.Armory
+namespace MrX.Armory
 {
     [System.Serializable]
     public class ItemSaveData
@@ -24,8 +24,11 @@ namespace OctoberStudio.Armory
         {
             get => level;
             set
-            { 
+            {
+                var gainedLevels = value - level;
                 level = value; 
+                if (gainedLevels > 0)
+                    GameController.AchievementsManager?.Record(Achievements.AchievementMetric.ItemUpgrades, gainedLevels);
                 OnItemLevelChanged?.Invoke(this, level);
             }
         }

@@ -1,6 +1,6 @@
-﻿using OctoberStudio.Enemy;
+﻿using MrX.Enemy;
 
-namespace OctoberStudio.Abilities
+namespace MrX.Abilities
 {
     public class BossSlayerAbilityBehavior : AbilityBehavior<BossSlayerAbilityData, BossSlayerAbilityLevel>
     {

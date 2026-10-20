@@ -1,9 +1,9 @@
-using OctoberStudio.StageCreator;
+using MrX.StageCreator;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace MrX.Abilities
 {
     public class AbilitiesTesterWindow : EditorWindow
     {
@@ -25,11 +25,11 @@ namespace OctoberStudio.Abilities
 
         protected TestingPresetsListContainer testingPresetsListContainer;
 
-        [MenuItem("Tools/October/Abilities Tester #a")]
+        [MenuItem("Tools/MrX Studio/Abilities Tester #a")]
         public static void OpenWindow()
         {
             AbilitiesTesterWindow wnd = GetWindow<AbilitiesTesterWindow>();
-            var content = new GUIContent("Abilities Tester");
+            var content = new GUIContent("MrX Studio | Abilities Tester");
 
             Texture2D icon = AssetDatabase.LoadAssetAtPath<Texture2D>("Assets/Common/Sprites/Editor/editor_ab_icon.png");
             if (icon != null)

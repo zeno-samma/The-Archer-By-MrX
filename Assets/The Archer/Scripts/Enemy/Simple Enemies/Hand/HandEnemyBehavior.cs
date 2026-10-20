@@ -1,8 +1,8 @@
-using OctoberStudio.Extensions;
+using MrX.Extensions;
 using System.Collections;
 using UnityEngine;
 
-namespace OctoberStudio.Enemy
+namespace MrX.Enemy
 {
     public class HandEnemyBehavior : EnemyBehavior
     {

@@ -1,11 +1,11 @@
-using OctoberStudio.Audio;
-using OctoberStudio.Easing;
-using OctoberStudio.Extensions;
-using OctoberStudio.Projectile;
+using MrX.Audio;
+using MrX.Easing;
+using MrX.Extensions;
+using MrX.Projectile;
 using System.Collections;
 using UnityEngine;
 
-namespace OctoberStudio.Enemy
+namespace MrX.Enemy
 {
     public class CouldronEnemyBehavior : EnemyBehavior
     {

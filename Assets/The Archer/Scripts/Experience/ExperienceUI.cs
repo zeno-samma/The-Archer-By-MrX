@@ -1,9 +1,9 @@
-using OctoberStudio.Easing;
+using MrX.Easing;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace OctoberStudio
+namespace MrX
 {
     public class ExperienceUI : MonoBehaviour
     {

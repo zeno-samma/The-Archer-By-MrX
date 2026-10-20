@@ -1,10 +1,10 @@
-using OctoberStudio.Easing;
-using OctoberStudio.Upgrades;
+using MrX.Easing;
+using MrX.Upgrades;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace OctoberStudio.UI
+namespace MrX.UI
 {
     public class UpgradeCardsSelector : HorizontalSelector<UpgradeCardSelectable>
     {

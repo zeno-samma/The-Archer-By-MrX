@@ -1,4 +1,4 @@
-using OctoberStudio.Enemy;
+using MrX.Enemy;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEditor.SceneManagement;
@@ -6,7 +6,7 @@ using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace OctoberStudio.StageCreator
+namespace MrX.StageCreator
 {
     public class WaveEnemiesHandler
     {

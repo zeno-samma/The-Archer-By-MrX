@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace MrX.Abilities
 {
-    [CreateAssetMenu(fileName = "Split Shot Ability Data", menuName = "October/Abilities/Weapon Abilities/Split Shot")]
+    [CreateAssetMenu(fileName = "Split Shot Ability Data", menuName = "MrX Studio/Abilities/Weapon Abilities/Split Shot")]
     public class SplitShotAbilityData : GenericAbilityData<SplitShotAbilityLevel>
     {
         protected virtual void Awake()

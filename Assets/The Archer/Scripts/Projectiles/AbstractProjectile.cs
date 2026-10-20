@@ -1,10 +1,10 @@
-using OctoberStudio.Easing;
-using OctoberStudio.StatusEffects;
+using MrX.Easing;
+using MrX.StatusEffects;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace OctoberStudio.Projectile
+namespace MrX.Projectile
 {
     public abstract class AbstractProjectile : MonoBehaviour
     {

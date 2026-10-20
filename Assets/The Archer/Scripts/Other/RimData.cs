@@ -1,8 +1,8 @@
 using UnityEngine;
 
-namespace OctoberStudio
+namespace MrX
 {
-    [CreateAssetMenu(fileName = "Rim Data", menuName = "October/Effects/Rim Data")]
+    [CreateAssetMenu(fileName = "Rim Data", menuName = "MrX Studio/Effects/Rim Data")]
     public class RimData : ScriptableObject
     {
         [SerializeField] protected Color rimColor;

@@ -1,17 +1,22 @@
-using OctoberStudio.Abilities;
-using OctoberStudio.Armory;
-using OctoberStudio.Player;
-using OctoberStudio.Weapon;
+using MrX.Abilities;
+using MrX.Armory;
+using MrX.Player;
+using MrX.Weapon;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace OctoberStudio
+namespace MrX
 {
     public class ArmoryManager : MonoBehaviour
     {
         [SerializeField] protected ArmoryDatabase database;
         protected ArmorySave save;
+        public EquipmentForge Forge { get; private set; }
+        public MrX.Crafting.CraftingManager Crafting { get; private set; }
+        public InventoryBagService Bag { get; private set; }
+        public Rewards.BossChestService BossChests { get; private set; }
+        public event UnityAction OnInventoryChanged;
 
         protected Dictionary<ItemType, ItemData> EquippedItems { get; set; }
         public HeroData EquippedHero { get; protected set; }
@@ -38,6 +43,17 @@ namespace OctoberStudio
 
             InitItems();
             InitHeroes();
+            var dashboard = Resources.Load<UI.ArmoryDashboardDatabase>(UI.ArmoryDashboardDatabase.ResourcePath);
+            Bag = new InventoryBagService(save, dashboard, GameController.CurrenciesManager, GameController.SaveManager, ClaimPendingEquipment);
+            Forge = new EquipmentForge(database, save, GameController.CurrenciesManager, GameController.SaveManager);
+            var craftingDatabase = Resources.Load<MrX.Crafting.CraftingDatabase>(MrX.Crafting.CraftingDatabase.ResourcePath);
+            if (craftingDatabase != null)
+            {
+                Crafting = gameObject.AddComponent<MrX.Crafting.CraftingManager>();
+                Crafting.Initialize(craftingDatabase, database, save, GameController.SaveManager, UnlockItem);
+            }
+            BossChests = new Rewards.BossChestService(this, new Rewards.LuckyRewardDelivery(this, GameController.CurrenciesManager), GameController.SaveManager);
+            BossChests.RecoverPending();
         }
 
         protected virtual void InitItems()
@@ -287,8 +303,12 @@ namespace OctoberStudio
 
         public virtual void UnlockItem(string id)
         {
+            if (database.GetItem(id) == null) return;
+            if (save.GetItem(id) == null && !save.HasBagSpace)
+            { save.QueueEquipment(id); OnInventoryChanged?.Invoke(); return; }
             // save.AddItem(id);
             var itemSave = save.AddItem(id);
+            GameController.AchievementsManager?.RecordItemOwned(id);
 
             // Đăng ký sự kiện lắng nghe ngay khi item được mở khóa
             if (itemSave != null)
@@ -296,6 +316,25 @@ namespace OctoberStudio
                 itemSave.OnItemEquipped -= OnItemEquippedEventFired; // Hủy đăng ký cũ nếu có để tránh bị duplicate
                 itemSave.OnItemEquipped += OnItemEquippedEventFired; // Đăng ký sự kiện mới
             }
+            Crafting?.Service.OnItemUnlocked(id);
+            OnInventoryChanged?.Invoke();
+        }
+
+        public void ClaimPendingEquipment()
+        {
+            var pending = save.PendingEquipment;
+            for (var i = 0; i < pending.Count;)
+            {
+                var entry = pending[i]; var data = database.GetItem(entry.id);
+                if (data == null) { i++; continue; }
+                var item = save.GetItem(entry.id);
+                if (item == null && !save.HasBagSpace) break;
+                var isNew = item == null; if (isNew) item = save.AddItem(entry.id);
+                // Remove the pending unit before publishing item events.
+                entry.amount--; if (entry.amount <= 0) pending.RemoveAt(i);
+                if (isNew) UnlockItem(entry.id); else IncreaseItemLevel(data);
+            }
+            OnInventoryChanged?.Invoke();
         }
 
         public virtual HeroSaveData GetHeroSave(string id)

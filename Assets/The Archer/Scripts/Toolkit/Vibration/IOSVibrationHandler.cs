@@ -4,7 +4,7 @@ using UnityEngine;
 using System;
 #endif
 
-namespace OctoberStudio.Vibration
+namespace MrX.Vibration
 {
     public class IOSVibrationHandler : SimpleVibrationHandler
     {

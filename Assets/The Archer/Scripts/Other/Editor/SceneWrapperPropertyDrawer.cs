@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-namespace OctoberStudio
+namespace MrX
 {
     [CustomPropertyDrawer(typeof(SceneWrapper))]
     public class SceneWrapperPropertyDrawer : PropertyDrawer

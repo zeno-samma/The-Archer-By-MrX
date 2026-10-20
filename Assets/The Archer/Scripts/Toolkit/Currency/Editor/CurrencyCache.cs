@@ -1,9 +1,9 @@
 using System;
 using UnityEngine;
 using UnityEditor;
-using OctoberStudio.Extensions;
+using MrX.Extensions;
 
-namespace OctoberStudio.Currency
+namespace MrX.Currency
 {
     [InitializeOnLoad]
     public static class CurrencyCache

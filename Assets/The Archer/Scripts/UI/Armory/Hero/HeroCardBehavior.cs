@@ -1,9 +1,9 @@
-using OctoberStudio.Armory;
-using OctoberStudio.Extensions;
+using MrX.Armory;
+using MrX.Extensions;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace OctoberStudio.UI.Armory
+namespace MrX.UI.Armory
 {
     public class HeroCardBehavior : ArmoryCardBehavior
     {

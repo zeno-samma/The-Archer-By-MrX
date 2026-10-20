@@ -1,9 +1,9 @@
-﻿using OctoberStudio.Enemy;
+﻿using MrX.Enemy;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace OctoberStudio.Abilities
+namespace MrX.Abilities
 {
     public class StrongAuraAbilityBehavior : AbilityBehavior<StrongAuraAbilityData, StrongAuraAbilityLevel>
     {

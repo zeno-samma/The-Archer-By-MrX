@@ -1,9 +1,9 @@
-using OctoberStudio.Abilities;
+using MrX.Abilities;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace OctoberStudio
+namespace MrX
 {
     public class GoodChestBehavior : ChestBehavior
     {
@@ -36,7 +36,7 @@ namespace OctoberStudio
 
             if (selectedRarity != AbilityRarity.Legendary && Random.value * 100 < StageController.Player.Stats.ChanceToIncreaseRarity)
             {
-                selectedRarity = selectedRarity++;
+                selectedRarity++;
             }
 
             return selectedRarity;

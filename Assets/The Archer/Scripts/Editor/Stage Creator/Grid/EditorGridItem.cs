@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace OctoberStudio.StageCreator
+namespace MrX.StageCreator
 {
     public abstract class EditorGridItem<T>
     {

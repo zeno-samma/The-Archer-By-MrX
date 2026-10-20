@@ -1,9 +1,9 @@
-using OctoberStudio.Armory;
-using OctoberStudio.StatusEffects;
+using MrX.Armory;
+using MrX.StatusEffects;
 using System;
 using System.Collections.Generic;
 
-namespace OctoberStudio.Player
+namespace MrX.Player
 {
     public class PlayerStatsHandler
     {
@@ -117,6 +117,20 @@ namespace OctoberStudio.Player
             var heroLevel = GameController.ArmoryManager.GetEquippedHeroLevel();
 
             var itemTypes = new List<ItemType>((ItemType[])Enum.GetValues(typeof(ItemType)));
+            var levels = new List<ItemLevel>(itemTypes.Count);
+            for (int i = 0; i < itemTypes.Count; i++)
+            {
+                var itemData = GameController.ArmoryManager.GetEquippedItemData(itemTypes[i]);
+                var itemSave = GameController.ArmoryManager.GetEquippedItemSave(itemTypes[i]);
+                if (itemData == null || itemSave == null || itemSave.Level < 0) continue;
+                var level = itemData.GetItemLevel(itemSave.Level); if (level != null) levels.Add(level);
+            }
+            Init(heroLevel, levels);
+        }
+
+        // Shared by gameplay and the Armory snapshot, without spawning a player.
+        public virtual void Init(HeroLevel heroLevel, IReadOnlyList<ItemLevel> itemLevels)
+        {
 
             var maxHP = heroLevel.GetStatValue(StatType.HP);
             var damage = heroLevel.GetStatValue(StatType.Damage);
@@ -128,15 +142,9 @@ namespace OctoberStudio.Player
             var criticalChance = heroLevel.GetStatValue(StatType.CriticalChance);
             var hpRecovery = heroLevel.GetStatValue(StatType.HPRecovery);
 
-            for (int i = 0; i < itemTypes.Count; i++)
+            for (int i = 0; i < itemLevels.Count; i++)
             {
-                var itemType = itemTypes[i];
-                var itemData = GameController.ArmoryManager.GetEquippedItemData(itemType);
-                var itemSave = GameController.ArmoryManager.GetEquippedItemSave(itemType);
-
-                if (itemData == null || itemSave == null) continue;
-
-                var itemLevel = itemData.GetItemLevel(itemSave.Level);
+                var itemLevel = itemLevels[i];
 
                 if (itemLevel == null) continue;
 

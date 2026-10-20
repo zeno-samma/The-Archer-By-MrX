@@ -1,7 +1,7 @@
-using OctoberStudio.Extensions;
+using MrX.Extensions;
 using UnityEngine;
 
-namespace OctoberStudio.Weapon
+namespace MrX.Weapon
 {
     public class FlyingWeaponHolder : MonoBehaviour
     {

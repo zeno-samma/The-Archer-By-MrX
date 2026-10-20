@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace OctoberStudio
+namespace MrX
 {
-    [CreateAssetMenu(fileName = "Chests Database", menuName = "October/Chests Database")]
+    [CreateAssetMenu(fileName = "Chests Database", menuName = "MrX Studio/Chests Database")]
     public class ChestsDatabase : ScriptableObject
     {
         [SerializeField] public List<ChestData> chests;

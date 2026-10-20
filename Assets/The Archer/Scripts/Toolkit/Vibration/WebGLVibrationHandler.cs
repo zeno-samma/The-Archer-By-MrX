@@ -6,7 +6,7 @@ using System;
 
 using UnityEngine.InputSystem;
 
-namespace OctoberStudio.Vibration
+namespace MrX.Vibration
 {
     public class WebGLVibrationHandler : SimpleVibrationHandler
     {

@@ -1,9 +1,9 @@
-using OctoberStudio.Armory;
-using OctoberStudio.Save;
+using MrX.Armory;
+using MrX.Save;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace OctoberStudio
+namespace MrX
 {
     [System.Serializable]
     public class ArmorySave : ISave
@@ -13,6 +13,19 @@ namespace OctoberStudio
 
         [SerializeField] protected HeroSaveData[] heroes;
         protected List<HeroSaveData> Heroes { get; set; }
+
+        [SerializeField] private int bagCapacity = 40;
+        [SerializeField] private List<PendingEquipmentEntry> pendingEquipment = new List<PendingEquipmentEntry>();
+        public int BagCapacity => System.Math.Max(40, bagCapacity);
+        public int UsedSlots => Items == null ? (items == null ? 0 : items.Length) : Items.Count;
+        public bool HasBagSpace => UsedSlots < BagCapacity;
+        public List<PendingEquipmentEntry> PendingEquipment => pendingEquipment;
+        public void SetBagCapacity(int capacity) { bagCapacity = System.Math.Max(BagCapacity, capacity); }
+        public void QueueEquipment(string id)
+        {
+            foreach (var entry in pendingEquipment) if (entry.id == id) { if (entry.amount < int.MaxValue) entry.amount++; return; }
+            pendingEquipment.Add(new PendingEquipmentEntry { id = id, amount = 1 });
+        }
 
         public bool IsInitialized { get; protected set; }
 
@@ -37,9 +50,15 @@ namespace OctoberStudio
             {
                 Heroes = new List<HeroSaveData>(heroes);
             }
+            if (pendingEquipment == null) pendingEquipment = new List<PendingEquipmentEntry>();
+            pendingEquipment.RemoveAll(entry => entry == null || string.IsNullOrEmpty(entry.id) || entry.amount <= 0);
+            // Old saves keep all equipment, even if their count exceeds 40.
+            bagCapacity = System.Math.Max(BagCapacity, UsedSlots);
         }
 
         #region Items
+
+        [System.Serializable] public class PendingEquipmentEntry { public string id; public int amount; }
 
         public virtual ItemSaveData GetItem(string id)
         {

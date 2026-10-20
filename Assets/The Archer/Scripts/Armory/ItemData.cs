@@ -1,5 +1,5 @@
-using OctoberStudio.Abilities;
-using OctoberStudio.Currency;
+using MrX.Abilities;
+using MrX.Currency;
 using System;
 using System.Collections.Generic;
 #if UNITY_EDITOR
@@ -7,9 +7,9 @@ using UnityEditor;
 #endif
 using UnityEngine;
 
-namespace OctoberStudio.Armory
+namespace MrX.Armory
 {
-    [CreateAssetMenu(fileName = "Item Data 001", menuName = "October/Armory/Item Data")]
+    [CreateAssetMenu(fileName = "Item Data 001", menuName = "MrX Studio/Armory/Item Data")]
     public class ItemData: ScriptableObject
     {
         [SerializeField, HideInInspector] protected int dataVersion;
@@ -26,6 +26,10 @@ namespace OctoberStudio.Armory
 
         [Space]
         [SerializeField] protected List<ItemLevel> itemLevels;
+
+        [Header("Crafting — unlock equipment, independent of Item Levels")]
+        [SerializeField] protected MrX.Crafting.CraftingRecipe crafting = new MrX.Crafting.CraftingRecipe();
+        public MrX.Crafting.CraftingRecipe Crafting => crafting;
 
         public string Id => guid;
 

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace MrX.Abilities
 {
     public abstract class AbilityBehavior<T, K> : MonoBehaviour, IAbilityBehavior where T : GenericAbilityData<K> where K : AbilityLevel
     {
@@ -46,7 +46,7 @@ namespace OctoberStudio.Abilities
 
         protected virtual void OnDestroy()
         {
-            Data.onAbilityUpgraded -= OnAbilityUpgraded;
+            if (Data != null) Data.onAbilityUpgraded -= OnAbilityUpgraded;
         }
 
         public virtual void Clear()

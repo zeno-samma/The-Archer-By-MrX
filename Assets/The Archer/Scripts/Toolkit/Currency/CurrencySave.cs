@@ -1,9 +1,9 @@
-using OctoberStudio.Currency;
-using OctoberStudio.Save;
+using MrX.Currency;
+using MrX.Save;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace OctoberStudio
+namespace MrX
 {
     public class CurrencySave: ISave
     {
@@ -47,6 +47,17 @@ namespace OctoberStudio
             }
 
             return canAfford;
+        }
+
+        // Commit the purchased state before publishing the wallet notification.
+        // Observers therefore see both the new balance and the purchased level.
+        public bool TryWithdrawAndCommit(int requiredAmount, System.Action commit)
+        {
+            if (requiredAmount < 0 || commit == null || !CanAfford(requiredAmount)) return false;
+            amount -= requiredAmount;
+            try { commit(); }
+            finally { OnAmountChanged?.Invoke(this); }
+            return true;
         }
 
         public virtual bool CanAfford(int requiredAmount)

@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace MrX.Abilities
 {
-    [CreateAssetMenu(fileName = "Heal Ability Data", menuName = "October/Abilities/Defensive Abilities/Heal")]
+    [CreateAssetMenu(fileName = "Heal Ability Data", menuName = "MrX Studio/Abilities/Defensive Abilities/Heal")]
     public class HealAbilityData : GenericAbilityData<HealAbilityLevel>
     {
         protected virtual void Awake()

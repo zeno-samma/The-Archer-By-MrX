@@ -1,8 +1,8 @@
-using OctoberStudio.Easing;
+using MrX.Easing;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace OctoberStudio.UI
+namespace MrX.UI
 {
     public class UpgradeCardSelectable : HorizontalSelectable
     {

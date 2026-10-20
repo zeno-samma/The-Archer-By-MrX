@@ -1,4 +1,4 @@
-namespace OctoberStudio.Easing
+namespace MrX.Easing
 {
     public enum EasingType
     {

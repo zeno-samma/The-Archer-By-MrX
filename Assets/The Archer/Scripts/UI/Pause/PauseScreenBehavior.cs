@@ -1,11 +1,11 @@
-using OctoberStudio.Easing;
-using OctoberStudio.Extensions;
+using MrX.Easing;
+using MrX.Extensions;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace OctoberStudio.UI
+namespace MrX.UI
 {
     public class PauseScreenBehavior : MonoBehaviour
     {

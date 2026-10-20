@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace OctoberStudio.Audio
+namespace MrX.Audio
 {
     public interface IAudioManager
     {

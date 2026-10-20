@@ -1,9 +1,9 @@
-using OctoberStudio.Extensions;
-using OctoberStudio.Pool;
-using OctoberStudio.UI;
+using MrX.Extensions;
+using MrX.Pool;
+using MrX.UI;
 using UnityEngine;
 
-namespace OctoberStudio.Input
+namespace MrX.Input
 {
     public class HighlightsParentBehavior : MonoBehaviour
     {

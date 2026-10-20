@@ -1,9 +1,9 @@
-using OctoberStudio.Armory;
+using MrX.Armory;
 using UnityEngine;
 
-namespace OctoberStudio.Weapon
+namespace MrX.Weapon
 {
-    [CreateAssetMenu(fileName = "Weapon Data 001", menuName = "October/Armory/Weapon Data")]
+    [CreateAssetMenu(fileName = "Weapon Data 001", menuName = "MrX Studio/Armory/Weapon Data")]
     public class WeaponData : ItemData
     {
         [Space]

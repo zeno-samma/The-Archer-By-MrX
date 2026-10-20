@@ -1,4 +1,4 @@
-namespace OctoberStudio.Vibration
+namespace MrX.Vibration
 {
     public interface IVibrationManager
     {

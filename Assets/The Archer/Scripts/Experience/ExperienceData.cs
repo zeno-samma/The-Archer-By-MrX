@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace OctoberStudio
+namespace MrX
 {
-    [CreateAssetMenu(fileName = "Experience Data", menuName = "October/Experience Data")]
+    [CreateAssetMenu(fileName = "Experience Data", menuName = "MrX Studio/Experience Data")]
     public class ExperienceData: ScriptableObject 
     {
         public List<ExperienceDataLevel> levels;

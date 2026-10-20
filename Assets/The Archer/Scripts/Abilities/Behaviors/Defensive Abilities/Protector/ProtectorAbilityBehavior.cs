@@ -1,6 +1,6 @@
-﻿using OctoberStudio.Easing;
+﻿using MrX.Easing;
 
-namespace OctoberStudio.Abilities
+namespace MrX.Abilities
 {
     public class ProtectorAbilityBehavior : AbilityBehavior<ProtectorAbilityData, ProtectorAbilityLevel>
     {

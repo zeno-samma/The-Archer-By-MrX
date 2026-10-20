@@ -1,10 +1,16 @@
 using UnityEngine;
 
-namespace OctoberStudio.Drop
+namespace MrX.Drop
 {
     [System.Serializable]
     public class DropData
     {
+        public DropData() { }
+        public DropData(DropType type, GameObject prefab, int poolSize)
+        {
+            dropType = type; this.prefab = prefab; initialPoolSize = poolSize;
+            canPickUpManually = true; waveEndAutomaticPickUp = true; roomEndAutomaticPickUp = true;
+        }
         [SerializeField] protected DropType dropType;
         public DropType DropType => dropType;
 

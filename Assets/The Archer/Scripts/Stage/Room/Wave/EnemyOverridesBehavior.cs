@@ -1,11 +1,13 @@
-using OctoberStudio.Drop;
+using MrX.Drop;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace OctoberStudio
+namespace MrX
 {
     public class EnemyOverridesBehavior : MonoBehaviour
     {
+        [SerializeField] protected Rewards.BossChestRewards bossChestRewards;
+        public Rewards.BossChestRewards BossChestRewards => bossChestRewards;
         [Tooltip("This drop will spawn in addition to the main drop of the enemy")]
         [SerializeField] protected List<EnemyDropData> additionalDrop = new List<EnemyDropData>();
 
@@ -34,6 +36,7 @@ namespace OctoberStudio
 
         public virtual void Init(EnemyOverrideData overrideData)
         {
+            bossChestRewards = overrideData.BossChestRewards;
             additionalDrop = overrideData.AdditionalDrop;
             dropOverrides = overrideData.DropOverrides;
             removeDrop = overrideData.RemoveDrop;

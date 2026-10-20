@@ -1,10 +1,10 @@
-using OctoberStudio.Easing;
+using MrX.Easing;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-namespace OctoberStudio.UI
+namespace MrX.UI
 {
     public class MainMenuDockItemBehavior : MonoBehaviour
     {
@@ -30,6 +30,18 @@ namespace OctoberStudio.UI
         public event UnityAction<MainMenuPageType> onSelected;
 
         public bool IsSelected { get; protected set; } = false;
+
+        public virtual void Configure(MainMenuPageType type, string title, Sprite icon)
+        {
+            pageType = type;
+            gameObject.name = title + " Dock Item";
+            pageNameText.text = title;
+            pageNameText.textWrappingMode = TextWrappingModes.NoWrap;
+            pageNameText.enableAutoSizing = true;
+            pageNameText.fontSizeMin = 12;
+            if (icon != null) iconImage.sprite = icon;
+            button.navigation = new Navigation { mode = Navigation.Mode.Automatic };
+        }
 
         protected virtual void Awake()
         {
@@ -64,6 +76,7 @@ namespace OctoberStudio.UI
 
         protected virtual void OnButtonClicked()
         {
+            if (GameController.MainMenuScreenBehavior != null && !GameController.MainMenuScreenBehavior.IsDockEnabled) return;
             if (!IsSelected)
             {
                 GameController.AudioManager.PlayButtonClick();

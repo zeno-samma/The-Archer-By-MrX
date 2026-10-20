@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace OctoberStudio.Armory
+namespace MrX.Armory
 {
-    [CreateAssetMenu(fileName = "Weapon Animations Set", menuName = "October/Armory/Weapon Animations Set")]
+    [CreateAssetMenu(fileName = "Weapon Animations Set", menuName = "MrX Studio/Armory/Weapon Animations Set")]
     public class WeaponAnimationsSet : ScriptableObject
     {
         [Tooltip("This value is used to calculate the value of movement speed multipler property of hero animator")]

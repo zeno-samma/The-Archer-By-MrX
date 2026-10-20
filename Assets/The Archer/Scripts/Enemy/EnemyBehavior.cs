@@ -1,14 +1,14 @@
-using OctoberStudio.Audio;
-using OctoberStudio.Drop;
-using OctoberStudio.Easing;
-using OctoberStudio.Extensions;
-using OctoberStudio.StatusEffects;
+using MrX.Audio;
+using MrX.Drop;
+using MrX.Easing;
+using MrX.Extensions;
+using MrX.StatusEffects;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace OctoberStudio.Enemy
+namespace MrX.Enemy
 {
     public abstract class EnemyBehavior : MonoBehaviour, IDefeatable, IProjectileTarget
     {
@@ -103,6 +103,9 @@ namespace OctoberStudio.Enemy
         protected abstract IEnumerator BehaviorCoroutine();
 
         public bool UseDrop { get; protected set; }
+        private bool bossChestDropped;
+        private Vector3 lootSpawnPosition;
+        private int lootSpawnIndex = -1;
         public EnemyOverrideData OverrideData { get; protected set; }
 
         protected virtual void Awake()
@@ -155,10 +158,12 @@ namespace OctoberStudio.Enemy
         {
             OverrideData = spawn.OverrideData;
             Spawn(spawn.TransformData.Position, spawn.TransformData.Rotation);
+            lootSpawnIndex = StageController.Room != null ? StageController.Room.CurrentWave.EnemySpawns.IndexOf(spawn) : -1;
         }
 
         public virtual void Spawn(Vector3 position, Quaternion rotation, bool useDrop = true)
         {
+            bossChestDropped = false; lootSpawnPosition = position; lootSpawnIndex = -1;
             transform.position = position;
             transform.rotation = rotation;
 
@@ -516,6 +521,21 @@ namespace OctoberStudio.Enemy
             // Đặt dòng này lên trên cùng để xem hàm có được gọi tới không
             // Debug.Log($"[TỔNG KIỂM TRA DROP] Quái: {gameObject.name} | Gọi hàm Drop: CÓ | UseDrop: {UseDrop}");
             if (!UseDrop) return;
+            if (Data.IsBoss && !bossChestDropped)
+            {
+                bossChestDropped = true;
+                var config = Resources.Load<Crafting.CraftingDatabase>(Crafting.CraftingDatabase.ResourcePath);
+                var table = OverrideData?.BossChestRewards ?? Data.BossChestRewards ?? config?.defaultBossRewards;
+                var run = GameController.SaveManager.GetSave<ContinuePlayingSave>("Continue Playing");
+                string key = run.RunToken + ":" + StageController.StageIndex + ":" + run.ActiveRoomId + ":" + run.ActiveWaveId + ":" + Data.EnemyType + ":" + lootSpawnIndex + ":" + Mathf.RoundToInt(lootSpawnPosition.x * 1000) + ":" + Mathf.RoundToInt(lootSpawnPosition.y * 1000) + ":" + Mathf.RoundToInt(lootSpawnPosition.z * 1000);
+                var legacyDrops = OverrideData != null && OverrideData.DropOverrides.Exists(d => d.DropType == DropType.Item)
+                    ? OverrideData.DropOverrides : Data.Drops;
+                bool hasStageItemPool = legacyDrops.Exists(d => d.DropType == DropType.Item);
+                var receipt = hasStageItemPool
+                    ? GameController.ArmoryManager.BossChests.PrepareFromDrops(run.RunToken, key, legacyDrops, StageController.Player.NormalizedHP, Random.value, Random.value)
+                    : GameController.ArmoryManager.BossChests.Prepare(run.RunToken, key, table, Random.value, Random.value);
+                StageController.DropManager.DropBossChest(receipt, transform.position);
+            }
 
             int counter = 0;
             bool droppedExperience = false;
@@ -523,6 +543,7 @@ namespace OctoberStudio.Enemy
             for (int i = 0; i < Data.Drops.Count; i++)
             {
                 var data = Data.Drops[i];
+                if (data.DropType == DropType.Item || data.DropType == DropType.CraftingResource || data.DropType == DropType.BossChest) continue;
                 bool isWinnerFromPool = false; // Đánh dấu vật phẩm đã được quay trúng
 
                 if (OverrideData != null)
@@ -557,7 +578,6 @@ namespace OctoberStudio.Enemy
                 {
                     var amount = data.GetDropAmount(StageController.Player.NormalizedHP).Value;
 
-                    Debug.Log($"[BOSS OVERRIDE DEBUG] Quái: {gameObject.name} | Loại: {data.DropType} | Tỉ lệ: {chance}%");
                     // ... (Phần for bên trong giữ nguyên hoàn toàn)
                     for (int j = 0; j < amount; j++)
                     {
@@ -586,6 +606,7 @@ namespace OctoberStudio.Enemy
                 for (int i = 0; i < OverrideData.AdditionalDrop.Count; i++)
                 {
                     var data = OverrideData.AdditionalDrop[i];
+                    if (data.DropType == DropType.Item || data.DropType == DropType.CraftingResource || data.DropType == DropType.BossChest) continue;
 
                     var chance = data.GetChance(StageController.Player.NormalizedHP);
                     if (chance <= 0) continue;

@@ -1,6 +1,6 @@
 using UnityEngine.UI;
 
-namespace OctoberStudio.UI.Armory
+namespace MrX.UI.Armory
 {
     public class HeroesGridBehavior : ArmoryGridUI<HeroCardBehavior>
     {

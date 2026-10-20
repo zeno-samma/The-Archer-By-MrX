@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 using UnityEditor;
 using UnityEngine;
 
-namespace OctoberStudio.StageCreator
+namespace MrX.StageCreator
 {
     public static class SerializedPropertyExtensions
     {

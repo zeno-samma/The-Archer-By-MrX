@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace OctoberStudio.Currency
+namespace MrX.Currency
 {
     [DefaultExecutionOrder(-5)]
     public class CurrenciesManager : MonoBehaviour, ICurrenciesManager
@@ -41,6 +41,20 @@ namespace OctoberStudio.Currency
 
                 gameplayCurrencies.Add(data.ID, gameplaySave);
             }
+            GameController.InitializeMenuEconomy(this);
+        }
+
+        private float nextRecoveryCheck;
+        protected virtual void Update()
+        {
+            if (Time.unscaledTime < nextRecoveryCheck) return;
+            nextRecoveryCheck = Time.unscaledTime + 1;
+            GameController.MenuEconomy?.Refresh();
+        }
+
+        protected virtual void OnApplicationFocus(bool focused)
+        {
+            if (focused) GameController.MenuEconomy?.Refresh();
         }
 
         public virtual CurrencySave GetCurrency(string id, bool gameplay)

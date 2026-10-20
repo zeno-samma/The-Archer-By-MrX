@@ -2,7 +2,7 @@
 // Modified by [Your Name or Studio].
 // Licensed under the Unity Companion License (see https://unity3d.com/legal/licenses/unity-companion-license)
 
-Shader "October/Particles/Standard Unlit Scrolling"
+Shader "MrX/Particles/Standard Unlit Scrolling"
 {
     Properties
     {
@@ -357,5 +357,5 @@ Shader "October/Particles/Standard Unlit Scrolling"
     }
 
     Fallback "VertexLit"
-    CustomEditor "OctoberStudio.StandardParticlesScrollingShaderGUI"
+    CustomEditor "MrX.StandardParticlesScrollingShaderGUI"
 }

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 #if !UNITY_6000_6_OR_NEWER
 using System.Runtime.Serialization.Formatters.Binary;
@@ -7,28 +7,45 @@ using System.Security.Cryptography;
 using System.Text;
 using UnityEngine;
 
-namespace OctoberStudio.Save
+namespace MrX.Save
 {
     public static class SerializationHelper
     {
         public static readonly string persistentDataPath = Application.persistentDataPath + "/";
+
+#if UNITY_EDITOR
+        public const string VerificationDirectoryKey = "MrX.Verification.SaveDirectory";
+        private static string verificationDirectory;
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+        private static void InitVerificationDirectory()
+        { verificationDirectory = UnityEditor.SessionState.GetString(VerificationDirectoryKey, ""); }
+        public static void SetVerificationDirectory(string directory) => verificationDirectory = directory;
+#endif
+
+        public static string GetPersistentFilePath(string fileName)
+        {
+#if UNITY_EDITOR
+            if (!string.IsNullOrEmpty(verificationDirectory)) return Path.Combine(verificationDirectory, fileName);
+#endif
+            return persistentDataPath + fileName;
+        }
 
 #if !UNITY_6000_6_OR_NEWER
         public static T DeserializePersistent<T>(string fileName, bool isJson = false, string secureKey = "", bool useLogs = true) where T : class
         {
             if (isJson)
             {
-                return JsonDeserializeFromPath<T>(persistentDataPath + fileName, secureKey, useLogs);
+                return JsonDeserializeFromPath<T>(GetPersistentFilePath(fileName), secureKey, useLogs);
             }
             else
             {
-                return BinaryDeserializeFromPath<T>(persistentDataPath + fileName, useLogs);
+                return BinaryDeserializeFromPath<T>(GetPersistentFilePath(fileName), useLogs);
             }
         }
 #else
         public static T DeserializePersistent<T>(string fileName, string secureKey = "", bool useLogs = true) where T : class
         {
-            return JsonDeserializeFromPath<T>(persistentDataPath + fileName, secureKey, useLogs);
+            return JsonDeserializeFromPath<T>(GetPersistentFilePath(fileName), secureKey, useLogs);
         }
 #endif
 
@@ -111,17 +128,17 @@ namespace OctoberStudio.Save
         {
             if (isJson)
             {
-                JsonSerializeToPath(objectToSerialize, persistentDataPath + fileName, secureKey);
+                JsonSerializeToPath(objectToSerialize, GetPersistentFilePath(fileName), secureKey);
             }
             else
             {
-                BinarySerializeToPath(objectToSerialize, persistentDataPath + fileName);
+                BinarySerializeToPath(objectToSerialize, GetPersistentFilePath(fileName));
             }
         }
 #else
         public static void SerializePersistent<T>(T objectToSerialize, string fileName, string secureKey = "")
         {
-            JsonSerializeToPath(objectToSerialize, persistentDataPath + fileName, secureKey);
+            JsonSerializeToPath(objectToSerialize, GetPersistentFilePath(fileName), secureKey);
         }
 #endif
 
@@ -149,9 +166,9 @@ namespace OctoberStudio.Save
 
         public static void DeletePersistent(string fileName)
         {
-            if (File.Exists(persistentDataPath + fileName))
+            if (File.Exists(GetPersistentFilePath(fileName)))
             {
-                File.Delete(persistentDataPath + fileName);
+                File.Delete(GetPersistentFilePath(fileName));
             }
         }
 
@@ -200,7 +217,7 @@ namespace OctoberStudio.Save
 
         public static bool IsFileLocked(string fileName)
         {
-            string absolutePath = persistentDataPath + fileName;
+            string absolutePath = GetPersistentFilePath(fileName);
 
             if (!File.Exists(absolutePath)) return false;
 
@@ -222,7 +239,7 @@ namespace OctoberStudio.Save
 
         public static bool IsFileExists(string fileName)
         {
-            string absolutePath = persistentDataPath + fileName;
+            string absolutePath = GetPersistentFilePath(fileName);
             return File.Exists(absolutePath);
         }
     }

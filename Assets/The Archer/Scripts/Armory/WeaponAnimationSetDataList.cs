@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace OctoberStudio.Armory
+namespace MrX.Armory
 {
     [System.Serializable]
     public class WeaponAnimationSetDataList

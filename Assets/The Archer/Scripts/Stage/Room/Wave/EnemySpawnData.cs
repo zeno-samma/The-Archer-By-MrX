@@ -1,10 +1,10 @@
-using OctoberStudio.Drop;
-using OctoberStudio.Enemy;
+using MrX.Drop;
+using MrX.Enemy;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-namespace OctoberStudio
+namespace MrX
 {
     [System.Serializable]
     public class EnemySpawnData
@@ -56,6 +56,8 @@ namespace OctoberStudio
     [System.Serializable]
     public class EnemyOverrideData
     {
+        [SerializeField] protected Rewards.BossChestRewards bossChestRewards;
+        public Rewards.BossChestRewards BossChestRewards => bossChestRewards;
         [Tooltip("This drop will spawn in addition to the main drop of the enemy")]
         [SerializeField] protected List<EnemyDropData> additionalDrop;
 
@@ -84,6 +86,7 @@ namespace OctoberStudio
 
         public EnemyOverrideData(EnemyOverridesBehavior overridesBehavior)
         {
+            bossChestRewards = overridesBehavior.BossChestRewards;
             additionalDrop = overridesBehavior.AdditionalDrop;
             dropOverrides = overridesBehavior.DropOverrides;
             removeDrop = overridesBehavior.RemoveDrop;
@@ -108,6 +111,7 @@ namespace OctoberStudio
 #if UNITY_EDITOR
         public EnemyOverrideData(SerializedProperty property)
         {
+            bossChestRewards = property.FindPropertyRelative("bossChestRewards").objectReferenceValue as Rewards.BossChestRewards;
             var additionalDropProperty = property.FindPropertyRelative("additionalDrop");
             var dropOverridesProperty = property.FindPropertyRelative("dropOverrides");
             var removeDropProperty = property.FindPropertyRelative("removeDrop");
@@ -146,6 +150,7 @@ namespace OctoberStudio
 
         public virtual void SaveToSerializedProperty(SerializedProperty property)
         {
+            property.FindPropertyRelative("bossChestRewards").objectReferenceValue = bossChestRewards;
             var additionalDropProperty = property.FindPropertyRelative("additionalDrop");
             var dropOverridesProperty = property.FindPropertyRelative("dropOverrides");
             var removeDropProperty = property.FindPropertyRelative("removeDrop");

@@ -1,17 +1,17 @@
-using OctoberStudio.Abilities;
-using OctoberStudio.Drop;
-using OctoberStudio.Easing;
-using OctoberStudio.Enemy;
-using OctoberStudio.Particles;
-using OctoberStudio.Projectile;
-using OctoberStudio.StatusEffects;
-using OctoberStudio.UI;
+using MrX.Abilities;
+using MrX.Drop;
+using MrX.Easing;
+using MrX.Enemy;
+using MrX.Particles;
+using MrX.Projectile;
+using MrX.StatusEffects;
+using MrX.UI;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using static OctoberStudio.StageSave;
+using static MrX.StageSave;
 
-namespace OctoberStudio
+namespace MrX
 {
     [DefaultExecutionOrder(-10)]
     public class StageController : MonoBehaviour
@@ -28,6 +28,8 @@ namespace OctoberStudio
         [SerializeField] protected GameObject playerPrefab;
 
         public static bool IsLoaded => instance != null;
+        public static bool IsResultFinalized { get; private set; }
+        private static bool settlingResult;
 
         public static GameScreenBehavior GameScreen => instance.gameScreen;
 
@@ -83,6 +85,7 @@ namespace OctoberStudio
         private static void ResetStatics()
         {
             instance = null;
+            IsResultFinalized = settlingResult = false;
 
             StageData = null;
             ProjectilesManager = null;
@@ -116,6 +119,8 @@ namespace OctoberStudio
         protected virtual void Awake()
         {
             instance = this;
+            IsResultFinalized = settlingResult = false;
+            (GameController.SaveManager as Save.SaveManager)?.BeginGameplayBatch();
 
             StageSave = GameController.SaveManager.GetSave<StageSave>("Stage");
             ContinuePlayingSave = GameController.SaveManager.GetSave<ContinuePlayingSave>("Continue Playing");
@@ -138,8 +143,17 @@ namespace OctoberStudio
             else
             {
                 StageIndex = StageSave.SelectedStageId;
+                if (ContinuePlayingSave.HasUnfinishedStageData && !string.IsNullOrEmpty(ContinuePlayingSave.StageContentId))
+                {
+                    int savedIndex = System.Array.FindIndex(stageDatabase.Stages, s => s.StageId == ContinuePlayingSave.StageContentId);
+                    if (savedIndex >= 0) StageIndex = savedIndex;
+                }
                 StageData = stageDatabase.GetStageData(StageIndex);
             }
+
+            // Gameplay consumers (including DropManager) still read the selected index.
+            StageSave.SetSelectedStageId(StageIndex);
+            ContinuePlayingSave.RememberStage(StageData.StageId);
 
             RoomsShuffler = new RoomsShuffler(StageData);
 
@@ -333,13 +347,16 @@ namespace OctoberStudio
 
         public static void OnExitReached(RoomExitBehavior roomExitBehavior)//người chơi đã đi đến cổng thoát
         {
+            if (IsResultFinalized || settlingResult || CurrentRoomIndex >= StageData.RoomsCount) return;
             CurrentRoomIndex++;
 
             if (CurrentRoomIndex >= StageData.RoomsCount)
             {
                 StageSave.CompleteStage(StageData);
+                GameController.AchievementsManager?.RecordStageClear(StageData.StageId);
+                GameController.DailyQuestsManager?.Record(Quests.DailyQuestType.ClearStages);
 
-                DropManager.GrantPickedUpItems();
+                FinalizeRunRewards();
                 GameScreen.StageCompleteScreen.Show();
                 // Debug.Log("Người chơi đã hoàn thành tất cả các phòng trong giai đoạn");
                 // 3. Hoặc đọc lại biến lưu trữ ở bất kỳ đâu/bất kỳ lúc nào về sau
@@ -394,13 +411,14 @@ namespace OctoberStudio
 
         public static void OnHeroDied()// người chơi đã chết
         {
+            if (IsResultFinalized || settlingResult) return;
             if (!Player.TryToRevive())
             {
                 onDefeat?.Invoke();
                 // Debug.Log("Người chơi đã chết");
                 // float recordedTime = ConsoleTimer.Instance.GetElapsedTime("Wave_1");
                 // Debug.Log("Thời gian hoàn thành Wave 1: " + recordedTime.ToString("F2") + "s");
-                DropManager.GrantPickedUpItems();
+                FinalizeRunRewards();
                 instance.gameScreen.StageFailedScreen.Show();
                 // ConsoleTimer.Instance.LogAllResults();==> Phát event chết và cho biết chết ở phòng nào
                 ConsoleTimer.Instance.ReportSessionResult("Die");
@@ -409,10 +427,31 @@ namespace OctoberStudio
 
         public static void ForceFail()
         {
+            if (IsResultFinalized || settlingResult) return;
             onDefeat?.Invoke();
 
-            DropManager.GrantPickedUpItems();
+            FinalizeRunRewards();
             instance.gameScreen.StageFailedScreen.Show();
+        }
+
+        public static void FinalizeRunRewards()
+        {
+            if (IsResultFinalized || settlingResult) return;
+            settlingResult = true;
+            try
+            {
+                DropManager.GrantPickedUpItems();
+                GameController.CurrenciesManager.ApplyGameplayAmounts();
+                ContinuePlayingSave.Disable();
+                GameController.DailyQuestsManager?.FlushPending();
+                GameController.AchievementsManager?.FlushPending();
+                GameController.ArmoryManager.Crafting?.FlushPending();
+                IsResultFinalized = true;
+                GameScreen.PrepareForResult();
+                var saves = GameController.SaveManager as Save.SaveManager;
+                if (saves != null) saves.CommitGameplayBatch(); else GameController.SaveManager.Save(false);
+            }
+            finally { settlingResult = false; }
         }
 
         public static void RecalculateEnemyMultipliers()//tính toán lại các hệ số nhân sát thương và máu của kẻ thù

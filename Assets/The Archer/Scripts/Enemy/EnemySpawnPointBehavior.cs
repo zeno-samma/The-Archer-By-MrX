@@ -1,8 +1,8 @@
-using OctoberStudio.Easing;
+using MrX.Easing;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace OctoberStudio.Enemy
+namespace MrX.Enemy
 {
     public class EnemySpawnPointBehavior : MonoBehaviour
     {

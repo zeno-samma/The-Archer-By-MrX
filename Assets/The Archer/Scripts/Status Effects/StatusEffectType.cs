@@ -1,4 +1,4 @@
-namespace OctoberStudio.StatusEffects
+namespace MrX.StatusEffects
 {
     public enum StatusEffectType
     {

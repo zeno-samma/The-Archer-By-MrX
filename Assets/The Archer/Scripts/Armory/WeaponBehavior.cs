@@ -1,11 +1,11 @@
-using OctoberStudio.Audio;
-using OctoberStudio.Enemy;
-using OctoberStudio.Extensions;
-using OctoberStudio.Projectile;
+using MrX.Audio;
+using MrX.Enemy;
+using MrX.Extensions;
+using MrX.Projectile;
 using System.Collections;
 using UnityEngine;
 
-namespace OctoberStudio.Weapon
+namespace MrX.Weapon
 {
     public class WeaponBehavior : AbstractWeaponBehavior
     {
@@ -245,13 +245,14 @@ namespace OctoberStudio.Weapon
                     projectile.Speed *= biggestMultiplier;
                 }
                 
-                if(Random.value * 100 < player.Stats.CritChanceStat)
+                float projectileDamage = damage;
+                projectile.IsCriticalHit = Random.value * 100 < player.Stats.CritChanceStat;
+                if (projectile.IsCriticalHit)
                 {
-                    projectile.IsCriticalHit = true;
-                    damage *= player.Stats.CritDamageMultiplierStat;
+                    projectileDamage *= player.Stats.CritDamageMultiplierStat;
                 }
 
-                projectile.Launch(damage);
+                projectile.Launch(projectileDamage);
 
                 projectile.Target = target;
 

@@ -1,11 +1,11 @@
-using OctoberStudio.Extensions;
+using MrX.Extensions;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace OctoberStudio.StageCreator
+namespace MrX.StageCreator
 {
     public class ReorderableListView<T> : IEnumerable<T> where T : ListItem, new()
     {

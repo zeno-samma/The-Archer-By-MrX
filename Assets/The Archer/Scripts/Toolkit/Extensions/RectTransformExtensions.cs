@@ -2,7 +2,7 @@ using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace OctoberStudio.Extensions
+namespace MrX.Extensions
 {
     public static class RectTransformExtensions
     {

@@ -1,7 +1,7 @@
-using OctoberStudio.Extensions;
+using MrX.Extensions;
 using UnityEngine;
 
-namespace OctoberStudio.UI
+namespace MrX.UI
 {
     public class ComboTextIndicatorBehavior : TextIndicatorBehavior
     {

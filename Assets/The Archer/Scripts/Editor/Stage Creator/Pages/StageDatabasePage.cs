@@ -2,7 +2,7 @@ using System.IO;
 using UnityEditor;
 using UnityEngine;
 
-namespace OctoberStudio.StageCreator
+namespace MrX.StageCreator
 {
     public class StageDatabasePage
     {
@@ -153,6 +153,8 @@ namespace OctoberStudio.StageCreator
             GUILayout.Label(nameLabel, GUILayout.Width(100));
             EditorGUILayout.PropertyField(stageNameProperty, new GUIContent(), GUILayout.Width(200));
             EditorGUILayout.EndHorizontal();
+
+            EditorGUILayout.PropertyField(stageSerializedObject.FindProperty("energyCost"), new GUIContent("Run Energy Cost"));
 
             EditorGUILayout.BeginHorizontal();
             var useObjectiveLabel = new GUIContent("Show Objective");

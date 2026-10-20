@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace MrX.Abilities
 {
-    [CreateAssetMenu(fileName = "Boss Slayer Ability Data", menuName = "October/Abilities/Stat Abilities/Boss Slayer")]
+    [CreateAssetMenu(fileName = "Boss Slayer Ability Data", menuName = "MrX Studio/Abilities/Stat Abilities/Boss Slayer")]
     public class BossSlayerAbilityData : GenericAbilityData<BossSlayerAbilityLevel>
     {
         protected virtual void Awake()

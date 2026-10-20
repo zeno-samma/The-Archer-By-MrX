@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace MrX.Abilities
 {
-    [CreateAssetMenu(fileName = "GnomeForm Ability Data", menuName = "October/Abilities/Stat Abilities/GnomeForm")]
+    [CreateAssetMenu(fileName = "GnomeForm Ability Data", menuName = "MrX Studio/Abilities/Stat Abilities/GnomeForm")]
     public class GnomeFormAbilityData : GenericAbilityData<GnomeFormAbilityLevel>
     {
         protected virtual void Awake()

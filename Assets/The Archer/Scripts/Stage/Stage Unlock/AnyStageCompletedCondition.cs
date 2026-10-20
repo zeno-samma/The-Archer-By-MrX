@@ -1,10 +1,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace OctoberStudio
+namespace MrX
 {
     [System.Serializable]
     [UnlockCondition("One Of Stages Completed")]
+    [UnityEngine.Scripting.APIUpdating.MovedFrom(true, "OctoberStudio", "Assembly-CSharp", "AnyStageCompletedCondition")]
     public class AnyStageCompletedCondition : StageUnlockCondition
     {
         [SerializeField, HideInInspector] protected string name = "One Of Stages Completed";

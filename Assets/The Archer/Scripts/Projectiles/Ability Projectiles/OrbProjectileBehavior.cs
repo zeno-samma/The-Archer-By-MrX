@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace OctoberStudio.Projectile
+namespace MrX.Projectile
 {
     public class OrbProjectileBehavior : AbstractProjectile
     {

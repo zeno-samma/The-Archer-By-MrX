@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace MrX.Abilities
 {
-    [CreateAssetMenu(fileName = "Orb Enhancement Ability Data", menuName = "October/Abilities/Orb Abilities/Orb Enhancement")]
+    [CreateAssetMenu(fileName = "Orb Enhancement Ability Data", menuName = "MrX Studio/Abilities/Orb Abilities/Orb Enhancement")]
     public class OrbEnhancementAbilityData : GenericAbilityData<OrbEnhancementAbilityLevel>
     {
         protected virtual void Awake()

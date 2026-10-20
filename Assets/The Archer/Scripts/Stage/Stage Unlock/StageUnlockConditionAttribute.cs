@@ -1,6 +1,6 @@
 using System;
 
-namespace OctoberStudio
+namespace MrX
 {
     [AttributeUsage(AttributeTargets.Class, Inherited = false)]
     public class UnlockConditionAttribute : Attribute

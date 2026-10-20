@@ -2,7 +2,7 @@
 using UnityEngine;
 using System;
 
-namespace OctoberStudio
+namespace MrX
 {
     [CustomPropertyDrawer(typeof(Float))]
     public class FloatPropertyDrawer : PropertyDrawer

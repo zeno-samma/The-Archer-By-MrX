@@ -1,11 +1,11 @@
-using OctoberStudio.Easing;
-using OctoberStudio.Input;
+using MrX.Easing;
+using MrX.Input;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace OctoberStudio
+namespace MrX
 {
     public class ContinuePlayingPopup : MonoBehaviour
     {
@@ -88,8 +88,21 @@ namespace OctoberStudio
 
         protected virtual void OnNoButtonClicked()
         {
+            if (!ContinuePlayingSave.HasUnfinishedStageData) return;
+            var saves = GameController.SaveManager as MrX.Save.SaveManager;
+            saves?.BeginGameplayBatch();
+            GameController.ArmoryManager.BossChests.CommitRun(ContinuePlayingSave.RunToken);
+            if (ContinuePlayingSave.PickedUpItems != null)
+                foreach (var drop in ContinuePlayingSave.PickedUpItems)
+                {
+                    if (GameController.ArmoryManager.IsItemUnlocked(drop.ItemId)) GameController.ArmoryManager.IncreaseItemLevel(drop.ItemId);
+                    else GameController.ArmoryManager.UnlockItem(drop.ItemId);
+                }
+            ContinuePlayingSave.SavePickedUpItems(System.Array.Empty<StageSave.ItemDropSaveData>());
             ContinuePlayingSave.Disable();
             GameController.CurrenciesManager.ApplyGameplayAmounts();
+            GameController.DailyQuestsManager?.FlushPending(); GameController.AchievementsManager?.FlushPending(); GameController.ArmoryManager.Crafting?.FlushPending();
+            if (saves != null) saves.CommitGameplayBatch(); else GameController.SaveManager.Save(false);
 
             GameController.AudioManager.PlayButtonClick();
 

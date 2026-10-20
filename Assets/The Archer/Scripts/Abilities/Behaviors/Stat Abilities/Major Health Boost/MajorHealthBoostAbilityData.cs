@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace MrX.Abilities
 {
-    [CreateAssetMenu(fileName = "Major Health Boost Ability Data", menuName = "October/Abilities/Stat Abilities/Major Health Boost")]
+    [CreateAssetMenu(fileName = "Major Health Boost Ability Data", menuName = "MrX Studio/Abilities/Stat Abilities/Major Health Boost")]
     public class MajorHealthBoostAbilityData : GenericAbilityData<MajorHealthBoostAbilityLevel>
     {
         protected virtual void Awake()

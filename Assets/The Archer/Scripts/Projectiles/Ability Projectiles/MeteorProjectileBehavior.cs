@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-namespace OctoberStudio.Projectile
+namespace MrX.Projectile
 {
     public class MeteorProjectileBehavior : AbstractProjectile
     {

@@ -1,14 +1,14 @@
-using OctoberStudio.Abilities;
-using OctoberStudio.Currency;
+using MrX.Abilities;
+using MrX.Currency;
 using System;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace OctoberStudio.Armory
+namespace MrX.Armory
 {
-    [CreateAssetMenu(fileName = "Hero Data 001", menuName = "October/Armory/Hero Data")]
+    [CreateAssetMenu(fileName = "Hero Data 001", menuName = "MrX Studio/Armory/Hero Data")]
     public class HeroData: ScriptableObject
     {
         [SerializeField, HideInInspector] protected int dataVersion;

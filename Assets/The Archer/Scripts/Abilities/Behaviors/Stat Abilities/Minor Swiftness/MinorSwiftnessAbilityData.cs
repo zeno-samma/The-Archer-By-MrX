@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace MrX.Abilities
 {
-    [CreateAssetMenu(fileName = "Minor Swiftness Ability Data", menuName = "October/Abilities/Stat Abilities/Minor Swiftness")]
+    [CreateAssetMenu(fileName = "Minor Swiftness Ability Data", menuName = "MrX Studio/Abilities/Stat Abilities/Minor Swiftness")]
     public class MinorSwiftnessAbilityData : GenericAbilityData<MinorSwiftnessAbilityLevel>
     {
         protected virtual void Awake()

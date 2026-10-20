@@ -1,6 +1,6 @@
 using UnityEditor;
 
-namespace OctoberStudio.Armory
+namespace MrX.Armory
 {
     [CustomEditor(typeof(WeaponAnimationsSet))]
     public class WeaponAnimationsSetEditor : Editor

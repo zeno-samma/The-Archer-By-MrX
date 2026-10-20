@@ -4,7 +4,7 @@ using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace OctoberStudio
+namespace MrX
 {
     [InitializeOnLoad]
     public static class DefaultSceneLoader

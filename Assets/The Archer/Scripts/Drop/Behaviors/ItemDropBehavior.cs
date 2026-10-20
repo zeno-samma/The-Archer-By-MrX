@@ -1,6 +1,6 @@
-using OctoberStudio.Armory;
+using MrX.Armory;
 
-namespace OctoberStudio.Drop
+namespace MrX.Drop
 {
     public class ItemDropBehavior : DropBehavior
     {

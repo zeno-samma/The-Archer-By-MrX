@@ -1,10 +1,10 @@
 using UnityEditor;
 
-namespace OctoberStudio
+namespace MrX
 {
     public static class DefaultSceneLoaderActions
     {
-        private const string MenuPath = "Tools/October/Default Scene Loader Enabled";
+        private const string MenuPath = "Tools/MrX Studio/Default Scene Loader Enabled";
         private const string PrefKeyEnabled = "DefaultSceneLoader.Enabled";
         private const string PrefKeySkipWarning = "DefaultSceneLoader.Skip Warning";
 

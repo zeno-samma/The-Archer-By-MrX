@@ -1,8 +1,8 @@
 using Unity.Cinemachine;
-using OctoberStudio.Extensions;
+using MrX.Extensions;
 using UnityEngine;
 
-namespace OctoberStudio
+namespace MrX
 {
     public class CameraManager : MonoBehaviour
     {

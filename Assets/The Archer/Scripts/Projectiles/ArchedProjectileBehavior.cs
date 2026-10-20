@@ -1,8 +1,8 @@
-using OctoberStudio.Extensions;
+using MrX.Extensions;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace OctoberStudio.Projectile
+namespace MrX.Projectile
 {
     public class ArchedProjectileBehavior : SimpleProjectile
     {

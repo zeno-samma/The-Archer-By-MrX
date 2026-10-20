@@ -3,7 +3,7 @@ using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine.SceneManagement;
 
-namespace OctoberStudio
+namespace MrX
 {
     public static class SceneUtility
     {

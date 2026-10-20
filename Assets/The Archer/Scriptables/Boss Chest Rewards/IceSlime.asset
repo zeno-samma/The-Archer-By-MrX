@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01f29a5fb50c7e24ab4ec43df3d0d6c0, type: 3}
+  m_Name: IceSlime
+  m_EditorClassIdentifier: Assembly-CSharp::MrX.Rewards.BossChestRewards
+  prizes:
+  - id: equipment-05fc01e43df2b3641b29d22045226a30
+    enabled: 1
+    title: 
+    icon: {fileID: 0}
+    weight: 70
+    kind: 1
+    currencyId: gold
+    item: {fileID: 11400000, guid: 05fc01e43df2b3641b29d22045226a30, type: 2}
+    material: 0
+    minimumAmount: 1
+    maximumAmount: 1
+    maxLevelDuplicateGold: 100
+  - id: fragments-05fc01e43df2b3641b29d22045226a30
+    enabled: 1
+    title: 
+    icon: {fileID: 0}
+    weight: 30.000002
+    kind: 2
+    currencyId: gold
+    item: {fileID: 11400000, guid: 05fc01e43df2b3641b29d22045226a30, type: 2}
+    material: 0
+    minimumAmount: 1
+    maximumAmount: 3
+    maxLevelDuplicateGold: 100

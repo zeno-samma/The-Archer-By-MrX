@@ -1,10 +1,10 @@
-using OctoberStudio.Easing;
-using OctoberStudio.Enemy;
-using OctoberStudio.Extensions;
+using MrX.Easing;
+using MrX.Enemy;
+using MrX.Extensions;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace OctoberStudio.Player
+namespace MrX.Player
 {
     [DefaultExecutionOrder(5)]
     public class EnemiesDetector : MonoBehaviour

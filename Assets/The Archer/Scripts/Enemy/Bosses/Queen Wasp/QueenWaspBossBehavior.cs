@@ -1,12 +1,12 @@
-using OctoberStudio.Audio;
-using OctoberStudio.Extensions;
-using OctoberStudio.Pool;
-using OctoberStudio.Projectile;
+using MrX.Audio;
+using MrX.Extensions;
+using MrX.Pool;
+using MrX.Projectile;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace OctoberStudio.Enemy
+namespace MrX.Enemy
 {
     public class QueenWaspBossBehavior : EnemyBehavior
     {

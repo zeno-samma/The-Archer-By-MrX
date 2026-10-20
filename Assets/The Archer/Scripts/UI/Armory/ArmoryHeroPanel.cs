@@ -1,15 +1,15 @@
-using OctoberStudio.Armory;
-using OctoberStudio.Easing;
-using OctoberStudio.Extensions;
-using OctoberStudio.Pool;
-using OctoberStudio.Weapon;
+using MrX.Armory;
+using MrX.Easing;
+using MrX.Extensions;
+using MrX.Pool;
+using MrX.Weapon;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 
-namespace OctoberStudio.UI.Armory
+namespace MrX.UI.Armory
 {
     public class ArmoryHeroPanel : MonoBehaviour
     {
@@ -21,6 +21,7 @@ namespace OctoberStudio.UI.Armory
 
         [Space]
         [SerializeField] protected RectTransform statsPanelRect;
+        [SerializeField] private bool showCompactStats = true;
         [SerializeField] protected ScalingLabelBehavior damageLabel;
         [SerializeField] protected ScalingLabelBehavior hpLabel;
 
@@ -33,6 +34,7 @@ namespace OctoberStudio.UI.Armory
 
         protected float statsPanelPadding;
         protected float statsPanelSpacing;
+        private bool isInitialized;
 
         private EntityId debugPanelId;
 
@@ -55,7 +57,16 @@ namespace OctoberStudio.UI.Armory
         }
         protected virtual void Start()
         {
+            EnsureInitialized();
+        }
+
+        private void EnsureInitialized()
+        {
+            if (isInitialized) return;
+            isInitialized = true;
             cardsPool = new PoolComponent<ItemCardBehavior>(itemCardPrefab, slots.Count, cardsParent);
+
+            if (!showCompactStats) return;
 
             statsPanelSpacing = hpLabel.RectTransform.anchoredPosition.x - damageLabel.RectTransform.anchoredPosition.x - damageLabel.Width;
             statsPanelPadding = (statsPanelRect.sizeDelta.x - damageLabel.Width - hpLabel.Width - statsPanelSpacing) / 2f;
@@ -64,6 +75,8 @@ namespace OctoberStudio.UI.Armory
 
         public virtual void Init()
         {
+            // Stage Start can reach this panel before its own Start callback.
+            EnsureInitialized();
             // DebugPanel("INIT");
             heroPreviewBehavior.Clear();
             heroPreviewBehavior.Show();
@@ -143,6 +156,7 @@ namespace OctoberStudio.UI.Armory
         }
         protected virtual void RecalculateStats()
         {
+            if (!showCompactStats) return;
             var heroLevel = GameController.ArmoryManager.GetEquippedHeroLevel();
 
             var damage = heroLevel.GetStatValue(StatType.Damage);

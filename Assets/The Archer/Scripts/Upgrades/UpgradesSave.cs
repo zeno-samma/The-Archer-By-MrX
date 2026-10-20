@@ -1,8 +1,8 @@
-using OctoberStudio.Save;
+using MrX.Save;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace OctoberStudio.Upgrades
+namespace MrX.Upgrades
 {
     [System.Serializable]
     public class UpgradesSave : ISave

@@ -1,4 +1,4 @@
-﻿namespace OctoberStudio.Abilities
+﻿namespace MrX.Abilities
 {
     public class TrifectaAbilityBehavior : AbilityBehavior<TrifectaAbilityData, TrifectaAbilityLevel>
     {
@@ -28,7 +28,7 @@
         {
             StageController.Player.Stats.AttackDamageStat.RemoveMultiplier(attackDamageMultiplier);
             StageController.Player.Stats.AttackSpeedStat.RemoveMultiplier(attackSpeedMultiplier);
-            StageController.Player.Stats.MaxHPStat.AddMultiplier(maxHPMultiplier);
+            StageController.Player.Stats.MaxHPStat.RemoveMultiplier(maxHPMultiplier);
 
             base.Clear();
         }

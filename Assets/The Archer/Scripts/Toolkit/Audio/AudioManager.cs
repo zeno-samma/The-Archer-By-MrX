@@ -1,10 +1,10 @@
-using OctoberStudio.Easing;
-using OctoberStudio.Pool;
+using MrX.Easing;
+using MrX.Pool;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 
-namespace OctoberStudio.Audio
+namespace MrX.Audio
 {
     public class AudioManager : MonoBehaviour, IAudioManager
     {

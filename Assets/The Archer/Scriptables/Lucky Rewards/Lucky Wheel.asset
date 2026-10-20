@@ -1,0 +1,93 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fa5030679ed0074e9c1a51c05f8a7fc, type: 3}
+  m_Name: Lucky Wheel
+  m_EditorClassIdentifier: Assembly-CSharp::MrX.Rewards.LuckyRewardTable
+  id: lucky-wheel
+  title: LUCKY WHEEL
+  price:
+    currencyId: gem
+    amount: 10
+  prizes:
+  - id: gold
+    enabled: 1
+    title: Gold
+    icon: {fileID: 21300000, guid: 05f378ff9ca9db843a4a433d68edd596, type: 3}
+    weight: 35
+    kind: 0
+    currencyId: gold
+    item: {fileID: 0}
+    material: 0
+    minimumAmount: 100
+    maximumAmount: 100
+    maxLevelDuplicateGold: 100
+  - id: iron
+    enabled: 1
+    title: Iron
+    icon: {fileID: 21300000, guid: a6badf9e07dcb814580bff7d07d5c325, type: 3}
+    weight: 20
+    kind: 3
+    currencyId: gold
+    item: {fileID: 0}
+    material: 0
+    minimumAmount: 3
+    maximumAmount: 5
+    maxLevelDuplicateGold: 100
+  - id: crystal
+    enabled: 1
+    title: Wood
+    icon: {fileID: 21300000, guid: d7bf4cc17d8504445a933a6d339bd765, type: 3}
+    weight: 30
+    kind: 3
+    currencyId: gold
+    item: {fileID: 0}
+    material: 4
+    minimumAmount: 3
+    maximumAmount: 5
+    maxLevelDuplicateGold: 100
+  - id: scroll
+    enabled: 0
+    title: Wood
+    icon: {fileID: 21300000, guid: d7bf4cc17d8504445a933a6d339bd765, type: 3}
+    weight: 15
+    kind: 3
+    currencyId: gold
+    item: {fileID: 0}
+    material: 4
+    minimumAmount: 3
+    maximumAmount: 5
+    maxLevelDuplicateGold: 100
+  - id: leather
+    enabled: 1
+    title: Leather
+    icon: {fileID: 21300000, guid: 327292e6adfe50f41b55a09430a372c2, type: 3}
+    weight: 10
+    kind: 3
+    currencyId: gold
+    item: {fileID: 0}
+    material: 3
+    minimumAmount: 3
+    maximumAmount: 5
+    maxLevelDuplicateGold: 100
+  - id: gems
+    enabled: 1
+    title: Gems
+    icon: {fileID: 21300000, guid: 876bb27359e28c34cb7d16c9a0d7f32b, type: 3}
+    weight: 5
+    kind: 0
+    currencyId: gem
+    item: {fileID: 0}
+    material: 0
+    minimumAmount: 20
+    maximumAmount: 20
+    maxLevelDuplicateGold: 100
+  animationSeconds: 4

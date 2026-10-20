@@ -2,9 +2,9 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace OctoberStudio.Armory
+namespace MrX.Armory
 {
-    [CreateAssetMenu(fileName = "Armory Database", menuName = "October/Armory/Armory Database")]
+    [CreateAssetMenu(fileName = "Armory Database", menuName = "MrX Studio/Armory/Armory Database")]
     public class ArmoryDatabase : ScriptableObject
     {
         [SerializeField] protected List<ItemData> items;

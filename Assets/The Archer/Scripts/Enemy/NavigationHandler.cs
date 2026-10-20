@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-namespace OctoberStudio
+namespace MrX
 {
     public abstract class NavigationHandler : MonoBehaviour
     {

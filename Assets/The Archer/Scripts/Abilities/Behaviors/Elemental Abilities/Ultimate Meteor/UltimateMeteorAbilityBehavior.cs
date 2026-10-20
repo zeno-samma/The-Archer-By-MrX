@@ -1,7 +1,7 @@
-﻿using OctoberStudio.Extensions;
+﻿using MrX.Extensions;
 using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace MrX.Abilities
 {
     public class UltimateMeteorAbilityBehavior : AbilityBehavior<UltimateMeteorAbilityData, UltimateMeteorAbilityLevel>
     {

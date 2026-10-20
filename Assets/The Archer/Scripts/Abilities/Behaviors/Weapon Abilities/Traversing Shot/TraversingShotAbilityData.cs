@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace MrX.Abilities
 {
-    [CreateAssetMenu(fileName = "TraversingShot Ability Data", menuName = "October/Abilities/Weapon Abilities/TraversingShot")]
+    [CreateAssetMenu(fileName = "TraversingShot Ability Data", menuName = "MrX Studio/Abilities/Weapon Abilities/TraversingShot")]
     public class TraversingShotAbilityData : GenericAbilityData<TraversingShotAbilityLevel>
     {
         protected virtual void Awake()

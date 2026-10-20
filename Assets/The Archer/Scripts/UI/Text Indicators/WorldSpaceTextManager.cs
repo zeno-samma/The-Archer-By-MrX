@@ -1,8 +1,8 @@
-using OctoberStudio.Pool;
+using MrX.Pool;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace OctoberStudio.UI
+namespace MrX.UI
 {
     public class WorldSpaceTextManager : MonoBehaviour
     {

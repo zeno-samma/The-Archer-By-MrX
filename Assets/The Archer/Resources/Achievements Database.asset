@@ -1,0 +1,520 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 671197eb060470144abef7c589fac7c8, type: 3}
+  m_Name: Achievements Database
+  m_EditorClassIdentifier: Assembly-CSharp::MrX.Achievements.AchievementsDatabase
+  slotSprite: {fileID: 21300000, guid: 0af05280b9f42e648805ad9f3ac3cdd6, type: 3}
+  slotMaterial: {fileID: 2100000, guid: d565b84c457755448aa871c9ab98c735, type: 2}
+  trophySprite: {fileID: 21300000, guid: 73c8022722b3183478f84fbc43129a0a, type: 3}
+  coinSprite: {fileID: 21300000, guid: 05f378ff9ca9db843a4a433d68edd596, type: 3}
+  settingsSprite: {fileID: 21300000, guid: c937c468b400b624280d123d42804961, type: 3}
+  circleSprite: {fileID: 21300000, guid: e9e03f86a2f24b2499e2097d48db43cc, type: 3}
+  claimButtonSprite: {fileID: 21300000, guid: a4088e99fa611aa4b9d9c04d5c43b541, type: 3}
+  disabledButtonSprite: {fileID: 21300000, guid: 3877251ea12389449ad7cb7bad961758, type: 3}
+  font: {fileID: 11400000, guid: 31407a7c0e0838c45b42b35e37f26b6c, type: 2}
+  stages: {fileID: 11400000, guid: 174b61186db437847b06dfc3c15cdf55, type: 2}
+  armory: {fileID: 11400000, guid: eae64b77c9595b84aba7b509a7552a5b, type: 2}
+  upgrades: {fileID: 11400000, guid: 1d703bbc2eb28654bb9c2d4e2ae0af15, type: 2}
+  categories:
+  - category: 0
+    title: Adventure
+    icon: {fileID: 21300000, guid: 4700cf76bf0c7b24e882b8cf89ff2f91, type: 3}
+  - category: 1
+    title: Battle
+    icon: {fileID: 21300000, guid: 4ea8b1049959fc44aa6945e7e8555303, type: 3}
+  - category: 2
+    title: Collection
+    icon: {fileID: 21300000, guid: d99c713804ba7ae469d7fdd9b0216891, type: 3}
+  - category: 3
+    title: Upgrade
+    icon: {fileID: 21300000, guid: 5cd4a4f8b73b2e2429655254c7696ce0, type: 3}
+  achievements:
+  - id: stage_clears_1
+    category: 0
+    metric: 0
+    title: A New Journey
+    description: Complete 1 stages.
+    target: 1
+    reward:
+      currencyId: gold
+      amount: 100
+    icon: {fileID: 21300000, guid: 41e224fd0746aad4b826bb5df9f1f5ac, type: 3}
+  - id: unique_stages_1
+    category: 0
+    metric: 1
+    title: Explorer
+    description: Complete 1 different stages.
+    target: 1
+    reward:
+      currencyId: gold
+      amount: 100
+    icon: {fileID: 21300000, guid: 4700cf76bf0c7b24e882b8cf89ff2f91, type: 3}
+  - id: rooms_5
+    category: 0
+    metric: 2
+    title: Pathfinder
+    description: Complete 5 rooms.
+    target: 5
+    reward:
+      currencyId: gold
+      amount: 100
+    icon: {fileID: 21300000, guid: 4700cf76bf0c7b24e882b8cf89ff2f91, type: 3}
+  - id: stage_clears_3
+    category: 0
+    metric: 0
+    title: Adventure Veteran 2
+    description: Complete 3 stages.
+    target: 3
+    reward:
+      currencyId: gold
+      amount: 175
+    icon: {fileID: 21300000, guid: 41e224fd0746aad4b826bb5df9f1f5ac, type: 3}
+  - id: unique_stages_2
+    category: 0
+    metric: 1
+    title: World Explorer 2
+    description: Complete 2 different stages.
+    target: 2
+    reward:
+      currencyId: gold
+      amount: 175
+    icon: {fileID: 21300000, guid: 4700cf76bf0c7b24e882b8cf89ff2f91, type: 3}
+  - id: rooms_20
+    category: 0
+    metric: 2
+    title: Dungeon Pathfinder 2
+    description: Complete 20 rooms.
+    target: 20
+    reward:
+      currencyId: gold
+      amount: 175
+    icon: {fileID: 21300000, guid: 4700cf76bf0c7b24e882b8cf89ff2f91, type: 3}
+  - id: stage_clears_10
+    category: 0
+    metric: 0
+    title: Adventure Veteran 3
+    description: Complete 10 stages.
+    target: 10
+    reward:
+      currencyId: gold
+      amount: 250
+    icon: {fileID: 21300000, guid: 41e224fd0746aad4b826bb5df9f1f5ac, type: 3}
+  - id: unique_stages_3
+    category: 0
+    metric: 1
+    title: World Explorer 3
+    description: Complete 3 different stages.
+    target: 3
+    reward:
+      currencyId: gold
+      amount: 250
+    icon: {fileID: 21300000, guid: 4700cf76bf0c7b24e882b8cf89ff2f91, type: 3}
+  - id: rooms_50
+    category: 0
+    metric: 2
+    title: Dungeon Pathfinder 3
+    description: Complete 50 rooms.
+    target: 50
+    reward:
+      currencyId: gold
+      amount: 250
+    icon: {fileID: 21300000, guid: 4700cf76bf0c7b24e882b8cf89ff2f91, type: 3}
+  - id: stage_clears_25
+    category: 0
+    metric: 0
+    title: Adventure Veteran 4
+    description: Complete 25 stages.
+    target: 25
+    reward:
+      currencyId: gold
+      amount: 325
+    icon: {fileID: 21300000, guid: 41e224fd0746aad4b826bb5df9f1f5ac, type: 3}
+  - id: unique_stages_4
+    category: 0
+    metric: 1
+    title: World Explorer 4
+    description: Complete 4 different stages.
+    target: 4
+    reward:
+      currencyId: gold
+      amount: 325
+    icon: {fileID: 21300000, guid: 4700cf76bf0c7b24e882b8cf89ff2f91, type: 3}
+  - id: rooms_100
+    category: 0
+    metric: 2
+    title: Dungeon Pathfinder 4
+    description: Complete 100 rooms.
+    target: 100
+    reward:
+      currencyId: gold
+      amount: 325
+    icon: {fileID: 21300000, guid: 4700cf76bf0c7b24e882b8cf89ff2f91, type: 3}
+  - id: enemies_10
+    category: 1
+    metric: 3
+    title: First Victory
+    description: Defeat 10 monsters.
+    target: 10
+    reward:
+      currencyId: gold
+      amount: 100
+    icon: {fileID: 21300000, guid: 4ea8b1049959fc44aa6945e7e8555303, type: 3}
+  - id: bosses_1
+    category: 1
+    metric: 4
+    title: Boss Challenger
+    description: Defeat 1 bosses.
+    target: 1
+    reward:
+      currencyId: gold
+      amount: 100
+    icon: {fileID: 21300000, guid: e1ba6e314c638f0449d661a6f3c93afa, type: 3}
+  - id: enemies_50
+    category: 1
+    metric: 3
+    title: Monster Hunter 2
+    description: Defeat 50 monsters.
+    target: 50
+    reward:
+      currencyId: gold
+      amount: 175
+    icon: {fileID: 21300000, guid: 4ea8b1049959fc44aa6945e7e8555303, type: 3}
+  - id: bosses_5
+    category: 1
+    metric: 4
+    title: Boss Slayer 2
+    description: Defeat 5 bosses.
+    target: 5
+    reward:
+      currencyId: gold
+      amount: 175
+    icon: {fileID: 21300000, guid: e1ba6e314c638f0449d661a6f3c93afa, type: 3}
+  - id: enemies_100
+    category: 1
+    metric: 3
+    title: Monster Hunter 3
+    description: Defeat 100 monsters.
+    target: 100
+    reward:
+      currencyId: gold
+      amount: 250
+    icon: {fileID: 21300000, guid: 4ea8b1049959fc44aa6945e7e8555303, type: 3}
+  - id: bosses_10
+    category: 1
+    metric: 4
+    title: Boss Slayer 3
+    description: Defeat 10 bosses.
+    target: 10
+    reward:
+      currencyId: gold
+      amount: 250
+    icon: {fileID: 21300000, guid: e1ba6e314c638f0449d661a6f3c93afa, type: 3}
+  - id: enemies_250
+    category: 1
+    metric: 3
+    title: Monster Hunter 4
+    description: Defeat 250 monsters.
+    target: 250
+    reward:
+      currencyId: gold
+      amount: 325
+    icon: {fileID: 21300000, guid: 4ea8b1049959fc44aa6945e7e8555303, type: 3}
+  - id: bosses_25
+    category: 1
+    metric: 4
+    title: Boss Slayer 4
+    description: Defeat 25 bosses.
+    target: 25
+    reward:
+      currencyId: gold
+      amount: 325
+    icon: {fileID: 21300000, guid: e1ba6e314c638f0449d661a6f3c93afa, type: 3}
+  - id: enemies_500
+    category: 1
+    metric: 3
+    title: Monster Hunter 5
+    description: Defeat 500 monsters.
+    target: 500
+    reward:
+      currencyId: gold
+      amount: 400
+    icon: {fileID: 21300000, guid: 4ea8b1049959fc44aa6945e7e8555303, type: 3}
+  - id: bosses_50
+    category: 1
+    metric: 4
+    title: Boss Slayer 5
+    description: Defeat 50 bosses.
+    target: 50
+    reward:
+      currencyId: gold
+      amount: 400
+    icon: {fileID: 21300000, guid: e1ba6e314c638f0449d661a6f3c93afa, type: 3}
+  - id: enemies_1000
+    category: 1
+    metric: 3
+    title: Monster Hunter 6
+    description: Defeat 1000 monsters.
+    target: 1000
+    reward:
+      currencyId: gold
+      amount: 475
+    icon: {fileID: 21300000, guid: 4ea8b1049959fc44aa6945e7e8555303, type: 3}
+  - id: bosses_100
+    category: 1
+    metric: 4
+    title: Boss Slayer 6
+    description: Defeat 100 bosses.
+    target: 100
+    reward:
+      currencyId: gold
+      amount: 475
+    icon: {fileID: 21300000, guid: e1ba6e314c638f0449d661a6f3c93afa, type: 3}
+  - id: item_drops_3
+    category: 2
+    metric: 5
+    title: Finder's Fortune
+    description: Pick up 3 equipment drops.
+    target: 3
+    reward:
+      currencyId: gold
+      amount: 100
+    icon: {fileID: 21300000, guid: 62107eb3b627fa449af8c087b23d5eeb, type: 3}
+  - id: unique_items_1
+    category: 2
+    metric: 6
+    title: First Collection
+    description: Own 1 different equipment items.
+    target: 1
+    reward:
+      currencyId: gold
+      amount: 100
+    icon: {fileID: 21300000, guid: 592a26689c43e0f43bf385fa2b49360f, type: 3}
+  - id: chests_1
+    category: 2
+    metric: 7
+    title: Treasure Hunter
+    description: Open 1 stage treasure chests.
+    target: 1
+    reward:
+      currencyId: gold
+      amount: 100
+    icon: {fileID: 21300000, guid: 2255ca2025c73a34abad2b46cb834311, type: 3}
+  - id: item_drops_10
+    category: 2
+    metric: 5
+    title: Loot Collector 2
+    description: Pick up 10 equipment drops.
+    target: 10
+    reward:
+      currencyId: gold
+      amount: 175
+    icon: {fileID: 21300000, guid: 62107eb3b627fa449af8c087b23d5eeb, type: 3}
+  - id: unique_items_5
+    category: 2
+    metric: 6
+    title: Armory Collector 2
+    description: Own 5 different equipment items.
+    target: 5
+    reward:
+      currencyId: gold
+      amount: 175
+    icon: {fileID: 21300000, guid: 592a26689c43e0f43bf385fa2b49360f, type: 3}
+  - id: chests_5
+    category: 2
+    metric: 7
+    title: Treasure Seeker 2
+    description: Open 5 stage treasure chests.
+    target: 5
+    reward:
+      currencyId: gold
+      amount: 175
+    icon: {fileID: 21300000, guid: 2255ca2025c73a34abad2b46cb834311, type: 3}
+  - id: item_drops_25
+    category: 2
+    metric: 5
+    title: Loot Collector 3
+    description: Pick up 25 equipment drops.
+    target: 25
+    reward:
+      currencyId: gold
+      amount: 250
+    icon: {fileID: 21300000, guid: 62107eb3b627fa449af8c087b23d5eeb, type: 3}
+  - id: unique_items_10
+    category: 2
+    metric: 6
+    title: Armory Collector 3
+    description: Own 10 different equipment items.
+    target: 10
+    reward:
+      currencyId: gold
+      amount: 250
+    icon: {fileID: 21300000, guid: 592a26689c43e0f43bf385fa2b49360f, type: 3}
+  - id: chests_10
+    category: 2
+    metric: 7
+    title: Treasure Seeker 3
+    description: Open 10 stage treasure chests.
+    target: 10
+    reward:
+      currencyId: gold
+      amount: 250
+    icon: {fileID: 21300000, guid: 2255ca2025c73a34abad2b46cb834311, type: 3}
+  - id: item_drops_50
+    category: 2
+    metric: 5
+    title: Loot Collector 4
+    description: Pick up 50 equipment drops.
+    target: 50
+    reward:
+      currencyId: gold
+      amount: 325
+    icon: {fileID: 21300000, guid: 62107eb3b627fa449af8c087b23d5eeb, type: 3}
+  - id: unique_items_14
+    category: 2
+    metric: 6
+    title: Armory Collector 4
+    description: Own 14 different equipment items.
+    target: 14
+    reward:
+      currencyId: gold
+      amount: 325
+    icon: {fileID: 21300000, guid: 592a26689c43e0f43bf385fa2b49360f, type: 3}
+  - id: chests_20
+    category: 2
+    metric: 7
+    title: Treasure Seeker 4
+    description: Open 20 stage treasure chests.
+    target: 20
+    reward:
+      currencyId: gold
+      amount: 325
+    icon: {fileID: 21300000, guid: 2255ca2025c73a34abad2b46cb834311, type: 3}
+  - id: hero_levels_1
+    category: 3
+    metric: 8
+    title: Growing Stronger
+    description: Gain 1 hero levels through upgrades.
+    target: 1
+    reward:
+      currencyId: gold
+      amount: 100
+    icon: {fileID: 21300000, guid: d99c713804ba7ae469d7fdd9b0216891, type: 3}
+  - id: item_levels_1
+    category: 3
+    metric: 9
+    title: Better Equipment
+    description: Gain 1 equipment levels.
+    target: 1
+    reward:
+      currencyId: gold
+      amount: 100
+    icon: {fileID: 21300000, guid: 56c9dd40bb0ffa642b333fb68003015d, type: 3}
+  - id: permanent_levels_1
+    category: 3
+    metric: 10
+    title: Lasting Power
+    description: Purchase 1 permanent upgrade levels.
+    target: 1
+    reward:
+      currencyId: gold
+      amount: 100
+    icon: {fileID: 21300000, guid: 5cd4a4f8b73b2e2429655254c7696ce0, type: 3}
+  - id: hero_levels_3
+    category: 3
+    metric: 8
+    title: Hero Training 2
+    description: Gain 3 hero levels through upgrades.
+    target: 3
+    reward:
+      currencyId: gold
+      amount: 175
+    icon: {fileID: 21300000, guid: d99c713804ba7ae469d7fdd9b0216891, type: 3}
+  - id: item_levels_5
+    category: 3
+    metric: 9
+    title: Equipment Master 2
+    description: Gain 5 equipment levels.
+    target: 5
+    reward:
+      currencyId: gold
+      amount: 175
+    icon: {fileID: 21300000, guid: 56c9dd40bb0ffa642b333fb68003015d, type: 3}
+  - id: permanent_levels_5
+    category: 3
+    metric: 10
+    title: Permanent Power 2
+    description: Purchase 5 permanent upgrade levels.
+    target: 5
+    reward:
+      currencyId: gold
+      amount: 175
+    icon: {fileID: 21300000, guid: 5cd4a4f8b73b2e2429655254c7696ce0, type: 3}
+  - id: hero_levels_5
+    category: 3
+    metric: 8
+    title: Hero Training 3
+    description: Gain 5 hero levels through upgrades.
+    target: 5
+    reward:
+      currencyId: gold
+      amount: 250
+    icon: {fileID: 21300000, guid: d99c713804ba7ae469d7fdd9b0216891, type: 3}
+  - id: item_levels_10
+    category: 3
+    metric: 9
+    title: Equipment Master 3
+    description: Gain 10 equipment levels.
+    target: 10
+    reward:
+      currencyId: gold
+      amount: 250
+    icon: {fileID: 21300000, guid: 56c9dd40bb0ffa642b333fb68003015d, type: 3}
+  - id: permanent_levels_10
+    category: 3
+    metric: 10
+    title: Permanent Power 3
+    description: Purchase 10 permanent upgrade levels.
+    target: 10
+    reward:
+      currencyId: gold
+      amount: 250
+    icon: {fileID: 21300000, guid: 5cd4a4f8b73b2e2429655254c7696ce0, type: 3}
+  - id: hero_levels_10
+    category: 3
+    metric: 8
+    title: Hero Training 4
+    description: Gain 10 hero levels through upgrades.
+    target: 10
+    reward:
+      currencyId: gold
+      amount: 325
+    icon: {fileID: 21300000, guid: d99c713804ba7ae469d7fdd9b0216891, type: 3}
+  - id: item_levels_25
+    category: 3
+    metric: 9
+    title: Equipment Master 4
+    description: Gain 25 equipment levels.
+    target: 25
+    reward:
+      currencyId: gold
+      amount: 325
+    icon: {fileID: 21300000, guid: 56c9dd40bb0ffa642b333fb68003015d, type: 3}
+  - id: permanent_levels_25
+    category: 3
+    metric: 10
+    title: Permanent Power 4
+    description: Purchase 25 permanent upgrade levels.
+    target: 25
+    reward:
+      currencyId: gold
+      amount: 325
+    icon: {fileID: 21300000, guid: 5cd4a4f8b73b2e2429655254c7696ce0, type: 3}

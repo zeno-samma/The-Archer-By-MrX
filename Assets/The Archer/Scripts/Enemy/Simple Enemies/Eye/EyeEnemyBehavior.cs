@@ -1,9 +1,9 @@
-using OctoberStudio.Audio;
-using OctoberStudio.Easing;
+using MrX.Audio;
+using MrX.Easing;
 using System.Collections;
 using UnityEngine;
 
-namespace OctoberStudio.Enemy
+namespace MrX.Enemy
 {
     public class EyeEnemyBehavior : EnemyBehavior
     {

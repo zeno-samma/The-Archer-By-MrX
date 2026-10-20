@@ -1,4 +1,4 @@
-namespace OctoberStudio
+namespace MrX
 {
     [System.Serializable]
     public abstract class StageUnlockCondition

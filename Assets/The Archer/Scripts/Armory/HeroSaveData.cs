@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace OctoberStudio
+namespace MrX
 {
     [System.Serializable]
     public class HeroSaveData
@@ -26,8 +26,14 @@ namespace OctoberStudio
         {
             get => level; 
             set
-            { 
+            {
+                var gainedLevels = value - level;
                 level = value; 
+                if (IsUnlocked && gainedLevels > 0)
+                {
+                    GameController.DailyQuestsManager?.Record(Quests.DailyQuestType.UpgradeHero, gainedLevels);
+                    GameController.AchievementsManager?.Record(Achievements.AchievementMetric.HeroUpgrades, gainedLevels);
+                }
                 OnHeroLevelChanged?.Invoke(this, level);
             }
         }

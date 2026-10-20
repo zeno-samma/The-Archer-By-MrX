@@ -1,9 +1,9 @@
-using OctoberStudio.UI;
+using MrX.UI;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
-namespace OctoberStudio.Input
+namespace MrX.Input
 {
     public class InputManager : MonoBehaviour, IInputManager
     {

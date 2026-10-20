@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace OctoberStudio.Upgrades
+namespace MrX.Upgrades
 {
     public class UpgradesManager : MonoBehaviour, IUpgradesManager
     {
@@ -81,6 +81,7 @@ namespace OctoberStudio.Upgrades
 
             var upgradeData = database.GetUpgrade(upgradeType);
             upgradeData.SetLevel(level + 1);
+            GameController.AchievementsManager?.Record(Achievements.AchievementMetric.PermanentUpgrades);
         }
 
         public virtual int GetUpgradeLevel(UpgradeType upgradeType)

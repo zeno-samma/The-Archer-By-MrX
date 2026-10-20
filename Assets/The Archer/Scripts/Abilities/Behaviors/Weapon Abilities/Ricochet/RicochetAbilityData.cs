@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace MrX.Abilities
 {
-    [CreateAssetMenu(fileName = "Ricochet Ability Data", menuName = "October/Abilities/Weapon Abilities/Ricochet")]
+    [CreateAssetMenu(fileName = "Ricochet Ability Data", menuName = "MrX Studio/Abilities/Weapon Abilities/Ricochet")]
     public class RicochetAbilityData : GenericAbilityData<RicochetAbilityLevel>
     {
         protected virtual void Awake()

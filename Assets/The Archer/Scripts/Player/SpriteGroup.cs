@@ -1,8 +1,8 @@
-using OctoberStudio.Extensions;
+using MrX.Extensions;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace OctoberStudio
+namespace MrX
 {
     public class SpriteGroup : MonoBehaviour
     {

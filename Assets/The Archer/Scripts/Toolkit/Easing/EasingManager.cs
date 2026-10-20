@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace OctoberStudio.Easing
+namespace MrX.Easing
 {
     [DefaultExecutionOrder(10000)]
     public class EasingManager : MonoBehaviour

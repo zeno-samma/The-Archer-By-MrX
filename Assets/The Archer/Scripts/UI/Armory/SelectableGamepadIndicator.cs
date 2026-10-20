@@ -1,9 +1,9 @@
-using OctoberStudio.Easing;
-using OctoberStudio.Input;
+using MrX.Easing;
+using MrX.Input;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace OctoberStudio
+namespace MrX
 {
     public class SelectableGamepadIndicator : MonoBehaviour, ISelectHandler, IDeselectHandler
     {

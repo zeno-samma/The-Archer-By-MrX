@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-namespace OctoberStudio
+namespace MrX
 {
     [CustomPropertyDrawer(typeof(AbilityDev))]
     public class AbilityDevPropertyDrawer : PropertyDrawer

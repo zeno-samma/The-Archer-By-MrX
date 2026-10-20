@@ -1,10 +1,10 @@
 using System.Collections.Generic;
-using OctoberStudio.Armory;
-using OctoberStudio.StageCreator;
+using MrX.Armory;
+using MrX.StageCreator;
 using UnityEditor;
 using UnityEngine;
 
-namespace OctoberStudio
+namespace MrX
 {
     [CustomPropertyDrawer(typeof(WeaponAnimationSetDataList))]
     public class WeaponAnimationSetDataListPropertyDrawer : PropertyDrawer

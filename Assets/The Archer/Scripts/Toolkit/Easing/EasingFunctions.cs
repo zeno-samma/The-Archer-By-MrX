@@ -1,7 +1,7 @@
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
-namespace OctoberStudio.Easing
+namespace MrX.Easing
 {
     public static class EasingFunctions
     {

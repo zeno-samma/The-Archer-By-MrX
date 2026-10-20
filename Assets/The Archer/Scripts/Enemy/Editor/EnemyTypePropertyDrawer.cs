@@ -1,8 +1,8 @@
-using OctoberStudio.Enemy;
+using MrX.Enemy;
 using UnityEditor;
 using UnityEngine;
 
-namespace OctoberStudio.StageCreator
+namespace MrX.StageCreator
 {
     [CustomPropertyDrawer(typeof(EnemyType))]
     public class EnemyTypePropertyDrawer : PropertyDrawer
@@ -19,7 +19,7 @@ namespace OctoberStudio.StageCreator
             buttonPosition.x += position.width + 5;
             buttonPosition.width = 25;
 
-            if (GUI.Button(buttonPosition, "•"))
+            if (GUI.Button(buttonPosition, "ï¿½"))
             {
                 EnemyTypeWindow.ShowWindow();
             }

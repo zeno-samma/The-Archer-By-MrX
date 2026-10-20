@@ -1,9 +1,9 @@
-using OctoberStudio.Armory;
-using OctoberStudio.Upgrades;
+using MrX.Armory;
+using MrX.Upgrades;
 using UnityEditor;
 using UnityEngine;
 
-namespace OctoberStudio.Currency
+namespace MrX.Currency
 {
     [InitializeOnLoad]
     public static class CurrencyPriceFixer
@@ -15,13 +15,13 @@ namespace OctoberStudio.Currency
             EditorApplication.delayCall += () => RunCheck(true);
         }
 
-        [MenuItem("Tools/October/Migration/Migrate from Cost to Price", true)]
+        [MenuItem("Tools/MrX Studio/Migration/Migrate from Cost to Price", true)]
         private static bool RunCheckMenuValidation()
         {
             return !Application.isPlaying;
         }
 
-        [MenuItem("Tools/October/Migration/Migrate from Cost to Price")]
+        [MenuItem("Tools/MrX Studio/Migration/Migrate from Cost to Price")]
         private static void RunCheckMenu()
         {
             RunCheck(false);

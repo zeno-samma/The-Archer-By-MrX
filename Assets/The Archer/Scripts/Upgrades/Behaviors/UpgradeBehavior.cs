@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace OctoberStudio.Upgrades
+namespace MrX.Upgrades
 {
     public class UpgradeBehavior : MonoBehaviour
     {

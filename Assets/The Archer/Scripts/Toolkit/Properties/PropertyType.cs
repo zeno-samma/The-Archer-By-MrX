@@ -1,4 +1,4 @@
-namespace OctoberStudio
+namespace MrX
 {
     public enum PropertyType
     {

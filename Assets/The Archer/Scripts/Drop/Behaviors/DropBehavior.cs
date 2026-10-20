@@ -1,10 +1,10 @@
-using OctoberStudio.Audio;
-using OctoberStudio.Easing;
+using MrX.Audio;
+using MrX.Easing;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace OctoberStudio.Drop
+namespace MrX.Drop
 {
     public class DropBehavior : MonoBehaviour
     {
@@ -43,6 +43,7 @@ namespace OctoberStudio.Drop
         protected IEasingCoroutine spawnPositionCoroutine;
         protected IEasingCoroutine despawnCoroutine;
         protected IEasingCoroutine flyCoroutine;
+        protected IEasingCoroutine spawnDelayCoroutine;
 
         public bool IsSpawning { get; protected set; } = false;
         public bool IsFlyingToPlayer { get; protected set; }
@@ -68,11 +69,13 @@ namespace OctoberStudio.Drop
             if(trigger != null) trigger.enabled = false;
 
             IsSpawning = true;
-            EasingManager.DoAfter(spawnDelay, Spawn);
+            spawnDelayCoroutine.StopIfExists();
+            spawnDelayCoroutine = EasingManager.DoAfter(spawnDelay, Spawn);
         }
 
         public virtual void Spawn()
         {
+            if (this == null || !gameObject.activeInHierarchy) return;
             scaleCoroutine = transform.DoLocalScale(Vector3.one * finalScale, scaleDuration).SetEasing(EasingType.QuadOut);
 
             var spawnPosition = transform.position;
@@ -143,7 +146,7 @@ namespace OctoberStudio.Drop
 
         protected virtual IEnumerator WaitAndFlyToPlayer(Transform playerTransform, AnimationCurve pickUpEasingCurve)
         {
-            yield return new WaitUntil(() => spawnCoroutine.IsActive);
+            yield return new WaitUntil(() => !spawnCoroutine.ExistsAndActive());
 
             flyCoroutine.StopIfExists();
             flyCoroutine = transform.DoPosition(StageController.Player.transform, 0.4f).SetEasingCurve(pickUpEasingCurve).SetOnFinish(() =>
@@ -185,6 +188,10 @@ namespace OctoberStudio.Drop
 
         protected virtual void OnDisable()
         {
+            StopAllCoroutines();
+            spawnDelayCoroutine.StopIfExists();
+            IsSpawning = false;
+            IsFlyingToPlayer = false;
             scaleCoroutine.StopIfExists();
             flyCoroutine.StopIfExists();
             spawnPositionCoroutine.StopIfExists();

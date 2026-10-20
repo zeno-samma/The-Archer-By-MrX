@@ -2,7 +2,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-namespace OctoberStudio.Save
+namespace MrX.Save
 {
     [Serializable]
     public class SaveDatabase

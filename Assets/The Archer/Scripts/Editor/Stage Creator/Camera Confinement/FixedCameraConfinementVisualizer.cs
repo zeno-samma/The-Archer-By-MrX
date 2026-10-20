@@ -1,8 +1,8 @@
-using OctoberStudio.Extensions;
+using MrX.Extensions;
 using UnityEditor;
 using UnityEngine;
 
-namespace OctoberStudio.StageCreator
+namespace MrX.StageCreator
 {
     public class FixedCameraConfinementVisualizer : CameraConfinementVisualiser
     {

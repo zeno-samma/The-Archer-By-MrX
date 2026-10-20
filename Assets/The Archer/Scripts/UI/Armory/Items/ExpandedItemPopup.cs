@@ -1,12 +1,12 @@
-using OctoberStudio.Abilities;
-using OctoberStudio.Armory;
-using OctoberStudio.Extensions;
+using MrX.Abilities;
+using MrX.Armory;
+using MrX.Extensions;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace OctoberStudio.UI.Armory
+namespace MrX.UI.Armory
 {
     public class ExpandedItemPopup : ExpandedArmoryPopup
     {
@@ -15,6 +15,7 @@ namespace OctoberStudio.UI.Armory
 
         public ItemData Data { get; protected set; }
         public ItemSaveData SaveData { get; protected set; }
+        private float nextUpgradeTime;
 
         public virtual void Show(ItemData data, ItemSaveData saveData)
         {
@@ -224,11 +225,11 @@ namespace OctoberStudio.UI.Armory
 
         protected override void OnUpgradeButtonClicked()
         {
+            if (Time.unscaledTime < nextUpgradeTime) return;
+            var result = GameController.ArmoryManager.Forge.TryUpgrade(Data.Id, SaveData.Level);
+            if (result != ForgeResult.Success) { InitVisuals(); return; }
+            nextUpgradeTime = Time.unscaledTime + .35f;
             GameController.AudioManager.PlayButtonClick();
-            SaveData.Level++;
-
-            var cost = Data.GetItemLevel(SaveData.Level).Price.Amount;
-            upgradeButton.Currency.Withdraw(cost);
 
             InitVisuals();
 

@@ -1,8 +1,8 @@
-using OctoberStudio.Input;
+using MrX.Input;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace OctoberStudio.UI
+namespace MrX.UI
 {
     public class ArmoryTabsPanel : MonoBehaviour
     {
@@ -32,6 +32,13 @@ namespace OctoberStudio.UI
         {
             GameController.InputManager.onInputChanged += OnInputChanged;
             GameController.InputManager.InputAsset.UI.Shoulders.performed += OnShouldersPerformed;
+        }
+
+        public virtual void SelectHeroesTab()
+        {
+            if (heroesTab.IsSelected) return;
+            OnHeroesTabSelected();
+            OnInputChanged(GameController.InputManager.ActiveInput, GameController.InputManager.ActiveInput);
         }
 
         protected virtual void OnInputChanged(InputType prevInput, InputType newInput)

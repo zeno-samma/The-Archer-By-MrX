@@ -1,10 +1,10 @@
-using OctoberStudio.Easing;
+using MrX.Easing;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-namespace OctoberStudio.UI
+namespace MrX.UI
 {
     public class ArmoryTabBehavior : MonoBehaviour
     {

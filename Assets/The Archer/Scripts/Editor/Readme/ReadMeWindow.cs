@@ -1,14 +1,14 @@
-using OctoberStudio.PipelineSwitcher;
+using MrX.PipelineSwitcher;
 using UnityEditor;
 using UnityEngine;
 
-namespace OctoberStudio.ReadMe
+namespace MrX.ReadMe
 {
     public class ReadMeWindow : EditorWindow
     {
         protected ReadMe readme;
 
-        [MenuItem("Tools/October/Readme", priority = 2000)]
+        [MenuItem("Tools/MrX Studio/Readme", priority = 2000)]
         public static void OpenWindow()
         {
             string[] guids = AssetDatabase.FindAssets("t:ReadMe");
@@ -28,7 +28,7 @@ namespace OctoberStudio.ReadMe
             }
 
             ReadMeWindow wnd = GetWindow<ReadMeWindow>();
-            wnd.titleContent = new GUIContent("Readme");
+            wnd.titleContent = new GUIContent("MrX Studio | Readme");
             wnd.minSize = new Vector2(width, 400);
         }
 
@@ -50,6 +50,11 @@ namespace OctoberStudio.ReadMe
 
         public virtual void OnGUI()
         {
+            EditorGUILayout.LabelField("MrX Studio — The Archer", EditorStyles.boldLabel);
+            EditorGUILayout.LabelField("Project tools, configuration and testing guide.", EditorStyles.wordWrappedLabel);
+            if (GUILayout.Button("Open MrX Studio Tools Guide")) MrX.EditorTools.StudioToolsGuide.Open();
+            EditorGUILayout.Space();
+            EditorGUILayout.LabelField("Original template reference", EditorStyles.boldLabel);
             if (readme == null)
             {
                 string[] guids = AssetDatabase.FindAssets("t:ReadMe");

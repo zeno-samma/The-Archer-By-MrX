@@ -2,7 +2,7 @@ using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 
-namespace OctoberStudio.StageCreator
+namespace MrX.StageCreator
 {
     public class StageCreatorWindow : EditorWindow
     {
@@ -108,11 +108,11 @@ namespace OctoberStudio.StageCreator
 
         #endregion
 
-        [MenuItem("Tools/October/Stage Creator #s")]
+        [MenuItem("Tools/MrX Studio/Stage Creator #s")]
         public static void OpenWindow()
         {
             StageCreatorWindow wnd = GetWindow<StageCreatorWindow>();
-            var content = new GUIContent("Stage Creator");
+            var content = new GUIContent("MrX Studio | Stage Creator");
 
             Texture2D icon = AssetDatabase.LoadAssetAtPath<Texture2D>("Assets/The Archer/Sprites/Editor/editor_stage_creator.png");
             if (icon != null)

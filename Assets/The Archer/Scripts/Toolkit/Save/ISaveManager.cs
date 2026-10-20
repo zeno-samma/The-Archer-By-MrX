@@ -1,4 +1,4 @@
-namespace OctoberStudio.Save
+namespace MrX.Save
 {
     public interface ISaveManager
     {

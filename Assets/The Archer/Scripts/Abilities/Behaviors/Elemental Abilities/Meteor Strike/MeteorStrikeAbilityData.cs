@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace MrX.Abilities
 {
-    [CreateAssetMenu(fileName = "MeteorStrike Ability Data", menuName = "October/Abilities/Elemental Abilities/MeteorStrike")]
+    [CreateAssetMenu(fileName = "MeteorStrike Ability Data", menuName = "MrX Studio/Abilities/Elemental Abilities/MeteorStrike")]
     public class MeteorStrikeAbilityData : GenericAbilityData<MeteorStrikeAbilityLevel>
     {
         protected virtual void Awake()

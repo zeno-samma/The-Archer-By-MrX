@@ -1,5 +1,5 @@
-using OctoberStudio.Audio;
-using OctoberStudio.Currency;
+using MrX.Audio;
+using MrX.Currency;
 using System;
 using System.Collections.Generic;
 #if UNITY_EDITOR
@@ -7,7 +7,7 @@ using UnityEditor;
 #endif
 using UnityEngine;
 
-namespace OctoberStudio
+namespace MrX
 {
     [System.Serializable]
     public class WaveData

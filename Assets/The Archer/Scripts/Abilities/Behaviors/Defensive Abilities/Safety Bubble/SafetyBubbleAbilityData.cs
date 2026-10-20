@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace MrX.Abilities
 {
-    [CreateAssetMenu(fileName = "SafetyBubble Ability Data", menuName = "October/Abilities/Defensive Abilities/SafetyBubble")]
+    [CreateAssetMenu(fileName = "SafetyBubble Ability Data", menuName = "MrX Studio/Abilities/Defensive Abilities/SafetyBubble")]
     public class SafetyBubbleAbilityData : GenericAbilityData<SafetyBubbleAbilityLevel>
     {
         protected virtual void Awake()

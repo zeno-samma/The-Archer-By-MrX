@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace OctoberStudio.Drop
+namespace MrX.Drop
 {
     public class HealDropBehavior : DropBehavior
     {

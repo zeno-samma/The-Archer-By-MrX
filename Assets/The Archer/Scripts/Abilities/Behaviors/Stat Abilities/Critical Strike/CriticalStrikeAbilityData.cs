@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace MrX.Abilities
 {
-    [CreateAssetMenu(fileName = "Critical Strike Ability Data", menuName = "October/Abilities/Stat Abilities/Critical Strike")]
+    [CreateAssetMenu(fileName = "Critical Strike Ability Data", menuName = "MrX Studio/Abilities/Stat Abilities/Critical Strike")]
     public class CriticalStrikeAbilityData : GenericAbilityData<CriticalStrikeAbilityLevel>
     {
         protected virtual void Awake()

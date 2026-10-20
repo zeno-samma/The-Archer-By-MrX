@@ -1,8 +1,8 @@
-using OctoberStudio.Armory;
+using MrX.Armory;
 using System.Collections.Generic;
 using UnityEngine.UI;
 
-namespace OctoberStudio.UI.Armory
+namespace MrX.UI.Armory
 {
     public class ItemsGridBehavior : ArmoryGridUI<ItemCardBehavior>
     {

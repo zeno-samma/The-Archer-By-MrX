@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace OctoberStudio.Pool
+namespace MrX.Pool
 {
     public abstract class Pool<T>: AbstractPool
     {

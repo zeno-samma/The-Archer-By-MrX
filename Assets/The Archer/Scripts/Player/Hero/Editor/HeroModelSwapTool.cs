@@ -1,11 +1,11 @@
-using OctoberStudio.Player;
+using MrX.Player;
 using System.Collections.Generic;
 using System.IO;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 
-namespace OctoberStudio
+namespace MrX
 {
     public class HeroModelSwapTool : EditorWindow
     {

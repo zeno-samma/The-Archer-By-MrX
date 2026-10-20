@@ -1,8 +1,8 @@
-using OctoberStudio.Audio;
-using OctoberStudio.Easing;
-using OctoberStudio.Extensions;
-using OctoberStudio.Pool;
-using OctoberStudio.UI;
+using MrX.Audio;
+using MrX.Easing;
+using MrX.Extensions;
+using MrX.Pool;
+using MrX.UI;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -11,7 +11,7 @@ using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace OctoberStudio.Abilities.UI
+namespace MrX.Abilities.UI
 {
     public class AbilitySelectorBehavior : MonoBehaviour
     {
@@ -153,6 +153,7 @@ namespace OctoberStudio.Abilities.UI
 
         protected virtual void OnXpLevelChanged(int level)
         {
+            if (StageController.IsResultFinalized) return;
             gameObject.SetActive(true);
             if (IsOpen)
             {
@@ -487,13 +488,15 @@ namespace OctoberStudio.Abilities.UI
 
         protected virtual void StopAmbientSound()
         {
-            if (ambientSoundAudioSource != null)
+            var source = ambientSoundAudioSource;
+            ambientSoundAudioSource = null;
+            if (source != null)
             {
-                ambientSoundAudioSource.DoVolume(0, ambientSoundFadeOutDuration).SetUnscaledTime(true).SetOnFinish(() =>
+                source.DoVolume(0, ambientSoundFadeOutDuration).SetUnscaledTime(true).SetOnFinish(() =>
                 {
-                    ambientSoundAudioSource.loop = false;
-                    ambientSoundAudioSource.Stop();
-                    ambientSoundAudioSource = null;
+                    if (source == null) return;
+                    source.loop = false;
+                    source.Stop();
                 });
             }
         }
@@ -635,6 +638,17 @@ namespace OctoberStudio.Abilities.UI
 
             GameController.InputManager.InputAsset.UI.Submit.performed -= GamepadSkipClicked;
             GameController.InputManager.InputAsset.UI.Cancel.performed -= GamepadSkipClicked;
+        }
+
+        public void CancelForResult()
+        {
+            DisableCoroutines(); StopAllCoroutines(); StopAmbientSound();
+            ambientSoundDelayEasingCoroutine.StopIfExists();
+            foreach (var slot in slots)
+            { slot.MainCard.onAbilitySelected -= OnAbilitySelected; slot.gameObject.SetActive(false); }
+            slots.Clear();
+            if (rerollButton.Currency != null) rerollButton.Currency.OnAmountChanged -= OnGoldAmountChanged;
+            onClosed = null; IsOpen = false; gameObject.SetActive(false);
         }
 
         protected virtual void OnGoldAmountChanged(CurrencySave currency)

@@ -1,7 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace OctoberStudio.Armory
+namespace MrX.Armory
 {
     public class CloneHeroWindow : EditorWindow
     {

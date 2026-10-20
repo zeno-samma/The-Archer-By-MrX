@@ -1,10 +1,10 @@
-using OctoberStudio.Abilities;
-using OctoberStudio.Easing;
-using OctoberStudio.Pool;
+using MrX.Abilities;
+using MrX.Easing;
+using MrX.Pool;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace OctoberStudio.UI
+namespace MrX.UI
 {
     public class AbilitiesGridBehavior : MonoBehaviour
     {

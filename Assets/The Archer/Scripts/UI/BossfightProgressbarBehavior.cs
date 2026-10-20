@@ -1,10 +1,10 @@
-using OctoberStudio.Easing;
+using MrX.Easing;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace OctoberStudio.UI
+namespace MrX.UI
 {
     public class BossfightProgressbarBehavior : MonoBehaviour
     {

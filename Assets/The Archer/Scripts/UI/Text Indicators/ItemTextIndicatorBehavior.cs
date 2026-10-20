@@ -1,9 +1,9 @@
-using OctoberStudio.Armory;
-using OctoberStudio.Extensions;
+using MrX.Armory;
+using MrX.Extensions;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace OctoberStudio.UI
+namespace MrX.UI
 {
     public class ItemTextIndicatorBehavior : TextIndicatorBehavior
     {
@@ -33,6 +33,9 @@ namespace OctoberStudio.UI
         }
 
         public virtual void SetItem(ItemData item)
+        { SetReward(item, item.ItemName); }
+
+        public void SetReward(ItemData item, string label)
         {
             // Debug.Log($"Set item text indicator: {item.ItemName}");
             var level = GameController.ArmoryManager.GetNextItemLevel(item.Id);
@@ -43,7 +46,7 @@ namespace OctoberStudio.UI
                 gradientImage.color = rarityData.MainColor.SetAlpha(gradientAlpha);
             }
 
-            textComponent.text = item.ItemName;
+            textComponent.text = label;
             textComponent.ForceMeshUpdate();
 
             var textheight = TextHeight();
@@ -57,7 +60,7 @@ namespace OctoberStudio.UI
             gradientImage.rectTransform.SetSizeDeltaX(combinedWidth + gradientWidthDifference);
 
             var typeData = GameController.ArmoryManager.GetItemTypeData(item.ItemType);
-            iconImage.sprite = typeData.ItemTypeIcon;
+            iconImage.sprite = item.Icon;
         }
 
         protected float TextWidth()

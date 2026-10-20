@@ -1,7 +1,7 @@
-﻿using OctoberStudio.UI;
+﻿using MrX.UI;
 using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace MrX.Abilities
 {
     public class ComboAbilityBehavior : AbilityBehavior<ComboAbilityData, ComboAbilityLevel>
     {

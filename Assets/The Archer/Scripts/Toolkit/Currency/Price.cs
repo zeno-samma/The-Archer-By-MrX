@@ -1,7 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace OctoberStudio.Currency
+namespace MrX.Currency
 {
     [System.Serializable]
     public class Price

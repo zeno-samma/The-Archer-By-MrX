@@ -1,14 +1,14 @@
-using OctoberStudio.Abilities;
-using OctoberStudio.Abilities.UI;
-using OctoberStudio.Easing;
-using OctoberStudio.Extensions;
+using MrX.Abilities;
+using MrX.Abilities.UI;
+using MrX.Easing;
+using MrX.Extensions;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace OctoberStudio.UI
+namespace MrX.UI
 {
     public class EvilChestUI : MonoBehaviour
     {
@@ -153,6 +153,7 @@ namespace OctoberStudio.UI
 
         protected virtual void SetTimeScale(float value)
         {
+            if (StageController.IsResultFinalized) return;
             if (value < 0) value = 0;
             Time.timeScale = value;
         }

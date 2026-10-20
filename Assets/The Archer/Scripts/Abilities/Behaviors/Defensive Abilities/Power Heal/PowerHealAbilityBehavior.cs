@@ -1,7 +1,7 @@
-﻿using OctoberStudio.Drop;
+﻿using MrX.Drop;
 using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace MrX.Abilities
 {
     public class PowerHealAbilityBehavior : AbilityBehavior<PowerHealAbilityData, PowerHealAbilityLevel>
     {

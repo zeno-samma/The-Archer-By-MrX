@@ -1,9 +1,9 @@
-using OctoberStudio.Audio;
+using MrX.Audio;
 using UnityEngine;
 
-namespace OctoberStudio
+namespace MrX
 {
-    [CreateAssetMenu(fileName = "Status Effect Data", menuName = "October/Effects/Effect Data")]
+    [CreateAssetMenu(fileName = "Status Effect Data", menuName = "MrX Studio/Effects/Effect Data")]
     public class StatusEffectData : ScriptableObject
     {
         [Header("Audio")]

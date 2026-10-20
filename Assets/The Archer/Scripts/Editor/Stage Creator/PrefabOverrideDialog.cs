@@ -4,7 +4,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace OctoberStudio.StageCreator
+namespace MrX.StageCreator
 {
     public class PrefabOverrideDialog : EditorWindow
     {

@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace MrX.Abilities
 {
-    [CreateAssetMenu(fileName = "Freeze Ability Data", menuName = "October/Abilities/Elemental Abilities/Freeze")]
+    [CreateAssetMenu(fileName = "Freeze Ability Data", menuName = "MrX Studio/Abilities/Elemental Abilities/Freeze")]
     public class FreezeAbilityData : GenericAbilityData<FreezeAbilityLevel>
     {
         protected virtual void Awake()

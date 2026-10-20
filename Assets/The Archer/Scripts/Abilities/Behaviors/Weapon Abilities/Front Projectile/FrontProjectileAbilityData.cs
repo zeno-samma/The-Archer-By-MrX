@@ -1,8 +1,8 @@
 using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace MrX.Abilities
 {
-    [CreateAssetMenu(fileName = "Front Projectile Ability Data", menuName = "October/Abilities/Weapon Abilities/Front Projectile")]
+    [CreateAssetMenu(fileName = "Front Projectile Ability Data", menuName = "MrX Studio/Abilities/Weapon Abilities/Front Projectile")]
     public class FrontProjectileAbilityData : GenericAbilityData<FrontProjectileAbilityLevel>
     {
         protected virtual void Awake()

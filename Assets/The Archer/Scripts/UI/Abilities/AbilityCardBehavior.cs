@@ -1,6 +1,6 @@
-using OctoberStudio.Audio;
-using OctoberStudio.Easing;
-using OctoberStudio.Extensions;
+using MrX.Audio;
+using MrX.Easing;
+using MrX.Extensions;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -8,7 +8,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-namespace OctoberStudio.Abilities.UI
+namespace MrX.Abilities.UI
 {
     public class AbilityCardBehavior : MonoBehaviour
     {

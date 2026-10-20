@@ -1,13 +1,13 @@
-using OctoberStudio.Easing;
-using OctoberStudio.Extensions;
-using OctoberStudio.Upgrades;
+using MrX.Easing;
+using MrX.Extensions;
+using MrX.Upgrades;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-namespace OctoberStudio.UI
+namespace MrX.UI
 {
     public class ExpandedUpgradePopup : MonoBehaviour
     {

@@ -1,8 +1,8 @@
-using OctoberStudio.Audio;
+using MrX.Audio;
 using System.Collections;
 using UnityEngine;
 
-namespace OctoberStudio.Enemy
+namespace MrX.Enemy
 {
     public class MoleEnemyBehavior : EnemyBehavior
     {

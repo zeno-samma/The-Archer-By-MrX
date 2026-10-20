@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reflection;
 using UnityEditor;
 
-namespace OctoberStudio
+namespace MrX
 {
     public static class StageUnlockConditionTypeCache
     {

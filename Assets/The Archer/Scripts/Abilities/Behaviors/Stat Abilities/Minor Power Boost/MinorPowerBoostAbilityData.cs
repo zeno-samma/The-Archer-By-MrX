@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace MrX.Abilities
 {
-    [CreateAssetMenu(fileName = "Minor Power Boost Ability Data", menuName = "October/Abilities/Stat Abilities/Minor Power Boost")]
+    [CreateAssetMenu(fileName = "Minor Power Boost Ability Data", menuName = "MrX Studio/Abilities/Stat Abilities/Minor Power Boost")]
     public class MinorPowerBoostAbilityData : GenericAbilityData<MinorPowerBoostAbilityLevel>
     {
         protected virtual void Awake()

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine.Events;
 
-namespace OctoberStudio
+namespace MrX
 {
     public class AdditiveStat
     {

@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace MrX.Abilities
 {
-    [CreateAssetMenu(fileName = "TitanForm Ability Data", menuName = "October/Abilities/Stat Abilities/TitanForm")]
+    [CreateAssetMenu(fileName = "TitanForm Ability Data", menuName = "MrX Studio/Abilities/Stat Abilities/TitanForm")]
     public class TitanFormAbilityData : GenericAbilityData<TitanFormAbilityLevel>
     {
         protected virtual void Awake()

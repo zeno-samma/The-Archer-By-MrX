@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace OctoberStudio.Drop
+namespace MrX.Drop
 {
-    [CreateAssetMenu(fileName = "Drop Database", menuName = "October/Drop Database")]
+    [CreateAssetMenu(fileName = "Drop Database", menuName = "MrX Studio/Drop Database")]
     public class DropDatabase : ScriptableObject
     {
         [SerializeField] protected List<DropData> drop;

@@ -1,8 +1,8 @@
-using OctoberStudio.Pool;
+using MrX.Pool;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace OctoberStudio.Enemy
+namespace MrX.Enemy
 {
     public class EnemiesSpawner : MonoBehaviour
     {

@@ -1,9 +1,9 @@
-using OctoberStudio.Extensions;
+using MrX.Extensions;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace OctoberStudio.UI.Armory
+namespace MrX.UI.Armory
 {
     public class StatIndicator : MonoBehaviour
     {

@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace MrX.Abilities
 {
-    [CreateAssetMenu(fileName = "Piercing Strike Ability Data", menuName = "October/Abilities/Weapon Abilities/Piercing Strike")]
+    [CreateAssetMenu(fileName = "Piercing Strike Ability Data", menuName = "MrX Studio/Abilities/Weapon Abilities/Piercing Strike")]
     public class PiercingStrikeAbilityData : GenericAbilityData<PiercingStrikeAbilityLevel>
     {
         protected virtual void Awake()

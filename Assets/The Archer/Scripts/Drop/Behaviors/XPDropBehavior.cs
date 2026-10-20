@@ -1,4 +1,4 @@
-namespace OctoberStudio.Drop
+namespace MrX.Drop
 {
     public class XPDropBehavior : DropBehavior
     {

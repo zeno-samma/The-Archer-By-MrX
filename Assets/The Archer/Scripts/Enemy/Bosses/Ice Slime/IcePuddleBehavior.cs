@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace OctoberStudio.Projectile
+namespace MrX.Projectile
 {
     public class IcePuddleBehavior : PuddleProjectileBehavior
     {

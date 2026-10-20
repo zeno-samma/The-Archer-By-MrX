@@ -1,7 +1,7 @@
-using OctoberStudio.StatusEffects;
+using MrX.StatusEffects;
 using UnityEngine;
 
-namespace OctoberStudio
+namespace MrX
 {
     public interface IProjectileTarget : IDefeatable
     {

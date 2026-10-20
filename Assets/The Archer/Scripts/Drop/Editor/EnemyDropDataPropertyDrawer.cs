@@ -1,10 +1,10 @@
-using OctoberStudio.StageCreator;
+using MrX.StageCreator;
 using System.Runtime.InteropServices;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace OctoberStudio.Drop
+namespace MrX.Drop
 {
     [CustomPropertyDrawer(typeof(EnemyDropData))]
     public class EnemyDropDataPropertyDrawer : PropertyDrawer

@@ -1,12 +1,12 @@
-using OctoberStudio.Easing;
-using OctoberStudio.Extensions;
-using OctoberStudio.Pool;
+using MrX.Easing;
+using MrX.Extensions;
+using MrX.Pool;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace OctoberStudio.Abilities.UI
+namespace MrX.Abilities.UI
 {
     public class AbilitySelectorSlotBehavior : MonoBehaviour
     {

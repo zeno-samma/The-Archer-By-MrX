@@ -1,8 +1,8 @@
-using OctoberStudio.StatusEffects;
+using MrX.StatusEffects;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace OctoberStudio.Weapon
+namespace MrX.Weapon
 {
     public abstract class AbstractWeaponBehavior : MonoBehaviour
     {

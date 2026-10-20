@@ -1,8 +1,8 @@
-using OctoberStudio.Easing;
-using OctoberStudio.Extensions;
+using MrX.Easing;
+using MrX.Extensions;
 using UnityEngine;
 
-namespace OctoberStudio.Projectile
+namespace MrX.Projectile
 {
     public class TotemLaserProjectileBehavior : LaserProjectileBehavior
     {

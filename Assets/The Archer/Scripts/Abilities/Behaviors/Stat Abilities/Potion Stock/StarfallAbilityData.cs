@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace MrX.Abilities
 {
-    [CreateAssetMenu(fileName = "Starfall Ability Data", menuName = "October/Abilities/Stat Abilities/Starfall")]
+    [CreateAssetMenu(fileName = "Starfall Ability Data", menuName = "MrX Studio/Abilities/Stat Abilities/Starfall")]
     public class StarfallAbilityData : GenericAbilityData<StarfallAbilityLevel>
     {
         protected virtual void Awake()

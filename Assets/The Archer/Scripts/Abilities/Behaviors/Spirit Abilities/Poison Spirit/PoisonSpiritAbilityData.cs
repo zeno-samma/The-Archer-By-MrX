@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace MrX.Abilities
 {
-    [CreateAssetMenu(fileName = "PoisonSpirit Ability Data", menuName = "October/Abilities/Spirit Abilities/PoisonSpirit")]
+    [CreateAssetMenu(fileName = "PoisonSpirit Ability Data", menuName = "MrX Studio/Abilities/Spirit Abilities/PoisonSpirit")]
     public class PoisonSpiritAbilityData : GenericAbilityData<PoisonSpiritAbilityLevel>
     {
         protected virtual void Awake()

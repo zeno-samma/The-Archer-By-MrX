@@ -1,9 +1,9 @@
-using OctoberStudio.Abilities;
-using OctoberStudio.Extensions;
+using MrX.Abilities;
+using MrX.Extensions;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace OctoberStudio.UI
+namespace MrX.UI
 {
     public class AbilitySelectedIndicatorBehavior : TextIndicatorBehavior
     {

@@ -1,6 +1,6 @@
 using UnityEditor;
 
-namespace OctoberStudio.ReadMe
+namespace MrX.ReadMe
 {
     [InitializeOnLoad]
     public static class ReadMeAutoOpener

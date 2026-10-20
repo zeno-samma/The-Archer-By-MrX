@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace OctoberStudio.UI
+namespace MrX.UI
 {
     [System.Serializable]
     public class WorldSpaceIndicatorData

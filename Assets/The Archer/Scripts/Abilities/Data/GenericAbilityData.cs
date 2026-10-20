@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace MrX.Abilities
 {
     public class GenericAbilityData<T> : AbilityData where T : AbilityLevel
     {

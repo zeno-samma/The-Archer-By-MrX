@@ -1,4 +1,4 @@
-namespace OctoberStudio.Armory
+namespace MrX.Armory
 {
     public enum ItemRarityType
     {

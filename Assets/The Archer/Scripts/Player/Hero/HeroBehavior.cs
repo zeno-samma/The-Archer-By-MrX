@@ -1,14 +1,14 @@
-using OctoberStudio.Armory;
-using OctoberStudio.Audio;
-using OctoberStudio.Enemy;
-using OctoberStudio.Extensions;
-using OctoberStudio.StatusEffects;
-using OctoberStudio.Weapon;
+using MrX.Armory;
+using MrX.Audio;
+using MrX.Enemy;
+using MrX.Extensions;
+using MrX.StatusEffects;
+using MrX.Weapon;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace OctoberStudio.Player
+namespace MrX.Player
 {
     public class HeroBehavior : MonoBehaviour, IHeroBehavior
     {
@@ -59,6 +59,7 @@ namespace OctoberStudio.Player
         protected List<KeyValuePair<AnimationClip, AnimationClip>> animationOverrides = new List<KeyValuePair<AnimationClip, AnimationClip>>();
 
         protected float movementBlend;
+        private PlayerBehavior boundPlayer;
 
         protected virtual void Awake()
         {
@@ -72,6 +73,8 @@ namespace OctoberStudio.Player
 
         public virtual void Init(HeroData hero)
         {
+            UnsubscribeFromPlayer();
+            boundPlayer = StageController.Player;
             HeroData = hero;
 
             animator.SetBool(CAN_ATTACK_BOOL, false);
@@ -348,23 +351,23 @@ namespace OctoberStudio.Player
 
         protected virtual void OnDestroy()
         {
-            if (!StageController.IsLoaded) return;
+            UnsubscribeFromPlayer();
+        }
 
-            StageController.Player.Stats.AttackSpeedStat.onStatChanged -= OnAttackSpeedChanged;
-
-            StageController.Player.onStartedMoving -= OnPlayerStartedMoving;
-            StageController.Player.onStoppedMoving -= OnPlayerStoppedMoving;
-
-            StageController.Player.onClosestEnemyChanged -= OnClosestEnemyChanged;
-
-            StageController.Player.onInvincibilityActivated += ShowInvincibilityVisuals;
-            StageController.Player.onInvincibilityDeactivated += HideInvincibilityVisuals;
-
-            StageController.Player.onPerfectStanceActivated += ShowPerfectStanceVisuals;
-            StageController.Player.onPerfectStanceDeactivated += HidePerfectStanceVisuals;
-
-            StageController.Player.onHurryActivated += ShowHurryVisuals;
-            StageController.Player.onHurryDeactivated += HideHurryVisuals;
+        private void UnsubscribeFromPlayer()
+        {
+            if (!boundPlayer) return;
+            boundPlayer.Stats.AttackSpeedStat.onStatChanged -= OnAttackSpeedChanged;
+            boundPlayer.onStartedMoving -= OnPlayerStartedMoving;
+            boundPlayer.onStoppedMoving -= OnPlayerStoppedMoving;
+            boundPlayer.onClosestEnemyChanged -= OnClosestEnemyChanged;
+            boundPlayer.onInvincibilityActivated -= ShowInvincibilityVisuals;
+            boundPlayer.onInvincibilityDeactivated -= HideInvincibilityVisuals;
+            boundPlayer.onPerfectStanceActivated -= ShowPerfectStanceVisuals;
+            boundPlayer.onPerfectStanceDeactivated -= HidePerfectStanceVisuals;
+            boundPlayer.onHurryActivated -= ShowHurryVisuals;
+            boundPlayer.onHurryDeactivated -= HideHurryVisuals;
+            boundPlayer = null;
         }
     }
 }

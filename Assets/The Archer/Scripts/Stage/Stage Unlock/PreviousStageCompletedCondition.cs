@@ -1,9 +1,10 @@
 using UnityEngine;
 
-namespace OctoberStudio
+namespace MrX
 {
     [System.Serializable]
     [UnlockCondition("Previous Stage Completed")]
+    [UnityEngine.Scripting.APIUpdating.MovedFrom(true, "OctoberStudio", "Assembly-CSharp", "PreviousStageCompletedCondition")]
     public class PreviousStageCompletedCondition : StageUnlockCondition
     {
         [SerializeField, HideInInspector] protected string name = "Previous Stage Completed";

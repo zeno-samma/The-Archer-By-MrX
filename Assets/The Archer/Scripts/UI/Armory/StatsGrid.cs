@@ -1,10 +1,10 @@
-using OctoberStudio.Armory;
-using OctoberStudio.Extensions;
-using OctoberStudio.Pool;
+using MrX.Armory;
+using MrX.Extensions;
+using MrX.Pool;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace OctoberStudio.UI.Armory
+namespace MrX.UI.Armory
 {
     public class StatsGrid : MonoBehaviour
     {

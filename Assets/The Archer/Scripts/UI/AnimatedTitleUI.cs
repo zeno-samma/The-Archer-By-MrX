@@ -1,8 +1,8 @@
-using OctoberStudio.Easing;
+using MrX.Easing;
 using TMPro;
 using UnityEngine;
 
-namespace OctoberStudio
+namespace MrX
 {
     public class AnimatedTitleUI : MonoBehaviour
     {

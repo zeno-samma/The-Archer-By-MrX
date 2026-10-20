@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace OctoberStudio.Save
+namespace MrX.Save
 {
     [System.Serializable]
     public class SaveCell

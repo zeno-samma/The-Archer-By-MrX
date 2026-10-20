@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace OctoberStudio.StatusEffects
+namespace MrX.StatusEffects
 {
     public abstract class StatusEffect: MonoBehaviour
     {

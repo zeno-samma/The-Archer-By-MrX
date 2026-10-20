@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace MrX.Abilities
 {
-    [CreateAssetMenu(fileName = "Ignite Ability Data", menuName = "October/Abilities/Elemental Abilities/Ignite")]
+    [CreateAssetMenu(fileName = "Ignite Ability Data", menuName = "MrX Studio/Abilities/Elemental Abilities/Ignite")]
     public class IgniteAbilityData : GenericAbilityData<IgniteAbilityLevel>
     {
         protected virtual void Awake()

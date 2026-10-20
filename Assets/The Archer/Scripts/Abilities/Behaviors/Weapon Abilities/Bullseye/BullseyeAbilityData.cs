@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace MrX.Abilities
 {
-    [CreateAssetMenu(fileName = "Bullseye Ability Data", menuName = "October/Abilities/Weapon Abilities/Bullseye")]
+    [CreateAssetMenu(fileName = "Bullseye Ability Data", menuName = "MrX Studio/Abilities/Weapon Abilities/Bullseye")]
     public class BullseyeAbilityData : GenericAbilityData<BullseyeAbilityLevel>
     {
         protected virtual void Awake()

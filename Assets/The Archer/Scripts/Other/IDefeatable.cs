@@ -1,6 +1,6 @@
 using UnityEngine.Events;
 
-namespace OctoberStudio
+namespace MrX
 {
     public interface IDefeatable
     {

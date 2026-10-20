@@ -1,8 +1,8 @@
-using OctoberStudio.Extensions;
+using MrX.Extensions;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace OctoberStudio.Easing
+namespace MrX.Easing
 {
     public static class EasingExtensions
     {

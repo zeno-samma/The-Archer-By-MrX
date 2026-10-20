@@ -1,11 +1,11 @@
-using OctoberStudio.Abilities;
-using OctoberStudio.Extensions;
-using OctoberStudio.Pool;
-using OctoberStudio.UI;
+using MrX.Abilities;
+using MrX.Extensions;
+using MrX.Pool;
+using MrX.UI;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace OctoberStudio
+namespace MrX
 {
     public class AbilitiesRowBehavior : MonoBehaviour
     {

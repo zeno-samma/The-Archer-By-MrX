@@ -1,7 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace OctoberStudio.StageCreator
+namespace MrX.StageCreator
 {
     public abstract class ListItem
     {

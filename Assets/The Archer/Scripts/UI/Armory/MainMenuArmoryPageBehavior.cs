@@ -1,10 +1,10 @@
-using OctoberStudio.Easing;
-using OctoberStudio.Input;
-using OctoberStudio.UI.Armory;
+using MrX.Easing;
+using MrX.Input;
+using MrX.UI.Armory;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace OctoberStudio.UI
+namespace MrX.UI
 {
     public class MainMenuArmoryPageBehavior : MainMenuPageBehavior
     {
@@ -18,6 +18,7 @@ namespace OctoberStudio.UI
         [Space]
         [SerializeField] protected ArmoryTabBehavior itemsTab;
         [SerializeField] protected ArmoryTabBehavior heroesTab;
+        [SerializeField] private ArmoryDashboard dashboard;
 
         protected override void Start()
         {
@@ -58,10 +59,25 @@ namespace OctoberStudio.UI
             heroPanel.HideSlots();
         }
 
+        public virtual void OpenHeroesTab()
+        {
+            if (dashboard != null) { dashboard.Focus(true); return; }
+            heroesGrid.gameObject.SetActive(true);
+            tabsPanel.SelectHeroesTab();
+        }
+
         public override void MoveCenter()//Sau khi click vào nút Armory thì sẽ thực hiện MoveCenter để hiển thị Armory
         {
             // Debug.Log("Click Armory");
             base.MoveCenter();
+
+            if (dashboard != null)
+            {
+                tabsPanel.gameObject.SetActive(false);
+                itemsGrid.gameObject.SetActive(false); heroesGrid.gameObject.SetActive(false);
+                heroPanel.Init(); heroPanel.ShowSlots(); dashboard.Show();
+                return;
+            }
 
             itemsTab.Init(true);
             heroesTab.Init(false);
@@ -83,6 +99,7 @@ namespace OctoberStudio.UI
 
         protected virtual void RecalculateSelection()
         {
+            if (dashboard != null) { dashboard.MarkDirty(); return; }
             EasingManager.DoNextFrame(() =>
             {
                 heroPanel.CalculateNavigation(itemsGrid.GetFirstItemSelectable());
@@ -102,12 +119,14 @@ namespace OctoberStudio.UI
 
         protected virtual void OnHeroPopupHidden()
         {
+            if (dashboard != null) { dashboard.MarkDirty(); dashboard.Focus(true); return; }
             ResetSelection();
             heroesGrid.Init();
         }
 
         protected virtual void ResetSelection()
         {
+            if (dashboard != null) { dashboard.MarkDirty(); dashboard.Focus(); return; }
             var firstSelectable = itemsTab.IsSelected ? itemsGrid.GetFirstItemSelectable() : heroesGrid.GetFirstItemSelectable();
 
             if (firstSelectable != null)
@@ -128,6 +147,7 @@ namespace OctoberStudio.UI
             base.OnMoveFinished();
 
             heroPanel.Clear();
+            if (dashboard != null) { dashboard.Hide(); return; }
             itemsGrid.Clear();
             heroesGrid.Clear();
             tabsPanel.Clear();
@@ -143,6 +163,7 @@ namespace OctoberStudio.UI
 
         public override void MoveLeft()
         {
+            if (dashboard != null) dashboard.Hide();
             base.MoveLeft();
 
             GameController.InputManager.onInputChanged -= OnInputChanged;
@@ -150,6 +171,7 @@ namespace OctoberStudio.UI
 
         public override void MoveRight()
         {
+            if (dashboard != null) dashboard.Hide();
             base.MoveRight();
 
             GameController.InputManager.onInputChanged -= OnInputChanged;
@@ -157,7 +179,15 @@ namespace OctoberStudio.UI
 
         protected virtual void OnDestroy()
         {
-            GameController.ArmoryManager.OnItemEquipmentChanged -= RecalculateSelection;
+            tabsPanel.onHeroesTabSelected -= OnHeroesTabSelected;
+            tabsPanel.onItemsTabSelected -= OnItemsTabSelected;
+            if (GameController.MainMenuScreenBehavior != null)
+            {
+                GameController.MainMenuScreenBehavior.ExpandedItemPopup.OnPopupHidden -= ResetSelection;
+                GameController.MainMenuScreenBehavior.ExpandedHeroPopup.OnPopupHidden -= OnHeroPopupHidden;
+            }
+            if (GameController.ArmoryManager != null) GameController.ArmoryManager.OnItemEquipmentChanged -= RecalculateSelection;
+            if (GameController.InputManager != null) GameController.InputManager.onInputChanged -= OnInputChanged;
         }
     }
 }

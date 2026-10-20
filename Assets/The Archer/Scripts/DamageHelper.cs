@@ -1,6 +1,6 @@
-using OctoberStudio.StatusEffects;
+using MrX.StatusEffects;
 
-namespace OctoberStudio
+namespace MrX
 {
     public static class DamageHelper
     {

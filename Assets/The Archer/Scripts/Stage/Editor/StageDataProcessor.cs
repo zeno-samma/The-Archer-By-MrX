@@ -1,7 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 using UnityEditor;
 
-namespace OctoberStudio
+namespace MrX
 {
     public class StageDataProcessor : AssetModificationProcessor
     {

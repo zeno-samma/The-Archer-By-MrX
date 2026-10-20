@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace OctoberStudio
+namespace MrX
 {
     [Serializable]
     public class SceneWrapper : ISerializationCallbackReceiver

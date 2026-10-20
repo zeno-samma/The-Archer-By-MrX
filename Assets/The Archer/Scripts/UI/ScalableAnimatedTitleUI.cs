@@ -1,8 +1,8 @@
-using OctoberStudio.Easing;
+using MrX.Easing;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace OctoberStudio.UI
+namespace MrX.UI
 {
     public class ScalableAnimatedTitleUI : AnimatedTitleUI
     {

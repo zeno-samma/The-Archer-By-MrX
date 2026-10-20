@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace OctoberStudio.Weapon
+namespace MrX.Weapon
 {
     public class WeaponEventsHandler : MonoBehaviour
     {

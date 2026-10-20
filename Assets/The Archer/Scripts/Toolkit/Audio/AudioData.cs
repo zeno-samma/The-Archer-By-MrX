@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace OctoberStudio.Audio
+namespace MrX.Audio
 {
-    [CreateAssetMenu(fileName = "Audio Data", menuName = "October/Audio/Data")]
+    [CreateAssetMenu(fileName = "Audio Data", menuName = "MrX Studio/Audio/Data")]
     public class AudioData : ScriptableObject
     {
         [SerializeField] protected AudioGroup audioGroup;

@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace OctoberStudio.Enemy
+namespace MrX.Enemy
 {
-    [CreateAssetMenu(menuName = "October/Enemies/Enemies Database", fileName = "Enemies Database")]
+    [CreateAssetMenu(menuName = "MrX Studio/Enemies/Enemies Database", fileName = "Enemies Database")]
     public class EnemiesDatabase : AbstractEnemiesDatabase
     {
         [SerializeField] EnemyData[] enemies;

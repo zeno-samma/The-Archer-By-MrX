@@ -1,7 +1,7 @@
-using OctoberStudio.Easing;
+using MrX.Easing;
 using UnityEngine;
 
-namespace OctoberStudio.Projectile
+namespace MrX.Projectile
 {
     public class TotemTornadoBehavior : SimpleProjectile
     {

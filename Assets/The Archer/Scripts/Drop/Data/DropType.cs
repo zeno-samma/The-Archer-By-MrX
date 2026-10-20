@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace OctoberStudio.Drop
+namespace MrX.Drop
 {
     public enum DropType
     {
@@ -14,5 +14,7 @@ namespace OctoberStudio.Drop
         XPGem,
 
         Item,
+        CraftingResource = 5,
+        BossChest = 6,
     }
 }

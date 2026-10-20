@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace MrX.Abilities
 {
     public interface IOrbsAbility
     {
