@@ -73,25 +73,12 @@ namespace MrX.UI
 
         protected virtual void OnHeroChanged()
         {
-            if (hero != null)
-            {
-                if (weapon != null)
-                {
-                    weapon.transform.SetParent(null);
-                }
-
-                Destroy(hero);
-            }
-
-            var heroData = GameController.ArmoryManager.EquippedHero;
-
+            if (weapon != null) Destroy(weapon);
+            if (hero != null) Destroy(hero);
+            heroData = GameController.ArmoryManager.EquippedHero;
             hero = Instantiate(heroData.Prefab, heroPreview.transform);
-
-            if (weapon != null)
-            {
-                var animationsSet = GameController.ArmoryManager.GetWeaponAnimationsSet(heroData.Id, weaponData.Id);
-                hero.GetComponent<IHeroBehavior>().PlaceWeapon(weapon.GetComponent<AbstractWeaponBehavior>(), animationsSet);
-            }
+            weaponData = null;
+            SetWeaponData(GameController.ArmoryManager.GetEquippedItemData(ItemType.Weapon) as WeaponData);
         }
 
         public virtual void Clear()

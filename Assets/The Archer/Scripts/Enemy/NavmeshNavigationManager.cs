@@ -7,6 +7,8 @@ namespace MrX
     public class NavmeshNavigationManager : NavigationManager
     {
         protected Mesh navigationMesh;
+        private Vector3[] navigationVertices;
+        private int[] navigationTriangles;
         protected float[] triangleSizes;
         protected float[] tirangleCumulativeSizes;
         protected float totalSizes = 0;
@@ -32,12 +34,16 @@ namespace MrX
             // Debug.Log("NavMesh built successfully.");
 
             var triangles = UnityEngine.AI.NavMesh.CalculateTriangulation();
+            navigationVertices = triangles.vertices;
+            navigationTriangles = triangles.indices;
+            if (navigationMesh != null) Destroy(navigationMesh);
             navigationMesh = new Mesh();
-            navigationMesh.vertices = triangles.vertices;
-            navigationMesh.triangles = triangles.indices;
+            navigationMesh.vertices = navigationVertices;
+            navigationMesh.triangles = navigationTriangles;
 
-            triangleSizes = GetTriSizes(navigationMesh.triangles, navigationMesh.vertices);
+            triangleSizes = GetTriSizes(navigationTriangles, navigationVertices);
             tirangleCumulativeSizes = new float[triangleSizes.Length];
+            totalSizes = 0;
 
             for (int i = 0; i < triangleSizes.Length; i++)
             {
@@ -94,9 +100,9 @@ namespace MrX
 
             if (triIndex == -1) return Vector3.zero;
 
-            var pointA = navigationMesh.vertices[navigationMesh.triangles[triIndex * 3]];
-            var pointB = navigationMesh.vertices[navigationMesh.triangles[triIndex * 3 + 1]];
-            var pointC = navigationMesh.vertices[navigationMesh.triangles[triIndex * 3 + 2]];
+            var pointA = navigationVertices[navigationTriangles[triIndex * 3]];
+            var pointB = navigationVertices[navigationTriangles[triIndex * 3 + 1]];
+            var pointC = navigationVertices[navigationTriangles[triIndex * 3 + 2]];
 
             var barycentricR = Random.value;
             var barycentricS = Random.value;
@@ -119,6 +125,10 @@ namespace MrX
                 sizes[i] = .5f * Vector3.Cross(verts[tris[i * 3 + 1]] - verts[tris[i * 3]], verts[tris[i * 3 + 2]] - verts[tris[i * 3]]).magnitude;
             }
             return sizes;
+        }
+        protected virtual void OnDestroy()
+        {
+            if (navigationMesh != null) Destroy(navigationMesh);
         }
     }
 }

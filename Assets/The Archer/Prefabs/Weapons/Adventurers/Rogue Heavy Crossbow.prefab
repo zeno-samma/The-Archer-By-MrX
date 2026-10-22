@@ -1,0 +1,164 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5558747223746723889
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4345369200229341045}
+  m_Layer: 0
+  m_Name: Projectile Spawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4345369200229341045
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5558747223746723889}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.25}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4707318286241664521}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6263317136450220291
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4707318286241664521}
+  - component: {fileID: 8101836127680251247}
+  m_Layer: 0
+  m_Name: Rogue Heavy Crossbow
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4707318286241664521
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6263317136450220291}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2506491854275991112}
+  - {fileID: 4345369200229341045}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8101836127680251247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6263317136450220291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c51b31e75f57404fb2555b3f3e2242d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MrX.Weapon.WeaponBehavior
+  projectileSpawn: {fileID: 4345369200229341045}
+  projectilePrefab: {fileID: 1638375144775726296, guid: 6fb51cc393c6556488d0ac67e46282ac, type: 3}
+  shootingSound: {fileID: 11400000, guid: fab7cd9e32904194aa1479e0c046e973, type: 2}
+  frontArrowSpacing: 0.3
+  animateInHands: 0
+  animateDetached: 0
+  detachedPosition: {x: 0, y: 0, z: 0}
+  detachedRotation: {x: 0, y: 0, z: 0}
+  detachedScale: {x: 1, y: 1, z: 1}
+  animator: {fileID: 0}
+  shootParticle: {fileID: 0}
+--- !u!1001 &2684814373833847203
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 4707318286241664521}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 15e00c4c23993fc4da840b888a93f486, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 86.75315
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 15e00c4c23993fc4da840b888a93f486, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 86.75315
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 15e00c4c23993fc4da840b888a93f486, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 86.75315
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 15e00c4c23993fc4da840b888a93f486, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 15e00c4c23993fc4da840b888a93f486, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 15e00c4c23993fc4da840b888a93f486, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 15e00c4c23993fc4da840b888a93f486, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.00000004371139
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 15e00c4c23993fc4da840b888a93f486, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 15e00c4c23993fc4da840b888a93f486, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 15e00c4c23993fc4da840b888a93f486, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 15e00c4c23993fc4da840b888a93f486, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 15e00c4c23993fc4da840b888a93f486, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 15e00c4c23993fc4da840b888a93f486, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 15e00c4c23993fc4da840b888a93f486, type: 3}
+      propertyPath: m_Name
+      value: crossbow_2handed
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 15e00c4c23993fc4da840b888a93f486, type: 3}
+--- !u!4 &2506491854275991112 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 15e00c4c23993fc4da840b888a93f486, type: 3}
+  m_PrefabInstance: {fileID: 2684814373833847203}
+  m_PrefabAsset: {fileID: 0}

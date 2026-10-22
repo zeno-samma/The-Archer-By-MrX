@@ -165,3 +165,44 @@ Sau cập nhật loot có thêm lệnh này ngoài 29 lệnh của lần khảo 
 ## Kết toán run và ví gem
 
 Bản đồ đường dẫn source/prefab và quy trình mới ở [Run Rewards and Save](Run%20Rewards%20and%20Save.md). Chỉnh rate từng boss trong Stage Creator như trước; không cần chạy Loot Install hoặc đổi Boss Chest Rewards để cập nhật Drop Overrides. Việc ghi thường trong combat được gom đến màn kết quả. Gem Wallet là prefab dùng lại trên năm tab ngoài Stage.
+
+## Hero roster Adventurers — 21/10/2026
+
+Trong **Armory** có thêm **Install Adventurer Roster** (bổ sung asset/mapping, dựng hàng nút trong prefab) và **Rebuild Adventurer Portraits** (ghi lại ảnh icon). Cả hai chạy Edit Mode. Không chạy installer chỉ để sửa stat; icon rebuild ghi đè ảnh chỉnh tay nhưng giữ GUID. Cấu hình ẩn, mở khóa, lớp, starter và đường dẫn chi tiết: [Adventurer Heroes and Weapons](Adventurer%20Heroes%20and%20Weapons.md).
+
+### Stage → Apply Hero Showcase Layout
+
+Edit Mode. Áp lại bố cục ngang/dọc của Stage Page, camera preview và clip lặp/điểm cầm cho vũ khí Mage/Barbarian. Có ghi đè phần trình bày này; sau khi tự chỉnh prefab thì không cần chạy lại. Không đổi giá/stat/save.
+
+### Armory → Apply Mage Barbarian Gem Defaults
+
+Edit Mode. Đặt Mage 500 gem, Barbarian 750 gem và chỉ số gốc Barbarian 220 HP/55 Damage theo tỷ lệ đường tăng trưởng hiện có. Đây là thao tác đặt lại cấu hình; không thu hồi nhân vật đã sở hữu. Xem [hướng dẫn hero và Stage Showcase](Adventurer%20Heroes%20and%20Weapons.md).
+
+### Stage → Install Stage 5 Skeleton Survival
+
+Chỉ Edit Mode. Tạo prefab/controller/material còn thiếu cho bốn boss skeleton, đăng ký enum 106–109 trong database, dựng môi trường/đặt mốc boss Stage 5. Lần đầu đổi mốc thành 8/16/24/33; giữ stageId và dữ liệu loot gốc đã sao chép. Lần chạy sau không ghi đè prefab/controller hiện hữu nhưng vẫn gán lại prefab môi trường room mặc định. Hướng dẫn và phạm vi kiểm tra: [Stage 5 Skeleton Survival](Stage%205%20Skeleton%20Survival.md).
+
+### Stage → Apply Skeleton Boss Combat Revision / Rebuild Stage 5 Optimized Necropolis
+
+Hai lệnh Edit Mode, source `Assets/The Archer/Scripts/Editor/SkeletonSurvivalRefinement.cs`. Lệnh Combat đặt lại nhịp bắn/áp sát, controller và projectile mặc định; lệnh Necropolis ghi đè nhóm trang trí của prefab Stage 5. Không chạy lại khi muốn giữ cân bằng/bố cục đã sửa tay. Xem phần cập nhật trong [Stage 5 Skeleton Survival](Stage%205%20Skeleton%20Survival.md).
+
+### Balance → Summarize Run Reports
+
+Tổng hợp các JSON trong `Application.persistentDataPath/BalanceReports`, tự mở báo cáo tiếng Việt `Temp/BalanceReport.html` có tổng quan, gợi ý nơi cần xem và bảng từng đợt thu gọn. Vẫn xuất `Temp/BalanceSummary.csv` để tra cứu số liệu. Bỏ qua run resumed và phiên verification mới. Đọc [Combat Pacing and Balance](Combat%20Pacing%20and%20Balance.md) để biết median/P75, damage nhận và giới hạn so sánh các build. Source: `Assets/The Archer/Scripts/Editor/BalanceReportTools.cs`.
+
+
+### Offline → Install Feature Switches Difficulty and Run Summary
+
+Dùng trong Edit Mode với Main Menu mở. Tạo asset công tắc được nối với Developer Tools Settings, bộ chọn ba độ khó và bảng thống kê cuối run dưới dạng prefab. Thêm các thành tựu gem theo từng stage/độ khó còn thiếu, không xóa dữ liệu cũ. Hướng dẫn Inspector, cơ chế nhận một lần và đường dẫn: [Offline Features Difficulty and Run Summary](Offline%20Features%20Difficulty%20and%20Run%20Summary.md).
+
+### Performance → Capture 600 Gameplay Frames / Stop and Save Capture
+
+Chạy trong Play khi phòng đã tải. Bỏ qua 60 frame khởi động và frame pause, thu tối đa 600 frame rồi ghi báo cáo vào `Logs/Performance`. Lệnh Stop kết thúc sớm và giải phóng recorder. Đây là số đo Editor, chưa phải benchmark GPU/thiết bị. Source: `Assets/The Archer/Scripts/Editor/PerformanceCapture.cs`. Xem [Performance Optimization](Performance%20Optimization.md).
+
+### Offline → Upgrade Run Summary Records
+
+Edit Mode. Thêm hai thẻ thời gian/DPS còn thiếu vào prefab Run Summary và các chuỗi dịch. Không tạo thẻ trùng hoặc reset kỷ lục; giữ layout đã sửa khi nhóm Record Highlights đã tồn tại. Xem [Run Records and Max Abilities](Run%20Records%20and%20Max%20Abilities.md).
+
+### UI → Create Text Effects Demo Prefab
+
+Edit Mode. Tạo prefab mẫu gồm 12 text hiệu ứng tại `Assets/The Archer/Prefabs/UI/Text Effects/UI Text Effects Demo.prefab`. Có asset rồi thì chỉ chọn, không ghi đè. Component `UITextEffect` có Preview trực tiếp trong Inspector khi chọn text ở scene hoặc Prefab Mode. Xem [UI Text Effects](UI%20Text%20Effects.md).

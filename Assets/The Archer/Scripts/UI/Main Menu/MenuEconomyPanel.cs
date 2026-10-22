@@ -13,6 +13,7 @@ namespace MrX.UI
         [SerializeField] private Button energyPlus, goldPlus, buyButton, closeButton;
         [SerializeField] private GameObject modal;
         [SerializeField] private TMP_Text purchaseLimit;
+        [SerializeField] private GameObject energyGroup;
         private MenuEconomyService service;
         private bool ownsDock;
         private GameObject previousSelection;
@@ -38,13 +39,17 @@ namespace MrX.UI
         }
         private void RefreshTimer()
         {
+            bool energyEnabled = Development.GameFeatureSettings.IsEnabled(Development.GameFeature.Energy);
+            if (energyGroup != null) energyGroup.SetActive(energyEnabled);
+            recoveryLabel.gameObject.SetActive(energyEnabled);
+            if (!energyEnabled && ownsDock && offeredCurrency == "energy") Close();
             int seconds = service.SecondsUntilRecovery;
             recoveryLabel.text = seconds == 0 ? "FULL" : "RECOVERS IN " + (seconds / 60).ToString("00") + ":" + (seconds % 60).ToString("00");
             if (ownsDock && offeredCurrency == "energy") RefreshLimit();
             var stage = GameController.MainMenuScreenBehavior?.CurrentPage as MainMenuStagesPageBehavior;
             if (runCost != null)
             {
-                runCost.gameObject.SetActive(stage != null && stage.StageSave != null);
+                runCost.gameObject.SetActive(energyEnabled && stage != null && stage.StageSave != null);
                 if (stage != null && stage.StageSave != null) runCost.text = "RUN COST: " + stage.StageDatabase.GetStageData(stage.StageSave.SelectedStageId).EnergyCost + " ENERGY";
             }
         }

@@ -24,5 +24,9 @@
 		IceSlime = 103,
 		Mask = 104,
 		Golem = 105,
+        SkeletonMinion = 106,
+        SkeletonWarrior = 107,
+        SkeletonRogue = 108,
+        SkeletonMage = 109,
 	}
 }

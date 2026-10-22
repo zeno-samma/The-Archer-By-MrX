@@ -28,10 +28,10 @@ namespace MrX.UI
         [SerializeField] private ArmoryDashboard inventory;
         private ResponsiveMenuSurface surface;
         private bool initialized,lastPortrait;
-        private void OnEnable(){initialized=false;}
+        private void OnEnable(){initialized=false;surface=GetComponentInParent<ResponsiveMenuSurface>();}
+        private void OnTransformParentChanged(){surface=GetComponentInParent<ResponsiveMenuSurface>();initialized=false;}
         private void LateUpdate()
         {
-            if(surface==null)surface=GetComponentInParent<ResponsiveMenuSurface>();
             if(surface!=null&&(!initialized||surface.IsPortrait!=lastPortrait))Apply(surface.IsPortrait);
         }
         public void Apply(bool portrait)
@@ -43,6 +43,7 @@ namespace MrX.UI
             foreach(var style in visibility)if(style.target!=null)style.target.SetActive(portrait?style.portrait:style.landscape);
             foreach(var style in grids)if(style.target!=null){style.target.cellSize=portrait?style.portraitSize:style.landscapeSize;style.target.padding=portrait?style.portraitPadding:style.landscapePadding;}
             if(inventory!=null)inventory.SetColumns(portrait?4:6);
+            foreach(var panel in GetComponentsInChildren<Armory.ArmoryHeroPanel>(true)) panel.RefreshSlotLayout();
         }
     }
 }

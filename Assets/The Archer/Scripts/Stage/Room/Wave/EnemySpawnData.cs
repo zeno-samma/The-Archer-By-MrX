@@ -98,14 +98,14 @@ namespace MrX
             damage = overridesBehavior.Damage;
         }
 
-        public virtual float ApplyDamageOverride(Float baseDamage)
+        public virtual float ApplyDamageOverride(Float baseDamage, float difficultyMultiplier = 1)
         {
-            return overrideDamage ? damage : baseDamage;
+            return overrideDamage ? damage * difficultyMultiplier : baseDamage;
         }
 
-        public virtual float ApplyHPOverride(Float baseHP)
+        public virtual float ApplyHPOverride(Float baseHP, float difficultyMultiplier = 1)
         {
-            return overrideHP ? hp : baseHP;
+            return overrideHP ? hp * difficultyMultiplier : baseHP;
         }
 
 #if UNITY_EDITOR

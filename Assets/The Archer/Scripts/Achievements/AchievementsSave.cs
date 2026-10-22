@@ -19,6 +19,17 @@ namespace MrX.Achievements
         [SerializeField] private List<string> claimedIds = new List<string>();
         [SerializeField] private List<string> completedStageIds = new List<string>();
         [SerializeField] private List<string> ownedItemIds = new List<string>();
+        [SerializeField] private List<string> difficultyClears = new List<string>();
+        public bool RecordDifficulty(string stageId, StageDifficulty mode)
+        {
+            if (string.IsNullOrEmpty(stageId) || (int)mode < 0 || (int)mode > 2) return false;
+            if (difficultyClears == null) difficultyClears = new List<string>();
+            string key = stageId + ":" + (int)mode;
+            if (difficultyClears.Contains(key)) return false;
+            difficultyClears.Add(key); return true;
+        }
+        public long GetProgress(AchievementDefinition definition) => definition.metric == AchievementMetric.StageDifficultyClear
+            ? (difficultyClears != null && difficultyClears.Contains(definition.stageId + ":" + (int)definition.difficulty) ? 1 : 0) : Get(definition.metric);
         [NonSerialized] private Dictionary<AchievementMetric, AchievementCounter> lookup;
         [NonSerialized] private HashSet<string> claimed;
         [NonSerialized] private HashSet<string> stages;
@@ -75,7 +86,7 @@ namespace MrX.Achievements
         }
 
         public bool IsClaimed(string id) { EnsureInitialized(); return claimed.Contains(id); }
-        public bool IsComplete(AchievementDefinition definition) => Get(definition.metric) >= definition.target;
+        public bool IsComplete(AchievementDefinition definition) => GetProgress(definition) >= definition.target;
         public bool TryClaim(AchievementDefinition definition)
         {
             if (!IsComplete(definition) || IsClaimed(definition.id)) return false;

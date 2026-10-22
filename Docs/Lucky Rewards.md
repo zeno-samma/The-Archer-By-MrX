@@ -1,5 +1,7 @@
 # Vòng quay may mắn và rương gem
 
+Cập nhật 20/10/2026: mỗi chức năng có một lượt miễn phí mỗi ngày và chấm đỏ khi chưa dùng; sau đó mới trả giá gem cũ. Cấu hình/reset/save và kiểm tra: [Daily Free Lucky Rewards](Daily%20Free%20Lucky%20Rewards.md).
+
 Hai nút xuất hiện bên phải trang chọn Stage, dùng hai ảnh người dùng cung cấp. Gem được thêm vào **Currencies Database** hiện có với ID `gem`, icon riêng, save riêng và ví gameplay riêng theo cơ chế cũ. Gold vẫn ở vị trí đầu database và vẫn là default currency.
 
 ## Cấu hình trong Inspector

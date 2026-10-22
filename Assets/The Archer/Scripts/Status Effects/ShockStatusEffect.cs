@@ -13,6 +13,7 @@ namespace MrX.StatusEffects
         public float ShockProjectileDamageMultiplier { get; set; }
         public GameObject ProjectilePrefab { get; protected set; }
         protected PoolComponent<ShockSpreadProjectileBehavior> projectilePool;
+        private Collider[] spreadTargets = new Collider[16];
 
         public ShockStatusEffect() : base()
         {
@@ -40,11 +41,16 @@ namespace MrX.StatusEffects
 
                 if(projectilePool != null)
                 {
-                    var colliders = Physics.OverlapSphere(target.Position, ShockSpreadRadius, 1 << target.Layer);
+                    int count;
+                    // Grow only on saturation: a fixed buffer would silently lose targets in dense waves.
+                    while ((count = Physics.OverlapSphereNonAlloc(target.Position, ShockSpreadRadius, spreadTargets, 1 << target.Layer)) == spreadTargets.Length)
+                        System.Array.Resize(ref spreadTargets, spreadTargets.Length * 2);
 
-                    for (int i = 0; i < colliders.Length; i++)
+                    for (int i = 0; i < count; i++)
                     {
-                        var additionalTarget = colliders[i].GetComponent<IProjectileTarget>();
+                        var collider = spreadTargets[i];
+                        spreadTargets[i] = null;
+                        var additionalTarget = collider.GetComponent<IProjectileTarget>();
                         if (additionalTarget != null && additionalTarget != target)
                         {
                             var projectile = projectilePool.GetEntity();

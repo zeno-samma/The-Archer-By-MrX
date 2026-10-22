@@ -15,7 +15,7 @@ namespace MrX.Achievements
         StagesCleared = 0, UniqueStages = 1, RoomsCompleted = 2,
         EnemiesDefeated = 3, BossesDefeated = 4, ItemsCollected = 5,
         UniqueItems = 6, ChestsOpened = 7, HeroUpgrades = 8,
-        ItemUpgrades = 9, PermanentUpgrades = 10
+        ItemUpgrades = 9, PermanentUpgrades = 10, StageDifficultyClear = 11
     }
 
     [Serializable]
@@ -29,6 +29,9 @@ namespace MrX.Achievements
         [Min(1)] public int target = 1;
         public Price reward = new Price("gold", 100);
         public Sprite icon;
+        [Tooltip("Only used for StageDifficultyClear")]
+        public string stageId;
+        public StageDifficulty difficulty;
     }
 
     [Serializable]

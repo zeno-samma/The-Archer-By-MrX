@@ -38,12 +38,13 @@ namespace MrX.Input
 
         protected virtual void OnEnable()
         {
-            inputAsset.Enable();
+            if (inputAsset != null) inputAsset.Enable();
         }
 
         protected virtual void OnDisable()
         {
             if (inputAsset != null) inputAsset.Disable();
+            MovementValue = Vector2.zero;
         }
 
         public virtual void Init()
@@ -56,7 +57,7 @@ namespace MrX.Input
             }
             else
             {
-                ActiveInput = InputType.UIJoystick;
+                ActiveInput = Keyboard.current != null && !Application.isMobilePlatform ? InputType.Keyboard : InputType.UIJoystick;
             }
 
             inputAsset.GamepadDetection.Detection.performed += GamepadDetection;
@@ -64,35 +65,31 @@ namespace MrX.Input
 
         protected virtual void Update()
         {
+            if (inputAsset == null || save == null) return;
             if (ActiveInput != InputType.Keyboard && Keyboard.current != null && Keyboard.current.wasUpdatedThisFrame && !Keyboard.current.CheckStateIsAtDefaultIgnoringNoise())
             {
-                Debug.Log("Switching To Keyboard");
-
-                var prevInput = ActiveInput;
-                ActiveInput = InputType.Keyboard;
-
-                if (Joystick != null) Joystick.Disable();
-
-                highlightsParent.EnableArrows();
-
-                onInputChanged?.Invoke(prevInput, InputType.Keyboard);
+                SetInputType(InputType.Keyboard);
             }
 
             if (ActiveInput != InputType.UIJoystick &&
                 (Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame ||
-                ActiveInput == InputType.Gamepad && Gamepad.current == null ||
-                Touchscreen.current != null && Touchscreen.current.wasUpdatedThisFrame))
+                Touchscreen.current != null && Touchscreen.current.wasUpdatedThisFrame && Touchscreen.current.primaryTouch.press.isPressed))
             {
-                Debug.Log("Switching To UI Joystick");
+                SetInputType(InputType.UIJoystick);
+            }
 
-                var prevInput = ActiveInput;
-                ActiveInput = InputType.UIJoystick;
+            if (ActiveInput == InputType.Gamepad && Gamepad.current == null)
+                SetInputType(Keyboard.current != null && !Application.isMobilePlatform ? InputType.Keyboard : InputType.UIJoystick);
 
-                if (Joystick != null) Joystick.Enable();
-
-                highlightsParent.DisableArrows();
-
-                onInputChanged?.Invoke(prevInput, InputType.UIJoystick);
+            // Never gate physical movement behind the last UI device. A mouse click
+            // must not stop a held WASD key, and a stick need not cross a button's
+            // press threshold before its analog movement can be used.
+            var movement = inputAsset.Gameplay.Movement.ReadValue<Vector2>();
+            var device = inputAsset.Gameplay.Movement.activeControl?.device;
+            if (movement.sqrMagnitude > 0.0001f)
+            {
+                if (device is Gamepad) SetInputType(InputType.Gamepad);
+                else if (device is Keyboard) SetInputType(InputType.Keyboard);
             }
 
             if (ActiveInput == InputType.UIJoystick && Joystick != null)
@@ -101,25 +98,38 @@ namespace MrX.Input
             }
             else
             {
-                MovementValue = inputAsset.Gameplay.Movement.ReadValue<Vector2>();
+                MovementValue = movement;
             }
         }
 
         protected virtual void GamepadDetection(InputAction.CallbackContext obj)
         {
-            if (ActiveInput != InputType.Gamepad)
+            SetInputType(InputType.Gamepad);
+        }
+
+        private void SetInputType(InputType type)
+        {
+            if (save == null || ActiveInput == type) return;
+            var previous = ActiveInput;
+            ActiveInput = type;
+            if (Joystick != null)
             {
-                Debug.Log("Switching To Gamepad");
-
-                var prevInput = ActiveInput;
-                ActiveInput = InputType.Gamepad;
-
-                if (Joystick != null) Joystick.Disable();
-
-                highlightsParent.EnableArrows();
-
-                onInputChanged?.Invoke(prevInput, InputType.Gamepad);
+                if (type == InputType.UIJoystick) Joystick.Enable();
+                else Joystick.Disable();
             }
+            if (highlightsParent != null)
+            {
+                if (type == InputType.UIJoystick) highlightsParent.DisableArrows();
+                else highlightsParent.EnableArrows();
+            }
+            onInputChanged?.Invoke(previous, type);
+        }
+
+        protected virtual void OnDestroy()
+        {
+            if (inputAsset == null) return;
+            inputAsset.GamepadDetection.Detection.performed -= GamepadDetection;
+            inputAsset.Dispose();
         }
 
         public virtual void RegisterJoystick(JoystickBehavior joystick)

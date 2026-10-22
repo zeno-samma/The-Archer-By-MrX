@@ -16,6 +16,7 @@ namespace MrX.Save
 #if UNITY_EDITOR
         public const string VerificationDirectoryKey = "MrX.Verification.SaveDirectory";
         private static string verificationDirectory;
+        [UnityEditor.InitializeOnLoadMethod]
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
         private static void InitVerificationDirectory()
         { verificationDirectory = UnityEditor.SessionState.GetString(VerificationDirectoryKey, ""); }

@@ -12,6 +12,8 @@ namespace MrX.Armory
         [SerializeField] protected List<WeaponAnimation> animations;
         [SerializeField] protected RuntimeAnimatorController runtimeAnimatorController;
         [SerializeField] protected float attackAnimationLength;
+        [SerializeField] private bool normalizeAttackSpeed;
+        public bool NormalizeAttackSpeed => normalizeAttackSpeed;
 
         public WeaponAnimationsSetType WeaponAnimationsSetType => weaponAnimationsSetType;
 

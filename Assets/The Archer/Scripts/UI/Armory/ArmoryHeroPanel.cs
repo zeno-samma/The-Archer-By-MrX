@@ -118,6 +118,7 @@ namespace MrX.UI.Armory
         }
         protected virtual void OnSelectedHeroChanged()
         {
+            InitSlots();
             RecalculateStats();
         }
 
@@ -207,6 +208,18 @@ namespace MrX.UI.Armory
                         heroPreviewBehavior.SetWeaponData(data as WeaponData);
                     }
                 }
+            }
+        }
+
+        public void RefreshSlotLayout()
+        {
+            foreach (var card in equippedCards)
+            {
+                if (card == null || card.ItemData == null) continue;
+                var slot = slots.Find(value => value.ItemType == card.ItemData.ItemType);
+                if (slot == null) continue;
+                card.RectTransform.sizeDelta = slot.SlotRect.sizeDelta;
+                card.transform.position = slot.SlotRect.position;
             }
         }
 

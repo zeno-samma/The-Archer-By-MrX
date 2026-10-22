@@ -467,6 +467,7 @@ GameObject:
   - component: {fileID: 192859706}
   - component: {fileID: 192859707}
   - component: {fileID: 192859708}
+  - component: {fileID: 192859709}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -621,6 +622,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   screens:
   - {fileID: 1487360076}
+--- !u!114 &192859709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 192859701}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbf2455bd76f0e24a8b3c806fda8b99e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MrX.UI.LocalizedMenuScope
 --- !u!1 &292619724
 GameObject:
   m_ObjectHideFlags: 0

@@ -17,6 +17,9 @@ namespace MrX.EditorTools
             int count=0;
             Action<bool,string> check=(ok,message)=>{if(!ok)throw new Exception(message);count++;};
             var config=ScriptableObject.CreateInstance<MenuEconomySettings>();
+            var features = MrX.Development.GameFeatureSettings.Current;
+            bool originalEnergy = features != null && features.energyEnabled;
+            if (features != null) features.energyEnabled = true;
             try
             {
                 var wallets=new Wallets();var saves=new Saves();long now=100000;
@@ -80,9 +83,18 @@ namespace MrX.EditorTools
                     check(root!=null&&root.GetComponentsInChildren<MrX.UI.MenuEconomyPanel>(true).Length==1,"Exactly one economy prefab per page");
                     foreach(var tr in root.GetComponentsInChildren<Transform>(true))check(GameObjectUtility.GetMonoBehavioursWithMissingScriptCount(tr.gameObject)==0,"Missing script in "+path);
                 }
+                if (features != null)
+                {
+                    features.energyEnabled = false;
+                    int disabledEnergy = wallets.Energy.Amount, disabledGems = wallets.Gems.Amount, writesBefore = saves.Writes;
+                    check(service.TrySpendForNewRun(int.MaxValue) && wallets.Energy.Amount == disabledEnergy && saves.Writes == writesBefore, "Energy disabled: run never charges or blocks");
+                    check(service.Buy("energy") == ExchangeResult.InvalidConfiguration && wallets.Gems.Amount == disabledGems, "Energy disabled: no paid purchase");
+                    now += 36000;
+                    check(!service.Refresh() && wallets.Energy.Amount == disabledEnergy, "Energy disabled: no recovery grant");
+                }
                 return "Energy, exchange, localization and prefab checks passed: "+count;
             }
-            finally { UnityEngine.Object.DestroyImmediate(config); }
+            finally { if (features != null) features.energyEnabled = originalEnergy; UnityEngine.Object.DestroyImmediate(config); }
         }
         private sealed class Saves:ISaveManager
         {

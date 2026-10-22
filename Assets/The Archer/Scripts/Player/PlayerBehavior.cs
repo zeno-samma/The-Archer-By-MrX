@@ -355,7 +355,12 @@ namespace MrX
 
             damage *= Stats.DamageReduction.Value;
 
+            var hpBeforeDamage = healthbar.HP;
             var subtractedHP = healthbar.Subtract(damage);
+            var actualDamage = Mathf.Max(0, hpBeforeDamage - healthbar.HP);
+            ConsoleTimer.Instance?.RecordDamage(actualDamage);
+            if (StageController.RunStatistics != null && !StageController.IsResultFinalized)
+            { StageController.RunStatistics.damageTaken += actualDamage; if (actualDamage > 0) StageController.RunStatistics.hitsTaken++; }
 
             onHPChanged?.Invoke();
 
@@ -378,7 +383,9 @@ namespace MrX
         {
             if (!IsPlaying) return;
 
+            var hpBeforeHealing = healthbar.HP;
             var addedHP = healthbar.AddPercentage(maxProportionHP * 100 * Stats.HealingStat);
+            if (StageController.RunStatistics != null && !StageController.IsResultFinalized) StageController.RunStatistics.healing += Mathf.Max(0, healthbar.HP - hpBeforeHealing);
 
             if (addedHP > 0)
             {
@@ -396,7 +403,9 @@ namespace MrX
 
             var hpToAdd = hp * Stats.HealingStat;
 
+            var hpBeforeHealing = healthbar.HP;
             var addedHP = healthbar.AddHP(hpToAdd);
+            if (StageController.RunStatistics != null && !StageController.IsResultFinalized) StageController.RunStatistics.healing += Mathf.Max(0, healthbar.HP - hpBeforeHealing);
 
             if (addedHP > 0)
             {

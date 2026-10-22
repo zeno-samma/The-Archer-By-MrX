@@ -172,6 +172,8 @@ namespace MrX.UI
         }
         private void Refresh()
         {
+            for (int i = 0; i < heroButtons.Count; i++)
+            { var rosterHero = Armory.GetAllHeroDataList().Find(h => h.Id == heroIds[i]); heroButtons[i].gameObject.SetActive(rosterHero != null && !rosterHero.HideInRoster); }
             enabled = true;
             var oldStats = heroPanel.Find("Stats Background"); if (oldStats) oldStats.gameObject.SetActive(false);
             var snapshot = ArmoryStatsSnapshot.Current(); var t = snapshot.Total; var b = snapshot.HeroOnly;

@@ -179,8 +179,9 @@ namespace MrX.Enemy
             CollisionDamage = Damage * collisionDamageMultiplier;
             if (OverrideData != null)
             {
-                Damage = OverrideData.ApplyDamageOverride(Damage);
-                hp = OverrideData.ApplyHPOverride(hp);
+                var tuning = StageController.StageData.GetDifficulty(StageController.ActiveDifficulty);
+                Damage = OverrideData.ApplyDamageOverride(Damage, Mathf.Max(.1f, tuning.enemyDamage));
+                hp = OverrideData.ApplyHPOverride(hp, Mathf.Max(.1f, tuning.enemyHp));
             }
 
             healthbar.Init(hp);
@@ -235,7 +236,9 @@ namespace MrX.Enemy
 
             if (Data.IsBoss) receivedDamage *= StageController.Player.Stats.DamageToBossesMultiplierStat;
 
+            var hpBeforeDamage = healthbar.HP;
             var displayedDamage = healthbar.Subtract(receivedDamage);
+            if (!StageController.IsResultFinalized) StageController.RunStatistics?.RecordDamage(Mathf.Max(0, hpBeforeDamage - healthbar.HP), damageType, isCrit, Data != null && Data.IsBoss);
 
             var textSpawnPosition = healthbar.transform.position;
             var text = displayedDamage.ToString();

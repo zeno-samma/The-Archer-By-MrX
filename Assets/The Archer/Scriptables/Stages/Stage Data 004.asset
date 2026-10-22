@@ -15,7 +15,15 @@ MonoBehaviour:
   dataVersion: 1
   stageId: 98f43066-55f0-4c56-aa7e-661ad6981943
   stageImage: {fileID: 21300000, guid: 6be77ed2e6496494fb788d1b23886393, type: 3}
-  stageName: Forgotten Tombs
+  stageName: Halloween Crypt
+  energyCost: 5
+  difficulties:
+  - enemyHp: 1
+    enemyDamage: 1
+  - enemyHp: 1.5
+    enemyDamage: 1.25
+  - enemyHp: 2
+    enemyDamage: 1.5
   showStageObjective: 1
   stageObjective: Survive 33 waves of enemies
   stageMusic: {fileID: 11400000, guid: b1ff3aeba1a032048b384624765ff9df, type: 2}
@@ -36,74 +44,9 @@ MonoBehaviour:
   nextAbilityRerollMultiplier: 2
   rooms:
   - prefabs:
-    - prefab: {fileID: 3178937839235950401, guid: 6584e55e7e1c86b4f8b878233fb9d9bf, type: 3}
+    - prefab: {fileID: 1826943813969747183, guid: 0a303e6cdab753b4884c81d2ebd86adb, type: 3}
       transformData:
-        position: {x: 0, y: 0, z: -8.099998}
-        rotation: {x: 0, y: 0, z: 0, w: 1}
-        localScale: {x: 1, y: 1, z: 1}
-    - prefab: {fileID: 2880132555539923626, guid: c97f4b5097de5aa49a94acf81ccb6a40, type: 3}
-      transformData:
-        position: {x: 20.92347, y: 0, z: 28.61045}
-        rotation: {x: 0, y: 0, z: 0, w: 1}
-        localScale: {x: 1, y: 1, z: 1}
-    - prefab: {fileID: 2880132555539923626, guid: c97f4b5097de5aa49a94acf81ccb6a40, type: 3}
-      transformData:
-        position: {x: 13.92347, y: 0, z: -8.489552}
-        rotation: {x: 0, y: 0, z: 0, w: 1}
-        localScale: {x: 1, y: 1, z: 1}
-    - prefab: {fileID: 5358008420192249959, guid: 436a8f476223b0947b9f3adaa3e8ddae, type: 3}
-      transformData:
-        position: {x: -11.844106, y: 2.059114, z: -2.6839993}
-        rotation: {x: 0, y: 0, z: 0, w: 1}
-        localScale: {x: 1.4977133, y: 1.4977133, z: 1.4977133}
-    - prefab: {fileID: 5358008420192249959, guid: 436a8f476223b0947b9f3adaa3e8ddae, type: 3}
-      transformData:
-        position: {x: 10.155895, y: 2.059114, z: 0.51600075}
-        rotation: {x: 0, y: 0, z: 0, w: 1}
-        localScale: {x: 1.4977133, y: 1.4977133, z: 1.4977133}
-    - prefab: {fileID: 5358008420192249959, guid: 436a8f476223b0947b9f3adaa3e8ddae, type: 3}
-      transformData:
-        position: {x: 1.6558955, y: 2.059114, z: 10.616005}
-        rotation: {x: 0, y: 0, z: 0, w: 1}
-        localScale: {x: 1.4977133, y: 1.4977133, z: 1.4977133}
-    - prefab: {fileID: 5358008420192249959, guid: 436a8f476223b0947b9f3adaa3e8ddae, type: 3}
-      transformData:
-        position: {x: -12.144104, y: 2.059114, z: -8.783997}
-        rotation: {x: 0, y: 0, z: 0, w: 1}
-        localScale: {x: 1.4977133, y: 1.4977133, z: 1.4977133}
-    - prefab: {fileID: 3404627847192129608, guid: d4b86c6ed8151e44591220a7aad02546, type: 3}
-      transformData:
-        position: {x: -11.84199, y: -0.100000024, z: -2.6835072}
-        rotation: {x: 0, y: 0, z: 0, w: 1}
-        localScale: {x: 1, y: 1, z: 1}
-    - prefab: {fileID: 3404627847192129608, guid: d4b86c6ed8151e44591220a7aad02546, type: 3}
-      transformData:
-        position: {x: 10.1580105, y: -0.100000024, z: -17.383507}
-        rotation: {x: 0, y: 0, z: 0, w: 1}
-        localScale: {x: 1, y: 1, z: 1}
-    - prefab: {fileID: 3404627847192129608, guid: d4b86c6ed8151e44591220a7aad02546, type: 3}
-      transformData:
-        position: {x: 3.7580109, y: -0.100000024, z: -44.683506}
-        rotation: {x: 0, y: 0, z: 0, w: 1}
-        localScale: {x: 1, y: 1, z: 1}
-    - prefab: {fileID: 3404627847192129608, guid: d4b86c6ed8151e44591220a7aad02546, type: 3}
-      transformData:
-        position: {x: -18.34199, y: -0.100000024, z: -33.383507}
-        rotation: {x: 0, y: 0, z: 0, w: 1}
-        localScale: {x: 1, y: 1, z: 1}
-    - prefab: {fileID: 2676403075697605406, guid: f4f8bbda749cbb54586d6f2e28109dc2, type: 3}
-      transformData:
-        position: {x: -21.647919, y: -0.1, z: -8.835381}
-        rotation: {x: 0, y: 0, z: 0, w: 1}
-        localScale: {x: 1, y: 1, z: 1}
-    - prefab: {fileID: 2676403075697605406, guid: f4f8bbda749cbb54586d6f2e28109dc2, type: 3}
-      transformData:
-        position: {x: -18.147919, y: -0.1, z: -8.835381}
-        rotation: {x: 0, y: 0, z: 0, w: 1}
-        localScale: {x: 1, y: 1, z: 1}
-    - prefab: {fileID: 2676403075697605406, guid: f4f8bbda749cbb54586d6f2e28109dc2, type: 3}
-      transformData:
-        position: {x: -14.647919, y: -0.100000024, z: -8.835381}
+        position: {x: 0, y: 0, z: 0}
         rotation: {x: 0, y: 0, z: 0, w: 1}
         localScale: {x: 1, y: 1, z: 1}
     waves:

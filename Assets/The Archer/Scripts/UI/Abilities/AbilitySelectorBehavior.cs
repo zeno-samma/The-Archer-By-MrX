@@ -444,9 +444,10 @@ namespace MrX.Abilities.UI
         {
             rarityText.text = data.RarityName;
             rarityText.color = data.RarityTextColor;
+            GetComponentInParent<MrX.UI.LocalizedMenuScope>()?.RefreshNow();
 
             rarityBackgroundImage.color = data.RarityBackgroundColor;
-            rarityBackgroundImage.rectTransform.sizeDelta = new Vector2(data.RarityBackgroundWidth, rarityBackgroundImage.rectTransform.sizeDelta.y);
+            rarityBackgroundImage.rectTransform.sizeDelta = new Vector2(Mathf.Max(data.RarityBackgroundWidth, rarityText.preferredWidth + 40f), rarityBackgroundImage.rectTransform.sizeDelta.y);
         }
 
         protected virtual void DoRarityFlash(RarityData data)

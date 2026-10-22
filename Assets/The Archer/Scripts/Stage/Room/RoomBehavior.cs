@@ -52,6 +52,7 @@ namespace MrX
         public virtual void Init(RoomData roomData, int waveIndex, bool waitForAbilitySelector, bool loadShuffle, bool loadWithoutEnemies)
         {
             RoomData = roomData;
+            ConsoleTimer.Instance?.MarkResumed(loadShuffle);
 
             SpawnRoomPrefabs();
             InitExits();
@@ -80,13 +81,9 @@ namespace MrX
             IsLoaded = true;
 
             onRoomStarted?.Invoke();
-            // Debug.Log("OnRoomStarted");
             RoomId++;
-            // Debug.Log($"Room: {RoomId}");
-            ConsoleTimer.Instance.ResetSession();
-            // 1. Bắt đầu phiên đếm
-            ConsoleTimer.Instance.StartTimer("Room " + CurrentWave.Icon.name + " " + RoomId);
-            
+            ConsoleTimer.Instance?.StartTimer("Room " + (StageController.CurrentRoomIndex + 1));
+
         }
 
         protected virtual void OnAbilitySelectorClosed()
@@ -136,6 +133,11 @@ namespace MrX
         public void LoadWave(bool skipEnemies = false)
         {
             StageController.RecalculateEnemyMultipliers();
+            bool timingBoss = false;
+            foreach (var spawn in CurrentWave.EnemySpawns)
+                timingBoss |= StageController.EnemiesSpawner.EnemiesDatabase.GetEnemy(spawn.EnemyType).IsBoss;
+            ConsoleTimer.Instance?.BeginWave(StageController.CurrentRoomIndex + 1, CurrentWaveIndex + 1,
+                skipEnemies ? 0 : CurrentWave.EnemySpawns.Count, timingBoss, skipEnemies);
 
             if (!skipEnemies)
             {
@@ -211,6 +213,8 @@ namespace MrX
 
         protected virtual IEnumerator EndWave()
         {
+            ConsoleTimer.Instance?.EndWave(true);
+            var completedWaveDelay = CurrentWave.CustomWaveEndDelay < 0 ? RoomData.DelayBetweenWaves : CurrentWave.CustomWaveEndDelay;
             onWaveEnded?.Invoke();
 
             if (CurrentWave.WaveMusic != null)
@@ -305,8 +309,8 @@ namespace MrX
 
                 if (nextWave != null)
                 {
-                    var delay = CurrentWave.CustomWaveEndDelay < 0 ? RoomData.DelayBetweenWaves : CurrentWave.CustomWaveEndDelay;
-                    delay -= startWaitingTime;
+                    var delay = completedWaveDelay;
+                    delay -= Time.time - startWaitingTime;
                     if (delay < 0) delay = 0;
 
                     EasingManager.DoAfter(delay, () =>
@@ -366,7 +370,7 @@ namespace MrX
             }
             onRoomEnded?.Invoke();
             // Debug.Log("OnRoomEnded - Hoàn thành"+ Wave);
-            float finalTime = ConsoleTimer.Instance.StopTimer("Room " + CurrentWave.Icon.name + " " + RoomId);
+            ConsoleTimer.Instance?.StopTimer("Room " + (StageController.CurrentRoomIndex + 1));
             // Debug.Log($"Room: {CurrentWave.Icon.name + " " + RoomId} - Clear: {finalTime:F2}s");
             if (exits.Count == 0 || StageController.IsLastRoom)
             {
@@ -428,6 +432,8 @@ namespace MrX
 
             if (aliveEnemies.Remove(enemy))
             {
+                if (StageController.RunStatistics != null && !StageController.IsResultFinalized)
+                { StageController.RunStatistics.enemiesKilled++; if (enemy.Data != null && enemy.Data.IsBoss) StageController.RunStatistics.bossesKilled++; }
                 GameController.DailyQuestsManager?.Record(Quests.DailyQuestType.DefeatEnemies);
                 GameController.AchievementsManager?.Record(Achievements.AchievementMetric.EnemiesDefeated);
                 if (enemy.Data != null && enemy.Data.IsBoss)
@@ -450,6 +456,7 @@ namespace MrX
 
             if (aliveEnemies.Count == 0)
             {
+                ConsoleTimer.Instance?.EndWave(true);
                 onAllEnemiesDefeated?.Invoke();
 
                 ContinuePlayingSave.KilledAllEnemies = true;

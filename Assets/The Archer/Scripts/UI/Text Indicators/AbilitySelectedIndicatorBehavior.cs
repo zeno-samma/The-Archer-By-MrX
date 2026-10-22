@@ -33,6 +33,7 @@ namespace MrX.UI
             var rarityData = StageController.AbilitiesManager.AbilitiesDatabase.GetRarityData(abilityData.Rarity);
 
             textComponent.text = abilityData.Title;
+            GetComponent<LocalizedMenuScope>()?.RefreshNow();
             textComponent.ForceMeshUpdate();
 
             gradientImage.rectTransform.SetSizeDeltaY(TextHeight() + gradientHeightDifference);

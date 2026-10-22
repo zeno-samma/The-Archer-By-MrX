@@ -1,160 +1,93 @@
-using UnityEngine;
-using System.Collections;
+using System;
 using System.Collections.Generic;
+using System.IO;
+using UnityEngine;
+
 namespace MrX
 {
+    // Session-local measurements: no per-kill writes and no changes to the player's save.
     public class ConsoleTimer : MonoBehaviour
     {
         public static ConsoleTimer Instance { get; private set; }
-
-        private Dictionary<string, bool> stopFlags = new Dictionary<string, bool>();
-
-        // Lưu trữ giá trị thời gian (giây) theo ID để tra cứu sau
-        private Dictionary<string, float> timerResults = new Dictionary<string, float>();
-
-        private bool hasReportedThisRun = false; // Cờ chặn tổng hợp nhiều lần
-        private float totalElapsedTime = 0f; // Biến lưu tổng thời gian
-        private void Awake()
+        [SerializeField] private bool exportDevelopmentReports = true;
+        [Serializable] public class WaveMeasurement
         {
-            if (Instance == null) Instance = this;
-            else Destroy(gameObject);
+            public int room, wave, enemyCount;
+            public bool boss, cleared;
+            public float seconds, damageTaken;
+            public int hitsTaken;
         }
-
-        /// <summary>
-        /// Bắt đầu đếm thời gian cho một ID
-        /// </summary>
-        public void StartTimer(string timerId)
+        [Serializable] public class RunMeasurement
         {
-            stopFlags[timerId] = false;
-            timerResults[timerId] = 0f; // Reset về 0 khi bắt đầu phiên mới
-            StartCoroutine(CountRoutine(timerId));
+            public string utc, stage, hero, outcome;
+            public float damageTaken;
+            public int hitsTaken;
+            public float activeSeconds;
+            public bool resumed;
+            public bool verification;
+            public int difficulty;
+            public List<WaveMeasurement> waves = new List<WaveMeasurement>();
         }
-
-        /// <summary>
-        /// Dừng đếm và trả về ngay kết quả thời gian
-        /// </summary>
-        public float StopTimer(string timerId)
+        private readonly Dictionary<string, float> results = new Dictionary<string, float>();
+        private readonly Dictionary<string, float> starts = new Dictionary<string, float>();
+        private RunMeasurement report = new RunMeasurement();
+        private WaveMeasurement activeWave;
+        private float waveStart, runStart;
+        private bool reported;
+        public string LastReportPath { get; private set; }
+        private void Awake() { if (Instance == null) { Instance = this; ResetSession(); } else Destroy(this); }
+        private void OnDestroy() { if (Instance == this) Instance = null; }
+        public void StartTimer(string id) { if (string.IsNullOrEmpty(id) || starts.ContainsKey(id)) return; results[id] = 0; starts[id] = Time.time; }
+        public float StopTimer(string id) { float value = GetElapsedTime(id); starts.Remove(id); results[id] = value; return value; }
+        public float GetElapsedTime(string id) { return starts.TryGetValue(id, out var start) ? Mathf.Max(0, Time.time - start) : results.TryGetValue(id, out var value) ? value : 0; }
+        public Dictionary<string, float> GetAllResults() { var copy = new Dictionary<string, float>(results); foreach (var pair in starts) copy[pair.Key] = GetElapsedTime(pair.Key); return copy; }
+        public void LogAllResults() { float total = 0; foreach (var pair in GetAllResults()) { total += pair.Value; Debug.Log($"[Timing] {pair.Key}: {pair.Value:F2}s"); } Debug.Log($"[Timing] Room total: {total:F2}s"); }
+        public void ResetSession() { results.Clear(); starts.Clear(); activeWave = null; reported = false; runStart = Time.time; LastReportPath = null; report = new RunMeasurement { utc = DateTime.UtcNow.ToString("o") }; }
+        public void BeginWave(int room, int wave, int count, bool boss, bool resumed)
         {
-            // Debug.Log(timerId);
-            if (stopFlags.ContainsKey(timerId))
-            {
-                stopFlags[timerId] = true;
-            }
-            return GetElapsedTime(timerId);
+            EndWave(false);
+            report.stage = StageController.StageData != null ? StageController.StageData.StageId : "unknown";
+            report.resumed |= resumed;
+            report.difficulty = (int)StageController.ActiveDifficulty;
+#if UNITY_EDITOR
+            report.verification = !string.IsNullOrEmpty(UnityEditor.SessionState.GetString(Save.SerializationHelper.VerificationDirectoryKey, ""));
+#endif
+            var hero = StageController.Player != null ? StageController.Player.Hero as Component : null;
+            report.hero = hero != null ? hero.name : "unknown";
+            activeWave = new WaveMeasurement { room = room, wave = wave, enemyCount = count, boss = boss };
+            waveStart = Time.time;
         }
-
-        /// <summary>
-        /// Lấy kết quả thời gian của một ID (kể cả khi đang chạy hoặc đã dừng)
-        /// </summary>
-        public float GetElapsedTime(string timerId)
+        public void MarkResumed(bool resumed) { report.resumed |= resumed; }
+        public void RecordDamage(float damage)
         {
-            if (timerResults.TryGetValue(timerId, out float time))
-            {
-                return time;
-            }
-            return 0f;
+            if (reported || damage <= 0) return;
+            report.damageTaken += damage; report.hitsTaken++;
+            if (activeWave != null) { activeWave.damageTaken += damage; activeWave.hitsTaken++; }
         }
-
-        private IEnumerator CountRoutine(string timerId)
+        public void EndWave(bool cleared)
         {
-            float elapsedTime = 0f;
-            while (!stopFlags[timerId])// Chạy cho đến khi stopFlags[timerId] được đặt thành true
-            {
-                elapsedTime += Time.deltaTime;
-                timerResults[timerId] = elapsedTime; // Cập nhật biến lưu trữ theo realtime
-                yield return null;
-            }
+            if (activeWave == null) return;
+            activeWave.seconds = Mathf.Max(0, Time.time - waveStart); activeWave.cleared = cleared;
+            report.waves.Add(activeWave); activeWave = null;
         }
-        /// <summary>
-        /// Trả về bản sao của toàn bộ Dictionary kết quả để duyệt bằng code
-        /// </summary>
-        public Dictionary<string, float> GetAllResults()
+        public void ReportSessionResult(string outcome)
         {
-            return new Dictionary<string, float>(timerResults);
-        }
-
-        /// <summary>
-        /// In ra Console toàn bộ danh sách thời gian đã ghi nhận từ trước đến nay
-        /// </summary>
-        public void LogAllResults()
-        {
-            Debug.Log("================ DANH SÁCH THỜI GIAN CÁC PHÒNG ================");
-            foreach (var item in timerResults)
-            {
-                Debug.Log($"- {item.Key}: {item.Value:F2} giây");
-                totalElapsedTime+= item.Value;
-            }
-            Debug.Log($"Tổng thời gian: {totalElapsedTime:F2} giây");
-            Debug.Log("===============================================================");
-        }
-        /// <summary>
-        /// Gọi hàm này mỗi khi bắt đầu một Lượt Chơi mới (Game mới / Room 1)
-        /// </summary>
-        public void ResetSession()
-        {
-            hasReportedThisRun = false;
-            // timerResults.Clear();
-        }
-        /// <summary>
-        /// Tổng hợp kết quả phiên chơi (chỉ chạy duy nhất 1 lần cho sự kiện xảy ra trước)
-        /// </summary>
-        public void ReportSessionResult(string message)
-        {
-            // Nếu đã xuất báo cáo trước đó trong lượt chơi này -> Chặn ngay
-            if (hasReportedThisRun)
-            {
-                Debug.Log("Đã có thông báo tổng hợp rồi, bỏ qua sự kiện: " + message);
-                return;
-            }
-
-            // Đánh dấu đã báo cáo
-            hasReportedThisRun = true;
-
-            // 1. In lý do kết thúc
-            switch (message)
-            {
-                case "Die":
-                    Debug.Log($"===> KẾT THÚC: Người chơi chết tại phòng {StageController.Room.RoomId}");
-                    break;
-                case "FinishAllRoom":
-                    Debug.Log("===> KẾT THÚC: Người chơi đã phá đảo toàn bộ phòng!");
-                    break;
-                case "BackToMenu":
-                    Debug.Log("===> KẾT THÚC: Người chơi chủ động thoát về Menu");
-                    break;
-                default:
-                    Debug.Log("===> KẾT THÚC: " + message);
-                    break;
-            }
-            // 2. In toàn bộ danh sách thời gian các phòng
+            if (reported) return;
+            reported = true; EndWave(false);
+            report.outcome = outcome; report.activeSeconds = Mathf.Max(0, Time.time - runStart);
+            foreach (var id in new List<string>(starts.Keys)) StopTimer(id);
             LogAllResults();
+            Debug.Log($"[Timing] {outcome}; active session {report.activeSeconds:F2}s; waves {report.waves.Count}");
+            if (!exportDevelopmentReports || (!Application.isEditor && !Debug.isDebugBuild)) return;
+            try
+            {
+                string folder = Path.Combine(Application.persistentDataPath, "BalanceReports");
+                Directory.CreateDirectory(folder);
+                LastReportPath = Path.Combine(folder, "run-" + DateTime.UtcNow.ToString("yyyyMMdd-HHmmss-fff") + "-" + Guid.NewGuid().ToString("N").Substring(0, 6) + ".json");
+                File.WriteAllText(LastReportPath, JsonUtility.ToJson(report, true));
+                Debug.Log("[Timing] Report: " + LastReportPath);
+            }
+            catch (Exception exception) { Debug.LogWarning("[Timing] Could not export report: " + exception.Message); }
         }
     }
-
-
-
-    // ==========================
-    // // 1. Bắt đầu phiên đếm
-    // ConsoleTimer.Instance.StartTimer("Wave_1");
-
-    // // 2. Dừng khi kết thúc phiên và lấy giá trị ra ngay
-    // float finalTime = ConsoleTimer.Instance.StopTimer("Wave_1");
-    // Debug.Log("Thời gian hoàn thành Wave 1: " + finalTime.ToString("F2") + "s");
-
-    // // // 3. Hoặc đọc lại biến lưu trữ ở bất kỳ đâu/bất kỳ lúc nào về sau
-    // float recordedTime = ConsoleTimer.Instance.GetElapsedTime("Wave_1");
-
-    // Cách 1: In nhanh toàn bộ danh sách ra Console
-    // Gọi dòng này ở cuối màn chơi hoặc khi Game Over
-    // ConsoleTimer.Instance.LogAllResults();
-    // Cách 2: Lấy dữ liệu dạng danh sách để xử lý bằng code (ví dụ vẽ UI, gửi dữ liệu Analytic)
-    //     var allRoomTimes = ConsoleTimer.Instance.GetAllResults();
-
-    // foreach (KeyValuePair<string, float> entry in allRoomTimes)
-    // {
-    //     string roomId = entry.Key;     // Ví dụ: "RoomId_1"
-    //     float timeSpent = entry.Value; // Ví dụ: 15.42f
-
-    //     Debug.Log($"[Thống kê] {roomId} hoàn thành trong {timeSpent:F2}s");
-    // }
 }

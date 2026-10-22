@@ -15,6 +15,14 @@ namespace MrX
         [Obsolete]
         [SerializeField] protected int maxReachedStageId;
         [SerializeField] protected int selectedStageId;
+        [SerializeField] private int selectedDifficulty;
+        public StageDifficulty SelectedDifficulty => (StageDifficulty)Mathf.Clamp(selectedDifficulty, 0, 2);
+        public bool IsDifficultyComplete(StageData stage, StageDifficulty mode) => GetStageSave(stage).IsDifficultyComplete(mode);
+        public bool CanPlayDifficulty(StageData stage, StageDifficulty mode) => (int)mode >= 0 && (int)mode <= 2 &&
+            (mode == StageDifficulty.Normal || IsDifficultyComplete(stage, (StageDifficulty)((int)mode - 1)));
+        public bool SelectDifficulty(StageData stage, StageDifficulty mode)
+        { if (!CanPlayDifficulty(stage, mode)) return false; selectedDifficulty = (int)mode; return true; }
+        public void CompleteDifficulty(StageData stage, StageDifficulty mode) { GetStageSave(stage).CompleteDifficulty(mode); }
 
         [SerializeField] protected TestingData testingData;
 
@@ -226,6 +234,11 @@ namespace MrX
             [SerializeField] protected bool isUnlocked = false;
             [SerializeField] protected bool isCompleted = false;
             [SerializeField] protected int attemptsCount = 0;
+            [SerializeField] private int difficultyCompletionMask;
+            public bool IsDifficultyComplete(StageDifficulty mode)
+            { return (int)mode >= 0 && (int)mode <= 2 && ((difficultyCompletionMask & (1 << (int)mode)) != 0 || mode == StageDifficulty.Normal && isCompleted); }
+            public void CompleteDifficulty(StageDifficulty mode)
+            { if ((int)mode < 0 || (int)mode > 2) return; difficultyCompletionMask |= 1 << (int)mode; isCompleted = true; }
 
             public string StageId => stageId;
             public bool IsUnlocked => isUnlocked;

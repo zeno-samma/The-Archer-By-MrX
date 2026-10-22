@@ -66,6 +66,19 @@ namespace MrX.Quests
 
         public TimeSpan TimeUntilReset => Save.TimeUntilReset(DateTime.UtcNow, Database.resetUtcOffsetHours);
         public int CompletedCount => Save.CompletedCount(Database.quests);
+        public bool HasClaimableRewards
+        {
+            get
+            {
+                if (Save == null || Database == null) return false;
+                foreach (var quest in Database.quests)
+                    if (Save.IsComplete(quest) && !Save.IsClaimed(quest.id)) return true;
+                int completed = CompletedCount;
+                foreach (var milestone in Database.milestones)
+                    if (completed >= milestone.requiredCompletions && !Save.IsMilestoneClaimed(milestone.id)) return true;
+                return false;
+            }
+        }
 
         public bool TryClaimQuest(string id)
         {

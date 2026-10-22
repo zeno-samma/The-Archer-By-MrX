@@ -121,6 +121,7 @@ namespace MrX.Abilities.UI
             iconImage.sprite = data.Icon;
             nameText.text = data.Title;
             descriptionText.text = data.Description;
+            GetComponent<MrX.UI.LocalizedMenuScope>()?.RefreshNow();
 
             var rarityData = GetRarityData(data.Rarity);
             gradientImage.color = rarityData.GradientColor;

@@ -35,6 +35,7 @@ namespace MrX.UI.Armory
             {
                 lockText.text = $"Lvl {level}";
             }
+            GetComponent<LocalizedMenuScope>()?.RefreshNow();
         }
     }
 }

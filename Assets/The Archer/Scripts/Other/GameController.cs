@@ -34,6 +34,9 @@ namespace MrX
         public static MainMenuScreenBehavior MainMenuScreenBehavior { get; protected set; }
 
         [SerializeField] protected SceneSettings sceneSettings;
+        [Header("Frame pacing (desktop VSync can override this limit)")]
+        [SerializeField, Range(30, 240)] private int desktopFrameRate = 120;
+        [SerializeField, Range(30, 120)] private int mobileFrameRate = 60;
         public static SceneSettings SceneSettings => instance.sceneSettings;
 
         // Indicates that the main menu is just loaded, and not exited from the game scene
@@ -78,7 +81,9 @@ namespace MrX
 
             DontDestroyOnLoad(gameObject);
 
-            Application.targetFrameRate = 120;
+            Application.targetFrameRate = Application.isMobilePlatform
+                ? Mathf.Clamp(mobileFrameRate, 30, 120)
+                : Mathf.Clamp(desktopFrameRate, 30, 240);
         }
 
         #region Registering Managers
@@ -203,6 +208,7 @@ namespace MrX
             if (instance == null || loadingStage || stage == null || MenuEconomy == null) return false;
             var stages = SaveManager.GetSave<StageSave>("Stage");
             if (!stages.IsStageUnlocked(stage)) return false;
+            if (!stages.CanPlayDifficulty(stage, stages.SelectedDifficulty)) return false;
             // Set the transition guard before wallet events can reenter the start path.
             loadingStage = true;
             if (!MenuEconomy.TrySpendForNewRun(stage.EnergyCost)) { loadingStage = false; return false; }

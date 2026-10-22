@@ -39,13 +39,13 @@ namespace MrX.UI
             gameObject.SetActive(true);
 
             stageIdText.text = string.Format(stageIdFormat, stageId + 1);
+            objectiveText.text = stageData.StageObjective;
+            GetComponentInParent<LocalizedMenuScope>()?.RefreshNow();
             stageIdText.ForceMeshUpdate();
 
             var halfWidth = stageIdText.preferredWidth / 2f;
             leftDecorImage.rectTransform.SetAnchoredPositionX(halfWidth + leftOffset);
             rightDecorImage.rectTransform.SetAnchoredPositionX(halfWidth + rightOffset);
-
-            objectiveText.text = stageData.StageObjective;
 
             canvasGroup.alpha = 0;
             canvasGroup.DoAlpha(1, fadeInDuration);

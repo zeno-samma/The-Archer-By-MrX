@@ -125,12 +125,13 @@ namespace MrX.Abilities
         public virtual List<AbilityData> GetAllAbilitiesOfRarity(AbilityRarity rarity)
         {
             var abilities = new List<AbilityData>();
+            var types = new HashSet<AbilityType>();
             var rarityData = abilitiesDatabase.GetRarityData(rarity);
 
             for (int i = 0; i < abilitiesDatabase.AbilitiesCount; i++)
             {
                 var ability = abilitiesDatabase.GetAbility(i);
-                if (ability.Rarity == rarity)
+                if (ability != null && ability.Rarity == rarity && types.Add(ability.AbilityType))
                 {
                     abilities.Add(ability);
                 }
@@ -142,11 +143,12 @@ namespace MrX.Abilities
         public virtual List<AbilityData> GetAllEndgameAbilitiesOfRarity(AbilityRarity rarity)
         {
             var abilities = new List<AbilityData>();
+            var types = new HashSet<AbilityType>();
             var rarityData = abilitiesDatabase.GetRarityData(rarity);
             for (int i = 0; i < abilitiesDatabase.AbilitiesCount; i++)
             {
                 var ability = abilitiesDatabase.GetAbility(i);
-                if (ability.Rarity == rarity && ability.IsEndgameAbility)
+                if (ability != null && ability.LevelsCount > 0 && ability.Rarity == rarity && ability.IsEndgameAbility && types.Add(ability.AbilityType))
                 {
                     abilities.Add(ability);
                 }
@@ -223,7 +225,12 @@ namespace MrX.Abilities
 
         public virtual bool IsAbilityAvailable(AbilityData ability)
         {
+            if (ability == null || ability.LevelsCount == 0) return false;
+            if (ability.RangedWeaponsOnly && StageController.Player.Weapon.WeaponData.IsMelee) return false;
             if (ability.IsEndgameAbility) return false;
+            // Save is authoritative, including restored and equipment-granted abilities.
+            // Repeated rewards are supplied separately by the endgame fallback.
+            if (save.GetAbilityLevel(ability.AbilityType) >= ability.LevelsCount - 1) return false;
 
             var isAquired = IsAbilityAquired(ability.AbilityType);
 
@@ -246,7 +253,7 @@ namespace MrX.Abilities
                 return hasPrerequisite;
             }
 
-            return (save.GetAbilityLevel(ability.AbilityType) < ability.LevelsCount - 1 || ability.IsRepeatedAbility) && !ability.IsEndgameAbility;
+            return true;
         }
 
         public virtual void AddAbility(AbilityData abilityData, int level = 0)

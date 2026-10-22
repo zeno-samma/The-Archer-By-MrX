@@ -68,6 +68,8 @@ namespace MrX.Currency
 
         public bool Refresh()
         {
+            if (!Development.GameFeatureSettings.IsEnabled(Development.GameFeature.Energy))
+            { recovery.lastRecoveryUtc = Math.Max(recovery.lastRecoveryUtc, utc()); return false; }
             if (!Ready || busy) return false;
             long now = utc();
             // No banked recovery while full. A clock rollback never grants energy.
@@ -90,6 +92,7 @@ namespace MrX.Currency
         // Caller commits attempts/run selection and then saves before scene transition.
         public bool TrySpendForNewRun(int amount)
         {
+            if (!Development.GameFeatureSettings.IsEnabled(Development.GameFeature.Energy)) return amount >= 0;
             if (!Ready || busy || amount < 0) return false;
             Refresh();
             if (!Energy.CanAfford(amount)) return false;
@@ -108,6 +111,7 @@ namespace MrX.Currency
 
         public ExchangeResult Buy(string currencyId)
         {
+            if (currencyId == "energy" && !Development.GameFeatureSettings.IsEnabled(Development.GameFeature.Energy)) return ExchangeResult.InvalidConfiguration;
             if (busy) return ExchangeResult.Busy;
             if (!Ready || Gems == null || Gold == null || (currencyId != "gold" && currencyId != "energy")) return ExchangeResult.InvalidConfiguration;
             Refresh();

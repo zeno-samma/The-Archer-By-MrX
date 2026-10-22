@@ -194,7 +194,7 @@ namespace MrX.UI
         private void RefreshRow(RowView row)
         {
             var definition = row.definition;
-            var progress = Math.Min((long)definition.target, manager.Save.Get(definition.metric));
+            var progress = Math.Min((long)definition.target, manager.Save.GetProgress(definition));
             if (row.lastProgress != progress)
             {
                 row.lastProgress = progress; row.progress.text = progress + " / " + definition.target;

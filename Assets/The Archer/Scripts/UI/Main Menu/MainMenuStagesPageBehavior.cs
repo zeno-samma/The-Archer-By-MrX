@@ -196,6 +196,7 @@ namespace MrX.UI
         protected virtual void InitStage(int stageId)
         {
             var stageData = stageDatabase.GetStageData(stageId);
+            if (stageData != null && !StageSave.CanPlayDifficulty(stageData, StageSave.SelectedDifficulty)) StageSave.SelectDifficulty(stageData, StageDifficulty.Normal);
             if (stageData == null)
             {
                 Debug.LogError($"Stage with ID {StageSave.SelectedStageId} not found in the database.");

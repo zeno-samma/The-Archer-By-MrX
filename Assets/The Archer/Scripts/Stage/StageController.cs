@@ -30,6 +30,8 @@ namespace MrX
         public static bool IsLoaded => instance != null;
         public static bool IsResultFinalized { get; private set; }
         private static bool settlingResult;
+        public static StageDifficulty ActiveDifficulty { get; private set; }
+        public static RunCombatStatistics RunStatistics { get; private set; }
 
         public static GameScreenBehavior GameScreen => instance.gameScreen;
 
@@ -85,6 +87,7 @@ namespace MrX
         private static void ResetStatics()
         {
             instance = null;
+            ActiveDifficulty = StageDifficulty.Normal; RunStatistics = null;
             IsResultFinalized = settlingResult = false;
 
             StageData = null;
@@ -124,6 +127,10 @@ namespace MrX
 
             StageSave = GameController.SaveManager.GetSave<StageSave>("Stage");
             ContinuePlayingSave = GameController.SaveManager.GetSave<ContinuePlayingSave>("Continue Playing");
+            if (!ContinuePlayingSave.HasUnfinishedStageData)
+            { ContinuePlayingSave.ResetRunStatistics(); ContinuePlayingSave.Difficulty = StageSave.SelectedDifficulty; }
+            ActiveDifficulty = ContinuePlayingSave.Difficulty;
+            RunStatistics = ContinuePlayingSave.RunStatistics;
 
             TestingData = StageSave.GetTestingData();
 
@@ -353,10 +360,15 @@ namespace MrX
             if (CurrentRoomIndex >= StageData.RoomsCount)
             {
                 StageSave.CompleteStage(StageData);
+                if (instance.TestingData == null)
+                {
+                    StageSave.CompleteDifficulty(StageData, ActiveDifficulty);
+                    GameController.AchievementsManager?.RecordDifficultyClear(StageData.StageId, ActiveDifficulty);
+                }
                 GameController.AchievementsManager?.RecordStageClear(StageData.StageId);
                 GameController.DailyQuestsManager?.Record(Quests.DailyQuestType.ClearStages);
 
-                FinalizeRunRewards();
+                FinalizeRunRewards(true);
                 GameScreen.StageCompleteScreen.Show();
                 // Debug.Log("Người chơi đã hoàn thành tất cả các phòng trong giai đoạn");
                 // 3. Hoặc đọc lại biến lưu trữ ở bất kỳ đâu/bất kỳ lúc nào về sau
@@ -432,14 +444,17 @@ namespace MrX
 
             FinalizeRunRewards();
             instance.gameScreen.StageFailedScreen.Show();
+            ConsoleTimer.Instance?.ReportSessionResult("ForceFail");
         }
 
-        public static void FinalizeRunRewards()
+        public static void FinalizeRunRewards(bool victory = false)
         {
             if (IsResultFinalized || settlingResult) return;
             settlingResult = true;
             try
             {
+                if (instance.TestingData == null)
+                    GameController.SaveManager.GetSave<RunRecordsSave>("Run Records").Record(StageData.StageId, ActiveDifficulty, RunStatistics, victory);
                 DropManager.GrantPickedUpItems();
                 GameController.CurrenciesManager.ApplyGameplayAmounts();
                 ContinuePlayingSave.Disable();
@@ -463,6 +478,14 @@ namespace MrX
             EnemyHPMultiplier = StageData.EnemyHPMultiplier +
                 StageData.EnemyHPMultiplierRoomStep * CurrentRoomIndex +
                 StageData.EnemyHPMultiplierWaveStep * Room.CurrentWaveIndex;
+            var difficulty = StageData.GetDifficulty(ActiveDifficulty);
+            EnemyDamageMultiplier *= Mathf.Max(.1f, difficulty.enemyDamage);
+            EnemyHPMultiplier *= Mathf.Max(.1f, difficulty.enemyHp);
+        }
+        private void Update()
+        {
+            if (!IsResultFinalized && Player != null && Player.IsPlaying && Player.IsAlive && RunStatistics != null)
+                RunStatistics.seconds += Time.deltaTime;
         }
 
         public static void ReturnToMainMenu()//quay lại menu chính

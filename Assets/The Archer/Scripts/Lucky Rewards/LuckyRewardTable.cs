@@ -31,11 +31,16 @@ namespace MrX.Rewards
         public string id;
         public string title = "LUCKY WHEEL";
         public Price price = new Price("gem", 10);
+        [Header("Daily Free Use")]
+        public bool dailyFreeUse;
+        [Range(-12, 14), Tooltip("Daily midnight reset, default Vietnam UTC+7. Unused free uses do not accumulate.")]
+        public int dailyResetUtcOffsetHours = 7;
         public List<LuckyPrize> prizes = new List<LuckyPrize>();
         [Min(.1f)] public float animationSeconds = 3.5f;
         public bool IsValid(out double total)
         {
             total = 0;
+            if (dailyFreeUse && (dailyResetUtcOffsetHours < -12 || dailyResetUtcOffsetHours > 14)) return false;
             if (string.IsNullOrEmpty(id) || price == null || price.CurrencyId != "gem" || price.Amount < 1 || prizes == null) return false;
             var identities = new HashSet<string>(StringComparer.Ordinal);
             foreach (var prize in prizes)

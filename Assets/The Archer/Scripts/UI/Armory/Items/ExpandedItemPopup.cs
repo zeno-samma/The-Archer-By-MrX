@@ -68,6 +68,8 @@ namespace MrX.UI.Armory
             {
                 InitButtonsUpgradable();
             }
+            if (!GameController.ArmoryManager.CanEquipItem(Data))
+            { selectButton.enabled = false; selectButtonText.text = "Wrong class"; selectButton.image.sprite = disabledButtonSprite; }
         }
 
         protected virtual void InitButtonsUpgradable()
@@ -205,6 +207,7 @@ namespace MrX.UI.Armory
         {
             // Debug.Log($"[EQUIP BUTTON] Clicked | Frame: {Time.frameCount}");
             GameController.AudioManager.PlayButtonClick();
+            if (!GameController.ArmoryManager.CanEquipItem(Data)) return;
             SaveData.IsEquipped = !SaveData.IsEquipped;
 
             InitVisuals();

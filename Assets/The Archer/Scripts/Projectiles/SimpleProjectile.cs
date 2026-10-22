@@ -149,8 +149,6 @@ namespace MrX.Projectile
         {
             if (RicochetCount < MaxRicochetCount)
             {
-                var colliders = Physics.OverlapSphere(target.Position, 20, 1 << target.Layer);
-
 #pragma warning disable CS0253 // Possible unintended reference comparison; right hand side needs cast
                 IProjectileTarget closestNewTarget = StageController.Room.GetClosestEnemy(target.Position, (enemy) => enemy != target);
 #pragma warning restore CS0253

@@ -1,0 +1,140 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0d9783eacba5724294b5811eacda531, type: 3}
+  m_Name: Knight Greatsword
+  m_EditorClassIdentifier: 
+  dataVersion: 1
+  guid: 33346df144ef1804a97232b2612ed8cc
+  itemType: 0
+  itemName: Knight Greatsword
+  icon: {fileID: 21300000, guid: 6de7e7bfe0546184fac9069e59c7c281, type: 3}
+  isDefaultItem: 0
+  isUnlockedByDefault: 0
+  itemLevels:
+  - cost: 0
+    price:
+      currencyId: gold
+      amount: 0
+    itemRarity: 0
+    stats:
+    - statType: 0
+      value: 22
+      isVisibleOnUI: 1
+    attachedAbilities: 
+  - cost: 100
+    price:
+      currencyId: gold
+      amount: 100
+    itemRarity: 0
+    stats:
+    - statType: 0
+      value: 33
+      isVisibleOnUI: 1
+    attachedAbilities: 
+  - cost: 200
+    price:
+      currencyId: gold
+      amount: 200
+    itemRarity: 1
+    stats:
+    - statType: 0
+      value: 44
+      isVisibleOnUI: 1
+    attachedAbilities: 
+  - cost: 300
+    price:
+      currencyId: gold
+      amount: 300
+    itemRarity: 1
+    stats:
+    - statType: 0
+      value: 55
+      isVisibleOnUI: 1
+    attachedAbilities: 
+  - cost: 500
+    price:
+      currencyId: gold
+      amount: 500
+    itemRarity: 1
+    stats:
+    - statType: 0
+      value: 66
+      isVisibleOnUI: 1
+    attachedAbilities: 
+  - cost: 800
+    price:
+      currencyId: gold
+      amount: 800
+    itemRarity: 2
+    stats:
+    - statType: 0
+      value: 77
+      isVisibleOnUI: 1
+    - statType: 2
+      value: 1.02
+      isVisibleOnUI: 1
+    attachedAbilities: 
+  - cost: 1200
+    price:
+      currencyId: gold
+      amount: 1200
+    itemRarity: 2
+    stats:
+    - statType: 0
+      value: 88
+      isVisibleOnUI: 1
+    - statType: 2
+      value: 1.04
+      isVisibleOnUI: 1
+    attachedAbilities: 
+  - cost: 1800
+    price:
+      currencyId: gold
+      amount: 1800
+    itemRarity: 3
+    stats:
+    - statType: 0
+      value: 99
+      isVisibleOnUI: 1
+    - statType: 2
+      value: 1.06
+      isVisibleOnUI: 1
+    attachedAbilities: 
+  - cost: 2400
+    price:
+      currencyId: gold
+      amount: 2400
+    itemRarity: 3
+    stats:
+    - statType: 0
+      value: 110
+      isVisibleOnUI: 1
+    - statType: 2
+      value: 1.08
+      isVisibleOnUI: 1
+    attachedAbilities: 
+  crafting:
+    enabled: 1
+    requiredFragments: 30
+    materials:
+    - material: 0
+      amount: 10
+    - material: 4
+      amount: 8
+    - material: 3
+      amount: 2
+  weaponPrefab: {fileID: 8138149650497130045, guid: d709e93aafacdfd46ad0933c79a69d43, type: 3}
+  isRightHandWeapon: 1
+  allowedClasses: 8
+  offhandVisualPrefab: {fileID: 0}
+  isMelee: 1
+  attackReach: 3

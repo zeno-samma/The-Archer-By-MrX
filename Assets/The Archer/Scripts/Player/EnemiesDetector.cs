@@ -22,12 +22,16 @@ namespace MrX.Player
         protected IEasingCoroutine indicatorAlphaCoroutine;
 
         protected Quaternion rangeRotation;
+        private int obstacleMask;
 
         protected virtual void Awake()
         {
+            obstacleMask = LayerMask.GetMask("Obstacle");
             initialIndicatorAlpha = rangeIndicator.color.a;
 
             InitialRadius = trigger.radius;
+            if (StageController.Player.Weapon.WeaponData.IsMelee) InitialRadius = StageController.Player.Weapon.WeaponData.AttackReach;
+            trigger.radius = InitialRadius;
             rangeIndicator.size = Vector2.one * InitialRadius * 2;
             rangeIndicator.gameObject.SetActive(false);
 
@@ -47,6 +51,7 @@ namespace MrX.Player
 
         protected virtual void OnRangeChanged(MultiplicativeStat rangeStat)
         {
+            trigger.radius = Mathf.Max(.1f, rangeStat.Value);
             rangeIndicator.size = Vector2.one * rangeStat * 2;
         }
 
@@ -103,28 +108,37 @@ namespace MrX.Player
 
         protected virtual bool GetClosestReachableEnemy(out EnemyBehavior closestEnemy)
         {
-            detectedEnemies.Sort(DistanceComparator);
-
-            var obstacleMask = LayerMask.GetMask("Obstacle");
+            var origin = transform.position;
+            var closestDistance = float.MaxValue;
+            var fallbackDistance = float.MaxValue;
+            EnemyBehavior fallback = null;
+            closestEnemy = null;
 
             for (int i = 0; i < detectedEnemies.Count; i++)
             {
                 var enemy = detectedEnemies[i];
 
-                if (!enemy.IsColliderEnabled) continue;
+                if (enemy == null || !enemy.IsColliderEnabled) continue;
 
-                var distance = Vector3.Distance(transform.position, enemy.Position);
-                var direction = transform.DirectionToXZ(detectedEnemies[i].Position);
-                var ray = new Ray(transform.position + Vector3.up, direction);
+                var squaredDistance = (origin - enemy.Position).sqrMagnitude;
+                if (squaredDistance < fallbackDistance)
+                {
+                    fallbackDistance = squaredDistance;
+                    fallback = enemy;
+                }
+                if (squaredDistance >= closestDistance) continue;
+                var distance = Mathf.Sqrt(squaredDistance);
+                var direction = transform.DirectionToXZ(enemy.Position);
+                var ray = new Ray(origin + Vector3.up, direction);
                 if (!Physics.Raycast(ray, distance, obstacleMask))
                 {
                     closestEnemy = enemy;
-                    return true;
+                    closestDistance = squaredDistance;
                 }
             }
 
-            closestEnemy = detectedEnemies[0];
-            return true;
+            if (closestEnemy == null) closestEnemy = fallback;
+            return closestEnemy != null;
         }
 
         protected virtual bool GetSimpleClosestEnemy(out EnemyBehavior closestEnemy)

@@ -73,6 +73,8 @@ namespace MrX.UI.Armory
                 {
                     InitButtonsUpgradable();
                 }
+            if (SaveData.IsUnlocked && !SaveData.IsEquipped && !GameController.ArmoryManager.CanSelectHero(Data))
+            { selectButton.enabled = false; selectButtonText.text = "Bag full"; selectButton.image.sprite = disabledButtonSprite; }
             }
         }
 
@@ -222,7 +224,7 @@ namespace MrX.UI.Armory
         {
             GameController.AudioManager.PlayButtonClick();
 
-            SaveData.IsEquipped = true;
+            GameController.ArmoryManager.TrySelectHero(Data);
 
             InitVisuals();
 
@@ -238,6 +240,11 @@ namespace MrX.UI.Armory
 
         protected override void OnUpgradeButtonClicked()
         {
+            var targetLevel = SaveData.IsUnlocked ? SaveData.Level + 1 : 0;
+            if (targetLevel >= Data.HeroLevelCount) return;
+            var price = Data.GetHeroLevel(targetLevel).Price;
+            var currency = GameController.CurrenciesManager.GetCurrency(price.CurrencyId, false);
+            if (currency == null || currency.Amount < price.Amount) return;
             GameController.AudioManager.PlayButtonClick();
 
             if (!SaveData.IsUnlocked)
@@ -249,8 +256,7 @@ namespace MrX.UI.Armory
                 SaveData.Level++;
             }
 
-            var cost = Data.GetHeroLevel(SaveData.Level).Price.Amount;
-            upgradeButton.Currency.Withdraw(cost);
+            currency.Withdraw(price.Amount);
 
             InitVisuals();
 

@@ -16,6 +16,7 @@ namespace MrX.UI
         [SerializeField] private bool isWheel;
         [SerializeField] private TMP_Text heading, walletText, costText, status, resultTitle, resultAmount;
         [SerializeField] private Image resultIcon;
+        [SerializeField] private Image costIcon;
         [SerializeField] private Button purchaseButton, closeButton, continueButton;
         [SerializeField] private GameObject resultPanel;
         [SerializeField] private RectTransform wheelDisc, chestIllustration;
@@ -31,6 +32,14 @@ namespace MrX.UI
         private bool wired, animating, ownsDock;
         private long receiptSequence;
         private GameObject previousSelection;
+        private float nextRefresh;
+        public LuckyRewardTable Table => table;
+        private void Update()
+        {
+            if (service == null || Time.unscaledTime < nextRefresh) return;
+            nextRefresh = Time.unscaledTime + 1;
+            Refresh();
+        }
         private void Wire()
         {
             if (wired) return; wired = true;
@@ -105,7 +114,9 @@ namespace MrX.UI
         {
             if (service == null) return;
             walletText.text = gems != null ? gems.Amount.ToString("N0") : "0";
-            costText.text = (table.price == null ? "--" : table.price.Amount.ToString("N0")) + " GEM\n" + (isWheel ? "SPIN" : "OPEN CHEST");
+            bool free = service.HasDailyFreeUse(table);
+            costText.text = (free ? "FREE" : (table.price == null ? "--" : table.price.Amount.ToString("N0")) + " GEM") + "\n" + (isWheel ? "SPIN" : "OPEN CHEST");
+            if (costIcon != null) costIcon.enabled = !free;
             var state = service.State(table);
             purchaseButton.interactable = !animating && !resultPanel.activeSelf && state == LuckyPurchaseResult.Ready;
             purchaseButton.navigation = new Navigation { mode = Navigation.Mode.Explicit, selectOnUp = closeButton, selectOnRight = closeButton };

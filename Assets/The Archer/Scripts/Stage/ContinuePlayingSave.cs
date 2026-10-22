@@ -8,6 +8,11 @@ namespace MrX
         [SerializeField] private string runToken;
         public string RunToken => string.IsNullOrEmpty(runToken) ? runToken = System.Guid.NewGuid().ToString("N") : runToken;
         [SerializeField] private string stageContentId;
+        [SerializeField] private int difficulty;
+        [SerializeField] private RunCombatStatistics runStatistics;
+        public StageDifficulty Difficulty { get => (StageDifficulty)Mathf.Clamp(difficulty, 0, 2); set => difficulty = Mathf.Clamp((int)value, 0, 2); }
+        public RunCombatStatistics RunStatistics => runStatistics ?? (runStatistics = new RunCombatStatistics());
+        public void ResetRunStatistics() { runStatistics = new RunCombatStatistics(); }
         public string StageContentId => stageContentId;
         public void RememberStage(string contentId) { stageContentId = contentId; }
         [SerializeField] protected bool hasUnfinishedStageData;
@@ -75,6 +80,7 @@ namespace MrX
         {
             runToken = null;
             stageContentId = null;
+            difficulty = 0; runStatistics = null;
             HasUnfinishedStageData = false;
 
             ActiveRoomId = 0;

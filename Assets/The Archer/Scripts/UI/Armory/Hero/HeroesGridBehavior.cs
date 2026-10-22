@@ -22,7 +22,7 @@ namespace MrX.UI.Armory
             for (int i = 0; i < heroes.Count; i++)
             {
                 var heroData = heroes[i];
-                if (heroData != null)
+                if (heroData != null && !heroData.HideInRoster)
                 {
                     var card = cardsPool.GetEntity();
 

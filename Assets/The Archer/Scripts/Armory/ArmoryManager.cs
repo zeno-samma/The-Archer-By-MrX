@@ -23,6 +23,7 @@ namespace MrX
 
         public event UnityAction OnItemEquipmentChanged;
         public event UnityAction OnSelectedHeroChanged;
+        private bool changingHero;
 
         protected virtual void Awake()
         {
@@ -43,6 +44,12 @@ namespace MrX
 
             InitItems();
             InitHeroes();
+            if (!EnsureHeroWeapon(EquippedHero))
+            {
+                EquippedHero = database.GetDefaultHero();
+                save.GetHeroSave(EquippedHero.Id).IsEquipped = true;
+                EnsureHeroWeapon(EquippedHero);
+            }
             var dashboard = Resources.Load<UI.ArmoryDashboardDatabase>(UI.ArmoryDashboardDatabase.ResourcePath);
             Bag = new InventoryBagService(save, dashboard, GameController.CurrenciesManager, GameController.SaveManager, ClaimPendingEquipment);
             Forge = new EquipmentForge(database, save, GameController.CurrenciesManager, GameController.SaveManager);
@@ -180,6 +187,9 @@ namespace MrX
             // }
             // ============================
             var itemData = database.GetItem(itemSaveData.Id);
+            if (itemData == null) return;
+            if (isEquipped && itemData is WeaponData candidate && !candidate.Supports(EquippedHero) && !changingHero)
+            { itemSaveData.IsEquipped = false; return; }
             var itemType = itemData.ItemType;
             if (isEquipped)
             {
@@ -201,7 +211,7 @@ namespace MrX
                 }
             }
 
-            OnItemEquipmentChanged?.Invoke();
+            if (!changingHero) OnItemEquipmentChanged?.Invoke();
         }
 
         public virtual ItemData GetEquippedItemData(ItemType itemType)
@@ -219,6 +229,7 @@ namespace MrX
             for (int i = 0; i < database.HeroesCount; i++)
             {
                 var hero = database.Heroes[i];
+                if (hero == null) continue;
                 var heroSaveData = save.GetHeroSave(hero.Id);
 
                 if (hero != null && heroSaveData.Level >= hero.HeroLevelCount)
@@ -226,7 +237,7 @@ namespace MrX
                     heroSaveData.Level = hero.HeroLevelCount - 1;
                 }
 
-                if (heroSaveData.IsEquipped && EquippedHero == null)
+                if (heroSaveData.IsEquipped && !hero.HideInRoster && EquippedHero == null)
                 {
                     EquippedHero = database.GetHero(heroSaveData.Id);
                 }
@@ -235,7 +246,7 @@ namespace MrX
                 {
                     heroSaveData.IsUnlocked = true;
 
-                    if (hero.IsDefaultHero && EquippedHero == null)
+                    if (hero.IsDefaultHero && !hero.HideInRoster && EquippedHero == null)
                     {
                         EquippedHero = hero;
 
@@ -243,7 +254,16 @@ namespace MrX
                     }
                 }
 
+                heroSaveData.OnHeroSelected -= OnHeroSelectedEventFired;
                 heroSaveData.OnHeroSelected += OnHeroSelectedEventFired;
+            }
+
+            if (EquippedHero == null)
+            {
+                EquippedHero = database.GetDefaultHero();
+                var fallback = save.GetHeroSave(EquippedHero.Id);
+                fallback.IsUnlocked = true;
+                fallback.IsEquipped = true;
             }
 
             for (int i = 0; i < heroSaves.Count; i++)
@@ -261,9 +281,14 @@ namespace MrX
 
         protected virtual void OnHeroSelectedEventFired(HeroSaveData selectedHero)
         {
+            if (changingHero) return;
             if (selectedHero.IsEquipped)
             {
-                EquippedHero = database.GetHero(selectedHero.Id);
+                var data = database.GetHero(selectedHero.Id);
+                if (!CanSelectHero(data)) { selectedHero.IsEquipped = false; return; }
+                changingHero = true;
+                EquippedHero = data;
+                EnsureHeroWeapon(data);
 
                 var saveHeroes = save.GetHeroes();
 
@@ -276,9 +301,52 @@ namespace MrX
                     }
                 }
 
+                changingHero = false;
                 OnSelectedHeroChanged?.Invoke();
             }
         }
+
+        private WeaponData FindOwnedWeapon(HeroData hero)
+        {
+            var current = GetEquippedItemData(ItemType.Weapon) as WeaponData;
+            if (current != null && current.Supports(hero)) return current;
+            if (hero.StarterWeapon != null && save.GetItem(hero.StarterWeapon.Id) != null && hero.StarterWeapon.Supports(hero)) return hero.StarterWeapon;
+            foreach (var item in database.Items)
+                if (item is WeaponData weapon && weapon.Supports(hero) && save.GetItem(weapon.Id) != null) return weapon;
+            return null;
+        }
+
+        public bool CanSelectHero(HeroData hero)
+        {
+            return hero != null && database.GetHero(hero.Id) == hero && !hero.HideInRoster && save.GetHeroSave(hero.Id).IsUnlocked &&
+                (FindOwnedWeapon(hero) != null || (hero.StarterWeapon != null && database.GetItem(hero.StarterWeapon.Id) == hero.StarterWeapon && hero.StarterWeapon.Supports(hero) && save.HasBagSpace));
+        }
+
+        public bool TrySelectHero(HeroData hero)
+        {
+            if (!CanSelectHero(hero)) return false;
+            save.GetHeroSave(hero.Id).IsEquipped = true;
+            return EquippedHero == hero;
+        }
+
+        private bool EnsureHeroWeapon(HeroData hero)
+        {
+            if (hero == null) return false;
+            var weapon = FindOwnedWeapon(hero);
+            if (weapon == null && hero.StarterWeapon != null && hero.StarterWeapon.Supports(hero) && save.HasBagSpace)
+            {
+                weapon = hero.StarterWeapon;
+                var starter = save.AddItem(weapon.Id);
+                starter.OnItemEquipped -= OnItemEquippedEventFired;
+                starter.OnItemEquipped += OnItemEquippedEventFired;
+            }
+            if (weapon == null) return false;
+            var itemSave = save.GetItem(weapon.Id);
+            if (!itemSave.IsEquipped) itemSave.IsEquipped = true;
+            return true;
+        }
+
+        public bool CanEquipItem(ItemData item) => !(item is WeaponData weapon) || weapon.Supports(EquippedHero);
 
         public virtual bool IsItemUnlocked(ItemData itemData)
         {

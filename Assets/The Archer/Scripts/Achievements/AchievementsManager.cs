@@ -63,6 +63,11 @@ namespace MrX.Achievements
 
         public void RecordStageClear(string stageId)
         { Record(AchievementMetric.StagesCleared); RecordUnique(AchievementMetric.UniqueStages, stageId); }
+        public void RecordDifficultyClear(string stageId, StageDifficulty mode)
+        {
+            if (Save == null || !Save.RecordDifficulty(stageId, mode)) return;
+            RebuildSummaries(); ScheduleSave(); Changed?.Invoke();
+        }
 
         public void RecordItemOwned(string itemId) => RecordUnique(AchievementMetric.UniqueItems, itemId);
 

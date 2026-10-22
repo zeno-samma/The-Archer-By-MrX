@@ -60,6 +60,8 @@ namespace MrX.Player
 
         protected float movementBlend;
         private PlayerBehavior boundPlayer;
+        private GameObject offhandVisual;
+        private bool normalizeAttackSpeed;
 
         protected virtual void Awake()
         {
@@ -144,6 +146,7 @@ namespace MrX.Player
         public virtual void PlaceWeapon(AbstractWeaponBehavior weapon, WeaponAnimationsSet animationsSet)
         {
             Weapon = weapon;
+            normalizeAttackSpeed = animationsSet.NormalizeAttackSpeed;
 
             if (weapon.IsRightHandWeapon)
             {
@@ -155,6 +158,9 @@ namespace MrX.Player
             }
 
             Weapon.transform.ResetLocal();
+            if (offhandVisual != null) Destroy(offhandVisual);
+            if (weapon.WeaponData.OffhandVisualPrefab != null)
+                offhandVisual = Instantiate(weapon.WeaponData.OffhandVisualPrefab, weapon.IsRightHandWeapon ? leftWeaponParent : rightWeaponParent, false);
 
             if(animationsSet.WeaponAnimationsSetType == WeaponAnimationsSetType.Separate_Animations)
             {
@@ -189,6 +195,7 @@ namespace MrX.Player
             }
 
             movementAnimationSpeed = animationsSet.MovementAnimationSpeed;
+            if (boundPlayer != null) OnAttackSpeedChanged(boundPlayer.Stats.AttackSpeedStat);
         }
 
         public virtual void SetMovementBlend(float blend)
@@ -200,7 +207,7 @@ namespace MrX.Player
 
         protected virtual void OnAttackSpeedChanged(MultiplicativeStat attackSpeedStat)
         {
-            animator.SetFloat(ATTACK_SPEED_MULTIPLIER_FLOAT, attackSpeedStat / attackAnimationLength);
+            animator.SetFloat(ATTACK_SPEED_MULTIPLIER_FLOAT, normalizeAttackSpeed ? attackSpeedStat.Value * attackAnimationLength : attackSpeedStat / attackAnimationLength);
         }
 
         public virtual void SetMovementSpeed(float speed)

@@ -47,11 +47,11 @@ namespace MrX.Armory
 
         public virtual HeroData GetDefaultHero()
         {
-            var defaultHero = heroes.FirstOrDefault(hero => hero.IsDefaultHero);
+            var defaultHero = heroes.FirstOrDefault(hero => hero != null && !hero.HideInRoster && hero.IsDefaultHero);
 
             if(defaultHero != null) return defaultHero;
 
-            defaultHero = heroes.FirstOrDefault(hero => hero.IsUnlockedByDefault);
+            defaultHero = heroes.FirstOrDefault(hero => hero != null && !hero.HideInRoster && hero.IsUnlockedByDefault);
 
             if(defaultHero != null) return defaultHero;
 

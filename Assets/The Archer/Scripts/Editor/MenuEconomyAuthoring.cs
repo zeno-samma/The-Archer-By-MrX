@@ -85,7 +85,8 @@ namespace MrX.EditorTools
         {
             if (Application.isPlaying) throw new InvalidOperationException("Edit Mode required.");
             var table = Resources.Load<MenuTranslations>("Menu Translations");
-            foreach (string line in File.ReadAllLines("Assets/The Archer/Resources/Menu Translation Additions.txt"))
+            foreach (string path in new[] { "Assets/The Archer/Resources/Menu Translation Additions.txt", "Assets/The Archer/Resources/Ability Translation Additions.txt" })
+            foreach (string line in File.ReadAllLines(path))
             {
                 if (string.IsNullOrWhiteSpace(line) || line.StartsWith("#")) continue;
                 var cells = line.Split('|').Select(s => s.Replace("\\n", "\n")).ToArray();

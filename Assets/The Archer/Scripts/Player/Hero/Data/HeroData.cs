@@ -2,7 +2,9 @@ using MrX.Abilities;
 using MrX.Currency;
 using System;
 using System.Collections.Generic;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -23,6 +25,14 @@ namespace MrX.Armory
         [Space]
         [SerializeField] protected bool isDefaultHero;
         [SerializeField] protected bool isUnlockedByDefault;
+
+        [Header("Roster and class loadout")]
+        [SerializeField] private HeroClass heroClass;
+        [SerializeField] private bool hideInRoster;
+        [SerializeField] private MrX.Weapon.WeaponData starterWeapon;
+        public HeroClass HeroClass => heroClass;
+        public bool HideInRoster => hideInRoster;
+        public MrX.Weapon.WeaponData StarterWeapon => starterWeapon;
 
         [Space]
         [SerializeField] protected List<HeroLevel> heroLevels;

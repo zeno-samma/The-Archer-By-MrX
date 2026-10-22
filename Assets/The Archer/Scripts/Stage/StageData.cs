@@ -22,6 +22,15 @@ namespace MrX
         [Header("Run Energy")]
         [SerializeField, Min(0)] protected int energyCost = 5;
         public int EnergyCost => Mathf.Max(0, energyCost);
+        [Header("Difficulty — Normal / Hard / Nightmare")]
+        [SerializeField] private StageDifficultyTuning[] difficulties = {
+            new StageDifficultyTuning(1, 1), new StageDifficultyTuning(1.5f, 1.25f), new StageDifficultyTuning(2, 1.5f) };
+        public StageDifficultyTuning GetDifficulty(StageDifficulty difficulty)
+        {
+            int index = Mathf.Clamp((int)difficulty, 0, 2);
+            if (difficulties != null && index < difficulties.Length && difficulties[index] != null) return difficulties[index];
+            return index == 0 ? new StageDifficultyTuning(1, 1) : index == 1 ? new StageDifficultyTuning(1.5f, 1.25f) : new StageDifficultyTuning(2, 1.5f);
+        }
 
         [SerializeField] protected bool showStageObjective = true;
         public bool ShowStageObjective => showStageObjective;

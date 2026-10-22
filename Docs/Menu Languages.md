@@ -6,9 +6,9 @@ Lựa chọn lưu qua SaveManager hiện có, khóa riêng `Language Settings`, 
 
 ## Phạm vi dịch hiện tại
 
-Hiện có 210 mục dịch cho Stage, Upgrades, Achievements, Forge, Daily Quests, năng lượng/đổi gem, tên trang bị đang dùng và các nhãn menu/dock thông dụng. Các format `{0}`, `{1}` giữ số liệu động; mô tả nhiều dòng được đối chiếu theo khoảng trắng. Nhãn do controller cập nhật được dịch lại trước khi dựng canvas; chỉ dịch lại khi nội dung/font đổi hoặc đổi ngôn ngữ.
+Hiện có 420 mục dịch cho menu và giao diện trong run, bao gồm tên/mô tả của 80 kỹ năng, độ hiếm, màn chọn kỹ năng, rương kỹ năng, tạm dừng và tên nhân vật/vũ khí Adventurers. Các format `{0}`, `{1}` giữ số liệu động; mô tả nhiều dòng được đối chiếu theo khoảng trắng. Nhãn do controller cập nhật được dịch lại trước khi dựng canvas; chỉ dịch lại khi nội dung/font đổi hoặc đổi ngôn ngữ.
 
-Chưa phải bản dịch toàn bộ nội dung trong trận. Ability, hội thoại hoặc nội dung mới chưa có trong bảng giữ nguyên tiếng Anh. Quest hiện tại đã dịch tiêu đề, mô tả, tiến độ, thời gian và thông báo; xem [Responsive Menu and Daily Updates](Responsive%20Menu%20and%20Daily%20Updates.md). Muốn dịch thêm, bổ sung entry vào bảng; không sửa trực tiếp chữ runtime trong prefab rồi coi đó là bản dịch.
+Tên và mô tả kỹ năng hiện tại đã có đủ năm ngôn ngữ. Nội dung mới chưa có trong bảng vẫn giữ nguyên nguồn tiếng Anh; đây chưa phải xác nhận mọi tên quái hay mọi chuỗi gameplay đều đã được dịch. Quest hiện tại đã dịch tiêu đề, mô tả, tiến độ, thời gian và thông báo; xem [Responsive Menu and Daily Updates](Responsive%20Menu%20and%20Daily%20Updates.md). Hướng dẫn thêm kỹ năng và chỉnh Stage 4: [Run Languages and Halloween Crypt](Run%20Languages%20and%20Halloween%20Crypt.md).
 
 ## File cần tìm
 

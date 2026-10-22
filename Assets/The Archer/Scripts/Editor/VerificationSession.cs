@@ -14,6 +14,8 @@ namespace MrX.EditorTools
         public static string Begin()
         {
             if (EditorApplication.isPlaying) throw new InvalidOperationException("Stop Play before isolating saves.");
+            if (EditorApplication.isCompiling || EditorUtility.scriptCompilationFailed)
+                throw new InvalidOperationException("Fix compilation errors before isolating saves.");
             var manager = UnityEngine.Object.FindAnyObjectByType<SaveManager>();
             if (!manager || new SerializedObject(manager).FindProperty("saveType").intValue != (int)MrX.Save.SaveType.SaveFile)
                 throw new InvalidOperationException("Verification isolation requires the Main Menu SaveManager in SaveFile mode.");
@@ -21,6 +23,7 @@ namespace MrX.EditorTools
                 throw new InvalidOperationException("Verification session already active.");
             var folder = Path.GetFullPath("Temp/Verification/" + DateTime.UtcNow.ToString("yyyyMMdd-HHmmss"));
             Directory.CreateDirectory(folder);
+            if (File.Exists(OriginalPath)) File.Copy(OriginalPath, Path.Combine(folder, "original-save.backup"), false);
             SessionState.SetString(OriginalHashKey, Hash(OriginalPath));
             SessionState.SetString(SerializationHelper.VerificationDirectoryKey, folder);
             SerializationHelper.SetVerificationDirectory(folder);

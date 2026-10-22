@@ -11,6 +11,7 @@ Tài liệu này là bản đồ để hiểu dự án, chọn đúng nơi thay 
 - Yêu cầu trực tiếp của người dùng quyết định mục tiêu và phạm vi công việc. Nếu khác tài liệu này, thực hiện theo yêu cầu đó và cập nhật tài liệu khi phù hợp.
 - Trước khi sửa, đọc thay đổi đang có và các file liên quan. Giữ công việc của người dùng; không hoàn tác thay đổi ngoài phạm vi.
 - Chủ động hoàn thành các bước cần thiết trong phạm vi đã được giao. Không đặt thêm bước xin xác nhận cho thao tác đọc, sửa hoặc kiểm tra thông thường đã được cho phép.
+- **Quy tắc build từ 20/10/2026:** chỉ chạy build khi người dùng yêu cầu build rõ ràng. Không tự build để kiểm tra hoặc bàn giao một tác vụ tính năng; dùng compilation/Play Mode và ghi giới hạn kiểm tra tương ứng.
 - Khi thiếu thông tin, kiểm tra source, dữ liệu và reference trước. Chỉ hỏi những điểm thực sự ảnh hưởng đến kết quả mà không thể suy ra hợp lý.
 - Giữ thay đổi tập trung; không gộp nâng phiên bản, đổi kiến trúc diện rộng hoặc cân bằng lại toàn game vào một tác vụ nhỏ.
 - Khi hiện trạng khác tài liệu, ưu tiên bằng chứng từ source và asset đang được sử dụng. Không suy ra tính năng đã hoạt động chỉ vì có file hoặc tên tương ứng.
@@ -300,8 +301,8 @@ Các mục sau là đầu mối cần kiểm tra khi tác vụ chạm đến ph�
 | `Chest/HealthChestBehavior` | Vòng chọn ability có điều kiện counter nhưng không tăng counter |
 | `Player/EnemiesDetector` và weapon range | Chỉ thị range, bán kính detector và lifetime đạn chưa dùng chung một cơ chế cập nhật |
 | `Projectiles/SimpleProjectile.ResetOverrides` | Một số field như target bỏ qua, piercing, ignore obstacles không được reset ở đây; cần kiểm tra caller khi tái dùng |
-| `Other/ConsoleTimer`, `Room/RoomBehavior` | Tổng thời gian chưa reset khi in; ResetSession chưa xóa kết quả; key timer lấy icon của wave hiện tại ở cả đầu/cuối phòng có thể khác nhau |
-| `RoomBehavior.EndWave` | Delay có phép trừ timestamp tuyệt đối; cần kiểm tra thời gian chờ dự kiến khi sửa pacing wave |
+| `Other/ConsoleTimer`, `Room/RoomBehavior` | Đã sửa 21/10: khóa số phòng ổn định, reset thật, tổng không cộng dồn; thêm report wave/run ở `Docs/Combat Pacing and Balance.md` |
+| `RoomBehavior.EndWave` | Đã sửa 21/10: dùng delay wave vừa kết thúc và trừ khoảng thời gian đã chờ; Stage 5 có nhịp nghỉ 0,8/2/3 giây |
 | Một số file runtime, ví dụ `HeroData`, `Int`, `Price` | Có import `UnityEditor` ngoài điều kiện biên dịch; cần kiểm tra khi build player |
 
 Danh sách này không thay thế review toàn diện. Đọc lại code hiện tại trước khi xử lý vì các mục có thể đã được sửa sau ngày khảo sát; cập nhật hoặc bỏ mục đã hết hiệu lực.
@@ -443,3 +444,78 @@ Stage có Language Picker prefab với tối đa năm mã en/vi/es/pt/fr, save r
 - Menu luôn chọn Stage 1 mỗi lần tải scene. ContinuePlayingSave.stageContentId giữ stage của run và migration từ lựa chọn cũ; StageController khôi phục index gameplay để DropManager vẫn đọc đúng stage.
 - Mua năng lượng mặc định 5 lần/ngày, reset 00:00 UTC+7 cấu hình Inspector; chỉ thành công mới tính lượt. Save Energy Recovery giữ purchaseDay/energyPurchases; gold không giới hạn theo quota này.
 - Bảng dịch 210 mục gồm Quest hiện tại. Xem Docs/Responsive Menu and Daily Updates.md để sửa profile, cấu hình và tra đường dẫn.
+
+## Build Windows PC — xác minh 20/10/2026
+
+- Đã build Windows x64 Player bằng Unity 6000.6.2f1, Mono, không Development, LZ4, StrictMode và DetailedBuildReport: Succeeded, 0 errors, 0 warnings. Không suy kết quả này sang IL2CPP/mobile hoặc mọi đường gameplay.
+- Giữ ba scene Main Menu → Loading Screen → Game. Hướng dẫn từng bước và vị trí bản chơi thử: Docs/Windows PC Build Guide.md; số liệu máy đọc được: Docs/Windows Build Report 2026-10-20.json.
+- TMP_SDF-Mobile.shader dùng enable_debug_symbols. Hai ModelImporter enemy_cauldron_attack.fbx và enemy_mole.fbx bật Read/Write vì Particle System Shape tham chiếu mesh; không bật hàng loạt model.
+- Build nằm ngoài Assets trong Builds/Windows; ZIP gửi người chơi giữ runtime/Data và loại thư mục sao lưu *_BackUpThisFolder_ButDontShipItWithYourGame. Không đổi Company/Product Name chỉ để thử build vì ảnh hưởng vị trí save.
+
+## Badge thưởng và input — cập nhật 20/10/2026
+
+- Menu Dock.prefab có hai instance Reward Notification Dot.prefab dưới icon Quest/Achievements. MenuRewardBadges cập nhật qua Changed, bind lại khi bật, hủy listener khi tắt. Chỉ tắt dot khi hết thưởng đủ điều kiện; Quest tính cả milestone, không xóa thông báo chỉ vì mở trang. Không tạo UI runtime hoặc save flag mới.
+- Gamepad đã có binding trong Input Asset. InputManager lấy di chuyển vật lý dù thao tác UI gần nhất là chuột, nhận analog dưới ngưỡng Button Detection, fallback khi ngắt pad; joystick chuột/cảm ứng giữ nguyên. Không sửa lớp Input Asset.cs được sinh tự động để đổi binding.
+- Hướng dẫn, đường dẫn và giới hạn kiểm tra tay cầm mô phỏng: Docs/Reward Notifications and Input.md. RewardBadgeInputVerification chỉ chạy Play bằng VerificationSession, không thao tác hồ sơ thật.
+
+## Lucky Rewards miễn phí mỗi ngày — 20/10/2026
+
+- Lucky Wheel và Gem Chest đang bật dailyFreeUse, mỗi bảng một lượt/ngày, reset mặc định 00:00 UTC+7, không cộng dồn. Bảng mới mặc định tắt tính năng; chỉnh trong LuckyRewardTable. Giữ giá gem và weight cũ.
+- Lucky Rewards save giữ dailyFreeUses theo tableId/usedDay. Quota chỉ tiêu khi commit cùng receipt, không khi mở popup; reload/ack không grant lại. Receipt mới ghi dailyFreeUse/gemCost. Save cũ không bị reset.
+- Stage Lucky Rewards.prefab có hai chấm đỏ dùng Reward Notification Dot.prefab. Shortcut/popup kiểm tra qua ngày mỗi giây unscaled, không ghi save định kỳ. FREE có đủ năm ngôn ngữ; icon giá gem ẩn khi miễn phí.
+- Hướng dẫn: Docs/Daily Free Lucky Rewards.md. Chỉ kiểm tra compilation/Play và logic giả lập; không tự build. Từ yêu cầu này chỉ build khi người dùng yêu cầu build rõ ràng.
+
+## Ngôn ngữ kỹ năng và Stage 4 Halloween — 20/10/2026
+
+- Bảng Menu Translations hiện có 397 entry, bao gồm tên/mô tả của 80 kỹ năng ở năm ngôn ngữ. AbilityData giữ nguồn tiếng Anh; không đổi enum/ID để dịch. File bổ sung là `Assets/The Archer/Resources/Ability Translation Additions.txt`; importer đọc cùng file menu và giữ bản dịch Inspector đã có.
+- LocalizedMenuScope được gắn sẵn vào Canvas Game, prefab selector/thẻ/rương/thông báo. Scope gần nhất sở hữu nhãn; RefreshNow áp chữ/font trước khi đo TMP; scope tắt không giữ listener. Không dựng UI runtime.
+- Stage 4 có tên Halloween Crypt và dùng `Prefabs/Prop/Halloween/Halloween Crypt Arena.prefab`. Giữ ID stage, một phòng/33 wave, toàn bộ boss/loot override và spawn/camera. Material và ảnh preview riêng; không sửa prefab đền dùng chung. Props trang trí tắt collider/NavMeshObstacle, bốn tường biên vẫn chặn và sàn vẫn là Ground.
+- Hướng dẫn và đường dẫn: `Docs/Run Languages and Halloween Crypt.md`. Đã kiểm tra 800 binding tên/mô tả và 105 vị trí sinh quái có đường đi; chưa chơi thắng trọn 33 wave, không build trong tác vụ này.
+
+## Hero roster và vũ khí theo lớp — 21/10/2026
+
+- Armory Database đăng ký Ranger cũ và năm prefab mới: Mage, Barbarian, Knight, Rogue, Rogue Hooded. Ba hero đầu hiện/mở mặc định; ba hero sau ẩn/chưa mở. HeroData có HeroClass, HideInRoster, StarterWeapon. Không xóa database entry để ẩn hoặc đổi ID để reset tiến trình.
+- Có 12 WeaponData/prefab mới, tổng 15 weapon, 23 mapping hợp lệ. AllowedClasses kiểm tra equip; đổi lớp giữ món phù hợp hoặc dùng starter. Starter chỉ cấp khi thiếu và có chỗ; không nhân bản qua các lần đổi. Khiên/offhand là hình phụ của weapon, chưa thêm loại slot mới.
+- Prefab mới tái sử dụng skeleton Generic Ranger, remap mesh/bones và giữ controller AC_Hero_Ranger qua override. Clip mới có event Shoot; normalize tốc độ chỉ bật cho set mới. Không thay ModelImporter hàng loạt. Material mới hỗ trợ MrX Character URP/rim.
+- MeleeWeaponBehavior dùng damage/status pipeline cũ, kiểm tra góc/tầm/tường/collider trùng. RangedWeaponsOnly lọc sáu ability thuần đạn khỏi lựa chọn cận chiến; preset/attach cần cấu hình hợp lý. UI roster sáu nút đã lưu trong Armory Page.prefab.
+- Hướng dẫn/công cụ/file: Docs/Adventurer Heroes and Weapons.md. Chỉ compilation/Play Mode với profile riêng; không build khi chưa được yêu cầu.
+
+### Stage Showcase, gem và clip di chuyển (21/10/2026)
+
+Mage/Barbarian hiện cần 500/750 `gem` để mở trên profile mới, giá ở Hero Levels[0].Price; save đã mở vẫn giữ. Barbarian gốc 220 HP/55 Damage. Stage Page đã lưu bố cục showcase landscape/portrait trong prefab và ResponsiveMenuLayout, ảnh stage là banner bo góc. Clip Idle/Walking/Running Adventurers dùng các bản sao Loop *.anim; không sửa FBX gốc. Hướng dẫn chi tiết: [Adventurer Heroes and Weapons](Docs/Adventurer%20Heroes%20and%20Weapons.md).
+
+## Stage 5 Skeleton Survival — 21/10/2026
+
+- Stage Data 005 giữ stageId người dùng đã tạo, một room/33 wave như Stage 2; prefab riêng `Stage 5 Bone Courtyard`, preview riêng. Mốc 8/16/24/33 lần lượt SkeletonMinion/Warrior/Rogue/Mage (enum mới 106–109, không đổi enum cũ). Group Id riêng giữ thứ tự wave.
+- SkeletonBossBehavior dùng event animation và marker mesh đã lưu trong prefab: chém/quật đất, charge/vòng đạn, quạt đạn/sidestep, ba rune/vòng đạn. Dùng damage, navigation, projectile pool, status, boss healthbar và rương của hệ cũ. Tạm dừng/chết/pool reset có guard và cleanup.
+- General/MovementBasic lấy từ Boss/Animation; thư mục đó hiện chưa có combat nên tái sử dụng clip Generic khớp rig từ Ranger/Animation_Pack, không sửa FBX importer. Prefab/controller/material riêng có thể sửa Inspector.
+- Ba cấu hình boss spawn cũ được giữ cho ba boss đầu, Mage kế thừa mốc cuối; không đổi rate trên các stage khác. Nhặt rương và kết toán cuối run dùng BossChestService cũ.
+- Chi tiết file, cấu hình, kiểm tra và giới hạn: [Stage 5 Skeleton Survival](Docs/Stage%205%20Skeleton%20Survival.md). Chỉ compilation/Play Mode, không build.
+
+### Stage 5 — chỉnh combat và geometry lần tiếp theo
+
+Minion/Warrior có gap closer theo khoảng cách + cooldown; Rogue bắn thường liên tục rồi mới fan/sidestep, Mage ba chưởng thường rồi xen kẽ rune/ring. Attack Cadence nằm ở controller; damage/shot vẫn do event, charge chặn contact damage trùng. Môi trường Necropolis thay nội dung prefab cùng GUID, 7.056 tam giác mesh thay 25.252; mẫu UnityStats wave 8 khoảng 41,8k thay 85,2k, không coi là FPS hoặc trung bình mọi wave. Công cụ riêng SkeletonSurvivalRefinement và hướng dẫn mới ở Docs/Stage 5 Skeleton Survival.md. Không đổi Stage 4/loot/save thật; không build.
+
+
+## Bổ sung offline ngày 21/10/2026
+
+- Công tắc gameplay tại `Assets/The Archer/Resources/Game Feature Settings.asset`, tham chiếu và chỉnh trực tiếp trong Inspector của Developer Tools Settings. Thể lực và cờ online dự phòng mặc định tắt; `toolsEnabled` chỉ kiểm soát công cụ DEV.
+- Stage có enum độ khó ổn định Normal=0, Hard=1, Nightmare=2, mở tuần tự theo từng StageId. Hệ số HP/damage trong StageData, kể cả spawn override. Mức Thường giữ cân bằng trước đó.
+- Thành tựu `StageDifficultyClear=11` lưu đúng StageId/mức; reward gem cấu hình trong Achievements Database, nhận một lần qua UI thành tựu. Không tái sinh ID thành tựu.
+- ContinuePlayingSave giữ độ khó và RunCombatStatistics; kết quả giữ bản tham chiếu sau kết toán. Thống kê ghi nhận HP thực, không ghi save sau mỗi đòn. Bảng thống kê và bộ chọn độ khó nằm trong prefab `UI/Offline Progression`.
+- Đọc `Docs/Offline Features Difficulty and Run Summary.md` để tra cấu hình, lưu/resume và giới hạn xác minh. Không bật lại hoặc triển khai backend theo các cờ dự phòng nếu người dùng chưa yêu cầu.
+
+## Bổ sung hiệu suất ngày 22/10/2026
+
+Đã tối ưu đường lấy mẫu NavMesh, chọn mục tiêu, ricochet/Shock, redraw HP và cập nhật UI; giới hạn FPS PC/mobile cấu hình ở GameController. Công cụ Tools → MrX Studio → Performance thu số đo Editor vào Logs/Performance. Đọc [Performance Optimization](Docs/Performance%20Optimization.md) để biết phạm vi, kết quả và giới hạn; không diễn giải số đo Editor thành bảo đảm FPS trên mọi thiết bị. Không build trong đợt này.
+
+
+## Bổ sung kỹ năng và kỷ lục ngày 22/10/2026
+
+Danh sách lựa chọn không đề xuất kỹ năng thường đã max, kể cả cờ IsRepeatedAbility; giữ phần thưởng Endgame hồi máu/vàng có tác dụng ngay. Kỷ lục offline theo stageId + độ khó lưu ở save key Run Records: thời gian thấp nhất chỉ khi clear, DPS trung bình cao nhất khi kết thúc run. Hai thẻ số chạy bằng unscaled time được author trong Run Summary.prefab. Xem [Run Records and Max Abilities](Docs/Run%20Records%20and%20Max%20Abilities.md) trước khi đổi quy tắc.
+
+
+## Bổ sung UI Text Effect ngày 22/10/2026
+
+Component UI/UITextEffect.cs kéo thả lên TextMeshProUGUI có 12 kiểu hiệu ứng, dùng lại EasingFunctions; không dựng UI runtime và không đổi RectTransform. Inspector có Preview khôi phục trước khi lưu scene/prefab; prefab mẫu ở Prefabs/UI/Text Effects. Đọc [UI Text Effects](Docs/UI%20Text%20Effects.md) về API đếm số, pause, callback và tránh hai script cùng ghi text. Bộ đếm bảng kết quả hiện hữu vẫn do RunRecordHighlights quản lý, dùng chung helper FormatTime.
+

@@ -6,6 +6,9 @@ namespace MrX.Abilities
 {
     public abstract class AbilityData : ScriptableObject
     {
+        [Header("Weapon compatibility")]
+        [SerializeField] private bool rangedWeaponsOnly;
+        public bool RangedWeaponsOnly => rangedWeaponsOnly;
         [Tooltip("The unique identifier of an ability")]
         [SerializeField] protected AbilityType type;
         public AbilityType AbilityType => type;

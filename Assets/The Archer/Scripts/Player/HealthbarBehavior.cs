@@ -44,6 +44,7 @@ namespace MrX
         protected bool isShown = false;
 
         protected float maskT;
+        private int displayedHp = int.MinValue;
 
         protected InvincibilityData invincibilityData;
 
@@ -205,7 +206,12 @@ namespace MrX
 
             if (hpText != null)
             {
-                hpText.text = Mathf.CeilToInt(HP).ToString();
+                var value = Mathf.CeilToInt(HP);
+                if (displayedHp != value)
+                {
+                    displayedHp = value;
+                    hpText.text = value.ToString();
+                }
             }
 
             if (invincibilityMaskTransform != null)
