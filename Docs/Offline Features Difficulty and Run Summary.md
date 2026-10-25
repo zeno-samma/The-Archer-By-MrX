@@ -45,7 +45,7 @@ Save cũ phải vượt lại Thường để nhận thành tựu mới này; vi
 
 ## Bảng thống kê khi thắng hoặc chết
 
-Bảng tự mở trên màn kết quả. Bấm **Đóng** để xem loot và tiếp tục; bấm **Thống kê lượt chơi** để mở lại. Có thể cuộn chuột/kéo trong mỗi khung. Escape hoặc nút B trên tay cầm đóng bảng. Bảng không tự thay đổi timeScale; màn kết quả điều khiển pause.
+Từ bản cập nhật mùa/EXP ngày 22/10, màn kết quả gọn hiện trước. Bấm **Thống kê** để mở bảng chi tiết, **Đóng** để trở lại màn gọn và **Xác nhận** để về menu. Xem [Mùa, EXP và kết quả](Seasons%20Hero%20Experience%20and%20Results.md). Có thể cuộn chuột/kéo trong mỗi khung. Escape hoặc nút B trên tay cầm đóng bảng. Bảng không tự thay đổi timeScale; màn kết quả điều khiển pause.
 
 - Thời gian chơi: scaled time khi nhân vật đang chơi và còn sống; không tính pause, thời gian xem kết quả hoặc chờ hồi sinh.
 - Sát thương: lượng HP thực bị trừ ở mục tiêu; không tính phần overkill. Có tổng, tổng lên boss, đòn cao nhất và chia theo DamageType.

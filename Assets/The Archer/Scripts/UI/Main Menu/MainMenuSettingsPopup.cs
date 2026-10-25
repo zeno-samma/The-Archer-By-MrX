@@ -95,7 +95,7 @@ namespace MrX.UI
 
         protected virtual void OnCancelButtonPressed(UnityEngine.InputSystem.InputAction.CallbackContext context)
         {
-            OnCloseButtonClicked();
+            UIButtonAudio.Click(closeButton);
         }
 
         protected virtual void OnDisable()
@@ -128,7 +128,7 @@ namespace MrX.UI
 
         protected virtual void OnCloseButtonClicked()
         {
-            GameController.AudioManager.PlayButtonClick();
+
 
             Hide();
         }

@@ -466,6 +466,7 @@ GameObject:
   - component: {fileID: 5229216204025381449}
   - component: {fileID: 4386595589451025043}
   - component: {fileID: 5589900854489769668}
+  - component: {fileID: 6994840065657652679}
   m_Layer: 5
   m_Name: Close Statistics
   m_TagString: Untagged
@@ -575,6 +576,20 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &6994840065657652679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2543598706557104767}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f904d408be9b1f049bb84165ecbfc558, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MrX.UI.UIButtonAudio
+  mode: 0
+  customSound: {fileID: 0}
 --- !u!1 &3080900183841518969
 GameObject:
   m_ObjectHideFlags: 0
@@ -1273,6 +1288,7 @@ GameObject:
   - component: {fileID: 6749401009854266833}
   - component: {fileID: 7258555651269756041}
   - component: {fileID: 4645389271359645956}
+  - component: {fileID: 5673992136323214567}
   m_Layer: 5
   m_Name: Open Statistics
   m_TagString: Untagged
@@ -1382,6 +1398,20 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &5673992136323214567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5035625922264471681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f904d408be9b1f049bb84165ecbfc558, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MrX.UI.UIButtonAudio
+  mode: 0
+  customSound: {fileID: 0}
 --- !u!1 &5207616015821156231
 GameObject:
   m_ObjectHideFlags: 0

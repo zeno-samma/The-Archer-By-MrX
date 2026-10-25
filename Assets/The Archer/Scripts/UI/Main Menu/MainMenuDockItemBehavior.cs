@@ -24,6 +24,8 @@ namespace MrX.UI
         [Space]
         [SerializeField] protected Vector2 selectedIconPosition = new Vector2(0, 55);
         [SerializeField] protected Vector2 unselectedIconPosition = Vector2.zero;
+        [SerializeField] private Image selectedBackdrop;
+        [SerializeField, Range(0, 1)] private float inactiveLabelAlpha;
 
         public MainMenuPageType PageType => pageType;
 
@@ -53,6 +55,7 @@ namespace MrX.UI
             if (!IsSelected)
             {
                 IsSelected = true;
+                if (selectedBackdrop != null) selectedBackdrop.enabled = true;
 
                 iconImage.rectTransform.DoSizeDelta(selectedIconSize, 0.2f).SetEasing(EasingType.SineInOut);
                 iconImage.rectTransform.DoAnchorPosition(selectedIconPosition, 0.2f).SetEasing(EasingType.SineInOut);
@@ -63,6 +66,7 @@ namespace MrX.UI
         // phương thức này được gọi khi một item khác được chọn, và item này sẽ bị bỏ chọn. Nó sẽ thay đổi trạng thái IsSelected thành false, và thực hiện các hiệu ứng chuyển đổi kích thước và vị trí của icon, cũng như làm mờ text của tên trang.
         public virtual void Deselect()
         {
+            if (selectedBackdrop != null) selectedBackdrop.enabled = false;
             if (IsSelected)
             {
                 IsSelected = false;
@@ -70,7 +74,7 @@ namespace MrX.UI
                 iconImage.rectTransform.DoSizeDelta(unselectedIconSize, 0.2f).SetEasing(EasingType.SineInOut);
                 iconImage.rectTransform.DoAnchorPosition(unselectedIconPosition, 0.2f).SetEasing(EasingType.SineInOut);
 
-                pageNameText.DoAlpha(0, 0.2f);
+                pageNameText.DoAlpha(inactiveLabelAlpha, 0.2f);
             }
         }
 
@@ -79,7 +83,7 @@ namespace MrX.UI
             if (GameController.MainMenuScreenBehavior != null && !GameController.MainMenuScreenBehavior.IsDockEnabled) return;
             if (!IsSelected)
             {
-                GameController.AudioManager.PlayButtonClick();
+
 
                 Select();
                 onSelected?.Invoke(pageType);

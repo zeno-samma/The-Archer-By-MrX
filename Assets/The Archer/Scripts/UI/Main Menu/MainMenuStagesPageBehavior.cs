@@ -427,7 +427,7 @@ namespace MrX.UI
         {
             var screen = GameController.MainMenuScreenBehavior;
             if (!screen.IsDockEnabled || screen.CurrentPage != this) return;
-            GameController.AudioManager.PlayButtonClick();
+
             if (!GameController.TryStartNewRun(StageDatabase.GetStageData(StageSave.SelectedStageId)))
                 GetComponentInChildren<MenuEconomyPanel>(true)?.ShowInsufficientEnergy();
         }
@@ -453,12 +453,12 @@ namespace MrX.UI
 
         protected virtual void OnSettingsInputClicked(UnityEngine.InputSystem.InputAction.CallbackContext context)
         {
-            OnSettingsButtonClicked();
+            UIButtonAudio.Click(settingsButton);
         }
 
         protected virtual void OnSettingsButtonClicked()
         {
-            GameController.AudioManager.PlayButtonClick();
+
 
             GameController.MainMenuScreenBehavior.SettingsPopup.Show();
             GameController.MainMenuScreenBehavior.SettingsPopup.onPopupClosed += OnSettingsPopupClosed;
@@ -470,12 +470,12 @@ namespace MrX.UI
 
         protected virtual void OnInfoInputClicked(UnityEngine.InputSystem.InputAction.CallbackContext context)
         {
-            OnInfoButtonClicked();
+            UIButtonAudio.Click(infoButton);
         }
 
         protected virtual void OnInfoButtonClicked()
         {
-            GameController.AudioManager.PlayButtonClick();
+
 
             GameController.MainMenuScreenBehavior.InfoPopup.Show();
             GameController.MainMenuScreenBehavior.InfoPopup.onPopupClosed += OnInfoPopupClosed;

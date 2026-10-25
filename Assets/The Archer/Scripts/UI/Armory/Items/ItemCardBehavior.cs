@@ -13,6 +13,7 @@ namespace MrX.UI.Armory
 
         [Space]
         [SerializeField] protected List<ItemTypeData> itemTypeDataList;
+        [SerializeField] private string levelPrefix = "";
 
         public ItemSaveData SaveData { get; protected set; }
         public ItemData ItemData { get; protected set; }
@@ -46,7 +47,7 @@ namespace MrX.UI.Armory
 
             ItemLevel = data.GetItemLevel(saveData.Level);
 
-            levelText.text = (saveData.Level + 1).ToString();
+            levelText.text = levelPrefix + (saveData.Level + 1).ToString();
 
             InitRarityVisuals(ItemLevel.ItemRarity);
 
@@ -58,7 +59,7 @@ namespace MrX.UI.Armory
         protected virtual void OnItemLevelChanged(ItemSaveData saveData, int level)
         {
             ItemLevel = ItemData.GetItemLevel(level);
-            levelText.text = (level + 1).ToString();
+            levelText.text = levelPrefix + (level + 1).ToString();
             InitRarityVisuals(ItemLevel.ItemRarity);
         }
 

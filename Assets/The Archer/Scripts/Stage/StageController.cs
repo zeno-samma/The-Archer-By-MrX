@@ -161,6 +161,17 @@ namespace MrX
             // Gameplay consumers (including DropManager) still read the selected index.
             StageSave.SetSelectedStageId(StageIndex);
             ContinuePlayingSave.RememberStage(StageData.StageId);
+            if(string.IsNullOrEmpty(RunStatistics.heroId))RunStatistics.heroId=GameController.ArmoryManager.EquippedHero.Id;
+            else if(ContinuePlayingSave.HasUnfinishedStageData&&GameController.ArmoryManager.EquippedHero.Id!=RunStatistics.heroId)
+                GameController.ArmoryManager.TrySelectHero(GameController.ArmoryManager.Database.GetHero(RunStatistics.heroId));
+            if(!RunStatistics.seasonAssigned)
+            {
+                var config=Resources.Load<RunProgressionSettings>(RunProgressionSettings.ResourcePath);
+                var season=config!=null?config.Roll(StageData):null;
+                RunStatistics.seasonAssigned=true;RunStatistics.seasonId=season!=null?(int)season.season:-1;
+                RunStatistics.seasonDamageMultiplier=season!=null?season.damageMultiplier:1;
+                RunStatistics.seasonEffectMultiplier=season!=null?season.effectMultiplier:1;
+            }
 
             RoomsShuffler = new RoomsShuffler(StageData);
 
@@ -453,6 +464,19 @@ namespace MrX
             settlingResult = true;
             try
             {
+                if(instance.TestingData==null&&RunStatistics!=null)
+                {
+                    var config=Resources.Load<RunProgressionSettings>(RunProgressionSettings.ResourcePath);
+                    var hero=GameController.ArmoryManager.Database.GetHero(RunStatistics.heroId);
+                    if(config!=null&&hero!=null)
+                    {
+                        var heroSave=GameController.ArmoryManager.GetHeroSave(hero.Id);
+                        RunStatistics.heroLevelBefore=heroSave.Level;
+                        RunStatistics.heroExperienceGained=config.RunExperience(RunStatistics,StageData,ActiveDifficulty,victory);
+                        heroSave.AddExperience(hero,config,RunStatistics.heroExperienceGained);
+                        RunStatistics.heroLevelAfter=heroSave.Level;
+                    }
+                }
                 if (instance.TestingData == null)
                     GameController.SaveManager.GetSave<RunRecordsSave>("Run Records").Record(StageData.StageId, ActiveDifficulty, RunStatistics, victory);
                 DropManager.GrantPickedUpItems();

@@ -71,7 +71,7 @@ namespace MrX.UI
             selected = row;
             var result = purchases.TryBuy(row.data.UpgradeType, row.quotedLevel);
             feedback.text = result == UpgradePurchaseResult.Success ? "Upgrade complete!" : result == UpgradePurchaseResult.InsufficientFunds ? "Not enough gold." : "Upgrade unavailable. Please check the current level.";
-            if (result == UpgradePurchaseResult.Success) GameController.AudioManager.PlayButtonClick();
+
             Refresh();
         }
         private void Refresh()

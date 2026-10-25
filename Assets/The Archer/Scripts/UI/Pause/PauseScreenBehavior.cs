@@ -96,7 +96,7 @@ namespace MrX.UI
         {
             if (IsShowAnimationEnded)
             {
-                OnResumeButtonClicked();
+                UIButtonAudio.Click(resumeButton);
             }
         }
 
@@ -104,7 +104,7 @@ namespace MrX.UI
         {
             if (IsShowAnimationEnded)
             {
-                OnResumeButtonClicked();
+                UIButtonAudio.Click(resumeButton);
             }
         }
 
@@ -214,7 +214,7 @@ namespace MrX.UI
 
         protected virtual void OnResumeButtonClicked()
         {
-            GameController.AudioManager.PlayButtonClick();
+
 
             EasingManager.DoTimeScale(1, 0.25f);
             gameObject.SetActive(false);
@@ -226,7 +226,7 @@ namespace MrX.UI
 
         protected virtual void OnQuitButtonClicked()
         {
-            GameController.AudioManager.PlayButtonClick();
+
 
             Time.timeScale = 1f;
 

@@ -379,6 +379,8 @@ namespace MrX.Enemy
 
         public virtual bool ApplyStatusEffect(StatusEffectType type, float multiplier)
         {
+            if(type==StatusEffectType.Poison&&RunSeasons.Matches(type))
+                multiplier=Mathf.Clamp(1-(1-multiplier)*StageController.RunStatistics.seasonEffectMultiplier,.01f,1);
             var applied = statusEffectsHandler.ApplyStatusEffect(type);
 
             if (applied && type == StatusEffectType.Freeze)
@@ -418,7 +420,7 @@ namespace MrX.Enemy
         {
             if (statusEffectsHandler == null) return 1;
 
-            return statusEffectsHandler.GetStatusEffectDurationMultiplier(statusEffect);
+            return statusEffectsHandler.GetStatusEffectDurationMultiplier(statusEffect)*RunSeasons.Duration(statusEffect);
         }
 
         public virtual void Kill()

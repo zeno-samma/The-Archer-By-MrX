@@ -7,6 +7,11 @@ namespace MrX
 {
     public class StageData : ScriptableObject
     {
+        [Header("Hero EXP and seasonal weights")]
+        [SerializeField,Min(0)] private float heroExperienceMultiplier=1;
+        [SerializeField] private float[] seasonWeights={1,1,1,1};
+        public float HeroExperienceMultiplier=>heroExperienceMultiplier;
+        public float SeasonWeight(RunSeason season)=>seasonWeights!=null&&(int)season>=0&&(int)season<seasonWeights.Length?Mathf.Max(0,seasonWeights[(int)season]):1;
         [SerializeField, HideInInspector] protected int dataVersion;
         public int DataVersion => dataVersion;
 

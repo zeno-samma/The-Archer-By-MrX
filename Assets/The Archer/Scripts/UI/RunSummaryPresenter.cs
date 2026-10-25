@@ -18,10 +18,10 @@ namespace MrX.UI
         private bool bound;
         private ResponsiveMenuLayout layout;
         private bool? portrait;
+        public bool IsDetailsOpen=>details!=null&&details.activeInHierarchy;
         private void Awake()
         { openButton.onClick.AddListener(Open); closeButton.onClick.AddListener(Close); layout = GetComponent<ResponsiveMenuLayout>(); bound = true; }
-        private void OnEnable() { if (bound) Open(); }
-        private void Start() { if (isActiveAndEnabled && !details.activeSelf) Open(); }
+        public void OpenDetails(){Open();}
         private static string T(string source) => MenuLanguage.Text(source);
         private static string Number(double value) => value.ToString("#,0.##");
         private void Open()

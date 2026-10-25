@@ -10,6 +10,16 @@ namespace MrX
         [SerializeField] protected bool isEquipped;
         [SerializeField] protected bool isUlocked;
         [SerializeField] protected int level;
+        [SerializeField] private int experience;
+        public int Experience=>Mathf.Max(0,experience);
+        public void AddExperience(Armory.HeroData hero,RunProgressionSettings config,int amount)
+        {
+            if(!IsUnlocked||hero==null||config==null||amount<=0)return;
+            long available=(long)Experience+amount;
+            while(Level<hero.HeroLevelCount-1)
+            {int required=config.RequiredExperience(hero,Level);if(available<required)break;available-=required;Level++;}
+            experience=Level>=hero.HeroLevelCount-1?0:(int)System.Math.Min(int.MaxValue,available);
+        }
 
         public string Id => id;
         public bool IsEquipped

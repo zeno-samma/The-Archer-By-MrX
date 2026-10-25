@@ -782,6 +782,7 @@ GameObject:
   - component: {fileID: 1298468086524903349}
   - component: {fileID: 1859824313113699727}
   - component: {fileID: 838678010279115841}
+  - component: {fileID: 1622186047740504138}
   m_Layer: 5
   m_Name: Accept Button
   m_TagString: Untagged
@@ -905,6 +906,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gamepadIndicator: {fileID: 2727049267482850180}
+--- !u!114 &1622186047740504138
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3845089822629980741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f904d408be9b1f049bb84165ecbfc558, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MrX.UI.UIButtonAudio
+  mode: 0
+  customSound: {fileID: 0}
 --- !u!1 &4538283706447221669
 GameObject:
   m_ObjectHideFlags: 0
@@ -918,6 +933,7 @@ GameObject:
   - component: {fileID: 5388109193906828596}
   - component: {fileID: 8268235937635573778}
   - component: {fileID: 8143402383675751399}
+  - component: {fileID: 7064249776471590012}
   m_Layer: 5
   m_Name: Reject Button
   m_TagString: Untagged
@@ -1041,6 +1057,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gamepadIndicator: {fileID: 2460510555334334588}
+--- !u!114 &7064249776471590012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4538283706447221669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f904d408be9b1f049bb84165ecbfc558, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MrX.UI.UIButtonAudio
+  mode: 0
+  customSound: {fileID: 0}
 --- !u!1 &4560196950158976145
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,5 +1,7 @@
 # Giao diện menu và cách chỉnh prefab
 
+Bố cục Stage/Armory và dock đã cập nhật theo thiết kế Rep ngày 23/10/2026. Xem [Rep Menu UI](Rep%20Menu%20UI.md) để biết prefab, profile ngang/dọc, ảnh thực tế và công cụ authoring.
+
 Các trang mới được lưu thành GameObject/uGUI/TMP trong prefab và được đặt trực tiếp trong scene `Main Menu`. Script runtime chỉ nối sự kiện, hiển thị dữ liệu và thay đổi trạng thái tương tác; không dựng cây giao diện khi mở trang.
 
 ## Nơi chỉnh giao diện

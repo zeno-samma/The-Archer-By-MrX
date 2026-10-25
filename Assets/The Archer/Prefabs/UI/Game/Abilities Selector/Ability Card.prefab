@@ -1439,6 +1439,7 @@ GameObject:
   - component: {fileID: 4132956446389183484}
   - component: {fileID: 9205607277842742392}
   - component: {fileID: 8004909060830939020}
+  - component: {fileID: 4380160744709309641}
   m_Layer: 5
   m_Name: Card Front
   m_TagString: Untagged
@@ -1529,6 +1530,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gamepadIndicator: {fileID: 2607407058988588273}
+--- !u!114 &4380160744709309641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5891038194564014184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f904d408be9b1f049bb84165ecbfc558, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MrX.UI.UIButtonAudio
+  mode: 0
+  customSound: {fileID: 0}
 --- !u!1 &7948788398460103882
 GameObject:
   m_ObjectHideFlags: 0

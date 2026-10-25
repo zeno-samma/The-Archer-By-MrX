@@ -131,7 +131,7 @@ namespace MrX.UI
         {
             if (manager == null || !GameController.MainMenuScreenBehavior.IsDockEnabled) return;
             selectedCategory = category; rebind = dirty = true;
-            GameController.AudioManager.PlayButtonClick();
+
             RefreshVisible(); dirty = false;
         }
 
@@ -170,6 +170,7 @@ namespace MrX.UI
         private void BindCategory()
         {
             var definitions = manager.GetCategory(selectedCategory);
+            if (!EnsureRowCapacity(definitions.Count)) return;
             var index = 0;
             // Stable three-way partition, no LINQ/sort allocations. The order is
             // frozen while a category is open, so claiming cannot move another
@@ -187,8 +188,63 @@ namespace MrX.UI
                     row.icon.sprite = definition.icon != null ? definition.icon : database.trophySprite;
                 }
             for (; index < rowPool.Count; index++) { rowPool[index].definition = null; rowPool[index].rect.gameObject.SetActive(false); }
+            GetComponentInParent<LocalizedMenuScope>()?.RefreshNow();
             LayoutRebuilder.ForceRebuildLayoutImmediate(content);
             scroll.verticalNormalizedPosition = 1;
+        }
+
+        // The database can grow after this page prefab was authored (for example,
+        // stage/difficulty achievements). Extend the pool using its authored row,
+        // rather than assuming its serialized capacity still matches the database.
+        private bool EnsureRowCapacity(int required)
+        {
+            if (rowPool.Count >= required) return true;
+            if (rowPool.Count == 0)
+            {
+                feedback.text = "Achievement row template is missing.";
+                return false;
+            }
+            var template = rowPool[0];
+            var originals = template.rect.GetComponentsInChildren<Transform>(true);
+            while (rowPool.Count < required)
+            {
+                var rect = Instantiate(template.rect, content);
+                rect.name = "Achievement Row " + rowPool.Count;
+                rect.gameObject.SetActive(false);
+                var copies = rect.GetComponentsInChildren<Transform>(true);
+                var row = new RowView
+                {
+                    rect = rect,
+                    layout = CloneReference(template.layout, originals, copies),
+                    outline = CloneReference(template.outline, originals, copies),
+                    background = CloneReference(template.background, originals, copies),
+                    icon = CloneReference(template.icon, originals, copies),
+                    title = CloneReference(template.title, originals, copies),
+                    description = CloneReference(template.description, originals, copies),
+                    fill = CloneReference(template.fill, originals, copies),
+                    progress = CloneReference(template.progress, originals, copies),
+                    reward = CloneReference(template.reward, originals, copies),
+                    button = CloneReference(template.button, originals, copies),
+                    buttonImage = CloneReference(template.buttonImage, originals, copies),
+                    buttonLabel = CloneReference(template.buttonLabel, originals, copies),
+                    badge = CloneReference(template.badge.transform, originals, copies).gameObject
+                };
+                // Keep listeners owned by prefab components, including UIButtonAudio.
+                // Runtime callbacks on the template are not serialized into the clone.
+                row.button.onClick.AddListener(() => Claim(row));
+                row.button.GetComponent<AchievementRowFocus>()?.Initialize(scroll, rect);
+                rowPool.Add(row);
+            }
+            return true;
+        }
+
+        private static T CloneReference<T>(T original, Transform[] originals, Transform[] copies) where T : Component
+        {
+            if (original == null) return null;
+            // Instantiate preserves hierarchy order and remaps components already
+            // on the cloned row. No UI components or layouts are built at runtime.
+            var index = Array.IndexOf(originals, original.transform);
+            return index >= 0 && index < copies.Length ? copies[index].GetComponent<T>() : null;
         }
 
         private void RefreshRow(RowView row)
@@ -218,7 +274,7 @@ namespace MrX.UI
             var granted = manager.TryClaim(definition.id);
             if (granted)
             {
-                GameController.AudioManager.PlayButtonClick();
+
                 feedback.text = "Reward received: +" + definition.reward.Amount + " " + definition.reward.CurrencyId.ToUpperInvariant();
             }
             else feedback.text = manager.Save.IsClaimed(definition.id) ? "This reward has already been claimed." : "Reward unavailable. Complete the challenge and check the reward currency.";
@@ -264,7 +320,7 @@ namespace MrX.UI
         {
             var screen = GameController.MainMenuScreenBehavior;
             if (!screen.IsDockEnabled) return;
-            GameController.AudioManager.PlayButtonClick(); screen.DisableDock();
+             screen.DisableDock();
             screen.SettingsPopup.onPopupClosed += OnSettingsClosed; screen.SettingsPopup.Show();
         }
         private void OnSettingsClosed()

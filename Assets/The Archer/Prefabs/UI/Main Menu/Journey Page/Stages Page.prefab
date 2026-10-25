@@ -1404,6 +1404,7 @@ GameObject:
   - component: {fileID: 8836645295180521585}
   - component: {fileID: 7311347613706849710}
   - component: {fileID: 737791250531766053}
+  - component: {fileID: 8157671408182262073}
   m_Layer: 5
   m_Name: Info Button
   m_TagString: Untagged
@@ -1514,6 +1515,20 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &8157671408182262073
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3248862165780863198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f904d408be9b1f049bb84165ecbfc558, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MrX.UI.UIButtonAudio
+  mode: 0
+  customSound: {fileID: 0}
 --- !u!1 &3257624087018148164
 GameObject:
   m_ObjectHideFlags: 0
@@ -1620,6 +1635,7 @@ GameObject:
   - component: {fileID: 8439093652133121318}
   - component: {fileID: 6490862979224877001}
   - component: {fileID: 6440317940579410155}
+  - component: {fileID: 6023824911571493980}
   m_Layer: 5
   m_Name: Settings Button
   m_TagString: Untagged
@@ -1742,6 +1758,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gamepadIndicator: {fileID: 5376393521328693796}
+--- !u!114 &6023824911571493980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3483567753009003910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f904d408be9b1f049bb84165ecbfc558, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MrX.UI.UIButtonAudio
+  mode: 0
+  customSound: {fileID: 0}
 --- !u!1 &3646750508744228044
 GameObject:
   m_ObjectHideFlags: 0
@@ -2266,6 +2296,7 @@ GameObject:
   - component: {fileID: 7529882563298646733}
   - component: {fileID: 5657149844327992192}
   - component: {fileID: 1549395231120908862}
+  - component: {fileID: 1783673080961718967}
   m_Layer: 5
   m_Name: Unlock Button
   m_TagString: Untagged
@@ -2421,6 +2452,20 @@ MonoBehaviour:
     value: gold
   useTempGameplayCurrency: 0
   costLabel: {fileID: 6687569888157830831}
+--- !u!114 &1783673080961718967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5165366955760150934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f904d408be9b1f049bb84165ecbfc558, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MrX.UI.UIButtonAudio
+  mode: 0
+  customSound: {fileID: 0}
 --- !u!1 &5376393521328693796
 GameObject:
   m_ObjectHideFlags: 0
@@ -3024,6 +3069,7 @@ GameObject:
   - component: {fileID: 3928085145247113542}
   - component: {fileID: 1202309761360830122}
   - component: {fileID: 6506587434966851668}
+  - component: {fileID: 5622652785316743729}
   m_Layer: 5
   m_Name: Play Button
   m_TagString: Untagged
@@ -3160,6 +3206,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gamepadIndicator: {fileID: 1228022536313282220}
+--- !u!114 &5622652785316743729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8255497855311922474}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f904d408be9b1f049bb84165ecbfc558, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MrX.UI.UIButtonAudio
+  mode: 0
+  customSound: {fileID: 0}
 --- !u!1 &8633873904467299124
 GameObject:
   m_ObjectHideFlags: 0

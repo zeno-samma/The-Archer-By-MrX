@@ -118,3 +118,8 @@ Buffer vertex/color được giữ lại để tái sử dụng và chỉ tăng 
 ## Tham khảo kỹ thuật
 
 Đã đối chiếu API TMP qua MCP và tài liệu Unity: [OnPreRenderText](https://docs.unity3d.com/Packages/com.unity.textmeshpro@3.0/api/TMPro.TMP_Text.OnPreRenderText.html) là điểm can thiệp hình học trước khi render; [TMP_Text](https://docs.unity3d.com/Packages/com.unity.textmeshpro@3.0/api/TMPro.TMP_Text.html) mô tả maxVisibleCharacters và UpdateVertexData. Script triển khai các chuyển động riêng, giữ font/material và cấu trúc uGUI hiện có.
+
+
+### Binding màn kết quả gọn
+
+`Completed` là event C# bổ sung bên cạnh UnityEvent trong Inspector; đăng ký/hủy đối xứng theo vòng đời view. `Prefix` và `Suffix` cho phép đổi nhãn bản địa hóa trước khi gọi `PlayNumber`. Màn kết quả gọn dùng event này để hiện nhãn kỷ lục sau khi đếm; không để script khác đồng thời ghi vào số đang chạy.

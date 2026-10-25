@@ -423,6 +423,7 @@ GameObject:
   - component: {fileID: 2300638092774102540}
   - component: {fileID: 2744362953086065334}
   - component: {fileID: 4206508315144785008}
+  - component: {fileID: 1270893846681684097}
   m_Layer: 5
   m_Name: Buy Gold
   m_TagString: Untagged
@@ -532,6 +533,20 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1270893846681684097
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1976741287705325855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f904d408be9b1f049bb84165ecbfc558, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MrX.UI.UIButtonAudio
+  mode: 0
+  customSound: {fileID: 0}
 --- !u!1 &2408781760503613981
 GameObject:
   m_ObjectHideFlags: 0
@@ -2048,6 +2063,7 @@ GameObject:
   - component: {fileID: 1282284458255867230}
   - component: {fileID: 7034266614452731340}
   - component: {fileID: 3812720199872453052}
+  - component: {fileID: 5113408982904597848}
   m_Layer: 5
   m_Name: Close
   m_TagString: Untagged
@@ -2157,6 +2173,20 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &5113408982904597848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4436200238344153092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f904d408be9b1f049bb84165ecbfc558, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MrX.UI.UIButtonAudio
+  mode: 0
+  customSound: {fileID: 0}
 --- !u!1 &4629708528158385091
 GameObject:
   m_ObjectHideFlags: 0
@@ -2321,6 +2351,7 @@ GameObject:
   - component: {fileID: 7189568668174609720}
   - component: {fileID: 3060490448450224838}
   - component: {fileID: 5915630441559463773}
+  - component: {fileID: 5452574476591851465}
   m_Layer: 5
   m_Name: Buy Energy
   m_TagString: Untagged
@@ -2430,6 +2461,20 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &5452574476591851465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5987157907799912235}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f904d408be9b1f049bb84165ecbfc558, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MrX.UI.UIButtonAudio
+  mode: 0
+  customSound: {fileID: 0}
 --- !u!1 &6281941705393763274
 GameObject:
   m_ObjectHideFlags: 0
@@ -3022,6 +3067,7 @@ GameObject:
   - component: {fileID: 1224253795273936600}
   - component: {fileID: 1375506570000841359}
   - component: {fileID: 8140802163233487974}
+  - component: {fileID: 5188833506308496404}
   m_Layer: 5
   m_Name: Confirm Purchase
   m_TagString: Untagged
@@ -3131,3 +3177,17 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &5188833506308496404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8885199202678573457}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f904d408be9b1f049bb84165ecbfc558, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MrX.UI.UIButtonAudio
+  mode: 0
+  customSound: {fileID: 0}

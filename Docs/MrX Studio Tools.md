@@ -42,6 +42,8 @@ Các lệnh cấp tiền/mở stage làm thay đổi tiến trình đang dùng. 
 
 Để đổi danh mục, chỉ tiêu, icon và quà: chọn `Resources/Achievements Database.asset` trong Project. Giữ ID của thành tựu đã phát hành để save nhận đúng tiến trình.
 
+Sửa lỗi 22/10/2026: prefab cũ có 12 hàng nhưng Adventure đã có 27 thành tựu sau khi thêm độ khó, gây `ArgumentOutOfRangeException` lặp khi mở trang. `Scripts/UI/Main Menu/Achievements/AchievementsPageBehavior.cs` hiện tự bổ sung pool bằng cách clone hàng UI đã vẽ, remap reference và gắn listener nhận thưởng cho từng hàng; không cần dựng lại prefab hoặc reset save khi thêm thành tựu. Đã kiểm tra qua MCP: nhận 5 nhiệm vụ + 5 mốc ngày rồi mở Thành tựu, đủ 27 ID không trùng; 80 lần đổi danh mục không tăng tiếp pool; hàng bổ sung nhận thưởng đúng một lần và cuộn theo focus. Console không còn Error, save thật giữ nguyên hash; không build.
+
 ## 4. Armory — trang bị, túi và stat
 
 **Create Dashboard Settings If Missing** tạo `Resources/Armory Dashboard Database.asset` nếu thiếu; nếu đã có thì chọn asset đó. Chạy khi không Play. Trong Inspector có ảnh ô trống, font/màu, sức chứa ban đầu, số ô tăng thêm, giá vàng và giới hạn túi.
@@ -206,3 +208,12 @@ Edit Mode. Thêm hai thẻ thời gian/DPS còn thiếu vào prefab Run Summary 
 ### UI → Create Text Effects Demo Prefab
 
 Edit Mode. Tạo prefab mẫu gồm 12 text hiệu ứng tại `Assets/The Archer/Prefabs/UI/Text Effects/UI Text Effects Demo.prefab`. Có asset rồi thì chỉ chọn, không ghi đè. Component `UITextEffect` có Preview trực tiếp trong Inspector khi chọn text ở scene hoặc Prefab Mode. Xem [UI Text Effects](UI%20Text%20Effects.md).
+
+### UI → Install Button Audio
+
+Edit Mode. Bổ sung `UIButtonAudio` vào Button trong prefab/scene của The Archer; giữ nguyên Mode/Custom Sound đã chỉnh. Dùng sau khi dựng lại trang hoặc thêm nút từ công cụ authoring. Gắn thủ công vào prefab nút mới cũng được. Component có Default/Custom/Silent, dùng AudioManager và không thêm AudioSource trên từng nút. Xem [UI Button Audio](UI%20Button%20Audio.md).
+
+
+### Offline → Install Seasons Hero EXP and Compact Results
+
+Edit Mode, Main Menu đang mở. Tạo cấu hình mùa/EXP, thanh EXP hero, màn kết quả gọn và thông báo mùa dạng prefab; đấu nối Stage/Armory và hai màn kết quả. Có prefab/config rồi thì giữ thiết kế và giá trị cân bằng. Nâng hero bằng gold được thay bằng EXP cuối run; giá mở khóa gem vẫn giữ. Đọc [Mùa, EXP hero và kết quả](Seasons%20Hero%20Experience%20and%20Results.md) để biết công thức, vị trí từng file và giới hạn kiểm tra.

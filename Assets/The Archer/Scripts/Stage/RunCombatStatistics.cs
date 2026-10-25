@@ -6,6 +6,13 @@ namespace MrX
     [Serializable] public sealed class RunCombatStatistics
     {
         public float seconds;
+        public string heroId;
+        public int seasonId=-1;
+        public bool seasonAssigned;
+        public float seasonDamageMultiplier=1,seasonEffectMultiplier=1;
+        [NonSerialized] public int heroExperienceGained,heroLevelBefore,heroLevelAfter;
+        [NonSerialized] public bool newSurvivalRecord;
+        [NonSerialized] public double previousBestSurvival;
         public double damageDealt, bossDamage, damageTaken, healing;
         public float highestHit;
         public int hitsLanded, criticalHits, hitsTaken, enemiesKilled, bossesKilled;

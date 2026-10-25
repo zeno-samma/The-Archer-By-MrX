@@ -10,6 +10,8 @@ namespace MrX.UI
         [SerializeField] private Button[] choices;
         [SerializeField] private TMP_Text[] labels;
         [SerializeField] private TMP_Text info;
+        [SerializeField] private Sprite selectedFrame, idleFrame;
+        [SerializeField] private bool compactLabels;
         private StageSave save;
         private MainMenuStagesPageBehavior page;
         public static string Name(StageDifficulty mode) => MenuLanguage.Text(mode == StageDifficulty.Normal ? "Normal" : mode == StageDifficulty.Hard ? "Hard" : "Nightmare");
@@ -28,7 +30,7 @@ namespace MrX.UI
         {
             if (!GameController.MainMenuScreenBehavior.IsDockEnabled) return;
             if (save.SelectDifficulty(page.StageDatabase.GetStageData(save.SelectedStageId), mode))
-            { GameController.AudioManager.PlayButtonClick(); Refresh(); }
+            {  Refresh(); }
         }
         private void Refresh()
         {
@@ -39,8 +41,13 @@ namespace MrX.UI
             {
                 var mode = (StageDifficulty)i; bool unlocked = save.CanPlayDifficulty(stage, mode);
                 choices[i].interactable = unlocked;
-                labels[i].text = Name(mode) + "\n" + MenuLanguage.Text(!unlocked ? "Locked" : save.IsDifficultyComplete(stage, mode) ? "Completed" : "First clear");
+                labels[i].text = Name(mode) + (compactLabels ? "" : "\n" + MenuLanguage.Text(!unlocked ? "Locked" : save.IsDifficultyComplete(stage, mode) ? "Completed" : "First clear"));
                 choices[i].image.color = mode == save.SelectedDifficulty ? new Color(1, .85f, .4f) : unlocked ? Color.white : new Color(.65f, .7f, .8f);
+                if (selectedFrame != null && idleFrame != null)
+                {
+                    choices[i].image.sprite = mode == save.SelectedDifficulty ? selectedFrame : idleFrame;
+                    choices[i].image.color = unlocked ? Color.white : new Color(.64f, .7f, .8f);
+                }
             }
             var definition = GameController.AchievementsManager?.Database.achievements.Find(a => a.id == AchievementId(stage.StageId, save.SelectedDifficulty));
             var manager = GameController.AchievementsManager;

@@ -11,6 +11,7 @@ namespace MrX.UI
         [SerializeField] private Button wheelButton, chestButton;
         [SerializeField] private LuckyRewardsPopup wheelPopup, chestPopup;
         [SerializeField] private GameObject wheelFreeBadge, chestFreeBadge;
+        [SerializeField] private GameObject wheelFreeLabel, chestFreeLabel;
         public LuckyRewardsService Service { get; private set; }
         private float nextRefresh;
         private void Start()
@@ -31,6 +32,8 @@ namespace MrX.UI
         {
             SetBadge(wheelFreeBadge, wheelPopup != null && Service.HasDailyFreeUse(wheelPopup.Table));
             SetBadge(chestFreeBadge, chestPopup != null && Service.HasDailyFreeUse(chestPopup.Table));
+            SetBadge(wheelFreeLabel, wheelPopup != null && Service.HasDailyFreeUse(wheelPopup.Table));
+            SetBadge(chestFreeLabel, chestPopup != null && Service.HasDailyFreeUse(chestPopup.Table));
         }
         private static void SetBadge(GameObject badge, bool visible)
         { if (badge != null && badge.activeSelf != visible) badge.SetActive(visible); }

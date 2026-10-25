@@ -72,7 +72,7 @@ namespace MrX.UI
 
         public void Hide()
         {
-            GameController.AudioManager.PlayButtonClick();
+
 
             GameController.InputManager.InputAsset.UI.Cancel.performed -= OnCancelButtonPressed;
 

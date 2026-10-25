@@ -20,11 +20,13 @@ namespace MrX.UI
         [Serializable] public class RowStyle {public LayoutElement target;public float landscape,portrait;}
         [Serializable] public class Visibility {public GameObject target;public bool landscape=true,portrait=true;}
         [Serializable] public class GridStyle {public GridLayoutGroup target;public Vector2 landscapeSize,portraitSize;public RectOffset landscapePadding,portraitPadding;}
+        [Serializable] public class ImageStyle {public Image target;public float landscape=3,portrait=6;}
         public List<RectStyle> rectangles=new List<RectStyle>();
         public List<TextStyle> texts=new List<TextStyle>();
         public List<RowStyle> rows=new List<RowStyle>();
         public List<Visibility> visibility=new List<Visibility>();
         public List<GridStyle> grids=new List<GridStyle>();
+        public List<ImageStyle> images=new List<ImageStyle>();
         [SerializeField] private ArmoryDashboard inventory;
         private ResponsiveMenuSurface surface;
         private bool initialized,lastPortrait;
@@ -42,6 +44,7 @@ namespace MrX.UI
             foreach(var style in rows)if(style.target!=null)style.target.preferredHeight=portrait?style.portrait:style.landscape;
             foreach(var style in visibility)if(style.target!=null)style.target.SetActive(portrait?style.portrait:style.landscape);
             foreach(var style in grids)if(style.target!=null){style.target.cellSize=portrait?style.portraitSize:style.landscapeSize;style.target.padding=portrait?style.portraitPadding:style.landscapePadding;}
+            foreach(var style in images)if(style.target!=null)style.target.pixelsPerUnitMultiplier=portrait?style.portrait:style.landscape;
             if(inventory!=null)inventory.SetColumns(portrait?4:6);
             foreach(var panel in GetComponentsInChildren<Armory.ArmoryHeroPanel>(true)) panel.RefreshSlotLayout();
         }

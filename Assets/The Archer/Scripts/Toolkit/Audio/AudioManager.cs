@@ -34,6 +34,7 @@ namespace MrX.Audio
         protected Dictionary<AudioData, float> lastTimePlayed = new Dictionary<AudioData, float>();
         protected Dictionary<AudioData, int> consecutiveCount = new Dictionary<AudioData, int>();
         protected AudioSave save;
+        public bool IsInitialized => save != null;
 
         protected bool isPausedSnapshotActive = false;
 

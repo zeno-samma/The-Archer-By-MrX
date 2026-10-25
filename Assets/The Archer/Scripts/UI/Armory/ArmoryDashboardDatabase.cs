@@ -14,5 +14,8 @@ namespace MrX.UI
         public Sprite slotSprite, emptySlotIcon, lockIcon, blueButton, yellowButton, grayButton;
         public Material slotMaterial;
         public TMP_FontAsset font;
+        [Header("Rep inventory presentation (optional)")]
+        public Sprite equipmentFrame, stackFrame, emptyFrame, emptyPlus;
+        public Sprite[] rarityFrames;
     }
 }

@@ -97,12 +97,12 @@ namespace MrX.UI
                 {
                     if (UpgradeLevel < Data.LevelsCount && upgradeButton.HasEnoughMoney)
                     {
-                        OnUpgradeButtonClicked();
+                        UIButtonAudio.Click(upgradeButton.Button);
                     }
                 }
                 else
                 {
-                    OnInfoButtonClicked();
+                    UIButtonAudio.Click(infoButton);
                 }
             }
         }
@@ -226,7 +226,7 @@ namespace MrX.UI
 
             GameController.UpgradesManager.IncrementUpgradeLevel(Data.UpgradeType);
 
-            GameController.AudioManager.PlayButtonClick();
+
         }
 
         protected virtual void OnUpgradeLevelChanged(int level)

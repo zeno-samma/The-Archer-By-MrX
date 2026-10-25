@@ -929,6 +929,7 @@ GameObject:
   - component: {fileID: 3845374213339814192}
   - component: {fileID: 3750747301533680606}
   - component: {fileID: 4554408238363853926}
+  - component: {fileID: 5463075623658897785}
   m_Layer: 5
   m_Name: Settings Button
   m_TagString: Untagged
@@ -1051,6 +1052,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gamepadIndicator: {fileID: 5170071518938433277}
+--- !u!114 &5463075623658897785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6512240249242833667}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f904d408be9b1f049bb84165ecbfc558, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MrX.UI.UIButtonAudio
+  mode: 0
+  customSound: {fileID: 0}
 --- !u!1 &6991080670171783154
 GameObject:
   m_ObjectHideFlags: 0

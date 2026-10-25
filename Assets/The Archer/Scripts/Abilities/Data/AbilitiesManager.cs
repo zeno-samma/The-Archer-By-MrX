@@ -192,7 +192,10 @@ namespace MrX.Abilities
 
             while (selectedAbilities.Count < 3 && abilities.Count > 0)
             {
-                selectedAbilities.Add(abilities.PopRandom());
+                float total=0;foreach(var a in abilities)total+=SeasonWeight(a);
+                float roll=Random.value*total;int index=abilities.Count-1;
+                for(int i=0;i<abilities.Count;i++){roll-=SeasonWeight(abilities[i]);if(roll<=0){index=i;break;}}
+                selectedAbilities.Add(abilities[index]);abilities.RemoveAt(index);
             }
 
             if (selectedAbilities.Count < 3)
@@ -222,6 +225,8 @@ namespace MrX.Abilities
 
             return false;
         }
+        private float SeasonWeight(AbilityData data)
+        {return ContinuePlayingSave.XPLevel<=3&&StageController.RunStatistics!=null&&(int)data.SeasonAffinity>=0&&(int)data.SeasonAffinity==StageController.RunStatistics.seasonId?1.5f:1;}
 
         public virtual bool IsAbilityAvailable(AbilityData ability)
         {

@@ -451,6 +451,7 @@ GameObject:
   - component: {fileID: 8954874268541552725}
   - component: {fileID: 3390578487159172229}
   - component: {fileID: 5362429749617619530}
+  - component: {fileID: 5791597364127495095}
   m_Layer: 5
   m_Name: Close Button
   m_TagString: Untagged
@@ -559,6 +560,20 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &5791597364127495095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1484484341871371045}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f904d408be9b1f049bb84165ecbfc558, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MrX.UI.UIButtonAudio
+  mode: 0
+  customSound: {fileID: 0}
 --- !u!1 &2799747747862247948
 GameObject:
   m_ObjectHideFlags: 0
@@ -1198,6 +1213,7 @@ GameObject:
   - component: {fileID: 674672908006818819}
   - component: {fileID: 1345642300846498419}
   - component: {fileID: 682039250553737637}
+  - component: {fileID: 424623581330196788}
   m_Layer: 5
   m_Name: Upgrade Button
   m_TagString: Untagged
@@ -1342,6 +1358,20 @@ MonoBehaviour:
     value: gold
   useTempGameplayCurrency: 0
   costLabel: {fileID: 6578654430216505279}
+--- !u!114 &424623581330196788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5386144393813675843}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f904d408be9b1f049bb84165ecbfc558, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MrX.UI.UIButtonAudio
+  mode: 0
+  customSound: {fileID: 0}
 --- !u!1 &6354816778684374928
 GameObject:
   m_ObjectHideFlags: 0
@@ -1904,6 +1934,7 @@ GameObject:
   - component: {fileID: 1155650324629607927}
   - component: {fileID: 9033288491573252072}
   - component: {fileID: 1154013296479317088}
+  - component: {fileID: 8915577924323565545}
   m_Layer: 5
   m_Name: Select Button
   m_TagString: Untagged
@@ -2027,6 +2058,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gamepadIndicator: {fileID: 97470274713143742}
+--- !u!114 &8915577924323565545
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7529953568000648051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f904d408be9b1f049bb84165ecbfc558, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MrX.UI.UIButtonAudio
+  mode: 0
+  customSound: {fileID: 0}
 --- !u!1 &7625335946778321833
 GameObject:
   m_ObjectHideFlags: 0
@@ -2419,8 +2464,30 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1293539121496644567, guid: 9f3c1bf6645dbd24ca37477cced96d6d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8623003298973229157}
   m_SourcePrefab: {fileID: 100100000, guid: 9f3c1bf6645dbd24ca37477cced96d6d, type: 3}
+--- !u!1 &3478898088804275085 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1293539121496644567, guid: 9f3c1bf6645dbd24ca37477cced96d6d, type: 3}
+  m_PrefabInstance: {fileID: 2428589854642538586}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8623003298973229157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3478898088804275085}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f904d408be9b1f049bb84165ecbfc558, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MrX.UI.UIButtonAudio
+  mode: 0
+  customSound: {fileID: 0}
 --- !u!224 &5504207770022739097 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7914735869644272835, guid: 9f3c1bf6645dbd24ca37477cced96d6d, type: 3}
@@ -2431,7 +2498,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5107827436244706731, guid: 9f3c1bf6645dbd24ca37477cced96d6d, type: 3}
   m_PrefabInstance: {fileID: 2428589854642538586}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 3478898088804275085}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 57aa5e26d3039a2419b6fd5fcadf7a20, type: 3}

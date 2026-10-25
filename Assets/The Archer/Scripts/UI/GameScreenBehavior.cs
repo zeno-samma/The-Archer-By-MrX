@@ -11,6 +11,7 @@ namespace MrX.UI
     public class GameScreenBehavior : MonoBehaviour
     {
         protected Canvas canvas;
+        private IEasingCoroutine transitionFade;
 
         [SerializeField] protected BossfightProgressbarBehavior bossProgressbar;
         [SerializeField] protected WorldSpaceTextManager worldSpaceTextManager;
@@ -68,6 +69,7 @@ namespace MrX.UI
 
         protected virtual void OnDisable()
         {
+            transitionFade.StopIfExists();
             GameController.InputManager.InputAsset.UI.Settings.performed -= OnSettingsButtonClicked;
         }
 
@@ -79,6 +81,8 @@ namespace MrX.UI
 
         public void PrepareForResult()
         {
+            transitionFade.StopIfExists();
+            blackFadeImage.gameObject.SetActive(false);
             abilitySelector.CancelForResult();
             pauseWindow.gameObject.SetActive(false);
             evilChestUI.gameObject.SetActive(false); hpChestUI.gameObject.SetActive(false);
@@ -95,7 +99,7 @@ namespace MrX.UI
         {
             if (pauseWindow.IsOpen || abilitySelector.IsOpen || evilChestUI.IsOpen || hpChestUI.IsOpen || stageFailedScreen.IsOpen || stageComleteScreen.IsOpen) return;
 
-            OnPauseButtonClicked();
+            UIButtonAudio.Click(pauseButton);
         }
 
         protected virtual void Start()
@@ -123,20 +127,23 @@ namespace MrX.UI
 
         protected virtual void OnPauseButtonClicked()
         {
-            GameController.AudioManager.PlayButtonClick();
+
             pauseWindow.Show();
         }
 
         public virtual void FadeInOut(UnityAction hiddenAction, UnityAction finishAction)
         {
+            if(StageController.IsResultFinalized)return;
+            transitionFade.StopIfExists();
             blackFadeImage.gameObject.SetActive(true);
             blackFadeImage.SetAlpha(0);
 
-            blackFadeImage.DoAlpha(1, 0.3f).SetOnFinish(() =>
+            transitionFade = blackFadeImage.DoAlpha(1, 0.3f).SetUnscaledTime(true).SetOnFinish(() =>
             {
                 hiddenAction?.Invoke();
+                if(StageController.IsResultFinalized)return;
 
-                blackFadeImage.DoAlpha(0, 0.3f).SetOnFinish(() =>
+                transitionFade = blackFadeImage.DoAlpha(0, 0.3f).SetUnscaledTime(true).SetOnFinish(() =>
                 {
                     finishAction?.Invoke();
 
@@ -147,9 +154,11 @@ namespace MrX.UI
 
         public virtual void FadeOut()
         {
+            if(StageController.IsResultFinalized)return;
+            transitionFade.StopIfExists();
             blackFadeImage.gameObject.SetActive(true);
             blackFadeImage.SetAlpha(1);
-            blackFadeImage.DoAlpha(0, 0.2f).SetOnFinish(() => blackFadeImage.gameObject.SetActive(false));
+            transitionFade = blackFadeImage.DoAlpha(0, 0.2f).SetUnscaledTime(true).SetOnFinish(() => blackFadeImage.gameObject.SetActive(false));
         }
 
         public virtual bool HasAnyOpenedPage()

@@ -118,7 +118,7 @@ namespace MrX.Abilities.UI
             ContinuePlayingSave = GameController.SaveManager.GetSave<ContinuePlayingSave>("Continue Playing");
 
             rerollButton.SetOnClick(OnRerollButtonClicked);
-            
+
             ResetUI();
         }
 
@@ -304,7 +304,7 @@ namespace MrX.Abilities.UI
         {
             if (rerollButton.WithdrawCost())
             {
-                GameController.AudioManager.PlayButtonClick();
+
 
                 EventSystem.current.SetSelectedGameObject(null);
 
@@ -379,7 +379,7 @@ namespace MrX.Abilities.UI
                 currency = GameController.CurrenciesManager.GetDefaultCurrency(true);
             }
             rerollButton.SetCurrency(currency);
-            
+
             var cost = StageController.StageData.AbilityRerollPrice.Amount;
             for (int i = 0; i < ContinuePlayingSave.RerollsCount; i++) {
                 cost = Mathf.RoundToInt(cost * StageController.StageData.NextAbilityRerollMultiplier);
@@ -661,7 +661,7 @@ namespace MrX.Abilities.UI
         {
             if (skipButton.gameObject.activeSelf)
             {
-                OnSkipButtonClicked();
+                UIButtonAudio.Click(skipButton);
             }
         }
 

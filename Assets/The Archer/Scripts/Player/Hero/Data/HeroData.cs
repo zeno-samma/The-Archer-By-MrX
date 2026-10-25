@@ -75,6 +75,9 @@ namespace MrX.Armory
     [System.Serializable]
     public class HeroLevel
     {
+        [Tooltip("EXP to next level. 0 uses Run Progression Settings. Price remains the unlock price at level 1 only.")]
+        [SerializeField, Min(0)] private int experienceToNextLevel;
+        public int ExperienceToNextLevel=>experienceToNextLevel;
         [Obsolete("Migrating to Price")]
         [SerializeField, HideInInspector] protected int cost;
         [SerializeField] protected Price price;

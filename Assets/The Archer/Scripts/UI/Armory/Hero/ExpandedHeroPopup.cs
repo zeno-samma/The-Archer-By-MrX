@@ -80,45 +80,13 @@ namespace MrX.UI.Armory
 
         protected virtual void InitButtonsUpgradable()
         {
-            var nextLevel = Data.GetHeroLevel(SaveData.Level + 1);
-
-            if (SaveData.IsEquipped)
-            {
-                selectButtonText.text = "Selected";
-
-                selectButton.enabled = false;
-                selectButton.image.sprite = disabledButtonSprite;
-            }
-            else
-            {
-                selectButtonText.text = "Select";
-
-                selectButton.enabled = true;
-                selectButton.image.sprite = selectButtonSprite;
-            }
-
-            upgradeButtonLabel.gameObject.SetActive(true);
-            upgradeButtonText.gameObject.SetActive(true);
-            maxLvlButtonText.gameObject.SetActive(false);
-
-            upgradeButtonText.text = "Upgrade";
-
-            var cost = nextLevel.Price.Amount;
-            upgradeButton.SetCurrency(GameController.CurrenciesManager.GetCurrency(nextLevel.Price.CurrencyId, false));
-            upgradeButton.SetCost(cost);
-
-            if (upgradeButton.HasEnoughMoney)
-            {
-                costText.color = enabledCostTextColor;
-            }
-            else
-            {
-                costText.color = disabledCostTextColor;
-            }
+            InitButtonsMaxLevel();
+            maxLvlButtonText.text=MrX.Localization.MenuLanguage.Text("Gain hero EXP by completing runs");
         }
 
         protected virtual void InitButtonsMaxLevel()
         {
+            maxLvlButtonText.text=MrX.Localization.MenuLanguage.Text("MAX");
             if (SaveData.IsEquipped)
             {
                 selectButtonText.text = "Selected";
@@ -222,7 +190,7 @@ namespace MrX.UI.Armory
 
         protected override void OnSelectButtonClicked()
         {
-            GameController.AudioManager.PlayButtonClick();
+
 
             GameController.ArmoryManager.TrySelectHero(Data);
 
@@ -240,21 +208,15 @@ namespace MrX.UI.Armory
 
         protected override void OnUpgradeButtonClicked()
         {
-            var targetLevel = SaveData.IsUnlocked ? SaveData.Level + 1 : 0;
+            if(SaveData.IsUnlocked)return;
+            const int targetLevel = 0;
             if (targetLevel >= Data.HeroLevelCount) return;
             var price = Data.GetHeroLevel(targetLevel).Price;
             var currency = GameController.CurrenciesManager.GetCurrency(price.CurrencyId, false);
             if (currency == null || currency.Amount < price.Amount) return;
-            GameController.AudioManager.PlayButtonClick();
 
-            if (!SaveData.IsUnlocked)
-            {
-                SaveData.IsUnlocked = true;
-            }
-            else
-            {
-                SaveData.Level++;
-            }
+
+            SaveData.IsUnlocked = true;
 
             currency.Withdraw(price.Amount);
 

@@ -207,6 +207,7 @@ GameObject:
   - component: {fileID: 1681765514763506128}
   - component: {fileID: 2059751186744764538}
   - component: {fileID: 3660800422557656206}
+  - component: {fileID: 7840599626582402586}
   m_Layer: 5
   m_Name: Gem Chest Shortcut
   m_TagString: Untagged
@@ -318,6 +319,20 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &7840599626582402586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2367379098464070610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f904d408be9b1f049bb84165ecbfc558, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MrX.UI.UIButtonAudio
+  mode: 0
+  customSound: {fileID: 0}
 --- !u!1 &2775857458237431338
 GameObject:
   m_ObjectHideFlags: 0
@@ -617,6 +632,7 @@ GameObject:
   - component: {fileID: 449747271360749973}
   - component: {fileID: 8826582175710907740}
   - component: {fileID: 6109242698538239192}
+  - component: {fileID: 98437185938507622}
   m_Layer: 5
   m_Name: Lucky Wheel Shortcut
   m_TagString: Untagged
@@ -728,6 +744,20 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &98437185938507622
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5815060610762226892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f904d408be9b1f049bb84165ecbfc558, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MrX.UI.UIButtonAudio
+  mode: 0
+  customSound: {fileID: 0}
 --- !u!1001 &2144844176440780854
 PrefabInstance:
   m_ObjectHideFlags: 0

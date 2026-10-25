@@ -105,6 +105,7 @@ GameObject:
   - component: {fileID: 5107827436244706731}
   - component: {fileID: 1059128930548622006}
   - component: {fileID: 6578443446316044340}
+  - component: {fileID: 3543287090604459096}
   m_Layer: 5
   m_Name: Hero Card
   m_TagString: Untagged
@@ -227,6 +228,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gamepadIndicator: {fileID: 1770486515820171064}
+--- !u!114 &3543287090604459096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1293539121496644567}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f904d408be9b1f049bb84165ecbfc558, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MrX.UI.UIButtonAudio
+  mode: 0
+  customSound: {fileID: 0}
 --- !u!1 &1770486515820171064
 GameObject:
   m_ObjectHideFlags: 0

@@ -206,7 +206,7 @@ namespace MrX.UI.Armory
         protected override void OnSelectButtonClicked()
         {
             // Debug.Log($"[EQUIP BUTTON] Clicked | Frame: {Time.frameCount}");
-            GameController.AudioManager.PlayButtonClick();
+
             if (!GameController.ArmoryManager.CanEquipItem(Data)) return;
             SaveData.IsEquipped = !SaveData.IsEquipped;
 
@@ -232,7 +232,7 @@ namespace MrX.UI.Armory
             var result = GameController.ArmoryManager.Forge.TryUpgrade(Data.Id, SaveData.Level);
             if (result != ForgeResult.Success) { InitVisuals(); return; }
             nextUpgradeTime = Time.unscaledTime + .35f;
-            GameController.AudioManager.PlayButtonClick();
+
 
             InitVisuals();
 

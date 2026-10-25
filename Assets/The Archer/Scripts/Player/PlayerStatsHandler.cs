@@ -90,12 +90,13 @@ namespace MrX.Player
 
         public virtual float GetDamageMultiplier(DamageType damageType)
         {
+            float season=RunSeasons.Damage(damageType);
             switch (damageType)
             {
-                case DamageType.Burning: return BurnDamageMultiplierStat;
-                case DamageType.Freezing: return FreezeDamageMultiplierStat;
-                case DamageType.Poison: return PoisonDamageMultiplierStat;
-                case DamageType.Shock: return ShockDamageMultiplierStat;
+                case DamageType.Burning: return BurnDamageMultiplierStat*season;
+                case DamageType.Freezing: return FreezeDamageMultiplierStat*season;
+                case DamageType.Poison: return PoisonDamageMultiplierStat*season;
+                case DamageType.Shock: return ShockDamageMultiplierStat*season;
                 default: return 1;
             }
         }

@@ -108,7 +108,7 @@ namespace MrX.UI
             if (owned.Count < 2 || !CanInteract()) return;
             selectedIndex = (selectedIndex + direction + owned.Count) % owned.Count; BindSelected();
             feedback.text = "Each equipment recipe uses its own fragments.";
-            GameController.AudioManager.PlayButtonClick();
+
         }
         private bool CanInteract() => canvas.enabled && canvasGroup.blocksRaycasts && GameController.MainMenuScreenBehavior.IsDockEnabled;
 
@@ -183,7 +183,7 @@ namespace MrX.UI
             {
                 nextForgeTime = Time.unscaledTime + .35f; forgeButton.interactable = false;
                 feedback.text = "Crafted! Your new equipment is available in Armory.";
-                GameController.AudioManager.PlayButtonClick();
+
             }
             else feedback.text = result == CraftResult.AlreadyOwned ? "Already owned. Upgrade this equipment in Stage / Armory." : "Crafting not completed. Check fragments and materials.";
             dirty = true;
@@ -198,7 +198,7 @@ namespace MrX.UI
         {
             if (!CanInteract()) return;
             var screen = GameController.MainMenuScreenBehavior; screen.DisableDock();
-            screen.SettingsPopup.onPopupClosed += SettingsClosed; screen.SettingsPopup.Show(); GameController.AudioManager.PlayButtonClick();
+            screen.SettingsPopup.onPopupClosed += SettingsClosed; screen.SettingsPopup.Show();
         }
         private void SettingsClosed()
         { var screen = GameController.MainMenuScreenBehavior; screen.SettingsPopup.onPopupClosed -= SettingsClosed; screen.EnableDock(); OnMoveCenterFinished(); }

@@ -168,7 +168,7 @@ namespace MrX.UI
 
         protected virtual void OnAcceptButtonClicked()
         {
-            GameController.AudioManager.PlayButtonClick();
+
 
             if (StageController.AbilitiesManager.IsAbilityAquired(abilityData.AbilityType))
             {
@@ -188,7 +188,7 @@ namespace MrX.UI
 
         protected virtual void OnRejectButtonClicked()
         {
-            GameController.AudioManager.PlayButtonClick();
+
 
             Hide();
         }

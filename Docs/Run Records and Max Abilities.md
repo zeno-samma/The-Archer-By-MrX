@@ -13,30 +13,13 @@ Cập nhật 22/10/2026. Không build trong tác vụ này.
 
 File: `Assets/The Archer/Scripts/Abilities/Data/AbilitiesManager.cs`. Cả selector, reroll và đường lấy ability theo rarity dùng chung các phương thức này.
 
-## Hai thẻ nổi bật đầu bảng kết quả
+## Màn kết quả hiện tại
 
-**Thời gian:** hiện thời gian vượt ải khi thắng; hiện thời gian sinh tồn khi thua. Chỉ lượt thắng mới cạnh tranh kỷ lục vượt ải nhanh nhất. Chết sớm không được xem là phá kỷ lục thời gian.
+Từ cập nhật mùa/EXP ngày 22/10, thời gian và DPS cao nhất chuyển ra **màn kết quả gọn**, còn bảng chi tiết chỉ mở bằng nút Thống kê. Thời gian clear thấp nhất dành cho lượt thắng; thời gian sinh tồn dài nhất dành cho lượt thua được lưu riêng. DPS là trung bình toàn run, không phải đỉnh một giây. Các kỷ lục tách theo stageId và độ khó.
 
-**DPS trung bình:** tổng sát thương thực gây ra chia cho `RunCombatStatistics.seconds`. Bao gồm sát thương thường, crit và các loại damage đã được hệ thống thống kê ghi nhận. Đây là DPS trung bình toàn lượt theo thời gian hoạt động hiện hữu, không phải DPS đỉnh hay thời gian chỉ đứng bắn. Tổng sát thương được hiển thị riêng ngay dưới số DPS để tránh nhầm hai khái niệm.
+Hai số dùng UITextEffect, đếm 2,4 giây bằng unscaled time, rồi hiển thị nhãn kỷ lục mới. Sửa tại `Assets/The Archer/Prefabs/UI/Run Progression/Compact Run Result.prefab`. Nhóm Record Highlights cũ được giữ để tương thích công cụ nhưng bị tắt trong các màn kết quả. Không dùng lệnh Upgrade Run Summary Records để thay bố cục mới.
 
-Kỷ lục được so riêng theo **stageId + độ khó**, dùng chung giữa các hero/build của người chơi. Thời gian thấp hơn là tốt hơn; DPS cao hơn là tốt hơn. Lượt thua vẫn có thể lập kỷ lục DPS. Trường hợp bằng kỷ lục không đánh dấu mới; lần hợp lệ đầu tiên được coi là kỷ lục đầu tiên. Lượt có thời gian bằng 0/không hợp lệ không lập kỷ lục. Kỷ lục không được suy ngược từ các run cũ chưa từng được ghi.
-
-Mỗi số chạy từ 0 tới giá trị thực bằng thời gian không phụ thuộc pause, mặc định **2,4 giây**, chậm dần ở cuối. Hai nhãn **KỶ LỤC MỚI!** xuất hiện khi đếm xong nếu đạt điều kiện. Đóng/mở lại bảng hiển thị ngay giá trị cuối, không ghi thêm kỷ lục. So sánh vẫn dùng giá trị gốc, không dùng số đang chạy hoặc số đã làm tròn trên UI.
-
-## Chỉnh giao diện và hiệu ứng trong Inspector
-
-1. Mở prefab `Assets/The Archer/Prefabs/UI/Offline Progression/Run Summary.prefab`.
-2. Mở `Statistics Panel → Record Highlights`.
-3. `Time Record Card` và `DPS Record Card` chứa Heading, Value, Previous Best, New Record Badge; thẻ DPS còn có Total Damage.
-4. Chỉnh RectTransform, TMP, màu nền sliced trực tiếp tại đây. Không cần sửa code runtime để đổi hình thức thẻ.
-5. Component `RunRecordHighlights` trên Record Highlights có **Count Duration** và **Record Color**, cùng chín reference TMP.
-6. Component `ResponsiveMenuLayout` trên root quản lý bố cục hai cột ngang và hai vùng cuộn xếp dọc. Thẻ kỷ lục nằm đầu bảng ở cả hai hướng.
-
-Prefab trên được lồng trong cả `Assets/The Archer/Prefabs/UI/Game/Stage Complete.prefab` và `Stage Failed.prefab`.
-
-Lệnh **Tools → MrX Studio → Offline → Upgrade Run Summary Records** thêm các thẻ còn thiếu và các chuỗi dịch vào prefab hiện tại. Có thể chạy lại mà không tạo thêm thẻ; khi Record Highlights đã tồn tại, lệnh giữ layout thẻ đã chỉnh tay. Lệnh không reset save/kỷ lục. Giao diện chỉ được dựng lúc authoring trong Editor và lưu vào prefab, không dựng bằng code trong player.
-
-Hỗ trợ tiếng Anh, Việt, Tây Ban Nha, Bồ Đào Nha và Pháp qua `Assets/The Archer/Resources/Menu Translations.asset`.
+Hướng dẫn hiện hành và công thức: [Mùa, EXP hero và kết quả](Seasons%20Hero%20Experience%20and%20Results.md).
 
 ## File xử lý và lưu dữ liệu
 
@@ -45,8 +28,8 @@ Hỗ trợ tiếng Anh, Việt, Tây Ban Nha, Bồ Đào Nha và Pháp qua `Asse
 | `Stage/RunRecordsSave.cs` | Save key mới `Run Records`, danh sách kỷ lục; so sánh thời gian/DPS và giữ giá trị trước đó cho UI. Không có file save riêng. |
 | `Stage/RunCombatStatistics.cs` | Công thức DPS và kết quả so sánh tạm thời của lượt; không dùng giá trị UI để tính damage. |
 | `Stage/StageController.cs` | Ghi kỷ lục tại FinalizeRunRewards trước lần commit cuối lượt, chỉ một lần; lượt testing qua Stage Creator không lập kỷ lục. |
-| `UI/RunSummaryPresenter.cs` | Binding bảng kết quả và hai thẻ mới. |
-| `UI/RunRecordHighlights.cs` | Hiệu ứng số dùng unscaled time, nhãn kỷ lục và định dạng thời gian. |
+| `UI/RunSummaryPresenter.cs` | Binding bảng thống kê chi tiết theo yêu cầu. |
+| `UI/RunRecordHighlights.cs` | Thẻ kỷ lục bố cục cũ; màn gọn mới dùng CompactRunResult + UITextEffect. |
 | `Editor/OfflineProgressionAuthoring.cs` | Dựng/nâng cấp prefab trong Edit Mode và thêm bản dịch. |
 
 Giữ save key và stageId ổn định để không mất liên kết kỷ lục. Save cũ tự bắt đầu với danh sách kỷ lục rỗng. Kỷ lục mới được ghi cùng batch kết thúc lượt có sẵn; không phát sinh thao tác ghi đĩa mỗi hit hoặc mỗi frame đếm số.

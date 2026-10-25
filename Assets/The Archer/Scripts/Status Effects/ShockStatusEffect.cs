@@ -60,7 +60,7 @@ namespace MrX.StatusEffects
 
                             projectile.Target = additionalTarget.Transform;
                             projectile.TargetToIgnore = target;
-                            projectile.Launch(damage * ShockProjectileDamageMultiplier);
+                            projectile.Launch(damage * ShockProjectileDamageMultiplier*(RunSeasons.Matches(Type)?StageController.RunStatistics.seasonEffectMultiplier:1));
                         }
                     }
                 }

@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53cd118fae6c9cf4d9b93295f615ea6f, type: 3}
   m_Name: Ultimate Meteor Ability Data
   m_EditorClassIdentifier: 
+  rangedWeaponsOnly: 0
+  seasonAffinity: 1
   type: 24
+  prerequisites: 
   rarity: 3
   isRepeatedAbiltiy: 0
   isEndgameAbility: 0
@@ -22,4 +25,5 @@ MonoBehaviour:
   prefab: {fileID: 860765915133764670, guid: 590a7ec62a79820469d8eb98a3f74264, type: 3}
   levels:
   - meteorSpawnDelay: 2
+    maxOffsetFromEnemy: 5
     meteorDamageMultiplier: 0.7

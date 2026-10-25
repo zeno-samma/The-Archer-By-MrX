@@ -1,5 +1,11 @@
 # The Archer Roguelike — Mô tả dự án và quy tắc phát triển
 
+> Rep menu input: mỗi ô dock phải có Image nhận raycast trên chính Button; icon/TMP chỉ trang trí. Không kiểm tra chuyển tab bằng onClick.Invoke đơn thuần: dùng Tools/MrX Studio/UI/Verify Menu Pointer Targets (Play Mode) để kiểm tra 18 vùng bấm thật qua GraphicRaycaster. Bốn tab còn lại dùng RepMenuPagesAuthoring, chi tiết tại Docs/Rep Menu UI.md.
+
+> UI Rep 23/10/2026: Stage Page, Armory Page, Menu Dock và Item Card đã áp giao diện Rep được duyệt; scene Main Menu có override trình bày tương ứng. Chỉnh cả Landscape/Portrait trong ResponsiveMenuLayout (gồm pixelsPerUnitMultiplier của Image), không dựng UI runtime. Tài liệu: [Rep Menu UI](Docs/Rep%20Menu%20UI.md). Apply Approved Rep Menu là công cụ áp lại bố cục, có thể ghi đè chỉnh mỹ thuật thủ công. Không build.
+
+> Cập nhật UI audio 22/10/2026: Button dùng `UI/UIButtonAudio.cs` (Default/Custom/Silent), gắn sẵn trong prefab/scene. Không gọi thêm PlayButtonClick trong handler đã có component. Dùng helper Click cho shortcut thông thường; selector có mũi tên ẩn khi gamepad dùng PlayShortcut và hành động cũ. Khi thay callback, chỉ RemoveListener callback mình sở hữu. Hướng dẫn: [UI Button Audio](Docs/UI%20Button%20Audio.md). Không build.
+
 > Áp dụng cho toàn bộ repository, dành cho người phát triển và trợ lý AI. Hiện trạng bên dưới được đối chiếu với source, scene, prefab, ScriptableObject và các phần liên quan của tài liệu đi kèm vào ngày **18/10/2026**. Đây là kết quả đọc tĩnh, chưa phải xác nhận Play Mode hoặc build thành công.
 
 ## 1. Mục đích và cách dùng
@@ -519,3 +525,8 @@ Danh sách lựa chọn không đề xuất kỹ năng thường đã max, kể 
 
 Component UI/UITextEffect.cs kéo thả lên TextMeshProUGUI có 12 kiểu hiệu ứng, dùng lại EasingFunctions; không dựng UI runtime và không đổi RectTransform. Inspector có Preview khôi phục trước khi lưu scene/prefab; prefab mẫu ở Prefabs/UI/Text Effects. Đọc [UI Text Effects](Docs/UI%20Text%20Effects.md) về API đếm số, pause, callback và tránh hai script cùng ghi text. Bộ đếm bảng kết quả hiện hữu vẫn do RunRecordHighlights quản lý, dùng chung helper FormatTime.
 
+
+
+## Bổ sung mùa, EXP hero và kết quả ngày 22/10/2026
+
+Run Progression Settings.asset trong Resources quản lý mùa nguyên tố và công thức EXP; StageData có trọng số mùa/hệ số EXP, HeroLevel có ngưỡng EXP tùy chọn. EXP riêng theo hero của run, giữ level cũ, nhận khi kết toán thắng/thua cùng batch; không còn mua level hero bằng gold, mở khóa gem giữ nguyên. ContinuePlayingSave giữ mùa/hệ số/hero khi resume. Màn gọn mới ở Prefabs/UI/Run Progression hiển thị thời gian + DPS cao nhất bằng UITextEffect; bảng Run Summary chỉ mở bằng nút Thống kê, không lặp thẻ DPS. Thua có record thời gian sống dài nhất riêng với fastest clear. Source và hướng dẫn: [Seasons Hero Experience and Results](Docs/Seasons%20Hero%20Experience%20and%20Results.md). Các mô tả RunRecordHighlights phía trên là bố cục cũ. Không build.

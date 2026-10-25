@@ -133,7 +133,7 @@ namespace MrX.Abilities.UI
 
         protected virtual void OnAbilitySelected()
         {
-            GameController.AudioManager.PlayButtonClick();
+
             onAbilitySelected?.Invoke(AbilityData);
         }
 

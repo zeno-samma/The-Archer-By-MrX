@@ -12,6 +12,7 @@ namespace MrX.UI
 {
     public class StageCompleteScreen : MonoBehaviour
     {
+        [SerializeField] private CompactRunResult compactResult;
         [SerializeField] protected Canvas canvas;
         [SerializeField] protected Image backgroundImage;
         [SerializeField] protected RectTransform titleRect;
@@ -84,6 +85,11 @@ namespace MrX.UI
         public virtual void Show()
         {
             if (IsOpen) return;
+            if(compactResult!=null)
+            {
+                StageController.FinalizeRunRewards(true);gameObject.SetActive(true);canvas.enabled=true;
+                IsOpen=true;Time.timeScale=0;compactResult.Show(true);return;
+            }
             StageController.FinalizeRunRewards();
             gameObject.SetActive(true);
 
@@ -183,7 +189,7 @@ namespace MrX.UI
 
         protected virtual void OnContinueButtonClicked()
         {
-            GameController.AudioManager.PlayButtonClick();
+
 
             Clear();
 

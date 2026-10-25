@@ -9,6 +9,9 @@ namespace MrX.Abilities
         [Header("Weapon compatibility")]
         [SerializeField] private bool rangedWeaponsOnly;
         public bool RangedWeaponsOnly => rangedWeaponsOnly;
+        [Tooltip("-1: none, 0: Spring/Electric, 1: Summer/Fire, 2: Autumn/Poison, 3: Winter/Ice")]
+        [SerializeField] private RunSeason seasonAffinity=RunSeason.None;
+        public RunSeason SeasonAffinity=>seasonAffinity;
         [Tooltip("The unique identifier of an ability")]
         [SerializeField] protected AbilityType type;
         public AbilityType AbilityType => type;

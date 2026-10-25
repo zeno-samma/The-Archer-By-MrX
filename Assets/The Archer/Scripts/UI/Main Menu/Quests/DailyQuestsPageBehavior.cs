@@ -199,7 +199,7 @@ namespace MrX.UI
             manager.RefreshDay();
             var quest = database.quests.Find(q => q.id == id);
             if (quest == null) return;
-            GameController.AudioManager.PlayButtonClick();
+
             if (manager.Save.IsComplete(quest))
             {
                 var granted = manager.TryClaimQuest(id);
@@ -216,7 +216,7 @@ namespace MrX.UI
         private void OnChestClicked(string id)
         {
             if (!GameController.MainMenuScreenBehavior.IsDockEnabled) return;
-            GameController.AudioManager.PlayButtonClick();
+
             var data = database.milestones.Find(m => m.id == id);
             if (data == null) return;
             var granted = manager.TryClaimMilestone(id);
@@ -228,7 +228,7 @@ namespace MrX.UI
         {
             var screen = GameController.MainMenuScreenBehavior;
             if (!screen.IsDockEnabled) return;
-            GameController.AudioManager.PlayButtonClick();
+
             screen.DisableDock();
             screen.SettingsPopup.onPopupClosed += OnSettingsClosed;
             screen.SettingsPopup.Show();

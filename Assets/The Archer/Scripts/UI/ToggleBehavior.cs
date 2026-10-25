@@ -35,7 +35,7 @@ namespace MrX.UI
         {
             SetToggle(!IsOn);
 
-            GameController.AudioManager.PlayButtonClick();
+
         }
 
         public virtual void Select()

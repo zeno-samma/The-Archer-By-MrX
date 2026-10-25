@@ -148,7 +148,7 @@ namespace MrX.UI.Armory
 
         protected virtual void OnCloseButtonClicked()
         {
-            GameController.AudioManager.PlayButtonClick();
+
 
             StartCoroutine(HideCoroutine());
 
@@ -157,7 +157,7 @@ namespace MrX.UI.Armory
 
         protected virtual void OnCancelButtonPressed(UnityEngine.InputSystem.InputAction.CallbackContext context)
         {
-            OnCloseButtonClicked();
+            UIButtonAudio.Click(closeButton);
         }
 
         protected virtual IEnumerator HideCoroutine()

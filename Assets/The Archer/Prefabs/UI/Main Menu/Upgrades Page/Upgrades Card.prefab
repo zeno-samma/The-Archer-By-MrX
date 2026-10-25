@@ -648,6 +648,7 @@ GameObject:
   - component: {fileID: 3484303705804630194}
   - component: {fileID: 2164829394723061916}
   - component: {fileID: 4227723416601149843}
+  - component: {fileID: 828993903832601673}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -789,6 +790,20 @@ MonoBehaviour:
     value: gold
   useTempGameplayCurrency: 0
   costLabel: {fileID: 8458605560133744241}
+--- !u!114 &828993903832601673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1985981764854763874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f904d408be9b1f049bb84165ecbfc558, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MrX.UI.UIButtonAudio
+  mode: 0
+  customSound: {fileID: 0}
 --- !u!1 &2631420708935289483
 GameObject:
   m_ObjectHideFlags: 0
@@ -1105,6 +1120,7 @@ GameObject:
   - component: {fileID: 5049198712038563378}
   - component: {fileID: 7443051696266747041}
   - component: {fileID: 7261025581377605743}
+  - component: {fileID: 4327739421074982711}
   m_Layer: 5
   m_Name: Upgrades Image
   m_TagString: Untagged
@@ -1213,6 +1229,20 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &4327739421074982711
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4487890967946315255}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f904d408be9b1f049bb84165ecbfc558, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MrX.UI.UIButtonAudio
+  mode: 0
+  customSound: {fileID: 0}
 --- !u!1 &4993156982884562404
 GameObject:
   m_ObjectHideFlags: 0

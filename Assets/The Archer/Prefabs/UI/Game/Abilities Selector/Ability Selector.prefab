@@ -1394,6 +1394,7 @@ GameObject:
   - component: {fileID: 938122540245338566}
   - component: {fileID: 1184939872604862837}
   - component: {fileID: 3068317066178640008}
+  - component: {fileID: 5897880638512303967}
   m_Layer: 0
   m_Name: Skip Button
   m_TagString: Untagged
@@ -1502,6 +1503,20 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &5897880638512303967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3658824200161283598}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f904d408be9b1f049bb84165ecbfc558, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MrX.UI.UIButtonAudio
+  mode: 0
+  customSound: {fileID: 0}
 --- !u!1 &3971569072537230622
 GameObject:
   m_ObjectHideFlags: 0
@@ -1578,6 +1593,7 @@ GameObject:
   - component: {fileID: 2219394884982036198}
   - component: {fileID: 8717266383313854785}
   - component: {fileID: 1668553360550886700}
+  - component: {fileID: 7533565533933265790}
   m_Layer: 5
   m_Name: Roll Again Button
   m_TagString: Untagged
@@ -1721,6 +1737,20 @@ MonoBehaviour:
     value: gold
   useTempGameplayCurrency: 1
   costLabel: {fileID: 3696597466881163695}
+--- !u!114 &7533565533933265790
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5619324169364088931}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f904d408be9b1f049bb84165ecbfc558, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MrX.UI.UIButtonAudio
+  mode: 0
+  customSound: {fileID: 0}
 --- !u!1 &5758350598768294343
 GameObject:
   m_ObjectHideFlags: 0

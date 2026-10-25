@@ -23,6 +23,12 @@ namespace MrX.UI
         [SerializeField] private Button expand, details, confirm, firstHero, filterButton;
         [SerializeField] private List<Button> heroButtons = new List<Button>();
         [SerializeField] private List<string> heroIds = new List<string>();
+        private UnityEngine.Events.UnityAction confirmAction;
+        private void SetConfirmAction(UnityEngine.Events.UnityAction action)
+        {
+            if (confirmAction != null) confirm.onClick.RemoveListener(confirmAction);
+            confirmAction = action; confirm.onClick.AddListener(action);
+        }
         private bool wired;
         private bool listening, dirty, expansionModal;
         private int quotedCapacity, firstRow = -1;
@@ -134,6 +140,8 @@ namespace MrX.UI
                 foreach (var upgrade in GameController.UpgradesManager.GetAllUpgrades()) upgrade.onUpgradeLevelChanged += OnUpgrade;
             }
             BindSaves(); Refresh();
+            scroll.verticalNormalizedPosition = 1;
+            firstRow = -1; RenderCells();
         }
         public void Hide()
         {
@@ -173,7 +181,12 @@ namespace MrX.UI
         private void Refresh()
         {
             for (int i = 0; i < heroButtons.Count; i++)
-            { var rosterHero = Armory.GetAllHeroDataList().Find(h => h.Id == heroIds[i]); heroButtons[i].gameObject.SetActive(rosterHero != null && !rosterHero.HideInRoster); }
+            { var rosterHero = Armory.GetAllHeroDataList().Find(h => h.Id == heroIds[i]); heroButtons[i].gameObject.SetActive(rosterHero != null && !rosterHero.HideInRoster);
+                var lockBadge = heroButtons[i].transform.Find("Locked Badge");
+                var selected = heroButtons[i].transform.Find("Selected Badge");
+                if (lockBadge != null) lockBadge.gameObject.SetActive(rosterHero != null && !Armory.GetHeroSave(rosterHero.Id).IsUnlocked);
+                if (selected != null) selected.gameObject.SetActive(rosterHero == Armory.EquippedHero);
+            }
             enabled = true;
             var oldStats = heroPanel.Find("Stats Background"); if (oldStats) oldStats.gameObject.SetActive(false);
             var snapshot = ArmoryStatsSnapshot.Current(); var t = snapshot.Total; var b = snapshot.HeroOnly;
@@ -250,11 +263,31 @@ namespace MrX.UI
                 int stackIndex = index - visibleItems.Count;
                 cell.stack = stackIndex >= 0 && stackIndex < visibleStacks.Count ? visibleStacks[stackIndex] : null;
                 bool empty = cell.item == null && cell.stack == null;
+                var inset = cell.button.transform.Find("Navy Inset");
+                if (inset != null) inset.gameObject.SetActive(!empty);
                 cell.button.interactable = !empty; cell.button.image.enabled = !empty;
+                if (art.emptyFrame != null)
+                {
+                    cell.button.image.enabled = true;
+                    cell.button.image.sprite = empty ? art.emptyFrame : cell.item != null ? art.equipmentFrame : art.stackFrame;
+                    cell.button.image.color = Color.white;
+                    if(cell.item != null && art.rarityFrames != null)
+                    {
+                        var level=Armory.GetItemData(cell.item.Id).GetItemLevel(Mathf.Max(0,cell.item.Level));
+                        int rarity=level != null ? (int)level.ItemRarity : 0;
+                        if(rarity >= 0 && rarity < art.rarityFrames.Length && art.rarityFrames[rarity] != null)cell.button.image.sprite=art.rarityFrames[rarity];
+                    }
+                }
                 cell.icon.sprite = empty ? art.emptySlotIcon : cell.item != null ? Armory.GetItemData(cell.item.Id).Icon : cell.stack.icon;
                 cell.icon.color = Color.white;
                 cell.icon.enabled = cell.icon.sprite != null;
                 Place(cell.icon.rectTransform, empty ? 0 : .1f, empty ? 0 : .18f, empty ? 1 : .9f, empty ? 1 : .92f);
+                if (empty && art.emptyPlus != null)
+                {
+                    cell.icon.sprite = art.emptyPlus; cell.icon.enabled = true;
+                    cell.icon.color = new Color(.54f, .64f, .77f);
+                    Place(cell.icon.rectTransform, .38f, .38f, .62f, .62f);
+                }
                 cell.label.gameObject.SetActive(!empty);
                 cell.label.text = cell.item != null ? "Lv." + (cell.item.Level + 1) : cell.stack != null ? "× " + cell.stack.amount.ToString("N0") : "";
                 Place(cell.label.rectTransform, .05f, .02f, .95f, .25f);
@@ -289,7 +322,7 @@ namespace MrX.UI
             CloseModal(); GameController.MainMenuScreenBehavior.DisableDock();
             modal.gameObject.SetActive(true); modal.SetAsLastSibling(); modalTitle.text = title;
             GameController.InputManager.InputAsset.UI.Cancel.performed += OnCancel;
-            confirm.onClick.RemoveAllListeners(); confirm.onClick.AddListener(CloseModal);
+            SetConfirmAction(CloseModal);
             confirm.interactable = true; confirm.GetComponentInChildren<TMP_Text>().text = "OK";
             var close = modal.Find("Panel/Close").GetComponent<Button>();
             close.navigation = new Navigation { mode = Navigation.Mode.Explicit, selectOnDown = confirm };
@@ -302,7 +335,7 @@ namespace MrX.UI
         {
             CreateModal("EXPAND EQUIPMENT BAG"); expansionModal = true; quotedCapacity = Armory.Bag.Save.BagCapacity;
             UpdateExpansion();
-            confirm.onClick.RemoveAllListeners(); confirm.onClick.AddListener(() =>
+            SetConfirmAction(() =>
             {
                 var result = Armory.Bag.TryExpand(quotedCapacity);
                 if (result == BagExpansionResult.Success) { CloseModal(); MarkDirty(); }

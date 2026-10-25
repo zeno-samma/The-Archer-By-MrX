@@ -15,7 +15,7 @@ using Object = UnityEngine.Object;
 
 namespace MrX.EditorTools
 {
-    public static class OfflineProgressionAuthoring
+    public static partial class OfflineProgressionAuthoring
     {
         private const string Folder = "Assets/The Archer/Prefabs/UI/Offline Progression";
         private static ForgePageDatabase art;

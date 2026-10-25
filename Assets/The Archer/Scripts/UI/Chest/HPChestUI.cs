@@ -119,7 +119,7 @@ namespace MrX.UI
 
         protected virtual void OnAbilityCardClicked(AbilityData abilityData)
         {
-            GameController.AudioManager.PlayButtonClick();
+
 
             if (StageController.AbilitiesManager.IsAbilityAquired(abilityData.AbilityType))
             {

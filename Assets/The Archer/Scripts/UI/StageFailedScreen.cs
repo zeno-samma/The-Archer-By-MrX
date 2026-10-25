@@ -12,6 +12,7 @@ namespace MrX.UI
 {
     public class StageFailedScreen : MonoBehaviour
     {
+        [SerializeField] private CompactRunResult compactResult;
         [SerializeField] protected Canvas canvas;
         [SerializeField] protected Image backgroundImage;
         [SerializeField] protected RectTransform titleRect;
@@ -85,6 +86,11 @@ namespace MrX.UI
         public virtual void Show()
         {
             if (IsOpen) return;
+            if(compactResult!=null)
+            {
+                StageController.FinalizeRunRewards();gameObject.SetActive(true);canvas.enabled=true;
+                IsOpen=true;Time.timeScale=0;compactResult.Show(false);return;
+            }
             StageController.FinalizeRunRewards();
             gameObject.SetActive(true);
 
@@ -126,7 +132,7 @@ namespace MrX.UI
                 int earned; StageController.DropManager.ResultCurrencies.TryGetValue(currency.Data.ID, out earned);
                 if (earned > 0)
                 {
-                    
+
                     var card = currencyRewardCards[currency];
                     card.gameObject.SetActive(true);
                     card.SetAmount(earned);
@@ -185,7 +191,7 @@ namespace MrX.UI
 
         protected virtual void OnContinueButtonClicked()
         {
-            GameController.AudioManager.PlayButtonClick();
+
 
             Clear();
 

@@ -11,6 +11,7 @@ namespace MrX
     public class ArmoryManager : MonoBehaviour
     {
         [SerializeField] protected ArmoryDatabase database;
+        public ArmoryDatabase Database=>database;
         protected ArmorySave save;
         public EquipmentForge Forge { get; private set; }
         public MrX.Crafting.CraftingManager Crafting { get; private set; }

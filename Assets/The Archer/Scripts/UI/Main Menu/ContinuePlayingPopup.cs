@@ -81,7 +81,7 @@ namespace MrX
 
         protected virtual void OnYesButtonClicked()
         {
-            GameController.AudioManager.PlayButtonClick();
+
 
             GameController.LoadStage();
         }
@@ -104,7 +104,7 @@ namespace MrX
             GameController.DailyQuestsManager?.FlushPending(); GameController.AchievementsManager?.FlushPending(); GameController.ArmoryManager.Crafting?.FlushPending();
             if (saves != null) saves.CommitGameplayBatch(); else GameController.SaveManager.Save(false);
 
-            GameController.AudioManager.PlayButtonClick();
+
 
             Hide();
         }

@@ -54,6 +54,9 @@ namespace MrX.UI
         private bool running, pending, captured, subscribed;
         private float progress;
         public bool IsPlaying => running || pending;
+        public event Action Completed;
+        public string Prefix {get=>prefix;set=>prefix=value??"";}
+        public string Suffix {get=>suffix;set=>suffix=value??"";}
         public UITextEffectStyle Effect { get => effect; set { Stop(); effect = value; } }
         private bool MeshEffect => activeEffect != UITextEffectStyle.CountNumber && activeEffect != UITextEffectStyle.Typewriter;
 
@@ -245,7 +248,7 @@ namespace MrX.UI
                 if (activeEffect == UITextEffectStyle.Typewriter) label.maxVisibleCharacters = originalVisible;
                 if (MeshEffect) label.ForceMeshUpdate();
             }
-            if (wasRunning && completed && Application.isPlaying) onComplete.Invoke();
+            if (wasRunning && completed && Application.isPlaying) {onComplete.Invoke();Completed?.Invoke();}
         }
         private void OnDisable()
         {

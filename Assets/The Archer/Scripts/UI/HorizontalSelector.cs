@@ -120,7 +120,7 @@ namespace MrX.UI
             SelectablesQueue[^1].MoveRight();
             IsMovingRight = true;
 
-            GameController.AudioManager.PlayButtonClick();
+
 
             onSelectableChanged?.Invoke(CurrentSelectable);
         }
@@ -139,7 +139,7 @@ namespace MrX.UI
             SelectablesQueue[^1].MoveLeft();
             IsMovingRight = false;
 
-            GameController.AudioManager.PlayButtonClick();
+
 
             onSelectableChanged?.Invoke(CurrentSelectable);
         }
@@ -152,6 +152,7 @@ namespace MrX.UI
             {
                 if (IsRightAvailable())
                 {
+                    UIButtonAudio.PlayShortcut(rightButton);
                     OnRightButtonClicked();
                 }
             }
@@ -159,6 +160,7 @@ namespace MrX.UI
             {
                 if (IsLeftAvailable())
                 {
+                    UIButtonAudio.PlayShortcut(leftButton);
                     OnLeftButtonClicked();
                 }
             }
