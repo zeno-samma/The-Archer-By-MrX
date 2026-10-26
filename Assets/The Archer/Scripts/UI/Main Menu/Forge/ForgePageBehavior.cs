@@ -29,12 +29,13 @@ namespace MrX.UI
         private string selectedId;
         private int selectedIndex;
         private bool dirty = true, layoutDirty = true;
-        private float textScale = -1, nextForgeTime;
-        private static readonly Color Ink = new Color32(37, 60, 137, 255);
-        private static readonly Color Muted = new Color32(110, 137, 183, 255);
-        private static readonly Color Green = new Color32(46, 165, 82, 255);
-        private static readonly Color Red = new Color32(211, 86, 91, 255);
-        private static readonly Color Pastel = new Color(.73f, .83f, .95f);
+        private float nextForgeTime;
+        [Header("Crafting state presentation")]
+        [SerializeField] private Color Ink = new Color32(37, 60, 137, 255);
+        [SerializeField] private Color Muted = new Color32(110, 137, 183, 255);
+        [SerializeField] private Color Green = new Color32(46, 165, 82, 255);
+        [SerializeField] private Color Red = new Color32(211, 86, 91, 255);
+        [SerializeField] private Color Pastel = new Color(.73f, .83f, .95f);
         [Serializable] private class TextStyle { public TMP_Text text; public float size; }
         [Serializable] private class StatRow { public RectTransform rect; public TMP_Text title, before, after, arrow; }
         [Serializable] private class MaterialView { public CraftingMaterial material; public TMP_Text count, title; public Image icon; }
@@ -156,12 +157,10 @@ namespace MrX.UI
                 { visibleStats.Add(StatType.Damage); visibleStats.Add(StatType.CriticalChance); visibleStats.Add(StatType.AttackSpeed); }
                 foreach (var stat in quote.output.Stats) if (stat != null && stat.IsVisibleOnUI && !visibleStats.Contains(stat.StatType)) visibleStats.Add(stat.StatType);
             }
-            var count = Mathf.Max(3, visibleStats.Count);
             for (var i = 0; i < rows.Count; i++)
             {
                 var row = rows[i]; row.rect.gameObject.SetActive(i < visibleStats.Count);
                 if (i >= visibleStats.Count) continue;
-                row.rect.anchorMin = new Vector2(.04f, 1 - (i + 1f) / count); row.rect.anchorMax = new Vector2(.96f, 1 - i / (float)count);
                 var stat = visibleStats[i]; var value = quote.output.GetStatValue(stat);
                 row.title.text = StatName(stat); row.before.text = ""; row.after.text = StatValue(stat, value);
                 row.after.color = Ink; row.arrow.text = "";
@@ -188,12 +187,6 @@ namespace MrX.UI
             else feedback.text = result == CraftResult.AlreadyOwned ? "Already owned. Upgrade this equipment in Stage / Armory." : "Crafting not completed. Check fragments and materials.";
             dirty = true;
         }
-        private void ResizeText()
-        {
-            var scale = Mathf.Max(.8f, pageRect.rect.width / 1672f);
-            if (Mathf.Abs(textScale - scale) < .01f) return; textScale = scale;
-            foreach (var style in typography) { style.text.fontSize = style.text.fontSizeMax = style.size * scale; style.text.fontSizeMin = 10 * scale; }
-        }
         private void OpenSettings()
         {
             if (!CanInteract()) return;
@@ -214,6 +207,7 @@ namespace MrX.UI
         // Editor authoring only. Saved prefab instances provide all runtime UI.
         public static ForgePageBehavior Create(Transform parent, ForgePageDatabase data)
         {
+            if (Application.isPlaying) throw new InvalidOperationException("Author the Forge prefab outside Play Mode.");
             var root = Rect("Forge Page", parent, 0, 0, 1, 1); var page = root.gameObject.AddComponent<ForgePageBehavior>();
             page.database = data; page.pageType = MainMenuPageType.Forge; page.pageRect = root;
             page.canvas = root.gameObject.AddComponent<Canvas>(); root.gameObject.AddComponent<GraphicRaycaster>(); page.canvasGroup = root.gameObject.AddComponent<CanvasGroup>();
@@ -268,6 +262,10 @@ namespace MrX.UI
             itemName = Text("Item Name", detail, "Equipment", 30, Ink, .33f, .825f, .95f, .95f);
             var level = Panel("Level Preview", detail, Pastel, .33f, .765f, .92f, .825f); levelLabel = Text("Level Text", level, "Lv.1  >  Lv.2", 22, Ink, .05f, .05f, .95f, .95f, TextAlignmentOptions.Center);
             statsRoot = Panel("Stat Comparison", detail, new Color(.75f, .84f, .96f), .055f, .425f, .945f, .73f);
+            var statLayout = statsRoot.gameObject.AddComponent<VerticalLayoutGroup>();
+            statLayout.padding = new RectOffset(20, 20, 0, 0);
+            statLayout.childControlWidth = statLayout.childControlHeight = true;
+            statLayout.childForceExpandWidth = statLayout.childForceExpandHeight = true;
             for (var i = 0; i < 7; i++)
             {
                 var row = Rect("Stat Row " + i, statsRoot, .04f, 1 - (i + 1) / 3f, .96f, 1 - i / 3f);

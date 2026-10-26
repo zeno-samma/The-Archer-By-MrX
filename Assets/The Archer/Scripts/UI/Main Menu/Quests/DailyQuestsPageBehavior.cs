@@ -24,7 +24,6 @@ namespace MrX.UI
         private DailyQuestsManager manager;
         private CurrencySave wallet;
         private float nextRefresh;
-        private float lastTextScale = -1;
 
         [Serializable] private class TextStyle { public TMP_Text text; public float size; }
 
@@ -50,10 +49,16 @@ namespace MrX.UI
             public Button button;
         }
 
-        private static readonly Color Ink = new Color32(39, 65, 149, 255);
-        private static readonly Color Muted = new Color32(108, 134, 188, 255);
-        private static readonly Color Blue = new Color32(48, 146, 255, 255);
-        private static readonly Color Pale = new Color32(207, 230, 255, 255);
+        [Header("Reward state presentation")]
+        [SerializeField] private Color Ink = new Color32(39, 65, 149, 255);
+        [SerializeField] private Color Muted = new Color32(108, 134, 188, 255);
+        [SerializeField] private Color Blue = new Color32(48, 146, 255, 255);
+        [SerializeField] private Color Pale = new Color32(207, 230, 255, 255);
+        [SerializeField] private Color claimedButtonColor = new Color32(166, 184, 206, 255);
+        [SerializeField] private Color incompleteButtonColor = new Color(.9f, .7f, 1);
+        [SerializeField] private Color claimedChestColor = new Color32(120, 210, 157, 255);
+        [SerializeField] private Color lockedChestColor = new Color32(140, 163, 199, 255);
+        [SerializeField] private Color claimedTextColor = new Color32(29, 141, 100, 255);
 
         protected override void Start()
         {
@@ -85,30 +90,6 @@ namespace MrX.UI
             manager.RefreshDay();
             var remaining = manager.TimeUntilReset;
             resetText.text = $"Resets in {(int)remaining.TotalHours:00}h {remaining.Minutes:00}m";
-        }
-
-        private void ResizeRows()
-        {
-            var height = Mathf.Clamp((viewport.rect.height - (rows.Count - 1) * 10) / Mathf.Max(1, rows.Count), 68, 180);
-            foreach (var row in rows)
-            {
-                var element = row.rect.GetComponent<LayoutElement>();
-                if (element != null && Mathf.Abs(element.preferredHeight - height) > .5f) element.preferredHeight = height;
-            }
-        }
-
-        private void ScaleText()
-        {
-            var scale = Mathf.Max(.85f, pageRect.rect.width / 1672f);
-            if (Mathf.Abs(scale - lastTextScale) < .01f) return;
-            lastTextScale = scale;
-            foreach (var style in typography)
-            {
-                if (style.text == null) continue;
-                style.text.fontSizeMax = style.size * scale;
-                style.text.fontSizeMin = Mathf.Min(style.size, 11) * scale;
-                style.text.fontSize = style.size * scale;
-            }
         }
 
         public override void MoveCenter()
@@ -157,7 +138,7 @@ namespace MrX.UI
                 row.action.text = claimed ? "CLAIMED" : complete ? "CLAIM" : "GO";
                 row.button.interactable = !claimed;
                 row.buttonImage.sprite = complete && !claimed ? database.claimButtonSprite : database.blueButtonSprite;
-                row.buttonImage.color = claimed ? new Color32(166, 184, 206, 255) : complete ? Color.white : new Color(.9f, .7f, 1);
+                row.buttonImage.color = claimed ? claimedButtonColor : complete ? Color.white : incompleteButtonColor;
             }
             foreach (var chest in chests)
             {
@@ -166,9 +147,9 @@ namespace MrX.UI
                 var claimed = manager.Save.IsMilestoneClaimed(data.id);
                 var available = completed >= data.requiredCompletions;
                 chest.button.interactable = available && !claimed;
-                chest.icon.color = claimed ? new Color32(120, 210, 157, 255) : available ? Color.white : new Color32(140, 163, 199, 255);
+                chest.icon.color = claimed ? claimedChestColor : available ? Color.white : lockedChestColor;
                 chest.state.text = claimed ? "DONE" : $"{data.requiredCompletions}\n<size=70%>+{data.reward.Amount}</size>";
-                chest.state.color = claimed ? new Color32(29, 141, 100, 255) : Ink;
+                chest.state.color = claimed ? claimedTextColor : Ink;
             }
             UpdateNavigation();
         }
@@ -251,14 +232,14 @@ namespace MrX.UI
             if (screen != null && screen.SettingsPopup != null) screen.SettingsPopup.onPopupClosed -= OnSettingsClosed;
         }
 
-        // Shared by the runtime fallback and the Editor prefab builder. All generated
-        // references are serialized so artists can subsequently edit the prefab.
+        // Progress binding only; all graphics and references are authored in the prefab.
         private static void Fill(RectTransform fill, float value)
         { var fraction = Mathf.Clamp01(value); fill.anchorMax = new Vector2(fraction, 1); fill.gameObject.SetActive(fraction > 0); }
 #if UNITY_EDITOR
         // Editor authoring only. Saved prefab instances provide all runtime UI.
         public static DailyQuestsPageBehavior Create(Transform parent, DailyQuestsDatabase data)
         {
+            if (Application.isPlaying) throw new InvalidOperationException("Author the Quests prefab outside Play Mode.");
             var root = Rect("Daily Quests Page", parent, 0, 0, 1, 1);
             var page = root.gameObject.AddComponent<DailyQuestsPageBehavior>();
             page.database = data; page.pageType = MainMenuPageType.DailyQuests; page.pageRect = root;

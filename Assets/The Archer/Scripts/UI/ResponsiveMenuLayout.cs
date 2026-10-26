@@ -27,6 +27,8 @@ namespace MrX.UI
         public List<Visibility> visibility=new List<Visibility>();
         public List<GridStyle> grids=new List<GridStyle>();
         public List<ImageStyle> images=new List<ImageStyle>();
+        [HideInInspector] public bool editorPortrait;
+        [HideInInspector] public bool captureInspectorEdits = true;
         [SerializeField] private ArmoryDashboard inventory;
         private ResponsiveMenuSurface surface;
         private bool initialized,lastPortrait;

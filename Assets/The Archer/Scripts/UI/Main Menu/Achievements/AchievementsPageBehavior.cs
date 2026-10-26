@@ -33,11 +33,16 @@ namespace MrX.UI
         private int lastCompleted = -1;
         private int lastTotal = -1;
         private int lastGold = -1;
-        private float lastTextScale = -1;
-        private static readonly Color Ink = new Color32(38, 62, 140, 255);
-        private static readonly Color Muted = new Color32(108, 133, 183, 255);
-        private static readonly Color Blue = new Color32(50, 146, 255, 255);
-        private static readonly Color Pale = new Color32(208, 230, 255, 255);
+        [Header("State presentation")]
+        [SerializeField] private Color Ink = new Color32(38, 62, 140, 255);
+        [SerializeField] private Color Muted = new Color32(108, 133, 183, 255);
+        [SerializeField] private Color Blue = new Color32(50, 146, 255, 255);
+        [SerializeField] private Color Pale = new Color32(208, 230, 255, 255);
+        [SerializeField] private Color selectedTabColor = new Color(.94f, .99f, 1);
+        [SerializeField] private Color idleTabColor = new Color(.86f, .94f, 1);
+        [SerializeField] private Color claimedButtonColor = new Color32(134, 183, 163, 255);
+        [SerializeField] private Color claimableRowColor = new Color(1, 1, .98f);
+        [SerializeField] private Color idleRowColor = new Color(.94f, .99f, 1);
 
         [Serializable] private class TextStyle { public TMP_Text text; public float size; }
         [Serializable] private class CategoryView
@@ -158,7 +163,7 @@ namespace MrX.UI
                 { tab.progress.SetText("{0} / {1}", (float)summary.completed, (float)summary.total); tab.lastCompleted = summary.completed; tab.lastTotal = summary.total; }
                 if (tab.lastClaimable != summary.claimable) { tab.badge.SetActive(summary.claimable > 0); tab.lastClaimable = summary.claimable; }
                 var selected = tab.category == selectedCategory;
-                tab.background.color = selected ? new Color(.94f, .99f, 1) : new Color(.86f, .94f, 1);
+                tab.background.color = selected ? selectedTabColor : idleTabColor;
                 tab.outline.enabled = selected;
                 tab.title.color = selected ? Blue : Ink;
             }
@@ -262,8 +267,8 @@ namespace MrX.UI
             row.button.interactable = state == 1;
             row.buttonLabel.text = state == 2 ? "CLAIMED" : "CLAIM";
             row.buttonImage.sprite = state == 1 ? database.claimButtonSprite : database.disabledButtonSprite;
-            row.buttonImage.color = state == 2 ? new Color32(134, 183, 163, 255) : Color.white;
-            row.background.color = state == 1 ? new Color(1, 1, .98f) : new Color(.94f, .99f, 1);
+            row.buttonImage.color = state == 2 ? claimedButtonColor : Color.white;
+            row.background.color = state == 1 ? claimableRowColor : idleRowColor;
             row.outline.enabled = state == 1; row.badge.SetActive(state == 1);
         }
 
@@ -305,17 +310,6 @@ namespace MrX.UI
                 EventSystem.current.SetSelectedGameObject(selectedTab.gameObject);
         }
 
-        private void ResizeLayout()
-        {
-            var rowHeight = Mathf.Max(90, viewport.rect.height / 4.15f - 10);
-            foreach (var row in rowPool) row.layout.preferredHeight = rowHeight;
-            var scale = Mathf.Max(.85f, pageRect.rect.width / 1672f);
-            if (Mathf.Abs(scale - lastTextScale) < .01f) return;
-            lastTextScale = scale;
-            foreach (var style in typography)
-            { style.text.fontSizeMax = style.size * scale; style.text.fontSizeMin = Mathf.Min(style.size, 11) * scale; style.text.fontSize = style.size * scale; }
-        }
-
         private void OpenSettings()
         {
             var screen = GameController.MainMenuScreenBehavior;
@@ -340,6 +334,7 @@ namespace MrX.UI
         // Editor authoring only. Saved prefab instances provide all runtime UI.
         public static AchievementsPageBehavior Create(Transform parent, AchievementsDatabase data)
         {
+            if (Application.isPlaying) throw new InvalidOperationException("Author the Achievements prefab outside Play Mode.");
             var root = Rect("Achievements Page", parent, 0, 0, 1, 1);
             var page = root.gameObject.AddComponent<AchievementsPageBehavior>();
             page.database = data; page.pageType = MainMenuPageType.Achievements; page.pageRect = root;

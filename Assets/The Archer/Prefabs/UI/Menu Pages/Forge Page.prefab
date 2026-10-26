@@ -2656,6 +2656,7 @@ GameObject:
   - component: {fileID: 1510234864009020511}
   - component: {fileID: 8991208380211609021}
   - component: {fileID: 6573291801067415764}
+  - component: {fileID: 445136098531513493}
   m_Layer: 5
   m_Name: Stat Comparison
   m_TagString: Untagged
@@ -2727,6 +2728,32 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 8
+--- !u!114 &445136098531513493
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1662935429794247325}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59f8146938fff824cb5fd77236b75775, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.VerticalLayoutGroup
+  m_Padding:
+    m_Left: 20
+    m_Right: 20
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 0
+  m_Spacing: 0
+  m_ChildForceExpandWidth: 1
+  m_ChildForceExpandHeight: 1
+  m_ChildControlWidth: 1
+  m_ChildControlHeight: 1
+  m_ChildScaleWidth: 0
+  m_ChildScaleHeight: 0
+  m_ReverseArrangement: 0
 --- !u!1 &1777463238387382314
 GameObject:
   m_ObjectHideFlags: 0
@@ -6935,6 +6962,11 @@ MonoBehaviour:
     count: {fileID: 7064682024865411277}
     title: {fileID: 9004344948237053815}
     icon: {fileID: 8522813880268909900}
+  Ink: {r: 0.14509805, g: 0.23529412, b: 0.5372549, a: 1}
+  Muted: {r: 0.43137255, g: 0.5372549, b: 0.7176471, a: 1}
+  Green: {r: 0.18039216, g: 0.64705884, b: 0.32156864, a: 1}
+  Red: {r: 0.827451, g: 0.3372549, b: 0.35686275, a: 1}
+  Pastel: {r: 0.73, g: 0.83, b: 0.95, a: 1}
 --- !u!223 &3991440514675813641
 Canvas:
   m_ObjectHideFlags: 0
@@ -8108,6 +8140,8 @@ MonoBehaviour:
   - target: {fileID: 4186752901733761062}
     landscape: 3
     portrait: 6
+  editorPortrait: 0
+  captureInspectorEdits: 1
   inventory: {fileID: 0}
 --- !u!1 &5241091385671338809
 GameObject:

@@ -14,6 +14,8 @@ namespace MrX.UI
         [SerializeField] private Button[] choices;
         [SerializeField] private TMP_Text currentLabel;
         [SerializeField] private GameObject panel;
+        [SerializeField] private Color selectedColor = new Color(.55f,.82f,1);
+        [SerializeField] private Color idleColor = Color.white;
         private bool ownsDock;private GameObject previous;
         private void Start()
         {
@@ -38,7 +40,7 @@ namespace MrX.UI
             if(EventSystem.current)EventSystem.current.SetSelectedGameObject(previous!=null&&previous.activeInHierarchy?previous:openButton.gameObject);
         }
         private void Cancel(InputAction.CallbackContext _){Close();}
-        private void Refresh(){currentLabel.text="LANGUAGE · "+MenuLanguage.Code.ToUpperInvariant();for(int i=0;i<choices.Length;i++)choices[i].image.color=MenuLanguage.Codes[i]==MenuLanguage.Code?new Color(.55f,.82f,1):Color.white;}
+        private void Refresh(){currentLabel.text="LANGUAGE · "+MenuLanguage.Code.ToUpperInvariant();for(int i=0;i<choices.Length;i++)choices[i].image.color=MenuLanguage.Codes[i]==MenuLanguage.Code?selectedColor:idleColor;}
         private void OnDisable(){Close();}
         private void OnDestroy(){MenuLanguage.Changed-=Refresh;}
     }

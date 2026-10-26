@@ -2684,7 +2684,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 34
+  m_fontSize: 26.8
   m_fontSizeBase: 14.210526
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -7452,7 +7452,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.000030517578}
+  m_AnchoredPosition: {x: 0, y: 768.9242}
   m_SizeDelta: {x: 0, y: 1535.6161}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!1 &2305203619909693702
@@ -9931,7 +9931,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 34
+  m_fontSize: 20.400002
   m_fontSizeBase: 14.210526
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -24419,7 +24419,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 40
+  m_fontSize: 24
   m_fontSizeBase: 13.564593
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -27554,7 +27554,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 1afbfeec26ab8d74593b2b997865b789, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -29371,6 +29371,10 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2739475956082329462, guid: 8bb75560b7740a64984c04f1e694306a, type: 3}
+      propertyPath: m_FillAmount
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4442573664139952583, guid: 8bb75560b7740a64984c04f1e694306a, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -29470,6 +29474,10 @@ PrefabInstance:
     - target: {fileID: 5426841053582820160, guid: 8bb75560b7740a64984c04f1e694306a, type: 3}
       propertyPath: m_Name
       value: Player Profile
+      objectReference: {fileID: 0}
+    - target: {fileID: 5741735065169114139, guid: 8bb75560b7740a64984c04f1e694306a, type: 3}
+      propertyPath: m_text
+      value: "Ranger \xB7 Lv.1"
       objectReference: {fileID: 0}
     - target: {fileID: 5741735065169114139, guid: 8bb75560b7740a64984c04f1e694306a, type: 3}
       propertyPath: m_fontSize
@@ -29708,6 +29716,10 @@ PrefabInstance:
     - target: {fileID: 177956173510262274, guid: 9903c54c92d569d488fc477db7f14ecb, type: 3}
       propertyPath: m_PixelsPerUnitMultiplier
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 212516239394679889, guid: 9903c54c92d569d488fc477db7f14ecb, type: 3}
+      propertyPath: m_text
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 212516239394679889, guid: 9903c54c92d569d488fc477db7f14ecb, type: 3}
       propertyPath: m_fontSize
@@ -31190,6 +31202,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5548201899030211874, guid: 9903c54c92d569d488fc477db7f14ecb, type: 3}
+      propertyPath: m_text
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 5548201899030211874, guid: 9903c54c92d569d488fc477db7f14ecb, type: 3}
       propertyPath: m_fontSize
       value: 135.11111
       objectReference: {fileID: 0}
@@ -31925,6 +31941,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8430009632180616756, guid: 9903c54c92d569d488fc477db7f14ecb, type: 3}
+      propertyPath: m_Texture
+      value: 
+      objectReference: {fileID: 2800000, guid: 5564c29f7ce88c84b8713b18e75ad425, type: 3}
     - target: {fileID: 8647118445838953572, guid: 9903c54c92d569d488fc477db7f14ecb, type: 3}
       propertyPath: m_SizeDelta.x
       value: 1510
@@ -32462,6 +32482,11 @@ MonoBehaviour:
   - fa072321fe541de4fb18918b8da4e709
   - cf3269f21e999d74eb25e322534961db
   - 641526c2add363a42bcb3074121871fe
+  layoutReferenceWidth: 1672
+  cellGap: 9
+  emptyIconBounds: {x: 0, y: 0, z: 1, w: 1}
+  emptyPlusBounds: {x: 0.38, y: 0.38, z: 0.62, w: 0.62}
+  emptyPlusColor: {r: 0.54, g: 0.64, b: 0.77, a: 1}
 --- !u!114 &347128824042616786
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34300,6 +34325,8 @@ MonoBehaviour:
   - target: {fileID: 332149490704127164}
     landscape: 3
     portrait: 6
+  editorPortrait: 0
+  captureInspectorEdits: 1
   inventory: {fileID: 8501527911860344181}
 --- !u!114 &2182465651533858391 stripped
 MonoBehaviour:

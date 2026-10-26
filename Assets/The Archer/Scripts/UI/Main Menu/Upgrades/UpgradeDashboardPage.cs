@@ -27,6 +27,11 @@ namespace MrX.UI
         [SerializeField] private TMP_Text[] currentStats, nextStats;
         [SerializeField] private Button upgradeButton;
         [SerializeField] private Sprite blueButton, yellowButton, grayButton;
+        [Header("Selection and level presentation")]
+        [SerializeField] private Color selectedRowColor = new Color(1, .97f, .85f);
+        [SerializeField] private Color idleRowColor = new Color(.9f, .95f, 1);
+        [SerializeField] private Color filledSegmentColor = new Color(.22f, .57f, 1);
+        [SerializeField] private Color emptySegmentColor = new Color(.72f, .83f, .95f);
         private readonly List<CurrencySave> observedWallets = new List<CurrencySave>();
         private PermanentUpgradeService purchases;
         private Row selected;
@@ -87,8 +92,8 @@ namespace MrX.UI
                 row.price.text = max ? "MAX" : price == null ? "--" : price.Amount.ToString("N0");
                 row.buy.interactable = state == UpgradePurchaseResult.Ready;
                 row.buyImage.sprite = !row.buy.interactable ? grayButton : row == selected ? yellowButton : blueButton;
-                row.background.color = row == selected ? new Color(1, .97f, .85f) : new Color(.9f, .95f, 1);
-                for (int i = 0; i < row.segments.Length; i++) row.segments[i].color = (i + 1f) / row.segments.Length <= (level + 1f) / Mathf.Max(1, row.data.LevelsCount) ? new Color(.22f, .57f, 1) : new Color(.72f, .83f, .95f);
+                row.background.color = row == selected ? selectedRowColor : idleRowColor;
+                for (int i = 0; i < row.segments.Length; i++) row.segments[i].color = (i + 1f) / row.segments.Length <= (level + 1f) / Mathf.Max(1, row.data.LevelsCount) ? filledSegmentColor : emptySegmentColor;
             }
             walletLabel.text = GameController.CurrenciesManager.GetCurrency("gold", false).Amount.ToString("N0");
             if (selected == null) return;

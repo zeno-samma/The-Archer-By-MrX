@@ -1,5 +1,7 @@
 # The Archer Roguelike — Mô tả dự án và quy tắc phát triển
 
+> UI Inspector 26/10/2026: chọn Edit Landscape/Portrait trên ResponsiveMenuLayout rồi chỉnh RectTransform/TMP/Image trực tiếp; Auto Capture Inspector lưu vào profile đang chọn, có Undo. HeroPreviewBehavior có Refresh Editor Preview và trường hero/weapon/ánh sáng mẫu; không dùng save thật. Không thêm runtime reset mỹ thuật hoặc dựng UI; trạng thái/animation lấy cấu hình Inspector. Hướng dẫn: [Inspector UI Authoring](Docs/Inspector%20UI%20Authoring.md). Kiểm kê prefab/source: Tools/MrX Studio/UI/Audit Inspector Authoring. Không build.
+
 > Rep menu input: mỗi ô dock phải có Image nhận raycast trên chính Button; icon/TMP chỉ trang trí. Không kiểm tra chuyển tab bằng onClick.Invoke đơn thuần: dùng Tools/MrX Studio/UI/Verify Menu Pointer Targets (Play Mode) để kiểm tra 18 vùng bấm thật qua GraphicRaycaster. Bốn tab còn lại dùng RepMenuPagesAuthoring, chi tiết tại Docs/Rep Menu UI.md.
 
 > UI Rep 23/10/2026: Stage Page, Armory Page, Menu Dock và Item Card đã áp giao diện Rep được duyệt; scene Main Menu có override trình bày tương ứng. Chỉnh cả Landscape/Portrait trong ResponsiveMenuLayout (gồm pixelsPerUnitMultiplier của Image), không dựng UI runtime. Tài liệu: [Rep Menu UI](Docs/Rep%20Menu%20UI.md). Apply Approved Rep Menu là công cụ áp lại bố cục, có thể ghi đè chỉnh mỹ thuật thủ công. Không build.

@@ -33,6 +33,10 @@ namespace MrX.UI
         private long receiptSequence;
         private GameObject previousSelection;
         private float nextRefresh;
+        [Header("Reveal animation")]
+        [SerializeField, Min(0)] private float chestPulseAmplitude = .045f;
+        [SerializeField, Min(0)] private float chestPulseCycles = 5f;
+        private Vector3 chestBaseScale = Vector3.one;
         public LuckyRewardTable Table => table;
         private void Update()
         {
@@ -43,6 +47,7 @@ namespace MrX.UI
         private void Wire()
         {
             if (wired) return; wired = true;
+            if (chestIllustration) chestBaseScale = chestIllustration.localScale;
             purchaseButton.onClick.AddListener(Purchase); closeButton.onClick.AddListener(Hide); continueButton.onClick.AddListener(Continue);
         }
         public void Show(LuckyRewardsService rewards)
@@ -85,8 +90,7 @@ namespace MrX.UI
                 {
                     if (count >= slicePool.Count)
                     {
-                        var view = Instantiate(slicePrefab, wheelDisc); var rect = (RectTransform)view.transform;
-                        rect.anchorMin = Vector2.zero; rect.anchorMax = Vector2.one; rect.offsetMin = rect.offsetMax = Vector2.zero; slicePool.Add(view);
+                        var view = Instantiate(slicePrefab, wheelDisc); slicePool.Add(view);
                     }
                     slicePool[count].gameObject.SetActive(true);
                     slicePool[count].Bind(angle, visualFraction, icon, "", count);
@@ -158,10 +162,10 @@ namespace MrX.UI
             {
                 elapsed += Time.unscaledDeltaTime; float t = Mathf.Clamp01(elapsed / duration); float eased = 1 - Mathf.Pow(1 - t, 4);
                 if (isWheel && wheelDisc) wheelDisc.localEulerAngles = new Vector3(0, 0, Mathf.LerpUnclamped(from, turn, eased));
-                else if (chestIllustration) chestIllustration.localScale = Vector3.one * (1 + Mathf.Sin(t * Mathf.PI * 10) * .045f * (1 - t));
+                else if (chestIllustration) chestIllustration.localScale = chestBaseScale * (1 + Mathf.Sin(t * Mathf.PI * 2 * chestPulseCycles) * chestPulseAmplitude * (1 - t));
                 yield return null;
             }
-            if (chestIllustration) chestIllustration.localScale = Vector3.one;
+            if (chestIllustration) chestIllustration.localScale = chestBaseScale;
             animating = false; animationRoutine = null; DisplayReceipt(receipt);
         }
         private void DisplayReceipt(LuckyReceipt receipt)
@@ -182,6 +186,7 @@ namespace MrX.UI
         private void OnDisable()
         {
             if (animationRoutine != null) { StopCoroutine(animationRoutine); animationRoutine = null; }
+            if (wired && chestIllustration) chestIllustration.localScale = chestBaseScale;
             animating = false;
             if (gems != null) gems.OnAmountChanged -= OnWallet;
             if (service != null) service.Changed -= OnChanged;

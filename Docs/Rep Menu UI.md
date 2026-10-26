@@ -1,5 +1,9 @@
 # Giao diện Rep — các tab menu
 
+## Chỉnh Inspector — cập nhật 26/10/2026
+
+Quy trình mới: chọn **Edit Landscape/Edit Portrait** và bật **Auto Capture Inspector** trên ResponsiveMenuLayout, rồi chỉnh trực tiếp object con; profile tương ứng được cập nhật tự động, có Undo. Hero Raw Image đã bỏ AspectRatioFitter, có nút **Refresh Editor Preview** để xem model/vũ khí thật trước Play. Hướng dẫn đầy đủ, nơi chỉnh màu trạng thái và bản đồ prefab tại [Inspector UI Authoring](Inspector%20UI%20Authoring.md). Các lệnh Apply Rep vẫn là áp lại mẫu và có thể ghi đè chỉnh tay.
+
 ## Sửa co giãn sprite — 23/10/2026
 
 Các khung/nút Rep trước đây dùng đường chia viền tự động theo 22% cạnh ngắn; đường chia cắt qua góc trang trí nên kéo lớn làm mép vàng/xanh bị giãn. Đã đặt lại 9-slice riêng theo từng họ ảnh, bảo vệ trọn góc và mép. Các surface được import tối đa 2048, không nén texture để tránh vết khối ở cạnh; icon giữ cấu hình riêng. Không sửa pixel ảnh gốc hoặc ID/GUID của sprite.
@@ -55,7 +59,7 @@ Tất cả hình, TMP, nút, mask và scrollbar nằm trong prefab/scene. Script
 | Thẻ trang bị trên hero | `Assets/The Archer/Prefabs/UI/Armory/Item Card.prefab` |
 
 3. Các node quan trọng: `Player Profile`, `Stage Showcase Card`, `Journey Heading`, `Stage Panel`, `Rewards`, `Stage Difficulty Selector`, `Info Panel`, `Armory Panel`, `Hero Selector` và `Settings Shortcut`.
-4. Chỉnh ảnh/màu trong Image, chữ trong TMP. Những node có layout theo tỉ lệ cần sửa cả `Landscape` và `Portrait` ở component `ResponsiveMenuLayout`. RectTransform đơn lẻ có thể bị profile ghi đè khi vào Play hoặc xoay màn.
+4. Chọn Edit Landscape/Portrait trên `ResponsiveMenuLayout`, bật Auto Capture Inspector rồi chỉnh ảnh/màu trong Image, chữ trong TMP và RectTransform trực tiếp. Chỉnh lần lượt cả hai hướng. Khi tắt Auto Capture, cần Capture Current Layout trước khi Play để profile không ghi đè thay đổi chưa lưu.
 5. Có thể dùng `ResponsiveMenuLayout.Apply(false)` để xem ngang và `Apply(true)` để xem dọc qua công cụ Editor. Trong Play, Game View quyết định hướng; không chỉnh prefab khi đang Play.
 6. Khi sửa scene instance, chú ý prefab override. Hai trang đã được đồng bộ cả prefab và override trình bày trong Main Menu.
 

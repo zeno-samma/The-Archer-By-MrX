@@ -23,6 +23,12 @@ namespace MrX.UI
         [SerializeField] private Button expand, details, confirm, firstHero, filterButton;
         [SerializeField] private List<Button> heroButtons = new List<Button>();
         [SerializeField] private List<string> heroIds = new List<string>();
+        [Header("Inventory presentation")]
+        [SerializeField, Min(1)] private float layoutReferenceWidth = 1672f;
+        [SerializeField, Min(0)] private float cellGap = 9f;
+        [SerializeField] private Vector4 emptyIconBounds = new Vector4(0, 0, 1, 1);
+        [SerializeField] private Vector4 emptyPlusBounds = new Vector4(.38f, .38f, .62f, .62f);
+        [SerializeField] private Color emptyPlusColor = new Color(.54f, .64f, .77f);
         private UnityEngine.Events.UnityAction confirmAction;
         private void SetConfirmAction(UnityEngine.Events.UnityAction action)
         {
@@ -39,13 +45,14 @@ namespace MrX.UI
         private readonly List<ItemSaveData> visibleItems = new List<ItemSaveData>();
         private readonly List<InventoryStack> visibleStacks = new List<InventoryStack>();
         private sealed class InventoryStack { public string key, title; public Sprite icon; public long amount; }
-        private float Scale => page.rect.width / 1672f;
+        private float Scale => page.rect.width / Mathf.Max(1, layoutReferenceWidth);
         private static readonly Color Ink = new Color(.12f, .23f, .56f);
         private ArmoryManager Armory => GameController.ArmoryManager;
 
 #if UNITY_EDITOR
         public void Build(RectTransform owner, RectTransform existingHero, ArmoryDashboardDatabase configuration)
         {
+            if (Application.isPlaying) throw new InvalidOperationException("Author the Armory prefab outside Play Mode.");
             page = owner; heroPanel = existingHero; art = configuration;
             var stats = (RectTransform)page.Find("Info Panel");
             inventory = (RectTransform)page.Find("Armory Panel");
@@ -125,7 +132,12 @@ namespace MrX.UI
             details.onClick.AddListener(ShowDetails); expand.onClick.AddListener(ShowExpansion);
             filterButton.onClick.AddListener(() => { filter = filter == null ? ItemType.Weapon : (int)filter.Value >= 3 ? (ItemType?)null : (ItemType)((int)filter.Value + 1); filterButton.GetComponentInChildren<TMP_Text>().text = filter?.ToString().ToUpperInvariant() ?? "ALL"; Refresh(); });
             scroll.onValueChanged.AddListener(OnScroll);
-            foreach (var cell in cells) { var captured = cell; cell.button.onClick.AddListener(() => { if (captured.item != null) GameController.MainMenuScreenBehavior.ExpandedItemPopup.Show(Armory.GetItemData(captured.item.Id), captured.item); else if (captured.stack != null) ShowStack(captured.stack); }); }
+            foreach (var cell in cells)
+            {
+                cell.iconPlacement = ResponsiveMenuLayout.Placement.Capture(cell.icon.rectTransform);
+                cell.iconColor = cell.icon.color; cell.frameColor = cell.button.image.color;
+                var captured = cell; cell.button.onClick.AddListener(() => { if (captured.item != null) GameController.MainMenuScreenBehavior.ExpandedItemPopup.Show(Armory.GetItemData(captured.item.Id), captured.item); else if (captured.stack != null) ShowStack(captured.stack); });
+            }
             for (int i = 0; i < heroButtons.Count; i++) { var id = heroIds[i]; heroButtons[i].onClick.AddListener(() => GameController.MainMenuScreenBehavior.ExpandedHeroPopup.Show(Armory.GetAllHeroDataList().Find(h => h.Id == id), Armory.GetHeroSave(id))); }
             modal.Find("Panel/Close").GetComponent<Button>().onClick.AddListener(CloseModal);
         }
@@ -257,7 +269,7 @@ namespace MrX.UI
                 var cell = cells[i]; int index = row * columns + i;
                 cell.button.gameObject.SetActive(index < total); if (index >= total) continue;
                 var rect = (RectTransform)cell.button.transform; rect.anchorMin = rect.anchorMax = new Vector2(0, 1); rect.pivot = new Vector2(0, 1);
-                rect.sizeDelta = Vector2.one * (cellSize - 9 * Scale);
+                rect.sizeDelta = Vector2.one * Mathf.Max(1, cellSize - cellGap * Scale);
                 rect.anchoredPosition = new Vector2(index % columns * stride, -(index / columns) * stride);
                 cell.item = index < visibleItems.Count ? visibleItems[index] : null;
                 int stackIndex = index - visibleItems.Count;
@@ -270,7 +282,7 @@ namespace MrX.UI
                 {
                     cell.button.image.enabled = true;
                     cell.button.image.sprite = empty ? art.emptyFrame : cell.item != null ? art.equipmentFrame : art.stackFrame;
-                    cell.button.image.color = Color.white;
+                    cell.button.image.color = cell.frameColor;
                     if(cell.item != null && art.rarityFrames != null)
                     {
                         var level=Armory.GetItemData(cell.item.Id).GetItemLevel(Mathf.Max(0,cell.item.Level));
@@ -279,18 +291,18 @@ namespace MrX.UI
                     }
                 }
                 cell.icon.sprite = empty ? art.emptySlotIcon : cell.item != null ? Armory.GetItemData(cell.item.Id).Icon : cell.stack.icon;
-                cell.icon.color = Color.white;
+                cell.icon.color = cell.iconColor;
                 cell.icon.enabled = cell.icon.sprite != null;
-                Place(cell.icon.rectTransform, empty ? 0 : .1f, empty ? 0 : .18f, empty ? 1 : .9f, empty ? 1 : .92f);
+                if (empty) Place(cell.icon.rectTransform, emptyIconBounds.x, emptyIconBounds.y, emptyIconBounds.z, emptyIconBounds.w);
+                else cell.iconPlacement.Apply(cell.icon.rectTransform);
                 if (empty && art.emptyPlus != null)
                 {
                     cell.icon.sprite = art.emptyPlus; cell.icon.enabled = true;
-                    cell.icon.color = new Color(.54f, .64f, .77f);
-                    Place(cell.icon.rectTransform, .38f, .38f, .62f, .62f);
+                    cell.icon.color = emptyPlusColor;
+                    Place(cell.icon.rectTransform, emptyPlusBounds.x, emptyPlusBounds.y, emptyPlusBounds.z, emptyPlusBounds.w);
                 }
                 cell.label.gameObject.SetActive(!empty);
                 cell.label.text = cell.item != null ? "Lv." + (cell.item.Level + 1) : cell.stack != null ? "× " + cell.stack.amount.ToString("N0") : "";
-                Place(cell.label.rectTransform, .05f, .02f, .95f, .25f);
                 cell.lockIcon.gameObject.SetActive(cell.item != null && cell.item.IsEquipped);
             }
         }
@@ -360,7 +372,7 @@ namespace MrX.UI
         }
         private void OnCancel(UnityEngine.InputSystem.InputAction.CallbackContext context) => CloseModal();
         private void OnDestroy() { if (listening) Hide(); }
-        [Serializable] private sealed class Cell { public Button button; public Image icon, lockIcon; public TMP_Text label; [NonSerialized] public ItemSaveData item; [NonSerialized] public InventoryStack stack; }
+        [Serializable] private sealed class Cell { public Button button; public Image icon, lockIcon; public TMP_Text label; [NonSerialized] public ItemSaveData item; [NonSerialized] public InventoryStack stack; [NonSerialized] public ResponsiveMenuLayout.Placement iconPlacement; [NonSerialized] public Color iconColor, frameColor; }
 #if UNITY_EDITOR
         private void Skin(Image image, Color? tint = null)
         { image.sprite = art.slotSprite; image.type = Image.Type.Sliced; image.pixelsPerUnitMultiplier = 1.5f; image.material = art.slotMaterial; image.color = tint ?? new Color(.9f, .96f, 1); image.raycastTarget = false; }

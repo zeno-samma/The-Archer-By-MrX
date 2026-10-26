@@ -200,7 +200,8 @@ namespace MrX.EditorTools
             Point("Hero Panel/Hero/Hero Stand Image",.5f,.5f,0,0,1120,310,1,.5f,.5f,1);
             Point("Hero Panel/Decor Image",.5f,.5f,0,510,1510,1510,1,.5f,.5f,1);
             var raw=Find("Hero Panel/Hero/Hero Raw Image").GetComponent<RawImage>();raw.color=Color.white;
-            var fitter=raw.GetComponent<AspectRatioFitter>();if(fitter!=null){fitter.aspectMode=AspectRatioFitter.AspectMode.HeightControlsWidth;fitter.aspectRatio=1;}
+            // Preview camera follows the authored rect; a fitter would lock Inspector resizing.
+            var fitter=raw.GetComponent<AspectRatioFitter>();if(fitter!=null){var size=raw.rectTransform.sizeDelta;Object.DestroyImmediate(fitter);raw.rectTransform.sizeDelta=size;}
             string[] slots={"Weapon","Helmet","Ring","Armor"};
             for(int i=0;i<4;i++)
             {

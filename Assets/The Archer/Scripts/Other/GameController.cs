@@ -1,4 +1,4 @@
-using MrX.Currency;
+﻿using MrX.Currency;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -242,21 +242,45 @@ namespace MrX
 
         private static IEnumerator StageLoadingCoroutine()
         {
-            // Debug.Log("Loading Stage...");
-            yield return LoadAsyncScene(SceneSettings.LoadingScene.SceneName, LoadSceneMode.Additive);//Load loading scene
-            yield return UnloadAsyncScene(SceneSettings.MainMenuScene.SceneName);//Unload main menu scene
-            yield return LoadAsyncScene(SceneSettings.GameScene.SceneName, LoadSceneMode.Single);//Load game scene
+            SceneLoadingProgress.Begin();
+            yield return LoadAsyncScene(SceneSettings.LoadingScene.SceneName, LoadSceneMode.Additive);
+            SceneLoadingProgress.Report(.08f);
+            yield return UnloadAsyncScene(SceneSettings.MainMenuScene.SceneName);
+            SceneLoadingProgress.Report(.15f);
+            yield return LoadDestinationScene(SceneSettings.GameScene.SceneName);
+            SceneLoadingProgress.End();
         }
 
         private static IEnumerator MainMenuLoadingCoroutine()
         {
+            SceneLoadingProgress.Begin();
             yield return LoadAsyncScene(SceneSettings.LoadingScene.SceneName, LoadSceneMode.Additive);
+            SceneLoadingProgress.Report(.08f);
             yield return UnloadAsyncScene(SceneSettings.GameScene.SceneName);
-            yield return LoadAsyncScene(SceneSettings.MainMenuScene.SceneName, LoadSceneMode.Single);
+            SceneLoadingProgress.Report(.15f);
+            yield return LoadDestinationScene(SceneSettings.MainMenuScene.SceneName);
+            SceneLoadingProgress.End();
 
             loadingStage = false;
 
             AudioManager.PlayMainMusic();
+        }
+
+        private static IEnumerator LoadDestinationScene(string sceneName)
+        {
+            var operation=SceneManager.LoadSceneAsync(sceneName,LoadSceneMode.Single);
+            if(operation==null)throw new System.InvalidOperationException("Cannot load scene: "+sceneName);
+            operation.allowSceneActivation=false;
+            while(operation.progress<.9f)
+            {
+                SceneLoadingProgress.Report(.15f+.84f*Mathf.Clamp01(operation.progress/.9f));
+                yield return null;
+            }
+            // Unity reports 0.9 when scene data is ready. Present 100% before activation removes the loading scene.
+            SceneLoadingProgress.Report(1);
+            yield return null;
+            operation.allowSceneActivation=true;
+            while(!operation.isDone)yield return null;
         }
 
         private static IEnumerator UnloadAsyncScene(string sceneName)
