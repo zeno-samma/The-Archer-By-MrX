@@ -12,6 +12,7 @@ namespace MrX.UI
     /// <summary>Only binds data to authored prefab views. No runtime UI construction.</summary>
     public sealed class UpgradeDashboardPage : MainMenuPageBehavior
     {
+        [SerializeField, Tooltip("Opt in to gameplay state colors. Off preserves Image/TMP colors authored in Inspector.")] private bool useStateColors;
         [Serializable] public sealed class Row
         {
             public UpgradeData data;
@@ -26,7 +27,7 @@ namespace MrX.UI
         [SerializeField] private TMP_Text selectedTitle, selectedDescription, selectedLevel, selectedEffect, selectedCost, walletLabel, feedback;
         [SerializeField] private TMP_Text[] currentStats, nextStats;
         [SerializeField] private Button upgradeButton;
-        [SerializeField] private Sprite blueButton, yellowButton, grayButton;
+        [SerializeField, HideInInspector] private Sprite blueButton, yellowButton, grayButton;
         [Header("Selection and level presentation")]
         [SerializeField] private Color selectedRowColor = new Color(1, .97f, .85f);
         [SerializeField] private Color idleRowColor = new Color(.9f, .95f, 1);
@@ -91,8 +92,7 @@ namespace MrX.UI
                 row.values.text = Effect(row.data, level) + (max ? "" : "  >  " + Effect(row.data, level + 1));
                 row.price.text = max ? "MAX" : price == null ? "--" : price.Amount.ToString("N0");
                 row.buy.interactable = state == UpgradePurchaseResult.Ready;
-                row.buyImage.sprite = !row.buy.interactable ? grayButton : row == selected ? yellowButton : blueButton;
-                row.background.color = row == selected ? selectedRowColor : idleRowColor;
+                if (useStateColors) row.background.color = row == selected ? selectedRowColor : idleRowColor;
                 for (int i = 0; i < row.segments.Length; i++) row.segments[i].color = (i + 1f) / row.segments.Length <= (level + 1f) / Mathf.Max(1, row.data.LevelsCount) ? filledSegmentColor : emptySegmentColor;
             }
             walletLabel.text = GameController.CurrenciesManager.GetCurrency("gold", false).Amount.ToString("N0");
@@ -104,7 +104,6 @@ namespace MrX.UI
             selectedEffect.text = Effect(selected.data, current) + (hasNext ? "  >  " + Effect(selected.data, current + 1) : "");
             selectedCost.text = cost == null ? "MAX LEVEL" : cost.Amount.ToString("N0") + " " + cost.CurrencyId.ToUpperInvariant() + "\nUPGRADE";
             upgradeButton.interactable = quote == UpgradePurchaseResult.Ready;
-            upgradeButton.image.sprite = upgradeButton.interactable ? yellowButton : grayButton;
             var now = ArmoryStatsSnapshot.Current();
             var preview = hasNext ? ArmoryStatsSnapshot.Current(new PreviewUpgrades(GameController.UpgradesManager, selected.data.UpgradeType, current + 1)) : now;
             float[] before = { now.Total.AttackDamageStat.Value, now.Total.MaxHPStat.Value, now.Total.CritChanceStat.Value, now.Total.MovementSpeedStat.Value, now.Total.AttackSpeedStat.Value };

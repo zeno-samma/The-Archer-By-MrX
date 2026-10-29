@@ -10,6 +10,7 @@ namespace MrX.UI
         [SerializeField] protected TMP_Text label;
         [SerializeField] protected Image icon;
         [SerializeField] protected AligmentType aligment;
+        [SerializeField, Tooltip("Opt in to automatic icon/text positioning. Off keeps the authored RectTransforms.")] private bool autoFitContent;
 
         protected RectTransform rectTransform;
         public RectTransform RectTransform => rectTransform;
@@ -40,6 +41,7 @@ namespace MrX.UI
 
         protected virtual void RecalculatePositions()
         {
+            if (!autoFitContent) return;
             label.SetSizeDeltaX(label.preferredWidth);
 
             var iconWidth = icon.rectTransform.sizeDelta.x;

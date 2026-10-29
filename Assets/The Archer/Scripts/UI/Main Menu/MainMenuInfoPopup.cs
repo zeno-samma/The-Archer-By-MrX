@@ -29,12 +29,13 @@ namespace MrX.UI
         protected IEasingCoroutine alphaEasingCoroutine;
 
         protected float rectWidth;
+        private readonly InspectorVisibility authoredVisibility = new InspectorVisibility();
 
         protected virtual void Awake()
         {
             infoButton.onClick.AddListener(Hide);
-
-            infoButton.enabled = false;
+            authoredVisibility.Capture(infoButton);
+            authoredVisibility.SetEnabled(infoButton, false);
 
             heightDifference = descriptionRect.sizeDelta.y - descriptionText.preferredHeight;
             rectWidth = descriptionRect.sizeDelta.x;
@@ -42,6 +43,7 @@ namespace MrX.UI
 
         public virtual void Show()
         {
+            if (!enabled) return;
             gameObject.SetActive(true);
             UpdateText();
 
@@ -58,7 +60,8 @@ namespace MrX.UI
 
             descriptionRect.sizeDelta = startRectSize;
             sizeEasingCoroutine = descriptionRect.DoSizeDelta(targetRectSize, 0.3f, 0.1f).SetEasing(EasingType.QuadOut).SetOnFinish(() => {
-                infoButton.enabled = true;
+                if (!isActiveAndEnabled) return;
+                authoredVisibility.SetEnabled(infoButton, true);
                 SubscribeToInputEvents();
             });
         }
@@ -94,7 +97,7 @@ namespace MrX.UI
 
         protected virtual void Hide()
         {
-            infoButton.enabled = false;
+            authoredVisibility.SetEnabled(infoButton, false);
 
             UnsubscribeFromInputEvents();
 
@@ -114,6 +117,7 @@ namespace MrX.UI
         {
             sizeEasingCoroutine.StopIfExists();
             alphaEasingCoroutine.StopIfExists();
+            if (GameController.InputManager != null) UnsubscribeFromInputEvents();
         }
     }
 }

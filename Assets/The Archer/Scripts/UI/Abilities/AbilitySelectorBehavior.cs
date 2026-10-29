@@ -15,6 +15,17 @@ namespace MrX.Abilities.UI
 {
     public class AbilitySelectorBehavior : MonoBehaviour
     {
+        private readonly UIAnimationDefaults animationDefaults = new UIAnimationDefaults();
+        private readonly MrX.UI.InspectorVisibility inspectorVisibility = new MrX.UI.InspectorVisibility();
+
+        protected virtual void Awake()
+        {
+            inspectorVisibility.Capture(skipButton.gameObject);
+            animationDefaults.Capture(rarityRect, rerollButton.transform, goldIndicator.transform);
+            animationDefaults.CaptureAlpha(backgroundImage);
+            animationDefaults.CaptureAlpha(rarityCanvasGroup);
+        }
+
         [SerializeField] protected AbilitiesDatabase abilitiesDatabase;
 
         [Space]
@@ -201,7 +212,7 @@ namespace MrX.Abilities.UI
             timeScaleEasingCoroutine = EasingManager.DoTimeScale(0, timescaleStopDuration);
 
             backgroundAlphaEasingCoroutine =
-                backgroundImage.DoAlpha(1, backgroundFadeInDuration)
+                backgroundImage.DoAlpha(animationDefaults.Alpha(backgroundImage), backgroundFadeInDuration)
                 .SetUnscaledTime(true);
 
             title.Show();
@@ -210,12 +221,12 @@ namespace MrX.Abilities.UI
 
             InitSlots(abilities);
 
-            skipButton.gameObject.SetActive(true);
+            inspectorVisibility.SetVisible(skipButton.gameObject, true);
 
             yield return new WaitForSecondsRealtime(flashInitialDelay);
 
             rarityAlphaEasingCoroutine =
-                rarityCanvasGroup.DoAlpha(1, 0.5f)
+                rarityCanvasGroup.DoAlpha(animationDefaults.Alpha(rarityCanvasGroup), 0.5f)
                 .SetUnscaledTime(true);
 
             var rarityIndex = (int)rarity;
@@ -260,7 +271,7 @@ namespace MrX.Abilities.UI
             InitNavigation();
 
             rarityScaleEasingCoroutine =
-                rarityRect.DoLocalScale(Vector3.one, 0.25f)
+                rarityRect.DoLocalScale(animationDefaults.Scale(rarityRect), 0.25f)
                 .SetEasing(EasingType.SineInOut)
                 .SetUnscaledTime(true);
 
@@ -268,12 +279,12 @@ namespace MrX.Abilities.UI
 
             rerollButton.ButtonEnabled = false;
             rerollButton.transform
-                .DoLocalScale(Vector3.one, 0.3f)
+                .DoLocalScale(animationDefaults.Scale(rerollButton.transform), 0.3f)
                 .SetUnscaledTime(true)
                 .SetEasing(EasingType.CubicOut)
                 .SetOnFinish(() => rerollButton.RecalculateVisuals());
 
-            goldIndicator.transform.DoLocalScale(Vector3.one, 0.3f).SetUnscaledTime(true).SetEasing(EasingType.CubicOut);
+            goldIndicator.transform.DoLocalScale(animationDefaults.Scale(goldIndicator.transform), 0.3f).SetUnscaledTime(true).SetEasing(EasingType.CubicOut);
 
             ambientSoundDelayEasingCoroutine.StopIfExists();
             StopAmbientSound();
@@ -286,7 +297,7 @@ namespace MrX.Abilities.UI
             DisableCoroutines();
 
             Time.timeScale = 0f;
-            backgroundImage.SetAlpha(1);
+            backgroundImage.SetAlpha(animationDefaults.Alpha(backgroundImage));
 
             title.Skip();
 
@@ -294,8 +305,8 @@ namespace MrX.Abilities.UI
 
             InitRarityData(data);
 
-            rarityCanvasGroup.alpha = 1;
-            rarityRect.localScale = Vector3.one;
+            rarityCanvasGroup.alpha = animationDefaults.Alpha(rarityCanvasGroup);
+            rarityRect.localScale = animationDefaults.Scale(rarityRect);
 
             StartCoroutine(CompleteShowCoroutine());
         }
@@ -319,7 +330,7 @@ namespace MrX.Abilities.UI
                 }
 
                 rerollButton.ButtonEnabled = false;
-                rerollButton.transform.DoLocalScale(new Vector3(0, 0.6f, 1f), 0.4f).SetUnscaledTime(true).SetEasing(EasingType.CubicIn);
+                rerollButton.transform.DoLocalScale(animationDefaults.Scale(rerollButton.transform, new Vector3(0, 0.6f, 1f)), 0.4f).SetUnscaledTime(true).SetEasing(EasingType.CubicIn);
 
                 EasingManager.DoAfter(AllCardsEndedAnimations).SetOnFinish(FinishReroll).SetUnscaledTime(true);
 
@@ -457,7 +468,7 @@ namespace MrX.Abilities.UI
             InitRarityData(data);
 
             rarityScaleEasingCoroutine =
-                rarityRect.DoLocalScale(Vector3.one * rarityFlashScale, rarityScaleInDuration)
+                rarityRect.DoLocalScale(animationDefaults.Scale(rarityRect) * rarityFlashScale, rarityScaleInDuration)
                 .SetEasingCurve(rarityScaleCurve)
                 .SetUnscaledTime(true)
                 .SetOnFinish(OnRarityFlashScaleFinished);
@@ -468,7 +479,7 @@ namespace MrX.Abilities.UI
         protected virtual void OnRarityFlashScaleFinished()
         {
             rarityScaleEasingCoroutine =
-                rarityRect.DoLocalScale(Vector3.one * rarityAnimationScale, rarityScaleOutDuration)
+                rarityRect.DoLocalScale(animationDefaults.Scale(rarityRect) * rarityAnimationScale, rarityScaleOutDuration)
                 .SetEasing(EasingType.SineOut)
                 .SetUnscaledTime(true);
         }
@@ -578,7 +589,7 @@ namespace MrX.Abilities.UI
                 .SetOnFinish(OnBackgroundHidden);
 
             rerollButton.ButtonEnabled = false;
-            rerollButton.transform.DoLocalScale(new Vector3(0, 0.6f, 1f), 0.4f).SetUnscaledTime(true).SetEasing(EasingType.CubicIn);
+            rerollButton.transform.DoLocalScale(animationDefaults.Scale(rerollButton.transform, new Vector3(0, 0.6f, 1f)), 0.4f).SetUnscaledTime(true).SetEasing(EasingType.CubicIn);
 
             goldIndicator.transform.DoLocalScale(new Vector3(0, 0.6f, 1f), 0.3f).SetUnscaledTime(true).SetEasing(EasingType.CubicOut);
 
@@ -618,10 +629,10 @@ namespace MrX.Abilities.UI
 
             rarityCanvasGroup.alpha = 0;
 
-            rerollButton.transform.localScale = new Vector3(0, 0.6f, 1);
+            rerollButton.transform.localScale = animationDefaults.Scale(rerollButton.transform, new Vector3(0, 0.6f, 1));
             rerollButton.ButtonEnabled = false;
 
-            goldIndicator.transform.localScale = new Vector3(0, 0.6f, 1f);
+            goldIndicator.transform.localScale = animationDefaults.Scale(goldIndicator.transform, new Vector3(0, 0.6f, 1f));
 
             skipButton.gameObject.SetActive(false);
         }

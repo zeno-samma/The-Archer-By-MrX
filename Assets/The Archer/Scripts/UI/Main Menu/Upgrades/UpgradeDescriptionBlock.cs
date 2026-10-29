@@ -8,11 +8,23 @@ namespace MrX.UI
 {
     public class UpgradeDescriptionBlock : MonoBehaviour
     {
+        private readonly UIAnimationDefaults animationDefaults = new UIAnimationDefaults();
+        private readonly InspectorVisibility inspectorVisibility = new InspectorVisibility();
+
+        protected virtual void Awake()
+        {
+            animationDefaults.Capture(statsBackgroundRect);
+            animationDefaults.CaptureAlpha(descriptionText, statsText);
+            inspectorVisibility.Capture(statsBackgroundRect != null ? statsBackgroundRect.gameObject : null);
+        }
+
         [SerializeField] protected TMP_Text descriptionText;
         [SerializeField] protected TMP_Text statsText;
         [SerializeField] protected RectTransform statsBackgroundRect;
         [SerializeField] protected float backgroundPadding = 10f;
         [SerializeField] protected float spacing = 10f;
+        [Tooltip("Opt in to resizing and positioning the description from its text. Leave off to author the layout directly in Inspector.")]
+        [SerializeField] private bool autoFitContent;
         protected UpgradeData Data { get; set; }
 
         public void SetData(UpgradeData data)
@@ -36,11 +48,11 @@ namespace MrX.UI
         {
             if (level == Data.LevelsCount - 1)
             {
-                statsBackgroundRect.gameObject.SetActive(false);
+                inspectorVisibility.SetVisible(statsBackgroundRect.gameObject, false);
             }
             else
             {
-                statsBackgroundRect.gameObject.SetActive(true);
+                inspectorVisibility.SetVisible(statsBackgroundRect.gameObject, true);
 
                 float value;
                 if (level >= 0)
@@ -62,6 +74,7 @@ namespace MrX.UI
 
         protected virtual void RecalculateBackgroundRect()
         {
+            if (!autoFitContent) return;
             descriptionText.ForceMeshUpdate();
             statsText.ForceMeshUpdate();
 
@@ -77,9 +90,9 @@ namespace MrX.UI
             statsText.alpha = 0f;
             statsBackgroundRect.localScale = Vector3.zero;
 
-            descriptionText.DoAlpha(1f, 0.3f).SetDelay(0.3f);
-            statsText.DoAlpha(1f, 0.3f).SetDelay(0.3f);
-            statsBackgroundRect.DoLocalScale(Vector3.one, 0.3f).SetDelay(0.3f).SetEasing(EasingType.CubicOut);
+            descriptionText.DoAlpha(animationDefaults.Alpha(descriptionText), 0.3f).SetDelay(0.3f);
+            statsText.DoAlpha(animationDefaults.Alpha(statsText), 0.3f).SetDelay(0.3f);
+            statsBackgroundRect.DoLocalScale(animationDefaults.Scale(statsBackgroundRect), 0.3f).SetDelay(0.3f).SetEasing(EasingType.CubicOut);
         }
 
         public virtual void Hide()

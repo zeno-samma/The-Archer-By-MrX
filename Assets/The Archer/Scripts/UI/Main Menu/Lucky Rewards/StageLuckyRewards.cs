@@ -14,11 +14,17 @@ namespace MrX.UI
         [SerializeField] private GameObject wheelFreeLabel, chestFreeLabel;
         public LuckyRewardsService Service { get; private set; }
         private float nextRefresh;
+        private readonly InspectorVisibility visibility = new InspectorVisibility();
+        private void Awake()
+        {
+            visibility.Capture(wheelFreeBadge); visibility.Capture(chestFreeBadge);
+            visibility.Capture(wheelFreeLabel); visibility.Capture(chestFreeLabel);
+        }
         private void Start()
         {
             Service = new LuckyRewardsService(GameController.CurrenciesManager, GameController.SaveManager,
                 new LuckyRewardDelivery(GameController.ArmoryManager, GameController.CurrenciesManager));
-            wheelButton.onClick.AddListener(() => Open(wheelPopup)); chestButton.onClick.AddListener(() => Open(chestPopup));
+            wheelButton.onClick.AddListener(OpenWheel); chestButton.onClick.AddListener(OpenChest);
             Service.Changed += RefreshBadges;
             RefreshBadges();
         }
@@ -30,18 +36,24 @@ namespace MrX.UI
         }
         private void RefreshBadges()
         {
-            SetBadge(wheelFreeBadge, wheelPopup != null && Service.HasDailyFreeUse(wheelPopup.Table));
-            SetBadge(chestFreeBadge, chestPopup != null && Service.HasDailyFreeUse(chestPopup.Table));
-            SetBadge(wheelFreeLabel, wheelPopup != null && Service.HasDailyFreeUse(wheelPopup.Table));
-            SetBadge(chestFreeLabel, chestPopup != null && Service.HasDailyFreeUse(chestPopup.Table));
+            if (!isActiveAndEnabled || Service == null) return;
+            visibility.SetVisible(wheelFreeBadge, wheelPopup != null && Service.HasDailyFreeUse(wheelPopup.Table));
+            visibility.SetVisible(chestFreeBadge, chestPopup != null && Service.HasDailyFreeUse(chestPopup.Table));
+            visibility.SetVisible(wheelFreeLabel, wheelPopup != null && Service.HasDailyFreeUse(wheelPopup.Table));
+            visibility.SetVisible(chestFreeLabel, chestPopup != null && Service.HasDailyFreeUse(chestPopup.Table));
         }
-        private static void SetBadge(GameObject badge, bool visible)
-        { if (badge != null && badge.activeSelf != visible) badge.SetActive(visible); }
-        private void OnDestroy() { if (Service != null) Service.Changed -= RefreshBadges; }
+        private void OpenWheel() { Open(wheelPopup); }
+        private void OpenChest() { Open(chestPopup); }
+        private void OnDestroy()
+        {
+            if (Service != null) Service.Changed -= RefreshBadges;
+            if (wheelButton != null) wheelButton.onClick.RemoveListener(OpenWheel);
+            if (chestButton != null) chestButton.onClick.RemoveListener(OpenChest);
+        }
         private void Open(LuckyRewardsPopup popup)
         {
             var screen = GameController.MainMenuScreenBehavior;
-            if (Service == null || !screen.IsDockEnabled || screen.CurrentPageType != MainMenuPageType.Stages) return;
+            if (!isActiveAndEnabled || Service == null || screen == null || popup == null || !screen.IsDockEnabled || screen.CurrentPageType != MainMenuPageType.Stages) return;
             popup.Show(Service);
         }
     }

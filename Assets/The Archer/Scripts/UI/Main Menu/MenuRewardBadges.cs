@@ -13,6 +13,9 @@ namespace MrX.UI
         private DailyQuestsManager quests;
         private AchievementsManager achievements;
         private bool started;
+        private readonly InspectorVisibility visibility = new InspectorVisibility();
+
+        private void Awake() { visibility.Capture(dailyQuestsBadge); visibility.Capture(achievementsBadge); }
 
         private void Start() { started = true; Bind(); }
         private void OnEnable() { if (started) Bind(); }
@@ -28,13 +31,9 @@ namespace MrX.UI
 
         private void Refresh()
         {
-            SetVisible(dailyQuestsBadge, quests != null && quests.HasClaimableRewards);
-            SetVisible(achievementsBadge, achievements != null && achievements.ClaimableCount > 0);
-        }
-
-        private static void SetVisible(GameObject badge, bool visible)
-        {
-            if (badge != null && badge.activeSelf != visible) badge.SetActive(visible);
+            if (!isActiveAndEnabled) return;
+            visibility.SetVisible(dailyQuestsBadge, quests != null && quests.HasClaimableRewards);
+            visibility.SetVisible(achievementsBadge, achievements != null && achievements.ClaimableCount > 0);
         }
 
         private void Unbind()

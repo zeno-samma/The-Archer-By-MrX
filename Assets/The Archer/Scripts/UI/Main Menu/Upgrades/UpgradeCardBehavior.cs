@@ -38,10 +38,14 @@ namespace MrX.UI
 
         public event UnityAction<UpgradeCardBehavior> onCardSelected;
         public CurrencySave Currency { get; protected set; }
+        private readonly InspectorVisibility authoredVisibility = new InspectorVisibility();
 
         protected override void Awake()
         {
             base.Awake();
+            authoredVisibility.Capture(gamepadIndicator);
+            if (costLabel != null) authoredVisibility.Capture(costLabel.gameObject);
+            authoredVisibility.Capture(upgradedLabel);
 
             RectTransform = GetComponent<RectTransform>();
         }
@@ -69,6 +73,7 @@ namespace MrX.UI
 
         protected virtual void OnInputChanged(InputType prevInput, InputType newInput)
         {
+            if (!isActiveAndEnabled) return;
             if (newInput == InputType.Gamepad)
             {
                 infoButton.onClick.RemoveListener(OnInfoButtonClicked);
@@ -85,12 +90,13 @@ namespace MrX.UI
                 infoButton.onClick.AddListener(OnInfoButtonClicked);
                 upgradeButton.SetOnClick(OnUpgradeButtonClicked);
 
-                if (gamepadIndicator.activeSelf) gamepadIndicator.SetActive(false);
+                authoredVisibility.SetVisible(gamepadIndicator, false);
             }
         }
 
         protected virtual void OnGamepadSouthButtonPressed(InputAction.CallbackContext ctx)
         {
+            if (!isActiveAndEnabled) return;
             if (IsSelected)
             {
                 if (buyOnGamepadButtonClick)
@@ -132,40 +138,26 @@ namespace MrX.UI
 
         protected virtual void InitGamepadIndicator()
         {
-            if (IsSelected && GameController.InputManager.ActiveInput == InputType.Gamepad)
-            {
-                if (buyOnGamepadButtonClick)
-                {
-                    if (UpgradeLevel < Data.LevelsCount && upgradeButton.HasEnoughMoney)
-                    {
-                        gamepadIndicator.SetActive(true);
-                    }
-                }
-                else
-                {
-                    gamepadIndicator.SetActive(true);
-                }
-            }
-            else
-            {
-                gamepadIndicator.SetActive(false);
-            }
+            if (!isActiveAndEnabled) return;
+            bool visible = IsSelected && GameController.InputManager.ActiveInput == InputType.Gamepad &&
+                (!buyOnGamepadButtonClick || Data != null && UpgradeLevel < Data.LevelsCount && upgradeButton.HasEnoughMoney);
+            authoredVisibility.SetVisible(gamepadIndicator, visible);
         }
 
         protected virtual void RedrawButton()
         {
             if (UpgradeLevel >= Data.LevelsCount)
             {
-                costLabel.gameObject.SetActive(false);
-                upgradedLabel.gameObject.SetActive(true);
+                authoredVisibility.SetVisible(costLabel.gameObject, false);
+                authoredVisibility.SetVisible(upgradedLabel, true);
 
                 upgradeButton.DisableButton();
                 buttonCanvasGroup.alpha = 0.5f;
             }
             else
             {
-                costLabel.gameObject.SetActive(true);
-                upgradedLabel.gameObject.SetActive(false);
+                authoredVisibility.SetVisible(costLabel.gameObject, true);
+                authoredVisibility.SetVisible(upgradedLabel, false);
 
                 var level = Data.GetLevel(UpgradeLevel);
                 upgradeButton.SetCurrency(Currency);
@@ -210,7 +202,7 @@ namespace MrX.UI
 
             IsSelected = false;
 
-            gamepadIndicator.SetActive(false);
+            authoredVisibility.SetVisible(gamepadIndicator, false);
 
             infoButton.onClick.RemoveListener(OnInfoButtonClicked);
             upgradeButton.RemoveOnClick(OnUpgradeButtonClicked);
@@ -220,6 +212,7 @@ namespace MrX.UI
 
         public virtual void OnUpgradeButtonClicked()
         {
+            if (!isActiveAndEnabled) return;
             var level = Data.GetLevel(UpgradeLevel);
 
             upgradeButton.Currency.Withdraw(level.Price.Amount);
@@ -232,11 +225,13 @@ namespace MrX.UI
         protected virtual void OnUpgradeLevelChanged(int level)
         {
             UpgradeLevel = level + 1;
+            if (!isActiveAndEnabled) return;
             RedrawVisuals();
         }
 
         public virtual void OnInfoButtonClicked()
         {
+            if (!isActiveAndEnabled) return;
             GameController.MainMenuScreenBehavior.ExpandedUpgradePopup.Show(Data);
         }
 

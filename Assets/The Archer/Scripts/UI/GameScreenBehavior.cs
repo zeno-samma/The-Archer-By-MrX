@@ -10,6 +10,7 @@ namespace MrX.UI
 {
     public class GameScreenBehavior : MonoBehaviour
     {
+        private readonly UIAnimationDefaults animationDefaults = new UIAnimationDefaults();
         protected Canvas canvas;
         private IEasingCoroutine transitionFade;
 
@@ -54,6 +55,7 @@ namespace MrX.UI
 
         protected virtual void Awake()
         {
+            animationDefaults.Capture(pauseButton.transform, goldIndicatorRect);
             canvas = GetComponent<Canvas>();
 
             pauseButton.onClick.AddListener(OnPauseButtonClicked);
@@ -91,8 +93,8 @@ namespace MrX.UI
 
         public virtual void ShowSideUI()
         {
-            pauseButton.transform.DoLocalScale(Vector3.one, 0.3f).SetUnscaledTime(true).SetEasing(EasingType.CubicOut);
-            goldIndicatorRect.DoLocalScale(Vector3.one, 0.3f).SetUnscaledTime(true).SetEasing(EasingType.CubicOut);
+            pauseButton.transform.DoLocalScale(animationDefaults.Scale(pauseButton.transform), 0.3f).SetUnscaledTime(true).SetEasing(EasingType.CubicOut);
+            goldIndicatorRect.DoLocalScale(animationDefaults.Scale(goldIndicatorRect), 0.3f).SetUnscaledTime(true).SetEasing(EasingType.CubicOut);
         }
 
         protected virtual void OnSettingsButtonClicked(UnityEngine.InputSystem.InputAction.CallbackContext obj)

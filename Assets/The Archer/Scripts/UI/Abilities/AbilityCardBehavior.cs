@@ -12,6 +12,8 @@ namespace MrX.Abilities.UI
 {
     public class AbilityCardBehavior : MonoBehaviour
     {
+        private readonly UIAnimationDefaults animationDefaults = new UIAnimationDefaults();
+        private readonly MrX.UI.InspectorVisibility inspectorVisibility = new MrX.UI.InspectorVisibility();
         // Shader properties
         protected static readonly int _MaxAlphaV = Shader.PropertyToID("_MaxAlphaV");
         protected static readonly int _MinAlphaV = Shader.PropertyToID("_MinAlphaV");
@@ -78,6 +80,8 @@ namespace MrX.Abilities.UI
         public RectTransform CardBackRect => cardBackRect;
 
         public CanvasGroup CanvasGroup => canvasGroup;
+        public Vector3 AuthoredScale => animationDefaults.Scale(transform);
+        public float AuthoredAlpha => animationDefaults.Alpha(canvasGroup);
 
         public AbilityData AbilityData { get; protected set; }
 
@@ -99,6 +103,10 @@ namespace MrX.Abilities.UI
 
         protected virtual void Awake()
         {
+            inspectorVisibility.Capture(button);
+            inspectorVisibility.Capture(upgradeIndicator.gameObject);
+            animationDefaults.Capture(transform, upgradeIndicator);
+            animationDefaults.CaptureAlpha(canvasGroup);
             gradientOffsetMin = gradientImage.rectTransform.offsetMin;
             gradientOffsetMax = gradientImage.rectTransform.offsetMax;
 
@@ -179,10 +187,10 @@ namespace MrX.Abilities.UI
 
             CardBackRect.SetStretchedOffset(Vector2.zero, Vector2.zero);
 
-            transform.localScale = new Vector3(scaleX, scaleY, 1);
+            transform.localScale = animationDefaults.Scale(transform, new Vector3(scaleX, scaleY, 1));
 
             scaleEasingCoroutine =
-                transform.DoLocalScale(Vector3.one, scaleDuration)
+                transform.DoLocalScale(animationDefaults.Scale(transform), scaleDuration)
                 .SetDelay(duration - scaleDelayReduction + delay)
                 .SetEasingCurve(scaleCurve)
                 .SetUnscaledTime(true);
@@ -212,8 +220,8 @@ namespace MrX.Abilities.UI
 
             if (shouldShowUpgrade)
             {
-                upgradeIndicator.gameObject.SetActive(true);
-                upgradeIndicator.DoLocalScale(Vector3.one, 0.4f)
+                inspectorVisibility.SetVisible(upgradeIndicator.gameObject, true);
+                upgradeIndicator.DoLocalScale(animationDefaults.Scale(upgradeIndicator), 0.4f)
                     .SetUnscaledTime(true)
                     .SetEasing(EasingType.CubicOut);
             }
@@ -235,8 +243,8 @@ namespace MrX.Abilities.UI
 
             if (shouldShowUpgrade)
             {
-                upgradeIndicator.gameObject.SetActive(true);
-                upgradeIndicator.DoLocalScale(new Vector3(0, 0.6f, 1f), 0.3f)
+                inspectorVisibility.SetVisible(upgradeIndicator.gameObject, true);
+                upgradeIndicator.DoLocalScale(animationDefaults.Scale(upgradeIndicator, new Vector3(0, 0.6f, 1f)), 0.3f)
                     .SetUnscaledTime(true)
                     .SetEasing(EasingType.CubicIn);
             }
@@ -260,8 +268,8 @@ namespace MrX.Abilities.UI
 
             if (shouldShowUpgrade)
             {
-                upgradeIndicator.gameObject.SetActive(true);
-                upgradeIndicator.DoLocalScale(Vector3.one, 0.4f)
+                inspectorVisibility.SetVisible(upgradeIndicator.gameObject, true);
+                upgradeIndicator.DoLocalScale(animationDefaults.Scale(upgradeIndicator), 0.4f)
                     .SetUnscaledTime(true)
                     .SetEasing(EasingType.CubicOut);
             }
@@ -286,7 +294,7 @@ namespace MrX.Abilities.UI
 
         public virtual void EnableButton()
         {
-            button.enabled = true;
+            inspectorVisibility.SetEnabled(button, true);
         }
 
         public void Hide(float delay, float disableDelay)
@@ -322,7 +330,7 @@ namespace MrX.Abilities.UI
             button.enabled = false;
 
             upgradeIndicator.gameObject.SetActive(false);
-            upgradeIndicator.localScale = new Vector3(0, 0.6f, 1);
+            upgradeIndicator.localScale = animationDefaults.Scale(upgradeIndicator, new Vector3(0, 0.6f, 1));
         }
 
         protected virtual RarityData GetRarityData(AbilityRarity rarity)

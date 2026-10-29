@@ -8,6 +8,7 @@ namespace MrX.UI
 {
     public class WaveIndicatorBehavior : MonoBehaviour
     {
+        private readonly UIAnimationDefaults animationDefaults = new UIAnimationDefaults();
         [SerializeField] protected Image waveIconImage;
         [SerializeField] protected TMP_Text waveNumberText;
         [SerializeField] protected RectTransform numberRect;
@@ -20,6 +21,7 @@ namespace MrX.UI
 
         protected virtual void Awake()
         {
+            animationDefaults.Capture(transform, numberRect);
             RectTransform = GetComponent<RectTransform>();
 
             GetComponentsInChildren(maskableGraphics);
@@ -46,11 +48,11 @@ namespace MrX.UI
         {
             if (skipAnimation)
             {
-                numberRect.localScale = Vector3.one;
+                numberRect.localScale = animationDefaults.Scale(numberRect);
             }
             else
             {
-                numberRect.DoLocalScale(Vector3.one, 0.2f);
+                numberRect.DoLocalScale(animationDefaults.Scale(numberRect), 0.2f);
             }
         }
 
@@ -76,7 +78,7 @@ namespace MrX.UI
 
         public virtual void Grow()
         {
-            RectTransform.DoLocalScale(Vector3.one * 1.3f, 0.2f);
+            RectTransform.DoLocalScale(animationDefaults.Scale(RectTransform) * growScale, 0.2f);
         }
 
         public virtual void Shrink()

@@ -11,6 +11,7 @@ namespace MrX.UI
         [Space]
         [SerializeField] protected GameObject leftGamepadIndicator;
         [SerializeField] protected GameObject rightGamepadIndicator;
+        private readonly InspectorVisibility inspectorVisibility = new InspectorVisibility();
 
         public event UnityAction<MainMenuPageType> onPageSelected;
         public MainMenuPageType SelectedPage { get; protected set; }
@@ -61,6 +62,12 @@ namespace MrX.UI
             item.Select();
             OnPageSelected(pageType);
             return true;
+        }
+
+        protected virtual void Awake()
+        {
+            inspectorVisibility.Capture(leftGamepadIndicator);
+            inspectorVisibility.Capture(rightGamepadIndicator);
         }
 
         protected virtual void Start()
@@ -122,8 +129,8 @@ namespace MrX.UI
             {
                 var selectedIndex = GetDockItemIndex(SelectedPage);
 
-                leftGamepadIndicator.SetActive(selectedIndex != 0);
-                rightGamepadIndicator.SetActive(selectedIndex != dockItems.Count - 1);
+                inspectorVisibility.SetVisible(leftGamepadIndicator, selectedIndex != 0);
+                inspectorVisibility.SetVisible(rightGamepadIndicator, selectedIndex != dockItems.Count - 1);
             }
         }
 
@@ -133,13 +140,13 @@ namespace MrX.UI
             {
                 var selectedIndex = GetDockItemIndex(SelectedPage);
 
-                if (selectedIndex != 0) leftGamepadIndicator.SetActive(true);
-                if (selectedIndex != dockItems.Count - 1) rightGamepadIndicator.SetActive(true);
+                if (selectedIndex != 0) inspectorVisibility.SetVisible(leftGamepadIndicator, true);
+                if (selectedIndex != dockItems.Count - 1) inspectorVisibility.SetVisible(rightGamepadIndicator, true);
             }
             else
             {
-                leftGamepadIndicator.SetActive(false);
-                rightGamepadIndicator.SetActive(false);
+                inspectorVisibility.SetVisible(leftGamepadIndicator, false);
+                inspectorVisibility.SetVisible(rightGamepadIndicator, false);
             }
         }
 

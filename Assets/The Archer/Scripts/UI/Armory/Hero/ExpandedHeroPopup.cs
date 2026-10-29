@@ -74,7 +74,7 @@ namespace MrX.UI.Armory
                     InitButtonsUpgradable();
                 }
             if (SaveData.IsUnlocked && !SaveData.IsEquipped && !GameController.ArmoryManager.CanSelectHero(Data))
-            { selectButton.enabled = false; selectButtonText.text = "Bag full"; selectButton.image.sprite = disabledButtonSprite; }
+            { selectButton.interactable = false; selectButtonText.text = "Bag full"; }
             }
         }
 
@@ -91,15 +91,13 @@ namespace MrX.UI.Armory
             {
                 selectButtonText.text = "Selected";
 
-                selectButton.enabled = false;
-                selectButton.image.sprite = disabledButtonSprite;
+                selectButton.interactable = false;
             }
             else
             {
                 selectButtonText.text = "Select";
 
-                selectButton.enabled = true;
-                selectButton.image.sprite = selectButtonSprite;
+                selectButton.interactable = true;
             }
 
             upgradeButtonLabel.gameObject.SetActive(false);
@@ -111,8 +109,7 @@ namespace MrX.UI.Armory
 
         protected virtual void InitButtonsNotBought()
         {
-            selectButton.enabled = false;
-            selectButton.image.sprite = disabledButtonSprite;
+            selectButton.interactable = false;
             selectButtonText.text = "Select";
 
             upgradeButtonLabel.gameObject.SetActive(true);
@@ -224,7 +221,7 @@ namespace MrX.UI.Armory
 
             if (!upgradeButton.ButtonEnabled)
             {
-                if (!selectButton.enabled)
+                if (!selectButton.interactable)
                 {
                     EventSystem.current.SetSelectedGameObject(null);
                 }

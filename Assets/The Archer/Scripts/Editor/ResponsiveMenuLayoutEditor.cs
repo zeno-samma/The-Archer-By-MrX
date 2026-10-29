@@ -102,7 +102,7 @@ namespace MrX.EditorTools
         public static void CaptureTargets(ResponsiveMenuLayout layout, bool portrait, Object only)
         {
             foreach (var e in layout.rectangles) if (e.target != null && (only == null || only == e.target)) {var p=ResponsiveMenuLayout.Placement.Capture(e.target);if(portrait)e.portrait=p;else e.landscape=p;}
-            foreach (var e in layout.texts) if (e.target != null && (only == null || only == e.target)) {float n=e.target.enableAutoSizing?e.target.fontSizeMax:e.target.fontSize;e.autoSize=e.target.enableAutoSizing;if(portrait)e.portrait=n;else e.landscape=n;}
+            foreach (var e in layout.texts) if (e.target != null && (only == null || only == e.target)) {float n=e.target.enableAutoSizing?e.target.fontSizeMax:e.target.fontSize;e.autoSize=e.target.enableAutoSizing;if(portrait){e.portrait=n;e.portraitMinimum=e.target.fontSizeMin;}else{e.landscape=n;e.landscapeMinimum=e.target.fontSizeMin;}}
             foreach (var e in layout.rows) if (e.target != null && (only == null || only == e.target)) {if(portrait)e.portrait=e.target.preferredHeight;else e.landscape=e.target.preferredHeight;}
             foreach (var e in layout.visibility) if (e.target != null && (only == null || only == e.target)) {if(portrait)e.portrait=e.target.activeSelf;else e.landscape=e.target.activeSelf;}
             foreach (var e in layout.grids) if (e.target != null && (only == null || only == e.target)) {var p=e.target.padding;var copy=new RectOffset(p.left,p.right,p.top,p.bottom);if(portrait){e.portraitSize=e.target.cellSize;e.portraitPadding=copy;}else{e.landscapeSize=e.target.cellSize;e.landscapePadding=copy;}}

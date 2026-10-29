@@ -22,6 +22,8 @@ namespace MrX.UI.Armory
         [Space]
         [SerializeField] protected RectTransform statsPanelRect;
         [SerializeField] private bool showCompactStats = true;
+        [Tooltip("Opt in to automatically fit the compact stats panel to its text. Leave disabled to keep the RectTransforms authored in the Inspector.")]
+        [SerializeField] private bool autoFitCompactStats;
         [SerializeField] protected ScalingLabelBehavior damageLabel;
         [SerializeField] protected ScalingLabelBehavior hpLabel;
 
@@ -35,6 +37,9 @@ namespace MrX.UI.Armory
         protected float statsPanelPadding;
         protected float statsPanelSpacing;
         private bool isInitialized;
+        private readonly Dictionary<SlotData, Vector3> slotBaseScales = new Dictionary<SlotData, Vector3>();
+        private readonly Dictionary<SlotData, bool> slotAuthoredVisibility = new Dictionary<SlotData, bool>();
+        private readonly Dictionary<ItemCardBehavior, Vector3> cardBaseScales = new Dictionary<ItemCardBehavior, Vector3>();
 
         private EntityId debugPanelId;
 
@@ -64,9 +69,15 @@ namespace MrX.UI.Armory
         {
             if (isInitialized) return;
             isInitialized = true;
+            foreach (var slot in slots)
+            {
+                if (slot == null || slot.SlotRect == null) continue;
+                slotBaseScales[slot] = slot.SlotRect.localScale;
+                slotAuthoredVisibility[slot] = slot.SlotRect.gameObject.activeSelf;
+            }
             cardsPool = new PoolComponent<ItemCardBehavior>(itemCardPrefab, slots.Count, cardsParent);
 
-            if (!showCompactStats) return;
+            if (!showCompactStats || !autoFitCompactStats) return;
 
             statsPanelSpacing = hpLabel.RectTransform.anchoredPosition.x - damageLabel.RectTransform.anchoredPosition.x - damageLabel.Width;
             statsPanelPadding = (statsPanelRect.sizeDelta.x - damageLabel.Width - hpLabel.Width - statsPanelSpacing) / 2f;
@@ -163,10 +174,14 @@ namespace MrX.UI.Armory
             var damage = heroLevel.GetStatValue(StatType.Damage);
             var hp = heroLevel.GetStatValue(StatType.HP);
 
-            for (int i = 0; i < equippedCards.Count; i++)
+            // Hidden equipment slots still contribute their actual equipped item stats.
+            for (int i = 0; i < slots.Count; i++)
             {
-                var card = equippedCards[i];
-                var itemLevel = GameController.ArmoryManager.GetItemLevel(card.ItemData.Id);
+                var slot = slots[i];
+                if (slot == null) continue;
+                var item = GameController.ArmoryManager.GetEquippedItemData(slot.ItemType);
+                if (item == null) continue;
+                var itemLevel = GameController.ArmoryManager.GetItemLevel(item.Id);
 
                 damage += itemLevel.GetStatValue(StatType.Damage);
                 hp += itemLevel.GetStatValue(StatType.HP);
@@ -175,6 +190,7 @@ namespace MrX.UI.Armory
             damageLabel.SetAmount((int)damage);
             hpLabel.SetAmount((int)hp);
 
+            if (!autoFitCompactStats) return;
             statsPanelRect.SetSizeDeltaX(damageLabel.Width + hpLabel.Width + statsPanelSpacing + statsPanelPadding * 2f);
             damageLabel.RectTransform.SetAnchoredPositionX(statsPanelPadding);
             hpLabel.RectTransform.SetAnchoredPositionX(damageLabel.RectTransform.anchoredPosition.x + damageLabel.Width + statsPanelSpacing);
@@ -187,10 +203,17 @@ namespace MrX.UI.Armory
             for (int i = 0; i < slots.Count; i++)
             {
                 var slot = slots[i];
+                if (slot == null || slot.SlotRect == null) continue;
                 var data = GameController.ArmoryManager.GetEquippedItemData(slot.ItemType);
                 if (data != null)
                 {
+                    if (slot.ItemType == ItemType.Weapon)
+                    {
+                        heroPreviewBehavior.SetWeaponData(data as WeaponData);
+                    }
+                    if (!slotAuthoredVisibility.TryGetValue(slot, out var canShow) || !canShow) continue;
                     var card = cardsPool.GetEntity();
+                    if (!cardBaseScales.ContainsKey(card)) cardBaseScales.Add(card, card.RectTransform.localScale);
                     var itemSave = GameController.ArmoryManager.GetEquippedItemSave(slot.ItemType);
 
                     card.SetData(data, itemSave);
@@ -199,14 +222,11 @@ namespace MrX.UI.Armory
                     card.RectTransform.anchoredPosition = slot.SlotRect.anchoredPosition;
                     card.RectTransform.sizeDelta = slot.SlotRect.sizeDelta;
                     card.transform.position = slot.SlotRect.position;
+                    card.RectTransform.localScale = cardBaseScales[card] * slotsScale;
                     // Debug.Log($"[DEBUG] Card sau khi gán -> AnchoredPos: {card.RectTransform.anchoredPosition} | WorldPos: {card.transform.position}");
                     // // --- KẾT THÚC DEBUG ---
                     equippedCards.Add(card);
 
-                    if (slot.ItemType == ItemType.Weapon)
-                    {
-                        heroPreviewBehavior.SetWeaponData(data as WeaponData);
-                    }
                 }
             }
         }
@@ -238,13 +258,14 @@ namespace MrX.UI.Armory
             for (int i = 0; i < slots.Count; i++)
             {
                 var slot = slots[i];
-                slot.SlotRect.localScale = new Vector3(value, value, value);
+                if (slot == null || slot.SlotRect == null) continue;
+                if (slotBaseScales.TryGetValue(slot, out var baseScale)) slot.SlotRect.localScale = baseScale * value;
             }
 
             for (int i = 0; i < equippedCards.Count; i++)
             {
                 var card = equippedCards[i];
-                card.RectTransform.localScale = new Vector3(value, value, value);
+                if (card != null && cardBaseScales.TryGetValue(card, out var baseScale)) card.RectTransform.localScale = baseScale * value;
             }
         }
 

@@ -8,6 +8,7 @@ namespace MrX.UI
 {
     public class UpgradeCardsSelector : HorizontalSelector<UpgradeCardSelectable>
     {
+        private readonly UIAnimationDefaults animationDefaults = new UIAnimationDefaults();
         protected List<UpgradeData> upgrades;
 
         protected int selectedId;
@@ -15,6 +16,7 @@ namespace MrX.UI
 
         protected override void Awake()
         {
+            animationDefaults.Capture(leftButton.transform, rightButton.transform, leftGamepadIndicator.transform, rightGamepadIndicator.transform, selectablesParent);
             base.Awake();
             upgrades = GameController.UpgradesManager.GetAllUpgrades();
         }
@@ -39,14 +41,14 @@ namespace MrX.UI
 
             selectablesParent.localScale = Vector3.zero;
 
-            leftButton.transform.DoLocalScale(new Vector3(-1, 1, 1), 0.3f).SetEasing(EasingType.CubicOut).SetDelay(0.2f);
-            rightButton.transform.DoLocalScale(Vector3.one, 0.3f).SetEasing(EasingType.CubicOut).SetDelay(0.2f);
+            leftButton.transform.DoLocalScale(animationDefaults.Scale(leftButton.transform), 0.3f).SetEasing(EasingType.CubicOut).SetDelay(0.2f);
+            rightButton.transform.DoLocalScale(animationDefaults.Scale(rightButton.transform), 0.3f).SetEasing(EasingType.CubicOut).SetDelay(0.2f);
 
-            leftGamepadIndicator.transform.DoLocalScale(Vector3.one, 0.3f).SetEasing(EasingType.CubicOut).SetDelay(0.2f);
-            rightGamepadIndicator.transform.DoLocalScale(Vector3.one, 0.3f).SetEasing(EasingType.CubicOut).SetDelay(0.2f);
+            leftGamepadIndicator.transform.DoLocalScale(animationDefaults.Scale(leftGamepadIndicator.transform), 0.3f).SetEasing(EasingType.CubicOut).SetDelay(0.2f);
+            rightGamepadIndicator.transform.DoLocalScale(animationDefaults.Scale(rightGamepadIndicator.transform), 0.3f).SetEasing(EasingType.CubicOut).SetDelay(0.2f);
 
-            selectablesParent.localScale = new Vector3(0, 1, 1);
-            selectablesParent.DoLocalScale(Vector3.one, 0.3f).SetEasing(EasingType.CubicOut).SetDelay(0.1f);
+            selectablesParent.localScale = animationDefaults.Scale(selectablesParent, new Vector3(0, 1, 1));
+            selectablesParent.DoLocalScale(animationDefaults.Scale(selectablesParent), 0.3f).SetEasing(EasingType.CubicOut).SetDelay(0.1f);
         }
 
         public void Hide()
@@ -57,7 +59,7 @@ namespace MrX.UI
             leftGamepadIndicator.transform.DoLocalScale(Vector3.zero, 0.3f).SetEasing(EasingType.CubicIn);
             rightGamepadIndicator.transform.DoLocalScale(Vector3.zero, 0.3f).SetEasing(EasingType.CubicIn);
 
-            selectablesParent.DoLocalScale(new Vector3(0, 1, 1), 0.3f).SetEasing(EasingType.CubicIn).SetOnFinish(OnHidden);
+            selectablesParent.DoLocalScale(animationDefaults.Scale(selectablesParent, new Vector3(0, 1, 1)), 0.3f).SetEasing(EasingType.CubicIn).SetOnFinish(OnHidden);
         }
 
         protected virtual void OnHidden()

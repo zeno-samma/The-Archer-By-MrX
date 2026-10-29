@@ -16,7 +16,7 @@ namespace MrX.UI
             public void Apply(RectTransform r){r.pivot=pivot;r.anchorMin=min;r.anchorMax=max;r.offsetMin=offsetMin;r.offsetMax=offsetMax;r.localScale=scale;}
         }
         [Serializable] public class RectStyle {public RectTransform target;public Placement landscape,portrait;}
-        [Serializable] public class TextStyle {public TMP_Text target;public float landscape,portrait;public bool autoSize;}
+        [Serializable] public class TextStyle {public TMP_Text target;public float landscape,portrait;public float landscapeMinimum,portraitMinimum;public bool autoSize;}
         [Serializable] public class RowStyle {public LayoutElement target;public float landscape,portrait;}
         [Serializable] public class Visibility {public GameObject target;public bool landscape=true,portrait=true;}
         [Serializable] public class GridStyle {public GridLayoutGroup target;public Vector2 landscapeSize,portraitSize;public RectOffset landscapePadding,portraitPadding;}
@@ -32,6 +32,18 @@ namespace MrX.UI
         [SerializeField] private ArmoryDashboard inventory;
         private ResponsiveMenuSurface surface;
         private bool initialized,lastPortrait;
+        private void Awake()
+        {
+            // The visible, authored orientation is authoritative even when a scene
+            // override was edited without the profile inspector open. Runtime copies
+            // only; no prefab or scene asset is changed by this capture.
+            foreach(var e in rectangles)if(e.target!=null){var p=Placement.Capture(e.target);if(editorPortrait)e.portrait=p;else e.landscape=p;}
+            foreach(var e in texts)if(e.target!=null){float size=e.target.enableAutoSizing?e.target.fontSizeMax:e.target.fontSize;e.autoSize=e.target.enableAutoSizing;if(editorPortrait){e.portrait=size;e.portraitMinimum=e.target.fontSizeMin;}else{e.landscape=size;e.landscapeMinimum=e.target.fontSizeMin;}}
+            foreach(var e in rows)if(e.target!=null){if(editorPortrait)e.portrait=e.target.preferredHeight;else e.landscape=e.target.preferredHeight;}
+            foreach(var e in visibility)if(e.target!=null){if(editorPortrait)e.portrait=e.target.activeSelf;else e.landscape=e.target.activeSelf;}
+            foreach(var e in grids)if(e.target!=null){var p=e.target.padding;var copy=new RectOffset(p.left,p.right,p.top,p.bottom);if(editorPortrait){e.portraitSize=e.target.cellSize;e.portraitPadding=copy;}else{e.landscapeSize=e.target.cellSize;e.landscapePadding=copy;}}
+            foreach(var e in images)if(e.target!=null){if(editorPortrait)e.portrait=e.target.pixelsPerUnitMultiplier;else e.landscape=e.target.pixelsPerUnitMultiplier;}
+        }
         private void OnEnable(){initialized=false;surface=GetComponentInParent<ResponsiveMenuSurface>();}
         private void OnTransformParentChanged(){surface=GetComponentInParent<ResponsiveMenuSurface>();initialized=false;}
         private void LateUpdate()
@@ -40,9 +52,10 @@ namespace MrX.UI
         }
         public void Apply(bool portrait)
         {
+            if(Application.isPlaying&&!isActiveAndEnabled)return;
             initialized=true;lastPortrait=portrait;
             foreach(var style in rectangles)if(style.target!=null)(portrait?style.portrait:style.landscape).Apply(style.target);
-            foreach(var style in texts)if(style.target!=null){float size=portrait?style.portrait:style.landscape;style.target.fontSize=style.target.fontSizeMax=size;style.target.fontSizeMin=size*.6f;style.target.enableAutoSizing=style.autoSize;}
+            foreach(var style in texts)if(style.target!=null){float size=portrait?style.portrait:style.landscape;float minimum=portrait?style.portraitMinimum:style.landscapeMinimum;style.target.fontSize=style.target.fontSizeMax=size;style.target.fontSizeMin=minimum>0?minimum:size*.6f;style.target.enableAutoSizing=style.autoSize;}
             foreach(var style in rows)if(style.target!=null)style.target.preferredHeight=portrait?style.portrait:style.landscape;
             foreach(var style in visibility)if(style.target!=null)style.target.SetActive(portrait?style.portrait:style.landscape);
             foreach(var style in grids)if(style.target!=null){style.target.cellSize=portrait?style.portraitSize:style.landscapeSize;style.target.padding=portrait?style.portraitPadding:style.landscapePadding;}

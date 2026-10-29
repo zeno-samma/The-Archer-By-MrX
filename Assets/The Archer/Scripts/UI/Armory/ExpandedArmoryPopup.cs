@@ -14,6 +14,7 @@ namespace MrX.UI.Armory
 {
     public abstract class ExpandedArmoryPopup : MonoBehaviour
     {
+        private readonly UIAnimationDefaults animationDefaults = new UIAnimationDefaults();
         [SerializeField] protected AbilitiesDatabase abilitiesDatabase;
 
         [Space]
@@ -51,7 +52,7 @@ namespace MrX.UI.Armory
         [SerializeField] protected Color disabledCostTextColor;
 
         [Space]
-        [SerializeField] protected Sprite disabledButtonSprite;
+        [SerializeField, HideInInspector] protected Sprite disabledButtonSprite;
 
         protected PoolComponent<ArmoryAbilityCard> cardsPool;
 
@@ -62,7 +63,6 @@ namespace MrX.UI.Armory
         protected float heightDifference;
         protected float defaultCloseButtonPosition;
 
-        protected Sprite selectButtonSprite;
 
         protected Color enabledCostTextColor;
 
@@ -72,6 +72,8 @@ namespace MrX.UI.Armory
 
         protected virtual void Awake()
         {
+            animationDefaults.Capture(panelRect, closeButton.transform);
+            animationDefaults.CaptureAlpha(backgroundImage);
             closeButton.onClick.AddListener(OnCloseButtonClicked);
             selectButton.onClick.AddListener(OnSelectButtonClicked);
             upgradeButton.SetOnClick(OnUpgradeButtonClicked);
@@ -84,7 +86,6 @@ namespace MrX.UI.Armory
             closeButtonRect = closeButton.GetComponent<RectTransform>();
             defaultCloseButtonPosition = closeButtonRect.anchoredPosition.y;
 
-            selectButtonSprite = selectButton.image.sprite;
 
             enabledCostTextColor = costText.color;
 
@@ -116,7 +117,7 @@ namespace MrX.UI.Armory
 
         protected virtual void SelectButtonsGamepad()
         {
-            if (selectButton.enabled)
+            if (selectButton.interactable)
             {
                 EventSystem.current.SetSelectedGameObject(selectButton.gameObject);
             }
@@ -164,7 +165,7 @@ namespace MrX.UI.Armory
         {
             closeButton.transform.DoLocalScale(Vector3.zero, 0.3f).SetEasing(EasingType.CubicIn);
 
-            panelRect.DoLocalScale(new Vector3(0, 1, 1), 0.3f).SetEasing(EasingType.CubicIn);
+            panelRect.DoLocalScale(animationDefaults.Scale(panelRect, new Vector3(0, 1, 1)), 0.3f).SetEasing(EasingType.CubicIn);
 
             yield return new WaitForSeconds(0.1f);
 
@@ -186,14 +187,14 @@ namespace MrX.UI.Armory
             closeButton.transform.localScale = Vector3.zero;
 
             backgroundImage.SetAlpha(0f);
-            backgroundImage.DoAlpha(1f, 0.3f);
+            backgroundImage.DoAlpha(animationDefaults.Alpha(backgroundImage), 0.3f);
 
-            panelRect.localScale = new Vector3(0, 1, 1);
-            panelRect.DoLocalScale(Vector3.one, 0.3f).SetEasing(EasingType.CubicOut).SetDelay(0.1f);
+            panelRect.localScale = animationDefaults.Scale(panelRect, new Vector3(0, 1, 1));
+            panelRect.DoLocalScale(animationDefaults.Scale(panelRect), 0.3f).SetEasing(EasingType.CubicOut).SetDelay(0.1f);
 
             yield return new WaitForSeconds(0.3f);
 
-            closeButton.transform.DoLocalScale(Vector3.one, 0.3f).SetEasing(EasingType.CubicOut);
+            closeButton.transform.DoLocalScale(animationDefaults.Scale(closeButton.transform), 0.3f).SetEasing(EasingType.CubicOut);
         }
 
         protected virtual void InvokeOnHiddenEvent()

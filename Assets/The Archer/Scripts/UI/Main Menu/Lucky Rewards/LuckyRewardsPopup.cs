@@ -25,6 +25,8 @@ namespace MrX.UI
         [SerializeField] private LuckyWheelSlice slicePrefab;
         [SerializeField] private List<LuckyPrizeView> prizePool = new List<LuckyPrizeView>();
         [SerializeField] private List<LuckyWheelSlice> slicePool = new List<LuckyWheelSlice>();
+        private readonly InspectorVisibility authoredVisibility = new InspectorVisibility();
+        private Quaternion wheelBaseRotation;
         private readonly Dictionary<int, float> winningAngles = new Dictionary<int, float>();
         private LuckyRewardsService service;
         private CurrencySave gems;
@@ -48,14 +50,15 @@ namespace MrX.UI
         {
             if (wired) return; wired = true;
             if (chestIllustration) chestBaseScale = chestIllustration.localScale;
+            if (wheelDisc) wheelBaseRotation = wheelDisc.localRotation;
+            authoredVisibility.Capture(costIcon);
+            authoredVisibility.Capture(resultIcon);
             purchaseButton.onClick.AddListener(Purchase); closeButton.onClick.AddListener(Hide); continueButton.onClick.AddListener(Continue);
         }
         public void Show(LuckyRewardsService rewards)
         {
             Wire(); service = rewards; previousSelection = EventSystem.current ? EventSystem.current.currentSelectedGameObject : null;
             gameObject.SetActive(true); transform.SetAsLastSibling();
-            // A standalone prefab Canvas becomes nested after placement in the page.
-            GetComponent<Canvas>().overrideSorting = true;
             ownsDock = true; GameController.MainMenuScreenBehavior.DisableDock();
             gems = GameController.CurrenciesManager.GetCurrency("gem", false);
             if (gems != null) gems.OnAmountChanged += OnWallet;
@@ -99,7 +102,7 @@ namespace MrX.UI
             }
             for (int i = count; i < prizePool.Count; i++) prizePool[i].gameObject.SetActive(false);
             for (int i = count; i < slicePool.Count; i++) slicePool[i].gameObject.SetActive(false);
-            if (wheelDisc) wheelDisc.localRotation = Quaternion.identity;
+            if (wheelDisc) wheelDisc.localRotation = wheelBaseRotation;
         }
         private Sprite PrizeIcon(LuckyPrize prize)
         {
@@ -116,11 +119,11 @@ namespace MrX.UI
         }
         private void Refresh()
         {
-            if (service == null) return;
+            if (!isActiveAndEnabled || service == null) return;
             walletText.text = gems != null ? gems.Amount.ToString("N0") : "0";
             bool free = service.HasDailyFreeUse(table);
             costText.text = (free ? "FREE" : (table.price == null ? "--" : table.price.Amount.ToString("N0")) + " GEM") + "\n" + (isWheel ? "SPIN" : "OPEN CHEST");
-            if (costIcon != null) costIcon.enabled = !free;
+            authoredVisibility.SetEnabled(costIcon, !free);
             var state = service.State(table);
             purchaseButton.interactable = !animating && !resultPanel.activeSelf && state == LuckyPurchaseResult.Ready;
             purchaseButton.navigation = new Navigation { mode = Navigation.Mode.Explicit, selectOnUp = closeButton, selectOnRight = closeButton };
@@ -133,7 +136,7 @@ namespace MrX.UI
         private void OnChanged() => Refresh();
         private void Purchase()
         {
-            if (animating || resultPanel.activeSelf || service.State(table) != LuckyPurchaseResult.Ready) return;
+            if (!isActiveAndEnabled || service == null || animating || resultPanel.activeSelf || service.State(table) != LuckyPurchaseResult.Ready) return;
             BindPrizes();
             animating = true; Refresh();
             LuckyReceipt receipt;
@@ -173,12 +176,12 @@ namespace MrX.UI
             receiptSequence = receipt.sequence; resultPanel.SetActive(true);
             resultTitle.text = receipt.grant.title;
             resultAmount.text = "x " + receipt.grant.amount + (receipt.grant.queuedEquipment ? "\nStored safely. Expand your equipment bag to receive it." : "\nAdded to your inventory.");
-            resultIcon.sprite = service.Delivery.Icon(receipt.grant); resultIcon.enabled = resultIcon.sprite != null;
+            resultIcon.sprite = service.Delivery.Icon(receipt.grant); authoredVisibility.SetEnabled(resultIcon, resultIcon.sprite != null);
             Refresh(); Focus(continueButton);
         }
         private void Continue()
         {
-            if (!service.Acknowledge(receiptSequence)) return;
+            if (!isActiveAndEnabled || service == null || !service.Acknowledge(receiptSequence)) return;
             resultPanel.SetActive(false); Refresh(); Focus(purchaseButton.interactable ? purchaseButton : closeButton);
         }
         public void Hide() { gameObject.SetActive(false); }
@@ -187,6 +190,7 @@ namespace MrX.UI
         {
             if (animationRoutine != null) { StopCoroutine(animationRoutine); animationRoutine = null; }
             if (wired && chestIllustration) chestIllustration.localScale = chestBaseScale;
+            if (wired && wheelDisc) wheelDisc.localRotation = wheelBaseRotation;
             animating = false;
             if (gems != null) gems.OnAmountChanged -= OnWallet;
             if (service != null) service.Changed -= OnChanged;

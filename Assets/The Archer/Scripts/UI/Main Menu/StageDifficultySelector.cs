@@ -7,10 +7,12 @@ namespace MrX.UI
 {
     public sealed class StageDifficultySelector : MonoBehaviour
     {
+        [SerializeField, Tooltip("Opt in to gameplay state colors. Off preserves Image/TMP colors authored in Inspector.")] private bool useStateColors;
         [SerializeField] private Button[] choices;
         [SerializeField] private TMP_Text[] labels;
         [SerializeField] private TMP_Text info;
-        [SerializeField] private Sprite selectedFrame, idleFrame;
+        // Legacy references are no longer applied over each choice's authored Image.
+        [SerializeField, HideInInspector] private Sprite selectedFrame, idleFrame;
         [SerializeField] private bool compactLabels;
         [Header("Difficulty state colors")]
         [SerializeField] private Color selectedColor = new Color(1, .85f, .4f);
@@ -47,12 +49,7 @@ namespace MrX.UI
                 var mode = (StageDifficulty)i; bool unlocked = save.CanPlayDifficulty(stage, mode);
                 choices[i].interactable = unlocked;
                 labels[i].text = Name(mode) + (compactLabels ? "" : "\n" + MenuLanguage.Text(!unlocked ? "Locked" : save.IsDifficultyComplete(stage, mode) ? "Completed" : "First clear"));
-                choices[i].image.color = mode == save.SelectedDifficulty ? selectedColor : unlocked ? idleColor : lockedColor;
-                if (selectedFrame != null && idleFrame != null)
-                {
-                    choices[i].image.sprite = mode == save.SelectedDifficulty ? selectedFrame : idleFrame;
-                    choices[i].image.color = unlocked ? idleColor : lockedFrameColor;
-                }
+                if (useStateColors) choices[i].image.color = mode == save.SelectedDifficulty ? selectedColor : unlocked ? idleColor : lockedColor;
             }
             var definition = GameController.AchievementsManager?.Database.achievements.Find(a => a.id == AchievementId(stage.StageId, save.SelectedDifficulty));
             var manager = GameController.AchievementsManager;

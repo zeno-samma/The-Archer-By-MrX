@@ -9,14 +9,20 @@ namespace MrX.UI
     public class SmallItemRewardCard : SmallRewardCard
     {
         [SerializeField] private TMP_Text rewardName;
+        protected override void Awake()
+        {
+            base.Awake();
+            if (itemTypeBackgroundImage != null) inspectorVisibility.Capture(itemTypeBackgroundImage.gameObject);
+            if (itemTypeIconImage != null) inspectorVisibility.Capture(itemTypeIconImage.gameObject);
+        }
         public void SetReward(LuckyGrant reward)
         {
             var item = string.IsNullOrEmpty(reward.itemId) ? null : GameController.ArmoryManager.GetItemData(reward.itemId);
-            itemTypeBackgroundImage.gameObject.SetActive(item != null);
-            itemTypeIconImage.gameObject.SetActive(item != null);
+            inspectorVisibility.SetVisible(itemTypeBackgroundImage.gameObject, item != null);
+            inspectorVisibility.SetVisible(itemTypeIconImage.gameObject, item != null);
             if (item != null) SetItem(item);
             SetIcon(new LuckyRewardDelivery(GameController.ArmoryManager, GameController.CurrenciesManager).Icon(reward));
-            SetAmount(reward.amount); amountText.gameObject.SetActive(true);
+            SetAmount(reward.amount); inspectorVisibility.SetVisible(amountText.gameObject, true);
             if (rewardName != null) rewardName.text = reward.title + (reward.pendingDelivery ? "\n(Pending delivery)" : reward.queuedEquipment ? "\n(Bag pending)" : "");
         }
         [SerializeField] protected Image rarityBackgroundImage;

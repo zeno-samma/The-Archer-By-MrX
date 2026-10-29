@@ -11,6 +11,7 @@ namespace MrX.UI
 {
     public class ExpandedUpgradePopup : MonoBehaviour
     {
+        private readonly UIAnimationDefaults animationDefaults = new UIAnimationDefaults();
         [SerializeField] protected Canvas canvas;
         [SerializeField] protected Image backgroundImage;
 
@@ -33,6 +34,8 @@ namespace MrX.UI
 
         protected virtual void Awake()
         {
+            animationDefaults.Capture(closeButton.transform);
+            animationDefaults.CaptureAlpha(backgroundImage);
             upgrades = GameController.UpgradesManager.GetAllUpgrades();
 
             closeButton.onClick.AddListener(Hide);
@@ -106,7 +109,7 @@ namespace MrX.UI
             closeButton.transform.localScale = Vector3.zero;
 
             backgroundImage.SetAlpha(0f);
-            backgroundImage.DoAlpha(1f, 0.3f);
+            backgroundImage.DoAlpha(animationDefaults.Alpha(backgroundImage), 0.3f);
 
             selector.Show();
 
@@ -114,7 +117,7 @@ namespace MrX.UI
 
             yield return new WaitForSeconds(0.3f);
 
-            closeButton.transform.DoLocalScale(Vector3.one, 0.3f).SetEasing(EasingType.CubicOut);
+            closeButton.transform.DoLocalScale(animationDefaults.Scale(closeButton.transform), 0.3f).SetEasing(EasingType.CubicOut);
         }
     }
 }

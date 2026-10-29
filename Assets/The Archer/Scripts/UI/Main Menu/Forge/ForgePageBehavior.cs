@@ -11,6 +11,8 @@ namespace MrX.UI
 {
     public class ForgePageBehavior : MainMenuPageBehavior
     {
+        private readonly InspectorVisibility authoredVisibility = new InspectorVisibility();
+        [SerializeField, Tooltip("Opt in to gameplay state colors. Off preserves Image/TMP colors authored in Inspector.")] private bool useStateColors;
         [SerializeField] private ForgePageDatabase database;
         [SerializeField] private Image showcaseIcon, detailIcon;
         [SerializeField] private TMP_Text itemName, levelLabel, enhancementLabel, selectionLabel, goldLabel, costLabel, statusLabel, resultLabel, forgeLabel, feedback;
@@ -126,19 +128,18 @@ namespace MrX.UI
             selectionLabel.text = owned.Count > 0 ? (selectedIndex + 1) + " / " + owned.Count + " EQUIPMENT RECIPES" : "Configure recipes in ItemData";
             previousButton.interactable = nextButton.interactable = owned.Count > 1;
             costLabel.text = quote.item != null ? "FRAGMENTS: " + quote.fragments + " / " + quote.requiredFragments : "No recipe selected";
-            costLabel.color = quote.fragments < quote.requiredFragments ? Red : Green;
+            if (useStateColors) costLabel.color = quote.fragments < quote.requiredFragments ? Red : Green;
             foreach (var view in materialViews)
             {
                 var required = quote.item != null ? quote.item.Crafting.Cost(view.material) : 0;
                 var amount = service.Inventory.Count(CraftingInventorySave.MaterialKey(view.material));
-                view.count.text = amount + " / " + required; view.count.color = amount >= required ? Green : Red;
+                view.count.text = amount + " / " + required; if (useStateColors) view.count.color = amount >= required ? Green : Red;
             }
             var ready = quote.result == CraftResult.Ready;
             forgeButton.interactable = ready && nextForgeTime == 0;
-            forgeImage.sprite = forgeButton.interactable ? database.forgeButtonSprite : database.disabledButtonSprite;
             forgeLabel.text = isOwned ? "OWNED" : "FORGE";
             statusLabel.text = ready ? "Success Rate: 100%" : isOwned ? "Upgrade levels in Stage / Armory" : quote.result == CraftResult.InventoryFull ? "Equipment bag full - expand in Armory" : quote.result == CraftResult.MissingFragments ? "Collect this equipment's fragments" : quote.result == CraftResult.MissingMaterials ? "Not enough crafting materials" : "Recipe unavailable";
-            statusLabel.color = ready || isOwned ? Green : Red;
+            if (useStateColors) statusLabel.color = ready || isOwned ? Green : Red;
             resultLabel.text = isOwned ? "Already in your Armory" : "Unlock equipment - Lv.1";
             RefreshStats(quote);
             var target = forgeButton.interactable ? forgeButton : settingsButton;
@@ -159,11 +160,11 @@ namespace MrX.UI
             }
             for (var i = 0; i < rows.Count; i++)
             {
-                var row = rows[i]; row.rect.gameObject.SetActive(i < visibleStats.Count);
+                var row = rows[i]; authoredVisibility.SetVisible(row.rect.gameObject, i < visibleStats.Count);
                 if (i >= visibleStats.Count) continue;
                 var stat = visibleStats[i]; var value = quote.output.GetStatValue(stat);
                 row.title.text = StatName(stat); row.before.text = ""; row.after.text = StatValue(stat, value);
-                row.after.color = Ink; row.arrow.text = "";
+                if(useStateColors) row.after.color = Ink; row.arrow.text = "";
             }
         }
         private static string StatName(StatType stat)

@@ -8,6 +8,7 @@ namespace MrX.UI
 {
     public class AbilitiesGridBehavior : MonoBehaviour
     {
+        private readonly UIAnimationDefaults animationDefaults = new UIAnimationDefaults();
         [SerializeField] protected GameObject abilitiesRowPrefab;
         [SerializeField] protected float scaleDuration = 0.3f;
         [SerializeField] protected float scaleDelay = 0.1f;
@@ -19,6 +20,7 @@ namespace MrX.UI
 
         protected virtual void Awake()
         {
+            animationDefaults.Capture(transform);
             rectTransform = GetComponent<RectTransform>();
 
             abilitiesRowPool = new PoolComponent<AbilitiesRowBehavior>(abilitiesRowPrefab, 3, transform);
@@ -27,7 +29,7 @@ namespace MrX.UI
         public void Show()
         {
             rectTransform.localScale = Vector3.zero;
-            rectTransform.DoLocalScale(Vector3.one, scaleDuration)
+            rectTransform.DoLocalScale(animationDefaults.Scale(rectTransform), scaleDuration)
                 .SetDelay(scaleDelay)
                 .SetEasingCurve(scaleEasing)
                 .SetUnscaledTime(true);

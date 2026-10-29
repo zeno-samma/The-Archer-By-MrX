@@ -20,6 +20,8 @@ namespace MrX.UI
         private int amountIndex = 1, itemIndex;
         private bool ownsDock;
         private GameObject previousSelection;
+        private readonly InspectorVisibility visibility = new InspectorVisibility();
+        private void Awake() { visibility.Capture(shortcut); visibility.Capture(itemIcon); }
         private void Start()
         {
             service = new DeveloperGrantService(settings, new LuckyRewardDelivery(GameController.ArmoryManager,
@@ -34,17 +36,17 @@ namespace MrX.UI
         }
         private void Availability()
         {
+            if (!isActiveAndEnabled) return;
             bool available = settings && settings.IsAvailable;
-            shortcut.SetActive(available);
+            visibility.SetVisible(shortcut, available);
             if (!available) Close();
         }
         private void Open()
         {
             var screen = GameController.MainMenuScreenBehavior;
-            if (!settings || !settings.IsAvailable || !screen.IsDockEnabled || screen.CurrentPageType != MainMenuPageType.Stages) return;
+            if (!isActiveAndEnabled || !settings || !settings.IsAvailable || screen == null || !screen.IsDockEnabled || screen.CurrentPageType != MainMenuPageType.Stages) return;
             previousSelection = EventSystem.current ? EventSystem.current.currentSelectedGameObject : null;
             panel.SetActive(true); panel.transform.SetAsLastSibling(); ownsDock = true; screen.DisableDock();
-            panel.GetComponent<Canvas>().overrideSorting = true;
             GameController.InputManager.InputAsset.UI.Cancel.performed += Cancel;
             status.text = "Grants are saved to this player profile."; Refresh();
             if (EventSystem.current) EventSystem.current.SetSelectedGameObject(goldButton.gameObject);
@@ -59,17 +61,18 @@ namespace MrX.UI
         }
         private void Refresh()
         {
+            if (!isActiveAndEnabled) return;
             amountIndex = settings && settings.currencyAmounts != null && settings.currencyAmounts.Length > 0 ? amountIndex % settings.currencyAmounts.Length : 0;
             if (settings && settings.armory) itemIndex = Mathf.Clamp(itemIndex, 0, Mathf.Max(0, settings.armory.ItemsCount - 1));
             amountLabel.text = "AMOUNT: " + Amount.ToString("N0") + "   >";
             goldButton.interactable = gemButton.interactable = Amount > 0;
             var item = Item; itemLabel.text = item ? item.ItemName + "\n" + (itemIndex + 1) + " / " + settings.armory.ItemsCount : "No equipment registered";
-            itemIcon.sprite = item ? item.Icon : null; itemIcon.enabled = item; grantItem.interactable = item;
+            itemIcon.sprite = item ? item.Icon : null; visibility.SetVisible(itemIcon, item != null); grantItem.interactable = item;
         }
         private void Currency(string id)
-        { service.GrantCurrency(id, Amount, out var message); status.text = message; }
+        { if (!isActiveAndEnabled) return; service.GrantCurrency(id, Amount, out var message); status.text = message; }
         private void GrantItem()
-        { service.GrantItem(Item, out var message); status.text = message; }
+        { if (!isActiveAndEnabled) return; service.GrantItem(Item, out var message); status.text = message; }
         private void Cancel(UnityEngine.InputSystem.InputAction.CallbackContext context) => Close();
         public void Close()
         {

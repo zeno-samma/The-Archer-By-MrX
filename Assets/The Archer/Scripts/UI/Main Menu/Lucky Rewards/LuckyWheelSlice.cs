@@ -19,8 +19,8 @@ namespace MrX.UI
             var position = new Vector2(Mathf.Sin(angle), Mathf.Cos(angle));
             icon.sprite = sprite; icon.rectTransform.anchorMin = icon.rectTransform.anchorMax = Vector2.one * .5f + position * iconRadius;
             icon.rectTransform.anchoredPosition = Vector2.zero;
-            // Percentages belong to the reward list, not the decorative wheel.
-            if (label) label.gameObject.SetActive(false);
+            // The prefab controls whether a label exists or is shown. Empty data keeps authored text.
+            if (label && !string.IsNullOrEmpty(text)) label.text = text;
         }
     }
 }

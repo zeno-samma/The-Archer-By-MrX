@@ -9,6 +9,14 @@ namespace MrX.UI.Armory
 {
     public class ArmoryGridUI<T> : MonoBehaviour where T : ArmoryCardBehavior
     {
+        private readonly UIAnimationDefaults animationDefaults = new UIAnimationDefaults();
+
+        protected virtual void Awake()
+        {
+            animationDefaults.Capture(rectTransform);
+            animationDefaults.CaptureAlpha(canvasGroup);
+        }
+
         [Space]
         [SerializeField] protected GameObject cardPrefab;
         [SerializeField] protected RectTransform cardsParent;
@@ -91,7 +99,7 @@ namespace MrX.UI.Armory
             alphaEasingCoroutine.StopIfExists();
 
             moveEasingCoroutine = rectTransform.DoStretchedOffset(offsetMin, offsetMax, duration).SetEasing(EasingType.CubicInOut);
-            scaleEasingCoroutine = rectTransform.DoLocalScale(new Vector3(1, scaleFactor, 1), duration).SetEasing(EasingType.CubicInOut);
+            scaleEasingCoroutine = rectTransform.DoLocalScale(animationDefaults.Scale(rectTransform, new Vector3(1, scaleFactor, 1)), duration).SetEasing(EasingType.CubicInOut);
             alphaEasingCoroutine = canvasGroup.DoAlpha(0, duration).SetDelay(0).SetOnFinish(OnMoveFinished);
         }
 
@@ -104,7 +112,7 @@ namespace MrX.UI.Armory
             alphaEasingCoroutine.StopIfExists();
 
             moveEasingCoroutine = rectTransform.DoStretchedOffset(offsetMin, offsetMax, duration).SetEasing(EasingType.CubicInOut);
-            scaleEasingCoroutine = rectTransform.DoLocalScale(new Vector3(1, scaleFactor, 1), duration).SetEasing(EasingType.CubicInOut);
+            scaleEasingCoroutine = rectTransform.DoLocalScale(animationDefaults.Scale(rectTransform, new Vector3(1, scaleFactor, 1)), duration).SetEasing(EasingType.CubicInOut);
             alphaEasingCoroutine = canvasGroup.DoAlpha(0, duration).SetDelay(0).SetOnFinish(OnMoveFinished);
         }
 
@@ -114,8 +122,8 @@ namespace MrX.UI.Armory
             alphaEasingCoroutine.StopIfExists();
 
             moveEasingCoroutine = rectTransform.DoStretchedOffset(Vector2.zero, Vector2.zero, duration).SetEasing(EasingType.CubicInOut).SetOnFinish(OnMoveCenterFinished);
-            scaleEasingCoroutine = rectTransform.DoLocalScale(new Vector3(1, 1, 1), duration).SetEasing(EasingType.CubicInOut);
-            alphaEasingCoroutine = canvasGroup.DoAlpha(1, duration);
+            scaleEasingCoroutine = rectTransform.DoLocalScale(animationDefaults.Scale(rectTransform), duration).SetEasing(EasingType.CubicInOut);
+            alphaEasingCoroutine = canvasGroup.DoAlpha(animationDefaults.Alpha(canvasGroup), duration);
         }
 
         protected virtual void OnMoveCenterFinished()
@@ -126,18 +134,19 @@ namespace MrX.UI.Armory
         public virtual void SpawnCenter()
         {
             rectTransform.SetStretchedOffset(Vector2.zero, Vector2.zero);
-            rectTransform.localScale = new Vector3(1, 1, 1);
+            rectTransform.localScale = animationDefaults.Scale(rectTransform);
 
-            canvasGroup.alpha = 1f;
+            canvasGroup.alpha = animationDefaults.Alpha(canvasGroup);
             gameObject.SetActive(true);
         }
 
         public virtual void SpawnLeft()
         {
+            animationDefaults.CaptureAlpha(canvasGroup);
             var offsetMin = new Vector2(-offset, 0);
             var offsetMax = new Vector2(-offset, 0);
             rectTransform.SetStretchedOffset(offsetMin, offsetMax);
-            rectTransform.localScale = new Vector3(1, scaleFactor, 1);
+            rectTransform.localScale = animationDefaults.Scale(rectTransform, new Vector3(1, scaleFactor, 1));
 
             canvasGroup.alpha = 0f;
             gameObject.SetActive(true);
@@ -145,10 +154,11 @@ namespace MrX.UI.Armory
 
         public virtual void SpawnRight()
         {
+            animationDefaults.CaptureAlpha(canvasGroup);
             var offsetMin = new Vector2(offset, 0);
             var offsetMax = new Vector2(offset, 0);
             rectTransform.SetStretchedOffset(offsetMin, offsetMax);
-            rectTransform.localScale = new Vector3(1, scaleFactor, 1);
+            rectTransform.localScale = animationDefaults.Scale(rectTransform, new Vector3(1, scaleFactor, 1));
 
             canvasGroup.alpha = 0f;
             gameObject.SetActive(true);

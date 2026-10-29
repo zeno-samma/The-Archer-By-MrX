@@ -1,4 +1,4 @@
-﻿using MrX.Extensions;
+using MrX.Extensions;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
@@ -31,6 +31,7 @@ namespace MrX.UI
         private RectTransform backgroundRectTransform;
         private RectTransform handleRectTransform;
 
+        private readonly UIAnimationDefaults animationDefaults = new UIAnimationDefaults();
         private bool isBeingUsed;
         public bool IsBeingUsed => isBeingUsed;
 
@@ -48,6 +49,8 @@ namespace MrX.UI
         private void Awake()
         {
             Instance = this;
+            animationDefaults.CaptureAlpha(backgroundImage, handleImage);
+            animationDefaults.CaptureAlpha(canvasGroup);
 
             baseRectTransform = GetComponent<RectTransform>();
             backgroundRectTransform = backgroundImage.rectTransform;
@@ -132,7 +135,7 @@ namespace MrX.UI
         public void Enable()
         {
             IsEnabled = true;
-            canvasGroup.alpha = 1;
+            canvasGroup.alpha = animationDefaults.Alpha(canvasGroup);
         }
 
         public void Disable()
@@ -153,13 +156,13 @@ namespace MrX.UI
         public void Hide()
         {
             backgroundImage.color = backgroundImage.color.SetAlpha(0f);
-            handleImage.color = backgroundImage.color.SetAlpha(0f);
+            handleImage.SetAlpha(0f);
         }
 
         public void Show()
         {
-            backgroundImage.SetAlpha(1f);
-            handleImage.SetAlpha(1f);
+            backgroundImage.SetAlpha(animationDefaults.Alpha(backgroundImage));
+            handleImage.SetAlpha(animationDefaults.Alpha(handleImage));
         }
     }
 }

@@ -20,6 +20,7 @@ namespace MrX.UI
         [SerializeField] protected GameObject rightGamepadIndicator;
 
         protected PoolComponent<T> selectablesPool;
+        private readonly InspectorVisibility inspectorVisibility = new InspectorVisibility();
 
         protected T CurrentSelectable { get; set; }
         protected List<T> SelectablesQueue { get; set; } = new List<T>();
@@ -32,6 +33,10 @@ namespace MrX.UI
 
         protected virtual void Awake()
         {
+            inspectorVisibility.Capture(leftButton.gameObject);
+            inspectorVisibility.Capture(rightButton.gameObject);
+            inspectorVisibility.Capture(leftGamepadIndicator);
+            inspectorVisibility.Capture(rightGamepadIndicator);
             selectablesPool = new PoolComponent<T>(selectablePrefab, 3, selectablesParent);
 
             leftButton.onClick.AddListener(OnLeftButtonClicked);
@@ -88,22 +93,11 @@ namespace MrX.UI
 
         protected virtual void InitButtons()
         {
-            if (GameController.InputManager.ActiveInput == Input.InputType.Gamepad)
-            {
-                leftButton.gameObject.SetActive(false);
-                rightButton.gameObject.SetActive(false);
-
-                leftGamepadIndicator.gameObject.SetActive(IsLeftAvailable());
-                rightGamepadIndicator.gameObject.SetActive(IsRightAvailable());
-            }
-            else
-            {
-                leftGamepadIndicator.gameObject.SetActive(false);
-                rightGamepadIndicator.gameObject.SetActive(false);
-
-                leftButton.gameObject.SetActive(IsLeftAvailable());
-                rightButton.gameObject.SetActive(IsRightAvailable());
-            }
+            bool gamepad = GameController.InputManager.ActiveInput == Input.InputType.Gamepad;
+            inspectorVisibility.SetVisible(leftButton.gameObject, !gamepad && IsLeftAvailable());
+            inspectorVisibility.SetVisible(rightButton.gameObject, !gamepad && IsRightAvailable());
+            inspectorVisibility.SetVisible(leftGamepadIndicator, gamepad && IsLeftAvailable());
+            inspectorVisibility.SetVisible(rightGamepadIndicator, gamepad && IsRightAvailable());
         }
 
         protected virtual void OnLeftButtonClicked()

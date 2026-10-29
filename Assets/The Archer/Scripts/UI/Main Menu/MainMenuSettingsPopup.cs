@@ -11,6 +11,17 @@ namespace MrX.UI
 {
     public class MainMenuSettingsPopup : MonoBehaviour
     {
+        private readonly UIAnimationDefaults animationDefaults = new UIAnimationDefaults();
+        private readonly MrX.UI.InspectorVisibility inspectorVisibility = new MrX.UI.InspectorVisibility();
+
+        protected virtual void Awake()
+        {
+            inspectorVisibility.Capture(closeButton);
+            inspectorVisibility.Capture(quitButton);
+            animationDefaults.Capture(panelRect, closeButton.transform);
+            animationDefaults.CaptureAlpha(backgroundImage);
+        }
+
         [SerializeField] protected Canvas canvas;
         [SerializeField] protected Image backgroundImage;
         [SerializeField] protected RectTransform panelRect;
@@ -38,19 +49,19 @@ namespace MrX.UI
             gameObject.SetActive(true);
 
             backgroundImage.SetAlpha(0);
-            backgroundImage.DoAlpha(1, 0.3f);
+            backgroundImage.DoAlpha(animationDefaults.Alpha(backgroundImage), 0.3f);
 
-            panelRect.localScale = new Vector3(0, 1, 1);
-            panelRect.DoLocalScale(Vector3.one, 0.3f).SetDelay(0.1f).SetEasing(EasingType.CubicOut);
+            panelRect.localScale = animationDefaults.Scale(panelRect, new Vector3(0, 1, 1));
+            panelRect.DoLocalScale(animationDefaults.Scale(panelRect), 0.3f).SetDelay(0.1f).SetEasing(EasingType.CubicOut);
 
             closeButton.enabled = false;
             quitButton.enabled = false;
 
             closeButton.transform.localScale = Vector3.zero;
-            closeButton.transform.DoLocalScale(Vector3.one, 0.3f).SetDelay(0.2f).SetEasing(EasingType.CubicOut).SetOnFinish(() =>
+            closeButton.transform.DoLocalScale(animationDefaults.Scale(closeButton.transform), 0.3f).SetDelay(0.2f).SetEasing(EasingType.CubicOut).SetOnFinish(() =>
             {
-                closeButton.enabled = true;
-                quitButton.enabled = true;
+                inspectorVisibility.SetEnabled(closeButton, true);
+                inspectorVisibility.SetEnabled(quitButton, true);
             });
 
             EventSystem.current.SetSelectedGameObject(soundToggle.gameObject);
@@ -63,7 +74,7 @@ namespace MrX.UI
 
             closeButton.transform.DoLocalScale(Vector3.zero, 0.3f).SetEasing(EasingType.CubicIn);
 
-            panelRect.DoLocalScale(new Vector3(0, 1, 1), 0.3f).SetEasing(EasingType.CubicIn).SetDelay(0.1f);
+            panelRect.DoLocalScale(animationDefaults.Scale(panelRect, new Vector3(0, 1, 1)), 0.3f).SetEasing(EasingType.CubicIn).SetDelay(0.1f);
 
             backgroundImage.DoAlpha(0, 0.3f).SetDelay(0.2f).SetOnFinish(() =>
             {

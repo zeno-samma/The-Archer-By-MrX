@@ -10,6 +10,17 @@ namespace MrX.UI
 {
     public class MainMenuStagesPageBehavior : MainMenuPageBehavior
     {
+        private readonly InspectorVisibility authoredVisibility = new InspectorVisibility();
+        protected override void Awake()
+        {
+            base.Awake();
+            if (attemptsText) authoredVisibility.Capture(attemptsText.gameObject);
+            if (playButton) authoredVisibility.Capture(playButton.gameObject);
+            if (purchaseButton) authoredVisibility.Capture(purchaseButton.gameObject);
+            if (infoButton) authoredVisibility.Capture(infoButton.gameObject);
+            authoredVisibility.Capture(settingsGamepadIndicator);
+            authoredVisibility.Capture(infoGamepadIndicator);
+        }
         [Space]
         [SerializeField] protected StageDatabase stageDatabase;
         [SerializeField] protected ArmoryHeroPanel heroPanel;
@@ -27,8 +38,9 @@ namespace MrX.UI
         [Header("Buttons")]
         [SerializeField] protected Button playButton;
         [SerializeField] protected RectTransform playButtonShineLine;
-        [SerializeField] protected Sprite playButtonEnabledSprite;
-        [SerializeField] protected Sprite playButtonDisabledSprite;
+        // Retained for asset compatibility; authored Image/Button states are authoritative.
+        [SerializeField, HideInInspector] protected Sprite playButtonEnabledSprite;
+        [SerializeField, HideInInspector] protected Sprite playButtonDisabledSprite;
 
         [Space]
         [SerializeField] protected CostButtonBehavior purchaseButton;
@@ -223,12 +235,12 @@ namespace MrX.UI
             var attemptsCount = StageSave.GetStageAttempts(stageData);
             if (attemptsCount > 0)
             {
-                attemptsText.gameObject.SetActive(true);
+                authoredVisibility.SetVisible(attemptsText.gameObject, true);
                 attemptsText.text = string.Format(attemptsFormat, attemptsCount);
             }
             else
             {
-                attemptsText.gameObject.SetActive(false);
+                authoredVisibility.SetVisible(attemptsText.gameObject, false);
             }
         }
 
@@ -238,12 +250,12 @@ namespace MrX.UI
 
             if (StageSave.IsStageUnlocked(stageData))
             {
-                infoButton.gameObject.SetActive(false);
+                authoredVisibility.SetVisible(infoButton.gameObject, false);
             }
             else
             {
-                infoButton.gameObject.SetActive(true);
-                infoGamepadIndicator.gameObject.SetActive(GameController.InputManager.ActiveInput == InputType.Gamepad);
+                authoredVisibility.SetVisible(infoButton.gameObject, true);
+                authoredVisibility.SetVisible(infoGamepadIndicator, GameController.InputManager.ActiveInput == InputType.Gamepad);
             }
         }
 
@@ -254,20 +266,19 @@ namespace MrX.UI
                 PurchaseCondition = stageData.GetPurchaseUnlockCondition();
                 if (PurchaseCondition == null)
                 {
-                    purchaseButton.gameObject.SetActive(false);
+                    authoredVisibility.SetVisible(purchaseButton.gameObject, false);
 
-                    playButton.gameObject.SetActive(true);
+                    authoredVisibility.SetVisible(playButton.gameObject, true);
                     playButton.interactable = false;
-                    playButton.image.sprite = playButtonDisabledSprite;
                 }
                 else
                 {
                     purchaseButton.SetCurrency(PurchaseCondition.Currency);
                     purchaseButton.SetCost(PurchaseCondition.Cost);
 
-                    playButton.gameObject.SetActive(false);
+                    authoredVisibility.SetVisible(playButton.gameObject, false);
 
-                    purchaseButton.gameObject.SetActive(true);
+                    authoredVisibility.SetVisible(purchaseButton.gameObject, true);
 
                     if (purchaseButton.ButtonEnabled)
                     {
@@ -277,11 +288,10 @@ namespace MrX.UI
             }
             else
             {
-                purchaseButton.gameObject.SetActive(false);
+                authoredVisibility.SetVisible(purchaseButton.gameObject, false);
 
-                playButton.gameObject.SetActive(true);
+                authoredVisibility.SetVisible(playButton.gameObject, true);
                 playButton.interactable = true;
-                playButton.image.sprite = playButtonEnabledSprite;
 
                 SelectPlayButton();
             }
@@ -289,17 +299,15 @@ namespace MrX.UI
 
         protected virtual void InitButtonsWithoutPurchaseButton(StageData stageData)
         {
-            playButton.gameObject.SetActive(true);
+            authoredVisibility.SetVisible(playButton.gameObject, true);
 
             if (!StageSave.IsStageUnlocked(stageData))
             {
                 playButton.interactable = false;
-                playButton.image.sprite = playButtonDisabledSprite;
             }
             else
             {
                 playButton.interactable = true;
-                playButton.image.sprite = playButtonEnabledSprite;
 
                 SelectPlayButton();
             }
@@ -441,11 +449,10 @@ namespace MrX.UI
             var stageData = StageDatabase.GetStageData(StageSave.SelectedStageId);
             StageSave.UnlockStage(stageData);
 
-            purchaseButton.gameObject.SetActive(false);
+            authoredVisibility.SetVisible(purchaseButton.gameObject, false);
 
-            playButton.gameObject.SetActive(true);
+            authoredVisibility.SetVisible(playButton.gameObject, true);
             playButton.interactable = true;
-            playButton.image.sprite = playButtonEnabledSprite;
 
             InitStage(StageSave.SelectedStageId);
             stageSelector.InitStage(StageSave.SelectedStageId);
@@ -492,11 +499,11 @@ namespace MrX.UI
                 EventSystem.current.SetSelectedGameObject(playButton.gameObject);
             }
 
-            settingsGamepadIndicator.SetActive(inputType == InputType.Gamepad);
+            authoredVisibility.SetVisible(settingsGamepadIndicator, inputType == InputType.Gamepad);
 
             if (infoButton != null && infoButton.gameObject.activeSelf)
             {
-                infoGamepadIndicator.SetActive(inputType == InputType.Gamepad);
+                authoredVisibility.SetVisible(infoGamepadIndicator, inputType == InputType.Gamepad);
             }
         }
 

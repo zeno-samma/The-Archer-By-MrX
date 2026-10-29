@@ -48,6 +48,36 @@ namespace MrX.UI
         private float Scale => page.rect.width / Mathf.Max(1, layoutReferenceWidth);
         private static readonly Color Ink = new Color(.12f, .23f, .56f);
         private ArmoryManager Armory => GameController.ArmoryManager;
+        private readonly InspectorVisibility inspectorVisibility = new InspectorVisibility();
+        private bool visibilityCaptured;
+
+        private void Awake() => CaptureInspectorVisibility();
+
+        private void CaptureInspectorVisibility()
+        {
+            if (visibilityCaptured) return;
+            visibilityCaptured = true;
+            foreach (var button in heroButtons)
+            {
+                if (button == null) continue;
+                inspectorVisibility.Capture(button.gameObject);
+                var locked = button.transform.Find("Locked Badge");
+                var selected = button.transform.Find("Selected Badge");
+                if (locked != null) inspectorVisibility.Capture(locked.gameObject);
+                if (selected != null) inspectorVisibility.Capture(selected.gameObject);
+            }
+            foreach (var cell in cells)
+            {
+                if (cell == null || cell.button == null) continue;
+                // Pool roots keep their own lifecycle; capture their decorations before filtering.
+                inspectorVisibility.Capture(cell.button.image);
+                inspectorVisibility.Capture(cell.icon);
+                if (cell.label != null) inspectorVisibility.Capture(cell.label.gameObject);
+                if (cell.lockIcon != null) inspectorVisibility.Capture(cell.lockIcon.gameObject);
+                var inset = cell.button.transform.Find("Navy Inset");
+                if (inset != null) inspectorVisibility.Capture(inset.gameObject);
+            }
+        }
 
 #if UNITY_EDITOR
         public void Build(RectTransform owner, RectTransform existingHero, ArmoryDashboardDatabase configuration)
@@ -129,6 +159,7 @@ namespace MrX.UI
         private void Wire()
         {
             if (wired) return; wired = true;
+            CaptureInspectorVisibility();
             details.onClick.AddListener(ShowDetails); expand.onClick.AddListener(ShowExpansion);
             filterButton.onClick.AddListener(() => { filter = filter == null ? ItemType.Weapon : (int)filter.Value >= 3 ? (ItemType?)null : (ItemType)((int)filter.Value + 1); filterButton.GetComponentInChildren<TMP_Text>().text = filter?.ToString().ToUpperInvariant() ?? "ALL"; Refresh(); });
             scroll.onValueChanged.AddListener(OnScroll);
@@ -143,6 +174,7 @@ namespace MrX.UI
         }
         public void Show()
         {
+            if (!enabled) return;
             Wire(); gameObject.SetActive(true);
             if (!listening)
             {
@@ -165,7 +197,7 @@ namespace MrX.UI
                 if (Armory.Crafting != null) Armory.Crafting.Changed -= MarkDirty;
                 foreach (var upgrade in GameController.UpgradesManager.GetAllUpgrades()) upgrade.onUpgradeLevelChanged -= OnUpgrade;
             }
-            UnbindSaves(); enabled = false;
+            UnbindSaves();
         }
         private void BindSaves()
         {
@@ -180,27 +212,28 @@ namespace MrX.UI
             foreach (var hero in observedHeroes) hero.OnHeroLevelChanged -= OnHeroLevel;
             observedItems.Clear(); observedHeroes.Clear();
         }
-        public void MarkDirty() { if (listening) { dirty = true; enabled = true; } }
+        public void MarkDirty() { if (listening) { dirty = true; } }
         private void OnItemLevel(ItemSaveData item, int level) => MarkDirty();
         private void OnHeroLevel(HeroSaveData hero, int level) => MarkDirty();
         private void OnUpgrade(int level) => MarkDirty();
         private void LateUpdate() { if (dirty && listening) { dirty = false; BindSaves(); Refresh(); } }
         public void Focus(bool heroes = false)
         {
-            var button = heroes ? firstHero : cells.Count > 0 && cells[0].button.interactable ? cells[0].button : details;
+            var button = heroes
+                ? heroButtons.Find(value => value != null && value.isActiveAndEnabled && value.IsInteractable())
+                : cells.Count > 0 && cells[0].button.isActiveAndEnabled && cells[0].button.IsInteractable() ? cells[0].button : details;
+            if (button == null) button = details;
             if (button && EventSystem.current) EventSystem.current.SetSelectedGameObject(button.gameObject);
         }
         private void Refresh()
         {
             for (int i = 0; i < heroButtons.Count; i++)
-            { var rosterHero = Armory.GetAllHeroDataList().Find(h => h.Id == heroIds[i]); heroButtons[i].gameObject.SetActive(rosterHero != null && !rosterHero.HideInRoster);
+            { var rosterHero = Armory.GetAllHeroDataList().Find(h => h.Id == heroIds[i]); inspectorVisibility.SetVisible(heroButtons[i].gameObject, rosterHero != null && !rosterHero.HideInRoster);
                 var lockBadge = heroButtons[i].transform.Find("Locked Badge");
                 var selected = heroButtons[i].transform.Find("Selected Badge");
-                if (lockBadge != null) lockBadge.gameObject.SetActive(rosterHero != null && !Armory.GetHeroSave(rosterHero.Id).IsUnlocked);
-                if (selected != null) selected.gameObject.SetActive(rosterHero == Armory.EquippedHero);
+                if (lockBadge != null) inspectorVisibility.SetVisible(lockBadge.gameObject, rosterHero != null && !Armory.GetHeroSave(rosterHero.Id).IsUnlocked);
+                if (selected != null) inspectorVisibility.SetVisible(selected.gameObject, rosterHero == Armory.EquippedHero);
             }
-            enabled = true;
-            var oldStats = heroPanel.Find("Stats Background"); if (oldStats) oldStats.gameObject.SetActive(false);
             var snapshot = ArmoryStatsSnapshot.Current(); var t = snapshot.Total; var b = snapshot.HeroOnly;
             float[] values = { t.AttackDamageStat.Value, t.MaxHPStat.Value, t.CritChanceStat.Value, t.MovementSpeedStat.Value };
             float[] basic = { b.AttackDamageStat.Value, b.MaxHPStat.Value, b.CritChanceStat.Value, b.MovementSpeedStat.Value };
@@ -276,11 +309,11 @@ namespace MrX.UI
                 cell.stack = stackIndex >= 0 && stackIndex < visibleStacks.Count ? visibleStacks[stackIndex] : null;
                 bool empty = cell.item == null && cell.stack == null;
                 var inset = cell.button.transform.Find("Navy Inset");
-                if (inset != null) inset.gameObject.SetActive(!empty);
-                cell.button.interactable = !empty; cell.button.image.enabled = !empty;
+                if (inset != null) inspectorVisibility.SetVisible(inset.gameObject, !empty);
+                cell.button.interactable = !empty;
+                inspectorVisibility.SetVisible(cell.button.image, !empty || art.emptyFrame != null);
                 if (art.emptyFrame != null)
                 {
-                    cell.button.image.enabled = true;
                     cell.button.image.sprite = empty ? art.emptyFrame : cell.item != null ? art.equipmentFrame : art.stackFrame;
                     cell.button.image.color = cell.frameColor;
                     if(cell.item != null && art.rarityFrames != null)
@@ -292,18 +325,18 @@ namespace MrX.UI
                 }
                 cell.icon.sprite = empty ? art.emptySlotIcon : cell.item != null ? Armory.GetItemData(cell.item.Id).Icon : cell.stack.icon;
                 cell.icon.color = cell.iconColor;
-                cell.icon.enabled = cell.icon.sprite != null;
                 if (empty) Place(cell.icon.rectTransform, emptyIconBounds.x, emptyIconBounds.y, emptyIconBounds.z, emptyIconBounds.w);
                 else cell.iconPlacement.Apply(cell.icon.rectTransform);
                 if (empty && art.emptyPlus != null)
                 {
-                    cell.icon.sprite = art.emptyPlus; cell.icon.enabled = true;
+                    cell.icon.sprite = art.emptyPlus;
                     cell.icon.color = emptyPlusColor;
                     Place(cell.icon.rectTransform, emptyPlusBounds.x, emptyPlusBounds.y, emptyPlusBounds.z, emptyPlusBounds.w);
                 }
-                cell.label.gameObject.SetActive(!empty);
+                inspectorVisibility.SetVisible(cell.icon, cell.icon.sprite != null);
+                inspectorVisibility.SetVisible(cell.label.gameObject, !empty);
                 cell.label.text = cell.item != null ? "Lv." + (cell.item.Level + 1) : cell.stack != null ? "× " + cell.stack.amount.ToString("N0") : "";
-                cell.lockIcon.gameObject.SetActive(cell.item != null && cell.item.IsEquipped);
+                inspectorVisibility.SetVisible(cell.lockIcon.gameObject, cell.item != null && cell.item.IsEquipped);
             }
         }
         private void ShowStack(InventoryStack stack)

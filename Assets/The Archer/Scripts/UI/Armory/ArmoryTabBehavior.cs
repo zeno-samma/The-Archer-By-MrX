@@ -8,6 +8,7 @@ namespace MrX.UI
 {
     public class ArmoryTabBehavior : MonoBehaviour
     {
+        private readonly UIAnimationDefaults animationDefaults = new UIAnimationDefaults();
         [SerializeField] protected Button button;
 
         [Header("Background")]
@@ -34,6 +35,7 @@ namespace MrX.UI
 
         protected virtual void Awake()
         {
+            animationDefaults.Capture(topBackgroundImage.rectTransform);
             button.onClick.AddListener(OnClicked);
         }
 
@@ -72,8 +74,8 @@ namespace MrX.UI
             bottomBackgroundImage.color = deselectedBackgroundColor;
 
             topBackgroundImage.color = selectedBackgroundColor;
-            topBackgroundImage.rectTransform.localScale = new Vector3(0, 0.7f, 1f);
-            scaleEasingCoroutine = topBackgroundImage.rectTransform.DoLocalScale(Vector3.one, 0.2f).SetEasing(EasingType.CubicOut).SetOnFinish(OnSelectFinished);
+            topBackgroundImage.rectTransform.localScale = animationDefaults.Scale(topBackgroundImage.rectTransform, new Vector3(0, 0.7f, 1f));
+            scaleEasingCoroutine = topBackgroundImage.rectTransform.DoLocalScale(animationDefaults.Scale(topBackgroundImage.rectTransform), 0.2f).SetEasing(EasingType.CubicOut).SetOnFinish(OnSelectFinished);
 
             button.enabled = false;
         }
@@ -96,8 +98,8 @@ namespace MrX.UI
             bottomBackgroundImage.color = deselectedBackgroundColor;
 
             topBackgroundImage.color = selectedBackgroundColor;
-            topBackgroundImage.rectTransform.localScale = Vector3.one;
-            scaleEasingCoroutine = topBackgroundImage.rectTransform.DoLocalScale(new Vector3(0, 0.7f, 1f), 0.2f).SetEasing(EasingType.CubicOut).SetOnFinish(OnDeselectFinished);
+            topBackgroundImage.rectTransform.localScale = animationDefaults.Scale(topBackgroundImage.rectTransform);
+            scaleEasingCoroutine = topBackgroundImage.rectTransform.DoLocalScale(animationDefaults.Scale(topBackgroundImage.rectTransform, new Vector3(0, 0.7f, 1f)), 0.2f).SetEasing(EasingType.CubicOut).SetOnFinish(OnDeselectFinished);
 
             button.enabled = true;
         }
@@ -115,7 +117,7 @@ namespace MrX.UI
 
         protected virtual void OnSelectFinished()
         {
-            topBackgroundImage.rectTransform.localScale = Vector3.one;
+            topBackgroundImage.rectTransform.localScale = animationDefaults.Scale(topBackgroundImage.rectTransform);
             topBackgroundImage.color = selectedBackgroundColor;
 
             bottomBackgroundImage.enabled = false;
@@ -123,7 +125,7 @@ namespace MrX.UI
 
         protected virtual void OnDeselectFinished()
         {
-            topBackgroundImage.rectTransform.localScale = Vector3.one;
+            topBackgroundImage.rectTransform.localScale = animationDefaults.Scale(topBackgroundImage.rectTransform);
             topBackgroundImage.color = deselectedBackgroundColor;
 
             bottomBackgroundImage.enabled = false;

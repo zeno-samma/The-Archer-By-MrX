@@ -8,8 +8,9 @@ namespace MrX.UI
     public class CostButtonBehavior : MonoBehaviour
     {
         [SerializeField] protected Button button;
-        [SerializeField] protected Sprite activeButtonSprite;
-        [SerializeField] protected Sprite disabledButtonSprite;
+        // Legacy serialized references only. Image and Button own their appearance.
+        [SerializeField, HideInInspector] protected Sprite activeButtonSprite;
+        [SerializeField, HideInInspector] protected Sprite disabledButtonSprite;
 
         [Space]
         [SerializeField] protected CurrencyId currency = "gold";
@@ -20,7 +21,7 @@ namespace MrX.UI
         public Selectable Selectable => button;
 
         public bool IsActive { get; protected set; }
-        public bool ButtonEnabled { get => button.enabled; set => button.enabled = value; }
+        public bool ButtonEnabled { get => button.enabled && button.interactable; set => button.interactable = value; }
 
         public bool HasEnoughMoney => HasEnough();
 
@@ -131,13 +132,11 @@ namespace MrX.UI
 
             var currencyAmount = Currency.Amount;
             ButtonEnabled = currencyAmount >= costLabel.Amount;
-            button.image.sprite = ButtonEnabled ? activeButtonSprite : disabledButtonSprite;
         }
 
         public virtual void DisableButton()
         {
             ButtonEnabled = false;
-            button.image.sprite = ButtonEnabled ? activeButtonSprite : disabledButtonSprite;
         }
     }
 }

@@ -6,6 +6,7 @@ namespace MrX
 {
     public class AnimatedTitleUI : MonoBehaviour
     {
+        private readonly UIAnimationDefaults animationDefaults = new UIAnimationDefaults();
         [SerializeField] protected CanvasGroup titleCanvasGroup;
         [SerializeField] protected RectTransform titleRect;
         [SerializeField] protected RectTransform titleGradientRect;
@@ -49,6 +50,8 @@ namespace MrX
 
         protected virtual void Awake()
         {
+            animationDefaults.Capture(titleRect, titleGradientRect);
+            animationDefaults.CaptureAlpha(titleCanvasGroup);
             titleLinePosition = titleShineRect.anchoredPosition;
             titleTextValue = titleText.text;
         }
@@ -66,18 +69,18 @@ namespace MrX
         public virtual void Show()
         {
             rectScaleEasingCoroutine =
-                titleRect.DoLocalScale(Vector3.one, titleRectScaleDuration)
+                titleRect.DoLocalScale(animationDefaults.Scale(titleRect), titleRectScaleDuration)
                 .SetDelay(titleRectScaleDelay)
                 .SetUnscaledTime(true)
                 .SetEasing(EasingType.SineOut);
 
             fadeInEasingCoroutine =
-                titleCanvasGroup.DoAlpha(1, titleCanvasGroupFadeInDuration)
+                titleCanvasGroup.DoAlpha(animationDefaults.Alpha(titleCanvasGroup), titleCanvasGroupFadeInDuration)
                 .SetDelay(titleCanvasGroupFadeInDelay)
                 .SetUnscaledTime(true);
 
             gradientScaleEasingCoroutine =
-                titleGradientRect.DoLocalScale(Vector3.one, titleGradientScaleDuration)
+                titleGradientRect.DoLocalScale(animationDefaults.Scale(titleGradientRect), titleGradientScaleDuration)
                 .SetDelay(titleGradientScaleDelay)
                 .SetUnscaledTime(true)
                 .SetEasing(EasingType.SineOut);
@@ -106,7 +109,7 @@ namespace MrX
                 .SetUnscaledTime(true);
 
             rectScaleEasingCoroutine =
-                titleRect.DoLocalScale(new Vector3(0, 1), titleRectHideDuration)
+                titleRect.DoLocalScale(animationDefaults.Scale(titleRect, new Vector3(0, 1, 1)), titleRectHideDuration)
                 .SetDelay(titleRectHideDelay)
                 .SetUnscaledTime(true)
                 .SetEasing(EasingType.SineIn);
@@ -117,7 +120,7 @@ namespace MrX
                 .SetUnscaledTime(true);
 
             gradientScaleEasingCoroutine =
-                titleGradientRect.DoLocalScale(new Vector3(0, 1), titleGradientHideDuration)
+                titleGradientRect.DoLocalScale(animationDefaults.Scale(titleGradientRect, new Vector3(0, 1, 1)), titleGradientHideDuration)
                 .SetDelay(titleGradientHideDelay)
                 .SetUnscaledTime(true)
                 .SetEasing(EasingType.SineIn);
@@ -130,17 +133,17 @@ namespace MrX
             gradientScaleEasingCoroutine.StopIfExists();
             lineEasingCoroutine.StopIfExists();
 
-            titleRect.localScale = Vector3.one;
-            titleCanvasGroup.alpha = 1;
-            titleGradientRect.localScale = Vector3.one;
+            titleRect.localScale = animationDefaults.Scale(titleRect);
+            titleCanvasGroup.alpha = animationDefaults.Alpha(titleCanvasGroup);
+            titleGradientRect.localScale = animationDefaults.Scale(titleGradientRect);
 
             titleShineRect.anchoredPosition = titleLinePosition;
         }
 
         public virtual void ResetUI()
         {
-            titleRect.localScale = new Vector3(0, 1f);
-            titleGradientRect.localScale = new Vector3(0, 1f);
+            titleRect.localScale = animationDefaults.Scale(titleRect, new Vector3(0, 1, 1));
+            titleGradientRect.localScale = animationDefaults.Scale(titleGradientRect, new Vector3(0, 1, 1));
             titleCanvasGroup.alpha = 0;
             titleShineRect.anchoredPosition = titleLinePosition;
         }

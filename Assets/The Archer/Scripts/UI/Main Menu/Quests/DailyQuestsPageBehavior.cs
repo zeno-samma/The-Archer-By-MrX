@@ -10,6 +10,8 @@ namespace MrX.UI
 {
     public class DailyQuestsPageBehavior : MainMenuPageBehavior
     {
+        private readonly InspectorVisibility authoredVisibility = new InspectorVisibility();
+        [SerializeField, Tooltip("Opt in to gameplay state colors. Off preserves Image/TMP colors authored in Inspector.")] private bool useStateColors;
         [SerializeField] private DailyQuestsDatabase database;
         [SerializeField] private TMP_Text resetText;
         [SerializeField] private TMP_Text completionText;
@@ -137,8 +139,7 @@ namespace MrX.UI
                 row.icon.sprite = quest.icon != null ? quest.icon : database.questIcon;
                 row.action.text = claimed ? "CLAIMED" : complete ? "CLAIM" : "GO";
                 row.button.interactable = !claimed;
-                row.buttonImage.sprite = complete && !claimed ? database.claimButtonSprite : database.blueButtonSprite;
-                row.buttonImage.color = claimed ? claimedButtonColor : complete ? Color.white : incompleteButtonColor;
+                if (useStateColors) row.buttonImage.color = claimed ? claimedButtonColor : complete ? Color.white : incompleteButtonColor;
             }
             foreach (var chest in chests)
             {
@@ -147,9 +148,9 @@ namespace MrX.UI
                 var claimed = manager.Save.IsMilestoneClaimed(data.id);
                 var available = completed >= data.requiredCompletions;
                 chest.button.interactable = available && !claimed;
-                chest.icon.color = claimed ? claimedChestColor : available ? Color.white : lockedChestColor;
+                if (useStateColors) chest.icon.color = claimed ? claimedChestColor : available ? Color.white : lockedChestColor;
                 chest.state.text = claimed ? "DONE" : $"{data.requiredCompletions}\n<size=70%>+{data.reward.Amount}</size>";
-                chest.state.color = claimed ? claimedTextColor : Ink;
+                if (useStateColors) chest.state.color = claimed ? claimedTextColor : Ink;
             }
             UpdateNavigation();
         }
@@ -233,8 +234,8 @@ namespace MrX.UI
         }
 
         // Progress binding only; all graphics and references are authored in the prefab.
-        private static void Fill(RectTransform fill, float value)
-        { var fraction = Mathf.Clamp01(value); fill.anchorMax = new Vector2(fraction, 1); fill.gameObject.SetActive(fraction > 0); }
+        private void Fill(RectTransform fill, float value)
+        { var fraction = Mathf.Clamp01(value); fill.anchorMax = new Vector2(fraction, 1); authoredVisibility.SetVisible(fill.gameObject, fraction > 0); }
 #if UNITY_EDITOR
         // Editor authoring only. Saved prefab instances provide all runtime UI.
         public static DailyQuestsPageBehavior Create(Transform parent, DailyQuestsDatabase data)

@@ -9,6 +9,8 @@ namespace MrX.UI
 {
     public class PauseScreenBehavior : MonoBehaviour
     {
+        private readonly UIAnimationDefaults animationDefaults = new UIAnimationDefaults();
+        private readonly MrX.UI.InspectorVisibility inspectorVisibility = new MrX.UI.InspectorVisibility();
         [SerializeField] protected Image backgroundImage;
 
         [Header("Title")]
@@ -66,6 +68,9 @@ namespace MrX.UI
 
         protected virtual void Awake()
         {
+            inspectorVisibility.Capture(resumeButton);
+            inspectorVisibility.Capture(quitButton);
+            animationDefaults.Capture(titleRect, abilitiesRect, settingsRect, buttonsRect);
             backgroundAlpha = backgroundImage.color.a;
 
             resumeButton.onClick.AddListener(OnResumeButtonClicked);
@@ -142,13 +147,13 @@ namespace MrX.UI
                 .SetUnscaledTime(true);
 
             titleRect.localScale = Vector3.zero;
-            titleRect.DoLocalScale(Vector3.one, titleRectScaleDuration)
+            titleRect.DoLocalScale(animationDefaults.Scale(titleRect), titleRectScaleDuration)
                 .SetDelay(titleRectScaleDelay)
                 .SetUnscaledTime(true)
                 .SetEasingCurve(titleRectScaleEasing);
 
             abilitiesRect.localScale = Vector3.zero;
-            abilitiesRect.DoLocalScale(Vector3.one, abilitiesRectScaleDuration)
+            abilitiesRect.DoLocalScale(animationDefaults.Scale(abilitiesRect), abilitiesRectScaleDuration)
                 .SetDelay(abilitiesRectScaleDelay)
                 .SetUnscaledTime(true)
                 .SetEasingCurve(abilitiesRectScaleEasing);
@@ -156,13 +161,13 @@ namespace MrX.UI
             abilitiesGrid.Show();
 
             settingsRect.localScale = Vector3.zero;
-            settingsRect.DoLocalScale(Vector3.one, settingsRectScaleDuration)
+            settingsRect.DoLocalScale(animationDefaults.Scale(settingsRect), settingsRectScaleDuration)
                 .SetDelay(settingsRectScaleDelay)
                 .SetUnscaledTime(true)
                 .SetEasingCurve(settingsRectScaleEasing);
 
             buttonsRect.localScale = Vector3.zero;
-            buttonsRect.DoLocalScale(Vector3.one, buttonsRectScaleDuration)
+            buttonsRect.DoLocalScale(animationDefaults.Scale(buttonsRect), buttonsRectScaleDuration)
                 .SetDelay(buttonsRectScaleDelay)
                 .SetUnscaledTime(true)
                 .SetEasingCurve(buttonsRectScaleEasing)
@@ -179,7 +184,7 @@ namespace MrX.UI
                 .SetOnFinish(() =>
                 {
                     resumeButtonShineRect.anchoredPosition = resumeShineRectPosition;
-                    resumeButton.enabled = true;
+                    inspectorVisibility.SetEnabled(resumeButton, true);
                 });
 
             quitButtonShineRect.anchoredPosition = quitShineRectPosition;
@@ -189,7 +194,7 @@ namespace MrX.UI
                 .SetOnFinish(() =>
                 {
                     quitButtonShineRect.anchoredPosition = quitShineRectPosition;
-                    quitButton.enabled = true;
+                    inspectorVisibility.SetEnabled(quitButton, true);
                 });
 
             IsOpen = true;

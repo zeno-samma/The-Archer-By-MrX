@@ -10,6 +10,7 @@ namespace MrX.Abilities.UI
 {
     public class AbilitySelectorSlotBehavior : MonoBehaviour
     {
+        private readonly UIAnimationDefaults animationDefaults = new UIAnimationDefaults();
         [SerializeField] protected GameObject abilityCardPrefab;
         [SerializeField] protected Image gradientImage;
 
@@ -67,6 +68,7 @@ namespace MrX.Abilities.UI
 
         protected virtual void Awake()
         {
+            animationDefaults.Capture(gradientImage.rectTransform);
             cardsPool = new PoolComponent<AbilityCardBehavior>(abilityCardPrefab, 3, transform, true);
 
             initialGradientColor = gradientImage.color;
@@ -89,7 +91,7 @@ namespace MrX.Abilities.UI
 
             for (int i = 0; i < cards.Count; i++)
             {
-                cards[i].Card.RectTransform.localScale = Vector3.one;
+                cards[i].Card.RectTransform.localScale = cards[i].Card.AuthoredScale;
             }
         }
 
@@ -132,7 +134,7 @@ namespace MrX.Abilities.UI
             var cardHeightOffset = new Vector2(0, cardSize.y);
 
             highestCard.SetAlphaParameters(200, 200 - fadeSize, true);
-            highestCard.CanvasGroup.alpha = 1;
+            highestCard.CanvasGroup.alpha = highestCard.AuthoredAlpha;
 
             nextCardSpawnTriggerY = cardPosition.y - cardSize.y + hiddenCardMargin * 2 - scrollingSpacing;
             var cardDisappearTriggerY = -cardPosition.y;
@@ -181,7 +183,7 @@ namespace MrX.Abilities.UI
 
                         if (card.Card != MainCard)
                         {
-                            card.Card.CanvasGroup.alpha = otherCardsAlpha;
+                            card.Card.CanvasGroup.alpha = card.Card.AuthoredAlpha * otherCardsAlpha;
                         }
                     }
                 }
@@ -195,7 +197,7 @@ namespace MrX.Abilities.UI
 
                     if (card != MainCard)
                     {
-                        card.transform.localScale = Vector3.one * cardsScale;
+                        card.transform.localScale = card.AuthoredScale * cardsScale;
                     }
 
                     if (card.RectTransform.anchoredPosition.y < cardDisappearTriggerY)
@@ -220,7 +222,7 @@ namespace MrX.Abilities.UI
                     highestCard.ShowHidden(hiddenCardMargin);
                     highestCard.RectTransform.anchoredPosition = cardPosition + new Vector2(0, difference);
                     highestCard.SetAlphaParameters(200, 200 - fadeSize, true);
-                    highestCard.CanvasGroup.alpha = 1;
+                    highestCard.CanvasGroup.alpha = highestCard.AuthoredAlpha;
 
                     LastCardSpawnTime = Time.unscaledTime;
 
@@ -251,7 +253,7 @@ namespace MrX.Abilities.UI
                 .SetUnscaledTime(true);
 
             flashGradientScaleEasingCoroutine =
-                gradientImage.rectTransform.DoLocalScale(Vector3.one * flashGradientScale, flashInDuration)
+                gradientImage.rectTransform.DoLocalScale(animationDefaults.Scale(gradientImage.rectTransform) * flashGradientScale, flashInDuration)
                 .SetUnscaledTime(true)
                 .SetEasing(flashInEasing)
                 .SetOnFinish(OnFlashInAminationEnded);
@@ -265,7 +267,7 @@ namespace MrX.Abilities.UI
         protected virtual void OnFlashInAminationEnded()
         {
             flashGradientScaleEasingCoroutine =
-                gradientImage.rectTransform.DoLocalScale(Vector3.one, flashOutDuration)
+                gradientImage.rectTransform.DoLocalScale(animationDefaults.Scale(gradientImage.rectTransform), flashOutDuration)
                 .SetUnscaledTime(true)
                 .SetEasing(flashOutEasing);
 

@@ -1,4 +1,5 @@
 using MrX.Easing;
+using MrX.Extensions;
 using MrX.Input;
 using UnityEngine;
 using UnityEngine.Events;
@@ -9,6 +10,14 @@ namespace MrX
 {
     public class ContinuePlayingPopup : MonoBehaviour
     {
+        private readonly UIAnimationDefaults animationDefaults = new UIAnimationDefaults();
+        private readonly MrX.UI.InspectorVisibility visibility = new MrX.UI.InspectorVisibility();
+        protected virtual void Awake()
+        {
+            animationDefaults.Capture(panelRect, titleRect);
+            animationDefaults.CaptureAlpha(backgroundImage);
+            visibility.Capture(yesButton); visibility.Capture(noButton);
+        }
         [SerializeField] protected RectTransform panelRect;
         [SerializeField] protected RectTransform titleRect;
         [SerializeField] protected Image backgroundImage;
@@ -29,7 +38,12 @@ namespace MrX
 
         public virtual void Show()
         {
+            if (!enabled) return;
             gameObject.SetActive(true);
+            panelRect.localScale = animationDefaults.Scale(panelRect);
+            titleRect.localScale = animationDefaults.Scale(titleRect);
+            backgroundImage.SetAlpha(animationDefaults.Alpha(backgroundImage));
+            visibility.SetEnabled(yesButton, true); visibility.SetEnabled(noButton, true);
 
             EventSystem.current.SetSelectedGameObject(yesButton.gameObject);
 
@@ -41,8 +55,8 @@ namespace MrX
             yesButton.enabled = false;
             noButton.enabled = false;
 
-            panelRect.DoLocalScale(new Vector3(0, 1, 1), 0.3f).SetEasing(EasingType.CubicIn);
-            titleRect.DoLocalScale(new Vector3(0, 1, 1), 0.3f).SetEasing(EasingType.CubicIn).SetDelay(0.1f);
+            panelRect.DoLocalScale(animationDefaults.Scale(panelRect, new Vector3(0, 1, 1)), 0.3f).SetEasing(EasingType.CubicIn);
+            titleRect.DoLocalScale(animationDefaults.Scale(titleRect, new Vector3(0, 1, 1)), 0.3f).SetEasing(EasingType.CubicIn).SetDelay(0.1f);
             backgroundImage.DoAlpha(0, 0.3f).SetDelay(0.2f).SetOnFinish(OnPopupHidden);
         }
 

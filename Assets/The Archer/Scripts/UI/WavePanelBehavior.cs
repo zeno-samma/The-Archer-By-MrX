@@ -7,6 +7,7 @@ namespace MrX.UI
 {
     public class WavePanelBehavior : MonoBehaviour
     {
+        private readonly UIAnimationDefaults animationDefaults = new UIAnimationDefaults();
         [SerializeField] protected GameObject waveIndicatorPrefab;
         [SerializeField] protected RectTransform panelRect;
         [SerializeField] protected RectTransform maskRect;
@@ -16,6 +17,7 @@ namespace MrX.UI
 
         protected virtual void Awake()
         {
+            animationDefaults.Capture(transform);
             waveIndicatorPool = new PoolComponent<WaveIndicatorBehavior>(waveIndicatorPrefab, 4, maskRect);
 
             transform.localScale = Vector3.zero;
@@ -29,7 +31,7 @@ namespace MrX.UI
         protected virtual IEnumerator AnimationCoroutine()
         {
             transform.localScale = Vector3.zero;
-            transform.DoLocalScale(Vector3.one, 0.3f).SetEasing(EasingType.CubicOut);
+            transform.DoLocalScale(animationDefaults.Scale(transform), 0.3f).SetEasing(EasingType.CubicOut);
 
             waveIndicatorPool.DisableAllEntities();
 
@@ -42,7 +44,7 @@ namespace MrX.UI
 
             var currentWaveIndicator = waveIndicatorPool.GetEntity();
             currentWaveIndicator.RectTransform.anchoredPosition = Vector2.up * 5;
-            currentWaveIndicator.transform.localScale = Vector3.one * 1.3f;
+            currentWaveIndicator.transform.localScale = animationDefaults.Scale(currentWaveIndicator.transform) * 1.3f;
             currentWaveIndicator.Init(currentWave, currentIndex + 1);
             currentWaveIndicator.SetMaskable(false);
             currentWaveIndicator.ShowNumber(true);
@@ -52,7 +54,7 @@ namespace MrX.UI
             {
                 prevWaveIndicator = waveIndicatorPool.GetEntity();
                 prevWaveIndicator.RectTransform.anchoredPosition = new Vector2(-100, 5);
-                prevWaveIndicator.transform.localScale = Vector3.one * 1f;
+                prevWaveIndicator.transform.localScale = animationDefaults.Scale(prevWaveIndicator.transform);
                 prevWaveIndicator.Init(prevWave, currentIndex);
                 prevWaveIndicator.SetMaskable(true);
                 prevWaveIndicator.HideNumber(true);
@@ -60,7 +62,7 @@ namespace MrX.UI
 
             var nextWaveIndicator = waveIndicatorPool.GetEntity();
             nextWaveIndicator.RectTransform.anchoredPosition = new Vector2(100, 5);
-            nextWaveIndicator.transform.localScale = Vector3.one;
+            nextWaveIndicator.transform.localScale = animationDefaults.Scale(nextWaveIndicator.transform);
             nextWaveIndicator.Init(nextWave, currentIndex + 2);
             nextWaveIndicator.SetMaskable(true);
             nextWaveIndicator.HideNumber(true);
@@ -70,7 +72,7 @@ namespace MrX.UI
             {
                 nextNextWaveIndicator = waveIndicatorPool.GetEntity();
                 nextNextWaveIndicator.RectTransform.anchoredPosition = new Vector2(200, 5);
-                nextNextWaveIndicator.transform.localScale = Vector3.one;
+                nextNextWaveIndicator.transform.localScale = animationDefaults.Scale(nextNextWaveIndicator.transform);
                 nextNextWaveIndicator.Init(nextNextWave, currentIndex + 3);
                 nextNextWaveIndicator.SetMaskable(true);
                 nextNextWaveIndicator.HideNumber(true);
@@ -87,8 +89,8 @@ namespace MrX.UI
 
             yield return new WaitForSeconds(0.2f);
 
-            currentWaveIndicator.RectTransform.DoLocalScale(Vector3.one, 0.2f).SetEasing(EasingType.CubicInOut);
-            nextWaveIndicator.RectTransform.DoLocalScale(Vector3.one * 1.3f, 0.2f).SetEasing(EasingType.CubicInOut);
+            currentWaveIndicator.RectTransform.DoLocalScale(animationDefaults.Scale(currentWaveIndicator.RectTransform), 0.2f).SetEasing(EasingType.CubicInOut);
+            nextWaveIndicator.RectTransform.DoLocalScale(animationDefaults.Scale(nextWaveIndicator.RectTransform) * 1.3f, 0.2f).SetEasing(EasingType.CubicInOut);
 
             nextWaveIndicator.ShowNumber(false);
 

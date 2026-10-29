@@ -12,6 +12,18 @@ namespace MrX.UI
 {
     public class StageFailedScreen : MonoBehaviour
     {
+        private readonly UIAnimationDefaults animationDefaults = new UIAnimationDefaults();
+        private readonly MrX.UI.InspectorVisibility inspectorVisibility = new MrX.UI.InspectorVisibility();
+
+        protected virtual void Awake()
+        {
+            inspectorVisibility.Capture(continueButton);
+            animationDefaults.Capture(titleRect, rewardsTitle,
+                continueButton != null && continueButton.image != null ? continueButton.image.rectTransform : null,
+                coinsRewardCard != null ? coinsRewardCard.transform : null);
+            animationDefaults.CaptureAlpha(backgroundImage);
+        }
+
         [SerializeField] private CompactRunResult compactResult;
         [SerializeField] protected Canvas canvas;
         [SerializeField] protected Image backgroundImage;
@@ -73,7 +85,7 @@ namespace MrX.UI
             for (int i = 1; i < currencies.Count; i++)
             {
                 var newCard = Instantiate(coinsRewardCard, coinsRewardCard.transform.parent);
-                newCard.transform.localScale = Vector3.one;
+                newCard.transform.localScale = animationDefaults.Scale(coinsRewardCard.transform);
                 newCard.SetIcon(currencies[i].Data.Icon);
                 newCard.gameObject.SetActive(false);
 
@@ -108,16 +120,16 @@ namespace MrX.UI
             continueButton.enabled = false;
 
             backgroundImage.SetAlpha(0);
-            backgroundImage.DoAlpha(1, 0.3f).SetUnscaledTime(true);
+            backgroundImage.DoAlpha(animationDefaults.Alpha(backgroundImage), 0.3f).SetUnscaledTime(true);
 
-            titleRect.localScale = new Vector3(0, 0.9f, 1f);
-            titleRect.DoLocalScale(Vector3.one, 0.3f).SetDelay(0.1f).SetUnscaledTime(true).SetEasing(EasingType.SineOut);
+            titleRect.localScale = animationDefaults.Scale(titleRect, new Vector3(0, 0.9f, 1f));
+            titleRect.DoLocalScale(animationDefaults.Scale(titleRect), 0.3f).SetDelay(0.1f).SetUnscaledTime(true).SetEasing(EasingType.SineOut);
 
             titleGlow.SetAlpha(0);
             titleGlow.DoAlpha(glowAlpha, 0.3f).SetDelay(0.3f).SetUnscaledTime(true).SetEasing(EasingType.SineOut);
 
-            rewardsTitle.localScale = new Vector3(0, 0.9f, 1f);
-            rewardsTitle.DoLocalScale(Vector3.one, 0.3f).SetDelay(0.6f).SetUnscaledTime(true).SetEasing(EasingType.SineOut);
+            rewardsTitle.localScale = animationDefaults.Scale(rewardsTitle, new Vector3(0, 0.9f, 1f));
+            rewardsTitle.DoLocalScale(animationDefaults.Scale(rewardsTitle), 0.3f).SetDelay(0.6f).SetUnscaledTime(true).SetEasing(EasingType.SineOut);
 
             foreach(var card in currencyRewardCards.Values)
             {
@@ -161,12 +173,12 @@ namespace MrX.UI
                 buttonRect.SetAnchoredPositionY(gridRect.anchoredPosition.y - gridRect.sizeDelta.y - buttonPositionDifference);
             });
 
-            buttonRect.localScale = new Vector3(0, 0.9f, 1f);
-            buttonRect.DoLocalScale(Vector3.one, 0.3f)
+            buttonRect.localScale = animationDefaults.Scale(buttonRect, new Vector3(0, 0.9f, 1f));
+            buttonRect.DoLocalScale(animationDefaults.Scale(buttonRect), 0.3f)
                 .SetDelay(0.7f + pickedUpItems.Count * 0.05f + 0.5f)
                 .SetUnscaledTime(true)
                 .SetEasing(EasingType.SineOut)
-                .SetOnFinish(() => continueButton.enabled = true);
+                .SetOnFinish(() => inspectorVisibility.SetEnabled(continueButton, true));
 
             EventSystem.current.SetSelectedGameObject(continueButton.gameObject);
             GameController.InputManager.onInputChanged += OnInputChanged;

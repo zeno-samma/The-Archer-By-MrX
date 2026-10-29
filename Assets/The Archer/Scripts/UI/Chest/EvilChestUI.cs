@@ -12,6 +12,8 @@ namespace MrX.UI
 {
     public class EvilChestUI : MonoBehaviour
     {
+        private readonly UIAnimationDefaults animationDefaults = new UIAnimationDefaults();
+        private readonly MrX.UI.InspectorVisibility inspectorVisibility = new MrX.UI.InspectorVisibility();
         [SerializeField] protected Canvas canvas;
         [SerializeField] protected Image backgroundImage;
 
@@ -51,6 +53,10 @@ namespace MrX.UI
 
         protected virtual void Awake()
         {
+            inspectorVisibility.Capture(acceptButton);
+            inspectorVisibility.Capture(rejectButton);
+            animationDefaults.Capture(acceptButton.transform, rejectButton.transform);
+            animationDefaults.CaptureAlpha(backgroundImage, descriptionText);
             acceptButton.onClick.AddListener(OnAcceptButtonClicked);
             rejectButton.onClick.AddListener(OnRejectButtonClicked);
         }
@@ -63,33 +69,33 @@ namespace MrX.UI
 
             EasingManager.DoFloat(1, 0, timescaleStopDuration, SetTimeScale)
                 .SetUnscaledTime(true);
-            backgroundImage.DoAlpha(1, backgroundFadeInDuration)
+            backgroundImage.DoAlpha(animationDefaults.Alpha(backgroundImage), backgroundFadeInDuration)
                 .SetUnscaledTime(true);
 
             title.Show();
 
             abilityCard.ShowHidden(0, false);
-            abilityCard.CanvasGroup.DoAlpha(1, 0.2f).SetUnscaledTime(true);
+            abilityCard.CanvasGroup.DoAlpha(abilityCard.AuthoredAlpha, 0.2f).SetUnscaledTime(true);
 
             abilityCard.Init(abilityData, 0.5f);
 
-            descriptionText.DoAlpha(1, 0.3f)
+            descriptionText.DoAlpha(animationDefaults.Alpha(descriptionText), 0.3f)
                 .SetDelay(0.2f)
                 .SetUnscaledTime(true);
 
-            acceptButton.transform.DoLocalScale(Vector3.one, 0.3f)
+            acceptButton.transform.DoLocalScale(animationDefaults.Scale(acceptButton.transform), 0.3f)
                 .SetDelay(0.6f)
                 .SetUnscaledTime(true)
                 .SetEasing(EasingType.SineOut)
-                .SetOnFinish(() => acceptButton.enabled = true);
+                .SetOnFinish(() => inspectorVisibility.SetEnabled(acceptButton, true));
 
-            rejectButton.transform.DoLocalScale(Vector3.one, 0.3f)
+            rejectButton.transform.DoLocalScale(animationDefaults.Scale(rejectButton.transform), 0.3f)
                 .SetDelay(0.7f)
                 .SetUnscaledTime(true)
                 .SetEasing(EasingType.SineOut)
                 .SetOnFinish(() =>
                 {
-                    rejectButton.enabled = true;
+                    inspectorVisibility.SetEnabled(rejectButton, true);
                     abilityCard.EnableButton();
 
                     if (GameController.InputManager.ActiveInput == Input.InputType.Gamepad)

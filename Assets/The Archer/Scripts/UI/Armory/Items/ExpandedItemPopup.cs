@@ -69,7 +69,7 @@ namespace MrX.UI.Armory
                 InitButtonsUpgradable();
             }
             if (!GameController.ArmoryManager.CanEquipItem(Data))
-            { selectButton.enabled = false; selectButtonText.text = "Wrong class"; selectButton.image.sprite = disabledButtonSprite; }
+            { selectButton.interactable = false; selectButtonText.text = "Wrong class"; }
         }
 
         protected virtual void InitButtonsUpgradable()
@@ -82,21 +82,18 @@ namespace MrX.UI.Armory
 
                 if (Data.ItemType == ItemType.Weapon)
                 {
-                    selectButton.enabled = false;
-                    selectButton.image.sprite = disabledButtonSprite;
+                    selectButton.interactable = false;
                 }
                 else
                 {
-                    selectButton.enabled = true;
-                    selectButton.image.sprite = selectButtonSprite;
+                    selectButton.interactable = true;
                 }
             }
             else
             {
                 selectButtonText.text = "Equip";
 
-                selectButton.enabled = true;
-                selectButton.image.sprite = selectButtonSprite;
+                selectButton.interactable = true;
             }
 
             upgradeButtonLabel.gameObject.SetActive(true);
@@ -127,21 +124,18 @@ namespace MrX.UI.Armory
 
                 if (Data.ItemType == ItemType.Weapon)
                 {
-                    selectButton.enabled = false;
-                    selectButton.image.sprite = disabledButtonSprite;
+                    selectButton.interactable = false;
                 }
                 else
                 {
-                    selectButton.enabled = true;
-                    selectButton.image.sprite = selectButtonSprite;
+                    selectButton.interactable = true;
                 }
             }
             else
             {
                 selectButtonText.text = "Equip";
 
-                selectButton.enabled = true;
-                selectButton.image.sprite = selectButtonSprite;
+                selectButton.interactable = true;
             }
 
             upgradeButtonLabel.gameObject.SetActive(false);

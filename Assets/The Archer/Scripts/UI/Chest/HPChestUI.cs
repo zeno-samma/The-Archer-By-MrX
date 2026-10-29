@@ -11,6 +11,7 @@ namespace MrX.UI
 {
     public class HPChestUI : MonoBehaviour
     {
+        private readonly UIAnimationDefaults animationDefaults = new UIAnimationDefaults();
         [Space]
         [SerializeField] protected Canvas canvas;
         [SerializeField] protected Image backgroundImage;
@@ -38,6 +39,7 @@ namespace MrX.UI
 
         protected virtual void Awake()
         {
+            animationDefaults.CaptureAlpha(backgroundImage);
             firstAbilityCard.onAbilitySelected += OnAbilityCardClicked;
             secondAbilityCard.onAbilitySelected += OnAbilityCardClicked;
         }
@@ -49,20 +51,20 @@ namespace MrX.UI
             ResetUI();
 
             EasingManager.DoTimeScale(0, timescaleStopDuration);
-            backgroundImage.DoAlpha(1, backgroundFadeInDuration)
+            backgroundImage.DoAlpha(animationDefaults.Alpha(backgroundImage), backgroundFadeInDuration)
                 .SetUnscaledTime(true);
 
             title.Show();
 
             firstAbilityCard.gameObject.SetActive(true);
             firstAbilityCard.ShowHidden(0, false);
-            firstAbilityCard.CanvasGroup.DoAlpha(1, 0.2f).SetDelay(0.3f).SetUnscaledTime(true);
+            firstAbilityCard.CanvasGroup.DoAlpha(firstAbilityCard.AuthoredAlpha, 0.2f).SetDelay(0.3f).SetUnscaledTime(true);
 
             firstAbilityCard.Init(firstAbilityData, 0.5f, 0.3f);
 
             secondAbilityCard.gameObject.SetActive(true);
             secondAbilityCard.ShowHidden(0, false);
-            secondAbilityCard.CanvasGroup.DoAlpha(1, 0.2f).SetDelay(0.45f).SetUnscaledTime(true);
+            secondAbilityCard.CanvasGroup.DoAlpha(secondAbilityCard.AuthoredAlpha, 0.2f).SetDelay(0.45f).SetUnscaledTime(true);
 
             secondAbilityCard.Init(secondAbilityData, 0.5f, 0.45f);
 

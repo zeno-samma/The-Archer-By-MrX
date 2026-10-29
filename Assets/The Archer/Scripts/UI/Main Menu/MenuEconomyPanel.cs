@@ -19,6 +19,14 @@ namespace MrX.UI
         private GameObject previousSelection;
         private string offeredCurrency;
         private float nextTick;
+        private readonly InspectorVisibility visibility = new InspectorVisibility();
+        private void Awake()
+        {
+            visibility.Capture(energyGroup);
+            if (recoveryLabel != null) visibility.Capture(recoveryLabel.gameObject);
+            if (runCost != null) visibility.Capture(runCost.gameObject);
+            if (purchaseLimit != null) visibility.Capture(purchaseLimit.gameObject);
+        }
 
         private void Start()
         {
@@ -39,9 +47,10 @@ namespace MrX.UI
         }
         private void RefreshTimer()
         {
+            if (!isActiveAndEnabled || service == null) return;
             bool energyEnabled = Development.GameFeatureSettings.IsEnabled(Development.GameFeature.Energy);
-            if (energyGroup != null) energyGroup.SetActive(energyEnabled);
-            recoveryLabel.gameObject.SetActive(energyEnabled);
+            visibility.SetVisible(energyGroup, energyEnabled);
+            if (recoveryLabel != null) visibility.SetVisible(recoveryLabel.gameObject, energyEnabled);
             if (!energyEnabled && ownsDock && offeredCurrency == "energy") Close();
             int seconds = service.SecondsUntilRecovery;
             recoveryLabel.text = seconds == 0 ? "FULL" : "RECOVERS IN " + (seconds / 60).ToString("00") + ":" + (seconds % 60).ToString("00");
@@ -49,12 +58,13 @@ namespace MrX.UI
             var stage = GameController.MainMenuScreenBehavior?.CurrentPage as MainMenuStagesPageBehavior;
             if (runCost != null)
             {
-                runCost.gameObject.SetActive(energyEnabled && stage != null && stage.StageSave != null);
+                visibility.SetVisible(runCost.gameObject, energyEnabled && stage != null && stage.StageSave != null);
                 if (stage != null && stage.StageSave != null) runCost.text = "RUN COST: " + stage.StageDatabase.GetStageData(stage.StageSave.SelectedStageId).EnergyCost + " ENERGY";
             }
         }
         private void Refresh()
         {
+            if (!isActiveAndEnabled || service == null) return;
             energyAmount.text = service.Energy.Amount + " / " + service.Settings.maximumEnergy;
             goldAmount.text = service.Gold.Amount.ToString("N0"); gemAmount.text = service.Gems.Amount.ToString("N0");
             RefreshTimer();
@@ -62,13 +72,14 @@ namespace MrX.UI
 
         public void ShowInsufficientEnergy()
         {
+            if (!isActiveAndEnabled) return;
             Open("energy");
             feedback.text = "Not enough energy. Wait for recovery or buy more with gems.";
         }
         private void Open(string currencyId)
         {
             var screen = GameController.MainMenuScreenBehavior;
-            if (service == null || !screen.IsDockEnabled || modal.activeSelf) return;
+            if (!isActiveAndEnabled || service == null || screen == null || !screen.IsDockEnabled || modal.activeSelf) return;
             offeredCurrency = currencyId; ownsDock = true;
             previousSelection = EventSystem.current != null ? EventSystem.current.currentSelectedGameObject : null;
             screen.DisableDock(); (screen.CurrentPage as MainMenuStagesPageBehavior)?.SetLanguageModalInput(true);
@@ -82,7 +93,7 @@ namespace MrX.UI
         }
         private void Buy()
         {
-            if (!ownsDock) return;
+            if (!isActiveAndEnabled || !ownsDock) return;
             var result = service.Buy(offeredCurrency);
             feedback.text = result == ExchangeResult.Success ? "Purchase complete!" : result == ExchangeResult.NotEnoughGems ? "Not enough gems." : result == ExchangeResult.EnergyFull ? "Not enough energy space for this pack." : result == ExchangeResult.DailyLimit ? "Daily energy purchase limit reached." : "Purchase unavailable.";
             Refresh();
@@ -90,7 +101,7 @@ namespace MrX.UI
         private void RefreshLimit()
         {
             bool energy = offeredCurrency == "energy";
-            if (purchaseLimit != null) { purchaseLimit.gameObject.SetActive(energy); purchaseLimit.text = "PURCHASES LEFT TODAY: " + service.RemainingEnergyPurchases + " / " + service.Settings.dailyEnergyPurchaseLimit; }
+            if (purchaseLimit != null) { visibility.SetVisible(purchaseLimit.gameObject, energy); purchaseLimit.text = "PURCHASES LEFT TODAY: " + service.RemainingEnergyPurchases + " / " + service.Settings.dailyEnergyPurchaseLimit; }
             buyButton.interactable = !energy || service.RemainingEnergyPurchases > 0;
         }
         private void Cancel(InputAction.CallbackContext _) { Close(); }

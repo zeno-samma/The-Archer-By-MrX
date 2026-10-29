@@ -6,6 +6,15 @@ namespace MrX.UI
 {
     public class UpgradeCardSelectable : HorizontalSelectable
     {
+        private readonly UIAnimationDefaults animationDefaults = new UIAnimationDefaults();
+
+        protected override void Awake()
+        {
+            animationDefaults.Capture(transform);
+            animationDefaults.CaptureAlpha(canvasGroup);
+            base.Awake();
+        }
+
         [SerializeField] protected CanvasGroup canvasGroup;
 
         [Space]
@@ -35,11 +44,11 @@ namespace MrX.UI
 
             if (!scaleEasingCoroutine.ExistsAndActive())
             {
-                RectTransform.localScale = new Vector3(0, 1, 1);
+                RectTransform.localScale = animationDefaults.Scale(RectTransform, new Vector3(0, 1, 1));
             }
 
             scaleEasingCoroutine.StopIfExists();
-            scaleEasingCoroutine = RectTransform.DoLocalScale(Vector3.one, moveDuration).SetDelay(delay).SetEasing(scaleInEasingType);
+            scaleEasingCoroutine = RectTransform.DoLocalScale(animationDefaults.Scale(RectTransform), moveDuration).SetDelay(delay).SetEasing(scaleInEasingType);
 
             if (!fadeEasingCoroutine.ExistsAndActive())
             {
@@ -47,7 +56,7 @@ namespace MrX.UI
             }
 
             fadeEasingCoroutine.StopIfExists();
-            fadeEasingCoroutine = canvasGroup.DoAlpha(1, moveDuration).SetDelay(delay).SetEasing(fadeInEasingType);
+            fadeEasingCoroutine = canvasGroup.DoAlpha(animationDefaults.Alpha(canvasGroup), moveDuration).SetDelay(delay).SetEasing(fadeInEasingType);
         }
 
         public override void MoveLeft()
@@ -67,7 +76,7 @@ namespace MrX.UI
         protected virtual void MoveAway()
         {
             scaleEasingCoroutine.StopIfExists();
-            scaleEasingCoroutine = RectTransform.DoLocalScale(new Vector3(0, 1, 1), moveDuration).SetEasing(scaleOutEasingType);
+            scaleEasingCoroutine = RectTransform.DoLocalScale(animationDefaults.Scale(RectTransform, new Vector3(0, 1, 1)), moveDuration).SetEasing(scaleOutEasingType);
 
             fadeEasingCoroutine.StopIfExists();
             fadeEasingCoroutine = canvasGroup.DoAlpha(0, moveDuration).SetEasing(fadeOutEasingType);
@@ -79,8 +88,8 @@ namespace MrX.UI
             fadeEasingCoroutine.StopIfExists();
             moveEasingCoroutine.StopIfExists();
 
-            canvasGroup.alpha = 1;
-            RectTransform.localScale = Vector3.one;
+            canvasGroup.alpha = animationDefaults.Alpha(canvasGroup);
+            RectTransform.localScale = animationDefaults.Scale(RectTransform);
             RectTransform.anchoredPosition = Vector2.zero;
 
             upgradeCard.Clear();

@@ -35,6 +35,8 @@ namespace MrX.EditorTools
             }
             var files = Directory.GetFiles("Assets/The Archer/Scripts", "*.cs", SearchOption.AllDirectories);
             var findings = new List<string>();
+            var visibilityWrites = new List<string>();
+            var presentationWrites = new List<string>();
             foreach (var file in files)
             {
                 if (file.Replace('\\', '/').Contains("/Editor/")) continue;
@@ -48,6 +50,10 @@ namespace MrX.EditorTools
                     if (editorOnly || s.StartsWith("//")) continue;
                     if (Regex.IsMatch(s, @"new\s+GameObject.*typeof\(RectTransform\)|AddComponent<(?:Image|RawImage|TextMeshProUGUI|Button|Canvas|ScrollRect|RectMask2D|VerticalLayoutGroup|HorizontalLayoutGroup|GridLayoutGroup|ContentSizeFitter|GraphicRaycaster)>"))
                         findings.Add("- `" + file.Replace('\\', '/') + ":" + line + "`: `" + s.Replace("`", "'") + "`");
+                    if (!file.Replace('\\', '/').Contains("/UI/")) continue;
+                    string entry = "- `" + file.Replace('\\', '/') + ":" + line + "`: `" + s.Replace("`", "'") + "`";
+                    if (Regex.IsMatch(s, @"\.SetActive\(|\.enabled\s*=")) visibilityWrites.Add(entry);
+                    if (Regex.IsMatch(s, @"\.(?:sprite|color|fontSize|fontSizeMin|fontSizeMax|enableAutoSizing|localScale|sizeDelta|anchoredPosition|anchorMin|anchorMax|pixelsPerUnitMultiplier|overrideSorting)\s*=")) presentationWrites.Add(entry);
                 }
             }
             report.AppendLine("- Prefab đã đọc: **" + prefabs.Length + "**; prefab có RectTransform: **" + ui + "**.");
@@ -56,7 +62,13 @@ namespace MrX.EditorTools
             report.AppendLine("Quét source là kiểm tra tĩnh, không chứng minh mọi callback hay mọi thiết bị hoạt động. Các hàm authoring trong #if UNITY_EDITOR không được tính là dựng UI runtime. Danh sách động, số tiến trình, nội dung bản dịch và hiệu ứng vẫn cần script binding.\n");
             report.AppendLine("## Dấu hiệu dựng UI runtime\n");
             report.AppendLine(findings.Count == 0 ? "Không thấy trong các mẫu API UI được kiểm tra.\n" : string.Join("\n", findings.ToArray()));
-            report.AppendLine("## Danh sách prefab\n"); report.Append(inventory);
+            report.AppendLine("## Ghi trạng thái hiển thị runtime cần đối chiếu\n");
+            report.AppendLine("Có " + visibilityWrites.Count + " dòng. Đây là danh sách cần phân loại, không đồng nghĩa mọi dòng là lỗi: popup/page/pool có vòng đời mở đóng; nội dung/progress có binding. Decoration phải qua InspectorVisibility; component tắt không được tự bật lại.\n");
+            report.AppendLine(string.Join("\n", visibilityWrites.ToArray()));
+            report.AppendLine("\n## Ghi trình bày runtime cần đối chiếu\n");
+            report.AppendLine("Có " + presentationWrites.Count + " dòng. Kiểm tra mốc Inspector của animation, tùy chọn Use State Colors/Auto Fit, bố cục responsive đã author và nội dung từ database. Kiểm kê construction bằng 0 không chứng minh Inspector được tôn trọng.\n");
+            report.AppendLine(string.Join("\n", presentationWrites.ToArray()));
+            report.AppendLine("\n## Danh sách prefab\n"); report.Append(inventory);
             Directory.CreateDirectory("Docs");
             const string output = "Docs/UI Inspector Asset Audit.md";
             File.WriteAllText(output, report.ToString(), new UTF8Encoding(false));

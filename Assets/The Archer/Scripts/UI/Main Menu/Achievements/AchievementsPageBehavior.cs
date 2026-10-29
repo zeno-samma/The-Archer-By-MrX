@@ -10,6 +10,8 @@ namespace MrX.UI
 {
     public class AchievementsPageBehavior : MainMenuPageBehavior
     {
+        private readonly InspectorVisibility authoredVisibility = new InspectorVisibility();
+        [SerializeField, Tooltip("Opt in to gameplay state colors. Off preserves Image/TMP colors authored in Inspector.")] private bool useStateColors;
         [SerializeField] private AchievementsDatabase database;
         [SerializeField] private TMP_Text overallCount;
         [SerializeField] private TMP_Text overallPercent;
@@ -161,11 +163,11 @@ namespace MrX.UI
                 var summary = manager.GetSummary(tab.category);
                 if (tab.lastCompleted != summary.completed || tab.lastTotal != summary.total)
                 { tab.progress.SetText("{0} / {1}", (float)summary.completed, (float)summary.total); tab.lastCompleted = summary.completed; tab.lastTotal = summary.total; }
-                if (tab.lastClaimable != summary.claimable) { tab.badge.SetActive(summary.claimable > 0); tab.lastClaimable = summary.claimable; }
+                if (tab.lastClaimable != summary.claimable) { authoredVisibility.SetVisible(tab.badge, summary.claimable > 0); tab.lastClaimable = summary.claimable; }
                 var selected = tab.category == selectedCategory;
-                tab.background.color = selected ? selectedTabColor : idleTabColor;
-                tab.outline.enabled = selected;
-                tab.title.color = selected ? Blue : Ink;
+                if (useStateColors) tab.background.color = selected ? selectedTabColor : idleTabColor;
+                authoredVisibility.SetEnabled(tab.outline, selected);
+                if (useStateColors) tab.title.color = selected ? Blue : Ink;
             }
             if (rebind) { BindCategory(); rebind = false; }
             foreach (var row in rowPool) if (row.definition != null) RefreshRow(row);
@@ -266,10 +268,9 @@ namespace MrX.UI
             row.lastState = state;
             row.button.interactable = state == 1;
             row.buttonLabel.text = state == 2 ? "CLAIMED" : "CLAIM";
-            row.buttonImage.sprite = state == 1 ? database.claimButtonSprite : database.disabledButtonSprite;
-            row.buttonImage.color = state == 2 ? claimedButtonColor : Color.white;
-            row.background.color = state == 1 ? claimableRowColor : idleRowColor;
-            row.outline.enabled = state == 1; row.badge.SetActive(state == 1);
+            if (useStateColors) row.buttonImage.color = state == 2 ? claimedButtonColor : Color.white;
+            if (useStateColors) row.background.color = state == 1 ? claimableRowColor : idleRowColor;
+            authoredVisibility.SetEnabled(row.outline, state == 1); authoredVisibility.SetVisible(row.badge, state == 1);
         }
 
         private void Claim(RowView row)
@@ -328,8 +329,8 @@ namespace MrX.UI
             if (screen != null && screen.SettingsPopup != null) screen.SettingsPopup.onPopupClosed -= OnSettingsClosed;
         }
 
-        private static void Fill(RectTransform rect, float value)
-        { var fraction = Mathf.Clamp01(value); rect.anchorMax = new Vector2(fraction, 1); rect.gameObject.SetActive(fraction > 0); }
+        private void Fill(RectTransform rect, float value)
+        { var fraction = Mathf.Clamp01(value); rect.anchorMax = new Vector2(fraction, 1); authoredVisibility.SetVisible(rect.gameObject, fraction > 0); }
 #if UNITY_EDITOR
         // Editor authoring only. Saved prefab instances provide all runtime UI.
         public static AchievementsPageBehavior Create(Transform parent, AchievementsDatabase data)
