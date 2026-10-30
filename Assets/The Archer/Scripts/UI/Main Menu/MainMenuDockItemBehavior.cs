@@ -33,6 +33,7 @@ namespace MrX.UI
 
         public virtual void Configure(MainMenuPageType type, string title, Sprite icon)
         {
+            Debug.Log($"BBB");
             pageType = type;
             gameObject.name = title + " Dock Item";
             pageNameText.text = title;

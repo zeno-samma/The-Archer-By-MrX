@@ -29,6 +29,8 @@ namespace MrX.UI
 
         private void RegisterPageSlot(MainMenuPageType type, string title, Sprite icon, string slotSprite)
         {
+            Debug.Log("AA");
+            // Debug.Log($"Registering {type} tab in main menu dock.");
             if (dockItems.Exists(item => item.PageType == type)) return;
             // The existing scroll-art slot is a visual placeholder, not a registered
             // tab. Replace that slot instead of appending a seventh layout cell.
