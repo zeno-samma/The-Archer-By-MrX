@@ -19,34 +19,76 @@ namespace MrX
 
         public virtual void OnBeforeSerialize()
         {
-#if UNITY_EDITOR
-            if (scene != null)
-            {
-                var sceneAssetPath = UnityEditor.AssetDatabase.GetAssetPath(scene);
-                var sceneAssetGUID = UnityEditor.AssetDatabase.AssetPathToGUID(sceneAssetPath);
-
-                UnityEditor.EditorBuildSettingsScene[] scenes =
-                    UnityEditor.EditorBuildSettings.scenes;
-
-                sceneIndex = -1;
-                for (int i = 0; i < scenes.Length; i++)
-                {
-                    if (scenes[i].guid.ToString() == sceneAssetGUID)
-                    {
-                        sceneIndex = i;
-                        sceneName = scene.name;
-
-                        break;
-                    }
-                }
-            }
-            else
-            {
-                sceneName = "";
-            }
-#endif
+            // Unity may serialize on a background thread or during domain backup.
+            // Never call AssetDatabase / EditorBuildSettings from this callback.
         }
 
         public virtual void OnAfterDeserialize() { }
     }
 }
+
+#if UNITY_EDITOR
+// Synchronize the serialized runtime fields while the reference is drawn in
+// the Inspector (on the Editor main thread), not during serialization.
+[UnityEditor.CustomPropertyDrawer(typeof(MrX.SceneWrapper))]
+internal sealed class SceneWrapperDrawer : UnityEditor.PropertyDrawer
+{
+    public override void OnGUI(Rect position, UnityEditor.SerializedProperty property,
+        GUIContent label)
+    {
+        UnityEditor.EditorGUI.BeginProperty(position, label, property);
+
+        var sceneProperty = property.FindPropertyRelative("scene");
+        var nameProperty = property.FindPropertyRelative("sceneName");
+        var indexProperty = property.FindPropertyRelative("sceneIndex");
+
+        if (sceneProperty != null && nameProperty != null && indexProperty != null)
+        {
+            UnityEditor.EditorGUI.PropertyField(position, sceneProperty, label);
+
+            // Keep fields accurate when the scene is changed, renamed, removed,
+            // or when enabled scenes in Build Settings are reordered.
+            if (!sceneProperty.hasMultipleDifferentValues)
+            {
+                var sceneAsset = sceneProperty.objectReferenceValue as UnityEditor.SceneAsset;
+                string path = sceneAsset != null
+                    ? UnityEditor.AssetDatabase.GetAssetPath(sceneAsset)
+                    : string.Empty;
+
+                string newName = string.IsNullOrEmpty(path)
+                    ? string.Empty
+                    : System.IO.Path.GetFileNameWithoutExtension(path);
+                int newIndex = -1;
+
+                if (!string.IsNullOrEmpty(path))
+                {
+                    int enabledIndex = 0;
+                    foreach (var buildScene in UnityEditor.EditorBuildSettings.scenes)
+                    {
+                        if (!buildScene.enabled)
+                            continue;
+
+                        if (buildScene.path == path)
+                        {
+                            newIndex = enabledIndex;
+                            break;
+                        }
+                        enabledIndex++;
+                    }
+                }
+
+                if (nameProperty.stringValue != newName)
+                    nameProperty.stringValue = newName;
+                if (indexProperty.intValue != newIndex)
+                    indexProperty.intValue = newIndex;
+            }
+        }
+        else
+        {
+            UnityEditor.EditorGUI.LabelField(position, label.text, "SceneWrapper fields not found");
+        }
+
+        UnityEditor.EditorGUI.EndProperty();
+    }
+}
+#endif
