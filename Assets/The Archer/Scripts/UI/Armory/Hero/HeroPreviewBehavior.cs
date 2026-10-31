@@ -10,6 +10,7 @@ namespace MrX.UI
     {
         [SerializeField] protected RawImage rawImage;
         [SerializeField] private AspectRatioFitter previewAspect;
+        [SerializeField] private int renderSize = 1024;
         [SerializeField] protected GameObject heroPreviewPrefab;
         [SerializeField] protected Vector3 previewPosition = new Vector3(100, 100, -100);
         [SerializeField] protected Vector3 previewRotation = new Vector3(0, 180, 0);
@@ -32,7 +33,7 @@ namespace MrX.UI
 
             previewCamera = heroPreview.GetComponentInChildren<Camera>();
 
-            renderTexture = new RenderTexture(512, 512, 16, RenderTextureFormat.ARGBHalf);
+            renderTexture = new RenderTexture(renderSize, renderSize, 16, RenderTextureFormat.ARGBHalf);
             previewCamera.targetTexture = renderTexture;
 
             rawImage.texture = renderTexture;
