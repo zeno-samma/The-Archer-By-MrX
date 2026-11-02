@@ -128,6 +128,7 @@ namespace MrX
             }
             // 2. In toàn bộ danh sách thời gian các phòng
             LogAllResults();
+            totalElapsedTime = 0f;
         }
     }
 

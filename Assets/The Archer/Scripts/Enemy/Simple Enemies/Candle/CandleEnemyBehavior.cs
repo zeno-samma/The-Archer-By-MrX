@@ -11,14 +11,14 @@ namespace MrX.Enemy
     {
         [Header("Idle and Walk Settings")]
         [SerializeField] protected Float idleDuration = (1, 1.5f);
-        [SerializeField] protected Float delayBetweenWalkAndAttack = (0.2f, 0.5f);
+        [SerializeField] protected Float delayBetweenWalkAndAttack = (0.2f, 0.5f);//Thời gian chờ giữa việc đi bộ và tấn công, để tránh việc enemy đi bộ liên tục mà không tấn công
         [SerializeField] protected Float maxWalkDistance = (4, 5);
-        [SerializeField] protected Int walkSequenceCount = (1, 2);
-        [SerializeField] protected Float delayBetweenWalks = (0.8f, 1.5f);
+        [SerializeField] protected Int walkSequenceCount = (1, 1);
+        [SerializeField] protected Float delayBetweenWalks = (0.4f, 0.8f);//thời gian chờ giữa các lần đi bộ, để tránh việc enemy đi bộ liên tục mà không tấn công
 
         [Header("Attack Settings")]
         [SerializeField] protected Float projectileDamageMultiplier = (0.9f, 1.1f);
-        [SerializeField] protected Int attacksCount = (1, 3);
+        [SerializeField] protected Int attacksCount = (1, 3);//Số lần tấn công liên tiếp, để tránh việc enemy tấn công liên tục mà không đi bộ
         [SerializeField] protected GameObject projectilePrefab;
         [SerializeField] protected Transform projectileSpawnPosition;
         [SerializeField] protected AudioData shootingSound;
@@ -70,9 +70,11 @@ namespace MrX.Enemy
                 {
                     yield return IdleCorountie(idleDuration, false);
                 }
-
-                LookAtPlayer = true;
-                yield return new WaitForSeconds(delayBetweenWalks);
+                if (i < count - 1)
+                {
+                    LookAtPlayer = true;
+                    yield return new WaitForSeconds(delayBetweenWalks);
+                }
                 LookAtPlayer = false;
             }
             
