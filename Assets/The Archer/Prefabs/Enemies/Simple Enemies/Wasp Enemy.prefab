@@ -148,8 +148,8 @@ MonoBehaviour:
   deathSound: {fileID: 0}
   idleDuration:
     value: 1.25
-    min: 1
-    max: 1.5
+    min: 0.8
+    max: 1.2
     propertyType: 1
   walkDuration:
     value: 0
@@ -188,10 +188,10 @@ Rigidbody:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 446584557187707321}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -394,10 +394,10 @@ Rigidbody:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2892789755738094283}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -498,6 +498,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!212 &7290258296012119450
 SpriteRenderer:
+  serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -513,6 +514,11 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -534,9 +540,11 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 1cde3f90639117748b854156ee6304aa, type: 3}
   m_Color: {r: 1, g: 0, b: 0, a: 0.8235294}
   m_FlipX: 0
@@ -546,8 +554,8 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+  m_BlendShapeWeights: []
 --- !u!1 &7463463943376748195
 GameObject:
   m_ObjectHideFlags: 0
@@ -602,7 +610,7 @@ MonoBehaviour:
     particlePrefab: {fileID: 6935828024166083332, guid: 5b9600a178f4c344fa9b0f86001d119a, type: 3}
     changeParticleShapeToMesh: 1
     rimData: {fileID: 11400000, guid: 61834769551db9e41858a8bbf9447b20, type: 2}
-    statusEffectData: {fileID: 11400000, guid: 8883c18fb0ee6f54f8dde624f32eccf5, type: 2}
+    statusEffectAudioData: {fileID: 11400000, guid: 8883c18fb0ee6f54f8dde624f32eccf5, type: 2}
   - type: 0
     cooldown: 1
     initialCooldown: 1
@@ -611,7 +619,7 @@ MonoBehaviour:
     particlePrefab: {fileID: 6935828024166083332, guid: 5a9767f1810dfbd4989c5bba08802290, type: 3}
     changeParticleShapeToMesh: 1
     rimData: {fileID: 11400000, guid: 437c2d7536d04524286c2a7efac11338, type: 2}
-    statusEffectData: {fileID: 11400000, guid: dd4b21c02c7850d43ab4ab7e1df83877, type: 2}
+    statusEffectAudioData: {fileID: 11400000, guid: dd4b21c02c7850d43ab4ab7e1df83877, type: 2}
   - type: 2
     cooldown: 1
     initialCooldown: 1
@@ -620,7 +628,7 @@ MonoBehaviour:
     particlePrefab: {fileID: 6935828024166083332, guid: 492c973b61cddd84a8e368572db4cae3, type: 3}
     changeParticleShapeToMesh: 1
     rimData: {fileID: 11400000, guid: e6128f04f008af54faed3709ace6cead, type: 2}
-    statusEffectData: {fileID: 11400000, guid: 2b1e6a6f8fc091e4dbfd083bc79d73fb, type: 2}
+    statusEffectAudioData: {fileID: 11400000, guid: 2b1e6a6f8fc091e4dbfd083bc79d73fb, type: 2}
   - type: 3
     cooldown: 1
     initialCooldown: 1
@@ -629,7 +637,7 @@ MonoBehaviour:
     particlePrefab: {fileID: 6935828024166083332, guid: 17aaf62325de13e4b9a5205cb5f4435e, type: 3}
     changeParticleShapeToMesh: 1
     rimData: {fileID: 11400000, guid: 08c3c38b053aca84086667d39cfd6040, type: 2}
-    statusEffectData: {fileID: 11400000, guid: bc9e2cb62242bc941a0e5113033c1c87, type: 2}
+    statusEffectAudioData: {fileID: 11400000, guid: bc9e2cb62242bc941a0e5113033c1c87, type: 2}
 --- !u!1 &7892898992961816724
 GameObject:
   m_ObjectHideFlags: 0
@@ -737,11 +745,11 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 9012355558977206243, guid: bec60659dfb42fc4db7ad24647909fbe, type: 3}
-      propertyPath: m_VertexStreams.Array.data[1]
+      propertyPath: 'm_VertexStreams.Array.data[1]'
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 9012355558977206243, guid: bec60659dfb42fc4db7ad24647909fbe, type: 3}
-      propertyPath: m_VertexStreams.Array.data[2]
+      propertyPath: 'm_VertexStreams.Array.data[2]'
       value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -820,15 +828,15 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9012355558977206243, guid: f48b5a9374b65704a9c83c942e4d5221, type: 3}
-      propertyPath: m_VertexStreams.Array.data[1]
+      propertyPath: 'm_VertexStreams.Array.data[1]'
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 9012355558977206243, guid: f48b5a9374b65704a9c83c942e4d5221, type: 3}
-      propertyPath: m_VertexStreams.Array.data[2]
+      propertyPath: 'm_VertexStreams.Array.data[2]'
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 9012355558977206243, guid: f48b5a9374b65704a9c83c942e4d5221, type: 3}
-      propertyPath: m_VertexStreams.Array.data[3]
+      propertyPath: 'm_VertexStreams.Array.data[3]'
       value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -1028,7 +1036,7 @@ PrefabInstance:
       value: 0.555633
       objectReference: {fileID: 0}
     - target: {fileID: -2098953489148933950, guid: 86556cab056ed714fb0267d2e8c07aa4, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 33cd04697f9412a4fa2f2eed8df605f2, type: 2}
     - target: {fileID: -2046448380018380532, guid: 86556cab056ed714fb0267d2e8c07aa4, type: 3}

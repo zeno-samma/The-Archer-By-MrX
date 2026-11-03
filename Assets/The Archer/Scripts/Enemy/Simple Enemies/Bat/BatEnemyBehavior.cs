@@ -7,12 +7,13 @@ namespace MrX.Enemy
 {
     public class BatEnemyBehavior : EnemyBehavior
     {
+        // [Tooltip("The amount of arrows per diagonal. If the value is 1, the Player will shoot two additional arrows, one per diagonal")]
         [Header("Idle Settings")]
-        [SerializeField] protected Float idleAfterSpawnDuration = (0.3f, 0.8f);
+        [SerializeField] protected Float idleAfterSpawnDuration = (0.24f, 0.64f);//DEF:0.3f, 0.8f(-20%)
         [SerializeField] protected bool lookAtPlayerAfterSpawn = false;
 
         [Space]
-        [SerializeField] protected Float idleAfterAttackDuration = (1, 1.5f);
+        [SerializeField] protected Float idleAfterAttackDuration = (0.8f, 1.2f);//DEF:1, 1.5f(-20%)
         [SerializeField] protected bool lookAtPlayerAfterAttack = false;
 
         [Header("Walk Settings")]

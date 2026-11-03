@@ -120,6 +120,7 @@ namespace MrX
 
         public virtual int Subtract(float value)
         {
+            // Debug.Log($"Trừ {value:f2} HP from {HP:f2} HP");
             if (value < 0)
             {
                 return AddHP(-value);
@@ -147,6 +148,8 @@ namespace MrX
             }
 
             var subtructedHP = displayedHP - Mathf.CeilToInt(HP);
+
+            Debug.Log($"Trừ {subtructedHP} HP");
 
             return subtructedHP;
         }

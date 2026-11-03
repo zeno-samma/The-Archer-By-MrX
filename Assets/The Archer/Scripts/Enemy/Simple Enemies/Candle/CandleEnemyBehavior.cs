@@ -14,7 +14,7 @@ namespace MrX.Enemy
         [SerializeField] protected Float delayBetweenWalkAndAttack = (0.2f, 0.5f);//Thời gian chờ giữa việc đi bộ và tấn công, để tránh việc enemy đi bộ liên tục mà không tấn công
         [SerializeField] protected Float maxWalkDistance = (4, 5);
         [SerializeField] protected Int walkSequenceCount = (1, 1);
-        [SerializeField] protected Float delayBetweenWalks = (0.4f, 0.8f);//thời gian chờ giữa các lần đi bộ, để tránh việc enemy đi bộ liên tục mà không tấn công
+        [SerializeField] protected Float delayBetweenWalks = (0.8f, 1.5f);//thời gian chờ giữa các lần đi bộ, để tránh việc enemy đi bộ liên tục mà không tấn công
 
         [Header("Attack Settings")]
         [SerializeField] protected Float projectileDamageMultiplier = (0.9f, 1.1f);

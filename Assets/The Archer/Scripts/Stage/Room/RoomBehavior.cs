@@ -79,14 +79,13 @@ namespace MrX
 
             IsLoaded = true;
 
-            onRoomStarted?.Invoke();
+            onRoomStarted?.Invoke();//nghĩa là khi bắt đầu phòng, sẽ gọi sự kiện onRoomStarted, có thể dùng để thực hiện các hành động khi phòng bắt đầu, ví dụ như hiển thị thông báo, phát nhạc nền, hoặc các hiệu ứng khác.
             // Debug.Log("OnRoomStarted");
             RoomId++;
             // Debug.Log($"Room: {RoomId}");
             ConsoleTimer.Instance.ResetSession();
             // 1. Bắt đầu phiên đếm
-            ConsoleTimer.Instance.StartTimer("Room " + CurrentWave.Icon.name + " " + RoomId);
-            
+            ConsoleTimer.Instance.StartTimer($"Room {CurrentWave.Icon.name} {RoomId}");
         }
 
         protected virtual void OnAbilitySelectorClosed()

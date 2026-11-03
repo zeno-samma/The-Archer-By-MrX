@@ -99,16 +99,16 @@ MonoBehaviour:
   deathSound: {fileID: 0}
   idleAfterSpawnDuration:
     value: 0
-    min: 0.3
-    max: 0.8
+    min: 0.24
+    max: 0.64
     propertyType: 1
-  lookAtPlayerAfterSpawn: 0
+  lookAtPlayerAfterSpawn: 1
   idleAfterAttackDuration:
     value: 0
-    min: 1
-    max: 1.5
+    min: 0.8
+    max: 1.2
     propertyType: 1
-  lookAtPlayerAfterAttack: 0
+  lookAtPlayerAfterAttack: 1
   maxWalkDistance:
     value: 0
     min: 4
@@ -154,10 +154,10 @@ Rigidbody:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 446584557187707321}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -304,7 +304,7 @@ MonoBehaviour:
     particlePrefab: {fileID: 6935828024166083332, guid: 5b9600a178f4c344fa9b0f86001d119a, type: 3}
     changeParticleShapeToMesh: 1
     rimData: {fileID: 11400000, guid: 61834769551db9e41858a8bbf9447b20, type: 2}
-    statusEffectData: {fileID: 11400000, guid: 8883c18fb0ee6f54f8dde624f32eccf5, type: 2}
+    statusEffectAudioData: {fileID: 11400000, guid: 8883c18fb0ee6f54f8dde624f32eccf5, type: 2}
   - type: 0
     cooldown: 3
     initialCooldown: 1
@@ -313,7 +313,7 @@ MonoBehaviour:
     particlePrefab: {fileID: 6935828024166083332, guid: 5a9767f1810dfbd4989c5bba08802290, type: 3}
     changeParticleShapeToMesh: 1
     rimData: {fileID: 11400000, guid: 437c2d7536d04524286c2a7efac11338, type: 2}
-    statusEffectData: {fileID: 11400000, guid: dd4b21c02c7850d43ab4ab7e1df83877, type: 2}
+    statusEffectAudioData: {fileID: 11400000, guid: dd4b21c02c7850d43ab4ab7e1df83877, type: 2}
   - type: 2
     cooldown: 3
     initialCooldown: 1
@@ -322,7 +322,7 @@ MonoBehaviour:
     particlePrefab: {fileID: 6935828024166083332, guid: 492c973b61cddd84a8e368572db4cae3, type: 3}
     changeParticleShapeToMesh: 1
     rimData: {fileID: 11400000, guid: e6128f04f008af54faed3709ace6cead, type: 2}
-    statusEffectData: {fileID: 11400000, guid: 2b1e6a6f8fc091e4dbfd083bc79d73fb, type: 2}
+    statusEffectAudioData: {fileID: 11400000, guid: 2b1e6a6f8fc091e4dbfd083bc79d73fb, type: 2}
   - type: 3
     cooldown: 3
     initialCooldown: 1
@@ -331,7 +331,7 @@ MonoBehaviour:
     particlePrefab: {fileID: 6935828024166083332, guid: 17aaf62325de13e4b9a5205cb5f4435e, type: 3}
     changeParticleShapeToMesh: 1
     rimData: {fileID: 11400000, guid: 08c3c38b053aca84086667d39cfd6040, type: 2}
-    statusEffectData: {fileID: 11400000, guid: bc9e2cb62242bc941a0e5113033c1c87, type: 2}
+    statusEffectAudioData: {fileID: 11400000, guid: bc9e2cb62242bc941a0e5113033c1c87, type: 2}
 --- !u!1 &2578771606849887810
 GameObject:
   m_ObjectHideFlags: 0
@@ -522,10 +522,10 @@ Rigidbody:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4865247005852654179}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -946,7 +946,7 @@ PrefabInstance:
       value: 9.513432
       objectReference: {fileID: 0}
     - target: {fileID: 1814153662081379798, guid: 68999ae3c8572844ba4e73a9ad56ec68, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 556a2d2c9106e634b9462d90e7dd7ed2, type: 2}
     - target: {fileID: 2060910820539814328, guid: 68999ae3c8572844ba4e73a9ad56ec68, type: 3}
