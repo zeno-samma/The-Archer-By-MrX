@@ -83,9 +83,10 @@ namespace MrX
             // Debug.Log("OnRoomStarted");
             RoomId++;
             // Debug.Log($"Room: {RoomId}");
-            ConsoleTimer.Instance.ResetSession();
+            // ConsoleTimer.Instance.ResetSession();
             // 1. Bắt đầu phiên đếm
-            ConsoleTimer.Instance.StartTimer($"Room {CurrentWave.Icon.name} {RoomId}");
+            // ConsoleTimer.Instance.StartTimer($"Room {CurrentWave.Icon.name} {RoomId}");
+            RunTelemetry.BeginRoom(StageController.CurrentRoomIndex + 1, CurrentWave.Icon.name);
         }
 
         protected virtual void OnAbilitySelectorClosed()
@@ -364,9 +365,7 @@ namespace MrX
                 GameController.AchievementsManager?.Record(Achievements.AchievementMetric.RoomsCompleted);
             }
             onRoomEnded?.Invoke();
-            // Debug.Log("OnRoomEnded - Hoàn thành"+ Wave);
-            float finalTime = ConsoleTimer.Instance.StopTimer("Room " + CurrentWave.Icon.name + " " + RoomId);
-            // Debug.Log($"Room: {CurrentWave.Icon.name + " " + RoomId} - Clear: {finalTime:F2}s");
+            RunTelemetry.EndRoom();
             if (exits.Count == 0 || StageController.IsLastRoom)
             {
                 StageController.OnExitReached(null);

@@ -362,7 +362,7 @@ namespace MrX
                 // 3. Hoặc đọc lại biến lưu trữ ở bất kỳ đâu/bất kỳ lúc nào về sau
                 // float recordedTime = ConsoleTimer.Instance.GetElapsedTime("Wave_1");
                 // ConsoleTimer.Instance.LogAllResults();//Phát event hoàn thành tất cả các phòng
-                ConsoleTimer.Instance.ReportSessionResult("FinishAllRoom");
+                // ConsoleTimer.Instance.ReportSessionResult("FinishAllRoom");
             }
             else
             {
@@ -421,7 +421,8 @@ namespace MrX
                 FinalizeRunRewards();
                 instance.gameScreen.StageFailedScreen.Show();
                 // ConsoleTimer.Instance.LogAllResults();==> Phát event chết và cho biết chết ở phòng nào
-                ConsoleTimer.Instance.ReportSessionResult("Die");
+                // ConsoleTimer.Instance.ReportSessionResult("Die");
+                RunTelemetry.FailRoom(); // Khi chết giữa Room
             }
         }
 
@@ -474,7 +475,7 @@ namespace MrX
             GameController.LoadMainMenu();
             // Debug.Log("Người chơi đã quay lại menu chính");
             // ConsoleTimer.Instance.LogAllResults();//===Phát event quay lại menu chính
-            ConsoleTimer.Instance.ReportSessionResult("BackToMenu");
+            // ConsoleTimer.Instance.ReportSessionResult("BackToMenu");
         }
     }
 }

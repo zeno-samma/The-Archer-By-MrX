@@ -32,6 +32,10 @@ namespace MrX
         public float MaxHP { get; protected set; }
         public float HP { get; protected set; }
 
+        // Dung de thong ke HP thuc te, khong phai gia tri HP lam tron de hien thi.
+        public event System.Action<float> OnHPDamaged;
+        public event System.Action<float> OnHPAdded;
+
         public bool IsZero => HP <= 0;
         public bool IsMax => HP >= MaxHP;
 
@@ -92,6 +96,7 @@ namespace MrX
                 return Subtract(-value);
             }
 
+            float telemetryHPBefore = HP;
             var displayedHP = Mathf.CeilToInt(HP);
 
             HP += value;
@@ -107,6 +112,9 @@ namespace MrX
             whiteMaskCoroutine = EasingManager.DoFloat(maskT, HP / MaxHP, whiteMaskDuration, (value) => maskT = value).SetEasingCurve(whiteMaskCurve).SetOnFinish(Redraw);
 
             Redraw();
+
+            float actualHPAdded = Mathf.Max(0f, HP - telemetryHPBefore);
+            if (actualHPAdded > 0f) OnHPAdded?.Invoke(actualHPAdded);
 
             return addedHP;
         }
@@ -126,6 +134,7 @@ namespace MrX
                 return AddHP(-value);
             }
 
+            float telemetryHPBefore = HP;
             var displayedHP = Mathf.CeilToInt(HP);
 
             HP -= value;
@@ -149,7 +158,10 @@ namespace MrX
 
             var subtructedHP = displayedHP - Mathf.CeilToInt(HP);
 
-            Debug.Log($"Trừ {subtructedHP} HP");
+            // Debug.Log($"Trừ {subtructedHP} HP");
+
+            float actualHPRemoved = Mathf.Max(0f, telemetryHPBefore - HP);
+            if (actualHPRemoved > 0f) OnHPDamaged?.Invoke(actualHPRemoved);
 
             return subtructedHP;
         }

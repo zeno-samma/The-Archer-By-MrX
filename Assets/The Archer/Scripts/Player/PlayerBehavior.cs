@@ -128,6 +128,9 @@ namespace MrX
 
             healthbar.ResetHP();
 
+            // Bind ONLY the player's HP bar, after initial stats and HP setup.
+            RunTelemetry.BindPlayerHealthbar(healthbar);
+
             Hero.SetMovementSpeed(Stats.MovementSpeedStat);
         }
 
@@ -209,7 +212,16 @@ namespace MrX
             {
                 if (ContinuePlayingSave.HP != HP)
                 {
-                    healthbar.Subtract(HP - ContinuePlayingSave.HP);
+                    // Restoring save HP is not combat damage/healing.
+                    RunTelemetry.UnbindPlayerHealthbar(healthbar);
+                    try
+                    {
+                        healthbar.Subtract(HP - ContinuePlayingSave.HP);
+                    }
+                    finally
+                    {
+                        RunTelemetry.BindPlayerHealthbar(healthbar);
+                    }
                 }
             }
             else
@@ -572,6 +584,8 @@ namespace MrX
 
         protected virtual void OnDestroy()
         {
+            RunTelemetry.UnbindPlayerHealthbar(healthbar);
+
             Stats.ArrowRangeStat.onStatChanged -= OnArrowRangeChanged;
 
             onHPChanged -= SaveHP;
