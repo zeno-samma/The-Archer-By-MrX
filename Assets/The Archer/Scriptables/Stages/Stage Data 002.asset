@@ -30,7 +30,6 @@ MonoBehaviour:
   unlockDescription: To unlock this stage complete the previous stage or purchase this one dirrectly
   unlockConditions:
   - rid: 1864345643964956698
-  - rid: 1864345711341994001
   abilityRerollPrice:
     currencyId: gold
     amount: 200
@@ -2808,8 +2807,4 @@ MonoBehaviour:
       data:
         currency:
           value: gold
-        cost: 500
-    - rid: 1864345711341994001
-      type: {class: PreviousStageCompletedCondition, ns: MrX, asm: Assembly-CSharp}
-      data:
-        name: Previous Stage Completed
+        cost: 5000
