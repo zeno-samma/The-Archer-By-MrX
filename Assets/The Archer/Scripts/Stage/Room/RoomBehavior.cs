@@ -135,6 +135,28 @@ namespace MrX
 
         public void LoadWave(bool skipEnemies = false)
         {
+            var enemyCounts = new Dictionary<string, int>();
+
+            foreach (var spawn in CurrentWave.EnemySpawns)
+            {
+                string type = spawn.EnemyType.ToString();
+
+                enemyCounts[type] = enemyCounts.TryGetValue(type, out int count)
+                    ? count + 1
+                    : 1;
+            }
+
+            var composition = new List<string>();
+
+            foreach (var enemy in enemyCounts)
+            {
+                composition.Add($"{enemy.Key}:{enemy.Value}");
+            }
+            RunTelemetry.BeginWave(
+               CurrentWaveIndex + 1,
+    CurrentWave.Icon != null ? CurrentWave.Icon.name : "Unknown",
+    string.Join("|", composition),
+    CurrentWave.EnemySpawns.Count);
             StageController.RecalculateEnemyMultipliers();
 
             if (!skipEnemies)
@@ -211,6 +233,7 @@ namespace MrX
 
         protected virtual IEnumerator EndWave()
         {
+            RunTelemetry.EndWave();
             onWaveEnded?.Invoke();
 
             if (CurrentWave.WaveMusic != null)
@@ -229,14 +252,14 @@ namespace MrX
                 }
             }
 
-            for(int i = 0; i < CurrentWave.Rewards.Count; i++)
+            for (int i = 0; i < CurrentWave.Rewards.Count; i++)
             {
                 var reward = CurrentWave.Rewards[i];
                 if (reward.Amount == 0) continue;
 
                 var currency = GameController.CurrenciesManager.GetCurrency(reward.CurrencyId, true);
 
-                if(currency != null)
+                if (currency != null)
                 {
                     currency.Deposit(reward.Amount);
                 }
@@ -364,8 +387,11 @@ namespace MrX
                 ContinuePlayingSave.AchievementRoomWatermark = completion;
                 GameController.AchievementsManager?.Record(Achievements.AchievementMetric.RoomsCompleted);
             }
+            Debug.Log("[DEBUG] 1 - Before onRoomEnded");
             onRoomEnded?.Invoke();
+            Debug.Log("[DEBUG] 2 - Before RunTelemetry");
             RunTelemetry.EndRoom();
+            Debug.Log("[DEBUG] 3 - Before OnExitReached");
             if (exits.Count == 0 || StageController.IsLastRoom)
             {
                 StageController.OnExitReached(null);
@@ -379,6 +405,7 @@ namespace MrX
 
                 OnExitSpawned?.Invoke();
             }
+            Debug.Log("[DEBUG] 4 - EndRoom completed");
         }
 
         protected virtual void SpawnChestOrEndWave()

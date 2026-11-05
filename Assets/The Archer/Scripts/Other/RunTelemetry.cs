@@ -13,9 +13,12 @@ namespace MrX
     {
         private sealed class RoomSample
         {
+            public string EnemyComposition;
+            public int EnemyCount;
             public string RunId;
             public int RoomNumber;
             public string RoomType;
+            public int WaveNumber;
             public float StartedAt;
             public float HPAtStart;
             public float LastHP;
@@ -28,9 +31,11 @@ namespace MrX
         private static readonly CultureInfo CsvCulture = CultureInfo.InvariantCulture;
         private static HealthbarBehavior playerHealthbar;
         private static RoomSample activeRoom;
+        private static RoomSample activeWave;
         private static string runId;
 
         public static string CsvPath => Path.Combine(Application.persistentDataPath, "room_telemetry.csv");
+        public static string WaveCsvPath => Path.Combine(Application.persistentDataPath, "wave_telemetry.csv");
 
         /// <summary>Goi sau khi khoi tao Healthbar cua PLAYER, khong phai Enemy.</summary>
         public static void BindPlayerHealthbar(HealthbarBehavior healthbar)
@@ -69,6 +74,8 @@ namespace MrX
 
         public static void BeginRoom(int roomNumber, string roomType)
         {
+            if (activeWave != null)
+                CompleteWave("Interrupted");
             // Tu dong tao ma Run moi tai Room 1.
             if (activeRoom != null)
             {
@@ -92,6 +99,86 @@ namespace MrX
             if (playerHealthbar == null)
                 Debug.LogWarning("[RunTelemetry] Chua BindPlayerHealthbar: HP cua Room nay se khong duoc ghi day du.");
         }
+        public static void BeginWave(
+            int waveNumber,
+            string waveType,
+            string enemyComposition,
+            int enemyCount)
+        {
+            if (activeWave != null)
+                CompleteWave("Interrupted");
+
+            activeWave = new RoomSample
+            {
+                RunId = runId,
+                RoomNumber = activeRoom != null ? activeRoom.RoomNumber : 1,
+                WaveNumber = waveNumber,
+                RoomType = waveType ?? "Unknown",
+                EnemyComposition = enemyComposition ?? "Unknown",//?? là nếu enemyComposition là null thì sẽ gán giá trị "Unknown"
+                EnemyCount = enemyCount,
+                StartedAt = Time.time,
+                HPAtStart = playerHealthbar != null ? playerHealthbar.HP : -1,
+                LastHP = playerHealthbar != null ? playerHealthbar.HP : -1,
+                MaxHP = playerHealthbar != null ? playerHealthbar.MaxHP : -1
+            };
+        }
+
+        public static void EndWave()
+        {
+            CompleteWave("Cleared");
+        }
+
+        private static void CompleteWave(string result)
+        {
+            if (activeWave == null) return;
+
+            var wave = activeWave;
+            activeWave = null;
+
+            if (playerHealthbar != null)
+            {
+                wave.LastHP = playerHealthbar.HP;
+                wave.MaxHP = playerHealthbar.MaxHP;
+            }
+
+            string N(float value) =>
+                value.ToString("0.##", CsvCulture);
+
+            string line = string.Join(";", new[]
+            {
+        wave.RunId,
+        wave.RoomNumber.ToString(),
+        wave.WaveNumber.ToString(),
+        wave.RoomType.Replace(';', ','),
+        wave.EnemyCount.ToString(CsvCulture),
+        wave.EnemyComposition,
+        N(Time.time - wave.StartedAt),
+        N(wave.HPAtStart),
+        N(wave.LastHP),
+        N(wave.MaxHP),
+        N(wave.DamageTaken),
+        N(wave.HPAdded),
+        wave.DamageEvents.ToString(),
+        result
+    });
+
+            try
+            {
+                if (!File.Exists(WaveCsvPath))
+                    File.AppendAllText(
+                        WaveCsvPath,
+                        "RunId;Room;Wave;Type;TimeSec;HPStart;HPEnd;MaxHP;DamageTaken;HPAdded;DamageEvents;Result\n"
+                    );
+
+                File.AppendAllText(WaveCsvPath, line + "\n");
+
+                // Debug.Log($"[RunTelemetry] Wave {wave.WaveNumber} | {result} | CSV: {WaveCsvPath}");
+            }
+            catch (Exception e)
+            {
+                Debug.LogWarning($"[RunTelemetry] Wave CSV error: {e.Message}");
+            }
+        }
 
         /// <summary>Ket thuc room va tu tinh thoi gian gameplay da troi qua.</summary>
         public static void EndRoom()
@@ -103,26 +190,38 @@ namespace MrX
         /// <summary>Goi khi Player chet / Run ket thuc truoc khi clear Room.</summary>
         public static void FailRoom()
         {
-            if (activeRoom == null) return;
-            CompleteRoom(Time.time - activeRoom.StartedAt, "Failed");
+            CompleteWave("Failed");
+
+            if (activeRoom != null)
+                CompleteRoom(Time.time - activeRoom.StartedAt, "Failed");
         }
 
-        private static void OnPlayerDamaged(float actualHPRemoved)
+        private static void OnPlayerDamaged(float damage)
         {
-            if (activeRoom == null || actualHPRemoved <= 0f) return;
+            if (damage <= 0f) return;
 
-            activeRoom.DamageTaken += actualHPRemoved;
-            activeRoom.DamageEvents++;
-            if (playerHealthbar != null) activeRoom.LastHP = playerHealthbar.HP;
+            if (activeRoom != null)
+            {
+                activeRoom.DamageTaken += damage;
+                activeRoom.DamageEvents++;
+            }
+
+            if (activeWave != null)
+            {
+                activeWave.DamageTaken += damage;
+                activeWave.DamageEvents++;
+            }
         }
 
-        private static void OnPlayerHPAdded(float actualHPAdded)
+        private static void OnPlayerHPAdded(float hp)
         {
-            if (activeRoom == null || actualHPAdded <= 0f) return;
+            if (hp <= 0f) return;
 
-            // Bao gom ca HP duoc cong khi ChangeMaxHP goi AddHP.
-            activeRoom.HPAdded += actualHPAdded;
-            if (playerHealthbar != null) activeRoom.LastHP = playerHealthbar.HP;
+            if (activeRoom != null)
+                activeRoom.HPAdded += hp;
+
+            if (activeWave != null)
+                activeWave.HPAdded += hp;
         }
 
         private static void CompleteRoom(float elapsedSeconds, string result)
@@ -187,6 +286,61 @@ namespace MrX
     [UnityEditor.InitializeOnLoad]
     internal static class RunTelemetryEditorLinks
     {
+        [UnityEditor.MenuItem("Tools/Run Telemetry/Reset CSV Data")]
+        private static void ResetCsvData()
+        {
+            bool confirm = UnityEditor.EditorUtility.DisplayDialog(
+                "Reset Run Telemetry",
+                "Xóa toàn bộ dữ liệu thống kê Room và Wave?\n\n" +
+                "Header của cả hai file sẽ được giữ lại.\n" +
+                "Thao tác này không thể hoàn tác.",
+                "Reset",
+                "Cancel"
+            );
+
+            if (!confirm) return;
+
+            const string roomHeader =
+                "RunId;Room;Type;TimeSec;HPStart;HPEnd;" +
+                "MaxHP;DamageTaken;HPAdded;DamageEvents;Result";
+
+            const string waveHeader =
+                "RunId;Room;Wave;Type;EnemyCount;EnemyComposition;" +
+                "TimeSec;HPStart;HPEnd;MaxHP;DamageTaken;" +
+                "HPAdded;DamageEvents;Result";
+
+            try
+            {
+                File.WriteAllText(
+                    RunTelemetry.CsvPath,
+                    roomHeader + "\n"
+                );
+
+                File.WriteAllText(
+                    RunTelemetry.WaveCsvPath,
+                    waveHeader + "\n"
+                );
+
+                Debug.Log(
+                    "[RunTelemetry] Reset thành công!\n" +
+                    $"Room: {RunTelemetry.CsvPath}\n" +
+                    $"Wave: {RunTelemetry.WaveCsvPath}"
+                );
+            }
+            catch (Exception e)
+            {
+                Debug.LogError(
+                    $"[RunTelemetry] Reset thất bại: {e.Message}"
+                );
+            }
+        }
+
+        [UnityEditor.MenuItem(
+            "Tools/Run Telemetry/Reset CSV Data", true)]
+        private static bool ValidateResetCsvData()
+        {
+            return !UnityEditor.EditorApplication.isPlayingOrWillChangePlaymode;
+        }
         private const string LinkId = "runtelemetry-open-csv";
 
 #if UNITY_6000_0_OR_NEWER
