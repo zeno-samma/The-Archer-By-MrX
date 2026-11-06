@@ -357,7 +357,9 @@ namespace MrX
                 GameController.DailyQuestsManager?.Record(Quests.DailyQuestType.ClearStages);
 
                 FinalizeRunRewards();
+                Debug.Log("[VICTORY] 1 - Before StageCompleteScreen.Show");
                 GameScreen.StageCompleteScreen.Show();
+                Debug.Log("[VICTORY] 2 - After StageCompleteScreen.Show");
                 // Debug.Log("Người chơi đã hoàn thành tất cả các phòng trong giai đoạn");
                 // 3. Hoặc đọc lại biến lưu trữ ở bất kỳ đâu/bất kỳ lúc nào về sau
                 // float recordedTime = ConsoleTimer.Instance.GetElapsedTime("Wave_1");
@@ -415,14 +417,11 @@ namespace MrX
             if (!Player.TryToRevive())
             {
                 onDefeat?.Invoke();
-                // Debug.Log("Người chơi đã chết");
-                // float recordedTime = ConsoleTimer.Instance.GetElapsedTime("Wave_1");
-                // Debug.Log("Thời gian hoàn thành Wave 1: " + recordedTime.ToString("F2") + "s");
+                RunTelemetry.FailRoom();
+                Debug.Log("[DEFEAT] 1 - Before StageFailedScreen.Show");
                 FinalizeRunRewards();
                 instance.gameScreen.StageFailedScreen.Show();
-                // ConsoleTimer.Instance.LogAllResults();==> Phát event chết và cho biết chết ở phòng nào
-                // ConsoleTimer.Instance.ReportSessionResult("Die");
-                RunTelemetry.FailRoom(); // Khi chết giữa Room
+                Debug.Log("[DEFEAT] 2 - After StageFailedScreen.Show");
             }
         }
 
@@ -430,7 +429,7 @@ namespace MrX
         {
             if (IsResultFinalized || settlingResult) return;
             onDefeat?.Invoke();
-
+            RunTelemetry.FailRoom();
             FinalizeRunRewards();
             instance.gameScreen.StageFailedScreen.Show();
         }
@@ -441,18 +440,23 @@ namespace MrX
             settlingResult = true;
             try
             {
+                Debug.Log("[RUN-END] Before GrantPickedUpItems");
                 DropManager.GrantPickedUpItems();
+                Debug.Log("[RUN-END] Before ApplyGameplayAmounts");
                 GameController.CurrenciesManager.ApplyGameplayAmounts();
                 ContinuePlayingSave.Disable();
                 GameController.DailyQuestsManager?.FlushPending();
                 GameController.AchievementsManager?.FlushPending();
                 GameController.ArmoryManager.Crafting?.FlushPending();
                 IsResultFinalized = true;
+                Debug.Log("[RUN-END] Before PrepareForResult");
                 GameScreen.PrepareForResult();
+                Debug.Log("[RUN-END] Before CommitGameplayBatch");
                 var saves = GameController.SaveManager as Save.SaveManager;
                 if (saves != null) saves.CommitGameplayBatch(); else GameController.SaveManager.Save(false);
             }
             finally { settlingResult = false; }
+            Debug.Log("[RUN-END] CommitGameplayBatch completed");
         }
 
         public static void RecalculateEnemyMultipliers()//tính toán lại các hệ số nhân sát thương và máu của kẻ thù
@@ -468,14 +472,15 @@ namespace MrX
 
         public static void ReturnToMainMenu()//quay lại menu chính
         {
+            Debug.Log("[RETURN] 1 - Start ReturnToMainMenu");
+
+            Debug.Log("[RETURN] 2 - Before OnStageUnloaded");
             GameController.UpgradesManager.OnStageUnloaded();
-
+            Debug.Log("[RETURN] 3 - After OnStageUnloaded");
             onDefeat = null;
-
+            Debug.Log("[RETURN] 4 - Before LoadMainMenu");
             GameController.LoadMainMenu();
-            // Debug.Log("Người chơi đã quay lại menu chính");
-            // ConsoleTimer.Instance.LogAllResults();//===Phát event quay lại menu chính
-            // ConsoleTimer.Instance.ReportSessionResult("BackToMenu");
+            Debug.Log("[RETURN] 5 - After LoadMainMenu");
         }
     }
 }

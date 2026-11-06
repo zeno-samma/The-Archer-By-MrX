@@ -167,7 +167,9 @@ namespace MrX
                 if (!File.Exists(WaveCsvPath))
                     File.AppendAllText(
                         WaveCsvPath,
-                        "RunId;Room;Wave;Type;TimeSec;HPStart;HPEnd;MaxHP;DamageTaken;HPAdded;DamageEvents;Result\n"
+                        "RunId;Room;Wave;Type;EnemyCount;EnemyComposition;" +
+                        "TimeSec;HPStart;HPEnd;MaxHP;DamageTaken;" +
+                        "HPAdded;DamageEvents;Result\n"
                     );
 
                 File.AppendAllText(WaveCsvPath, line + "\n");
