@@ -468,14 +468,14 @@ namespace MrX
 
         public static void ReturnToMainMenu()//quay lại menu chính
         {
+            Debug.Log("[RETURN] 1 - START");
+            
             GameController.UpgradesManager.OnStageUnloaded();
-
+            Debug.Log("[RETURN] 2 - Unloaded DONE");    
             onDefeat = null;
-
+            Debug.Log("[RETURN] 3 - Before LoadMainMenu");
             GameController.LoadMainMenu();
-            // Debug.Log("Người chơi đã quay lại menu chính");
-            // ConsoleTimer.Instance.LogAllResults();//===Phát event quay lại menu chính
-            // ConsoleTimer.Instance.ReportSessionResult("BackToMenu");
+            Debug.Log("[RETURN] 4 - LoadMainMenu DONE");
         }
     }
 }

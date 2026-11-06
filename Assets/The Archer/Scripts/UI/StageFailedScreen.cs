@@ -185,11 +185,13 @@ namespace MrX.UI
 
         protected virtual void OnContinueButtonClicked()
         {
+            // Debug.Log("[CONTINUE] 1 - Enter");
             GameController.AudioManager.PlayButtonClick();
-
+            // Debug.Log("[CONTINUE] 2 - Audio DONE");    
             Clear();
-
+            // Debug.Log("[CONTINUE] 3 - Clear DONE");
             Time.timeScale = 1f;
+            Debug.Log("[CONTINUE] 4 - TimeScale DONE");
             StageController.ReturnToMainMenu();
         }
     }

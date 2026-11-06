@@ -244,9 +244,15 @@ namespace MrX
 
         private static IEnumerator MainMenuLoadingCoroutine()
         {
+            Debug.Log("[SCENE] 1 - LoadingScene START");
             yield return LoadAsyncScene(SceneSettings.LoadingScene.SceneName, LoadSceneMode.Additive);
+            Debug.Log("[SCENE] 2 - LoadingScene DONE");
+            Debug.Log("[SCENE] 3 - Unload GameScene START");
             yield return UnloadAsyncScene(SceneSettings.GameScene.SceneName);
+            Debug.Log("[SCENE] 4 - Unload GameScene DONE");
+            Debug.Log("[SCENE] 5 - MainMenuScene START");
             yield return LoadAsyncScene(SceneSettings.MainMenuScene.SceneName, LoadSceneMode.Single);
+            Debug.Log("[SCENE] 6 - MainMenuScene DONE");
 
             loadingStage = false;
 
