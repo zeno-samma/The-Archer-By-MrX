@@ -6,7 +6,8 @@ namespace MrX.UI
     [DefaultExecutionOrder(60)]
     public sealed class StageHeroIdentity : MonoBehaviour
     {
-        [SerializeField] private TMP_Text heroLabel;
+        [SerializeField] private TMP_Text heroNameLabel;
+        [SerializeField] private TMP_Text heroLevelLabel;
         private ArmoryManager armory;
         private HeroSaveData heroSave;
         private void Start()
@@ -27,8 +28,10 @@ namespace MrX.UI
         private void OnLevel(HeroSaveData save, int level) => Refresh();
         private void Refresh()
         {
-            if (heroLabel && armory.EquippedHero != null)
-                heroLabel.text = armory.EquippedHero.Name + "  Lv." + ((heroSave?.Level ?? 0) + 1);
+            if (heroNameLabel && armory.EquippedHero != null)
+                heroNameLabel.text = armory.EquippedHero.Name;
+            if (heroLevelLabel && armory.EquippedHero != null)
+                heroLevelLabel.text = "" + ((heroSave?.Level ?? 0) + 1);
         }
         private void OnDestroy()
         {
