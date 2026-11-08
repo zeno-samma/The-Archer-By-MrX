@@ -23,7 +23,7 @@ namespace MrX.UI
         }
         [SerializeField] private List<Row> rows = new List<Row>();
         [SerializeField] private Image selectedIcon;
-        [SerializeField] private TMP_Text selectedTitle, selectedDescription, selectedLevel, selectedEffect, selectedCost, walletLabel, feedback;
+        [SerializeField] private TMP_Text selectedTitle, selectedDescription, selectedLevel, selectedEffect, selectedCost, feedback;
         [SerializeField] private TMP_Text[] currentStats, nextStats;
         [SerializeField] private Button upgradeButton;
         [SerializeField] private Sprite blueButton, yellowButton, grayButton;
@@ -90,7 +90,6 @@ namespace MrX.UI
                 row.background.color = row == selected ? new Color(1, .97f, .85f) : new Color(.9f, .95f, 1);
                 for (int i = 0; i < row.segments.Length; i++) row.segments[i].color = (i + 1f) / row.segments.Length <= (level + 1f) / Mathf.Max(1, row.data.LevelsCount) ? new Color(.22f, .57f, 1) : new Color(.72f, .83f, .95f);
             }
-            walletLabel.text = GameController.CurrenciesManager.GetCurrency("gold", false).Amount.ToString("N0");
             if (selected == null) return;
             selectedIcon.sprite = selected.data.Icon; selectedTitle.text = selected.data.Title; selectedDescription.text = selected.data.Description;
             var quote = purchases.Quote(selected.data.UpgradeType, out var current, out var cost);
