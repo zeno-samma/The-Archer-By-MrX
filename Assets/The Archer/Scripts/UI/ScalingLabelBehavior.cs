@@ -23,14 +23,14 @@ namespace MrX.UI
         protected virtual void Awake()
         {
             rectTransform = GetComponent<RectTransform>();
-            spacing = label.rectTransform.anchoredPosition.x - label.rectTransform.sizeDelta.x / 2 - icon.rectTransform.anchoredPosition.x - icon.rectTransform.sizeDelta.x / 2;
+            // spacing = label.rectTransform.anchoredPosition.x - label.rectTransform.sizeDelta.x / 2 - icon.rectTransform.anchoredPosition.x - icon.rectTransform.sizeDelta.x / 2;
         }
 
         public virtual void SetAmount(int amount)
         {
             Amount = amount;
             label.SetText(amount.ToString());
-            RecalculatePositions();
+            // RecalculatePositions();
         }
 
         public virtual void SetSprite(Sprite sprite)
