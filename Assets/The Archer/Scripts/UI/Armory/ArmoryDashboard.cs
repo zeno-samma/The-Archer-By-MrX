@@ -17,7 +17,9 @@ namespace MrX.UI
         private readonly List<ItemSaveData> observedItems = new List<ItemSaveData>();
         private readonly List<HeroSaveData> observedHeroes = new List<HeroSaveData>();
         [SerializeField] private List<TMP_Text> statValues = new List<TMP_Text>(), bonuses = new List<TMP_Text>();
-        [SerializeField] private TMP_Text capacity, heroTitle, modalText, modalTitle;
+        [SerializeField] private TMP_Text capacity, modalText, modalTitle;
+        // [SerializeField] private TMP_Text heroName;
+        // [SerializeField] private TMP_Text heroLevel;
         [SerializeField] private RectTransform modal;
         [SerializeField] private ScrollRect scroll;
         [SerializeField] private Button expand, details, confirm, firstHero, filterButton;
@@ -92,7 +94,7 @@ namespace MrX.UI
             foreach (var name in new[] { "Stats Background", "Damage Label", "HP Label" })
             { var child = heroPanel.Find(name); if (child) child.gameObject.SetActive(false); }
             var levelBar = heroPanel.Find("Info_Ui"); if (levelBar) levelBar.gameObject.SetActive(false);
-            heroTitle = Text(page, "Hero Name and Level", "", 25, .17f, .83f, .41f, .9f);
+            // heroTitle = Text(page, "Hero Name and Level", "", 25, .17f, .83f, .41f, .9f);
             var footer = Rect(page, "Hero Selector", .13f, .15f, .47f, .28f); Skin(footer.gameObject.AddComponent<Image>());
             Text(footer, "Title", "SWITCH HERO", 20, .05f, .73f, .95f, 1);
             var heroes = Resources.Load<ForgePageDatabase>(ForgePageDatabase.ResourcePath).armory.Heroes;
@@ -182,7 +184,8 @@ namespace MrX.UI
                 string unit = i == 2 ? "%" : ""; statValues[i].text = values[i].ToString("0.##") + unit;
                 bonuses[i].text = "(" + (values[i] >= basic[i] ? "+" : "") + (values[i] - basic[i]).ToString("0.##") + unit + ")";
             }
-            var hero = Armory.EquippedHero; heroTitle.text = hero.Name + "   Lv." + (Armory.GetHeroSave(hero.Id).Level + 1);
+            var hero = Armory.EquippedHero; 
+            // heroTitle.text = hero.Name + "   Lv." + (Armory.GetHeroSave(hero.Id).Level + 1);
             var bag = Armory.Bag; capacity.text = bag.Save.UsedSlots + " / " + bag.Save.BagCapacity;
             expand.interactable = bag.NextCapacity > bag.Save.BagCapacity;
             visibleItems.Clear();
