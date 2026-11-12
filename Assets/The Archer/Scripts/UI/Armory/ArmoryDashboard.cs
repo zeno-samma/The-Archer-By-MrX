@@ -30,7 +30,7 @@ namespace MrX.UI
         private int quotedCapacity, firstRow = -1;
         private float cellSize, stride;
         private int columns = 6;
-        public void SetColumns(int value) { value=Mathf.Clamp(value,1,6); if(columns==value)return;columns=value;MarkDirty(); }
+        public void SetColumns(int value) { value = Mathf.Clamp(value, 1, 6); if (columns == value) return; columns = value; MarkDirty(); }
         private ItemType? filter;
         private readonly List<ItemSaveData> visibleItems = new List<ItemSaveData>();
         private readonly List<InventoryStack> visibleStacks = new List<InventoryStack>();
@@ -184,7 +184,7 @@ namespace MrX.UI
                 string unit = i == 2 ? "%" : ""; statValues[i].text = values[i].ToString("0.##") + unit;
                 bonuses[i].text = "(" + (values[i] >= basic[i] ? "+" : "") + (values[i] - basic[i]).ToString("0.##") + unit + ")";
             }
-            var hero = Armory.EquippedHero; 
+            var hero = Armory.EquippedHero;
             // heroTitle.text = hero.Name + "   Lv." + (Armory.GetHeroSave(hero.Id).Level + 1);
             var bag = Armory.Bag; capacity.text = bag.Save.UsedSlots + " / " + bag.Save.BagCapacity;
             expand.interactable = bag.NextCapacity > bag.Save.BagCapacity;

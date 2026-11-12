@@ -35,7 +35,7 @@ namespace MrX.UI
 
         [Space]
         [SerializeField] protected Button settingsButton;
-        [SerializeField] protected GameObject settingsGamepadIndicator;
+        // [SerializeField] protected GameObject settingsGamepadIndicator;
 
         [Space]
         [SerializeField] protected Button infoButton;
@@ -491,7 +491,7 @@ namespace MrX.UI
                 EventSystem.current.SetSelectedGameObject(playButton.gameObject);
             }
 
-            settingsGamepadIndicator.SetActive(inputType == InputType.Gamepad);
+            // settingsGamepadIndicator.SetActive(inputType == InputType.Gamepad);
 
             if (infoButton != null && infoButton.gameObject.activeSelf)
             {
