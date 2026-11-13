@@ -30554,8 +30554,8 @@ MonoBehaviour:
   selectablesParent: {fileID: 4931642464098692137}
   leftButton: {fileID: 3585809371124731384}
   rightButton: {fileID: 3574501315582807815}
-  leftGamepadIndicator: {fileID: 2910904924812440579}
-  rightGamepadIndicator: {fileID: 6738664927548167820}
+  leftGamepadIndicator: {fileID: 0}
+  rightGamepadIndicator: {fileID: 0}
   stageNameText: {fileID: 8370642040262869988}
   stageNumberText: {fileID: 9078475626968776070}
   editorStagePreview: {fileID: 6384270583106138289}
@@ -38934,6 +38934,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 484834662156540279}
     - target: {fileID: 3457237952024790964, guid: e642593bf05464a4f82fa19d321c3abd, type: 3}
+      propertyPath: playButtonShineLine
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3457237952024790964, guid: e642593bf05464a4f82fa19d321c3abd, type: 3}
+      propertyPath: infoGamepadIndicator
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3457237952024790964, guid: e642593bf05464a4f82fa19d321c3abd, type: 3}
       propertyPath: playButtonEnabledSprite
       value: 
       objectReference: {fileID: 21300000, guid: 77f2fa5c779c34ab9ad50e39ebe0bacf, type: 3}
@@ -39426,6 +39434,34 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5182673000694183990}
     - target: {fileID: 6512578546357054810, guid: e642593bf05464a4f82fa19d321c3abd, type: 3}
+      propertyPath: texts.Array.data[0].target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6512578546357054810, guid: e642593bf05464a4f82fa19d321c3abd, type: 3}
+      propertyPath: texts.Array.data[1].target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6512578546357054810, guid: e642593bf05464a4f82fa19d321c3abd, type: 3}
+      propertyPath: texts.Array.data[2].target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6512578546357054810, guid: e642593bf05464a4f82fa19d321c3abd, type: 3}
+      propertyPath: texts.Array.data[3].target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6512578546357054810, guid: e642593bf05464a4f82fa19d321c3abd, type: 3}
+      propertyPath: texts.Array.data[4].target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6512578546357054810, guid: e642593bf05464a4f82fa19d321c3abd, type: 3}
+      propertyPath: texts.Array.data[5].target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6512578546357054810, guid: e642593bf05464a4f82fa19d321c3abd, type: 3}
+      propertyPath: texts.Array.data[6].target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6512578546357054810, guid: e642593bf05464a4f82fa19d321c3abd, type: 3}
       propertyPath: texts.Array.data[7].target
       value: 
       objectReference: {fileID: 0}
@@ -39735,6 +39771,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6512578546357054810, guid: e642593bf05464a4f82fa19d321c3abd, type: 3}
       propertyPath: texts.Array.data[87].target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6512578546357054810, guid: e642593bf05464a4f82fa19d321c3abd, type: 3}
+      propertyPath: texts.Array.data[88].target
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 6512578546357054810, guid: e642593bf05464a4f82fa19d321c3abd, type: 3}
@@ -40290,7 +40330,35 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 6512578546357054810, guid: e642593bf05464a4f82fa19d321c3abd, type: 3}
+      propertyPath: rectangles.Array.data[7].target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6512578546357054810, guid: e642593bf05464a4f82fa19d321c3abd, type: 3}
+      propertyPath: rectangles.Array.data[10].target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6512578546357054810, guid: e642593bf05464a4f82fa19d321c3abd, type: 3}
       propertyPath: rectangles.Array.data[11].target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6512578546357054810, guid: e642593bf05464a4f82fa19d321c3abd, type: 3}
+      propertyPath: rectangles.Array.data[12].target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6512578546357054810, guid: e642593bf05464a4f82fa19d321c3abd, type: 3}
+      propertyPath: rectangles.Array.data[13].target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6512578546357054810, guid: e642593bf05464a4f82fa19d321c3abd, type: 3}
+      propertyPath: rectangles.Array.data[14].target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6512578546357054810, guid: e642593bf05464a4f82fa19d321c3abd, type: 3}
+      propertyPath: rectangles.Array.data[15].target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6512578546357054810, guid: e642593bf05464a4f82fa19d321c3abd, type: 3}
+      propertyPath: rectangles.Array.data[16].target
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 6512578546357054810, guid: e642593bf05464a4f82fa19d321c3abd, type: 3}
@@ -40299,6 +40367,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6512578546357054810, guid: e642593bf05464a4f82fa19d321c3abd, type: 3}
       propertyPath: rectangles.Array.data[18].target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6512578546357054810, guid: e642593bf05464a4f82fa19d321c3abd, type: 3}
+      propertyPath: rectangles.Array.data[19].target
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 6512578546357054810, guid: e642593bf05464a4f82fa19d321c3abd, type: 3}
@@ -42136,6 +42208,17 @@ PrefabInstance:
     - {fileID: 244272209506585162, guid: e642593bf05464a4f82fa19d321c3abd, type: 3}
     - {fileID: 5972335545071042715, guid: e642593bf05464a4f82fa19d321c3abd, type: 3}
     - {fileID: 5947629687010160627, guid: e642593bf05464a4f82fa19d321c3abd, type: 3}
+    - {fileID: 7194610722320632212, guid: e642593bf05464a4f82fa19d321c3abd, type: 3}
+    - {fileID: 2194431540482456132, guid: e642593bf05464a4f82fa19d321c3abd, type: 3}
+    - {fileID: 2478526730848940517, guid: e642593bf05464a4f82fa19d321c3abd, type: 3}
+    - {fileID: 1234966404292598219, guid: e642593bf05464a4f82fa19d321c3abd, type: 3}
+    - {fileID: 2445854745586822095, guid: e642593bf05464a4f82fa19d321c3abd, type: 3}
+    - {fileID: 2617106698299637542, guid: e642593bf05464a4f82fa19d321c3abd, type: 3}
+    - {fileID: 1391324423800015266, guid: e642593bf05464a4f82fa19d321c3abd, type: 3}
+    - {fileID: 5337860943344700582, guid: e642593bf05464a4f82fa19d321c3abd, type: 3}
+    - {fileID: 9121544969128717516, guid: e642593bf05464a4f82fa19d321c3abd, type: 3}
+    - {fileID: 8634887334318308734, guid: e642593bf05464a4f82fa19d321c3abd, type: 3}
+    - {fileID: 3282669809416970456, guid: e642593bf05464a4f82fa19d321c3abd, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 8431443900486031870, guid: e642593bf05464a4f82fa19d321c3abd, type: 3}
       insertIndex: -1
@@ -42179,19 +42262,9 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1119480007222190229, guid: e642593bf05464a4f82fa19d321c3abd, type: 3}
   m_PrefabInstance: {fileID: 247603045556788662}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &2910904924812440579 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3101349787460889013, guid: e642593bf05464a4f82fa19d321c3abd, type: 3}
-  m_PrefabInstance: {fileID: 247603045556788662}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &3165565519468628830 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2918878711318091496, guid: e642593bf05464a4f82fa19d321c3abd, type: 3}
-  m_PrefabInstance: {fileID: 247603045556788662}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &6738664927548167820 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6839601845486471994, guid: e642593bf05464a4f82fa19d321c3abd, type: 3}
   m_PrefabInstance: {fileID: 247603045556788662}
   m_PrefabAsset: {fileID: 0}
 --- !u!224 &8162318990970552381 stripped

@@ -34,16 +34,16 @@ namespace MrX.UI
             leftButton.transform.localScale = Vector3.zero;
             rightButton.transform.localScale = Vector3.zero;
 
-            leftGamepadIndicator.transform.localScale = Vector3.zero;
-            rightGamepadIndicator.transform.localScale = Vector3.zero;
+            // // leftGamepadIndicator.transform.localScale = Vector3.zero;
+            // rightGamepadIndicator.transform.localScale = Vector3.zero;
 
             selectablesParent.localScale = Vector3.zero;
 
             leftButton.transform.DoLocalScale(new Vector3(-1, 1, 1), 0.3f).SetEasing(EasingType.CubicOut).SetDelay(0.2f);
             rightButton.transform.DoLocalScale(Vector3.one, 0.3f).SetEasing(EasingType.CubicOut).SetDelay(0.2f);
 
-            leftGamepadIndicator.transform.DoLocalScale(Vector3.one, 0.3f).SetEasing(EasingType.CubicOut).SetDelay(0.2f);
-            rightGamepadIndicator.transform.DoLocalScale(Vector3.one, 0.3f).SetEasing(EasingType.CubicOut).SetDelay(0.2f);
+            // leftGamepadIndicator.transform.DoLocalScale(Vector3.one, 0.3f).SetEasing(EasingType.CubicOut).SetDelay(0.2f);
+            // rightGamepadIndicator.transform.DoLocalScale(Vector3.one, 0.3f).SetEasing(EasingType.CubicOut).SetDelay(0.2f);
 
             selectablesParent.localScale = new Vector3(0, 1, 1);
             selectablesParent.DoLocalScale(Vector3.one, 0.3f).SetEasing(EasingType.CubicOut).SetDelay(0.1f);
@@ -54,8 +54,8 @@ namespace MrX.UI
             leftButton.transform.DoLocalScale(Vector3.zero, 0.3f).SetEasing(EasingType.CubicIn);
             rightButton.transform.DoLocalScale(Vector3.zero, 0.3f).SetEasing(EasingType.CubicIn);
 
-            leftGamepadIndicator.transform.DoLocalScale(Vector3.zero, 0.3f).SetEasing(EasingType.CubicIn);
-            rightGamepadIndicator.transform.DoLocalScale(Vector3.zero, 0.3f).SetEasing(EasingType.CubicIn);
+            // leftGamepadIndicator.transform.DoLocalScale(Vector3.zero, 0.3f).SetEasing(EasingType.CubicIn);
+            // rightGamepadIndicator.transform.DoLocalScale(Vector3.zero, 0.3f).SetEasing(EasingType.CubicIn);
 
             selectablesParent.DoLocalScale(new Vector3(0, 1, 1), 0.3f).SetEasing(EasingType.CubicIn).SetOnFinish(OnHidden);
         }

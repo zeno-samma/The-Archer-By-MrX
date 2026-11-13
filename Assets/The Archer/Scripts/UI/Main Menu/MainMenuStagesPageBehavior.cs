@@ -311,11 +311,6 @@ namespace MrX.UI
             // Debug.Log("Click stage");
             if (!GameController.MainMenuScreenBehavior.ContinuePlayingPopup.IsOpen)
             {
-                var linePosition = playButtonShineLine.anchoredPosition;
-                var targetPosition = new Vector2(-linePosition.x, linePosition.y);
-
-                playButtonShineLine.DoAnchorPosition(targetPosition, 0.5f).SetOnFinish(() => playButtonShineLine.anchoredPosition = linePosition);
-
                 SubscribeToInputEvents();
                 SelectPlayButton();
             }

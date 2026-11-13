@@ -16,8 +16,8 @@ namespace MrX.UI
         [SerializeField] protected Button rightButton;
 
         [Space]
-        [SerializeField] protected GameObject leftGamepadIndicator;
-        [SerializeField] protected GameObject rightGamepadIndicator;
+        // [SerializeField] protected GameObject leftGamepadIndicator;
+        // [SerializeField] protected GameObject rightGamepadIndicator;
 
         protected PoolComponent<T> selectablesPool;
 
@@ -93,13 +93,13 @@ namespace MrX.UI
                 leftButton.gameObject.SetActive(false);
                 rightButton.gameObject.SetActive(false);
 
-                leftGamepadIndicator.gameObject.SetActive(IsLeftAvailable());
-                rightGamepadIndicator.gameObject.SetActive(IsRightAvailable());
+                // leftGamepadIndicator.gameObject.SetActive(IsLeftAvailable());
+                // rightGamepadIndicator.gameObject.SetActive(IsRightAvailable());
             }
             else
             {
-                leftGamepadIndicator.gameObject.SetActive(false);
-                rightGamepadIndicator.gameObject.SetActive(false);
+                // leftGamepadIndicator.gameObject.SetActive(false);
+                // rightGamepadIndicator.gameObject.SetActive(false);
 
                 leftButton.gameObject.SetActive(IsLeftAvailable());
                 rightButton.gameObject.SetActive(IsRightAvailable());
