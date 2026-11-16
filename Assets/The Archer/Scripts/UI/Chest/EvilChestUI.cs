@@ -136,7 +136,7 @@ namespace MrX.UI
         protected virtual void ResetUI()
         {
             gameObject.SetActive(true);
-
+            abilityCard.gameObject.SetActive(true);
             backgroundImage.SetAlpha(0);
 
             title.ResetUI();
