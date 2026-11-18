@@ -8,9 +8,9 @@ namespace MrX.UI
     {
         [SerializeField] protected List<MainMenuDockItemBehavior> dockItems;
 
-        [Space]
-        [SerializeField] protected GameObject leftGamepadIndicator;
-        [SerializeField] protected GameObject rightGamepadIndicator;
+        // [Space]
+        // [SerializeField] protected GameObject leftGamepadIndicator;
+        // [SerializeField] protected GameObject rightGamepadIndicator;
 
         public event UnityAction<MainMenuPageType> onPageSelected;
         public MainMenuPageType SelectedPage { get; protected set; }
@@ -124,8 +124,8 @@ namespace MrX.UI
             {
                 var selectedIndex = GetDockItemIndex(SelectedPage);
 
-                leftGamepadIndicator.SetActive(selectedIndex != 0);
-                rightGamepadIndicator.SetActive(selectedIndex != dockItems.Count - 1);
+                // leftGamepadIndicator.SetActive(selectedIndex != 0);
+                // rightGamepadIndicator.SetActive(selectedIndex != dockItems.Count - 1);
             }
         }
 
@@ -135,13 +135,8 @@ namespace MrX.UI
             {
                 var selectedIndex = GetDockItemIndex(SelectedPage);
 
-                if (selectedIndex != 0) leftGamepadIndicator.SetActive(true);
-                if (selectedIndex != dockItems.Count - 1) rightGamepadIndicator.SetActive(true);
-            }
-            else
-            {
-                leftGamepadIndicator.SetActive(false);
-                rightGamepadIndicator.SetActive(false);
+                // if (selectedIndex != 0) leftGamepadIndicator.SetActive(true);
+                // if (selectedIndex != dockItems.Count - 1) rightGamepadIndicator.SetActive(true);
             }
         }
 

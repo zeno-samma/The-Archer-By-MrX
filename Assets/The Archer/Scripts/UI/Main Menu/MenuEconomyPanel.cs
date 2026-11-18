@@ -9,7 +9,7 @@ namespace MrX.UI
 {
     public sealed class MenuEconomyPanel : MonoBehaviour
     {
-        [SerializeField] private TMP_Text energyAmount, goldAmount, gemAmount, recoveryLabel, runCost, feedback, offerTitle, offerAmount, offerPrice;
+        [SerializeField] private TMP_Text  goldAmount, gemAmount, recoveryLabel, runCost, feedback, offerTitle, offerAmount, offerPrice;
         [SerializeField] private Button energyPlus, goldPlus, buyButton, closeButton;
         [SerializeField] private GameObject modal;
         [SerializeField] private TMP_Text purchaseLimit;
@@ -32,9 +32,12 @@ namespace MrX.UI
         private void WalletChanged(CurrencySave _) { Refresh(); }
         private void Update()
         {
-            if (Time.unscaledTime < nextTick || service == null) return;
-            nextTick = Time.unscaledTime + 1;
-            if (isActiveAndEnabled && GetComponentInParent<Canvas>().isActiveAndEnabled) RefreshTimer();
+            // if (Time.unscaledTime < nextTick || service == null) return;
+            // nextTick = Time.unscaledTime + 1;
+            // if (isActiveAndEnabled && GetComponentInParent<Canvas>().isActiveAndEnabled)
+            // {
+            //     RefreshTimer();
+            // }
         }
         private void RefreshTimer()
         {
@@ -50,7 +53,7 @@ namespace MrX.UI
         }
         private void Refresh()
         {
-            energyAmount.text = service.Energy.Amount + " / " + service.Settings.maximumEnergy;
+            // energyAmount.text = service.Energy.Amount + " / " + service.Settings.maximumEnergy;
             goldAmount.text = service.Gold.Amount.ToString("N0"); gemAmount.text = service.Gems.Amount.ToString("N0");
             RefreshTimer();
         }
