@@ -42,7 +42,8 @@ namespace MrX.Abilities.UI
 
         [Space]
         [SerializeField] protected List<RarityData> rarityData;
-
+        [Header("Performance")]
+        [SerializeField] private bool enableAnimations = false;
         [Header("Animation Settings")]
         [SerializeField] protected float timescaleStopDuration = 0.25f;
         [SerializeField] protected float backgroundFadeInDuration = 0.25f;
@@ -115,13 +116,23 @@ namespace MrX.Abilities.UI
 
         protected virtual void Start()
         {
+            // Debug.LogError("MRX_LOGCAT_TEST_123");
+            
+            InitializeContinuePlayingSave();
             ContinuePlayingSave = GameController.SaveManager.GetSave<ContinuePlayingSave>("Continue Playing");
 
             rerollButton.SetOnClick(OnRerollButtonClicked);
-            
+
             ResetUI();
         }
-
+        protected virtual void InitializeContinuePlayingSave()
+        {
+            if (ContinuePlayingSave == null)
+            {
+                ContinuePlayingSave =
+                    GameController.SaveManager.GetSave<ContinuePlayingSave>("Continue Playing");
+            }
+        }
         public virtual void Open()
         {
             gameObject.SetActive(true);
@@ -190,6 +201,11 @@ namespace MrX.Abilities.UI
 
         public virtual IEnumerator ShowCoroutine(List<AbilityData> abilities, AbilityRarity rarity)
         {
+            if (!enableAnimations)
+            {
+                yield return ShowInstantCoroutine(abilities, rarity);
+                yield break;
+            }
             IsOpen = true;
             Rarity = rarity;
 
@@ -209,7 +225,10 @@ namespace MrX.Abilities.UI
             yield return new WaitForSecondsRealtime(slotInitialDelay);
 
             InitSlots(abilities);
-
+            Canvas.ForceUpdateCanvases();
+            yield return null;
+            Canvas.ForceUpdateCanvases();
+            DebugSlotsHolder();
             skipButton.gameObject.SetActive(true);
 
             yield return new WaitForSecondsRealtime(flashInitialDelay);
@@ -231,7 +250,64 @@ namespace MrX.Abilities.UI
             yield return new WaitForSecondsRealtime(stopScrollingDelay);
             yield return CompleteShowCoroutine();
         }
+        protected virtual IEnumerator ShowInstantCoroutine(
+            List<AbilityData> abilities,
+            AbilityRarity rarity)
+        {
+            InitializeContinuePlayingSave();
+            IsOpen = true;
+            Rarity = rarity;
 
+            StageController.GameScreen.HideSideUI();
+
+            ResetUI();
+
+            // Dừng gameplay ngay lập tức
+            Time.timeScale = 0f;
+
+            // Hiển thị UI không animation
+            backgroundImage.SetAlpha(1f);
+
+            title.Skip();
+
+            InitSlots(abilities);
+            Canvas.ForceUpdateCanvases();
+            yield return null;
+            Canvas.ForceUpdateCanvases();
+
+            DebugSlotsHolder();
+
+            skipButton.gameObject.SetActive(false);
+
+            // Hiển thị Rarity
+            var rarityDataItem = rarityData[(int)rarity];
+            InitRarityData(rarityDataItem);
+
+            rarityCanvasGroup.alpha = 1f;
+            rarityRect.localScale = Vector3.one;
+
+            // Kích hoạt lựa chọn
+            foreach (var slot in slots)
+            {
+                slot.MainCard.onAbilitySelected += OnAbilitySelected;
+                slot.MainCard.EnableButton();
+            }
+
+            InitRerollButton();
+            Debug.Log("6 - Before InitNavigation");
+            InitNavigation();
+            Debug.Log("7 - After InitNavigation");
+            rerollButton.transform.localScale = Vector3.one;
+            Debug.Log("8 - After RerollButton Scale");
+            goldIndicator.localScale = Vector3.one;
+            Debug.Log("9 - ShowInstantCoroutine completed");
+            rerollButton.ButtonEnabled = false;
+            rerollButton.RecalculateVisuals();
+
+            showCoroutine = null;
+
+            yield break;
+        }
         protected virtual IEnumerator CompleteShowCoroutine()
         {
             yield return new WaitUntil(CardsInRightOrder);
@@ -305,11 +381,27 @@ namespace MrX.Abilities.UI
             if (rerollButton.WithdrawCost())
             {
                 GameController.AudioManager.PlayButtonClick();
-
                 EventSystem.current.SetSelectedGameObject(null);
 
                 var newAbilities = StageController.AbilitiesManager.GetAbilitiesForSelector(Rarity);
 
+                if (!enableAnimations)
+                {
+                    for (int i = 0; i < slots.Count; i++)
+                    {
+                        var card = slots[i].MainCard;
+                        var ability = i < newAbilities.Count ? newAbilities[i] : null;
+
+                        card.ChangeAbilityInstant(ability);
+                    }
+
+                    ContinuePlayingSave.RerollsCount++;
+
+                    FinishReroll();
+                    return;
+                }
+
+                // Giữ nguyên luồng animation
                 for (int i = 0; i < slots.Count; i++)
                 {
                     var card = slots[i].MainCard;
@@ -319,9 +411,14 @@ namespace MrX.Abilities.UI
                 }
 
                 rerollButton.ButtonEnabled = false;
-                rerollButton.transform.DoLocalScale(new Vector3(0, 0.6f, 1f), 0.4f).SetUnscaledTime(true).SetEasing(EasingType.CubicIn);
+                rerollButton.transform
+                    .DoLocalScale(new Vector3(0, 0.6f, 1f), 0.4f)
+                    .SetUnscaledTime(true)
+                    .SetEasing(EasingType.CubicIn);
 
-                EasingManager.DoAfter(AllCardsEndedAnimations).SetOnFinish(FinishReroll).SetUnscaledTime(true);
+                EasingManager.DoAfter(AllCardsEndedAnimations)
+                    .SetOnFinish(FinishReroll)
+                    .SetUnscaledTime(true);
 
                 ContinuePlayingSave.RerollsCount++;
             }
@@ -363,7 +460,10 @@ namespace MrX.Abilities.UI
 
                 var slot = slotsPool.GetEntity();
 
-                slot.StartScrolling(abilityData, i);
+                if (enableAnimations)
+                    slot.StartScrolling(abilityData, i);
+                else
+                    slot.ShowInstant(abilityData, i);
 
                 slots.Add(slot);
             }
@@ -371,25 +471,74 @@ namespace MrX.Abilities.UI
 
         protected virtual void InitRerollButton()
         {
+            // var currencyId = StageController.StageData.AbilityRerollPrice.CurrencyId;
+            // var currency = GameController.CurrenciesManager.GetCurrency(currencyId, true);
+
+            // if (currency == null)
+            // {
+            //     currency = GameController.CurrenciesManager.GetDefaultCurrency(true);
+            // }
+            // rerollButton.SetCurrency(currency);
+
+            // var cost = StageController.StageData.AbilityRerollPrice.Amount;
+            // for (int i = 0; i < ContinuePlayingSave.RerollsCount; i++)
+            // {
+            //     cost = Mathf.RoundToInt(cost * StageController.StageData.NextAbilityRerollMultiplier);
+            // }
+
+            // rerollButton.SetCost(cost);
+
+            // rerollButton.Currency.OnAmountChanged += OnGoldAmountChanged;
+
             var currencyId = StageController.StageData.AbilityRerollPrice.CurrencyId;
             var currency = GameController.CurrenciesManager.GetCurrency(currencyId, true);
 
-            if(currency == null)
-            {
+
+            if (currency == null)
                 currency = GameController.CurrenciesManager.GetDefaultCurrency(true);
-            }
             rerollButton.SetCurrency(currency);
-            
             var cost = StageController.StageData.AbilityRerollPrice.Amount;
-            for (int i = 0; i < ContinuePlayingSave.RerollsCount; i++) {
+            Debug.Log($"Currency property null: {rerollButton.Currency == null}");
+            Debug.Log($"ContinuePlayingSave null: {ContinuePlayingSave == null}");
+            Debug.Log($"RerollsCount: {ContinuePlayingSave.RerollsCount}");
+            Debug.Log($"StageData null: {StageController.StageData == null}");
+            Debug.Log($"Multiplier: {StageController.StageData.NextAbilityRerollMultiplier}");
+            for (int i = 0; i < ContinuePlayingSave.RerollsCount; i++)
                 cost = Mathf.RoundToInt(cost * StageController.StageData.NextAbilityRerollMultiplier);
-            }
 
             rerollButton.SetCost(cost);
 
-            rerollButton.Currency.OnAmountChanged += OnGoldAmountChanged;
-        }
+            Debug.Log($"RerollButton.Currency: {rerollButton.Currency}");
 
+            rerollButton.Currency.OnAmountChanged += OnGoldAmountChanged;
+            Debug.Log("5 - InitRerollButton completed");
+        }
+        private void DebugSlotsHolder()
+        {
+            RectTransform holder = slotsHolder as RectTransform;
+
+            Canvas canvas = slotsHolder.GetComponentInParent<Canvas>();
+            Canvas rootCanvas = canvas != null ? canvas.rootCanvas : null;
+
+            CanvasScaler scaler = rootCanvas != null
+                ? rootCanvas.GetComponent<CanvasScaler>()
+                : null;
+
+            Debug.Log(
+                $"SCREEN: {Screen.width}x{Screen.height}" +
+                $"\nSAFE AREA: {Screen.safeArea}" +
+                $"\nORIENTATION: {Screen.orientation}" +
+                $"\nCANVAS MODE: {rootCanvas.renderMode}" +
+                $"\nREFERENCE RESOLUTION: {scaler.referenceResolution}" +
+                $"\nMATCH: {scaler.matchWidthOrHeight}" +
+                $"\nCANVAS SIZE: {rootCanvas.GetComponent<RectTransform>().rect}" +
+                $"\nHOLDER ANCHOR MIN: {holder.anchorMin}" +
+                $"\nHOLDER ANCHOR MAX: {holder.anchorMax}" +
+                $"\nHOLDER PIVOT: {holder.pivot}" +
+                $"\nHOLDER ANCHORED POSITION: {holder.anchoredPosition}" +
+                $"\nHOLDER WORLD POSITION: {holder.position}"
+            );
+        }
         protected virtual void InitNavigation()
         {
             for (int i = 0; i < slots.Count; i++)
@@ -555,6 +704,11 @@ namespace MrX.Abilities.UI
 
         protected virtual void Hide()
         {
+            if (!enableAnimations)
+            {
+                HideInstant();
+                return;
+            }
             for (int i = 0; i < slots.Count; i++)
             {
                 var slot = slots[i];
@@ -589,7 +743,29 @@ namespace MrX.Abilities.UI
 
             rerollButton.Currency.OnAmountChanged -= OnGoldAmountChanged;
         }
+        protected virtual void HideInstant()
+        {
+            foreach (var slot in slots)
+            {
+                slot.MainCard.onAbilitySelected -= OnAbilitySelected;
+                slot.MainCard.HideInstant();
+                slot.gameObject.SetActive(false);
+            }
 
+            slots.Clear();
+
+            if (rerollButton.Currency != null)
+                rerollButton.Currency.OnAmountChanged -= OnGoldAmountChanged;
+
+            StageController.GameScreen.ShowSideUI();
+
+            Time.timeScale = 1f;
+
+            IsOpen = false;
+            gameObject.SetActive(false);
+
+            onClosed?.Invoke();
+        }
         protected virtual void OnBackgroundHidden()
         {
             for (int i = 0; i < slots.Count; i++)

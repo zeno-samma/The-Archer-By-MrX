@@ -241,7 +241,58 @@ namespace MrX.Abilities.UI
                 if (shouldBreak) break;
             }
         }
+        public virtual void ShowInstant(AbilityData data, int id)
+        {
+            if (scrollingCoroutine != null)
+            {
+                StopCoroutine(scrollingCoroutine);
+                scrollingCoroutine = null;
+            }
 
+            foreach (var card in cards)
+                card.Card.gameObject.SetActive(false);
+
+            if (highestCard != null)
+                highestCard.gameObject.SetActive(false);
+
+            cards.Clear();
+
+            MainCard = null;
+            highestCard = null;
+
+            AbilityData = data;
+            isStopped = true;
+
+            MainCard = cardsPool.GetEntity();
+            MainCard.gameObject.SetActive(true);
+            MainCard.transform.SetParent(scrollContentRect, false);
+
+
+            MainCard.ShowInstant(data);
+
+            MainCard.RectTransform.anchoredPosition = Vector2.zero;
+            MainCard.RectTransform.localRotation = Quaternion.identity;
+            MainCard.RectTransform.localScale = Vector3.one;
+
+            MainCard.RectTransform.SetAsLastSibling();
+
+
+            Bounds bounds = RectTransformUtility.CalculateRelativeRectTransformBounds(
+                scrollContentRect, MainCard.RectTransform);
+
+            Debug.Log($"[UI DEBUG] CARD BOUNDS IN CONTENT: {bounds}");
+
+            cards.Add(new CardData
+            {
+                Card = MainCard,
+                flipped = true
+            });
+
+            LastCardSpawnTime = Time.unscaledTime;
+
+            gradientImage.SetAlpha(0f);
+            gradientImage.rectTransform.localScale = Vector3.one;
+        }
         public virtual void DoFlash(AbilityRarity rarity)
         {
             var data = GetRarityData(rarity);

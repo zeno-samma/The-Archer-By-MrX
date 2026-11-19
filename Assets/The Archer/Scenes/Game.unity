@@ -2218,7 +2218,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -5047,9 +5047,73 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 192859705}
     m_Modifications:
+    - target: {fileID: 1179045883226359993, guid: f47ceb917871f09429eb90c33cfdae41, type: 3}
+      propertyPath: slotStepDelay
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 1179045883226359993, guid: f47ceb917871f09429eb90c33cfdae41, type: 3}
+      propertyPath: flashStepDelay
+      value: 0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 1179045883226359993, guid: f47ceb917871f09429eb90c33cfdae41, type: 3}
+      propertyPath: enableAnimations
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1179045883226359993, guid: f47ceb917871f09429eb90c33cfdae41, type: 3}
+      propertyPath: rarityFlashScale
+      value: 1.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1179045883226359993, guid: f47ceb917871f09429eb90c33cfdae41, type: 3}
+      propertyPath: slotInitialDelay
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1179045883226359993, guid: f47ceb917871f09429eb90c33cfdae41, type: 3}
+      propertyPath: flashInitialDelay
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1179045883226359993, guid: f47ceb917871f09429eb90c33cfdae41, type: 3}
+      propertyPath: stopScrollingDelay
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1179045883226359993, guid: f47ceb917871f09429eb90c33cfdae41, type: 3}
+      propertyPath: rarityAnimationScale
+      value: 1.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 1179045883226359993, guid: f47ceb917871f09429eb90c33cfdae41, type: 3}
+      propertyPath: rarityScaleInDuration
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 1179045883226359993, guid: f47ceb917871f09429eb90c33cfdae41, type: 3}
+      propertyPath: timescaleStopDuration
+      value: 0.08
+      objectReference: {fileID: 0}
+    - target: {fileID: 1179045883226359993, guid: f47ceb917871f09429eb90c33cfdae41, type: 3}
+      propertyPath: rarityScaleOutDuration
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1179045883226359993, guid: f47ceb917871f09429eb90c33cfdae41, type: 3}
+      propertyPath: backgroundFadeInDuration
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 5252534860670636412, guid: f47ceb917871f09429eb90c33cfdae41, type: 3}
       propertyPath: m_PresetInfoIsWorld
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5556614690656679725, guid: f47ceb917871f09429eb90c33cfdae41, type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
+      objectReference: {fileID: 0}
+    - target: {fileID: 6290506615400312965, guid: f47ceb917871f09429eb90c33cfdae41, type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
+      objectReference: {fileID: 0}
+    - target: {fileID: 6632522270057513744, guid: f47ceb917871f09429eb90c33cfdae41, type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
+      objectReference: {fileID: 0}
+    - target: {fileID: 7402748396220297917, guid: f47ceb917871f09429eb90c33cfdae41, type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
       objectReference: {fileID: 0}
     - target: {fileID: 7912970524650271097, guid: f47ceb917871f09429eb90c33cfdae41, type: 3}
       propertyPath: m_Pivot.x
@@ -5138,6 +5202,10 @@ PrefabInstance:
     - target: {fileID: 7970180799836844949, guid: f47ceb917871f09429eb90c33cfdae41, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8199372236023098303, guid: f47ceb917871f09429eb90c33cfdae41, type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

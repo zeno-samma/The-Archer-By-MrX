@@ -219,7 +219,60 @@ namespace MrX.Abilities.UI
 
             EasingManager.DoAfter(cardRevealSoundDelay + delay, () => GameController.AudioManager.PlayAudio(cardRevealedSound)).SetUnscaledTime(true);
         }
+        public virtual void ShowInstant(AbilityData data)
+        {
+            ResetUI();
 
+            SetData(data);
+
+            // Không xoay, không scale
+            transform.localScale = Vector3.one;
+
+            cardBackRect.gameObject.SetActive(false);
+            cardFrontRect.gameObject.SetActive(true);
+
+            cardFrontRect.localEulerAngles = Vector3.zero;
+            cardBackRect.localEulerAngles = Vector3.zero;
+
+            cardFrontRect.SetStretchedOffset(Vector2.zero, Vector2.zero);
+
+            gradientImage.rectTransform.offsetMin = gradientOffsetMin;
+            gradientImage.rectTransform.offsetMax = gradientOffsetMax;
+
+            canvasGroup.alpha = 1f;
+
+            if (shouldShowUpgrade)
+            {
+                upgradeIndicator.gameObject.SetActive(true);
+                upgradeIndicator.localScale = Vector3.one;
+            }
+
+            IsAnimationActive = false;
+            button.enabled = false;
+        }
+        public virtual void ChangeAbilityInstant(AbilityData data)
+        {
+            button.enabled = false;
+            IsAnimationActive = false;
+
+            if (data == null)
+            {
+                HideInstant();
+                return;
+            }
+
+            ShowInstant(data);
+        }
+        public virtual void HideInstant()
+        {
+            button.enabled = false;
+
+            IsAnimationActive = false;
+
+            canvasGroup.alpha = 0f;
+
+            gameObject.SetActive(false);
+        }
         public virtual void ChangeAbility(AbilityData newAbilityData, float delay)
         {
             StartCoroutine(ChangeAbilityCoroutine(newAbilityData, delay));
