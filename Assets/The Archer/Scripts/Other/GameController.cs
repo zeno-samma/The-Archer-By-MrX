@@ -78,7 +78,7 @@ namespace MrX
 
             DontDestroyOnLoad(gameObject);
 
-            Application.targetFrameRate = 120; // Giới hạn ổn định ở 60 FPS
+            Application.targetFrameRate = 120; // Giới hạn ổn định ở 120 FPS
             QualitySettings.vSyncCount = 0;   // Tắt VSync để tránh kẹt khung hình
         }
 
