@@ -228,7 +228,7 @@ namespace MrX.Abilities.UI
             Canvas.ForceUpdateCanvases();
             yield return null;
             Canvas.ForceUpdateCanvases();
-            DebugSlotsHolder();
+            // DebugSlotsHolder();
             skipButton.gameObject.SetActive(true);
 
             yield return new WaitForSecondsRealtime(flashInitialDelay);
@@ -275,7 +275,7 @@ namespace MrX.Abilities.UI
             yield return null;
             Canvas.ForceUpdateCanvases();
 
-            DebugSlotsHolder();
+            // DebugSlotsHolder();
 
             skipButton.gameObject.SetActive(false);
 
@@ -294,13 +294,13 @@ namespace MrX.Abilities.UI
             }
 
             InitRerollButton();
-            Debug.Log("6 - Before InitNavigation");
+            // Debug.Log("6 - Before InitNavigation");
             InitNavigation();
-            Debug.Log("7 - After InitNavigation");
+            // Debug.Log("7 - After InitNavigation");
             rerollButton.transform.localScale = Vector3.one;
-            Debug.Log("8 - After RerollButton Scale");
+            // Debug.Log("8 - After RerollButton Scale");
             goldIndicator.localScale = Vector3.one;
-            Debug.Log("9 - ShowInstantCoroutine completed");
+            // Debug.Log("9 - ShowInstantCoroutine completed");
             rerollButton.ButtonEnabled = false;
             rerollButton.RecalculateVisuals();
 
@@ -498,20 +498,20 @@ namespace MrX.Abilities.UI
                 currency = GameController.CurrenciesManager.GetDefaultCurrency(true);
             rerollButton.SetCurrency(currency);
             var cost = StageController.StageData.AbilityRerollPrice.Amount;
-            Debug.Log($"Currency property null: {rerollButton.Currency == null}");
-            Debug.Log($"ContinuePlayingSave null: {ContinuePlayingSave == null}");
-            Debug.Log($"RerollsCount: {ContinuePlayingSave.RerollsCount}");
-            Debug.Log($"StageData null: {StageController.StageData == null}");
-            Debug.Log($"Multiplier: {StageController.StageData.NextAbilityRerollMultiplier}");
+            // Debug.Log($"Currency property null: {rerollButton.Currency == null}");
+            // Debug.Log($"ContinuePlayingSave null: {ContinuePlayingSave == null}");
+            // Debug.Log($"RerollsCount: {ContinuePlayingSave.RerollsCount}");
+            // Debug.Log($"StageData null: {StageController.StageData == null}");
+            // Debug.Log($"Multiplier: {StageController.StageData.NextAbilityRerollMultiplier}");
             for (int i = 0; i < ContinuePlayingSave.RerollsCount; i++)
                 cost = Mathf.RoundToInt(cost * StageController.StageData.NextAbilityRerollMultiplier);
 
             rerollButton.SetCost(cost);
 
-            Debug.Log($"RerollButton.Currency: {rerollButton.Currency}");
+            // Debug.Log($"RerollButton.Currency: {rerollButton.Currency}");
 
             rerollButton.Currency.OnAmountChanged += OnGoldAmountChanged;
-            Debug.Log("5 - InitRerollButton completed");
+            // Debug.Log("5 - InitRerollButton completed");
         }
         private void DebugSlotsHolder()
         {

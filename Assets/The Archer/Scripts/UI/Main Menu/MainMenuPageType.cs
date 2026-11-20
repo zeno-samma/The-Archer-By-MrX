@@ -8,5 +8,6 @@ namespace MrX.UI
         DailyQuests = 3,
         Achievements = 4,
         Forge = 5,
+        Pets = 6,
     }
 }

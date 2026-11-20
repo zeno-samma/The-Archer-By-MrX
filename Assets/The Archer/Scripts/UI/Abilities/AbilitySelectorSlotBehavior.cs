@@ -280,7 +280,7 @@ namespace MrX.Abilities.UI
             Bounds bounds = RectTransformUtility.CalculateRelativeRectTransformBounds(
                 scrollContentRect, MainCard.RectTransform);
 
-            Debug.Log($"[UI DEBUG] CARD BOUNDS IN CONTENT: {bounds}");
+            // Debug.Log($"[UI DEBUG] CARD BOUNDS IN CONTENT: {bounds}");
 
             cards.Add(new CardData
             {

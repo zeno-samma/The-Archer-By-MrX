@@ -30,6 +30,7 @@ namespace MrX
         public static bool IsLoaded => instance != null;
         public static bool IsResultFinalized { get; private set; }
         private static bool settlingResult;
+        private static bool hasDeployedPet;
 
         public static GameScreenBehavior GameScreen => instance.gameScreen;
 
@@ -86,6 +87,7 @@ namespace MrX
         {
             instance = null;
             IsResultFinalized = settlingResult = false;
+            hasDeployedPet = false;
 
             StageData = null;
             ProjectilesManager = null;
@@ -120,6 +122,7 @@ namespace MrX
         {
             instance = this;
             IsResultFinalized = settlingResult = false;
+            hasDeployedPet = false;
             (GameController.SaveManager as Save.SaveManager)?.BeginGameplayBatch();
 
             StageSave = GameController.SaveManager.GetSave<StageSave>("Stage");
@@ -245,6 +248,7 @@ namespace MrX
                 CameraManager.TeleportCamera(Player.transform);
 
                 ContinuePlayingSave.Enable();
+                hasDeployedPet = Pets.PetSystem.AttachToRun();
             });
 
             StageSave.ClearTestingData();
@@ -414,6 +418,12 @@ namespace MrX
             if (IsResultFinalized || settlingResult) return;
             if (!Player.TryToRevive())
             {
+                if (hasDeployedPet)
+                {
+                    hasDeployedPet = false;
+                    Pets.PetSystem.RecordRunDefeat();
+                }
+
                 onDefeat?.Invoke();
                 // Debug.Log("Người chơi đã chết");
                 // float recordedTime = ConsoleTimer.Instance.GetElapsedTime("Wave_1");
@@ -468,14 +478,14 @@ namespace MrX
 
         public static void ReturnToMainMenu()//quay lại menu chính
         {
-            Debug.Log("[RETURN] 1 - START");
+            // Debug.Log("[RETURN] 1 - START");
             
             GameController.UpgradesManager.OnStageUnloaded();
-            Debug.Log("[RETURN] 2 - Unloaded DONE");    
+            // Debug.Log("[RETURN] 2 - Unloaded DONE");    
             onDefeat = null;
-            Debug.Log("[RETURN] 3 - Before LoadMainMenu");
+            // Debug.Log("[RETURN] 3 - Before LoadMainMenu");
             GameController.LoadMainMenu();
-            Debug.Log("[RETURN] 4 - LoadMainMenu DONE");
+            // Debug.Log("[RETURN] 4 - LoadMainMenu DONE");
         }
     }
 }
