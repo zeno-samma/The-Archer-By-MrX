@@ -21,9 +21,11 @@ namespace MrX.Achievements
         public int CompletedCount { get; private set; }
         public int ClaimableCount { get; private set; }
         public event Action Changed;
+        public static event Action FeatureUnlocksChanged;
         private ISaveManager saveManager;
         private ICurrenciesManager currencies;
         private readonly Dictionary<string, AchievementDefinition> byId = new Dictionary<string, AchievementDefinition>(StringComparer.Ordinal);
+        private readonly Dictionary<string, AchievementDefinition> featureRequirements = new Dictionary<string, AchievementDefinition>(StringComparer.Ordinal);
         private readonly Dictionary<AchievementMetric, List<AchievementDefinition>> byMetric = new Dictionary<AchievementMetric, List<AchievementDefinition>>();
         private readonly Dictionary<AchievementCategory, List<AchievementDefinition>> byCategory = new Dictionary<AchievementCategory, List<AchievementDefinition>>();
         private readonly Dictionary<AchievementCategory, AchievementCategoryProgress> summaries = new Dictionary<AchievementCategory, AchievementCategoryProgress>();
@@ -46,7 +48,47 @@ namespace MrX.Achievements
                 if (!byMetric.TryGetValue(definition.metric, out var definitions)) byMetric.Add(definition.metric, definitions = new List<AchievementDefinition>());
                 definitions.Add(definition);
             }
+            BuildFeatureRequirements();
             RebuildSummaries();
+            FeatureUnlocksChanged?.Invoke();
+        }
+
+        private void BuildFeatureRequirements()
+        {
+            featureRequirements.Clear();
+            if (Database.featureUnlocks == null) return;
+
+            foreach (var rule in Database.featureUnlocks)
+            {
+                if (rule == null || string.IsNullOrWhiteSpace(rule.featureId) ||
+                    string.IsNullOrWhiteSpace(rule.achievementId) ||
+                    !byId.TryGetValue(rule.achievementId, out var definition))
+                {
+                    Debug.LogError("Achievements: a feature unlock has an invalid feature ID or achievement ID.", this);
+                    continue;
+                }
+
+                if (featureRequirements.ContainsKey(rule.featureId))
+                {
+                    Debug.LogError($"Achievements: duplicate feature unlock for '{rule.featureId}'.", this);
+                    continue;
+                }
+
+                featureRequirements.Add(rule.featureId, definition);
+            }
+        }
+
+        public AchievementDefinition GetFeatureRequirement(string featureId)
+        {
+            return featureId != null && featureRequirements.TryGetValue(featureId, out var definition)
+                ? definition
+                : null;
+        }
+
+        public bool IsFeatureUnlocked(string featureId)
+        {
+            var requirement = GetFeatureRequirement(featureId);
+            return Save != null && requirement != null && Save.IsComplete(requirement);
         }
 
         public IReadOnlyList<AchievementDefinition> GetCategory(AchievementCategory category) => byCategory[category];
@@ -78,15 +120,18 @@ namespace MrX.Achievements
         {
             if (!byMetric.TryGetValue(metric, out var definitions)) return;
             var after = Save.Get(metric); bool visibleProgressChanged = false;
+            bool completedAchievement = false;
             foreach (var definition in definitions)
             {
                 if (before < definition.target) visibleProgressChanged = true;
                 if (before >= definition.target || after < definition.target) continue;
+                completedAchievement = true;
                 var summary = summaries[definition.category]; summary.completed++; CompletedCount++;
                 if (!Save.IsClaimed(definition.id)) { summary.claimable++; ClaimableCount++; }
                 summaries[definition.category] = summary;
             }
             if (visibleProgressChanged) Changed?.Invoke();
+            if (completedAchievement) FeatureUnlocksChanged?.Invoke();
         }
 
         private void RebuildSummaries()
@@ -156,7 +201,19 @@ namespace MrX.Achievements
                 for (var i = 0; i < Database.upgrades.UpgradesCount; i++) levels += Math.Max(0L, (long)upgradesSave.GetUpgradeLevel(Database.upgrades.GetUpgrade(i).UpgradeType) + 1);
                 changed |= Save.SetMinimum(AchievementMetric.PermanentUpgrades, levels);
             }
-            if (changed) { RebuildSummaries(); ScheduleSave(); Changed?.Invoke(); }
+            if (changed)
+            {
+                RebuildSummaries();
+                ScheduleSave();
+                Changed?.Invoke();
+                FeatureUnlocksChanged?.Invoke();
+            }
+        }
+
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+        private static void ResetFeatureUnlockListeners()
+        {
+            FeatureUnlocksChanged = null;
         }
     }
 }

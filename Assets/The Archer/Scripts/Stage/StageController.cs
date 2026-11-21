@@ -127,7 +127,7 @@ namespace MrX
 
             StageSave = GameController.SaveManager.GetSave<StageSave>("Stage");
             ContinuePlayingSave = GameController.SaveManager.GetSave<ContinuePlayingSave>("Continue Playing");
-
+            MrX.Progression.PlayerProgression.BeginRun(ContinuePlayingSave.HasUnfinishedStageData);
             TestingData = StageSave.GetTestingData();
 
             if (TestingData != null)
@@ -459,8 +459,13 @@ namespace MrX
                 GameController.ArmoryManager.Crafting?.FlushPending();
                 IsResultFinalized = true;
                 GameScreen.PrepareForResult();
+                int awardedProfileXp = MrX.Progression.PlayerProgression.SettleRun();
                 var saves = GameController.SaveManager as Save.SaveManager;
-                if (saves != null) saves.CommitGameplayBatch(); else GameController.SaveManager.Save(false);
+                if (saves != null)
+                    saves.CommitGameplayBatch();
+                else
+                    GameController.SaveManager.Save(false);
+                MrX.Progression.PlayerProgression.NotifyRunSettled(awardedProfileXp);
             }
             finally { settlingResult = false; }
         }
@@ -479,7 +484,7 @@ namespace MrX
         public static void ReturnToMainMenu()//quay lại menu chính
         {
             // Debug.Log("[RETURN] 1 - START");
-            
+
             GameController.UpgradesManager.OnStageUnloaded();
             // Debug.Log("[RETURN] 2 - Unloaded DONE");    
             onDefeat = null;

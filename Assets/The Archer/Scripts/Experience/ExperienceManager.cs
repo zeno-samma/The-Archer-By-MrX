@@ -108,6 +108,7 @@ namespace MrX
         public virtual void AddXP(float xp)
         {
             XP += xp;
+            MrX.Progression.PlayerProgression.RecordEarnedXp(xp);
         }
 
         protected virtual IEnumerator IncreaseLevelCoroutine()

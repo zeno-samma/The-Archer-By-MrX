@@ -1,6 +1,7 @@
 using MrX.Abilities;
 using MrX.Armory;
 using MrX.Player;
+using MrX.Progression;
 using MrX.Weapon;
 using System.Collections.Generic;
 using UnityEngine;
@@ -138,12 +139,12 @@ namespace MrX
                 }
             }
 
-            var heroSave = save.GetHeroSave(EquippedHero.Id);
-            var heroLevel = EquippedHero.GetHeroLevel(heroSave.Level);
+            var heroAbilities = GetEquippedHeroLevel().AttachedAbilities;
+            if (heroAbilities == null)
+                return abilities;
 
-            for (int i = 0; i < heroLevel.AttachedAbilities.Count; i++)
+            foreach (var ability in heroAbilities)
             {
-                var ability = heroLevel.AttachedAbilities[i];
                 if (!abilities.Contains(ability))
                 {
                     abilities.Add(ability);
@@ -346,9 +347,8 @@ namespace MrX
         {
             var equippedHero = EquippedHero;
             var heroSave = GetHeroSave(equippedHero.Id);
-            var level = equippedHero.GetHeroLevel(heroSave.Level);
-
-            return level;
+            int levelIndex = HeroProgression.GetEffectiveLevelIndex(equippedHero, heroSave);
+            return equippedHero.GetHeroLevel(levelIndex);
         }
 
         public virtual ItemData GetItemData(string id)

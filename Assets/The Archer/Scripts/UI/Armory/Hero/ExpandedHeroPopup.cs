@@ -1,6 +1,7 @@
 using MrX.Abilities;
 using MrX.Armory;
 using MrX.Extensions;
+using MrX.Progression;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,6 +16,8 @@ namespace MrX.UI.Armory
 
         public HeroData Data { get; protected set; }
         public HeroSaveData SaveData { get; protected set; }
+
+        private int EffectiveLevelIndex => HeroProgression.GetEffectiveLevelIndex(Data, SaveData);
 
         public virtual void Show(HeroData data, HeroSaveData saveData)
         {
@@ -49,7 +52,7 @@ namespace MrX.UI.Armory
             heroCard.Clear();
             heroCard.SetData(Data, SaveData);
 
-            statsGrid.Init(Data, SaveData.IsUnlocked, SaveData.Level);
+            statsGrid.Init(Data, SaveData.IsUnlocked, EffectiveLevelIndex);
 
             InitAbilities();
 
@@ -59,60 +62,15 @@ namespace MrX.UI.Armory
             var closeButtonPosition = defaultCloseButtonPosition + (height - defaultHeight) / 2f;
             closeButtonRect.SetAnchoredPositionY(closeButtonPosition);
 
-            if (!SaveData.IsUnlocked)
-            {
-                InitButtonsNotBought();
-            }
+            if (SaveData.IsUnlocked)
+                InitButtonsMaxLevel();
             else
-            {
-                if (SaveData.Level == Data.HeroLevelCount - 1)
-                {
-                    InitButtonsMaxLevel();
-                }
-                else
-                {
-                    InitButtonsUpgradable();
-                }
-            }
+                InitButtonsNotBought();
         }
 
         protected virtual void InitButtonsUpgradable()
         {
-            var nextLevel = Data.GetHeroLevel(SaveData.Level + 1);
-
-            if (SaveData.IsEquipped)
-            {
-                selectButtonText.text = "Selected";
-
-                selectButton.enabled = false;
-                selectButton.image.sprite = disabledButtonSprite;
-            }
-            else
-            {
-                selectButtonText.text = "Select";
-
-                selectButton.enabled = true;
-                selectButton.image.sprite = selectButtonSprite;
-            }
-
-            upgradeButtonLabel.gameObject.SetActive(true);
-            upgradeButtonText.gameObject.SetActive(true);
-            maxLvlButtonText.gameObject.SetActive(false);
-
-            upgradeButtonText.text = "Upgrade";
-
-            var cost = nextLevel.Price.Amount;
-            upgradeButton.SetCurrency(GameController.CurrenciesManager.GetCurrency(nextLevel.Price.CurrencyId, false));
-            upgradeButton.SetCost(cost);
-
-            if (upgradeButton.HasEnoughMoney)
-            {
-                costText.color = enabledCostTextColor;
-            }
-            else
-            {
-                costText.color = disabledCostTextColor;
-            }
+            InitButtonsMaxLevel();
         }
 
         protected virtual void InitButtonsMaxLevel()
@@ -134,8 +92,9 @@ namespace MrX.UI.Armory
 
             upgradeButtonLabel.gameObject.SetActive(false);
             upgradeButtonText.gameObject.SetActive(false);
-            maxLvlButtonText.gameObject.SetActive(true);
+            maxLvlButtonText.gameObject.SetActive(false);
 
+            upgradeButton.Button.interactable = false;
             upgradeButton.DisableButton();
         }
 
@@ -145,25 +104,29 @@ namespace MrX.UI.Armory
             selectButton.image.sprite = disabledButtonSprite;
             selectButtonText.text = "Select";
 
+            upgradeButton.gameObject.SetActive(true);
             upgradeButtonLabel.gameObject.SetActive(true);
             upgradeButtonText.gameObject.SetActive(true);
             maxLvlButtonText.gameObject.SetActive(false);
 
             upgradeButtonText.text = "Unlock";
 
-            var firstLevel = Data.GetHeroLevel(0);
-            var cost = firstLevel.Price.Amount;
-            upgradeButton.SetCurrency(GameController.CurrenciesManager.GetCurrency(firstLevel.Price.CurrencyId, false));
-            upgradeButton.SetCost(cost);
+            var price = Data.GetHeroLevel(0).Price;
+            var currency = GameController.CurrenciesManager.GetCurrency(price.CurrencyId, false);
+            bool hasValidPrice = currency != null && price.Amount >= 0;
+            upgradeButton.Button.interactable = hasValidPrice;
 
-            if (upgradeButton.HasEnoughMoney)
+            if (!hasValidPrice)
             {
-                costText.color = enabledCostTextColor;
-            }
-            else
-            {
+                upgradeButton.DisableButton();
                 costText.color = disabledCostTextColor;
+                return;
             }
+
+            upgradeButton.SetCurrency(currency);
+            upgradeButton.SetCost(price.Amount);
+
+            costText.color = upgradeButton.HasEnoughMoney ? enabledCostTextColor : disabledCostTextColor;
         }
 
         protected virtual void InitAbilities()
@@ -204,14 +167,15 @@ namespace MrX.UI.Armory
 
         protected override bool IsLevelReached(int level)
         {
-            return SaveData.IsUnlocked && SaveData.Level >= level;
+            return SaveData.IsUnlocked && EffectiveLevelIndex >= level;
         }
 
         protected virtual void InitText()
         {
-            levelText.text = $"Level {SaveData.Level + 1}";
+            int levelIndex = EffectiveLevelIndex;
+            levelText.text = $"Level {levelIndex + 1}";
 
-            var heroLevel = Data.GetHeroLevel(SaveData.Level);
+            var heroLevel = Data.GetHeroLevel(levelIndex);
             var rarityData = GameController.ArmoryManager.GetItemRarityData(heroLevel.HeroRarity);
 
             rarityText.color = rarityData.MainColor;
@@ -226,7 +190,7 @@ namespace MrX.UI.Armory
 
             InitVisuals();
 
-            if (upgradeButton.ButtonEnabled)
+            if (upgradeButton.ButtonEnabled && upgradeButton.Button.interactable)
             {
                 EventSystem.current.SetSelectedGameObject(upgradeButton.Button.gameObject);
             }
@@ -238,33 +202,19 @@ namespace MrX.UI.Armory
 
         protected override void OnUpgradeButtonClicked()
         {
+            var hero = SaveData;
+            if (hero == null || hero.IsUnlocked || Data == null || Data.HeroLevelCount == 0) return;
+
+            var price = Data.GetHeroLevel(0).Price;
+            var currency = GameController.CurrenciesManager.GetCurrency(price.CurrencyId, false);
+            if (currency == null || !currency.TryWithdrawAndCommit(price.Amount, () => hero.IsUnlocked = true))
+                return;
+
             GameController.AudioManager.PlayButtonClick();
-
-            if (!SaveData.IsUnlocked)
-            {
-                SaveData.IsUnlocked = true;
-            }
-            else
-            {
-                SaveData.Level++;
-            }
-
-            var cost = Data.GetHeroLevel(SaveData.Level).Price.Amount;
-            upgradeButton.Currency.Withdraw(cost);
-
             InitVisuals();
 
-            if (!upgradeButton.ButtonEnabled)
-            {
-                if (!selectButton.enabled)
-                {
-                    EventSystem.current.SetSelectedGameObject(null);
-                }
-                else
-                {
-                    EventSystem.current.SetSelectedGameObject(selectButton.gameObject);
-                }
-            }
+            if (EventSystem.current != null)
+                EventSystem.current.SetSelectedGameObject(selectButton.enabled ? selectButton.gameObject : null);
         }
     }
 }

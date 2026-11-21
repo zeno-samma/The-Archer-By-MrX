@@ -39,6 +39,13 @@ namespace MrX.Achievements
         public Sprite icon;
     }
 
+    [Serializable]
+    public class AchievementFeatureUnlock
+    {
+        public string featureId;
+        public string achievementId;
+    }
+
     [CreateAssetMenu(menuName = "MrX Studio/Achievements/Database", fileName = "Achievements Database")]
     public class AchievementsDatabase : ScriptableObject
     {
@@ -65,6 +72,11 @@ namespace MrX.Achievements
             new AchievementCategoryDefinition { category = AchievementCategory.Upgrade, title = "Upgrade" }
         };
         public List<AchievementDefinition> achievements = CreateDefaults();
+        [Header("Feature unlocks")]
+        public List<AchievementFeatureUnlock> featureUnlocks = new List<AchievementFeatureUnlock>
+        {
+            new AchievementFeatureUnlock { featureId = "Pets", achievementId = "stage_clears_1" }
+        };
 
         public bool IsValid(out string error)
         {
