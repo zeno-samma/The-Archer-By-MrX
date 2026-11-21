@@ -453,6 +453,7 @@ namespace MrX
 
             if (aliveEnemies.Remove(enemy))
             {
+                StageController.RegisterRageDefeat(enemy.Data != null && enemy.Data.IsBoss);
                 GameController.DailyQuestsManager?.Record(Quests.DailyQuestType.DefeatEnemies);
                 GameController.AchievementsManager?.Record(Achievements.AchievementMetric.EnemiesDefeated);
                 if (enemy.Data != null && enemy.Data.IsBoss)

@@ -25,6 +25,13 @@ namespace MrX
 
         [Space]
         [SerializeField] protected GameScreenBehavior gameScreen;
+        [SerializeField] private MrX.Player.RunRageController runRage;
+
+        internal static void RegisterRageDefeat(bool isBoss)
+        {
+            if (instance != null && !IsResultFinalized)
+                instance.runRage?.RegisterDefeat(isBoss);
+        }
         [SerializeField] protected GameObject playerPrefab;
 
         public static bool IsLoaded => instance != null;
@@ -245,6 +252,7 @@ namespace MrX
             EasingManager.DoNextFrame(() =>
             {
                 Player.StartPlaying(Room.RoomData.PlayerSpawnPoint);
+                runRage?.Begin(Player, GameController.ArmoryManager.EquippedHero);
                 CameraManager.TeleportCamera(Player.transform);
 
                 ContinuePlayingSave.Enable();
@@ -458,6 +466,7 @@ namespace MrX
                 GameController.AchievementsManager?.FlushPending();
                 GameController.ArmoryManager.Crafting?.FlushPending();
                 IsResultFinalized = true;
+                instance.runRage?.End();
                 GameScreen.PrepareForResult();
                 int awardedProfileXp = MrX.Progression.PlayerProgression.SettleRun();
                 var saves = GameController.SaveManager as Save.SaveManager;
@@ -485,6 +494,7 @@ namespace MrX
         {
             // Debug.Log("[RETURN] 1 - START");
 
+            if (instance != null) instance.runRage?.End();
             GameController.UpgradesManager.OnStageUnloaded();
             // Debug.Log("[RETURN] 2 - Unloaded DONE");    
             onDefeat = null;

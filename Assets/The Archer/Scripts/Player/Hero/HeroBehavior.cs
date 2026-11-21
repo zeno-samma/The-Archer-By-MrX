@@ -209,9 +209,28 @@ namespace MrX.Player
             animator.SetFloat(MOVEMENT_SPEED_MULTIPLIER_FLOAT, speed / movementAnimationSpeed);
         }
 
+        private bool rageShooting;
+        private int shootingVersion;
+
+        public void SetRageShooting(bool enabled)
+        {
+            rageShooting = enabled;
+            shootingVersion++;
+        }
+
+        public bool TryShootRageVolley()
+        {
+            if (!rageShooting || movementBlend >= 0.01f || Weapon == null || Weapon.IsDetached ||
+                StageController.Player.ClosestEnemy == null || !StageController.Player.ClosestEnemy.IsAlive)
+                return false;
+
+            StartCoroutine(ShootCoroutine(StageController.Player.Stats.MultishotStat + 1));
+            return true;
+        }
+
         public virtual void OnShootAnimationEventFired()
         {
-            if (movementBlend < 0.01f)
+            if (!rageShooting && movementBlend < 0.01f)
             {
                 var multishotCount = StageController.Player.Stats.MultishotStat + 1;
                 StartCoroutine(ShootCoroutine(multishotCount));
@@ -220,8 +239,13 @@ namespace MrX.Player
 
         protected virtual IEnumerator ShootCoroutine(int multiShotCount)
         {
+            int version = shootingVersion;
             for (int i = 0; i < multiShotCount; i++)
             {
+                if (version != shootingVersion ||
+                    (rageShooting && (movementBlend >= 0.01f || Weapon == null || Weapon.IsDetached)))
+                    yield break;
+
                 Shoot();
 
                 if (i != multiShotCount - 1)
