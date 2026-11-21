@@ -1,4 +1,5 @@
 using System;
+using MrX.Achievements;
 using UnityEngine;
 
 namespace MrX.Pets
@@ -6,30 +7,34 @@ namespace MrX.Pets
     public static class PetSystem
     {
         private const string SaveKey = "ArcBorn Pet";
+        public const string FeatureId = "Pets";
 
         public static event Action Changed;
 
         public static PetDefinition Definition { get; private set; }
+        public static bool IsUnlocked => GameController.AchievementsManager?.IsFeatureUnlocked(FeatureId) == true;
 
         internal static void Configure(PetDefinition definition)
         {
             if (definition == null || Definition == definition) return;
 
+            if (Definition == null)
+                AchievementsManager.FeatureUnlocksChanged += NotifyUnlockChanged;
+
             Definition = definition;
             Changed?.Invoke();
         }
 
-        public static PetProfileSave Profile
-        {
-            get
-            {
-                var config = Definition;
-                if (config == null || GameController.SaveManager == null) return null;
+        public static PetProfileSave Profile => IsUnlocked ? GetOrCreateProfile() : null;
 
-                var profile = GameController.SaveManager.GetSave<PetProfileSave>(SaveKey);
-                profile?.Initialize(config.StartingCakes);
-                return profile;
-            }
+        private static PetProfileSave GetOrCreateProfile()
+        {
+            var config = Definition;
+            if (config == null || GameController.SaveManager == null) return null;
+
+            var profile = GameController.SaveManager.GetSave<PetProfileSave>(SaveKey);
+            profile?.Initialize(config.StartingCakes);
+            return profile;
         }
 
         public static bool TryDeploy()
@@ -60,7 +65,7 @@ namespace MrX.Pets
 
         public static bool GrantCakes(int amount)
         {
-            if (Profile?.AddCakes(amount) != true) return false;
+            if (GetOrCreateProfile()?.AddCakes(amount) != true) return false;
 
             SaveAndNotify();
             return true;
@@ -93,9 +98,15 @@ namespace MrX.Pets
             Changed?.Invoke();
         }
 
+        private static void NotifyUnlockChanged()
+        {
+            Changed?.Invoke();
+        }
+
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
         private static void ResetStatics()
         {
+            AchievementsManager.FeatureUnlocksChanged -= NotifyUnlockChanged;
             Definition = null;
             Changed = null;
         }

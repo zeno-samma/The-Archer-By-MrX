@@ -1213,6 +1213,39 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 699506174}
   m_CullTransparentMesh: 0
+--- !u!1 &789423400 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2792064193112940726, guid: 7ee1876f53c8e26458d3dc267c6089e6, type: 3}
+  m_PrefabInstance: {fileID: 117091043651229937}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &789423401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 789423400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1739047884bf48a4ba086919fbffeda9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MrX.UI.FeatureUnlockDockItem
+  icon: {fileID: 1843914479}
+  lockedIconColor: {r: 0, g: 0, b: 0, a: 1}
+  unlockedIconColor: {r: 1, g: 1, b: 1, a: 1}
+  lockedBadge: {fileID: 409133748}
+  requirementLabel: {fileID: 0}
+--- !u!114 &789423403 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1448918874066127407, guid: 7ee1876f53c8e26458d3dc267c6089e6, type: 3}
+  m_PrefabInstance: {fileID: 117091043651229937}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 789423400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1e4f5fb946997645ba0d51994bb4392, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &806826088
 GameObject:
   m_ObjectHideFlags: 0
@@ -1838,6 +1871,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 288398712152495946, guid: 7ee1876f53c8e26458d3dc267c6089e6, type: 3}
   m_PrefabInstance: {fileID: 117091043651229937}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1516744999 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7344585162102525558, guid: 7ee1876f53c8e26458d3dc267c6089e6, type: 3}
+  m_PrefabInstance: {fileID: 117091043651229937}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1e4f5fb946997645ba0d51994bb4392, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1533489899
 GameObject:
   m_ObjectHideFlags: 0
@@ -2048,6 +2092,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1123703332}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1843914479 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1950320693915904369, guid: 7ee1876f53c8e26458d3dc267c6089e6, type: 3}
+  m_PrefabInstance: {fileID: 117091043651229937}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1893073586 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6137449658774182600, guid: e0bb5f66ea734d34f924ceaf9048286a, type: 3}
@@ -2526,6 +2581,18 @@ PrefabInstance:
       propertyPath: m_fontSize
       value: 25.263159
       objectReference: {fileID: 0}
+    - target: {fileID: 1229792860528821005, guid: 7ee1876f53c8e26458d3dc267c6089e6, type: 3}
+      propertyPath: dockItems.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1229792860528821005, guid: 7ee1876f53c8e26458d3dc267c6089e6, type: 3}
+      propertyPath: 'dockItems.Array.data[3]'
+      value: 
+      objectReference: {fileID: 1516744999}
+    - target: {fileID: 1229792860528821005, guid: 7ee1876f53c8e26458d3dc267c6089e6, type: 3}
+      propertyPath: 'dockItems.Array.data[4]'
+      value: 
+      objectReference: {fileID: 789423403}
     - target: {fileID: 1233100636115038139, guid: 7ee1876f53c8e26458d3dc267c6089e6, type: 3}
       propertyPath: levelLabel
       value: 
@@ -4262,7 +4329,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6796179156033195370, guid: 7ee1876f53c8e26458d3dc267c6089e6, type: 3}
       insertIndex: -1
       addedObject: {fileID: 409133749}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2792064193112940726, guid: 7ee1876f53c8e26458d3dc267c6089e6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 789423401}
   m_SourcePrefab: {fileID: 100100000, guid: 7ee1876f53c8e26458d3dc267c6089e6, type: 3}
 --- !u!114 &117091043651229938 stripped
 MonoBehaviour:

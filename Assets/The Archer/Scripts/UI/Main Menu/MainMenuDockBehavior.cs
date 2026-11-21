@@ -55,9 +55,23 @@ namespace MrX.UI
 
 #endif
 
+        public bool IsPageUnlocked(MainMenuPageType pageType)
+        {
+            if (pageType == MainMenuPageType.Pets)
+                return Pets.PetSystem.IsUnlocked;
+
+            var achievements = GameController.AchievementsManager;
+            string featureId = pageType.ToString();
+            if (achievements?.GetFeatureRequirement(featureId) != null)
+                return achievements.IsFeatureUnlocked(featureId);
+
+            var item = dockItems.Find(tab => tab.PageType == pageType);
+            return item == null || !item.TryGetComponent<FeatureUnlockDockItem>(out _);
+        }
+
         public virtual bool TrySelectPage(MainMenuPageType pageType)
         {
-            if (!IsDockEnabled) return false;
+            if (!IsDockEnabled || !IsPageUnlocked(pageType)) return false;
             var item = dockItems.Find(tab => tab.PageType == pageType);
             if (item == null) return false;
             item.Select();
@@ -101,6 +115,18 @@ namespace MrX.UI
 
         protected virtual void OnPageSelected(MainMenuPageType pageType)
         {
+            if (!IsPageUnlocked(pageType))
+            {
+                var lockedItem = dockItems.Find(item => item.PageType == pageType);
+                if (lockedItem != null)
+                {
+                    lockedItem.Deselect();
+                    if (lockedItem.TryGetComponent<FeatureUnlockDockItem>(out var lockView))
+                        lockView.Refresh();
+                }
+                return;
+            }
+
             SelectedPage = pageType;
             for (int i = 0; i < dockItems.Count; i++)
             {
@@ -147,21 +173,15 @@ namespace MrX.UI
 
             var value = ctx.ReadValue<float>();
 
-            if (value > 0)
+            int step = value > 0 ? 1 : -1;
+            for (int index = selectedIndex + step; index >= 0 && index < dockItems.Count; index += step)
             {
-                if (selectedIndex < dockItems.Count - 1)
-                {
-                    OnPageSelected(dockItems[selectedIndex + 1].PageType);
-                    dockItems[selectedIndex + 1].Select();
-                }
-            }
-            else
-            {
-                if (selectedIndex > 0)
-                {
-                    OnPageSelected(dockItems[selectedIndex - 1].PageType);
-                    dockItems[selectedIndex - 1].Select();
-                }
+                var item = dockItems[index];
+                if (!IsPageUnlocked(item.PageType)) continue;
+
+                OnPageSelected(item.PageType);
+                item.Select();
+                break;
             }
         }
 

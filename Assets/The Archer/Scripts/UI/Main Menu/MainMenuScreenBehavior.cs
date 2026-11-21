@@ -34,9 +34,16 @@ namespace MrX.UI
 
         protected virtual void Awake()
         {
-            CurrentPage = pages.Find(page => page.PageType == defaultPageType)
-                ?? pages.Find(page => page.PageType == MainMenuPageType.Stages)
-                ?? pages[0];
+            CurrentPage = pages.Find(page => page.PageType == defaultPageType && dockBehavior.IsPageUnlocked(page.PageType))
+                ?? pages.Find(page => page.PageType == MainMenuPageType.Stages && dockBehavior.IsPageUnlocked(page.PageType))
+                ?? pages.Find(page => dockBehavior.IsPageUnlocked(page.PageType));
+
+            if (CurrentPage == null)
+            {
+                Debug.LogError("Main Menu: no unlocked page is available.", this);
+                enabled = false;
+                return;
+            }
 
             GameController.RegisterMainMenuScreenBehavior(this);
             foreach (var page in pages) page.PrepareInitialState(page == CurrentPage);
@@ -66,7 +73,7 @@ namespace MrX.UI
 
         protected virtual void OnPageSelected(MainMenuPageType pageType)
         {
-            if (CurrentPage.PageType == pageType)
+            if (CurrentPage.PageType == pageType || !dockBehavior.IsPageUnlocked(pageType))
             {
                 return;
             }
