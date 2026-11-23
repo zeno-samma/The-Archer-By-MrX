@@ -15,6 +15,8 @@ namespace MrX.Progression
 
         public static PlayerLevelProgress Current => PlayerXpCurve.Evaluate(Profile?.TotalXp ?? 0);
 
+        public static int PendingAwardXp => activeRun?.PendingAwardXp ?? 0;
+
         public static void BeginRun(bool resumeRun)
         {
             activeRun = Profile;

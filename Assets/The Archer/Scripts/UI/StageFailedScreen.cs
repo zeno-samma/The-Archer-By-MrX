@@ -25,6 +25,9 @@ namespace MrX.UI
         [SerializeField] protected Button continueButton;
 
         [SerializeField] protected SmallRewardCard coinsRewardCard;
+        [SerializeField] private TMPro.TMP_Text experienceAmount;
+        [SerializeField] private TMPro.TMP_Text totalDamageAmount;
+        [SerializeField] private TMPro.TMP_Text dpsAmount;
         [SerializeField] protected GameObject itemRewardCardPrefab;
 
         [Space]
@@ -120,6 +123,12 @@ namespace MrX.UI
 
             var currencies = GameController.CurrenciesManager.GetAllCurrencies(true);
             int counter = 0;
+            if (experienceAmount != null)
+                experienceAmount.text = $"+{StageController.ResultProfileXp:N0}";
+            if (totalDamageAmount != null)
+                totalDamageAmount.text = StageController.ResultDamage.ToString("N0");
+            if (dpsAmount != null)
+                dpsAmount.text = StageController.ResultDps.ToString("N0");
             for(int i = 0; i < currencies.Count; i++)
             {
                 var currency = currencies[i];

@@ -36,13 +36,17 @@ namespace MrX.Progression
             pendingRunXpFraction = pending - pendingRunXp;
         }
 
+        private double SettledTotal => Math.Min(PlayerXpCurve.MaxTotalXp,
+            TotalXp + totalXpFraction + pendingRunXp + pendingRunXpFraction);
+
+        internal int PendingAwardXp => runOpen ? (int)SettledTotal - TotalXp : 0;
+
         internal int SettleRun()
         {
             if (!runOpen) return 0;
 
             int previousTotal = TotalXp;
-            double settled = Math.Min(PlayerXpCurve.MaxTotalXp,
-                previousTotal + totalXpFraction + pendingRunXp + pendingRunXpFraction);
+            double settled = SettledTotal;
             totalXp = (int)settled;
             totalXpFraction = settled - totalXp;
             pendingRunXp = 0;

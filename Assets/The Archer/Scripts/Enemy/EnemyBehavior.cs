@@ -235,7 +235,9 @@ namespace MrX.Enemy
 
             if (Data.IsBoss) receivedDamage *= StageController.Player.Stats.DamageToBossesMultiplierStat;
 
+            float hpBeforeHit = healthbar.HP;
             var displayedDamage = healthbar.Subtract(receivedDamage);
+            StageController.RecordDamageDealt(hpBeforeHit - healthbar.HP);
 
             var textSpawnPosition = healthbar.transform.position;
             var text = displayedDamage.ToString();

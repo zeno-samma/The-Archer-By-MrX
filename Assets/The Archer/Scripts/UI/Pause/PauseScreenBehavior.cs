@@ -53,6 +53,15 @@ namespace MrX.UI
         [SerializeField] protected float quitButtonShineDuration = 0.5f;
         [SerializeField] protected float quitButtonShineDelay = 0.1f;
 
+        [Header("Run Rewards")]
+        [SerializeField] private GridLayoutGroup runRewards;
+        [SerializeField] private TMPro.TMP_Text experienceAmount;
+        [SerializeField] private SmallRewardCard goldReward;
+        [SerializeField] private TMPro.TMP_Text goldAmount;
+        [SerializeField] private SmallItemRewardCard itemRewardPrefab;
+        private readonly System.Collections.Generic.List<SmallItemRewardCard> itemRewardCards =
+            new System.Collections.Generic.List<SmallItemRewardCard>();
+
         protected float backgroundAlpha;
 
         public bool IsOpen { get; protected set; } = false;
@@ -154,6 +163,8 @@ namespace MrX.UI
                 .SetEasingCurve(abilitiesRectScaleEasing);
 
             abilitiesGrid.Show();
+            StageController.PauseResultStatistics();
+            RefreshRunRewards();
 
             settingsRect.localScale = Vector3.zero;
             settingsRect.DoLocalScale(Vector3.one, settingsRectScaleDuration)
@@ -197,6 +208,66 @@ namespace MrX.UI
             EventSystem.current.SetSelectedGameObject(null);
         }
 
+        private void RefreshRunRewards()
+        {
+            if (runRewards == null) return;
+
+            experienceAmount.text = $"+{Progression.PlayerProgression.PendingAwardXp:N0}";
+            var gold = GameController.CurrenciesManager.GetCurrency("gold", true);
+            if (gold != null) goldReward.SetIcon(gold.Data.Icon);
+            goldAmount.text = (gold?.Amount ?? 0).ToString("N0");
+
+            var counts = new System.Collections.Generic.Dictionary<string, int>();
+            foreach (var drop in StageController.DropManager.PickedUpItems)
+            {
+                counts.TryGetValue(drop.ItemId, out int count);
+                counts[drop.ItemId] = count + 1;
+            }
+
+            int used = 0;
+            foreach (var entry in counts)
+            {
+                var item = GameController.ArmoryManager.GetItemData(entry.Key);
+                if (item == null) continue;
+                ShowItemReward(used++, new Rewards.LuckyGrant
+                {
+                    kind = Rewards.LuckyRewardKind.Equipment,
+                    itemId = item.Id,
+                    title = item.ItemName,
+                    amount = entry.Value
+                });
+            }
+
+            var bossChests = GameController.ArmoryManager.BossChests;
+            if (bossChests != null)
+                foreach (var grant in bossChests.GetCollected(ContinuePlayingSave.RunToken))
+                    ShowItemReward(used++, grant);
+
+            for (int i = used; i < itemRewardCards.Count; i++)
+                itemRewardCards[i].gameObject.SetActive(false);
+
+            var rect = (RectTransform)runRewards.transform;
+            int columns = Mathf.Min(7, used + 2);
+            int rows = Mathf.CeilToInt((used + 2) / (float)columns);
+            float width = (rect.rect.width - (columns - 1) * runRewards.spacing.x) / columns;
+            float height = (rect.rect.height - (rows - 1) * runRewards.spacing.y) / rows;
+            float cellSize = Mathf.Max(1, Mathf.Min(130, width, height));
+            runRewards.constraintCount = columns;
+            runRewards.cellSize = new Vector2(cellSize, cellSize);
+            for (int i = 0; i < used; i++)
+                itemRewardCards[i].transform.localScale = Vector3.one * (cellSize / 130f);
+
+        }
+
+        private void ShowItemReward(int index, Rewards.LuckyGrant grant)
+        {
+            if (index == itemRewardCards.Count)
+                itemRewardCards.Add(Instantiate(itemRewardPrefab, runRewards.transform));
+            var card = itemRewardCards[index];
+            card.SetReward(grant);
+            card.gameObject.SetActive(true);
+        }
+
         protected virtual void OnSoundToggleChanged(bool soundEnabled)
         {
             GameController.AudioManager.SoundVolume = soundEnabled ? 1 : 0;
@@ -216,6 +287,7 @@ namespace MrX.UI
         {
             GameController.AudioManager.PlayButtonClick();
 
+            StageController.ResumeResultStatistics();
             EasingManager.DoTimeScale(1, 0.25f);
             gameObject.SetActive(false);
 

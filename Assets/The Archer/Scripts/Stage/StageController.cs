@@ -37,6 +37,37 @@ namespace MrX
         public static bool IsLoaded => instance != null;
         public static bool IsResultFinalized { get; private set; }
         private static bool settlingResult;
+        private static double damageDealt;
+        private static double statisticsStartedAt;
+        private static double pausedAt;
+        private static double pausedDuration;
+
+        public static int ResultProfileXp { get; private set; }
+        public static double ResultDamage { get; private set; }
+        public static double ResultDps { get; private set; }
+
+        private static void ResetResultStatistics()
+        {
+            statisticsStartedAt = Time.timeAsDouble;
+            pausedAt = -1;
+            pausedDuration = damageDealt = ResultDamage = ResultDps = 0;
+            ResultProfileXp = 0;
+        }
+
+        internal static void RecordDamageDealt(float amount)
+        {
+            if (instance != null && !IsResultFinalized && !settlingResult && amount > 0f)
+                damageDealt += amount;
+        }
+
+        internal static void PauseResultStatistics() => pausedAt = Time.timeAsDouble;
+
+        internal static void ResumeResultStatistics()
+        {
+            if (pausedAt < 0) return;
+            pausedDuration += Time.timeAsDouble - pausedAt;
+            pausedAt = -1;
+        }
         private static bool hasDeployedPet;
 
         public static GameScreenBehavior GameScreen => instance.gameScreen;
@@ -135,6 +166,7 @@ namespace MrX
             StageSave = GameController.SaveManager.GetSave<StageSave>("Stage");
             ContinuePlayingSave = GameController.SaveManager.GetSave<ContinuePlayingSave>("Continue Playing");
             MrX.Progression.PlayerProgression.BeginRun(ContinuePlayingSave.HasUnfinishedStageData);
+            ResetResultStatistics();
             TestingData = StageSave.GetTestingData();
 
             if (TestingData != null)
@@ -457,6 +489,10 @@ namespace MrX
         {
             if (IsResultFinalized || settlingResult) return;
             settlingResult = true;
+            double endTime = pausedAt < 0 ? Time.timeAsDouble : pausedAt;
+            double elapsed = endTime - statisticsStartedAt - pausedDuration;
+            ResultDamage = damageDealt;
+            ResultDps = elapsed > 0 ? damageDealt / elapsed : 0;
             try
             {
                 DropManager.GrantPickedUpItems();
@@ -468,13 +504,13 @@ namespace MrX
                 IsResultFinalized = true;
                 instance.runRage?.End();
                 GameScreen.PrepareForResult();
-                int awardedProfileXp = MrX.Progression.PlayerProgression.SettleRun();
+                ResultProfileXp = MrX.Progression.PlayerProgression.SettleRun();
                 var saves = GameController.SaveManager as Save.SaveManager;
                 if (saves != null)
                     saves.CommitGameplayBatch();
                 else
                     GameController.SaveManager.Save(false);
-                MrX.Progression.PlayerProgression.NotifyRunSettled(awardedProfileXp);
+                MrX.Progression.PlayerProgression.NotifyRunSettled(ResultProfileXp);
             }
             finally { settlingResult = false; }
         }
