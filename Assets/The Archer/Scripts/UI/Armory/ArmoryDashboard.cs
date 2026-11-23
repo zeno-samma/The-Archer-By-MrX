@@ -29,7 +29,7 @@ namespace MrX.UI
         private bool listening, dirty, expansionModal;
         private int quotedCapacity, firstRow = -1;
         private float cellSize, stride;
-        private int columns = 6;
+        [SerializeField, Range(1, 6)] private int columns = 6;
         public void SetColumns(int value) { value = Mathf.Clamp(value, 1, 6); if (columns == value) return; columns = value; MarkDirty(); }
         private ItemType? filter;
         private readonly List<ItemSaveData> visibleItems = new List<ItemSaveData>();
