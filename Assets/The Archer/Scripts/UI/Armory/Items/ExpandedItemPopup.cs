@@ -26,6 +26,7 @@ namespace MrX.UI.Armory
         protected override void Awake()
         {
             base.Awake();
+            if (useAuthoredPresentation) upgradeButton.UseAuthoredArtwork();
             if (deleteButton == null) return;
             deleteButton.onClick.AddListener(ShowDeleteConfirmation);
             cancelDeleteButton.onClick.AddListener(CancelDeletion);
@@ -72,7 +73,10 @@ namespace MrX.UI.Armory
             if (deleteButton == null) return;
             string reason = GameController.ArmoryManager.GetItemDeletionBlockReason(Data.Id);
             deleteButton.interactable = reason == null;
-            deleteLabel.text = reason ?? "Delete item";
+            deleteLabel.text = useAuthoredPresentation
+                ? reason == "Starter item protected" ? "Protected"
+                    : reason == "Last weapon protected" ? "Last weapon" : reason ?? "Delete"
+                : reason ?? "Delete item";
         }
 
         protected override void SelectButtonsGamepad()
@@ -99,6 +103,7 @@ namespace MrX.UI.Armory
 
         public ItemData Data { get; protected set; }
         public ItemSaveData SaveData { get; protected set; }
+        [SerializeField] private bool useAuthoredPresentation;
         private float nextUpgradeTime;
 
         public virtual void Show(ItemData data, ItemSaveData saveData)
@@ -139,11 +144,14 @@ namespace MrX.UI.Armory
 
             InitAbilities();
 
-            var height = heightDifference + statsGrid.Height + abilitiesRect.sizeDelta.y;
-            panelRect.SetSizeDeltaY(height);
+            if (!useAuthoredPresentation)
+            {
+                var height = heightDifference + statsGrid.Height + abilitiesRect.sizeDelta.y;
+                panelRect.SetSizeDeltaY(height);
 
-            var closeButtonPosition = defaultCloseButtonPosition + (height - defaultHeight) / 2f;
-            closeButtonRect.SetAnchoredPositionY(closeButtonPosition);
+                var closeButtonPosition = defaultCloseButtonPosition + (height - defaultHeight) / 2f;
+                closeButtonRect.SetAnchoredPositionY(closeButtonPosition);
+            }
 
             if (SaveData.Level == Data.ItemLevelCount - 1)
             {
@@ -168,12 +176,12 @@ namespace MrX.UI.Armory
                 if (Data.ItemType == ItemType.Weapon)
                 {
                     selectButton.enabled = false;
-                    selectButton.image.sprite = disabledButtonSprite;
+                    if (!useAuthoredPresentation) selectButton.image.sprite = disabledButtonSprite;
                 }
                 else
                 {
                     selectButton.enabled = true;
-                    selectButton.image.sprite = selectButtonSprite;
+                    if (!useAuthoredPresentation) selectButton.image.sprite = selectButtonSprite;
                 }
             }
             else
@@ -181,7 +189,7 @@ namespace MrX.UI.Armory
                 selectButtonText.text = "Equip";
 
                 selectButton.enabled = true;
-                selectButton.image.sprite = selectButtonSprite;
+                if (!useAuthoredPresentation) selectButton.image.sprite = selectButtonSprite;
             }
 
             upgradeButtonLabel.gameObject.SetActive(true);
@@ -213,12 +221,12 @@ namespace MrX.UI.Armory
                 if (Data.ItemType == ItemType.Weapon)
                 {
                     selectButton.enabled = false;
-                    selectButton.image.sprite = disabledButtonSprite;
+                    if (!useAuthoredPresentation) selectButton.image.sprite = disabledButtonSprite;
                 }
                 else
                 {
                     selectButton.enabled = true;
-                    selectButton.image.sprite = selectButtonSprite;
+                    if (!useAuthoredPresentation) selectButton.image.sprite = selectButtonSprite;
                 }
             }
             else
@@ -226,7 +234,7 @@ namespace MrX.UI.Armory
                 selectButtonText.text = "Equip";
 
                 selectButton.enabled = true;
-                selectButton.image.sprite = selectButtonSprite;
+                if (!useAuthoredPresentation) selectButton.image.sprite = selectButtonSprite;
             }
 
             upgradeButtonLabel.gameObject.SetActive(false);
@@ -258,6 +266,8 @@ namespace MrX.UI.Armory
                     }
                 }
             }
+
+            if (useAuthoredPresentation) return;
 
             var spacing = abilitieLayout.spacing;
 

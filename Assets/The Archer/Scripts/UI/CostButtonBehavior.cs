@@ -26,6 +26,10 @@ namespace MrX.UI
 
         public Button Button => button;
 
+        private bool useAuthoredArtwork;
+
+        internal void UseAuthoredArtwork() => useAuthoredArtwork = true;
+
         public CurrencySave Currency { get; protected set; }
 
         protected virtual void Awake()
@@ -45,7 +49,7 @@ namespace MrX.UI
                 return;
             }
 
-            costLabel.SetSprite(Currency.Data.Icon);
+            if (!useAuthoredArtwork) costLabel.SetSprite(Currency.Data.Icon);
 
             Currency.OnAmountChanged -= OnCurrencyAmountChanged;
             Currency.OnAmountChanged += OnCurrencyAmountChanged;
@@ -112,7 +116,7 @@ namespace MrX.UI
 
             Currency = currency;
 
-            costLabel.SetSprite(Currency.Data.Icon);
+            if (!useAuthoredArtwork) costLabel.SetSprite(Currency.Data.Icon);
 
             Currency.OnAmountChanged -= OnCurrencyAmountChanged;
             Currency.OnAmountChanged += OnCurrencyAmountChanged;
@@ -131,13 +135,13 @@ namespace MrX.UI
 
             var currencyAmount = Currency.Amount;
             ButtonEnabled = currencyAmount >= costLabel.Amount;
-            button.image.sprite = ButtonEnabled ? activeButtonSprite : disabledButtonSprite;
+            if (!useAuthoredArtwork) button.image.sprite = ButtonEnabled ? activeButtonSprite : disabledButtonSprite;
         }
 
         public virtual void DisableButton()
         {
             ButtonEnabled = false;
-            button.image.sprite = ButtonEnabled ? activeButtonSprite : disabledButtonSprite;
+            if (!useAuthoredArtwork) button.image.sprite = ButtonEnabled ? activeButtonSprite : disabledButtonSprite;
         }
     }
 }
