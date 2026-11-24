@@ -20,6 +20,8 @@ namespace MrX.UI
         [Space]
         [SerializeField] protected RectTransform rewardsTitle;
         [SerializeField] protected GridLayoutGroup rewardsGrid;
+        [SerializeField] private RectTransform remainingHealthFill;
+        [SerializeField] private TMPro.TMP_Text remainingHealthLabel;
 
         [Space]
         [SerializeField] protected Button continueButton;
@@ -87,7 +89,15 @@ namespace MrX.UI
         public virtual void Show()
         {
             if (IsOpen) return;
+            var player = StageController.Player;
+            float remainingHealth = player != null ? Mathf.Clamp01(player.NormalizedHP) : 0f;
             StageController.FinalizeRunRewards();
+            if (remainingHealthFill != null && remainingHealthLabel != null)
+            {
+                remainingHealthFill.anchorMax = new Vector2(remainingHealth, 1f);
+                remainingHealthFill.gameObject.SetActive(remainingHealth > 0f);
+                remainingHealthLabel.text = $"HP REMAINING  {Mathf.RoundToInt(remainingHealth * 100f)}%";
+            }
             gameObject.SetActive(true);
 
             if (!isInitialized)
@@ -159,7 +169,10 @@ namespace MrX.UI
             EasingManager.DoNextFrame(() =>
             {
                 gridRect.SetSizeDeltaY(rewardsGrid.preferredHeight);
-                buttonRect.SetAnchoredPositionY(gridRect.anchoredPosition.y - gridRect.sizeDelta.y - buttonPositionDifference);
+                // The grid owns the positions of Claim and x2 Gold.
+                var buttonGrid = continueButton.transform.parent.GetComponent<GridLayoutGroup>();
+                if (buttonGrid == null || !buttonGrid.isActiveAndEnabled)
+                    buttonRect.SetAnchoredPositionY(gridRect.anchoredPosition.y - gridRect.sizeDelta.y - buttonPositionDifference);
             });
 
             buttonRect.localScale = new Vector3(0, 0.9f, 1f);
