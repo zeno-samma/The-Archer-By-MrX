@@ -60,13 +60,17 @@ namespace MrX.UI
             if (pageType == MainMenuPageType.Pets)
                 return Pets.PetSystem.IsUnlocked;
 
+            int requiredLevel = Progression.PlayerProgression.RequiredLevel(pageType);
+            if (requiredLevel > 0)
+                return Progression.PlayerProgression.Current.Level >= requiredLevel;
+
             var achievements = GameController.AchievementsManager;
             string featureId = pageType.ToString();
             if (achievements?.GetFeatureRequirement(featureId) != null)
                 return achievements.IsFeatureUnlocked(featureId);
 
             var item = dockItems.Find(tab => tab.PageType == pageType);
-            return item == null || !item.TryGetComponent<FeatureUnlockDockItem>(out _);
+            return item == null || !item.TryGetComponent<FeatureUnlockDockItem>(out var lockView) || lockView.UsesAccountLevel;
         }
 
         public virtual bool TrySelectPage(MainMenuPageType pageType)

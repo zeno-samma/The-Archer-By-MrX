@@ -65,6 +65,14 @@ namespace MrX.Progression
             return totalXp - previous;
         }
 
+        internal bool SetDeveloperXp(int amount)
+        {
+            if (runOpen) return false;
+            totalXp = Math.Min(Math.Max(0, amount), PlayerXpCurve.MaxTotalXp);
+            totalXpFraction = 0d;
+            return true;
+        }
+
         public void Flush()
         {
         }

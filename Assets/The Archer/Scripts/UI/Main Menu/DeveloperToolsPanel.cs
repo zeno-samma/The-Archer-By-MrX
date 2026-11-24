@@ -1,6 +1,7 @@
 using MrX.Development;
 using MrX.Armory;
 using MrX.Rewards;
+using MrX.Progression;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -16,6 +17,8 @@ namespace MrX.UI
         [SerializeField] private Button openButton, closeButton, amountButton, goldButton, gemButton, previousItem, nextItem, grantItem;
         [SerializeField] private TMP_Text amountLabel, itemLabel, status;
         [SerializeField] private Image itemIcon;
+        [SerializeField] private Button addXpButton, resetXpButton;
+        [SerializeField] private TMP_Text addXpLabel;
         private DeveloperGrantService service;
         private int amountIndex = 1, itemIndex;
         private bool ownsDock;
@@ -29,6 +32,8 @@ namespace MrX.UI
             goldButton.onClick.AddListener(() => Currency("gold")); gemButton.onClick.AddListener(() => Currency("gem"));
             previousItem.onClick.AddListener(() => SelectItem(-1)); nextItem.onClick.AddListener(() => SelectItem(1));
             grantItem.onClick.AddListener(GrantItem);
+            if (addXpButton) addXpButton.onClick.AddListener(() => ChangeXp(false));
+            if (resetXpButton) resetXpButton.onClick.AddListener(() => ChangeXp(true));
             if (settings) settings.Changed += Availability;
             Availability(); Refresh();
         }
@@ -46,7 +51,8 @@ namespace MrX.UI
             panel.SetActive(true); panel.transform.SetAsLastSibling(); ownsDock = true; screen.DisableDock();
             panel.GetComponent<Canvas>().overrideSorting = true;
             GameController.InputManager.InputAsset.UI.Cancel.performed += Cancel;
-            status.text = "Grants are saved to this player profile."; Refresh();
+            status.text = addXpButton ? XpStatus() : "Grants are saved to this player profile.";
+            Refresh();
             if (EventSystem.current) EventSystem.current.SetSelectedGameObject(goldButton.gameObject);
         }
         private int Amount => settings && settings.currencyAmounts != null && settings.currencyAmounts.Length > 0 ?
@@ -68,6 +74,8 @@ namespace MrX.UI
             itemIndex = Mathf.Clamp(itemIndex, 0, Mathf.Max(0, EntryCount - 1));
             amountLabel.text = "AMOUNT: " + Amount.ToString("N0") + "   >";
             goldButton.interactable = gemButton.interactable = Amount > 0;
+            if (addXpButton) addXpButton.interactable = Amount > 0;
+            if (addXpLabel) addXpLabel.text = $"+{Amount:N0} XP";
             var item = Item;
             var shard = IsShardSelected ? Shard : null;
             var heroSave = shard && shard.Hero ? GameController.ArmoryManager.GetHeroSave(shard.Hero.Id) : null;
@@ -78,6 +86,16 @@ namespace MrX.UI
             itemIcon.enabled = itemIcon.sprite != null;
             grantItem.interactable = heroSave != null || item != null;
         }
+        private static string XpStatus() =>
+            $"Account XP: {PlayerProgression.TotalXp:N0} | Lv. {PlayerProgression.Current.Level}";
+
+        private void ChangeXp(bool reset)
+        {
+            if (!settings || !settings.IsAvailable) return;
+            status.text = PlayerProgression.ChangeDeveloperXp(Amount, reset)
+                ? XpStatus() + " (saved)" : "Cannot change XP during an active run.";
+        }
+
         private void Currency(string id)
         { service.GrantCurrency(id, Amount, out var message); status.text = message; }
         private void GrantItem()
