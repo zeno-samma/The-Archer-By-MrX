@@ -55,6 +55,16 @@ namespace MrX.Progression
             return totalXp - previousTotal;
         }
 
+        internal int AwardResultBonusXp(int amount)
+        {
+            if (runOpen || amount <= 0) return 0;
+
+            int previous = TotalXp;
+            totalXp = (int)Math.Min(PlayerXpCurve.MaxTotalXp, (long)previous + amount);
+            if (totalXp == PlayerXpCurve.MaxTotalXp) totalXpFraction = 0d;
+            return totalXp - previous;
+        }
+
         public void Flush()
         {
         }

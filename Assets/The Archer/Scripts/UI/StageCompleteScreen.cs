@@ -38,6 +38,8 @@ namespace MrX.UI
         protected PoolComponent<SmallItemRewardCard> cardsPool;
         protected Dictionary<CurrencySave, SmallRewardCard> currencyRewardCards = new Dictionary<CurrencySave, SmallRewardCard>();
 
+        private readonly List<SmallItemRewardCard> displayedLootCards = new List<SmallItemRewardCard>();
+
         protected RectTransform gridRect;
 
         protected float buttonPositionDifference;
@@ -159,6 +161,7 @@ namespace MrX.UI
 
                 var card = cardsPool.GetEntity();
                 card.SetReward(item);
+                displayedLootCards.Add(card);
 
 
                 card.Show(0.7f + (counter + i) * 0.05f);
@@ -188,6 +191,26 @@ namespace MrX.UI
 
 
             IsOpen = true;
+        }
+
+        internal void ShowDoubledRewards(int awardedXp, Dictionary<Rewards.LuckyGrant, int> equipmentAwarded)
+        {
+            if (experienceAmount != null)
+                experienceAmount.text = $"+{StageController.ResultProfileXp + awardedXp:N0}";
+
+            foreach (var entry in currencyRewardCards)
+                if (StageController.DropManager.ResultCurrencies.TryGetValue(entry.Key.Data.ID, out int earned) && earned > 0)
+                    entry.Value.SetAmount((int)System.Math.Min(int.MaxValue, 2L * earned));
+
+            var loot = StageController.DropManager.ResultItems;
+            for (int i = 0; i < displayedLootCards.Count; i++)
+            {
+                var reward = loot[i];
+                int bonus = reward.kind == Rewards.LuckyRewardKind.Equipment
+                    ? equipmentAwarded[reward] : reward.amount;
+                int total = (int)System.Math.Min(int.MaxValue, (long)reward.amount + bonus);
+                if (total > 1) displayedLootCards[i].SetAmount(total);
+            }
         }
 
         protected virtual void OnInputChanged(InputType prevInput, InputType newInput)

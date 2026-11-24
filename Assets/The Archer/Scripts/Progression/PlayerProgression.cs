@@ -36,6 +36,8 @@ namespace MrX.Progression
             return awardedXp;
         }
 
+        internal static int AwardResultBonusXp(int amount) => Profile?.AwardResultBonusXp(amount) ?? 0;
+
         public static void NotifyRunSettled(int awardedXp)
         {
             if (awardedXp > 0)
