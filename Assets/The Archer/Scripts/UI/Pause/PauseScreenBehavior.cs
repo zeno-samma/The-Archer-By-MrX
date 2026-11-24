@@ -254,8 +254,17 @@ namespace MrX.UI
             float cellSize = Mathf.Max(1, Mathf.Min(130, width, height));
             runRewards.constraintCount = columns;
             runRewards.cellSize = new Vector2(cellSize, cellSize);
-            for (int i = 0; i < used; i++)
-                itemRewardCards[i].transform.localScale = Vector3.one * (cellSize / 130f);
+            float horizontalRoom = rect.rect.width - runRewards.padding.horizontal
+                - columns * cellSize - (columns - 1) * runRewards.spacing.x;
+            float verticalRoom = rect.rect.height - runRewards.padding.vertical
+                - rows * cellSize - (rows - 1) * runRewards.spacing.y;
+            float extraSize = Mathf.Min(cellSize * 0.5f, runRewards.spacing.x, horizontalRoom, verticalRoom);
+            if (rows > 1)
+                extraSize = Mathf.Min(extraSize, runRewards.spacing.y);
+            var scale = Vector3.one * (1f + Mathf.Max(0f, extraSize) / cellSize);
+            foreach (Transform reward in runRewards.transform)
+                if (reward.gameObject.activeSelf)
+                    reward.localScale = scale;
 
         }
 
