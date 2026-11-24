@@ -11,7 +11,29 @@ namespace MrX
         [SerializeField] protected bool isUlocked;
         [SerializeField] protected int level;
 
+        [SerializeField, Min(0)] private int shards;
+
         public string Id => id;
+        public int Shards => shards;
+        public int ShardsToUpgrade => 5 * (Mathf.Max(0, level) + 1);
+
+        public bool TryAddShards(int amount)
+        {
+            if (amount <= 0 || shards > int.MaxValue - amount) return false;
+            shards += amount;
+            return true;
+        }
+
+        public bool CanUpgradeWithShards(int levelCount) =>
+            IsUnlocked && level >= 0 && level < levelCount - 1 && shards >= ShardsToUpgrade;
+
+        public bool TryUpgradeWithShards(int levelCount)
+        {
+            if (!CanUpgradeWithShards(levelCount)) return false;
+            shards -= ShardsToUpgrade;
+            Level++;
+            return true;
+        }
         public bool IsEquipped
         {
             get => isEquipped;

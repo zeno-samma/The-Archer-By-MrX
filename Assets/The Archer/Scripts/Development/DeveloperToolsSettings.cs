@@ -10,6 +10,7 @@ namespace MrX.Development
         public bool allowInDevelopmentBuilds = true;
         public bool allowInReleaseBuilds;
         public ArmoryDatabase armory;
+        public HeroShardDefinition heroShard;
         public int[] currencyAmounts = { 100, 1000, 10000, 100000 };
         public event System.Action Changed;
         public bool Allows(bool editor, bool developmentBuild) => toolsEnabled &&

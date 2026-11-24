@@ -9,5 +9,6 @@ namespace MrX.UI
         Achievements = 4,
         Forge = 5,
         Pets = 6,
+        Heroes = 7,
     }
 }

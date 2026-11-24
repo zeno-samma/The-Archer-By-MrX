@@ -51,25 +51,57 @@ namespace MrX.UI
         }
         private int Amount => settings && settings.currencyAmounts != null && settings.currencyAmounts.Length > 0 ?
             settings.currencyAmounts[amountIndex % settings.currencyAmounts.Length] : 0;
-        private ItemData Item => settings && settings.armory && settings.armory.ItemsCount > 0 ? settings.armory.Items[itemIndex] : null;
+        private HeroShardDefinition Shard => settings ? settings.heroShard : null;
+        private int EquipmentOffset => Shard ? 1 : 0;
+        private int EntryCount => EquipmentOffset + (settings && settings.armory ? settings.armory.ItemsCount : 0);
+        private bool IsShardSelected => Shard && itemIndex == 0;
+        private ItemData Item => !IsShardSelected && itemIndex < EntryCount
+            ? settings.armory.Items[itemIndex - EquipmentOffset] : null;
         private void SelectItem(int direction)
         {
-            int count = settings && settings.armory ? settings.armory.ItemsCount : 0;
+            int count = EntryCount;
             itemIndex = count == 0 ? 0 : (itemIndex + direction + count) % count; Refresh();
         }
         private void Refresh()
         {
             amountIndex = settings && settings.currencyAmounts != null && settings.currencyAmounts.Length > 0 ? amountIndex % settings.currencyAmounts.Length : 0;
-            if (settings && settings.armory) itemIndex = Mathf.Clamp(itemIndex, 0, Mathf.Max(0, settings.armory.ItemsCount - 1));
+            itemIndex = Mathf.Clamp(itemIndex, 0, Mathf.Max(0, EntryCount - 1));
             amountLabel.text = "AMOUNT: " + Amount.ToString("N0") + "   >";
             goldButton.interactable = gemButton.interactable = Amount > 0;
-            var item = Item; itemLabel.text = item ? item.ItemName + "\n" + (itemIndex + 1) + " / " + settings.armory.ItemsCount : "No equipment registered";
-            itemIcon.sprite = item ? item.Icon : null; itemIcon.enabled = item; grantItem.interactable = item;
+            var item = Item;
+            var shard = IsShardSelected ? Shard : null;
+            var heroSave = shard && shard.Hero ? GameController.ArmoryManager.GetHeroSave(shard.Hero.Id) : null;
+            itemLabel.text = shard && shard.Hero
+                ? $"{shard.Hero.Name} Hero Shard\n{heroSave?.Shards ?? 0} owned · +{shard.GrantAmount}"
+                : item ? $"{item.ItemName}\n{itemIndex + 1} / {EntryCount}" : "No reward registered";
+            itemIcon.sprite = shard ? shard.Icon : item ? item.Icon : null;
+            itemIcon.enabled = itemIcon.sprite != null;
+            grantItem.interactable = heroSave != null || item != null;
         }
         private void Currency(string id)
         { service.GrantCurrency(id, Amount, out var message); status.text = message; }
         private void GrantItem()
-        { service.GrantItem(Item, out var message); status.text = message; }
+        {
+            if (!IsShardSelected)
+            {
+                service.GrantItem(Item, out var message);
+                status.text = message;
+                return;
+            }
+
+            if (!settings.IsAvailable) return;
+            var shard = Shard;
+            var heroSave = shard.Hero ? GameController.ArmoryManager.GetHeroSave(shard.Hero.Id) : null;
+            if (heroSave?.TryAddShards(shard.GrantAmount) != true)
+            {
+                status.text = "Cannot grant Hero Shards.";
+                return;
+            }
+
+            GameController.SaveManager.Save(false);
+            status.text = $"+{shard.GrantAmount} {shard.Hero.Name} Hero Shards (saved)";
+            Refresh();
+        }
         private void Cancel(UnityEngine.InputSystem.InputAction.CallbackContext context) => Close();
         public void Close()
         {
