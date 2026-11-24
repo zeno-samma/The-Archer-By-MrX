@@ -5,6 +5,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
+using TMPro;
 
 namespace MrX.UI.Armory
 {
@@ -12,6 +14,88 @@ namespace MrX.UI.Armory
     {
         [Space]
         [SerializeField] protected ItemCardBehavior itemCard;
+
+        [Header("Delete Item")]
+        [SerializeField] private Button deleteButton;
+        [SerializeField] private TMP_Text deleteLabel;
+        [SerializeField] private GameObject deleteConfirmation;
+        [SerializeField] private TMP_Text deletePrompt;
+        [SerializeField] private Button cancelDeleteButton;
+        [SerializeField] private Button confirmDeleteButton;
+
+        protected override void Awake()
+        {
+            base.Awake();
+            if (deleteButton == null) return;
+            deleteButton.onClick.AddListener(ShowDeleteConfirmation);
+            cancelDeleteButton.onClick.AddListener(CancelDeletion);
+            confirmDeleteButton.onClick.AddListener(ConfirmDeletion);
+        }
+
+        private void ShowDeleteConfirmation()
+        {
+            RefreshDeleteButton();
+            if (!deleteButton.interactable) return;
+
+            var rarity = Data.GetItemLevel(SaveData.Level).ItemRarity;
+            deletePrompt.text = $"Delete {Data.ItemName}?\n{rarity} · Lv. {SaveData.Level + 1}\nThe item and its upgrades will be lost.\nA queued reward may fill the freed slot.";
+            deleteConfirmation.SetActive(true);
+            EventSystem.current?.SetSelectedGameObject(cancelDeleteButton.gameObject);
+        }
+
+        private void CancelDeletion()
+        {
+            deleteConfirmation.SetActive(false);
+            RefreshDeleteButton();
+            if (deleteButton.interactable)
+                EventSystem.current?.SetSelectedGameObject(deleteButton.gameObject);
+            else
+                SelectButtonsGamepad();
+        }
+
+        private void ConfirmDeletion()
+        {
+            if (!deleteConfirmation.activeSelf) return;
+            if (GameController.ArmoryManager.TryDeleteItem(Data.Id))
+            {
+                deleteConfirmation.SetActive(false);
+                OnCloseButtonClicked();
+            }
+            else
+            {
+                CancelDeletion();
+            }
+        }
+
+        private void RefreshDeleteButton()
+        {
+            if (deleteButton == null) return;
+            string reason = GameController.ArmoryManager.GetItemDeletionBlockReason(Data.Id);
+            deleteButton.interactable = reason == null;
+            deleteLabel.text = reason ?? "Delete item";
+        }
+
+        protected override void SelectButtonsGamepad()
+        {
+            if (deleteConfirmation != null && deleteConfirmation.activeSelf)
+                EventSystem.current?.SetSelectedGameObject(cancelDeleteButton.gameObject);
+            else
+                base.SelectButtonsGamepad();
+        }
+
+        protected override void OnCancelButtonPressed(UnityEngine.InputSystem.InputAction.CallbackContext context)
+        {
+            if (deleteConfirmation != null && deleteConfirmation.activeSelf)
+                CancelDeletion();
+            else
+                base.OnCancelButtonPressed(context);
+        }
+
+        protected override void OnCloseButtonClicked()
+        {
+            if (deleteConfirmation != null) deleteConfirmation.SetActive(false);
+            base.OnCloseButtonClicked();
+        }
 
         public ItemData Data { get; protected set; }
         public ItemSaveData SaveData { get; protected set; }
@@ -23,6 +107,7 @@ namespace MrX.UI.Armory
 
             Data = data;
             SaveData = saveData;
+            if (deleteConfirmation != null) deleteConfirmation.SetActive(false);
 
             InitVisuals();
 
@@ -68,6 +153,8 @@ namespace MrX.UI.Armory
             {
                 InitButtonsUpgradable();
             }
+
+            RefreshDeleteButton();
         }
 
         protected virtual void InitButtonsUpgradable()

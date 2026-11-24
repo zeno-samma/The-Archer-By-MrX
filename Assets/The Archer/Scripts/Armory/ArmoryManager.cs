@@ -321,6 +321,31 @@ namespace MrX
             OnInventoryChanged?.Invoke();
         }
 
+        public string GetItemDeletionBlockReason(string id)
+        {
+            var item = database.GetItem(id);
+            var owned = save.GetItem(id);
+            if (item == null || owned == null) return "Item unavailable";
+            if (item.IsDefaultItem || item.IsUnlockedByDefault) return "Starter item protected";
+            if (owned.IsEquipped || GetEquippedItemData(item.ItemType) == item) return "Unequip first";
+            if (item.ItemType == ItemType.Weapon &&
+                !save.GetItems().Exists(other => other.Id != id && database.GetItem(other.Id)?.ItemType == ItemType.Weapon))
+                return "Last weapon protected";
+            return null;
+        }
+
+        public bool TryDeleteItem(string id)
+        {
+            if (GetItemDeletionBlockReason(id) != null) return false;
+
+            var owned = save.GetItem(id);
+            owned.OnItemEquipped -= OnItemEquippedEventFired;
+            save.RemoveItem(id);
+            ClaimPendingEquipment();
+            GameController.SaveManager.Save(false);
+            return true;
+        }
+
         public void ClaimPendingEquipment()
         {
             var pending = save.PendingEquipment;
