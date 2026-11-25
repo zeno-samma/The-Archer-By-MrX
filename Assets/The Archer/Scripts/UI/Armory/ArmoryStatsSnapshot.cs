@@ -55,8 +55,8 @@ namespace MrX.UI
         public string Details()
         {
             var text = new StringBuilder(3072);
-            text.AppendLine("<b>LOADOUT & PERMANENT UPGRADES</b>");
-            text.AppendLine("Loadout base stats plus permanent upgrades. Ability effects are resolved in battle. Green bonuses compare against the hero alone.\n");
+            // text.AppendLine("<b>LOADOUT & PERMANENT UPGRADES</b>");
+            // text.AppendLine("Loadout base stats plus permanent upgrades. Ability effects are resolved in battle. Green bonuses compare against the hero alone.\n");
             foreach (var property in Properties)
             {
                 var value = property.GetValue(Total);
@@ -73,7 +73,7 @@ namespace MrX.UI
                 var absolute = property.Name == "MaxHPStat" || property.Name == "AttackDamageStat" || property.Name == "MovementSpeedStat" || property.Name == "FrontArrowDamageStat" || property.Name == "RearArrowDamageStat" || property.Name == "DiagonalArrowDamageStat";
                 text.Append(label).Append(": <b>").Append(number.ToString("0.###")).Append(percent ? "%" : value is MultiplicativeStat && !absolute ? "x" : "").AppendLine("</b>");
             }
-            text.Append("Wave end healing: <b>").Append(WaveEndHealing.ToString("0.##")).AppendLine("%</b>");
+            // text.Append("Wave end healing: <b>").Append(WaveEndHealing.ToString("0.##")).AppendLine("%</b>");
             return text.ToString();
         }
     }

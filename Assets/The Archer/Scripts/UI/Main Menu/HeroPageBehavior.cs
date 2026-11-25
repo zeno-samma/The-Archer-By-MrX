@@ -61,7 +61,7 @@ namespace MrX.UI
                 SetText(slot.transform, "Text_Name", hero.Name);
                 SetText(slot.transform, "Text_Level", $"{GetLevel(hero) + 1}");
                 SetText(slot.transform, "Text_Slider", GetShardProgress(hero));
-                SetPortrait(slot.transform, "Icon", hero.Icon);
+                SetPortrait(slot.transform, "Character", hero.Icon);
             }
         }
 
@@ -79,7 +79,7 @@ namespace MrX.UI
             upgradeButton.interactable = Armory.GetHeroSave(hero.Id)?.CanUpgradeWithShards(hero.HeroLevelCount) == true;
             SetText(left, "Text_Rank", level.HeroRarity.ToString());
             SetText(left, "Text_Info", hero.Name);
-            SetPortrait(details.Find("Group_Center/Character"), "Character", hero.Icon);
+            SetPortrait(details.Find("Group_Center/Character_Panel"), "Character", hero.Icon);
 
             var stats = details.Find("Group_Center/Stats");
             SetStat(stats.Find("Attack"), "Attack", "ATK", level.GetStatValue(StatType.Damage));
