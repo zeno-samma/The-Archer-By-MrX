@@ -16,6 +16,12 @@ namespace MrX
         [SerializeField] protected Sprite stageImage;
         public Sprite StageImage => stageImage;
 
+        [Header("Journey Encounter")]
+        [SerializeField] private Texture2D journeyMap;
+        [SerializeField] private GameObject journeyBossPrefab;
+        public Texture2D JourneyMap => journeyMap;
+        public GameObject JourneyBossPrefab => journeyBossPrefab;
+
         [SerializeField] protected string stageName;
         public string StageName => stageName;
 

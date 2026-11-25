@@ -35,6 +35,8 @@ namespace MrX.UI.Armory
         protected float statsPanelPadding;
         protected float statsPanelSpacing;
         private bool isInitialized;
+        [SerializeField] private bool useAuthoredSlotScale;
+        private Vector3[] authoredSlotScales;
 
         private EntityId debugPanelId;
 
@@ -65,6 +67,9 @@ namespace MrX.UI.Armory
             if (isInitialized) return;
             isInitialized = true;
             cardsPool = new PoolComponent<ItemCardBehavior>(itemCardPrefab, slots.Count, cardsParent);
+
+            if (useAuthoredSlotScale)
+                authoredSlotScales = slots.Select(slot => slot.SlotRect.localScale).ToArray();
 
             if (!showCompactStats) return;
 
@@ -201,6 +206,8 @@ namespace MrX.UI.Armory
                     // Debug.Log($"[DEBUG] Card sau khi gán -> AnchoredPos: {card.RectTransform.anchoredPosition} | WorldPos: {card.transform.position}");
                     // // --- KẾT THÚC DEBUG ---
                     equippedCards.Add(card);
+                    if (useAuthoredSlotScale)
+                        card.RectTransform.localScale = Vector3.one * (slot.SlotRect.lossyScale.x / cardsParent.lossyScale.x);
 
                     if (slot.ItemType == ItemType.Weapon)
                     {
@@ -225,13 +232,22 @@ namespace MrX.UI.Armory
             for (int i = 0; i < slots.Count; i++)
             {
                 var slot = slots[i];
-                slot.SlotRect.localScale = new Vector3(value, value, value);
+                slot.SlotRect.localScale = (useAuthoredSlotScale ? authoredSlotScales[i] : Vector3.one) * value;
             }
 
             for (int i = 0; i < equippedCards.Count; i++)
             {
                 var card = equippedCards[i];
-                card.RectTransform.localScale = new Vector3(value, value, value);
+                if (useAuthoredSlotScale)
+                {
+                    var slot = slots.Find(candidate => candidate.ItemType == card.ItemData.ItemType);
+                    if (slot != null)
+                        card.RectTransform.localScale = Vector3.one * (slot.SlotRect.lossyScale.x / cardsParent.lossyScale.x);
+                }
+                else
+                {
+                    card.RectTransform.localScale = Vector3.one * value;
+                }
             }
         }
 

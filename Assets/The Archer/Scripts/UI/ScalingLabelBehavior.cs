@@ -12,7 +12,7 @@ namespace MrX.UI
         [SerializeField] protected AligmentType aligment;
 
         protected RectTransform rectTransform;
-        public RectTransform RectTransform => rectTransform;
+        public RectTransform RectTransform => rectTransform != null ? rectTransform : rectTransform = (RectTransform)transform;
 
         protected float spacing;
 

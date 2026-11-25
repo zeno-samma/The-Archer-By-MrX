@@ -42,6 +42,11 @@ namespace MrX.UI
             heroPreview.gameObject.SetActive(false);
         }
 
+        public void SetPreviewCameraEnabled(bool enabled)
+        {
+            if (previewCamera) previewCamera.enabled = enabled;
+        }
+
         public virtual void Show()
         {
             heroData = GameController.ArmoryManager.EquippedHero;
