@@ -6,6 +6,8 @@ namespace MrX.UI
     [DefaultExecutionOrder(100)]
     public sealed class StageEncounterPreview : MonoBehaviour
     {
+        public const int FighterPreviewLayer = 30;
+
         [SerializeField] private MainMenuStagesPageBehavior page;
         [SerializeField] private RawImage mapImage;
         [SerializeField] private GameObject encounterLayers;
@@ -14,6 +16,13 @@ namespace MrX.UI
         [SerializeField] private RawImage fightersImage;
         [SerializeField] private Image selectorPlate;
 
+        [Header("Fighter Placement")]
+        [Tooltip("Position relative to the Journey preview rig.")]
+        [SerializeField] private Vector3 bossPosition = new Vector3(-0.164856f, -13.721878f, 28.008347f);
+        [SerializeField, Min(0.01f)] private float bossScale = 1.91f;
+        [Tooltip("Position relative to the Journey preview rig.")]
+        [SerializeField] private Vector3 heroPosition = new Vector3(-0.012817f, 1.158997f, -13.409454f);
+        [SerializeField, Min(0.01f)] private float heroScale = 0.94f;
 
         private Camera previewCamera;
         private GameObject rig;
@@ -58,8 +67,7 @@ namespace MrX.UI
                     boss.SetActive(false);
                     Destroy(boss);
                 }
-                boss = CreateVisual(nextBossPrefab, new Vector3(0f, 0, 35f), Quaternion.Euler(0, 180, 0), 1.215f);
-                boss.transform.localScale = new Vector3(3f, 3f, 3f);
+                boss = CreateVisual(nextBossPrefab, bossPosition, Quaternion.Euler(0, 180, 0), bossScale);
                 displayedBossPrefab = nextBossPrefab;
             }
 
@@ -68,9 +76,8 @@ namespace MrX.UI
             {
                 if (hero != null) Destroy(hero);
                 heroPrefab = selectedHero.Prefab;
-                hero = CreateVisual(heroPrefab, new Vector3(0f, 0f, -14f), Quaternion.identity, 1f);
+                hero = CreateVisual(heroPrefab, heroPosition, Quaternion.identity, heroScale);
             }
-
         }
 
         private void SetShowing(bool active)
@@ -97,26 +104,33 @@ namespace MrX.UI
             rig.transform.position = new Vector3(240, 140, -180);
             var cameraObject = new GameObject("Camera");
             cameraObject.transform.SetParent(rig.transform, false);
-            cameraObject.transform.localPosition = new Vector3(-.01f, 23.58f, -49.19f);
-            cameraObject.transform.localRotation = Quaternion.Euler(27, 0, 0);
             previewCamera = cameraObject.AddComponent<Camera>();
+
+            var lightObject = new GameObject("Light");
+            lightObject.transform.SetParent(rig.transform, false);
+            ConfigurePreviewRig(previewCamera, lightObject.AddComponent<Light>());
+
+            texture = CreatePreviewTexture();
+            previewCamera.targetTexture = texture;
+            fightersImage.texture = texture;
+        }
+
+        public static RenderTexture CreatePreviewTexture() => new RenderTexture(540, 1203, 24, RenderTextureFormat.ARGB32);
+
+        public static void ConfigurePreviewRig(Camera previewCamera, Light keyLight)
+        {
+            previewCamera.transform.SetLocalPositionAndRotation(new Vector3(-.01f, 23.58f, -49.19f), Quaternion.Euler(27, 0, 0));
             previewCamera.clearFlags = CameraClearFlags.SolidColor;
             previewCamera.backgroundColor = Color.clear;
-            previewCamera.cullingMask = 1 << 30;
+            previewCamera.cullingMask = 1 << FighterPreviewLayer;
             previewCamera.usePhysicalProperties = true;
             previewCamera.sensorSize = new Vector2(36, 24);
             previewCamera.gateFit = Camera.GateFitMode.Vertical;
             previewCamera.fieldOfView = 42;
             previewCamera.lensShift = new Vector2(0, .16f);
-            texture = new RenderTexture(540, 1203, 24, RenderTextureFormat.ARGB32);
-            previewCamera.targetTexture = texture;
-            fightersImage.texture = texture;
-            var lightObject = new GameObject("Light");
-            lightObject.transform.SetParent(rig.transform, false);
-            lightObject.transform.rotation = Quaternion.Euler(55, -30, 0);
-            var keyLight = lightObject.AddComponent<Light>();
+            keyLight.transform.localRotation = Quaternion.Euler(55, -30, 0);
             keyLight.type = LightType.Directional;
-            keyLight.cullingMask = 1 << 30;
+            keyLight.cullingMask = 1 << FighterPreviewLayer;
             keyLight.intensity = .76f;
         }
 
@@ -131,7 +145,7 @@ namespace MrX.UI
             foreach (var behaviour in model.GetComponentsInChildren<MonoBehaviour>(true)) Destroy(behaviour);
             foreach (var collider in model.GetComponentsInChildren<Collider>(true)) Destroy(collider);
             foreach (var animator in model.GetComponentsInChildren<Animator>(true)) animator.fireEvents = false;
-            foreach (var part in model.GetComponentsInChildren<Transform>(true)) part.gameObject.layer = 30;
+            foreach (var part in model.GetComponentsInChildren<Transform>(true)) part.gameObject.layer = FighterPreviewLayer;
             StartCoroutine(ActivateVisual(holder));
             return holder;
         }
