@@ -23,6 +23,8 @@ namespace MrX.UI
         [SerializeField] private List<CategoryView> tabs = new List<CategoryView>();
         [SerializeField] private List<RowView> rowPool = new List<RowView>();
         [SerializeField] private List<TextStyle> typography = new List<TextStyle>();
+        [SerializeField] private bool usePrefabPresentation;
+        [SerializeField] private PrefabPresentation presentation = new PrefabPresentation();
         private AchievementsManager manager;
         private CurrencySave wallet;
         private AchievementCategory selectedCategory = AchievementCategory.Adventure;
@@ -40,6 +42,17 @@ namespace MrX.UI
         private static readonly Color Pale = new Color32(208, 230, 255, 255);
 
         [Serializable] private class TextStyle { public TMP_Text text; public float size; }
+        [Serializable] private class PrefabPresentation
+        {
+            public Color selectedTabTitle = Color.white;
+            public Color inactiveTabTitle = new Color32(74, 172, 247, 255);
+            public Color claimableRow = new Color32(29, 177, 255, 255);
+            public Color inactiveRow = new Color32(4, 94, 157, 255);
+            public Color lockedButton = new Color32(154, 169, 175, 255);
+            public Color claimedButton = new Color32(104, 152, 143, 255);
+            public Sprite goldRewardIcon;
+            public Sprite gemRewardIcon;
+        }
         [Serializable] private class CategoryView
         {
             public AchievementCategory category;
@@ -49,6 +62,7 @@ namespace MrX.UI
             public TMP_Text title;
             public TMP_Text progress;
             public GameObject badge;
+            public GameObject selectedIndicator;
             [NonSerialized] public int lastCompleted = -1;
             [NonSerialized] public int lastTotal = -1;
             [NonSerialized] public int lastClaimable = -1;
@@ -65,6 +79,7 @@ namespace MrX.UI
             public RectTransform fill;
             public TMP_Text progress;
             public TMP_Text reward;
+            public Image rewardIcon;
             public Button button;
             public Image buttonImage;
             public TMP_Text buttonLabel;
@@ -114,7 +129,7 @@ namespace MrX.UI
             enabled = true;
             canvasGroup.interactable = canvasGroup.blocksRaycasts = true;
             dirty = rebind = layoutDirty = true;
-            feedback.text = "Complete challenges and claim your rewards.";
+            if (feedback != null) feedback.text = "Complete challenges and claim your rewards.";
             base.MoveCenter();
         }
         public override void MoveLeft() { DisableInteraction(); base.MoveLeft(); }
@@ -145,8 +160,8 @@ namespace MrX.UI
             if (lastCompleted != completed || lastTotal != total)
             {
                 lastCompleted = completed; lastTotal = total;
-                overallCount.SetText("{0} / {1}", (float)completed, (float)total);
-                overallPercent.SetText("{0}%", total == 0 ? 0 : Mathf.FloorToInt(100f * completed / total));
+                if (overallCount != null) overallCount.SetText("{0} / {1}", (float)completed, (float)total);
+                if (overallPercent != null) overallPercent.SetText("{0}%", total == 0 ? 0 : Mathf.FloorToInt(100f * completed / total));
                 Fill(overallFill, total == 0 ? 0 : completed / (float)total);
             }
             if (wallet != null && wallet.Amount != lastGold)
@@ -155,12 +170,23 @@ namespace MrX.UI
             {
                 var summary = manager.GetSummary(tab.category);
                 if (tab.lastCompleted != summary.completed || tab.lastTotal != summary.total)
-                { tab.progress.SetText("{0} / {1}", (float)summary.completed, (float)summary.total); tab.lastCompleted = summary.completed; tab.lastTotal = summary.total; }
-                if (tab.lastClaimable != summary.claimable) { tab.badge.SetActive(summary.claimable > 0); tab.lastClaimable = summary.claimable; }
+                {
+                    if (tab.progress != null) tab.progress.SetText("{0} / {1}", (float)summary.completed, (float)summary.total);
+                    tab.lastCompleted = summary.completed;
+                    tab.lastTotal = summary.total;
+                }
+                if (tab.lastClaimable != summary.claimable)
+                {
+                    if (tab.badge != null) tab.badge.SetActive(summary.claimable > 0);
+                    tab.lastClaimable = summary.claimable;
+                }
                 var selected = tab.category == selectedCategory;
-                tab.background.color = selected ? new Color(.94f, .99f, 1) : new Color(.86f, .94f, 1);
-                tab.outline.enabled = selected;
-                tab.title.color = selected ? Blue : Ink;
+                if (tab.selectedIndicator != null) tab.selectedIndicator.SetActive(selected);
+                if (tab.background != null) tab.background.color = selected ? new Color(.94f, .99f, 1) : new Color(.86f, .94f, 1);
+                if (tab.outline != null) tab.outline.enabled = selected;
+                tab.title.color = usePrefabPresentation
+                    ? selected ? presentation.selectedTabTitle : presentation.inactiveTabTitle
+                    : selected ? Blue : Ink;
             }
             if (rebind) { BindCategory(); rebind = false; }
             foreach (var row in rowPool) if (row.definition != null) RefreshRow(row);
@@ -185,6 +211,12 @@ namespace MrX.UI
                     row.title.text = definition.title; row.description.text = definition.description;
                     row.reward.text = definition.reward.Amount.ToString("N0");
                     row.icon.sprite = definition.icon != null ? definition.icon : database.trophySprite;
+                    if (row.rewardIcon != null)
+                    {
+                        var icon = GetRewardIcon(definition.reward.CurrencyId);
+                        row.rewardIcon.sprite = icon;
+                        row.rewardIcon.enabled = icon != null;
+                    }
                 }
             for (; index < rowPool.Count; index++) { rowPool[index].definition = null; rowPool[index].rect.gameObject.SetActive(false); }
             LayoutRebuilder.ForceRebuildLayoutImmediate(content);
@@ -205,10 +237,26 @@ namespace MrX.UI
             row.lastState = state;
             row.button.interactable = state == 1;
             row.buttonLabel.text = state == 2 ? "CLAIMED" : "CLAIM";
-            row.buttonImage.sprite = state == 1 ? database.claimButtonSprite : database.disabledButtonSprite;
-            row.buttonImage.color = state == 2 ? new Color32(134, 183, 163, 255) : Color.white;
-            row.background.color = state == 1 ? new Color(1, 1, .98f) : new Color(.94f, .99f, 1);
-            row.outline.enabled = state == 1; row.badge.SetActive(state == 1);
+            if (usePrefabPresentation)
+            {
+                row.buttonImage.color = state == 1 ? Color.white : state == 2 ? presentation.claimedButton : presentation.lockedButton;
+                row.background.color = state == 1 ? presentation.claimableRow : presentation.inactiveRow;
+            }
+            else
+            {
+                row.buttonImage.sprite = state == 1 ? database.claimButtonSprite : database.disabledButtonSprite;
+                row.buttonImage.color = state == 2 ? new Color32(134, 183, 163, 255) : Color.white;
+                row.background.color = state == 1 ? new Color(1, 1, .98f) : new Color(.94f, .99f, 1);
+            }
+            if (row.outline != null) row.outline.enabled = state == 1;
+            if (row.badge != null) row.badge.SetActive(state == 1);
+        }
+
+        private Sprite GetRewardIcon(string currencyId)
+        {
+            if (currencyId == "gold" && presentation.goldRewardIcon != null) return presentation.goldRewardIcon;
+            if (currencyId == "gem" && presentation.gemRewardIcon != null) return presentation.gemRewardIcon;
+            return GameController.CurrenciesManager.GetCurrency(currencyId, false)?.Data.Icon;
         }
 
         private void Claim(RowView row)
@@ -219,9 +267,9 @@ namespace MrX.UI
             if (granted)
             {
                 GameController.AudioManager.PlayButtonClick();
-                feedback.text = "Reward received: +" + definition.reward.Amount + " " + definition.reward.CurrencyId.ToUpperInvariant();
+                if (feedback != null) feedback.text = "Reward received: +" + definition.reward.Amount + " " + definition.reward.CurrencyId.ToUpperInvariant();
             }
-            else feedback.text = manager.Save.IsClaimed(definition.id) ? "This reward has already been claimed." : "Reward unavailable. Complete the challenge and check the reward currency.";
+            else if (feedback != null) feedback.text = manager.Save.IsClaimed(definition.id) ? "This reward has already been claimed." : "Reward unavailable. Complete the challenge and check the reward currency.";
             dirty = true; RefreshVisible(); dirty = false;
         }
 
@@ -231,11 +279,21 @@ namespace MrX.UI
             foreach (var row in rowPool) if (row.definition != null && row.button.interactable) claimNavigation.Add(row.button);
             var selectedTab = SelectedTab().button;
             var firstClaim = claimNavigation.Count > 0 ? claimNavigation[0] : settingsButton;
-            for (var i = 0; i < tabs.Count; i++) tabs[i].button.navigation = new Navigation
+            for (var i = 0; i < tabs.Count; i++)
             {
-                mode = Navigation.Mode.Explicit, selectOnUp = i > 0 ? tabs[i - 1].button : settingsButton,
-                selectOnDown = i + 1 < tabs.Count ? tabs[i + 1].button : tabs[0].button, selectOnRight = firstClaim
-            };
+                tabs[i].button.navigation = usePrefabPresentation
+                    ? new Navigation
+                    {
+                        mode = Navigation.Mode.Explicit, selectOnUp = settingsButton, selectOnDown = firstClaim,
+                        selectOnLeft = tabs[(i + tabs.Count - 1) % tabs.Count].button,
+                        selectOnRight = tabs[(i + 1) % tabs.Count].button
+                    }
+                    : new Navigation
+                    {
+                        mode = Navigation.Mode.Explicit, selectOnUp = i > 0 ? tabs[i - 1].button : settingsButton,
+                        selectOnDown = i + 1 < tabs.Count ? tabs[i + 1].button : tabs[0].button, selectOnRight = firstClaim
+                    };
+            }
             for (var i = 0; i < claimNavigation.Count; i++) claimNavigation[i].navigation = new Navigation
             {
                 mode = Navigation.Mode.Explicit, selectOnLeft = selectedTab, selectOnUp = i > 0 ? claimNavigation[i - 1] : settingsButton,
@@ -279,7 +337,12 @@ namespace MrX.UI
         }
 
         private static void Fill(RectTransform rect, float value)
-        { var fraction = Mathf.Clamp01(value); rect.anchorMax = new Vector2(fraction, 1); rect.gameObject.SetActive(fraction > 0); }
+        {
+            if (rect == null) return;
+            var fraction = Mathf.Clamp01(value);
+            rect.anchorMax = new Vector2(fraction, 1);
+            rect.gameObject.SetActive(fraction > 0);
+        }
 #if UNITY_EDITOR
         // Editor authoring only. Saved prefab instances provide all runtime UI.
         public static AchievementsPageBehavior Create(Transform parent, AchievementsDatabase data)

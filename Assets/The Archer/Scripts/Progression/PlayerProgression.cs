@@ -31,10 +31,10 @@ namespace MrX.Progression
             activeRun?.RecordEarnedXp(earnedXp);
         }
 
-        // Call inside the existing reward batch, before it is committed.
+        // A saved run can be closed from the menu before BeginRun loads it into memory.
         public static int SettleRun()
         {
-            int awardedXp = activeRun?.SettleRun() ?? 0;
+            int awardedXp = (activeRun ?? Profile)?.SettleRun() ?? 0;
             activeRun = null;
             return awardedXp;
         }
@@ -47,6 +47,16 @@ namespace MrX.Progression
         {
             var profile = Profile;
             if (profile == null || (!reset && amount <= 0)) return false;
+
+            if (profile.IsRunOpen)
+            {
+                var continuation = GameController.SaveManager.GetSave<ContinuePlayingSave>("Continue Playing");
+                if (!GameController.MainMenuScreenBehavior || continuation.HasUnfinishedStageData) return false;
+
+                // Repair saves whose checkpoint was removed before its XP was settled.
+                SettleRun();
+            }
+
             int next = reset ? 0 : (int)Math.Min(PlayerXpCurve.MaxTotalXp, (long)profile.TotalXp + amount);
             if (!profile.SetDeveloperXp(next)) return false;
 

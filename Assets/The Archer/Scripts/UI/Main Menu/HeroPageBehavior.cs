@@ -1,5 +1,6 @@
 using MrX.Abilities;
 using MrX.Armory;
+using MrX.Currency;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -56,27 +57,29 @@ namespace MrX.UI
                 if (i >= heroes.Count) continue;
 
                 var hero = heroes[i];
+                var save = Armory.GetHeroSave(hero.Id);
                 slot.onClick.RemoveAllListeners();
                 slot.onClick.AddListener(() => Show(hero));
                 SetText(slot.transform, "Text_Name", hero.Name);
-                SetText(slot.transform, "Text_Level", $"{GetLevel(hero) + 1}");
-                SetText(slot.transform, "Text_Slider", GetShardProgress(hero));
+                SetText(slot.transform, "Text_Level", $"{GetLevel(hero, save) + 1}");
+                BindShardProgress(slot.transform, "Text_Slider", hero, save);
                 SetPortrait(slot.transform, "Character", hero.Icon);
             }
         }
 
-        private int GetLevel(HeroData hero) =>
-            Mathf.Clamp(Armory.GetHeroSave(hero.Id)?.Level ?? 0, 0, hero.HeroLevelCount - 1);
+        private static int GetLevel(HeroData hero, HeroSaveData save) =>
+            Mathf.Clamp(save?.Level ?? 0, 0, hero.HeroLevelCount - 1);
 
         private void Show(HeroData hero)
         {
             selected = hero;
-            int index = GetLevel(hero);
+            var save = Armory.GetHeroSave(hero.Id);
+            int index = GetLevel(hero, save);
             var level = hero.GetHeroLevel(index);
             var left = details.Find("Group_Left");
             SetText(left, "Text_Lv", (index + 1).ToString());
-            SetText(left, "Text_Exp", GetShardProgress(hero));
-            upgradeButton.interactable = Armory.GetHeroSave(hero.Id)?.CanUpgradeWithShards(hero.HeroLevelCount) == true;
+            BindShardProgress(left, "Text_Exp", hero, save, " shards");
+            RefreshUpgradeButton(hero, save);
             SetText(left, "Text_Rank", level.HeroRarity.ToString());
             SetText(left, "Text_Info", hero.Name);
             SetPortrait(details.Find("Group_Center/Character_Panel"), "Character", hero.Icon);
@@ -88,7 +91,7 @@ namespace MrX.UI
             SetStat(stats.Find("MoveSpeed"), "Text_Value", "SPD", level.GetStatValue(StatType.MovementSpeed));
             RefreshAbilities(hero, index, level);
 
-            bool unlocked = Armory.GetHeroSave(hero.Id)?.IsUnlocked == true;
+            bool unlocked = save?.IsUnlocked == true;
             bool equipped = Armory.EquippedHero == hero;
             selectButton.interactable = unlocked && !equipped;
             SetText(selectButton.transform, "Text_Select", equipped ? "Selected" : unlocked ? "Select" : "Locked");
@@ -125,21 +128,79 @@ namespace MrX.UI
                 parent.GetChild(i).gameObject.SetActive(false);
         }
 
-        private string GetShardProgress(HeroData hero)
+        private static void BindShardProgress(Transform root, string label, HeroData hero, HeroSaveData save, string suffix = "")
         {
-            var save = Armory.GetHeroSave(hero.Id);
-            if (save?.IsUnlocked != true) return "Locked";
-            return GetLevel(hero) >= hero.HeroLevelCount - 1
-                ? "MAX" : $"{save.Shards} / {save.ShardsToUpgrade}";
+            float progress = 0f;
+            string text = "Locked";
+            if (save?.IsUnlocked == true)
+            {
+                if (GetLevel(hero, save) >= hero.HeroLevelCount - 1)
+                {
+                    progress = 1f;
+                    text = "MAX";
+                }
+                else
+                {
+                    progress = Mathf.Clamp01((float)save.Shards / save.ShardsToUpgrade);
+                    text = $"{save.Shards} / {save.ShardsToUpgrade}{suffix}";
+                }
+            }
+
+            SetText(root, label, text);
+            var slider = root.GetComponentInChildren<Slider>(true);
+            if (slider == null) return;
+
+            slider.interactable = false;
+            slider.wholeNumbers = false;
+            slider.SetValueWithoutNotify(Mathf.Lerp(slider.minValue, slider.maxValue, progress));
+        }
+
+        private static Price GetUpgradePrice(HeroData hero, HeroSaveData save) =>
+            save?.IsUnlocked == true && save.Level >= 0 && save.Level < hero.HeroLevelCount - 1
+                ? hero.GetHeroLevel(save.Level + 1).Price
+                : null;
+
+        private static CurrencySave GetUpgradeCurrency(Price price) =>
+            price != null && price.Amount >= 0 && !string.IsNullOrEmpty(price.CurrencyId)
+                ? GameController.CurrenciesManager.GetCurrency(price.CurrencyId, false)
+                : null;
+
+        private void RefreshUpgradeButton(HeroData hero, HeroSaveData save)
+        {
+            var price = GetUpgradePrice(hero, save);
+            var currency = GetUpgradeCurrency(price);
+            var label = save?.IsUnlocked == true && GetLevel(hero, save) >= hero.HeroLevelCount - 1 ? "MAX" : "Locked";
+            if (currency != null)
+                label = $"{price.Amount:N0} {currency.Data.Name}";
+
+            SetText(upgradeButton.transform, "Text_Gold", label);
+            upgradeButton.interactable = currency != null && currency.CanAfford(price.Amount) && save.CanUpgradeWithShards(hero.HeroLevelCount);
         }
 
         private void UpgradeHero()
         {
-            if (selected == null ||
-                Armory.GetHeroSave(selected.Id)?.TryUpgradeWithShards(selected.HeroLevelCount) != true) return;
+            var hero = selected;
+            if (hero == null || !details.gameObject.activeInHierarchy) return;
+
+            var save = Armory.GetHeroSave(hero.Id);
+            var price = GetUpgradePrice(hero, save);
+            var currency = GetUpgradeCurrency(price);
+            if (currency == null || !save.CanUpgradeWithShards(hero.HeroLevelCount)) return;
+
+            bool upgraded = false;
+            if (!currency.TryWithdrawAndCommit(price.Amount, () =>
+            {
+                upgraded = save.TryUpgradeWithShards(hero.HeroLevelCount);
+                if (!upgraded) currency.Deposit(price.Amount);
+            }) || !upgraded)
+            {
+                RefreshUpgradeButton(hero, save);
+                return;
+            }
+
             GameController.SaveManager.Save(false);
             RefreshSlots();
-            Show(selected);
+            Show(hero);
         }
 
         private void SelectHero()

@@ -14,6 +14,7 @@ namespace MrX.Progression
         [SerializeField] private double pendingRunXpFraction;
 
         public int TotalXp => Math.Min(Math.Max(0, totalXp), PlayerXpCurve.MaxTotalXp);
+        internal bool IsRunOpen => runOpen;
 
         internal void BeginRun(bool resumeRun)
         {

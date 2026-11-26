@@ -1,5 +1,6 @@
 using MrX.Easing;
 using MrX.Input;
+using MrX.Progression;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
@@ -102,7 +103,9 @@ namespace MrX
             ContinuePlayingSave.Disable();
             GameController.CurrenciesManager.ApplyGameplayAmounts();
             GameController.DailyQuestsManager?.FlushPending(); GameController.AchievementsManager?.FlushPending(); GameController.ArmoryManager.Crafting?.FlushPending();
+            int awardedXp = PlayerProgression.SettleRun();
             if (saves != null) saves.CommitGameplayBatch(); else GameController.SaveManager.Save(false);
+            PlayerProgression.NotifyRunSettled(awardedXp);
 
             GameController.AudioManager.PlayButtonClick();
 
