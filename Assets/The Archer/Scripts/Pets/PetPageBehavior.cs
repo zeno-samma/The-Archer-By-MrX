@@ -85,7 +85,7 @@ namespace MrX.UI
                 deployButton.interactable = deployed || canDeploy;
 
             if (deployButtonLabel != null)
-                deployButtonLabel.text = deployed ? "Thu hồi" : "Xuất chiến";
+                deployButtonLabel.text = deployed ? "Recall" : "Deploy";
 
             if (feedButton != null)
             {
@@ -105,7 +105,7 @@ namespace MrX.UI
             }
 
             if (healthLabel != null) healthLabel.text = $"{profile.HealthPercent}%";
-            if (cakeLabel != null) cakeLabel.text = $"Bánh ×{profile.Cakes}  |  {data.CakesPerFeeding} bánh/lần";
+            if (cakeLabel != null) cakeLabel.text = $"Cakes ×{profile.Cakes}  |  {data.CakesPerFeeding} per feeding";
             if (attackBonusLabel != null) attackBonusLabel.text = $"+{data.AttackBonus:0.##}%";
             if (healthBonusLabel != null) healthBonusLabel.text = $"+{data.MaxHealthBonus:0.##}%";
             if (criticalBonusLabel != null) criticalBonusLabel.text = $"+{data.CriticalChanceBonus:0.##}%";
@@ -114,13 +114,13 @@ namespace MrX.UI
             if (statusLabel != null)
             {
                 if (profile.IsDeployed)
-                    statusLabel.text = "Đang xuất chiến";
+                    statusLabel.text = "Deployed";
                 else if (profile.HealthPercent < PetProfileSave.FullHealth)
-                    statusLabel.text = "Cần đủ 100% HP để xuất chiến";
+                    statusLabel.text = "Requires full HP to deploy";
                 else if (data.CombatAbility == null)
-                    statusLabel.text = "Chưa gán Combat Ability";
+                    statusLabel.text = "Combat ability unavailable";
                 else
-                    statusLabel.text = "Sẵn sàng xuất chiến";
+                    statusLabel.text = "Ready to deploy";
             }
         }
     }

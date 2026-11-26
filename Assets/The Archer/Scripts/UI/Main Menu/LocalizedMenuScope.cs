@@ -7,30 +7,110 @@ namespace MrX.UI
 {
     public sealed class LocalizedMenuScope : MonoBehaviour
     {
-        private sealed class Binding { public TMP_Text label; public TMP_FontAsset font; public string source, rendered; }
-        private readonly Dictionary<TMP_Text,Binding> bindings=new Dictionary<TMP_Text,Binding>();
+        private sealed class Binding
+        {
+            public TMP_FontAsset Font;
+            public Material Material;
+            public string Source;
+            public string Displayed;
+        }
+
+        private readonly Dictionary<TMP_Text, Binding> bindings = new Dictionary<TMP_Text, Binding>();
+        private readonly List<TMP_Text> removedLabels = new List<TMP_Text>();
         private bool started;
-        private void Start(){started=true;MenuLanguage.Initialize();Bind();}
-        private void OnEnable(){if(started)Bind();}
-        private void Bind()
+
+        private void Start()
         {
-            foreach(var text in GetComponentsInChildren<TMP_Text>(true))if(!bindings.ContainsKey(text))bindings.Add(text,new Binding{label=text,font=text.font,source=text.text});
-            MenuLanguage.Changed-=ApplyAll;MenuLanguage.Changed+=ApplyAll;
-            Canvas.preWillRenderCanvases-=ApplyDirty;Canvas.preWillRenderCanvases+=ApplyDirty;ApplyAll();
+            started = true;
+            Connect();
         }
-        private void ApplyAll(){foreach(var b in bindings.Values)Apply(b);}
-        private void ApplyDirty()
+
+        private void OnEnable()
         {
-            foreach(var b in bindings.Values)
-                if(b.label!=null&&(b.label.text!=b.rendered||b.label.font!=(MenuLanguage.Code!="en"&&b.rendered!=b.source&&MenuLanguage.Table!=null?MenuLanguage.Table.latinFont:b.font)))Apply(b);
+            if (started) Connect();
         }
-        private void Apply(Binding b)
+
+        private void Connect()
         {
-            if(b.label==null)return;if(b.label.text!=b.rendered)b.source=b.label.text;
-            var translated=MenuLanguage.Text(b.source);b.rendered=translated;
-            b.label.text=translated;
-            b.label.font=MenuLanguage.Code!="en"&&translated!=b.source&&MenuLanguage.Table!=null&&MenuLanguage.Table.latinFont!=null?MenuLanguage.Table.latinFont:b.font;
+            MenuLanguage.Initialize();
+            foreach (var label in GetComponentsInChildren<TMP_Text>(true))
+                Track(label);
+
+            MenuLanguage.Changed += Refresh;
+            Canvas.preWillRenderCanvases += ApplyChanges;
+            TMPro_EventManager.TEXT_CHANGED_EVENT.Add(OnTextChanged);
+            Refresh();
         }
-        private void OnDisable(){MenuLanguage.Changed-=ApplyAll;Canvas.preWillRenderCanvases-=ApplyDirty;}
+
+        private void OnDisable()
+        {
+            MenuLanguage.Changed -= Refresh;
+            Canvas.preWillRenderCanvases -= ApplyChanges;
+            TMPro_EventManager.TEXT_CHANGED_EVENT.Remove(OnTextChanged);
+        }
+
+        private Binding Track(TMP_Text label)
+        {
+            if (bindings.TryGetValue(label, out var binding)) return binding;
+            if (label.GetComponentInParent<LocalizedMenuScope>(true) != this) return null;
+            var input = label.GetComponentInParent<TMP_InputField>(true);
+            if (input != null && input.textComponent == label) return null;
+
+            binding = new Binding
+            {
+                Font = label.font,
+                Material = label.fontSharedMaterial,
+                Source = label.text
+            };
+            bindings.Add(label, binding);
+            return binding;
+        }
+
+        private void OnTextChanged(Object changed)
+        {
+            if (!(changed is TMP_Text label) || label == null) return;
+            var binding = Track(label);
+            if (binding != null && label.text != binding.Displayed)
+                Apply(label, binding);
+        }
+
+        private void Refresh()
+        {
+            foreach (var entry in bindings)
+                if (entry.Key != null) Apply(entry.Key, entry.Value);
+        }
+
+        private void ApplyChanges()
+        {
+            foreach (var entry in bindings)
+            {
+                if (entry.Key == null)
+                    removedLabels.Add(entry.Key);
+                else if (entry.Key.text != entry.Value.Displayed)
+                    Apply(entry.Key, entry.Value);
+            }
+
+            foreach (var label in removedLabels)
+                bindings.Remove(label);
+            removedLabels.Clear();
+        }
+
+        private static void Apply(TMP_Text label, Binding binding)
+        {
+            if (label.text != binding.Displayed) binding.Source = label.text;
+            string translated = MenuLanguage.Text(binding.Source);
+            binding.Displayed = translated;
+
+            var translatedFont = translated != binding.Source ? MenuLanguage.Table?.latinFont : null;
+            var font = translatedFont != null ? translatedFont : binding.Font;
+            if (font != null && label.font != font)
+            {
+                label.font = font;
+                if (translatedFont == null && binding.Material != null)
+                    label.fontSharedMaterial = binding.Material;
+            }
+
+            if (label.text != translated) label.text = translated;
+        }
     }
 }

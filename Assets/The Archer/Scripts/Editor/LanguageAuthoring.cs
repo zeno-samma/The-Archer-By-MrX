@@ -13,8 +13,45 @@ namespace MrX.EditorTools
     public static class LanguageAuthoring
     {
         private static ForgePageDatabase art;
-        private const string Data="Assets/The Archer/Resources/Menu Translations.asset";
+        private const string Data="Assets/The Archer/Scriptables/Resources/Menu Translations.asset";
         public const string Picker="Assets/The Archer/Prefabs/UI/Stage/Language Picker.prefab";
+
+        public static int RefreshVietnameseGlyphs()
+        {
+            if (Application.isPlaying) throw new System.InvalidOperationException("Edit Mode required.");
+            var table = AssetDatabase.LoadAssetAtPath<MenuTranslations>(Data);
+            var font = table != null ? table.latinFont : null;
+            if (font == null) throw new System.InvalidOperationException("The translated text font is missing.");
+
+            string missing = new string(table.entries
+                .Where(entry => entry != null && !string.IsNullOrEmpty(entry.vietnamese))
+                .SelectMany(entry => entry.vietnamese)
+                .Where(character => !char.IsControl(character) && !font.HasCharacter(character))
+                .Distinct().ToArray());
+            if (missing.Length == 0) return 0;
+
+            var populationMode = font.atlasPopulationMode;
+            font.atlasPopulationMode = AtlasPopulationMode.Dynamic;
+            try
+            {
+                if (!font.TryAddCharacters(missing, out string unresolved))
+                    throw new System.InvalidOperationException("Missing Vietnamese glyphs: " + unresolved);
+            }
+            finally
+            {
+                font.atlasPopulationMode = populationMode;
+            }
+
+            foreach (var atlas in font.atlasTextures)
+            {
+                if (!AssetDatabase.Contains(atlas)) AssetDatabase.AddObjectToAsset(atlas, font);
+                EditorUtility.SetDirty(atlas);
+            }
+            EditorUtility.SetDirty(font);
+            AssetDatabase.SaveAssetIfDirty(font);
+            return missing.Length;
+        }
+
         public static void Install()
         {
             if(Application.isPlaying)throw new System.Exception("Edit Mode required");
@@ -25,7 +62,7 @@ namespace MrX.EditorTools
             {
                 var source=AssetDatabase.LoadAssetAtPath<Font>("Assets/TextMesh Pro/Fonts/LiberationSans.ttf");
                 var font=TMP_FontAsset.CreateFontAsset(source,64,8,GlyphRenderMode.SDFAA,1024,1024,AtlasPopulationMode.Dynamic);
-                AssetDatabase.CreateAsset(font,"Assets/The Archer/Resources/Menu Latin Font.asset");
+                AssetDatabase.CreateAsset(font,"Assets/The Archer/Scriptables/Resources/Menu Latin Font.asset");
                 var chars=string.Concat(table.entries.SelectMany(e=>new[]{e.english,e.vietnamese,e.spanish,e.portuguese,e.french}))+string.Concat(MenuLanguage.Names)+"LANGUAGE · EN VI ES PT FR0123456789";
                 if(!font.TryAddCharacters(chars,out string missing))throw new System.Exception("Missing Latin glyphs: "+missing);
                 font.atlasPopulationMode=AtlasPopulationMode.Static;

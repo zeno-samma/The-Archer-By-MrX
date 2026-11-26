@@ -267,6 +267,7 @@ GameObject:
   - component: {fileID: 17658285}
   - component: {fileID: 17658287}
   - component: {fileID: 17658286}
+  - component: {fileID: 9019946802}
   m_Layer: 5
   m_Name: World Space Text Manager
   m_TagString: Untagged
@@ -468,6 +469,7 @@ GameObject:
   - component: {fileID: 192859707}
   - component: {fileID: 192859708}
   - component: {fileID: 192859709}
+  - component: {fileID: 9019946801}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -7855,3 +7857,27 @@ SceneRoots:
   - {fileID: 192859705}
   - {fileID: 590873500}
   - {fileID: 1834233560}
+--- !u!114 &9019946801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 192859701}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbf2455bd76f0e24a8b3c806fda8b99e, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::MrX.UI.LocalizedMenuScope
+--- !u!114 &9019946802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 17658284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbf2455bd76f0e24a8b3c806fda8b99e, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::MrX.UI.LocalizedMenuScope

@@ -59,7 +59,7 @@ namespace MrX.UI
             if (requirementLabel != null)
             {
                 requirementLabel.text = !unlocked && requirement != null
-                    ? $"Mở khóa: {requirement.title}"
+                    ? $"Unlock: {requirement.title}"
                     : string.Empty;
             }
         }

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 103b54e5a1e61a345b4385bdc908abbe, type: 3}
   m_Name: Menu Translations
   m_EditorClassIdentifier: Assembly-CSharp::MrX.Localization.MenuTranslations
-  latinFont: {fileID: 11400000, guid: e21d9fa883341484f8393b51730ca170, type: 2}
+  latinFont: {fileID: 11400000, guid: ab631cdd622aa3f4aa8ee7e223d7d076, type: 2}
   entries:
   - english: START
     vietnamese: "B\u1EAET \u0110\u1EA6U"
@@ -1092,18 +1092,2093 @@ MonoBehaviour:
     spanish: "L\xEDmite diario de compras de energ\xEDa alcanzado."
     portuguese: "Limite di\xE1rio de compras de energia atingido."
     french: "Limite quotidien d'achats d'\xE9nergie atteint."
-  - english: "Clear {0} on Basic to unlock."
+  - english: "Clear {0:loc} on Basic to unlock."
     vietnamese: "V\u01b0\u1ee3t {0} \u1edf m\u1ee9c C\u01a1 b\u1ea3n \u0111\u1ec3 m\u1edf kh\u00f3a."
     spanish: "Supera {0} en B\u00e1sico para desbloquear."
     portuguese: "Ven\u00e7a {0} no B\u00e1sico para desbloquear."
     french: "Terminez {0} en Facile pour d\u00e9bloquer."
-  - english: "Clear {0} on Intermediate to unlock."
+  - english: "Clear {0:loc} on Intermediate to unlock."
     vietnamese: "V\u01b0\u1ee3t {0} \u1edf m\u1ee9c Trung b\u00ecnh \u0111\u1ec3 m\u1edf kh\u00f3a."
     spanish: "Supera {0} en Intermedio para desbloquear."
     portuguese: "Ven\u00e7a {0} no Intermedi\u00e1rio para desbloquear."
     french: "Terminez {0} en Interm\u00e9diaire pour d\u00e9bloquer."
-  - english: "Clear {0} on Hard to unlock."
+  - english: "Clear {0:loc} on Hard to unlock."
     vietnamese: "V\u01b0\u1ee3t {0} \u1edf m\u1ee9c Kh\u00f3 \u0111\u1ec3 m\u1edf kh\u00f3a."
     spanish: "Supera {0} en Dif\u00edcil para desbloquear."
     portuguese: "Ven\u00e7a {0} no Dif\u00edcil para desbloquear."
     french: "Terminez {0} en Difficile pour d\u00e9bloquer."
+  - english: "Basic"
+    vietnamese: "C\u01a1 b\u1ea3n"
+    spanish:
+    portuguese:
+    french:
+  - english: "Intermediate"
+    vietnamese: "Trung b\u00ecnh"
+    spanish:
+    portuguese:
+    french:
+  - english: "Hard"
+    vietnamese: "Kh\u00f3"
+    spanish:
+    portuguese:
+    french:
+  - english: "Locked"
+    vietnamese: "\u0110\u00e3 kh\u00f3a"
+    spanish:
+    portuguese:
+    french:
+  - english: "Cleared"
+    vietnamese: "\u0110\u00e3 v\u01b0\u1ee3t"
+    spanish:
+    portuguese:
+    french:
+  - english: "Active"
+    vietnamese: "\u0110ang d\u00f9ng"
+    spanish:
+    portuguese:
+    french:
+  - english: "Selected"
+    vietnamese: "\u0110\u00e3 ch\u1ecdn"
+    spanish:
+    portuguese:
+    french:
+  - english: "Select"
+    vietnamese: "Ch\u1ecdn"
+    spanish:
+    portuguese:
+    french:
+  - english: "Unlock"
+    vietnamese: "M\u1edf kh\u00f3a"
+    spanish:
+    portuguese:
+    french:
+  - english: "Unlock: {0:loc}"
+    vietnamese: "M\u1edf kh\u00f3a: {0}"
+    spanish:
+    portuguese:
+    french:
+  - english: "Ranger"
+    vietnamese: "Cung th\u1ee7"
+    spanish:
+    portuguese:
+    french:
+  - english: "Archer"
+    vietnamese: "X\u1ea1 th\u1ee7"
+    spanish:
+    portuguese:
+    french:
+  - english: "Thief"
+    vietnamese: "\u0110\u1ea1o t\u1eb7c"
+    spanish:
+    portuguese:
+    french:
+  - english: "Hero"
+    vietnamese: "Anh h\u00f9ng"
+    spanish:
+    portuguese:
+    french:
+  - english: "Pet"
+    vietnamese: "Th\u00fa \u0111\u1ed3ng h\u00e0nh"
+    spanish:
+    portuguese:
+    french:
+  - english: "Pets"
+    vietnamese: "Th\u00fa \u0111\u1ed3ng h\u00e0nh"
+    spanish:
+    portuguese:
+    french:
+  - english: "Summon"
+    vietnamese: "Tri\u1ec7u h\u1ed3i"
+    spanish:
+    portuguese:
+    french:
+  - english: "Deploy"
+    vietnamese: "Xu\u1ea5t chi\u1ebfn"
+    spanish:
+    portuguese:
+    french:
+  - english: "Recall"
+    vietnamese: "Thu h\u1ed3i"
+    spanish:
+    portuguese:
+    french:
+  - english: "Feed"
+    vietnamese: "Cho \u0103n"
+    spanish:
+    portuguese:
+    french:
+  - english: "Deployed"
+    vietnamese: "\u0110ang xu\u1ea5t chi\u1ebfn"
+    spanish:
+    portuguese:
+    french:
+  - english: "Ready to deploy"
+    vietnamese: "S\u1eb5n s\u00e0ng xu\u1ea5t chi\u1ebfn"
+    spanish:
+    portuguese:
+    french:
+  - english: "Requires full HP to deploy"
+    vietnamese: "C\u1ea7n \u0111\u1ea7y m\u00e1u \u0111\u1ec3 xu\u1ea5t chi\u1ebfn"
+    spanish:
+    portuguese:
+    french:
+  - english: "Combat ability unavailable"
+    vietnamese: "K\u1ef9 n\u0103ng chi\u1ebfn \u0111\u1ea5u ch\u01b0a kh\u1ea3 d\u1ee5ng"
+    spanish:
+    portuguese:
+    french:
+  - english: "Cakes \u00d7{0} | {1} per feeding"
+    vietnamese: "B\u00e1nh \u00d7{0} | {1} b\u00e1nh/l\u1ea7n"
+    spanish:
+    portuguese:
+    french:
+  - english: "{0} cakes per feeding"
+    vietnamese: "{0} b\u00e1nh/l\u1ea7n"
+    spanish:
+    portuguese:
+    french:
+  - english: "Hero Shards"
+    vietnamese: "M\u1ea3nh anh h\u00f9ng"
+    spanish:
+    portuguese:
+    french:
+  - english: "{0} / {1} shards"
+    vietnamese: "{0} / {1} m\u1ea3nh"
+    spanish:
+    portuguese:
+    french:
+  - english: "{0:loc} Hero Shards"
+    vietnamese: "M\u1ea3nh {0}"
+    spanish:
+    portuguese:
+    french:
+  - english: "{0} Gold"
+    vietnamese: "{0} v\u00e0ng"
+    spanish:
+    portuguese:
+    french:
+  - english: "{0} Gem"
+    vietnamese: "{0} \u0111\u00e1 qu\u00fd"
+    spanish:
+    portuguese:
+    french:
+  - english: "Open Chest"
+    vietnamese: "M\u1edf r\u01b0\u01a1ng"
+    spanish:
+    portuguese:
+    french:
+  - english: "Spin"
+    vietnamese: "Quay"
+    spanish:
+    portuguese:
+    french:
+  - english: "Chest"
+    vietnamese: "R\u01b0\u01a1ng"
+    spanish:
+    portuguese:
+    french:
+  - english: "Friends"
+    vietnamese: "B\u1ea1n b\u00e8"
+    spanish:
+    portuguese:
+    french:
+  - english: "Settings"
+    vietnamese: "C\u00e0i \u0111\u1eb7t"
+    spanish:
+    portuguese:
+    french:
+  - english: "Sound"
+    vietnamese: "\u00c2m thanh"
+    spanish:
+    portuguese:
+    french:
+  - english: "Music"
+    vietnamese: "Nh\u1ea1c n\u1ec1n"
+    spanish:
+    portuguese:
+    french:
+  - english: "Vibration"
+    vietnamese: "Rung"
+    spanish:
+    portuguese:
+    french:
+  - english: "Back"
+    vietnamese: "Quay l\u1ea1i"
+    spanish:
+    portuguese:
+    french:
+  - english: "Close"
+    vietnamese: "\u0110\u00f3ng"
+    spanish:
+    portuguese:
+    french:
+  - english: "OK"
+    vietnamese: "\u0110\u1ed3ng \u00fd"
+    spanish:
+    portuguese:
+    french:
+  - english: "Cancel"
+    vietnamese: "H\u1ee7y"
+    spanish:
+    portuguese:
+    french:
+  - english: "Yes"
+    vietnamese: "C\u00f3"
+    spanish:
+    portuguese:
+    french:
+  - english: "No"
+    vietnamese: "Kh\u00f4ng"
+    spanish:
+    portuguese:
+    french:
+  - english: "Notice"
+    vietnamese: "Th\u00f4ng b\u00e1o"
+    spanish:
+    portuguese:
+    french:
+  - english: "Pause"
+    vietnamese: "T\u1ea1m d\u1eebng"
+    spanish:
+    portuguese:
+    french:
+  - english: "Resume"
+    vietnamese: "Ti\u1ebfp t\u1ee5c"
+    spanish:
+    portuguese:
+    french:
+  - english: "Quit"
+    vietnamese: "Tho\u00e1t"
+    spanish:
+    portuguese:
+    french:
+  - english: "Resume your unfinished journey?"
+    vietnamese: "Ti\u1ebfp t\u1ee5c h\u00e0nh tr\u00ecnh \u0111ang d\u1edf?"
+    spanish:
+    portuguese:
+    french:
+  - english: "Continue Playing"
+    vietnamese: "Ch\u01a1i ti\u1ebfp"
+    spanish:
+    portuguese:
+    french:
+  - english: "Loading..."
+    vietnamese: "\u0110ang t\u1ea3i..."
+    spanish:
+    portuguese:
+    french:
+  - english: "Level Up!"
+    vietnamese: "L\u00ean c\u1ea5p!"
+    spanish:
+    portuguese:
+    french:
+  - english: "Level Up"
+    vietnamese: "L\u00ean c\u1ea5p"
+    spanish:
+    portuguese:
+    french:
+  - english: "Roll again"
+    vietnamese: "Ch\u1ecdn l\u1ea1i"
+    spanish:
+    portuguese:
+    french:
+  - english: "Abilities"
+    vietnamese: "K\u1ef9 n\u0103ng"
+    spanish:
+    portuguese:
+    french:
+  - english: "Common"
+    vietnamese: "Th\u01b0\u1eddng"
+    spanish:
+    portuguese:
+    french:
+  - english: "Rare"
+    vietnamese: "Hi\u1ebfm"
+    spanish:
+    portuguese:
+    french:
+  - english: "Mystic"
+    vietnamese: "Th\u1ea7n b\u00ed"
+    spanish:
+    portuguese:
+    french:
+  - english: "Legendary"
+    vietnamese: "Huy\u1ec1n tho\u1ea1i"
+    spanish:
+    portuguese:
+    french:
+  - english: "Epic"
+    vietnamese: "S\u1eed thi"
+    spanish:
+    portuguese:
+    french:
+  - english: "Victory"
+    vietnamese: "Chi\u1ebfn th\u1eafng"
+    spanish:
+    portuguese:
+    french:
+  - english: "Defeat"
+    vietnamese: "Th\u1ea5t b\u1ea1i"
+    spanish:
+    portuguese:
+    french:
+  - english: "Rewards"
+    vietnamese: "Ph\u1ea7n th\u01b0\u1edfng"
+    spanish:
+    portuguese:
+    french:
+  - english: "Try your luck next time"
+    vietnamese: "H\u00e3y th\u1eed l\u1ea1i \u1edf l\u01b0\u1ee3t sau"
+    spanish:
+    portuguese:
+    french:
+  - english: "All stages cleared"
+    vietnamese: "\u0110\u00e3 v\u01b0\u1ee3t t\u1ea5t c\u1ea3 c\u00e1c m\u00e0n"
+    spanish:
+    portuguese:
+    french:
+  - english: "Revive"
+    vietnamese: "H\u1ed3i sinh"
+    spanish:
+    portuguese:
+    french:
+  - english: "Defeat one boss."
+    vietnamese: "Ti\u00eau di\u1ec7t m\u1ed9t tr\u00f9m."
+    spanish:
+    portuguese:
+    french:
+  - english: "Complete one stage."
+    vietnamese: "Ho\u00e0n th\u00e0nh m\u1ed9t m\u00e0n."
+    spanish:
+    portuguese:
+    french:
+  - english: "Complete one distinct stage."
+    vietnamese: "Ho\u00e0n th\u00e0nh m\u1ed9t m\u00e0n b\u1ea5t k\u1ef3."
+    spanish:
+    portuguese:
+    french:
+  - english: "Own one piece of equipment."
+    vietnamese: "S\u1edf h\u1eefu m\u1ed9t trang b\u1ecb."
+    spanish:
+    portuguese:
+    french:
+  - english: "Open one stage treasure chest."
+    vietnamese: "M\u1edf m\u1ed9t r\u01b0\u01a1ng b\u00e1u trong m\u00e0n."
+    spanish:
+    portuguese:
+    french:
+  - english: "Gain one hero level through upgrades."
+    vietnamese: "N\u00e2ng anh h\u00f9ng th\u00eam m\u1ed9t c\u1ea5p."
+    spanish:
+    portuguese:
+    french:
+  - english: "Gain one equipment level."
+    vietnamese: "T\u0103ng m\u1ed9t c\u1ea5p trang b\u1ecb."
+    spanish:
+    portuguese:
+    french:
+  - english: "Purchase one permanent upgrade level."
+    vietnamese: "Mua m\u1ed9t c\u1ea5p n\u00e2ng c\u1ea5p v\u0129nh vi\u1ec5n."
+    spanish:
+    portuguese:
+    french:
+  - english: "Complete challenges to earn rewards"
+    vietnamese: "Ho\u00e0n th\u00e0nh th\u1eed th\u00e1ch \u0111\u1ec3 nh\u1eadn th\u01b0\u1edfng"
+    spanish:
+    portuguese:
+    french:
+  - english: "Reward received: +{0} {1:loc}"
+    vietnamese: "\u0110\u00e3 nh\u1eadn th\u01b0\u1edfng: +{0} {1}"
+    spanish:
+    portuguese:
+    french:
+  - english: "Ads left today"
+    vietnamese: "L\u01b0\u1ee3t xem qu\u1ea3ng c\u00e1o c\u00f2n l\u1ea1i h\u00f4m nay"
+    spanish:
+    portuguese:
+    french:
+  - english: "x2 Rewards"
+    vietnamese: "Nh\u00e2n \u0111\u00f4i ph\u1ea7n th\u01b0\u1edfng"
+    spanish:
+    portuguese:
+    french:
+  - english: "XP"
+    vietnamese: "Kinh nghi\u1ec7m"
+    spanish:
+    portuguese:
+    french:
+  - english: "DPS"
+    vietnamese: "S\u00e1t th\u01b0\u01a1ng/gi\u00e2y"
+    spanish:
+    portuguese:
+    french:
+  - english: "TOTAL DAMAGE"
+    vietnamese: "T\u1ed4NG S\u00c1T TH\u01af\u01a0NG"
+    spanish:
+    portuguese:
+    french:
+  - english: "HP REMAINING {0}%"
+    vietnamese: "M\u00c1U C\u00d2N L\u1ea0I {0}%"
+    spanish:
+    portuguese:
+    french:
+  - english: "Attack"
+    vietnamese: "T\u1ea5n c\u00f4ng"
+    spanish:
+    portuguese:
+    french:
+  - english: "Attack Damage"
+    vietnamese: "S\u00e1t th\u01b0\u01a1ng t\u1ea5n c\u00f4ng"
+    spanish:
+    portuguese:
+    french:
+  - english: "Attack Speed"
+    vietnamese: "T\u1ed1c \u0111\u00e1nh"
+    spanish:
+    portuguese:
+    french:
+  - english: "Damage"
+    vietnamese: "S\u00e1t th\u01b0\u01a1ng"
+    spanish:
+    portuguese:
+    french:
+  - english: "Defense"
+    vietnamese: "Ph\u00f2ng th\u1ee7"
+    spanish:
+    portuguese:
+    french:
+  - english: "Health"
+    vietnamese: "M\u00e1u"
+    spanish:
+    portuguese:
+    french:
+  - english: "Crit Chance"
+    vietnamese: "T\u1ec9 l\u1ec7 ch\u00ed m\u1ea1ng"
+    spanish:
+    portuguese:
+    french:
+  - english: "Damage Reduction"
+    vietnamese: "Gi\u1ea3m s\u00e1t th\u01b0\u01a1ng"
+    spanish:
+    portuguese:
+    french:
+  - english: "Dodge"
+    vietnamese: "N\u00e9 \u0111\u00f2n"
+    spanish:
+    portuguese:
+    french:
+  - english: "Equipment / Fragments"
+    vietnamese: "Trang b\u1ecb / M\u1ea3nh"
+    spanish:
+    portuguese:
+    french:
+  - english: "Items"
+    vietnamese: "V\u1eadt ph\u1ea9m"
+    spanish:
+    portuguese:
+    french:
+  - english: "Weapon"
+    vietnamese: "V\u0169 kh\u00ed"
+    spanish:
+    portuguese:
+    french:
+  - english: "Armor"
+    vietnamese: "\u00c1o gi\u00e1p"
+    spanish:
+    portuguese:
+    french:
+  - english: "Helmet"
+    vietnamese: "M\u0169"
+    spanish:
+    portuguese:
+    french:
+  - english: "Ring"
+    vietnamese: "Nh\u1eabn"
+    spanish:
+    portuguese:
+    french:
+  - english: "Equip"
+    vietnamese: "Trang b\u1ecb"
+    spanish:
+    portuguese:
+    french:
+  - english: "Unequip"
+    vietnamese: "Th\u00e1o trang b\u1ecb"
+    spanish:
+    portuguese:
+    french:
+  - english: "Delete"
+    vietnamese: "X\u00f3a"
+    spanish:
+    portuguese:
+    french:
+  - english: "Delete item"
+    vietnamese: "X\u00f3a v\u1eadt ph\u1ea9m"
+    spanish:
+    portuguese:
+    french:
+  - english: "Delete this item?"
+    vietnamese: "X\u00f3a v\u1eadt ph\u1ea9m n\u00e0y?"
+    spanish:
+    portuguese:
+    french:
+  - english: "Delete {0:loc}?"
+    vietnamese: "X\u00f3a {0}?"
+    spanish:
+    portuguese:
+    french:
+  - english: "The item and its upgrades will be lost."
+    vietnamese: "B\u1ea1n s\u1ebd m\u1ea5t v\u1eadt ph\u1ea9m v\u00e0 c\u00e1c c\u1ea5p n\u00e2ng c\u1ea5p c\u1ee7a n\u00f3."
+    spanish:
+    portuguese:
+    french:
+  - english: "A queued reward may fill the freed slot."
+    vietnamese: "M\u1ed9t ph\u1ea7n th\u01b0\u1edfng ch\u1edd nh\u1eadn c\u00f3 th\u1ec3 l\u1ea5p v\u00e0o \u00f4 v\u1eeba tr\u1ed1ng."
+    spanish:
+    portuguese:
+    french:
+  - english: "MAX LVL"
+    vietnamese: "C\u1ea4P T\u1ed0I \u0110A"
+    spanish:
+    portuguese:
+    french:
+  - english: "Lv"
+    vietnamese: "C\u1ea5p"
+    spanish:
+    portuguese:
+    french:
+  - english: "Lv.{0} > Lv.{1}"
+    vietnamese: "C\u1ea5p {0} > C\u1ea5p {1}"
+    spanish:
+    portuguese:
+    french:
+  - english: "Lv. {0} \u00b7 Locked"
+    vietnamese: "C\u1ea5p {0} \u00b7 \u0110\u00e3 kh\u00f3a"
+    spanish:
+    portuguese:
+    french:
+  - english: "Lv. {0} \u00b7 {1:loc}"
+    vietnamese: "C\u1ea5p {0} \u00b7 {1}"
+    spanish:
+    portuguese:
+    french:
+  - english: "{0:loc} \u00b7 Lv. {1}"
+    vietnamese: "{0} \u00b7 C\u1ea5p {1}"
+    spanish:
+    portuguese:
+    french:
+  - english: "Lv.{0}"
+    vietnamese: "C\u1ea5p {0}"
+    spanish:
+    portuguese:
+    french:
+  - english: "Lvl {0}"
+    vietnamese: "C\u1ea5p {0}"
+    spanish:
+    portuguese:
+    french:
+  - english: "Level {0}"
+    vietnamese: "C\u1ea5p {0}"
+    spanish:
+    portuguese:
+    french:
+  - english: "Level"
+    vietnamese: "C\u1ea5p \u0111\u1ed9"
+    spanish:
+    portuguese:
+    french:
+  - english: "No stat changes shown"
+    vietnamese: "Ch\u01b0a c\u00f3 ch\u1ec9 s\u1ed1 thay \u0111\u1ed5i \u0111\u1ec3 hi\u1ec3n th\u1ecb"
+    spanish:
+    portuguese:
+    french:
+  - english: "Unavailable"
+    vietnamese: "Ch\u01b0a kh\u1ea3 d\u1ee5ng"
+    spanish:
+    portuguese:
+    french:
+  - english: "All player stats"
+    vietnamese: "To\u00e0n b\u1ed9 ch\u1ec9 s\u1ed1 nh\u00e2n v\u1eadt"
+    spanish:
+    portuguese:
+    french:
+  - english: "Owned: {0}"
+    vietnamese: "\u0110ang s\u1edf h\u1eefu: {0}"
+    spanish:
+    portuguese:
+    french:
+  - english: "Capacity: {0} > {1}"
+    vietnamese: "S\u1ee9c ch\u1ee9a: {0} > {1}"
+    spanish:
+    portuguese:
+    french:
+  - english: "Cost: {0} {1:loc}"
+    vietnamese: "Chi ph\u00ed: {0} {1}"
+    spanish:
+    portuguese:
+    french:
+  - english: "Expand"
+    vietnamese: "M\u1edf r\u1ed9ng"
+    spanish:
+    portuguese:
+    french:
+  - english: "Expand Bag"
+    vietnamese: "M\u1edf r\u1ed9ng t\u00fai \u0111\u1ed3"
+    spanish:
+    portuguese:
+    french:
+  - english: "EXPAND EQUIPMENT BAG"
+    vietnamese: "M\u1ede R\u1ed8NG T\u00daI TRANG B\u1eca"
+    spanish:
+    portuguese:
+    french:
+  - english: "Equipped items use bag slots. Materials and fragments have separate storage."
+    vietnamese: "Trang b\u1ecb \u0111ang d\u00f9ng v\u1eabn chi\u1ebfm \u00f4 trong t\u00fai. Nguy\u00ean li\u1ec7u v\u00e0 m\u1ea3nh c\u00f3 kho ri\u00eang."
+    spanish:
+    portuguese:
+    french:
+  - english: "Stored overflow rewards are delivered after expansion."
+    vietnamese: "Ph\u1ea7n th\u01b0\u1edfng ch\u1edd s\u1ebd \u0111\u01b0\u1ee3c chuy\u1ec3n v\u00e0o t\u00fai sau khi m\u1edf r\u1ed9ng."
+    spanish:
+    portuguese:
+    french:
+  - english: "Pending delivery"
+    vietnamese: "Ch\u1edd chuy\u1ec3n v\u00e0o t\u00fai"
+    spanish:
+    portuguese:
+    french:
+  - english: "(Pending delivery)"
+    vietnamese: "(Ch\u1edd chuy\u1ec3n v\u00e0o t\u00fai)"
+    spanish:
+    portuguese:
+    french:
+  - english: "(Bag pending)"
+    vietnamese: "(Ch\u1edd c\u00f3 ch\u1ed7 trong t\u00fai)"
+    spanish:
+    portuguese:
+    french:
+  - english: "Added to your inventory."
+    vietnamese: "\u0110\u00e3 th\u00eam v\u00e0o t\u00fai \u0111\u1ed3."
+    spanish:
+    portuguese:
+    french:
+  - english: "Stored safely. Expand your equipment bag to receive it."
+    vietnamese: "\u0110\u00e3 l\u01b0u ph\u1ea7n th\u01b0\u1edfng. M\u1edf r\u1ed9ng t\u00fai trang b\u1ecb \u0111\u1ec3 nh\u1eadn."
+    spanish:
+    portuguese:
+    french:
+  - english: "Success Rate: {0}%"
+    vietnamese: "T\u1ec9 l\u1ec7 th\u00e0nh c\u00f4ng: {0}%"
+    spanish:
+    portuguese:
+    french:
+  - english: "Tap a card to expand"
+    vietnamese: "Ch\u1ea1m v\u00e0o th\u1ebb \u0111\u1ec3 xem chi ti\u1ebft"
+    spanish:
+    portuguese:
+    french:
+  - english: "Read-only preview"
+    vietnamese: "Xem tr\u01b0\u1edbc"
+    spanish:
+    portuguese:
+    french:
+  - english: "Rage {0}%"
+    vietnamese: "N\u1ed8 {0}%"
+    spanish:
+    portuguese:
+    french:
+  - english: "Rage! {0}s"
+    vietnamese: "N\u1ed8! {0} gi\u00e2y"
+    spanish:
+    portuguese:
+    french:
+  - english: "Clear all {0} rooms of enemies"
+    vietnamese: "Ti\u00eau di\u1ec7t h\u1ebft qu\u00e1i trong {0} ph\u00f2ng"
+    spanish:
+    portuguese:
+    french:
+  - english: "Survive {0} waves of enemies"
+    vietnamese: "S\u1ed1ng s\u00f3t qua {0} \u0111\u1ee3t qu\u00e1i"
+    spanish:
+    portuguese:
+    french:
+  - english: "Wave {0}"
+    vietnamese: "\u0110\u1ee3t {0}"
+    spanish:
+    portuguese:
+    french:
+  - english: "Are you sure you want to quit?"
+    vietnamese: "B\u1ea1n c\u00f3 ch\u1eafc mu\u1ed1n tho\u00e1t?"
+    spanish:
+    portuguese:
+    french:
+  - english: "Chest Deal"
+    vietnamese: "Giao k\u00e8o r\u01b0\u01a1ng b\u00e1u"
+    spanish:
+    portuguese:
+    french:
+  - english: "Chest Reward"
+    vietnamese: "Ph\u1ea7n th\u01b0\u1edfng t\u1eeb r\u01b0\u01a1ng"
+    spanish:
+    portuguese:
+    french:
+  - english: "Accept"
+    vietnamese: "Ch\u1ea5p nh\u1eadn"
+    spanish:
+    portuguese:
+    french:
+  - english: "Reject"
+    vietnamese: "T\u1eeb ch\u1ed1i"
+    spanish:
+    portuguese:
+    french:
+  - english: "Take your reward but <color=#FA5152>lose</color> {0} HP"
+    vietnamese: "Nh\u1eadn th\u01b0\u1edfng nh\u01b0ng <color=#FA5152>m\u1ea5t</color> {0} m\u00e1u"
+    spanish:
+    portuguese:
+    french:
+  - english: "Spend gems to receive one reward."
+    vietnamese: "D\u00f9ng \u0111\u00e1 qu\u00fd \u0111\u1ec3 nh\u1eadn m\u1ed9t ph\u1ea7n th\u01b0\u1edfng."
+    spanish:
+    portuguese:
+    french:
+  - english: "Your previous reward has already been saved."
+    vietnamese: "Ph\u1ea7n th\u01b0\u1edfng tr\u01b0\u1edbc \u0111\u00e3 \u0111\u01b0\u1ee3c l\u01b0u."
+    spanish:
+    portuguese:
+    french:
+  - english: "Reward configuration unavailable."
+    vietnamese: "Ch\u01b0a c\u00f3 d\u1eef li\u1ec7u ph\u1ea7n th\u01b0\u1edfng."
+    spanish:
+    portuguese:
+    french:
+  - english: "Status"
+    vietnamese: "Tr\u1ea1ng th\u00e1i"
+    spanish:
+    portuguese:
+    french:
+  - english: "SPD"
+    vietnamese: "T\u1ed1c \u0111\u1ed9"
+    spanish:
+    portuguese:
+    french:
+  - english: "Name"
+    vietnamese: "T\u00ean"
+    spanish:
+    portuguese:
+    french:
+  - english: "DEV"
+    vietnamese: "TH\u1eec"
+    spanish:
+    portuguese:
+    french:
+  - english: "DEVELOPER TOOLS"
+    vietnamese: "C\u00d4NG C\u1ee4 PH\u00c1T TRI\u1ec2N"
+    spanish:
+    portuguese:
+    french:
+  - english: "Quick grants for testing"
+    vietnamese: "C\u1ea5p nhanh \u0111\u1ec3 ch\u01a1i th\u1eed"
+    spanish:
+    portuguese:
+    french:
+  - english: "Grants are saved to this player profile."
+    vietnamese: "V\u1eadt ph\u1ea9m c\u1ea5p th\u1eed \u0111\u01b0\u1ee3c l\u01b0u v\u00e0o h\u1ed3 s\u01a1 n\u00e0y."
+    spanish:
+    portuguese:
+    french:
+  - english: "AMOUNT: {0} >"
+    vietnamese: "S\u1ed0 L\u01af\u1ee2NG: {0} >"
+    spanish:
+    portuguese:
+    french:
+  - english: "Add XP"
+    vietnamese: "C\u1ed9ng kinh nghi\u1ec7m"
+    spanish:
+    portuguese:
+    french:
+  - english: "Reset XP"
+    vietnamese: "\u0110\u1eb7t l\u1ea1i kinh nghi\u1ec7m"
+    spanish:
+    portuguese:
+    french:
+  - english: "+{0} XP"
+    vietnamese: "+{0} kinh nghi\u1ec7m"
+    spanish:
+    portuguese:
+    french:
+  - english: "+ GOLD"
+    vietnamese: "+ V\u00c0NG"
+    spanish:
+    portuguese:
+    french:
+  - english: "+ 1 ITEM"
+    vietnamese: "+ 1 V\u1eacT PH\u1ea8M"
+    spanish:
+    portuguese:
+    french:
+  - english: "Cannot grant Hero Shards."
+    vietnamese: "Ch\u01b0a th\u1ec3 c\u1ea5p m\u1ea3nh anh h\u00f9ng."
+    spanish:
+    portuguese:
+    french:
+  - english: "+{0} {1:loc} Hero Shards (saved)"
+    vietnamese: "\u0110\u00e3 l\u01b0u +{0} m\u1ea3nh {1}"
+    spanish:
+    portuguese:
+    french:
+  - english: "Dragon Tooth"
+    vietnamese: "Nanh r\u1ed3ng"
+    spanish:
+    portuguese:
+    french:
+  - english: "Iron Sword"
+    vietnamese: "Ki\u1ebfm s\u1eaft"
+    spanish:
+    portuguese:
+    french:
+  - english: "Basic Bow"
+    vietnamese: "Cung c\u01a1 b\u1ea3n"
+    spanish:
+    portuguese:
+    french:
+  - english: "Bouncy Shot"
+    vietnamese: "\u0110\u1ea1n b\u1eadt t\u01b0\u1eddng"
+    spanish:
+    portuguese:
+    french:
+  - english: "Unlock {0:loc}"
+    vietnamese: "M\u1edf kh\u00f3a {0}"
+    spanish:
+    portuguese:
+    french:
+  - english: "Unlock at level {0}"
+    vietnamese: "M\u1edf kh\u00f3a \u1edf c\u1ea5p {0}"
+    spanish:
+    portuguese:
+    french:
+  - english: "Update"
+    vietnamese: "C\u1eadp nh\u1eadt"
+    spanish:
+    portuguese:
+    french:
+  - english: "Fire Arrows"
+    vietnamese: "M\u0169i t\u00ean l\u1eeda"
+    spanish:
+    portuguese:
+    french:
+  - english: "Fires laser ball. Causing 10damage against every bricks at horizontal line."
+    vietnamese: "B\u1eafn c\u1ea7u laze, g\u00e2y 10 s\u00e1t th\u01b0\u01a1ng l\u00ean m\u1ecdi m\u1ee5c ti\u00eau tr\u00ean c\u00f9ng h\u00e0ng ngang."
+    spanish:
+    portuguese:
+    french:
+  - english: "Ad Break"
+    vietnamese: "Gi\u1edd qu\u1ea3ng c\u00e1o"
+    spanish:
+    portuguese:
+    french:
+  - english: "Climb the ranks"
+    vietnamese: "Th\u0103ng h\u1ea1ng"
+    spanish:
+    portuguese:
+    french:
+  - english: "Collect Golds"
+    vietnamese: "Thu th\u1eadp v\u00e0ng"
+    spanish:
+    portuguese:
+    french:
+  - english: "Collect {0} Golds"
+    vietnamese: "Thu th\u1eadp {0} v\u00e0ng"
+    spanish:
+    portuguese:
+    french:
+  - english: "Play {0} times"
+    vietnamese: "Ch\u01a1i {0} l\u1ea7n"
+    spanish:
+    portuguese:
+    french:
+  - english: "Watch {0} Ads"
+    vietnamese: "Xem {0} qu\u1ea3ng c\u00e1o"
+    spanish:
+    portuguese:
+    french:
+  - english: "Technician"
+    vietnamese: "K\u1ef9 thu\u1eadt gia"
+    spanish:
+    portuguese:
+    french:
+  - english: "Use skills {0} times"
+    vietnamese: "D\u00f9ng k\u1ef9 n\u0103ng {0} l\u1ea7n"
+    spanish:
+    portuguese:
+    french:
+  - english: "{0} Level up characters"
+    vietnamese: "T\u0103ng {0} c\u1ea5p nh\u00e2n v\u1eadt"
+    spanish:
+    portuguese:
+    french:
+  - english: "{0:loc}: <b>{1}</b>"
+    vietnamese: "{0}: <b>{1}</b>"
+    spanish:
+    portuguese:
+    french:
+  - english: "Max HP"
+    vietnamese: "M\u00e1u t\u1ed1i \u0111a"
+    spanish:
+    portuguese:
+    french:
+  - english: "Attack Range"
+    vietnamese: "T\u1ea7m \u0111\u00e1nh"
+    spanish:
+    portuguese:
+    french:
+  - english: "Critical Damage"
+    vietnamese: "S\u00e1t th\u01b0\u01a1ng ch\u00ed m\u1ea1ng"
+    spanish:
+    portuguese:
+    french:
+  - english: "Crit Damage Multiplier"
+    vietnamese: "H\u1ec7 s\u1ed1 s\u00e1t th\u01b0\u01a1ng ch\u00ed m\u1ea1ng"
+    spanish:
+    portuguese:
+    french:
+  - english: "Damage Multiplier"
+    vietnamese: "H\u1ec7 s\u1ed1 s\u00e1t th\u01b0\u01a1ng"
+    spanish:
+    portuguese:
+    french:
+  - english: "Movement Speed"
+    vietnamese: "T\u1ed1c \u0111\u1ed9 di chuy\u1ec3n"
+    spanish:
+    portuguese:
+    french:
+  - english: "Chance To Increase Rarity"
+    vietnamese: "T\u1ec9 l\u1ec7 t\u0103ng \u0111\u1ed9 hi\u1ebfm"
+    spanish:
+    portuguese:
+    french:
+  - english: "Front Arrow Damage"
+    vietnamese: "S\u00e1t th\u01b0\u01a1ng m\u0169i t\u00ean tr\u01b0\u1edbc"
+    spanish:
+    portuguese:
+    french:
+  - english: "Rear Arrow Damage"
+    vietnamese: "S\u00e1t th\u01b0\u01a1ng m\u0169i t\u00ean sau"
+    spanish:
+    portuguese:
+    french:
+  - english: "Diagonal Arrow Damage"
+    vietnamese: "S\u00e1t th\u01b0\u01a1ng m\u0169i t\u00ean ch\u00e9o"
+    spanish:
+    portuguese:
+    french:
+  - english: "Projectile Speed"
+    vietnamese: "T\u1ed1c \u0111\u1ed9 \u0111\u1ea1n"
+    spanish:
+    portuguese:
+    french:
+  - english: "Projectile Size"
+    vietnamese: "K\u00edch th\u01b0\u1edbc \u0111\u1ea1n"
+    spanish:
+    portuguese:
+    french:
+  - english: "Damage Taken Multiplier"
+    vietnamese: "H\u1ec7 s\u1ed1 s\u00e1t th\u01b0\u01a1ng nh\u1eadn"
+    spanish:
+    portuguese:
+    french:
+  - english: "Gold Multiplier"
+    vietnamese: "H\u1ec7 s\u1ed1 v\u00e0ng"
+    spanish:
+    portuguese:
+    french:
+  - english: "Revives Left"
+    vietnamese: "L\u01b0\u1ee3t h\u1ed3i sinh c\u00f2n l\u1ea1i"
+    spanish:
+    portuguese:
+    french:
+  - english: "Not enough coins"
+    vietnamese: "Kh\u00f4ng \u0111\u1ee7 v\u00e0ng"
+    spanish:
+    portuguese:
+    french:
+  - english: "Upgrade ready"
+    vietnamese: "C\u00f3 th\u1ec3 n\u00e2ng c\u1ea5p"
+    spanish:
+    portuguese:
+    french:
+  - english: "Play again"
+    vietnamese: "Ch\u01a1i l\u1ea1i"
+    spanish:
+    portuguese:
+    french:
+  - english: "Current"
+    vietnamese: "Hi\u1ec7n t\u1ea1i"
+    spanish:
+    portuguese:
+    french:
+  - english: "Next"
+    vietnamese: "Ti\u1ebfp theo"
+    spanish:
+    portuguese:
+    french:
+  - english: "Rewards saved"
+    vietnamese: "\u0110\u00e3 l\u01b0u ph\u1ea7n th\u01b0\u1edfng"
+    spanish:
+    portuguese:
+    french:
+  - english: "Lock"
+    vietnamese: "Kh\u00f3a"
+    spanish:
+    portuguese:
+    french:
+  - english: "New skill"
+    vietnamese: "K\u1ef9 n\u0103ng m\u1edbi"
+    spanish:
+    portuguese:
+    french:
+  - english: "Skill"
+    vietnamese: "K\u1ef9 n\u0103ng"
+    spanish:
+    portuguese:
+    french:
+  - english: "Skill level"
+    vietnamese: "C\u1ea5p k\u1ef9 n\u0103ng"
+    spanish:
+    portuguese:
+    french:
+  - english: "Unlock level"
+    vietnamese: "C\u1ea5p m\u1edf kh\u00f3a"
+    spanish:
+    portuguese:
+    french:
+  - english: "Pet is resting"
+    vietnamese: "Th\u00fa \u0111\u1ed3ng h\u00e0nh \u0111ang ngh\u1ec9"
+    spanish:
+    portuguese:
+    french:
+  - english: "Cryo Cake"
+    vietnamese: "B\u00e1nh b\u0103ng gi\u00e1"
+    spanish:
+    portuguese:
+    french:
+  - english: "Frost Cake"
+    vietnamese: "B\u00e1nh b\u0103ng gi\u00e1"
+    spanish:
+    portuguese:
+    french:
+  - english: "Cakes"
+    vietnamese: "B\u00e1nh"
+    spanish:
+    portuguese:
+    french:
+  - english: "Remaining HP"
+    vietnamese: "M\u00e1u c\u00f2n l\u1ea1i"
+    spanish:
+    portuguese:
+    french:
+  - english: "Use current loadout"
+    vietnamese: "D\u00f9ng trang b\u1ecb hi\u1ec7n t\u1ea1i"
+    spanish:
+    portuguese:
+    french:
+  - english: "Need more XP"
+    vietnamese: "C\u1ea7n th\u00eam kinh nghi\u1ec7m"
+    spanish:
+    portuguese:
+    french:
+  - english: "Not enough shards"
+    vietnamese: "Thi\u1ebfu m\u1ea3nh"
+    spanish:
+    portuguese:
+    french:
+  - english: "Collect hero shards"
+    vietnamese: "Thu th\u1eadp m\u1ea3nh anh h\u00f9ng"
+    spanish:
+    portuguese:
+    french:
+  - english: "DELETE THIS ITEM ?"
+    vietnamese: "X\u00d3A V\u1eacT PH\u1ea8M N\u00c0Y?"
+    spanish:
+    portuguese:
+    french:
+  - english: "Combo x{0}"
+    vietnamese: "Li\u00ean k\u00edch x{0}"
+    spanish:
+    portuguese:
+    french:
+  - english: "Bonus reward"
+    vietnamese: "Ph\u1ea7n th\u01b0\u1edfng th\u00eam"
+    spanish:
+    portuguese:
+    french:
+  - english: "Ground"
+    vietnamese: "M\u1eb7t \u0111\u1ea5t"
+    spanish:
+    portuguese:
+    french:
+  - english: "Level {0} required"
+    vietnamese: "C\u1ea7n \u0111\u1ea1t c\u1ea5p {0}"
+    spanish:
+    portuguese:
+    french:
+  - english: "Combo"
+    vietnamese: "Li\u00ean k\u00edch"
+    spanish:
+    portuguese:
+    french:
+  - english: "Each consecutive kill increases damage"
+    vietnamese: "M\u1ed7i l\u1ea7n h\u1ea1 \u0111\u1ecbch li\u00ean ti\u1ebfp l\u00e0m t\u0103ng s\u00e1t th\u01b0\u01a1ng."
+    spanish:
+    portuguese:
+    french:
+  - english: "Invulnerability Star"
+    vietnamese: "Sao b\u1ea5t t\u1eed"
+    spanish:
+    portuguese:
+    french:
+  - english: "Gain brief invulnerability"
+    vietnamese: "Tr\u1edf n\u00ean b\u1ea5t t\u1eed trong th\u1eddi gian ng\u1eafn."
+    spanish:
+    portuguese:
+    french:
+  - english: "Painful Power"
+    vietnamese: "S\u1ee9c m\u1ea1nh t\u1eeb th\u01b0\u01a1ng t\u00edch"
+    spanish:
+    portuguese:
+    french:
+  - english: "Gain power after getting hit"
+    vietnamese: "T\u0103ng s\u1ee9c t\u1ea5n c\u00f4ng sau khi tr\u00fang \u0111\u00f2n."
+    spanish:
+    portuguese:
+    french:
+  - english: "Perfect Stance"
+    vietnamese: "Th\u1ebf \u0111\u1ee9ng ho\u00e0n h\u1ea3o"
+    spanish:
+    portuguese:
+    french:
+  - english: "Attack speed is increased while standing still for some time"
+    vietnamese: "T\u0103ng t\u1ed1c \u0111\u00e1nh sau khi \u0111\u1ee9ng y\u00ean m\u1ed9t l\u00fac."
+    spanish:
+    portuguese:
+    french:
+  - english: "Rage"
+    vietnamese: "Cu\u1ed3ng n\u1ed9"
+    spanish:
+    portuguese:
+    french:
+  - english: "When HP is below 50% gain attack speed and power"
+    vietnamese: "Khi m\u00e1u d\u01b0\u1edbi 50%, t\u0103ng t\u1ed1c \u0111\u00e1nh v\u00e0 s\u1ee9c t\u1ea5n c\u00f4ng."
+    spanish:
+    portuguese:
+    french:
+  - english: "Rage Star"
+    vietnamese: "Sao cu\u1ed3ng n\u1ed9"
+    spanish:
+    portuguese:
+    french:
+  - english: "Pick up the Rage Star to increase attack speed and crit chance"
+    vietnamese: "Nh\u1eb7t sao cu\u1ed3ng n\u1ed9 \u0111\u1ec3 t\u0103ng t\u1ed1c \u0111\u00e1nh v\u00e0 t\u1ec9 l\u1ec7 ch\u00ed m\u1ea1ng."
+    spanish:
+    portuguese:
+    french:
+  - english: "Cure"
+    vietnamese: "H\u1ed3i ph\u1ee5c ho\u00e0n to\u00e0n"
+    spanish:
+    portuguese:
+    french:
+  - english: "Heal up fully and increase max HP"
+    vietnamese: "H\u1ed3i \u0111\u1ea7y m\u00e1u v\u00e0 t\u0103ng m\u00e1u t\u1ed1i \u0111a."
+    spanish:
+    portuguese:
+    french:
+  - english: "Heal"
+    vietnamese: "H\u1ed3i m\u00e1u"
+    spanish:
+    portuguese:
+    french:
+  - english: "Heal some amount of HP"
+    vietnamese: "H\u1ed3i m\u1ed9t ph\u1ea7n m\u00e1u."
+    spanish:
+    portuguese:
+    french:
+  - english: "Heal Enhancement"
+    vietnamese: "T\u0103ng c\u01b0\u1eddng h\u1ed3i m\u00e1u"
+    spanish:
+    portuguese:
+    french:
+  - english: "Health pickups become stronger and increase max HP"
+    vietnamese: "V\u1eadt ph\u1ea9m h\u1ed3i m\u00e1u m\u1ea1nh h\u01a1n v\u00e0 t\u0103ng m\u00e1u t\u1ed1i \u0111a."
+    spanish:
+    portuguese:
+    french:
+  - english: "Kill To Heal"
+    vietnamese: "H\u1ea1 \u0111\u1ecbch h\u1ed3i m\u00e1u"
+    spanish:
+    portuguese:
+    french:
+  - english: "Eliminations have a chance to recover HP"
+    vietnamese: "H\u1ea1 \u0111\u1ecbch c\u00f3 th\u1ec3 h\u1ed3i m\u00e1u."
+    spanish:
+    portuguese:
+    french:
+  - english: "Power Heal"
+    vietnamese: "H\u1ed3i m\u00e1u t\u0103ng s\u1ee9c m\u1ea1nh"
+    spanish:
+    portuguese:
+    french:
+  - english: "Health pickups have a chance to increase power"
+    vietnamese: "V\u1eadt ph\u1ea9m h\u1ed3i m\u00e1u c\u00f3 th\u1ec3 t\u0103ng s\u1ee9c t\u1ea5n c\u00f4ng."
+    spanish:
+    portuguese:
+    french:
+  - english: "Protector"
+    vietnamese: "H\u1ed9 v\u1ec7"
+    spanish:
+    portuguese:
+    french:
+  - english: "Gain invulnerability after receiving damage"
+    vietnamese: "Tr\u1edf n\u00ean b\u1ea5t t\u1eed sau khi ch\u1ecbu s\u00e1t th\u01b0\u01a1ng."
+    spanish:
+    portuguese:
+    french:
+  - english: "Safety Bubble"
+    vietnamese: "Bong b\u00f3ng b\u1ea3o h\u1ed9"
+    spanish:
+    portuguese:
+    french:
+  - english: "Cast a bubble that absorbs one hit"
+    vietnamese: "T\u1ea1o bong b\u00f3ng ch\u1eb7n m\u1ed9t \u0111\u00f2n."
+    spanish:
+    portuguese:
+    french:
+  - english: "Second Chance"
+    vietnamese: "C\u01a1 h\u1ed9i th\u1ee9 hai"
+    spanish:
+    portuguese:
+    french:
+  - english: "Come back to the fight instantly after defeat. Once per run"
+    vietnamese: "H\u1ed3i sinh ngay sau khi b\u1ecb h\u1ea1. M\u1ed7i l\u01b0\u1ee3t ch\u1ec9 d\u00f9ng m\u1ed9t l\u1ea7n."
+    spanish:
+    portuguese:
+    french:
+  - english: "Strong Aura"
+    vietnamese: "H\u00e0o quang h\u1ed9 th\u00e2n"
+    spanish:
+    portuguese:
+    french:
+  - english: "Gain a force field that damages and weakens enemies"
+    vietnamese: "T\u1ea1o tr\u01b0\u1eddng l\u1ef1c g\u00e2y s\u00e1t th\u01b0\u01a1ng v\u00e0 l\u00e0m suy y\u1ebfu k\u1ebb \u0111\u1ecbch."
+    spanish:
+    portuguese:
+    french:
+  - english: "Freeze"
+    vietnamese: "\u0110\u00f3ng b\u0103ng"
+    spanish:
+    portuguese:
+    french:
+  - english: "Attacks have a chance to freeze enemies"
+    vietnamese: "\u0110\u00f2n \u0111\u00e1nh c\u00f3 th\u1ec3 \u0111\u00f3ng b\u0103ng k\u1ebb \u0111\u1ecbch."
+    spanish:
+    portuguese:
+    french:
+  - english: "Freeze Enhancement"
+    vietnamese: "T\u0103ng c\u01b0\u1eddng \u0111\u00f3ng b\u0103ng"
+    spanish:
+    portuguese:
+    french:
+  - english: "Freezing does more damage"
+    vietnamese: "T\u0103ng s\u00e1t th\u01b0\u01a1ng do \u0111\u00f3ng b\u0103ng."
+    spanish:
+    portuguese:
+    french:
+  - english: "Ignite"
+    vietnamese: "Thi\u00eau \u0111\u1ed1t"
+    spanish:
+    portuguese:
+    french:
+  - english: "Attacks have a chance to ignite enemies"
+    vietnamese: "\u0110\u00f2n \u0111\u00e1nh c\u00f3 th\u1ec3 thi\u00eau \u0111\u1ed1t k\u1ebb \u0111\u1ecbch."
+    spanish:
+    portuguese:
+    french:
+  - english: "Ignite Enhancement"
+    vietnamese: "T\u0103ng c\u01b0\u1eddng thi\u00eau \u0111\u1ed1t"
+    spanish:
+    portuguese:
+    french:
+  - english: "Ignition does more damage"
+    vietnamese: "T\u0103ng s\u00e1t th\u01b0\u01a1ng thi\u00eau \u0111\u1ed1t."
+    spanish:
+    portuguese:
+    french:
+  - english: "Meteor Rain"
+    vietnamese: "M\u01b0a thi\u00ean th\u1ea1ch"
+    spanish:
+    portuguese:
+    french:
+  - english: "Meteors spawn at a faster rate"
+    vietnamese: "Thi\u00ean th\u1ea1ch r\u01a1i th\u01b0\u1eddng xuy\u00ean h\u01a1n."
+    spanish:
+    portuguese:
+    french:
+  - english: "Meteor Strike"
+    vietnamese: "Thi\u00ean th\u1ea1ch gi\u00e1ng"
+    spanish:
+    portuguese:
+    french:
+  - english: "Cast meteors that fall from above"
+    vietnamese: "Tri\u1ec7u h\u1ed3i thi\u00ean th\u1ea1ch t\u1eeb tr\u00ean cao."
+    spanish:
+    portuguese:
+    french:
+  - english: "Poison"
+    vietnamese: "\u0110\u1ea7u \u0111\u1ed9c"
+    spanish:
+    portuguese:
+    french:
+  - english: "Attacks have a chance to poison enemies"
+    vietnamese: "\u0110\u00f2n \u0111\u00e1nh c\u00f3 th\u1ec3 \u0111\u1ea7u \u0111\u1ed9c k\u1ebb \u0111\u1ecbch."
+    spanish:
+    portuguese:
+    french:
+  - english: "Poison Enhancement"
+    vietnamese: "T\u0103ng c\u01b0\u1eddng \u0111\u1ed9c"
+    spanish:
+    portuguese:
+    french:
+  - english: "Poisoning deals more damage"
+    vietnamese: "T\u0103ng s\u00e1t th\u01b0\u01a1ng \u0111\u1ed9c."
+    spanish:
+    portuguese:
+    french:
+  - english: "Shock"
+    vietnamese: "\u0110i\u1ec7n gi\u1eadt"
+    spanish:
+    portuguese:
+    french:
+  - english: "Attacks have a chance to shock enemies"
+    vietnamese: "\u0110\u00f2n \u0111\u00e1nh c\u00f3 th\u1ec3 l\u00e0m k\u1ebb \u0111\u1ecbch b\u1ecb \u0111i\u1ec7n gi\u1eadt."
+    spanish:
+    portuguese:
+    french:
+  - english: "Shock Enhancement"
+    vietnamese: "T\u0103ng c\u01b0\u1eddng \u0111i\u1ec7n gi\u1eadt"
+    spanish:
+    portuguese:
+    french:
+  - english: "Shocking deals more damage"
+    vietnamese: "T\u0103ng s\u00e1t th\u01b0\u01a1ng \u0111i\u1ec7n gi\u1eadt."
+    spanish:
+    portuguese:
+    french:
+  - english: "Ultimate Meteor"
+    vietnamese: "Thi\u00ean th\u1ea1ch t\u1ed1i th\u01b0\u1ee3ng"
+    spanish:
+    portuguese:
+    french:
+  - english: "Cast devastating meteors that fall from above"
+    vietnamese: "Tri\u1ec7u h\u1ed3i thi\u00ean th\u1ea1ch c\u1ef1c m\u1ea1nh t\u1eeb tr\u00ean cao."
+    spanish:
+    portuguese:
+    french:
+  - english: "Common Coins"
+    vietnamese: "V\u00e0ng th\u01b0\u1eddng"
+    spanish:
+    portuguese:
+    french:
+  - english: "Get a small amount of coins"
+    vietnamese: "Nh\u1eadn m\u1ed9t \u00edt v\u00e0ng."
+    spanish:
+    portuguese:
+    french:
+  - english: "Common Heal"
+    vietnamese: "H\u1ed3i m\u00e1u th\u01b0\u1eddng"
+    spanish:
+    portuguese:
+    french:
+  - english: "Recover a small amount of HP"
+    vietnamese: "H\u1ed3i m\u1ed9t \u00edt m\u00e1u."
+    spanish:
+    portuguese:
+    french:
+  - english: "Legendary Coins"
+    vietnamese: "V\u00e0ng huy\u1ec1n tho\u1ea1i"
+    spanish:
+    portuguese:
+    french:
+  - english: "Gain a huge amount of coins"
+    vietnamese: "Nh\u1eadn l\u01b0\u1ee3ng v\u00e0ng c\u1ef1c l\u1edbn."
+    spanish:
+    portuguese:
+    french:
+  - english: "Legendary Heal"
+    vietnamese: "H\u1ed3i m\u00e1u huy\u1ec1n tho\u1ea1i"
+    spanish:
+    portuguese:
+    french:
+  - english: "Recover a huge amount of HP"
+    vietnamese: "H\u1ed3i l\u01b0\u1ee3ng m\u00e1u c\u1ef1c l\u1edbn."
+    spanish:
+    portuguese:
+    french:
+  - english: "Mystic Coins"
+    vietnamese: "V\u00e0ng th\u1ea7n b\u00ed"
+    spanish:
+    portuguese:
+    french:
+  - english: "Gain a big amount of coins"
+    vietnamese: "Nh\u1eadn nhi\u1ec1u v\u00e0ng."
+    spanish:
+    portuguese:
+    french:
+  - english: "Mystic Heal"
+    vietnamese: "H\u1ed3i m\u00e1u th\u1ea7n b\u00ed"
+    spanish:
+    portuguese:
+    french:
+  - english: "Recover a big amount of HP"
+    vietnamese: "H\u1ed3i nhi\u1ec1u m\u00e1u."
+    spanish:
+    portuguese:
+    french:
+  - english: "Rare Coins"
+    vietnamese: "V\u00e0ng hi\u1ebfm"
+    spanish:
+    portuguese:
+    french:
+  - english: "Gain a fair amount of coins"
+    vietnamese: "Nh\u1eadn m\u1ed9t l\u01b0\u1ee3ng v\u00e0ng v\u1eeba ph\u1ea3i."
+    spanish:
+    portuguese:
+    french:
+  - english: "Rare Heal"
+    vietnamese: "H\u1ed3i m\u00e1u hi\u1ebfm"
+    spanish:
+    portuguese:
+    french:
+  - english: "Recover a fair amount of HP"
+    vietnamese: "H\u1ed3i m\u1ed9t l\u01b0\u1ee3ng m\u00e1u v\u1eeba ph\u1ea3i."
+    spanish:
+    portuguese:
+    french:
+  - english: "Fire Orbs"
+    vietnamese: "Qu\u1ea3 c\u1ea7u l\u1eeda"
+    spanish:
+    portuguese:
+    french:
+  - english: "Gain circling fire orbs"
+    vietnamese: "T\u1ea1o c\u00e1c qu\u1ea3 c\u1ea7u l\u1eeda bay quanh nh\u00e2n v\u1eadt."
+    spanish:
+    portuguese:
+    french:
+  - english: "Ice Orbs"
+    vietnamese: "Qu\u1ea3 c\u1ea7u b\u0103ng"
+    spanish:
+    portuguese:
+    french:
+  - english: "Gain circling ice orbs"
+    vietnamese: "T\u1ea1o c\u00e1c qu\u1ea3 c\u1ea7u b\u0103ng bay quanh nh\u00e2n v\u1eadt."
+    spanish:
+    portuguese:
+    french:
+  - english: "Laser Orbs"
+    vietnamese: "Qu\u1ea3 c\u1ea7u laze"
+    spanish:
+    portuguese:
+    french:
+  - english: "Gain circling laser orbs"
+    vietnamese: "T\u1ea1o c\u00e1c qu\u1ea3 c\u1ea7u laze bay quanh nh\u00e2n v\u1eadt."
+    spanish:
+    portuguese:
+    french:
+  - english: "Orb Enhancement"
+    vietnamese: "T\u0103ng c\u01b0\u1eddng qu\u1ea3 c\u1ea7u"
+    spanish:
+    portuguese:
+    french:
+  - english: "All orbs deal increased damage"
+    vietnamese: "T\u0103ng s\u00e1t th\u01b0\u01a1ng c\u1ee7a m\u1ecdi qu\u1ea3 c\u1ea7u."
+    spanish:
+    portuguese:
+    french:
+  - english: "Poison Orbs"
+    vietnamese: "Qu\u1ea3 c\u1ea7u \u0111\u1ed9c"
+    spanish:
+    portuguese:
+    french:
+  - english: "Gain circling poison orbs"
+    vietnamese: "T\u1ea1o c\u00e1c qu\u1ea3 c\u1ea7u \u0111\u1ed9c bay quanh nh\u00e2n v\u1eadt."
+    spanish:
+    portuguese:
+    french:
+  - english: "Shock Orbs"
+    vietnamese: "Qu\u1ea3 c\u1ea7u s\u00e9t"
+    spanish:
+    portuguese:
+    french:
+  - english: "Gain circling lightning orbs"
+    vietnamese: "T\u1ea1o c\u00e1c qu\u1ea3 c\u1ea7u s\u00e9t bay quanh nh\u00e2n v\u1eadt."
+    spanish:
+    portuguese:
+    french:
+  - english: "Ultimate Orbs"
+    vietnamese: "Qu\u1ea3 c\u1ea7u t\u1ed1i th\u01b0\u1ee3ng"
+    spanish:
+    portuguese:
+    french:
+  - english: "Gain the ultimate circling orbs"
+    vietnamese: "T\u1ea1o c\u00e1c qu\u1ea3 c\u1ea7u t\u1ed1i th\u01b0\u1ee3ng bay quanh nh\u00e2n v\u1eadt."
+    spanish:
+    portuguese:
+    french:
+  - english: "Vampiric Orbs"
+    vietnamese: "Qu\u1ea3 c\u1ea7u h\u00fat m\u00e1u"
+    spanish:
+    portuguese:
+    french:
+  - english: "Gain circling orbs that steal enemy HP"
+    vietnamese: "T\u1ea1o c\u00e1c qu\u1ea3 c\u1ea7u bay quanh nh\u00e2n v\u1eadt v\u00e0 h\u00fat m\u00e1u k\u1ebb \u0111\u1ecbch."
+    spanish:
+    portuguese:
+    french:
+  - english: "Fire Spirit"
+    vietnamese: "Tinh linh l\u1eeda"
+    spanish:
+    portuguese:
+    french:
+  - english: "Summon a friendly fire spirit"
+    vietnamese: "Tri\u1ec7u h\u1ed3i m\u1ed9t tinh linh l\u1eeda \u0111\u1ed3ng minh."
+    spanish:
+    portuguese:
+    french:
+  - english: "Freeze Spirit"
+    vietnamese: "Tinh linh b\u0103ng"
+    spanish:
+    portuguese:
+    french:
+  - english: "Summon a friendly freeze spirit"
+    vietnamese: "Tri\u1ec7u h\u1ed3i m\u1ed9t tinh linh b\u0103ng \u0111\u1ed3ng minh."
+    spanish:
+    portuguese:
+    french:
+  - english: "Poison Spirit"
+    vietnamese: "Tinh linh \u0111\u1ed9c"
+    spanish:
+    portuguese:
+    french:
+  - english: "Summon a friendly poison spirit"
+    vietnamese: "Tri\u1ec7u h\u1ed3i m\u1ed9t tinh linh \u0111\u1ed9c \u0111\u1ed3ng minh."
+    spanish:
+    portuguese:
+    french:
+  - english: "Shock Spirit"
+    vietnamese: "Tinh linh s\u00e9t"
+    spanish:
+    portuguese:
+    french:
+  - english: "Summon a friendly shock spirit"
+    vietnamese: "Tri\u1ec7u h\u1ed3i m\u1ed9t tinh linh s\u00e9t \u0111\u1ed3ng minh."
+    spanish:
+    portuguese:
+    french:
+  - english: "Spirit Enhancement"
+    vietnamese: "T\u0103ng c\u01b0\u1eddng tinh linh"
+    spanish:
+    portuguese:
+    french:
+  - english: "All summoned spirits gain increased damage"
+    vietnamese: "T\u0103ng s\u00e1t th\u01b0\u01a1ng c\u1ee7a m\u1ecdi tinh linh \u0111\u01b0\u1ee3c tri\u1ec7u h\u1ed3i."
+    spanish:
+    portuguese:
+    french:
+  - english: "Ultimate Spirit"
+    vietnamese: "Tinh linh t\u1ed1i th\u01b0\u1ee3ng"
+    spanish:
+    portuguese:
+    french:
+  - english: "Summon the ultimate spirit"
+    vietnamese: "Tri\u1ec7u h\u1ed3i m\u1ed9t tinh linh t\u1ed1i th\u01b0\u1ee3ng."
+    spanish:
+    portuguese:
+    french:
+  - english: "Spirit Rage"
+    vietnamese: "Tinh linh cu\u1ed3ng n\u1ed9"
+    spanish:
+    portuguese:
+    french:
+  - english: "All summoned spirits gain attack speed"
+    vietnamese: "T\u0103ng t\u1ed1c \u0111\u00e1nh c\u1ee7a m\u1ecdi tinh linh \u0111\u01b0\u1ee3c tri\u1ec7u h\u1ed3i."
+    spanish:
+    portuguese:
+    french:
+  - english: "Boss Slayer"
+    vietnamese: "Di\u1ec7t tr\u00f9m"
+    spanish:
+    portuguese:
+    french:
+  - english: "Hit bosses with more power"
+    vietnamese: "T\u0103ng s\u00e1t th\u01b0\u01a1ng l\u00ean tr\u00f9m."
+    spanish:
+    portuguese:
+    french:
+  - english: "Critical Strike"
+    vietnamese: "\u0110\u00f2n ch\u00ed m\u1ea1ng"
+    spanish:
+    portuguese:
+    french:
+  - english: "Attacks can deal devastating damage"
+    vietnamese: "\u0110\u00f2n \u0111\u00e1nh c\u00f3 th\u1ec3 g\u00e2y s\u00e1t th\u01b0\u01a1ng r\u1ea5t l\u1edbn."
+    spanish:
+    portuguese:
+    french:
+  - english: "Four Leaf Clover"
+    vietnamese: "C\u1ecf b\u1ed1n l\u00e1"
+    spanish:
+    portuguese:
+    french:
+  - english: "Increase your luck while getting new abilities and dodging attacks"
+    vietnamese: "T\u0103ng v\u1eadn may khi nh\u1eadn k\u1ef9 n\u0103ng m\u1edbi v\u00e0 n\u00e9 \u0111\u00f2n."
+    spanish:
+    portuguese:
+    french:
+  - english: "Gnome Form"
+    vietnamese: "H\u00f3a t\u00ed hon"
+    spanish:
+    portuguese:
+    french:
+  - english: "Become smaller, but more agile"
+    vietnamese: "Thu nh\u1ecf c\u01a1 th\u1ec3 v\u00e0 t\u0103ng s\u1ef1 nhanh nh\u1eb9n."
+    spanish:
+    portuguese:
+    french:
+  - english: "Lucky Charm"
+    vietnamese: "B\u00f9a may m\u1eafn"
+    spanish:
+    portuguese:
+    french:
+  - english: "Heal pickups can increase max HP"
+    vietnamese: "V\u1eadt ph\u1ea9m h\u1ed3i m\u00e1u c\u00f3 th\u1ec3 t\u0103ng m\u00e1u t\u1ed1i \u0111a."
+    spanish:
+    portuguese:
+    french:
+  - english: "Major Health Boost"
+    vietnamese: "T\u0103ng m\u1ea1nh sinh l\u1ef1c"
+    spanish:
+    portuguese:
+    french:
+  - english: "Increase max HP"
+    vietnamese: "T\u0103ng m\u00e1u t\u1ed1i \u0111a."
+    spanish:
+    portuguese:
+    french:
+  - english: "Major Power Boost"
+    vietnamese: "T\u0103ng m\u1ea1nh s\u1ee9c c\u00f4ng"
+    spanish:
+    portuguese:
+    french:
+  - english: "Increase attack damage"
+    vietnamese: "T\u0103ng s\u00e1t th\u01b0\u01a1ng t\u1ea5n c\u00f4ng."
+    spanish:
+    portuguese:
+    french:
+  - english: "Major Swiftness"
+    vietnamese: "T\u0103ng m\u1ea1nh t\u1ed1c \u0111\u00e1nh"
+    spanish:
+    portuguese:
+    french:
+  - english: "Increase attack speed"
+    vietnamese: "T\u0103ng t\u1ed1c \u0111\u00e1nh."
+    spanish:
+    portuguese:
+    french:
+  - english: "Medium Power"
+    vietnamese: "T\u0103ng v\u1eeba s\u1ee9c c\u00f4ng"
+    spanish:
+    portuguese:
+    french:
+  - english: "Moderately increase attack damage"
+    vietnamese: "T\u0103ng v\u1eeba ph\u1ea3i s\u00e1t th\u01b0\u01a1ng t\u1ea5n c\u00f4ng."
+    spanish:
+    portuguese:
+    french:
+  - english: "Minor Attack Speed Boost"
+    vietnamese: "T\u0103ng nh\u1eb9 t\u1ed1c \u0111\u00e1nh"
+    spanish:
+    portuguese:
+    french:
+  - english: "Slightly increase attack speed"
+    vietnamese: "T\u0103ng nh\u1eb9 t\u1ed1c \u0111\u00e1nh."
+    spanish:
+    portuguese:
+    french:
+  - english: "Minor Health Boost"
+    vietnamese: "T\u0103ng nh\u1eb9 sinh l\u1ef1c"
+    spanish:
+    portuguese:
+    french:
+  - english: "Slightly increase max HP"
+    vietnamese: "T\u0103ng nh\u1eb9 m\u00e1u t\u1ed1i \u0111a."
+    spanish:
+    portuguese:
+    french:
+  - english: "Minor Power Boost"
+    vietnamese: "T\u0103ng nh\u1eb9 s\u1ee9c c\u00f4ng"
+    spanish:
+    portuguese:
+    french:
+  - english: "Slightly increase attack damage"
+    vietnamese: "T\u0103ng nh\u1eb9 s\u00e1t th\u01b0\u01a1ng t\u1ea5n c\u00f4ng."
+    spanish:
+    portuguese:
+    french:
+  - english: "Minor Speed Increase"
+    vietnamese: "T\u0103ng nh\u1eb9 t\u1ed1c di chuy\u1ec3n"
+    spanish:
+    portuguese:
+    french:
+  - english: "Slightly increase movement speed"
+    vietnamese: "T\u0103ng nh\u1eb9 t\u1ed1c di chuy\u1ec3n."
+    spanish:
+    portuguese:
+    french:
+  - english: "Minor Swiftness"
+    vietnamese: "T\u0103ng nh\u1eb9 nhanh nh\u1eb9n"
+    spanish:
+    portuguese:
+    french:
+  - english: "Slightly increase attack and movement speed"
+    vietnamese: "T\u0103ng nh\u1eb9 t\u1ed1c \u0111\u00e1nh v\u00e0 t\u1ed1c di chuy\u1ec3n."
+    spanish:
+    portuguese:
+    french:
+  - english: "Starfall"
+    vietnamese: "M\u01b0a sao"
+    spanish:
+    portuguese:
+    french:
+  - english: "Stars spawn more frequently"
+    vietnamese: "Sao xu\u1ea5t hi\u1ec7n th\u01b0\u1eddng xuy\u00ean h\u01a1n."
+    spanish:
+    portuguese:
+    french:
+  - english: "Titan Form"
+    vietnamese: "H\u00f3a kh\u1ed5ng l\u1ed3"
+    spanish:
+    portuguese:
+    french:
+  - english: "Become big and slow, but with much more HP and attack damage"
+    vietnamese: "C\u01a1 th\u1ec3 l\u1edbn h\u01a1n v\u00e0 di chuy\u1ec3n ch\u1eadm h\u01a1n, b\u00f9 l\u1ea1i t\u0103ng m\u1ea1nh m\u00e1u v\u00e0 s\u00e1t th\u01b0\u01a1ng."
+    spanish:
+    portuguese:
+    french:
+  - english: "Trifecta"
+    vietnamese: "C\u01b0\u1eddng h\u00f3a b\u1ed9 ba"
+    spanish:
+    portuguese:
+    french:
+  - english: "Gain higher attack damage, attack speed and max HP"
+    vietnamese: "T\u0103ng s\u00e1t th\u01b0\u01a1ng t\u1ea5n c\u00f4ng, t\u1ed1c \u0111\u00e1nh v\u00e0 m\u00e1u t\u1ed1i \u0111a."
+    spanish:
+    portuguese:
+    french:
+  - english: "Shots bounce off walls"
+    vietnamese: "\u0110\u1ea1n n\u1ea3y khi ch\u1ea1m t\u01b0\u1eddng."
+    spanish:
+    portuguese:
+    french:
+  - english: "Bullseye"
+    vietnamese: "B\u1eafn tr\u00fang h\u1ed3ng t\u00e2m"
+    spanish:
+    portuguese:
+    french:
+  - english: "Attacks become more precise"
+    vietnamese: "\u0110\u00f2n \u0111\u00e1nh ch\u00ednh x\u00e1c h\u01a1n."
+    spanish:
+    portuguese:
+    french:
+  - english: "Close Combat"
+    vietnamese: "C\u1eadn chi\u1ebfn"
+    spanish:
+    portuguese:
+    french:
+  - english: "Lower attack range, but gain increased damage and speed"
+    vietnamese: "Gi\u1ea3m t\u1ea7m \u0111\u00e1nh, t\u0103ng s\u00e1t th\u01b0\u01a1ng v\u00e0 t\u1ed1c \u0111\u00e1nh."
+    spanish:
+    portuguese:
+    french:
+  - english: "Diagonal Shot"
+    vietnamese: "B\u1eafn ch\u00e9o"
+    spanish:
+    portuguese:
+    french:
+  - english: "Gain two diagonal projectiles"
+    vietnamese: "B\u1eafn th\u00eam hai vi\u00ean \u0111\u1ea1n theo \u0111\u01b0\u1eddng ch\u00e9o."
+    spanish:
+    portuguese:
+    french:
+  - english: "Flying Weapon"
+    vietnamese: "V\u0169 kh\u00ed bay"
+    spanish:
+    portuguese:
+    french:
+  - english: "Weapon flies and attacks on its own, but loses some of its power and speed"
+    vietnamese: "V\u0169 kh\u00ed t\u1ef1 bay v\u00e0 t\u1ea5n c\u00f4ng, v\u1edbi s\u1ee9c m\u1ea1nh v\u00e0 t\u1ed1c \u0111\u1ed9 gi\u1ea3m."
+    spanish:
+    portuguese:
+    french:
+  - english: "Front Projectile"
+    vietnamese: "B\u1eafn th\u00eam \u0111\u1ea1n th\u1eb3ng"
+    spanish:
+    portuguese:
+    french:
+  - english: "Gain additional front projectile"
+    vietnamese: "B\u1eafn th\u00eam m\u1ed9t vi\u00ean \u0111\u1ea1n v\u1ec1 ph\u00eda tr\u01b0\u1edbc."
+    spanish:
+    portuguese:
+    french:
+  - english: "Multi Shot"
+    vietnamese: "B\u1eafn li\u00ean ti\u1ebfp"
+    spanish:
+    portuguese:
+    french:
+  - english: "Shoot twice in a row"
+    vietnamese: "B\u1eafn hai l\u1ea7n li\u00ean ti\u1ebfp."
+    spanish:
+    portuguese:
+    french:
+  - english: "Piercing Strike"
+    vietnamese: "\u0110\u1ea1n xuy\u00ean \u0111\u1ecbch"
+    spanish:
+    portuguese:
+    french:
+  - english: "Attacks pierce enemies"
+    vietnamese: "\u0110\u00f2n \u0111\u00e1nh xuy\u00ean qua k\u1ebb \u0111\u1ecbch."
+    spanish:
+    portuguese:
+    french:
+  - english: "Quick Shot"
+    vietnamese: "B\u1eafn nhanh"
+    spanish:
+    portuguese:
+    french:
+  - english: "Gain increased attack speed, but projectiles become smaller"
+    vietnamese: "T\u0103ng t\u1ed1c \u0111\u00e1nh nh\u01b0ng \u0111\u1ea1n nh\u1ecf h\u01a1n."
+    spanish:
+    portuguese:
+    french:
+  - english: "Rear Shot"
+    vietnamese: "B\u1eafn v\u1ec1 sau"
+    spanish:
+    portuguese:
+    french:
+  - english: "Shoot additional projectile from behind"
+    vietnamese: "B\u1eafn th\u00eam m\u1ed9t vi\u00ean \u0111\u1ea1n v\u1ec1 ph\u00eda sau."
+    spanish:
+    portuguese:
+    french:
+  - english: "Ricochet"
+    vietnamese: "\u0110\u1ea1n n\u1ea3y"
+    spanish:
+    portuguese:
+    french:
+  - english: "Projectiles bounce off enemies"
+    vietnamese: "\u0110\u1ea1n n\u1ea3y t\u1eeb k\u1ebb \u0111\u1ecbch n\u00e0y sang k\u1ebb \u0111\u1ecbch kh\u00e1c."
+    spanish:
+    portuguese:
+    french:
+  - english: "Sniper"
+    vietnamese: "B\u1eafn t\u1ec9a"
+    spanish:
+    portuguese:
+    french:
+  - english: "Gain increasingly more damage on distant shots"
+    vietnamese: "M\u1ee5c ti\u00eau c\u00e0ng xa, \u0111\u00f2n \u0111\u00e1nh c\u00e0ng m\u1ea1nh."
+    spanish:
+    portuguese:
+    french:
+  - english: "Split Shot"
+    vietnamese: "\u0110\u1ea1n t\u00e1ch"
+    spanish:
+    portuguese:
+    french:
+  - english: "Projectiles split into several smaller ones"
+    vietnamese: "\u0110\u1ea1n t\u00e1ch th\u00e0nh nhi\u1ec1u vi\u00ean nh\u1ecf h\u01a1n."
+    spanish:
+    portuguese:
+    french:
+  - english: "Traversing Shot"
+    vietnamese: "\u0110\u1ea1n xuy\u00ean v\u1eadt c\u1ea3n"
+    spanish:
+    portuguese:
+    french:
+  - english: "Projectiles pierce obstacles"
+    vietnamese: "\u0110\u1ea1n xuy\u00ean qua v\u1eadt c\u1ea3n."
+    spanish:
+    portuguese:
+    french:
+  - english: "Healing"
+    vietnamese: "H\u1ed3i ph\u1ee5c"
+    spanish:
+    portuguese:
+    french:
+  - english: "Poison Arrow Speed Multiplier"
+    vietnamese: "H\u1ec7 s\u1ed1 t\u1ed1c \u0111\u1ed9 t\u00ean \u0111\u1ed9c"
+    spanish:
+    portuguese:
+    french:
+  - english: "Freeze Arrow Speed Multiplier"
+    vietnamese: "H\u1ec7 s\u1ed1 t\u1ed1c \u0111\u1ed9 t\u00ean b\u0103ng"
+    spanish:
+    portuguese:
+    french:
+  - english: "Burn Arrow Speed Multiplier"
+    vietnamese: "H\u1ec7 s\u1ed1 t\u1ed1c \u0111\u1ed9 t\u00ean l\u1eeda"
+    spanish:
+    portuguese:
+    french:
+  - english: "Shock Arrow Speed Multiplier"
+    vietnamese: "H\u1ec7 s\u1ed1 t\u1ed1c \u0111\u1ed9 t\u00ean s\u00e9t"
+    spanish:
+    portuguese:
+    french:
+  - english: "Poison Damage Multiplier"
+    vietnamese: "H\u1ec7 s\u1ed1 s\u00e1t th\u01b0\u01a1ng \u0111\u1ed9c"
+    spanish:
+    portuguese:
+    french:
+  - english: "Freeze Damage Multiplier"
+    vietnamese: "H\u1ec7 s\u1ed1 s\u00e1t th\u01b0\u01a1ng b\u0103ng"
+    spanish:
+    portuguese:
+    french:
+  - english: "Burn Damage Multiplier"
+    vietnamese: "H\u1ec7 s\u1ed1 s\u00e1t th\u01b0\u01a1ng thi\u00eau \u0111\u1ed1t"
+    spanish:
+    portuguese:
+    french:
+  - english: "Shock Damage Multiplier"
+    vietnamese: "H\u1ec7 s\u1ed1 s\u00e1t th\u01b0\u01a1ng \u0111i\u1ec7n gi\u1eadt"
+    spanish:
+    portuguese:
+    french:
+  - english: "Meteor Spawn Delay"
+    vietnamese: "Th\u1eddi gian ch\u1edd thi\u00ean th\u1ea1ch"
+    spanish:
+    portuguese:
+    french:
+  - english: "Star Spawn Interval Multiplier"
+    vietnamese: "H\u1ec7 s\u1ed1 th\u1eddi gian gi\u1eefa c\u00e1c sao"
+    spanish:
+    portuguese:
+    french:
+  - english: "Front Arrows Count"
+    vietnamese: "S\u1ed1 m\u0169i t\u00ean tr\u01b0\u1edbc"
+    spanish:
+    portuguese:
+    french:
+  - english: "Rear Arrows Count"
+    vietnamese: "S\u1ed1 m\u0169i t\u00ean sau"
+    spanish:
+    portuguese:
+    french:
+  - english: "Diagonal Arrows Count"
+    vietnamese: "S\u1ed1 m\u0169i t\u00ean ch\u00e9o"
+    spanish:
+    portuguese:
+    french:
+  - english: "Arrow Bounce Count"
+    vietnamese: "S\u1ed1 l\u1ea7n t\u00ean b\u1eadt t\u01b0\u1eddng"
+    spanish:
+    portuguese:
+    french:
+  - english: "Arrow Bounce Damage"
+    vietnamese: "S\u00e1t th\u01b0\u01a1ng t\u00ean b\u1eadt t\u01b0\u1eddng"
+    spanish:
+    portuguese:
+    french:
+  - english: "Arrow Ricochet Count"
+    vietnamese: "S\u1ed1 l\u1ea7n t\u00ean n\u1ea3y gi\u1eefa c\u00e1c \u0111\u1ecbch"
+    spanish:
+    portuguese:
+    french:
+  - english: "Arrow Ricochet Damage"
+    vietnamese: "S\u00e1t th\u01b0\u01a1ng t\u00ean n\u1ea3y"
+    spanish:
+    portuguese:
+    french:
+  - english: "Arrow Size"
+    vietnamese: "K\u00edch th\u01b0\u1edbc t\u00ean"
+    spanish:
+    portuguese:
+    french:
+  - english: "Arrow Spread"
+    vietnamese: "\u0110\u1ed9 t\u1ea3n c\u1ee7a t\u00ean"
+    spanish:
+    portuguese:
+    french:
+  - english: "Arrow Range"
+    vietnamese: "T\u1ea7m bay c\u1ee7a t\u00ean"
+    spanish:
+    portuguese:
+    french:
+  - english: "Multishot"
+    vietnamese: "S\u1ed1 ph\u00e1t b\u1eafn li\u00ean ti\u1ebfp"
+    spanish:
+    portuguese:
+    french:
+  - english: "Split Arrow Count"
+    vietnamese: "S\u1ed1 m\u0169i t\u00ean t\u00e1ch"
+    spanish:
+    portuguese:
+    french:
+  - english: "Spli Arrow Damage Multiplier"
+    vietnamese: "H\u1ec7 s\u1ed1 s\u00e1t th\u01b0\u01a1ng t\u00ean t\u00e1ch"
+    spanish:
+    portuguese:
+    french:
+  - english: "Magnetism"
+    vietnamese: "Ph\u1ea1m vi h\u00fat v\u1eadt ph\u1ea9m"
+    spanish:
+    portuguese:
+    french:
+  - english: "Slow Down Multiplier"
+    vietnamese: "H\u1ec7 s\u1ed1 l\u00e0m ch\u1eadm"
+    spanish:
+    portuguese:
+    french:
+  - english: "Size"
+    vietnamese: "K\u00edch th\u01b0\u1edbc"
+    spanish:
+    portuguese:
+    french:
+  - english: "Damage To Bosses Multiplier"
+    vietnamese: "H\u1ec7 s\u1ed1 s\u00e1t th\u01b0\u01a1ng l\u00ean tr\u00f9m"
+    spanish:
+    portuguese:
+    french:
+  - english: "Revives"
+    vietnamese: "L\u01b0\u1ee3t h\u1ed3i sinh"
+    spanish:
+    portuguese:
+    french:
+  - english: "Wave end healing"
+    vietnamese: "H\u1ed3i m\u00e1u cu\u1ed1i \u0111\u1ee3t"
+    spanish:
+    portuguese:
+    french:
+  - english: "Every attack has a chance to land a critical hit"
+    vietnamese: "M\u1ed7i \u0111\u00f2n \u0111\u00e1nh \u0111\u1ec1u c\u00f3 th\u1ec3 g\u00e2y ch\u00ed m\u1ea1ng"
+    spanish:
+    portuguese:
+    french:
+  - english: "{0:loc} Fragments"
+    vietnamese: "M\u1ea3nh {0}"
+    spanish:
+    portuguese:
+    french:
+  - english: "{0:loc} Fragment"
+    vietnamese: "M\u1ea3nh {0}"
+    spanish:
+    portuguese:
+    french:

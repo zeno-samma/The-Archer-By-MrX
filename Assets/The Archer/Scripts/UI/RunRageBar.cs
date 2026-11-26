@@ -24,7 +24,7 @@ namespace MrX.UI
             displayedValue = percent;
             fill.color = label.color = chargingColor;
             icon.color = chargingColor;
-            label.text = $"NỘ {percent}%";
+            label.text = $"Rage {percent}%";
         }
 
         public void ShowActive(float remaining, float duration)
@@ -37,7 +37,7 @@ namespace MrX.UI
             displayedValue = tenths;
             fill.color = label.color = activeColor;
             icon.color = activeColor;
-            label.text = $"NỘ! {tenths / 10f:0.0}s";
+            label.text = $"Rage! {tenths / 10f:0.0}s";
         }
 
         public void Hide() => gameObject.SetActive(false);
