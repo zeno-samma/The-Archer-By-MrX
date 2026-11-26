@@ -22,6 +22,7 @@ namespace MrX.UI
         // [SerializeField] private TMP_Text heroLevel;
         [SerializeField] private RectTransform modal;
         [SerializeField] private ScrollRect scroll;
+        internal ScrollRect InventoryScroll => scroll;
         [SerializeField] private Button expand, details, confirm, firstHero, filterButton;
         [SerializeField] private List<Button> heroButtons = new List<Button>();
         [SerializeField] private List<string> heroIds = new List<string>();

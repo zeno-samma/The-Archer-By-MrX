@@ -38,6 +38,17 @@ namespace MrX.UI.Armory
         [SerializeField] private bool useAuthoredSlotScale;
         private Vector3[] authoredSlotScales;
 
+        internal RectTransform SlotGroup
+        {
+            get
+            {
+                if (slots == null) return null;
+                foreach (var slot in slots)
+                    if (slot != null && slot.SlotRect) return slot.SlotRect.parent as RectTransform;
+                return null;
+            }
+        }
+
         private EntityId debugPanelId;
 
         private void Awake()

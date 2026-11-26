@@ -69,7 +69,7 @@ namespace MrX.UI
             {
                 if (!region.frame) continue;
                 float scale = region.designWidth > 0 && region.minimumHeight > 0
-                    ? Mathf.Min(safe.width / region.designWidth, safe.height / region.minimumHeight) : 1;
+                    ? FitScale(safe.size, region.designWidth, region.minimumHeight) : 1;
                 Vector2 visibleSize = region.designWidth > 0 && region.minimumHeight > 0
                     ? new Vector2(region.designWidth * scale, safe.height) : safe.size;
                 Place(region.frame, safe.center, visibleSize / scale);
@@ -83,16 +83,45 @@ namespace MrX.UI
             }
 
             foreach (var pin in pins)
-            {
-                if (!pin.frame || !pin.target) continue;
-                var frameRect = pin.frame.rect;
-                float height = Mathf.Clamp(frameRect.height * pin.heightFraction, pin.minimum, pin.maximum) + pin.offset;
-                Vector3 world = pin.frame.TransformPoint(new Vector3(frameRect.center.x, frameRect.yMin + height, 0));
-                var position = pin.target.localPosition;
-                position.y = pin.target.parent.InverseTransformPoint(world).y;
-                pin.target.localPosition = position;
-            }
+                PlacePin(pin, pin.target, pin.frame);
         }
+
+        private static void PlacePin(VerticalPin pin, RectTransform target, RectTransform frame)
+        {
+            if (!frame || !target) return;
+            var frameRect = frame.rect;
+            float height = Mathf.Clamp(frameRect.height * pin.heightFraction, pin.minimum, pin.maximum) + pin.offset;
+            Vector3 world = frame.TransformPoint(new Vector3(frameRect.center.x, frameRect.yMin + height, 0));
+            var position = target.localPosition;
+            position.y = target.parent.InverseTransformPoint(world).y;
+            target.localPosition = position;
+        }
+
+        private static float FitScale(Vector2 available, float designWidth, float minimumHeight) =>
+            Mathf.Min(available.x / designWidth, available.y / minimumHeight);
+
+#if UNITY_EDITOR
+        public bool TryGetPreviewSize(Transform content, Vector2 available, out Vector2 size)
+        {
+            foreach (var region in regions)
+            {
+                if (!region.frame || !content.IsChildOf(region.frame) || region.designWidth <= 0 || region.minimumHeight <= 0)
+                    continue;
+
+                size = new Vector2(region.designWidth, available.y / FitScale(available, region.designWidth, region.minimumHeight));
+                return true;
+            }
+
+            size = default;
+            return false;
+        }
+
+        public void ApplyPreviewPins(Func<RectTransform, RectTransform> findClone)
+        {
+            foreach (var pin in pins)
+                PlacePin(pin, findClone(pin.target), findClone(pin.frame));
+        }
+#endif
 
         // Coordinates are measured from the parent's lower-left corner.
         internal static void Place(RectTransform target, Vector2 center, Vector2 size)
