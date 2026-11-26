@@ -1160,6 +1160,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1123703332}
   - component: {fileID: 1123703331}
+  - component: {fileID: 1123703333}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -1203,6 +1204,26 @@ Transform:
   - {fileID: 495577394}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1123703333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1123703330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41805fe154651dc4daeff930a0af2024, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MrX.UI.Feedback.ButtonFeedbackManager
+  defaults:
+    enabled: 1
+    hoverScale: 1.08
+    clickScale: 0.94
+    responseTime: 0.07
+    clickDuration: 0.13
+    brightenOnHover: 0
+    hoverBrightness: 1.28
 --- !u!114 &1173207242 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2953618524306816026, guid: e0bb5f66ea734d34f924ceaf9048286a, type: 3}
