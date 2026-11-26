@@ -27,6 +27,9 @@ namespace MrX.EditorTools
     public abstract class MenuLayoutPreviewWindow : EditorWindow
     {
         [SerializeField] private RectTransform source;
+        [SerializeField] private Vector2 lastGameViewPixels;
+        [SerializeField] private Vector2 lastSafeViewPixels;
+        [SerializeField] private Vector2 lastAuthoredSize;
         private RectTransform context;
         private Scene previewScene;
         private RectTransform clonedRoot;
@@ -39,6 +42,7 @@ namespace MrX.EditorTools
         private readonly Dictionary<GameObject, bool> visibility = new();
         private readonly Dictionary<Canvas, bool> canvasVisibility = new();
         private readonly Dictionary<CanvasGroup, float> alpha = new();
+        private Transform visibleFocus;
         private Vector2 layoutSize;
         private bool needsRender;
         private bool rebuildQueued;
@@ -50,6 +54,10 @@ namespace MrX.EditorTools
         protected RectTransform Source => source;
         protected RectTransform PreviewScope => FindClone(source) as RectTransform;
         protected RectTransform PreviewFrame => canvas ? (RectTransform)canvas.transform : null;
+        protected Vector2 PreviewPixels { get; private set; }
+        protected RectTransform FindPreviewRect(RectTransform original) => FindClone(original) as RectTransform;
+        protected virtual bool UseAuthoredCanvas => false;
+        protected virtual RectTransform IsolatedPanel => null;
 
         protected void Preview(RectTransform panel)
         {
@@ -149,7 +157,7 @@ namespace MrX.EditorTools
             var armory = source.GetComponentInParent<ArmoryResponsiveLayout>(true);
             var settings = armory ? new SerializedObject(armory) : null;
             DrawPreviewControls(settings);
-            Vector2 size = GetLayoutSize(source);
+            Vector2 size = GetLayoutSize(source, UseAuthoredCanvas);
             Rect space = GUILayoutUtility.GetRect(1f, 1f, GUILayout.ExpandWidth(true), GUILayout.ExpandHeight(true));
             if (Event.current.type == EventType.Layout || space.width <= 0 || space.height <= 0) return;
             float scale = Mathf.Min(space.width / size.x, space.height / size.y);
@@ -186,18 +194,37 @@ namespace MrX.EditorTools
         protected virtual Transform FocusedElement => source;
         protected virtual void DrawPreviewOverlay(Rect rect, Vector2 size) { }
 
-        private static Vector2 GetLayoutSize(Transform content)
+        protected static Vector2 GetGameViewPixels(bool useSafeArea)
         {
             Vector2 available = Handles.GetMainGameViewSize();
             if (available.x <= 0 || available.y <= 0) available = new Vector2(720, 1604);
             var safe = Screen.safeArea;
-            if (Mathf.Abs(available.x - Screen.width) <= 1f && Mathf.Abs(available.y - Screen.height) <= 1f
+            if (useSafeArea && Mathf.Abs(available.x - Screen.width) <= 1f && Mathf.Abs(available.y - Screen.height) <= 1f
                 && safe.width > 0 && safe.height > 0)
                 available = safe.size;
+            return available;
+        }
+
+        private Vector2 GetLayoutSize(RectTransform content, bool useAuthoredCanvas)
+        {
+            // Unity can report the maximized editor pane's size after it hides the Game View.
+            if (!IsolatedPanel || !maximized || lastGameViewPixels == Vector2.zero)
+            {
+                lastGameViewPixels = GetGameViewPixels(false);
+                lastSafeViewPixels = GetGameViewPixels(true);
+                if (IsolatedPanel && FindContext(content).parent is RectTransform parent)
+                    lastAuthoredSize = parent.rect.size;
+            }
+            if (useAuthoredCanvas && lastAuthoredSize.x > 0f && lastAuthoredSize.y > 0f)
+            {
+                PreviewPixels = lastGameViewPixels;
+                return lastAuthoredSize;
+            }
+            PreviewPixels = lastSafeViewPixels;
 
             var frame = content.GetComponentInParent<ResponsiveFrame>();
-            if (frame && frame.TryGetPreviewSize(content, available, out var size)) return size;
-            return new Vector2(1080f, Mathf.Max(1760f, 1080f * available.y / available.x));
+            if (frame && frame.TryGetPreviewSize(content, PreviewPixels, out var responsiveSize)) return responsiveSize;
+            return new Vector2(1080f, Mathf.Max(1760f, 1080f * PreviewPixels.y / PreviewPixels.x));
         }
 
         private static RectTransform FindContext(RectTransform selected)
@@ -349,6 +376,9 @@ namespace MrX.EditorTools
 
         private void ApplyVisibility()
         {
+            var focus = FocusedElement ? FocusedElement : source;
+            if (IsolatedPanel && visibleFocus == focus) return;
+            visibleFocus = focus;
             foreach (var entry in visibility) if (entry.Key) entry.Key.SetActive(entry.Value);
             foreach (var entry in canvasVisibility) if (entry.Key) entry.Key.enabled = entry.Value;
             foreach (var entry in alpha) if (entry.Key) entry.Key.alpha = entry.Value;
@@ -356,7 +386,16 @@ namespace MrX.EditorTools
             canvasVisibility.Clear();
             alpha.Clear();
 
-            var focus = FocusedElement ? FocusedElement : source;
+            var panel = FindPreviewRect(IsolatedPanel);
+            if (panel)
+            {
+                foreach (Transform sibling in panel.parent)
+                {
+                    if (sibling == panel || !sibling.gameObject.activeSelf) continue;
+                    visibility.TryAdd(sibling.gameObject, true);
+                    sibling.gameObject.SetActive(false);
+                }
+            }
             var page = focus.GetComponentInParent<MainMenuPageBehavior>(true);
             if (page && FindClone(page.transform))
             {
@@ -407,10 +446,13 @@ namespace MrX.EditorTools
             BeforeLayout();
             PreviewFrame.sizeDelta = size;
             ApplyVisibility();
-            var frame = context.GetComponentInParent<ResponsiveFrame>();
-            if (frame) frame.ApplyPreviewPins(rect => FindClone(rect) as RectTransform);
-            foreach (var pair in armories)
-                pair.clone.ApplyLayout(((RectTransform)pair.clone.transform).rect.size);
+            if (!UseAuthoredCanvas)
+            {
+                var frame = context.GetComponentInParent<ResponsiveFrame>();
+                if (frame) frame.ApplyPreviewPins(FindPreviewRect);
+                foreach (var pair in armories)
+                    pair.clone.ApplyLayout(((RectTransform)pair.clone.transform).rect.size);
+            }
             AfterLayout();
 
             const int width = 512;
@@ -442,6 +484,7 @@ namespace MrX.EditorTools
             visibility.Clear();
             canvasVisibility.Clear();
             alpha.Clear();
+            visibleFocus = null;
             context = null;
             clonedRoot = null;
             image = null;

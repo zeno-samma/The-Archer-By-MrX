@@ -12,6 +12,7 @@ namespace MrX.EditorTools
     {
         private static readonly string[] ArmoryGroups = { "Parents", "Stats", "Equipment", "Inventory", "All children" };
         private static readonly string[] MenuGroups = { "Parents", "All children" };
+        private static readonly string[] CharacterModes = { "Match Play Mode", "Edit Canvas" };
         private const string MenuPath = "GameObject/MrX Studio/Open UI Layout Trial";
         private const string ToolsPath = "Tools/MrX Studio/Main Menu Layout Trial";
         private const int InventoryGroup = 3;
@@ -59,9 +60,15 @@ namespace MrX.EditorTools
         [SerializeField] private int columns = 6;
         [SerializeField] private float gap = 10f;
         [SerializeField] private float inventoryScroll;
+        [SerializeField] private int characterMode;
+        [SerializeField] private bool showCharacterAdjustments;
 
         private RectTransform indexedSource;
         private RectTransform indexedPreview;
+        private RectTransform character;
+        private RectTransform characterStats;
+        private bool selectCharacterStats;
+        private string statsMeasurement;
         private RectTransform[] sourceNodes;
         private Transform[] sourceParents;
         private RectTransform[] previewNodes;
@@ -97,8 +104,12 @@ namespace MrX.EditorTools
 
         protected override void OnScopeChanged()
         {
+            ResolveCharacterScope();
             selected = 0;
-            group = 0;
+            selectCharacterStats = characterStats && characterStats != Source && characterStats.IsChildOf(Source);
+            group = selectCharacterStats ? 1 : 0;
+            characterMode = 0;
+            statsMeasurement = null;
             indexedGroup = -1;
             editingBackdrop = false;
             ResetAll();
@@ -107,6 +118,7 @@ namespace MrX.EditorTools
         protected override void OnEnable()
         {
             base.OnEnable();
+            ResolveCharacterScope();
             EditorApplication.hierarchyChanged += RefreshHierarchy;
         }
 
@@ -118,6 +130,27 @@ namespace MrX.EditorTools
 
         protected override void DrawPreviewControls(SerializedObject settings)
         {
+            if (characterStats)
+            {
+                int mode = GUILayout.Toolbar(characterMode, CharacterModes);
+                if (mode != characterMode)
+                {
+                    characterMode = mode;
+                    statsMeasurement = null;
+                    RebuildPreview();
+                }
+                using (new EditorGUILayout.HorizontalScope())
+                {
+                    EditorGUILayout.LabelField(statsMeasurement ?? "Measuring Stats cards…");
+                    if (characterStats.IsChildOf(Source) && GUILayout.Button("Select Stats", GUILayout.Width(90f)))
+                    {
+                        group = 1;
+                        IndexSource(settings, false);
+                        SelectElement(Array.IndexOf(sourceNodes, characterStats));
+                    }
+                }
+            }
+
             bool entireArmory = Source.GetComponent<ArmoryResponsiveLayout>();
             var groups = entireArmory ? ArmoryGroups : MenuGroups;
             group = GUILayout.Toolbar(Mathf.Clamp(group, 0, groups.Length - 1), groups);
@@ -130,11 +163,7 @@ namespace MrX.EditorTools
 
             int choice = Mathf.Max(0, Array.IndexOf(choices, selected));
             int next = choices[EditorGUILayout.Popup("Element", choice, labels)];
-            if (selected != next)
-            {
-                selected = next;
-                InvalidatePreview();
-            }
+            SelectElement(next);
             var backdrop = settings?.FindProperty("backdrop").objectReferenceValue as Image;
             editingBackdrop = backdrop && sourceNodes[selected] == backdrop.rectTransform;
             if (editingBackdrop)
@@ -142,6 +171,12 @@ namespace MrX.EditorTools
                 EditorGUILayout.LabelField("Backdrop settings · stored on Armory Page", EditorStyles.miniLabel);
                 base.DrawPreviewControls(settings);
                 return;
+            }
+
+            if (characterStats)
+            {
+                showCharacterAdjustments = EditorGUILayout.Foldout(showCharacterAdjustments, "Trial adjustments", true);
+                if (!showCharacterAdjustments) return;
             }
 
             EditorGUILayout.LabelField("Trial adjustments · preview only", EditorStyles.miniLabel);
@@ -173,12 +208,39 @@ namespace MrX.EditorTools
             EditorGUILayout.LabelField("Drag the preview to move the selected element.", EditorStyles.miniLabel);
         }
 
+        protected override bool UseAuthoredCanvas => characterStats && characterMode == 1;
+        protected override RectTransform IsolatedPanel => character;
+
+        private void SelectElement(int index)
+        {
+            if (index == selected) return;
+            selected = index;
+            if (characterStats) RebuildPreview();
+            else InvalidatePreview();
+        }
+
+        private void ResolveCharacterScope()
+        {
+            character = characterStats = null;
+            var hero = Source ? Source.root.GetComponentInChildren<HeroPageBehavior>(true) : null;
+            if (!hero) return;
+            var details = new SerializedObject(hero).FindProperty("details").objectReferenceValue as RectTransform;
+            if (!details || !Source.IsChildOf(details)) return;
+            character = details;
+            characterStats = details.Find("Group_Center/Stats") as RectTransform;
+        }
+
         private void IndexSource(SerializedObject settings, bool entireArmory)
         {
             if (indexedSource != Source)
             {
                 indexedSource = Source;
                 sourceNodes = Source.GetComponentsInChildren<RectTransform>(true);
+                if (selectCharacterStats)
+                {
+                    selected = Array.IndexOf(sourceNodes, characterStats);
+                    selectCharacterStats = false;
+                }
                 CaptureSourceParents();
                 indexedGroup = -1;
             }
@@ -404,10 +466,50 @@ namespace MrX.EditorTools
 
         protected override void DrawPreviewOverlay(Rect rect, Vector2 size)
         {
+            MeasureStats(size);
             var target = FindPreviewElement(selected);
             if (!target) return;
             var root = PreviewFrame;
+            var targetBounds = GetPreviewBounds(target);
+            var bounds = Rect.MinMaxRect(
+                (targetBounds.xMin - root.rect.xMin) / size.x * rect.width, (root.rect.yMax - targetBounds.yMax) / size.y * rect.height,
+                (targetBounds.xMax - root.rect.xMin) / size.x * rect.width, (root.rect.yMax - targetBounds.yMin) / size.y * rect.height);
+            GUI.BeginGroup(rect);
+            EditorGUI.DrawRect(new Rect(bounds.xMin, bounds.yMin, bounds.width, 2), Outline);
+            EditorGUI.DrawRect(new Rect(bounds.xMin, bounds.yMax - 2, bounds.width, 2), Outline);
+            EditorGUI.DrawRect(new Rect(bounds.xMin, bounds.yMin, 2, bounds.height), Outline);
+            EditorGUI.DrawRect(new Rect(bounds.xMax - 2, bounds.yMin, 2, bounds.height), Outline);
+            GUI.EndGroup();
+        }
+
+        private void MeasureStats(Vector2 size)
+        {
+            var stats = FindPreviewRect(characterStats);
+            if (!stats) return;
+            float left = float.PositiveInfinity;
+            float right = float.NegativeInfinity;
+            float top = float.NegativeInfinity;
+            foreach (Transform child in stats)
+            {
+                if (child is not RectTransform card || !card.gameObject.activeInHierarchy) continue;
+                var bounds = GetPreviewBounds(card);
+                left = Mathf.Min(left, bounds.xMin);
+                right = Mathf.Max(right, bounds.xMax);
+                top = Mathf.Max(top, bounds.yMax);
+            }
+            if (float.IsInfinity(left))
+            {
+                statsMeasurement = "No visible cards";
+                return;
+            }
+            float pixelsPerUnit = PreviewPixels.y / size.y;
+            statsMeasurement = $"{(right - left) * pixelsPerUnit:0} px wide · {(PreviewFrame.rect.yMax - top) * pixelsPerUnit:0} px from top";
+        }
+
+        private Rect GetPreviewBounds(RectTransform target)
+        {
             target.GetWorldCorners(corners);
+            var root = PreviewFrame;
             Vector2 min = root.InverseTransformPoint(corners[0]);
             Vector2 max = min;
             for (int i = 1; i < corners.Length; i++)
@@ -416,15 +518,7 @@ namespace MrX.EditorTools
                 min = Vector2.Min(min, corner);
                 max = Vector2.Max(max, corner);
             }
-            var bounds = Rect.MinMaxRect(
-                (min.x - root.rect.xMin) / size.x * rect.width, (root.rect.yMax - max.y) / size.y * rect.height,
-                (max.x - root.rect.xMin) / size.x * rect.width, (root.rect.yMax - min.y) / size.y * rect.height);
-            GUI.BeginGroup(rect);
-            EditorGUI.DrawRect(new Rect(bounds.xMin, bounds.yMin, bounds.width, 2), Outline);
-            EditorGUI.DrawRect(new Rect(bounds.xMin, bounds.yMax - 2, bounds.width, 2), Outline);
-            EditorGUI.DrawRect(new Rect(bounds.xMin, bounds.yMin, 2, bounds.height), Outline);
-            EditorGUI.DrawRect(new Rect(bounds.xMax - 2, bounds.yMin, 2, bounds.height), Outline);
-            GUI.EndGroup();
+            return Rect.MinMaxRect(min.x, min.y, max.x, max.y);
         }
     }
 }
