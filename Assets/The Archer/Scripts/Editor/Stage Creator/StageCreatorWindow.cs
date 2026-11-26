@@ -167,7 +167,7 @@ namespace MrX.StageCreator
             {
                 if (StagePage != null && StagePage.IsOpened)
                 {
-                    if (!IsTesting)
+                    if (!IsTesting && string.IsNullOrEmpty(SessionState.GetString(StageDifficultyTrial.StageKey, "")))
                     {
                         StagePage.ApplyTestingData();
                     }

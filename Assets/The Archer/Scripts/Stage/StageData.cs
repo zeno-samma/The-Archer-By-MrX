@@ -2,6 +2,7 @@ using MrX.Audio;
 using MrX.Currency;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace MrX
 {
@@ -55,11 +56,51 @@ namespace MrX
         [SerializeField] protected float enemyHPMultiplierRoomStep = 0.1f;
         [SerializeField] protected float enemyHPMultiplierWaveStep = 0.02f;
 
+        [Header("Difficulty")]
+        [SerializeField, FormerlySerializedAs("enableDifficultyTrial")] private bool enableDifficulties;
+        [SerializeField, Min(1f)] private float intermediateDamageFactor = 1.15f;
+        [SerializeField, Min(1f)] private float intermediateHpFactor = 1.25f;
+        [SerializeField, Min(1f)] private float hardDamageFactor = 1.3f;
+        [SerializeField, Min(1f)] private float hardHpFactor = 1.5f;
+
+        public bool UsesDifficulties => enableDifficulties;
+
+        public Vector2 GetEnemyMultipliers(StageDifficulty difficulty, int roomIndex, int waveIndex)
+        {
+            float damage = EnemyDamageMultiplier + EnemyDamageMultiplierRoomStep * roomIndex +
+                EnemyDamageMultiplierWaveStep * waveIndex;
+            float hp = EnemyHPMultiplier + EnemyHPMultiplierRoomStep * roomIndex +
+                EnemyHPMultiplierWaveStep * waveIndex;
+
+            switch (difficulty)
+            {
+                case StageDifficulty.Intermediate:
+                    return new Vector2(damage * Mathf.Max(1f, intermediateDamageFactor), hp * Mathf.Max(1f, intermediateHpFactor));
+                case StageDifficulty.Hard:
+                    return new Vector2(damage * Mathf.Max(1f, intermediateDamageFactor, hardDamageFactor),
+                        hp * Mathf.Max(1f, intermediateHpFactor, hardHpFactor));
+                default:
+                    return new Vector2(damage, hp);
+            }
+        }
+
+        public ClearStageThroughDifficultyCondition GetDifficultyUnlock(int stageIndex)
+        {
+            if (!enableDifficulties || stageIndex <= 0) return null;
+            foreach (var condition in unlockConditions)
+            {
+                if (condition is ClearStageThroughDifficultyCondition difficultyCondition)
+                    return difficultyCondition;
+            }
+
+            return new ClearStageThroughDifficultyCondition();
+        }
+
         [Space]
         [SerializeField, TextArea] protected string unlockDescription;
         public string UnlockDescription => unlockDescription;
 
-        [SerializeReference] protected List<StageUnlockCondition> unlockConditions;
+        [SerializeReference] protected List<StageUnlockCondition> unlockConditions = new List<StageUnlockCondition>();
         public List<StageUnlockCondition> UnlockConditions => unlockConditions;
 
         public float EnemyHPMultiplier => enemyHPMulitplier;

@@ -75,7 +75,17 @@ namespace MrX.StageCreator
             EditorGUILayout.BeginVertical(GUILayout.Width(350));
 
             var condition = conditionProperty.managedReferenceValue;
-            if (condition is PreviousStageCompletedCondition)
+            if (condition is ClearStageThroughDifficultyCondition)
+            {
+                EditorGUILayout.LabelField("Clear Stage Through Difficulty", EditorStyles.boldLabel);
+                var previous = conditionProperty.FindPropertyRelative("usePreviousStage");
+                EditorGUILayout.PropertyField(previous, new GUIContent("Previous Stage"));
+                if (!previous.boolValue)
+                    EditorGUILayout.PropertyField(conditionProperty.FindPropertyRelative("stage"));
+                EditorGUILayout.PropertyField(conditionProperty.FindPropertyRelative("requiredDifficulty"));
+                EditorGUILayout.HelpBox("For stages with difficulties enabled, this requirement controls access to the stage.", MessageType.Info);
+            }
+            else if (condition is PreviousStageCompletedCondition)
             {
                 DrawPrevCondition(conditionProperty, index);
             }
@@ -176,7 +186,7 @@ namespace MrX.StageCreator
             for(int i = 0; i < ListProperty.arraySize; i++)
             {
                 var condition = ListProperty.GetArrayElementAtIndex(i).managedReferenceValue;
-                if (condition.GetType() == conditionType) return true;
+                if (condition?.GetType() == conditionType) return true;
             }
 
             return false;

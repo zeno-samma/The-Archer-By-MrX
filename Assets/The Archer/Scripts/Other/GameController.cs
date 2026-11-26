@@ -199,15 +199,19 @@ namespace MrX
             MenuEconomy = new MenuEconomyService(Resources.Load<MenuEconomySettings>(MenuEconomySettings.ResourcePath), wallets, SaveManager);
         }
 
-        public static bool TryStartNewRun(StageData stage)
+        public static bool TryStartNewRun(StageData stage) => TryStartNewRun(stage, StageDifficulty.Basic);
+
+        public static bool TryStartNewRun(StageData stage, StageDifficulty difficulty)
         {
             if (instance == null || loadingStage || stage == null || MenuEconomy == null) return false;
             var stages = SaveManager.GetSave<StageSave>("Stage");
-            if (!stages.IsStageUnlocked(stage)) return false;
+            if (!stages.CanPlayDifficulty(stage, difficulty)) return false;
             // Set the transition guard before wallet events can reenter the start path.
             loadingStage = true;
             if (!MenuEconomy.TrySpendForNewRun(stage.EnergyCost)) { loadingStage = false; return false; }
-            SaveManager.GetSave<ContinuePlayingSave>("Continue Playing").Disable();
+            var run = SaveManager.GetSave<ContinuePlayingSave>("Continue Playing");
+            run.Disable();
+            run.RememberRun(stage.StageId, difficulty);
             CurrenciesManager.ApplyGameplayAmounts();
             stages.IncrementStageAttempts(stage);
             instance.StartCoroutine(StageLoadingCoroutine());

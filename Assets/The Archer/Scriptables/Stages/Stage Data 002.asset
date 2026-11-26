@@ -29,10 +29,14 @@ MonoBehaviour:
   enemyHPMulitplier: 1
   enemyHPMultiplierRoomStep: 0.1
   enemyHPMultiplierWaveStep: 0.05
-  unlockDescription: To unlock this stage complete the previous stage or purchase this one dirrectly
+  enableDifficulties: 1
+  intermediateDamageFactor: 1.15
+  intermediateHpFactor: 1.25
+  hardDamageFactor: 1.3
+  hardHpFactor: 1.5
+  unlockDescription: Clear Secrets Pyramid on Hard to unlock.
   unlockConditions:
-  - rid: 1864345643964956698
-  - rid: 6849199109708185680
+  - rid: 6849199109708185681
   abilityRerollPrice:
     currencyId: gold
     amount: 200
@@ -2805,13 +2809,9 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 1864345643964956698
-      type: {class: PurchasedCondition, ns: MrX, asm: Assembly-CSharp}
+    - rid: 6849199109708185681
+      type: {class: ClearStageThroughDifficultyCondition, ns: MrX, asm: Assembly-CSharp}
       data:
-        currency:
-          value: gold
-        cost: 50000
-    - rid: 6849199109708185680
-      type: {class: PreviousStageCompletedCondition, ns: MrX, asm: Assembly-CSharp}
-      data:
-        name: Previous Stage Completed
+        usePreviousStage: 1
+        stage: {fileID: 0}
+        requiredDifficulty: 2

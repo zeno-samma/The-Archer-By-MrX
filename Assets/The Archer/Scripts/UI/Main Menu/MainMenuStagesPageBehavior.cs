@@ -23,6 +23,14 @@ namespace MrX.UI
 
         [Header("Stage Data")]
         [SerializeField] protected MainMenuStageSelector stageSelector;
+        [SerializeField] private GameObject difficultySelector;
+        [SerializeField] private Button[] difficultyButtons;
+        [SerializeField] private TMP_Text[] difficultyLabels;
+        [SerializeField] private GameObject stageLockNotice;
+        [SerializeField] private TMP_Text stageLockText;
+        private StageDifficulty selectedDifficulty;
+        [SerializeField] private Color difficultyColor = new Color(0.06f, 0.18f, 0.33f);
+        [SerializeField] private Color selectedDifficultyColor = new Color(0.04f, 0.48f, 0.70f);
 
         [Header("Buttons")]
         [SerializeField] protected Button playButton;
@@ -58,11 +66,14 @@ namespace MrX.UI
             InitSaves();
 
             CheckFirstStageUnlockStatus();
+            int initialStageIndex = StageDifficultyTrial.GetInitialStageIndex(stageDatabase, StageSave);
             TryUnlockStages();
 
             StageSave.onSelectedStageChanged += InitStage;
 
             CheckContinuePlayingPopup();
+            if (StageDifficultyTrial.IsActive && !ContinuePlayingSave.HasUnfinishedStageData)
+                StageSave.SetSelectedStageId(initialStageIndex);
 
             OnMoveCenterFinished();
 
@@ -79,7 +90,7 @@ namespace MrX.UI
             // Migrate legacy runs before resetting the menu selection.
             if (ContinuePlayingSave.HasUnfinishedStageData && string.IsNullOrEmpty(ContinuePlayingSave.StageContentId))
                 ContinuePlayingSave.RememberStage(StageDatabase.GetStageData(Mathf.Clamp(StageSave.SelectedStageId,0,StageDatabase.StagesAmount-1)).StageId);
-            StageSave.SetSelectedStageId(0);
+            if (!StageDifficultyTrial.IsActive) StageSave.SetSelectedStageId(0);
         }
 
         protected virtual void AddListenersToButtons()
@@ -159,10 +170,19 @@ namespace MrX.UI
         {
             if (StageSave.IsStageUnlocked(stageData)) return false;
 
-            for (int i = 0; i < stageData.UnlockConditions.Count; i++)
+            if (stageData.UsesDifficulties)
             {
-                var condition = stageData.UnlockConditions[i];
+                var gate = stageData.GetDifficultyUnlock(stageIndex);
+                if (gate == null || !gate.IsMet(stageDatabase, stageIndex, StageSave)) return false;
+                StageSave.UnlockStage(stageData);
+                return true;
+            }
 
+            bool hasRegularCondition = false;
+            foreach (var condition in stageData.UnlockConditions)
+            {
+                if (condition == null || condition is ClearStageThroughDifficultyCondition) continue;
+                hasRegularCondition = true;
                 if (condition.IsMet(stageDatabase, stageIndex, StageSave))
                 {
                     StageSave.UnlockStage(stageData);
@@ -171,7 +191,7 @@ namespace MrX.UI
             }
 
             // If the stage does not have conditions, we use default PreviousStageCompletedCondition
-            if (stageData.UnlockConditions.Count == 0)
+            if (!hasRegularCondition)
             {
                 if (new PreviousStageCompletedCondition().IsMet(stageDatabase, stageIndex, StageSave))
                 {
@@ -213,6 +233,59 @@ namespace MrX.UI
 
             InitAttemptsText(stageData);
             InitInfoButton(stageData);
+            selectedDifficulty = StageDifficulty.Basic;
+            if (stageData.UsesDifficulties && StageSave.IsStageUnlocked(stageData))
+            {
+                while (selectedDifficulty < StageDifficulty.Hard &&
+                    StageSave.CanPlayDifficulty(stageData, selectedDifficulty + 1))
+                    selectedDifficulty++;
+            }
+
+            RefreshStageLockNotice(stageData, stageId);
+            RefreshDifficultySelector(stageData);
+        }
+
+        private void RefreshStageLockNotice(StageData stage, int stageIndex)
+        {
+            if (stageLockNotice == null) return;
+
+            var gate = StageSave.IsStageUnlocked(stage) ? null : stage.GetDifficultyUnlock(stageIndex);
+            if (gate != null)
+                stageLockText.text = gate.GetDescription(stageDatabase, stageIndex);
+            stageLockNotice.SetActive(gate != null);
+        }
+
+        public void SelectDifficulty(int value)
+        {
+            var screen = GameController.MainMenuScreenBehavior;
+            if (!screen.IsDockEnabled || screen.CurrentPage != this) return;
+            var stage = stageDatabase.GetStageData(StageSave.SelectedStageId);
+            var difficulty = (StageDifficulty)value;
+            if (!stage.UsesDifficulties || !StageSave.CanPlayDifficulty(stage, difficulty)) return;
+
+            selectedDifficulty = difficulty;
+            GameController.AudioManager.PlayButtonClick();
+            RefreshDifficultySelector(stage);
+        }
+
+        private void RefreshDifficultySelector(StageData stage)
+        {
+            if (difficultySelector == null) return;
+            bool canSelectDifficulty = stage.UsesDifficulties && StageSave.IsStageUnlocked(stage);
+            difficultySelector.SetActive(canSelectDifficulty);
+            if (!canSelectDifficulty) return;
+
+            for (int i = 0; i < difficultyButtons.Length; i++)
+            {
+                var difficulty = (StageDifficulty)i;
+                bool available = StageSave.CanPlayDifficulty(stage, difficulty);
+                bool cleared = StageSave.IsDifficultyCompleted(stage, difficulty);
+                difficultyButtons[i].interactable = available;
+                difficultyButtons[i].image.color = available && selectedDifficulty == difficulty
+                    ? selectedDifficultyColor : difficultyColor;
+                difficultyLabels[i].text = !available ? $"{difficulty}\nLocked" :
+                    cleared ? $"{difficulty}\nCleared" : difficulty.ToString();
+            }
         }
 
         protected virtual void InitAttemptsText(StageData stageData)
@@ -250,7 +323,7 @@ namespace MrX.UI
         {
             if (!StageSave.IsStageUnlocked(stageData))
             {
-                PurchaseCondition = stageData.GetPurchaseUnlockCondition();
+                PurchaseCondition = stageData.UsesDifficulties ? null : stageData.GetPurchaseUnlockCondition();
                 if (PurchaseCondition == null)
                 {
                     purchaseButton.gameObject.SetActive(false);
@@ -422,17 +495,20 @@ namespace MrX.UI
             var screen = GameController.MainMenuScreenBehavior;
             if (!screen.IsDockEnabled || screen.CurrentPage != this) return;
             GameController.AudioManager.PlayButtonClick();
-            if (!GameController.TryStartNewRun(StageDatabase.GetStageData(StageSave.SelectedStageId)))
+            var stage = StageDatabase.GetStageData(StageSave.SelectedStageId);
+            if (!StageSave.CanPlayDifficulty(stage, selectedDifficulty)) return;
+            if (!GameController.TryStartNewRun(stage, selectedDifficulty))
                 GetComponentInChildren<MenuEconomyPanel>(true)?.ShowInsufficientEnergy();
         }
 
         protected virtual void OnPurchaseButtonClicked()
         {
             if (PurchaseCondition == null) return;
+            var stageData = StageDatabase.GetStageData(StageSave.SelectedStageId);
+            if (stageData.UsesDifficulties) return;
 
             PurchaseCondition.Currency.Withdraw(PurchaseCondition.Cost);
 
-            var stageData = StageDatabase.GetStageData(StageSave.SelectedStageId);
             StageSave.UnlockStage(stageData);
 
             purchaseButton.gameObject.SetActive(false);

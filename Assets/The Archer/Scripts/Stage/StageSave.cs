@@ -59,6 +59,31 @@ namespace MrX
             GetStageSave(stageData).Complete();
         }
 
+        public bool IsDifficultyCompleted(StageData stage, StageDifficulty difficulty) =>
+            StageDifficultyTrial.IsValid(difficulty) && GetStageSave(stage).IsDifficultyCompleted(difficulty);
+
+        public bool HasClearedThrough(StageData stage, StageDifficulty difficulty)
+        {
+            if (!StageDifficultyTrial.IsValid(difficulty)) return false;
+            var save = GetStageSave(stage);
+            for (int level = 0; level <= (int)difficulty; level++)
+            {
+                if (!save.IsDifficultyCompleted((StageDifficulty)level)) return false;
+            }
+
+            return true;
+        }
+
+        public bool CanPlayDifficulty(StageData stage, StageDifficulty difficulty) =>
+            IsStageUnlocked(stage) && StageDifficultyTrial.IsValid(difficulty) &&
+            (difficulty == StageDifficulty.Basic ||
+                (stage.UsesDifficulties && HasClearedThrough(stage, (StageDifficulty)((int)difficulty - 1))));
+
+        public void CompleteDifficulty(StageData stage, StageDifficulty difficulty)
+        {
+            if (CanPlayDifficulty(stage, difficulty)) GetStageSave(stage).CompleteDifficulty(difficulty);
+        }
+
         public virtual void IncrementStageAttempts(StageData stageData)
         {
             GetStageSave(stageData).IncrementAttempts();
@@ -226,6 +251,7 @@ namespace MrX
             [SerializeField] protected bool isUnlocked = false;
             [SerializeField] protected bool isCompleted = false;
             [SerializeField] protected int attemptsCount = 0;
+            [SerializeField] private int completedDifficultyMask;
 
             public string StageId => stageId;
             public bool IsUnlocked => isUnlocked;
@@ -245,6 +271,16 @@ namespace MrX
             public void Complete()
             {
                 isCompleted = true;
+            }
+
+            public bool IsDifficultyCompleted(StageDifficulty difficulty) => difficulty == StageDifficulty.Basic
+                ? isCompleted
+                : (completedDifficultyMask & (1 << (int)difficulty)) != 0;
+
+            public void CompleteDifficulty(StageDifficulty difficulty)
+            {
+                if (difficulty == StageDifficulty.Basic) Complete();
+                else completedDifficultyMask |= 1 << (int)difficulty;
             }
             
             public void IncrementAttempts()

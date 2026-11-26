@@ -87,8 +87,10 @@ namespace MrX.UI
                 StageSave = GameController.SaveManager.GetSave<StageSave>("Stage");
             }
 
-            var stageData = stageDatabase.GetStageData(StageSave.SelectedStageId);
-            descriptionText.SetText(stageData.UnlockDescription);
+            int stageIndex = StageSave.SelectedStageId;
+            var stageData = stageDatabase.GetStageData(stageIndex);
+            var difficultyGate = stageData.UsesDifficulties ? stageData.GetDifficultyUnlock(stageIndex) : null;
+            descriptionText.SetText(difficultyGate?.GetDescription(stageDatabase, stageIndex) ?? stageData.UnlockDescription);
             descriptionText.ForceMeshUpdate();
         }
 

@@ -73,6 +73,7 @@ namespace MrX
         public static GameScreenBehavior GameScreen => instance.gameScreen;
 
         public static StageData StageData { get; private set; }
+        public static StageDifficulty CurrentDifficulty { get; private set; }
         public static IProjectilesManager ProjectilesManager { get; protected set; }
         public static PlayerBehavior Player { get; protected set; }
         public static EnemiesSpawner EnemiesSpawner { get; protected set; }
@@ -128,6 +129,7 @@ namespace MrX
             hasDeployedPet = false;
 
             StageData = null;
+            CurrentDifficulty = StageDifficulty.Basic;
             ProjectilesManager = null;
             Player = null;
             EnemiesSpawner = null;
@@ -174,7 +176,7 @@ namespace MrX
                 StageIndex = TestingData.StageId;
                 StageData = stageDatabase.GetStageData(StageIndex);
 
-                if (!StageSave.IsStageUnlocked(StageData))
+                if (!StageData.UsesDifficulties && !StageSave.IsStageUnlocked(StageData))
                 {
                     StageSave.UnlockStage(StageData);
                 }
@@ -185,7 +187,7 @@ namespace MrX
             else
             {
                 StageIndex = StageSave.SelectedStageId;
-                if (ContinuePlayingSave.HasUnfinishedStageData && !string.IsNullOrEmpty(ContinuePlayingSave.StageContentId))
+                if (!string.IsNullOrEmpty(ContinuePlayingSave.StageContentId))
                 {
                     int savedIndex = System.Array.FindIndex(stageDatabase.Stages, s => s.StageId == ContinuePlayingSave.StageContentId);
                     if (savedIndex >= 0) StageIndex = savedIndex;
@@ -195,7 +197,10 @@ namespace MrX
 
             // Gameplay consumers (including DropManager) still read the selected index.
             StageSave.SetSelectedStageId(StageIndex);
-            ContinuePlayingSave.RememberStage(StageData.StageId);
+            CurrentDifficulty = TestingData == null && StageSave.CanPlayDifficulty(StageData, ContinuePlayingSave.Difficulty)
+                ? ContinuePlayingSave.Difficulty
+                : StageDifficulty.Basic;
+            ContinuePlayingSave.RememberRun(StageData.StageId, CurrentDifficulty);
 
             RoomsShuffler = new RoomsShuffler(StageData);
 
@@ -396,7 +401,10 @@ namespace MrX
 
             if (CurrentRoomIndex >= StageData.RoomsCount)
             {
-                StageSave.CompleteStage(StageData);
+                if (!StageData.UsesDifficulties)
+                    StageSave.CompleteStage(StageData);
+                else if (instance.TestingData == null)
+                    StageSave.CompleteDifficulty(StageData, CurrentDifficulty);
                 GameController.AchievementsManager?.RecordStageClear(StageData.StageId);
                 GameController.DailyQuestsManager?.Record(Quests.DailyQuestType.ClearStages);
 
@@ -517,13 +525,9 @@ namespace MrX
 
         public static void RecalculateEnemyMultipliers()//tính toán lại các hệ số nhân sát thương và máu của kẻ thù
         {
-            EnemyDamageMultiplier = StageData.EnemyDamageMultiplier +
-                StageData.EnemyDamageMultiplierRoomStep * CurrentRoomIndex +
-                StageData.EnemyDamageMultiplierWaveStep * Room.CurrentWaveIndex;
-
-            EnemyHPMultiplier = StageData.EnemyHPMultiplier +
-                StageData.EnemyHPMultiplierRoomStep * CurrentRoomIndex +
-                StageData.EnemyHPMultiplierWaveStep * Room.CurrentWaveIndex;
+            var multipliers = StageData.GetEnemyMultipliers(CurrentDifficulty, CurrentRoomIndex, Room.CurrentWaveIndex);
+            EnemyDamageMultiplier = multipliers.x;
+            EnemyHPMultiplier = multipliers.y;
         }
 
         public static void ReturnToMainMenu()//quay lại menu chính

@@ -53,6 +53,8 @@ namespace MrX.StageCreator
 
         protected GUIStyle stageTextStyle;
         protected GUIStyle openButtonStyle;
+        private StageDifficulty playtestDifficulty;
+        private Vector2 detailsScroll;
 
         public StageDatabasePage(SerializedObject stageDatabaseSerializedObject)
         {
@@ -100,14 +102,14 @@ namespace MrX.StageCreator
 
             if (StagesListView.SelectedItem != null)
             {
-                EditorGUILayout.BeginVertical();
+                detailsScroll = EditorGUILayout.BeginScrollView(detailsScroll);
 
                 if (StagesListView.SelectedItem != null)
                 {
                     DrawStageData(StagesListView.SelectedItem);
                 }
 
-                EditorGUILayout.EndVertical();
+                EditorGUILayout.EndScrollView();
             }
 
             EditorGUILayout.EndHorizontal();
@@ -195,6 +197,7 @@ namespace MrX.StageCreator
             GUILayout.Space(10f);
 
             DrawMultipliers(stageSerializedObject);
+            DrawDifficultyPlaytest(stageSerializedObject, selectedStage.Index);
 
             GUILayout.Space(10f);
 
@@ -210,6 +213,37 @@ namespace MrX.StageCreator
             UnlockConditionsList.Draw();
 
             stageSerializedObject.ApplyModifiedProperties();
+        }
+
+        private void DrawDifficultyPlaytest(SerializedObject stageObject, int stageIndex)
+        {
+            EditorGUILayout.Space();
+            var enabled = stageObject.FindProperty("enableDifficulties");
+            EditorGUILayout.PropertyField(enabled, new GUIContent("Enable Difficulties"));
+            if (!enabled.boolValue) return;
+
+            EditorGUILayout.LabelField("Basic", "Damage ×1   HP ×1");
+            EditorGUILayout.PropertyField(stageObject.FindProperty("intermediateDamageFactor"), new GUIContent("Intermediate Damage"));
+            EditorGUILayout.PropertyField(stageObject.FindProperty("intermediateHpFactor"), new GUIContent("Intermediate HP"));
+            EditorGUILayout.PropertyField(stageObject.FindProperty("hardDamageFactor"), new GUIContent("Hard Damage"));
+            EditorGUILayout.PropertyField(stageObject.FindProperty("hardHpFactor"), new GUIContent("Hard HP"));
+
+            if (stageObject.FindProperty("hardDamageFactor").floatValue < stageObject.FindProperty("intermediateDamageFactor").floatValue ||
+                stageObject.FindProperty("hardHpFactor").floatValue < stageObject.FindProperty("intermediateHpFactor").floatValue)
+                EditorGUILayout.HelpBox("Hard uses at least the Intermediate multiplier for each stat.", MessageType.Warning);
+
+            playtestDifficulty = (StageDifficulty)EditorGUILayout.EnumPopup("Start at Difficulty", playtestDifficulty);
+            if (stageIndex > 0 || playtestDifficulty != StageDifficulty.Basic)
+                EditorGUILayout.HelpBox("The isolated profile pre-fills the selected stage and difficulty prerequisites so you can test combat immediately.", MessageType.Info);
+            if (!StageDifficultyPlaytest.CanStart)
+                EditorGUILayout.HelpBox("Keep Main Menu loaded alongside Game to launch the difficulty playtest.", MessageType.Info);
+
+            using (new EditorGUI.DisabledScope(!StageDifficultyPlaytest.CanStart))
+            {
+                if (!GUILayout.Button("Play Difficulty Trial")) return;
+                stageObject.ApplyModifiedProperties();
+                StageDifficultyPlaytest.Start((StageData)stageObject.targetObject, playtestDifficulty);
+            }
         }
 
         protected virtual void DrawAbilitiesRerollSettings(SerializedObject serializedObject)
