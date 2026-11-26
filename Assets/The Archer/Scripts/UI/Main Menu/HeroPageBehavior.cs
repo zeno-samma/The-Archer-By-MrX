@@ -3,6 +3,8 @@ using MrX.Armory;
 using MrX.Currency;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 namespace MrX.UI
@@ -15,16 +17,27 @@ namespace MrX.UI
         [SerializeField] private Button selectButton;
         [SerializeField] private Button upgradeButton;
         [SerializeField] private AbilitiesDatabase abilitiesDatabase;
+        [SerializeField] private RectTransform upgradePopupRoot;
 
         private ArmoryManager Armory => GameController.ArmoryManager;
         private HeroData selected;
+        private HeroUpgradePopup upgradePopup;
+        private int upgradeFromLevel = -1;
+        private CurrencySave observedUpgradeCurrency;
+        private InputAction cancelUpgradeAction;
+        private bool wasPageInteractable;
 
         protected override void Start()
         {
             base.Start();
             closeButton.onClick.AddListener(Close);
             selectButton.onClick.AddListener(SelectHero);
-            upgradeButton.onClick.AddListener(UpgradeHero);
+            upgradeButton.onClick.AddListener(OpenUpgradePopup);
+            if (upgradePopupRoot)
+            {
+                upgradePopup = new HeroUpgradePopup(upgradePopupRoot, UpgradeHero, () => CloseUpgradePopup());
+                upgradePopup.Hide();
+            }
             Close();
             RefreshSlots();
         }
@@ -76,6 +89,7 @@ namespace MrX.UI
             var save = Armory.GetHeroSave(hero.Id);
             int index = GetLevel(hero, save);
             var level = hero.GetHeroLevel(index);
+            bool unlocked = save?.IsUnlocked == true;
             var left = details.Find("Group_Left");
             SetText(left, "Text_Lv", (index + 1).ToString());
             BindShardProgress(left, "Text_Exp", hero, save, " shards");
@@ -91,7 +105,6 @@ namespace MrX.UI
             SetStat(stats.Find("MoveSpeed"), "Text_Value", "SPD", level.GetStatValue(StatType.MovementSpeed));
             RefreshAbilities(hero, index, level);
 
-            bool unlocked = save?.IsUnlocked == true;
             bool equipped = Armory.EquippedHero == hero;
             selectButton.interactable = unlocked && !equipped;
             SetText(selectButton.transform, "Text_Select", equipped ? "Selected" : unlocked ? "Select" : "Locked");
@@ -155,10 +168,11 @@ namespace MrX.UI
             slider.SetValueWithoutNotify(Mathf.Lerp(slider.minValue, slider.maxValue, progress));
         }
 
+        private static bool HasNextLevel(HeroData hero, HeroSaveData save) =>
+            save?.IsUnlocked == true && save.Level >= 0 && save.Level < hero.HeroLevelCount - 1;
+
         private static Price GetUpgradePrice(HeroData hero, HeroSaveData save) =>
-            save?.IsUnlocked == true && save.Level >= 0 && save.Level < hero.HeroLevelCount - 1
-                ? hero.GetHeroLevel(save.Level + 1).Price
-                : null;
+            HasNextLevel(hero, save) ? hero.GetHeroLevel(save.Level + 1).Price : null;
 
         private static CurrencySave GetUpgradeCurrency(Price price) =>
             price != null && price.Amount >= 0 && !string.IsNullOrEmpty(price.CurrencyId)
@@ -169,23 +183,81 @@ namespace MrX.UI
         {
             var price = GetUpgradePrice(hero, save);
             var currency = GetUpgradeCurrency(price);
-            var label = save?.IsUnlocked == true && GetLevel(hero, save) >= hero.HeroLevelCount - 1 ? "MAX" : "Locked";
+            bool canPreview = upgradePopup != null && HasNextLevel(hero, save);
+            var label = save?.IsUnlocked != true ? "Locked"
+                : GetLevel(hero, save) >= hero.HeroLevelCount - 1 ? "MAX" : "Upgrade";
             if (currency != null)
                 label = $"{price.Amount:N0} {currency.Data.Name}";
 
             SetText(upgradeButton.transform, "Text_Gold", label);
-            upgradeButton.interactable = currency != null && currency.CanAfford(price.Amount) && save.CanUpgradeWithShards(hero.HeroLevelCount);
+            upgradeButton.interactable = canPreview;
         }
+
+        private void OpenUpgradePopup()
+        {
+            if (upgradePopup == null || upgradeFromLevel >= 0 || !selected || !details.gameObject.activeInHierarchy) return;
+            var save = Armory.GetHeroSave(selected.Id);
+            if (!HasNextLevel(selected, save)) return;
+
+            var price = GetUpgradePrice(selected, save);
+            observedUpgradeCurrency = GetUpgradeCurrency(price);
+            upgradeFromLevel = save.Level;
+            wasPageInteractable = canvasGroup.interactable;
+            canvasGroup.interactable = false;
+            upgradePopup.Show(selected, upgradeFromLevel, save, price, observedUpgradeCurrency);
+            if (observedUpgradeCurrency != null)
+                observedUpgradeCurrency.OnAmountChanged += OnUpgradeBalanceChanged;
+            if (GameController.InputManager?.InputAsset != null)
+            {
+                cancelUpgradeAction = GameController.InputManager.InputAsset.UI.Cancel;
+                cancelUpgradeAction.performed += OnUpgradeCancel;
+            }
+        }
+
+        private void OnUpgradeBalanceChanged(CurrencySave currency)
+        {
+            var save = Armory.GetHeroSave(selected.Id);
+            if (save?.Level == upgradeFromLevel)
+                upgradePopup.BindCosts(GetUpgradePrice(selected, save), currency, save, selected.HeroLevelCount);
+        }
+
+        private void OnUpgradeCancel(InputAction.CallbackContext context) => CloseUpgradePopup();
+
+        private void CloseUpgradePopup(bool restoreSelection = true)
+        {
+            if (upgradeFromLevel < 0) return;
+            upgradeFromLevel = -1;
+            if (observedUpgradeCurrency != null) observedUpgradeCurrency.OnAmountChanged -= OnUpgradeBalanceChanged;
+            observedUpgradeCurrency = null;
+            if (cancelUpgradeAction != null) cancelUpgradeAction.performed -= OnUpgradeCancel;
+            cancelUpgradeAction = null;
+            upgradePopup.Hide();
+            canvasGroup.interactable = wasPageInteractable;
+            if (restoreSelection && EventSystem.current)
+                EventSystem.current.SetSelectedGameObject(upgradeButton.gameObject);
+        }
+
+        private void OnDisable() => CloseUpgradePopup(false);
 
         private void UpgradeHero()
         {
             var hero = selected;
-            if (hero == null || !details.gameObject.activeInHierarchy) return;
+            if (upgradeFromLevel < 0 || !hero || !details.gameObject.activeInHierarchy) return;
 
             var save = Armory.GetHeroSave(hero.Id);
+            if (save?.Level != upgradeFromLevel)
+            {
+                CloseUpgradePopup(false);
+                Show(hero);
+                return;
+            }
             var price = GetUpgradePrice(hero, save);
             var currency = GetUpgradeCurrency(price);
-            if (currency == null || !save.CanUpgradeWithShards(hero.HeroLevelCount)) return;
+            if (currency == null || !currency.CanAfford(price.Amount) || !save.CanUpgradeWithShards(hero.HeroLevelCount))
+            {
+                upgradePopup.BindCosts(price, currency, save, hero.HeroLevelCount);
+                return;
+            }
 
             bool upgraded = false;
             if (!currency.TryWithdrawAndCommit(price.Amount, () =>
@@ -194,13 +266,16 @@ namespace MrX.UI
                 if (!upgraded) currency.Deposit(price.Amount);
             }) || !upgraded)
             {
-                RefreshUpgradeButton(hero, save);
+                upgradePopup.BindCosts(price, currency, save, hero.HeroLevelCount);
                 return;
             }
 
             GameController.SaveManager.Save(false);
+            CloseUpgradePopup(false);
             RefreshSlots();
             Show(hero);
+            if (EventSystem.current)
+                EventSystem.current.SetSelectedGameObject((upgradeButton.interactable ? upgradeButton : closeButton).gameObject);
         }
 
         private void SelectHero()
@@ -215,6 +290,7 @@ namespace MrX.UI
 
         private void Close()
         {
+            CloseUpgradePopup(false);
             if (!details.gameObject.activeSelf) return;
             details.gameObject.SetActive(false);
             GameController.MainMenuScreenBehavior.EnableDock();

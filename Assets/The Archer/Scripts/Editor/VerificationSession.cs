@@ -21,7 +21,9 @@ namespace MrX.EditorTools
                 throw new InvalidOperationException("Verification session already active.");
             var folder = Path.GetFullPath("Temp/Verification/" + DateTime.UtcNow.ToString("yyyyMMdd-HHmmss"));
             Directory.CreateDirectory(folder);
-            SessionState.SetString(OriginalHashKey, Hash(OriginalPath));
+            var backup = Path.Combine(folder, "original-editor-save.bak");
+            if (File.Exists(OriginalPath)) File.Copy(OriginalPath, backup);
+            SessionState.SetString(OriginalHashKey, Hash(backup));
             SessionState.SetString(SerializationHelper.VerificationDirectoryKey, folder);
             SerializationHelper.SetVerificationDirectory(folder);
             return "Fresh isolated profile: " + folder;
@@ -29,12 +31,14 @@ namespace MrX.EditorTools
         public static string End()
         {
             if (EditorApplication.isPlaying) throw new InvalidOperationException("Stop Play before ending isolation.");
+            string folder = SessionState.GetString(SerializationHelper.VerificationDirectoryKey, "");
             string expected = SessionState.GetString(OriginalHashKey, "");
             string actual = Hash(OriginalPath);
             SessionState.EraseString(SerializationHelper.VerificationDirectoryKey);
             SerializationHelper.SetVerificationDirectory(null);
             SessionState.EraseString(OriginalHashKey);
-            if (expected != actual) throw new Exception("Original player save changed during verification.");
+            if (expected != actual)
+                throw new Exception("Original player save changed during verification. Backup location: " + Path.Combine(folder, "original-editor-save.bak"));
             return "Isolation ended. Original player save hash unchanged.";
         }
         private static string Hash(string path)

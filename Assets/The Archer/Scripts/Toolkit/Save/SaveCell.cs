@@ -27,7 +27,9 @@ namespace MrX.Save
 
         public void Flush()
         {
-            if (save != null) save.Flush();
+            // Managed save objects are unavailable after an Editor script reload.
+            if (save == null) return;
+            save.Flush();
             if (IsReassembled) json = JsonUtility.ToJson(save);
         }
 
