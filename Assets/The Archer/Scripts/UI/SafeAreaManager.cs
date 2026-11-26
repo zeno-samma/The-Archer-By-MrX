@@ -20,6 +20,14 @@ namespace MrX.UI
             ApplySafeArea();
         }
 
+        internal static Rect Normalize(Rect area, Vector2Int pixels)
+        {
+            var normalized = Rect.MinMaxRect(
+                Mathf.Clamp01(area.xMin / pixels.x), Mathf.Clamp01(area.yMin / pixels.y),
+                Mathf.Clamp01(area.xMax / pixels.x), Mathf.Clamp01(area.yMax / pixels.y));
+            return normalized.width > 0 && normalized.height > 0 ? normalized : new Rect(0, 0, 1, 1);
+        }
+
         private void ApplySafeArea()
         {
             var rect = Screen.safeArea;
@@ -29,30 +37,12 @@ namespace MrX.UI
 
             if (Screen.width > 0 && Screen.height > 0)
             {
-                var anchorMin = rect.position;
-                var anchorMax = rect.position + rect.size;
-
-                anchorMin.x /= Screen.width;
-                anchorMin.y /= Screen.height;
-                anchorMax.x /= Screen.width;
-                anchorMax.y /= Screen.height;
-
-                if (anchorMin.x >= 0 && anchorMin.y >= 0 && anchorMax.x >= 0 && anchorMax.y >= 0)
+                var normalized = Normalize(rect, new Vector2Int(Screen.width, Screen.height));
+                foreach (var screen in screens)
                 {
-                    for (int i = 0; i < screens.Count; i++)
-                    {
-                        if (screens[i] != null)
-                        {
-                            screens[i].anchorMin = anchorMin;
-                            screens[i].anchorMax = anchorMax;
-                        }
-                        else
-                        {
-                            screens.RemoveAt(i);
-
-                            i--;
-                        }
-                    }
+                    if (!screen) continue;
+                    screen.anchorMin = normalized.min;
+                    screen.anchorMax = normalized.max;
                 }
             }
         }

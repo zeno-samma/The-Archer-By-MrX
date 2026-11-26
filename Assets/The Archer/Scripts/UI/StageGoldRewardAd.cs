@@ -1,9 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using MrX.Progression;
 using MrX.Rewards;
+using MrX.Save;
 using GoogleMobileAds.Api;
 using GoogleMobileAds.Common;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,9 +16,13 @@ namespace MrX.UI
     public sealed class StageGoldRewardAd : MonoBehaviour
     {
         private const string AndroidTestRewardedId = "ca-app-pub-3940256099942544/5224354917";
+        private const string DailyUsageSaveKey = "Stage Reward Ad Daily Usage";
+        private const int DefaultResetUtcOffsetHours = 7;
 
         [SerializeField] private Button watchAdButton;
         [SerializeField] private Button claimButton;
+        [SerializeField] private TMP_Text dailyAdsRemaining;
+        [SerializeField, Min(1)] private int dailyAdLimit = 5;
 
         private static bool sdkInitializing;
         private static bool sdkInitialized;
@@ -28,6 +35,15 @@ namespace MrX.UI
         private bool isShowingAd;
         private bool rewardGranted;
         private bool requestInProgress;
+        private StageRewardAdDailySave dailyUsage;
+        private float nextDailyCheck;
+
+        private int DailyLimit => Mathf.Max(1, dailyAdLimit);
+        private int ResetUtcOffsetHours => GameController.DailyQuestsManager?.Database?.resetUtcOffsetHours
+            ?? DefaultResetUtcOffsetHours;
+        private bool AdsSupported => Application.platform == RuntimePlatform.Android && Debug.isDebugBuild;
+        private bool CanOfferAd => isActiveAndEnabled && resultScreen.IsOpen && !isShowingAd && !rewardGranted
+            && dailyUsage != null && dailyUsage.Remaining(DailyLimit) > 0 && CanGrantBonus();
 
         private void Awake()
         {
@@ -41,7 +57,6 @@ namespace MrX.UI
         private void OnEnable()
         {
             if (watchAdButton == null || claimButton == null || claimButton == watchAdButton) return;
-            if (Application.platform != RuntimePlatform.Android || !Debug.isDebugBuild) return;
 
             StartCoroutine(PrepareForResult());
         }
@@ -50,6 +65,9 @@ namespace MrX.UI
         {
             yield return new WaitUntil(() => resultScreen.IsOpen);
 
+            dailyUsage = GameController.SaveManager.GetSave<StageRewardAdDailySave>(DailyUsageSaveKey);
+            if (!RefreshDailyUsage()) UpdateDailyUsageDisplay();
+            if (!AdsSupported) yield break;
             if (rewardGranted || isShowingAd) yield break;
 
             CaptureRewards();
@@ -67,6 +85,29 @@ namespace MrX.UI
 
             yield return new WaitUntil(() => !sdkInitializing);
             if (sdkInitialized) LoadAd();
+        }
+
+        private void Update()
+        {
+            if (dailyUsage == null || !resultScreen.IsOpen || Time.unscaledTime < nextDailyCheck) return;
+
+            nextDailyCheck = Time.unscaledTime + 1f;
+            if (RefreshDailyUsage() && AdsSupported && sdkInitialized) LoadAd();
+        }
+
+        private bool RefreshDailyUsage()
+        {
+            if (!dailyUsage.EnsureDay(DateTime.UtcNow, ResetUtcOffsetHours)) return false;
+
+            UpdateDailyUsageDisplay();
+            GameController.SaveManager.Save(false);
+            return true;
+        }
+
+        private void UpdateDailyUsageDisplay()
+        {
+            if (dailyAdsRemaining != null)
+                dailyAdsRemaining.text = $"{dailyUsage.Remaining(DailyLimit)}/{DailyLimit}";
         }
 
         private void CaptureRewards()
@@ -149,6 +190,12 @@ namespace MrX.UI
 
         private void LoadAd()
         {
+            if (!CanOfferAd)
+            {
+                watchAdButton.interactable = false;
+                return;
+            }
+
             if (loadedAd != null)
             {
                 watchAdButton.interactable = loadedAd.CanShowAd();
@@ -158,7 +205,7 @@ namespace MrX.UI
                 loadedAd = null;
             }
 
-            if (!isActiveAndEnabled || requestInProgress || rewardGranted) return;
+            if (requestInProgress) return;
 
             requestInProgress = true;
             RewardedAd.Load(AndroidTestRewardedId, new AdRequest(), (ad, error) =>
@@ -179,13 +226,15 @@ namespace MrX.UI
                     }
 
                     loadedAd = ad;
-                    watchAdButton.interactable = isActiveAndEnabled && ad.CanShowAd();
+                    watchAdButton.interactable = CanOfferAd && ad.CanShowAd();
                 }));
         }
 
         private void ShowAd()
         {
-            if (!isActiveAndEnabled || !resultScreen.IsOpen || isShowingAd || rewardGranted || !CanGrantBonus()) return;
+            if (!AdsSupported || dailyUsage == null) return;
+            RefreshDailyUsage();
+            if (!CanOfferAd) return;
             if (loadedAd == null || !loadedAd.CanShowAd())
             {
                 watchAdButton.interactable = false;
@@ -231,8 +280,12 @@ namespace MrX.UI
                     return;
                 }
 
+                dailyUsage.EnsureDay(DateTime.UtcNow, ResetUtcOffsetHours);
+                if (!dailyUsage.TryRecordReward(DailyLimit)) return;
+
                 rewardGranted = true;
                 watchAdButton.interactable = false;
+                UpdateDailyUsageDisplay();
                 GrantBonus();
             }));
         }
@@ -242,5 +295,35 @@ namespace MrX.UI
             if (watchAdButton != null) watchAdButton.onClick.RemoveListener(ShowAd);
             loadedAd?.Destroy();
         }
+    }
+
+    [Serializable]
+    internal sealed class StageRewardAdDailySave : ISave
+    {
+        [SerializeField] private int activeDay = -1;
+        [SerializeField] private int rewardsGranted;
+
+        public bool EnsureDay(DateTime utcNow, int utcOffsetHours)
+        {
+            int day = (int)(utcNow.AddHours(utcOffsetHours).Ticks / TimeSpan.TicksPerDay);
+            if (day <= activeDay) return false;
+
+            activeDay = day;
+            rewardsGranted = 0;
+            return true;
+        }
+
+        public int Remaining(int limit) => limit - Mathf.Clamp(rewardsGranted, 0, limit);
+
+        public bool TryRecordReward(int limit)
+        {
+            int remaining = Remaining(limit);
+            if (remaining == 0) return false;
+
+            rewardsGranted = limit - remaining + 1;
+            return true;
+        }
+
+        public void Flush() { }
     }
 }
