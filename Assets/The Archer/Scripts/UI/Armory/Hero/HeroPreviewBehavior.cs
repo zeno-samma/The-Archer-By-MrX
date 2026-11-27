@@ -89,7 +89,7 @@ namespace MrX.UI
                 Destroy(hero);
             }
 
-            var heroData = GameController.ArmoryManager.EquippedHero;
+            heroData = GameController.ArmoryManager.EquippedHero;
 
             hero = Instantiate(heroData.Prefab, heroPreview.transform);
 
