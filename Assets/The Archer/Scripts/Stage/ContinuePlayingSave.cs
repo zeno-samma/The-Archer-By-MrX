@@ -12,11 +12,14 @@ namespace MrX
         public void RememberStage(string contentId) { stageContentId = contentId; }
         [SerializeField] private StageDifficulty difficulty;
         public StageDifficulty Difficulty => difficulty;
+        [SerializeField] private int stageLayoutRevision;
+        public int StageLayoutRevision => stageLayoutRevision;
 
-        public void RememberRun(string contentId, StageDifficulty runDifficulty)
+        public void RememberRun(StageData stage, StageDifficulty runDifficulty, int? layoutRevision = null)
         {
-            RememberStage(contentId);
+            RememberStage(stage.StageId);
             difficulty = runDifficulty;
+            stageLayoutRevision = layoutRevision ?? stage.LayoutRevision;
         }
         [SerializeField] protected bool hasUnfinishedStageData;
         public bool HasUnfinishedStageData { get => hasUnfinishedStageData; protected set => hasUnfinishedStageData = value; }
@@ -84,6 +87,7 @@ namespace MrX
             runToken = null;
             stageContentId = null;
             difficulty = StageDifficulty.Basic;
+            stageLayoutRevision = 0;
             HasUnfinishedStageData = false;
 
             ActiveRoomId = 0;

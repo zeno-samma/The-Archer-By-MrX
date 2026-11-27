@@ -63,6 +63,9 @@ namespace MrX.Enemy
         public MaskAttackType CurrentAttackType { get; protected set; }
 
         protected int handsCounter = 0;
+        private int waveVolleyIndex;
+        private Vector3 waveAim;
+        private bool UsesChallengePatterns => StageController.StageData.UseChallengeBossPatterns;
 
         public float WaveDamage => Damage * waveDamageMultiplier;
         public float ProjectileDamage => Damage * projectileDamageMultiplier;
@@ -86,11 +89,13 @@ namespace MrX.Enemy
 
             enemyCollider.enabled = true;
 
-            int i = 0;
+            int firstWave = UsesChallengePatterns ? attacksSequence.IndexOf(MaskAttackType.Waves) : -1;
+            int i = Mathf.Max(0, firstWave);
             while (IsAlive)
             {
                 LookAtPlayer = true;
-                yield return new WaitForSeconds(idleDuration);
+                bool secondPhase = UsesChallengePatterns && healthbar.HP <= healthbar.MaxHP * 0.5f;
+                yield return new WaitForSeconds(idleDuration * (secondPhase ? 0.7f : 1f));
 
                 if (attacksSequence[i % attacksSequence.Count] == MaskAttackType.Hands && spawnedHands.Count > 0) i++;
 
@@ -101,6 +106,12 @@ namespace MrX.Enemy
                         break;
                     case MaskAttackType.Hands:
                         yield return HandsAttackCoroutine();
+                        if (secondPhase && IsAlive)
+                        {
+                            yield return new WaitForSeconds(0.45f);
+                            waveVolleyIndex = 0;
+                            yield return PlayWaveVolley();
+                        }
                         break;
                     case MaskAttackType.Waves:
                         yield return WavesAttackCoroutine();
@@ -195,18 +206,20 @@ namespace MrX.Enemy
 
         protected virtual IEnumerator WavesAttackCoroutine()
         {
+            waveVolleyIndex = 0;
+            int volleys = wavesAttackCount;
+            for (int i = 0; i < volleys; i++)
+                yield return PlayWaveVolley();
+        }
+
+        private IEnumerator PlayWaveVolley()
+        {
             LookAtPlayer = false;
-
             CurrentAttackType = MaskAttackType.Waves;
-
-            for (int i = 0; i < wavesAttackCount; i++)
-            {
-                animator.SetInteger(ATTACK_TYPE_INT, (int)CurrentAttackType);
-                animator.SetTrigger(ATTACK_TRIGGER);
-                waitForAttackToEnd.Reset();
-
-                yield return waitForAttackToEnd;
-            }
+            animator.SetInteger(ATTACK_TYPE_INT, (int)CurrentAttackType);
+            waitForAttackToEnd.Reset();
+            animator.SetTrigger(ATTACK_TRIGGER);
+            yield return waitForAttackToEnd;
         }
 
         public override void OnSpawnEndedEventFired()
@@ -289,13 +302,24 @@ namespace MrX.Enemy
 
         protected virtual void SpawnWaves()
         {
-            var angleStep = 180f / (wavesCount - 1);
-            var startAngle = -90f;
-
+            int count = Mathf.Max(2, (int)wavesCount);
+            float angleStep = 180f / (count - 1);
+            float startAngle = -90f;
             TryFindTarget();
-
-            var toTarget = Target != null ? waveSpawnPosition.DirectionToXZ(Target.Position): Vector3.back;
-            for (int i = 0; i < wavesCount; i++)
+            var toTarget = Target != null ? waveSpawnPosition.DirectionToXZ(Target.Position) : Vector3.back;
+            if (UsesChallengePatterns)
+            {
+                if (waveVolleyIndex == 0) waveAim = toTarget;
+                toTarget = waveAim;
+                if (waveVolleyIndex % 2 != 0)
+                {
+                    startAngle += angleStep * 0.5f;
+                    count--;
+                }
+                waveVolleyIndex++;
+            }
+            float damage = WaveDamage;
+            for (int i = 0; i < count; i++)
             {
                 var wave = StageController.ProjectilesManager.GetProjectile<SimpleProjectile>(wavePrefab);
                 wave.transform.position = waveSpawnPosition.position;
@@ -304,7 +328,7 @@ namespace MrX.Enemy
                 wave.onProjectileHidden += OnWaveHidden;
                 launchedWaves.Add(wave);
 
-                wave.Launch(WaveDamage);
+                wave.Launch(damage);
             }
 
             GameController.AudioManager.PlayAudio(wavesAttackSound);

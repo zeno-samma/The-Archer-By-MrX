@@ -228,6 +228,17 @@ namespace MrX.StageCreator
             EditorGUILayout.PropertyField(stageObject.FindProperty("hardDamageFactor"), new GUIContent("Hard Damage"));
             EditorGUILayout.PropertyField(stageObject.FindProperty("hardHpFactor"), new GUIContent("Hard HP"));
 
+            if (StageCreatorWindow.Instance.IsChallengeAuthoring)
+            {
+                EditorGUILayout.PropertyField(stageObject.FindProperty("bossHpFactor"), new GUIContent("Boss HP"));
+                EditorGUILayout.PropertyField(stageObject.FindProperty("bossDamageFactor"), new GUIContent("Boss Damage"));
+                EditorGUILayout.PropertyField(stageObject.FindProperty("waveRecoveryFactor"), new GUIContent("Wave Recovery"));
+                EditorGUILayout.PropertyField(stageObject.FindProperty("normalEnemyRageFactor"), new GUIContent("Rage From Normal Enemies"));
+                EditorGUILayout.PropertyField(stageObject.FindProperty("evilChestCurrentHpCost"), new GUIContent("Evil Chest HP Cost"));
+                EditorGUILayout.PropertyField(stageObject.FindProperty("useChallengeBossPatterns"), new GUIContent("Challenge Boss Patterns"));
+                EditorGUILayout.PropertyField(stageObject.FindProperty("showLowHealthWarning"), new GUIContent("Low Health Warning"));
+            }
+
             if (stageObject.FindProperty("hardDamageFactor").floatValue < stageObject.FindProperty("intermediateDamageFactor").floatValue ||
                 stageObject.FindProperty("hardHpFactor").floatValue < stageObject.FindProperty("intermediateHpFactor").floatValue)
                 EditorGUILayout.HelpBox("Hard uses at least the Intermediate multiplier for each stat.", MessageType.Warning);
@@ -242,7 +253,10 @@ namespace MrX.StageCreator
             {
                 if (!GUILayout.Button("Play Difficulty Trial")) return;
                 stageObject.ApplyModifiedProperties();
-                StageDifficultyPlaytest.Start((StageData)stageObject.targetObject, playtestDifficulty);
+                var database = (StageDatabase)StageDatabaseSerializedObject.targetObject;
+                var challengeDatabase = AssetDatabase.GetAssetPath(database) == StageDifficultyTrial.ChallengeDatabasePath
+                    ? database : null;
+                StageDifficultyPlaytest.Start((StageData)stageObject.targetObject, playtestDifficulty, challengeDatabase);
             }
         }
 

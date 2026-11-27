@@ -173,15 +173,18 @@ namespace MrX.Enemy
 
             navigationHandler.Enable();
 
-            Damage = baseDamage * StageController.EnemyDamageMultiplier;
-            var hp = baseHealth * StageController.EnemyHPMultiplier;
+            var stage = StageController.StageData;
+            float damageMultiplier = StageController.EnemyDamageMultiplier * (Data.IsBoss ? stage.BossDamageFactor : 1f);
+            float hpMultiplier = StageController.EnemyHPMultiplier * (Data.IsBoss ? stage.BossHpFactor : 1f);
+            Damage = baseDamage * damageMultiplier;
+            var hp = baseHealth * hpMultiplier;
 
-            CollisionDamage = Damage * collisionDamageMultiplier;
             if (OverrideData != null)
             {
                 Damage = OverrideData.ApplyDamageOverride(Damage);
                 hp = OverrideData.ApplyHPOverride(hp);
             }
+            CollisionDamage = Damage * collisionDamageMultiplier;
 
             healthbar.Init(hp);
 

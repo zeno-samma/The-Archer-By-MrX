@@ -7,8 +7,18 @@ namespace MrX
     public class StageDatabase : ScriptableObject
     {
         [SerializeField] protected StageData[] stages;
-        public int StagesAmount => stages.Length;
-        public StageData[] Stages => stages;
+        public int StagesAmount => Stages.Length;
+        public StageData[] Stages
+        {
+            get
+            {
+#if UNITY_EDITOR
+                return StageDifficultyTrial.GetStageList(this, stages);
+#else
+                return stages;
+#endif
+            }
+        }
 
 #if UNITY_EDITOR
         [Header("Editor Settings")]
@@ -41,7 +51,8 @@ namespace MrX
 
         public virtual StageData GetStageData(int index)
         {
-            return stages[index % StagesAmount];
+            var activeStages = Stages;
+            return activeStages[index % activeStages.Length];
         }
     }
 }

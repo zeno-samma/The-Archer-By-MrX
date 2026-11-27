@@ -193,14 +193,18 @@ namespace MrX
                     if (savedIndex >= 0) StageIndex = savedIndex;
                 }
                 StageData = stageDatabase.GetStageData(StageIndex);
+                if (ContinuePlayingSave.HasUnfinishedStageData)
+                    StageData = StageData.GetRunLayout(ContinuePlayingSave.StageLayoutRevision);
             }
 
+            // The active layout may be a snapshot. Progression still uses the registered stage.
+            var registeredStage = stageDatabase.GetStageData(StageIndex);
             // Gameplay consumers (including DropManager) still read the selected index.
             StageSave.SetSelectedStageId(StageIndex);
-            CurrentDifficulty = TestingData == null && StageSave.CanPlayDifficulty(StageData, ContinuePlayingSave.Difficulty)
+            CurrentDifficulty = TestingData == null && StageSave.CanPlayDifficulty(registeredStage, ContinuePlayingSave.Difficulty)
                 ? ContinuePlayingSave.Difficulty
                 : StageDifficulty.Basic;
-            ContinuePlayingSave.RememberRun(StageData.StageId, CurrentDifficulty);
+            ContinuePlayingSave.RememberRun(registeredStage, CurrentDifficulty, StageData.LayoutRevision);
 
             RoomsShuffler = new RoomsShuffler(StageData);
 
@@ -401,11 +405,12 @@ namespace MrX
 
             if (CurrentRoomIndex >= StageData.RoomsCount)
             {
-                if (!StageData.UsesDifficulties)
-                    StageSave.CompleteStage(StageData);
+                var registeredStage = instance.stageDatabase.GetStageData(StageIndex);
+                if (!registeredStage.UsesDifficulties)
+                    StageSave.CompleteStage(registeredStage);
                 else if (instance.TestingData == null)
-                    StageSave.CompleteDifficulty(StageData, CurrentDifficulty);
-                GameController.AchievementsManager?.RecordStageClear(StageData.StageId);
+                    StageSave.CompleteDifficulty(registeredStage, CurrentDifficulty);
+                GameController.AchievementsManager?.RecordStageClear(registeredStage.StageId);
                 GameController.DailyQuestsManager?.Record(Quests.DailyQuestType.ClearStages);
 
                 FinalizeRunRewards();

@@ -21,34 +21,34 @@ MonoBehaviour:
     portion of your max HP
 
     at the end of each
-    wave'
+    combat wave'
   statsText: '{0}%><color=#75F05F>{1}%</color>'
   initialValue: 0
   prefab: {fileID: 3646608285076175882, guid: b67f4c49c993192488d7fc0a4ddb82aa, type: 3}
   devStartLevel: -1
   levels:
-  - cost: 100
+  - cost: 80
     price:
       currencyId: gold
-      amount: 100
-    value: 1
-  - cost: 250
-    price:
-      currencyId: gold
-      amount: 250
+      amount: 80
     value: 2
-  - cost: 600
+  - cost: 200
     price:
       currencyId: gold
-      amount: 600
+      amount: 200
     value: 3
-  - cost: 1200
+  - cost: 480
     price:
       currencyId: gold
-      amount: 1200
+      amount: 480
     value: 4
-  - cost: 2400
+  - cost: 970
     price:
       currencyId: gold
-      amount: 2400
+      amount: 970
     value: 5
+  - cost: 1850
+    price:
+      currencyId: gold
+      amount: 1850
+    value: 6

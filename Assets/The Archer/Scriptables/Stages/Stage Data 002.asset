@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dataVersion: 1
   stageId: 3cfe8430-5523-463b-a5e0-b28b49278e35
+  layoutRevision: 1
+  previousRunLayout: {fileID: 11400000, guid: fbdbb83e20254110be1951ab36111f68, type: 2}
   stageImage: {fileID: 21300000, guid: 835fd53e229f40f4abdeb6fac765d85d, type: 3}
   journeyMap: {fileID: 2800000, guid: 2a71d852b684d5349ab36bc89a566127, type: 3}
   journeyBossPrefab: {fileID: 446584557187707321, guid: c7a78230581b266448a85b11142bf10a, type: 3}
@@ -23,23 +25,28 @@ MonoBehaviour:
   stageObjective: Survive 33 waves of enemies
   stageMusic: {fileID: 11400000, guid: b1ff3aeba1a032048b384624765ff9df, type: 2}
   showAbilitySelector: 1
-  enemyDamageMulitplier: 1
-  enemyDamageMultiplierRoomStep: 0.1
-  enemyDamageMultiplierWaveStep: 0.05
-  enemyHPMulitplier: 1
-  enemyHPMultiplierRoomStep: 0.1
-  enemyHPMultiplierWaveStep: 0.05
+  enemyDamageMulitplier: 1.21
+  enemyDamageMultiplierRoomStep: 0
+  enemyDamageMultiplierWaveStep: 0.026
+  enemyHPMulitplier: 1.42
+  enemyHPMultiplierRoomStep: 0
+  enemyHPMultiplierWaveStep: 0.039
   enableDifficulties: 1
-  intermediateDamageFactor: 1.15
-  intermediateHpFactor: 1.25
-  hardDamageFactor: 1.3
-  hardHpFactor: 1.5
+  intermediateDamageFactor: 1.22
+  intermediateHpFactor: 1.28
+  hardDamageFactor: 1.5
+  hardHpFactor: 1.64
+  bossHpFactor: 2.03
+  bossDamageFactor: 1.2
+  waveRecoveryFactor: 0.3
+  normalEnemyRageFactor: 0.55
+  evilChestCurrentHpCost: 0.22
   unlockDescription: Clear Secrets Pyramid on Hard to unlock.
   unlockConditions:
   - rid: 6849199109708185681
   abilityRerollPrice:
     currencyId: gold
-    amount: 200
+    amount: 150
   nextAbilityRerollMultiplier: 2
   rooms:
   - prefabs:
@@ -94,13 +101,123 @@ MonoBehaviour:
             min: 0
             max: 1
             propertyType: 0
+      - enemyType: 3
+        transformData:
+          position: {x: -4.3, y: 0, z: -4.6}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 3
+        transformData:
+          position: {x: 4.3, y: 0, z: -4.6}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 14
+        transformData:
+          position: {x: 0, y: 0, z: 8}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 1
+        transformData:
+          position: {x: 0, y: 0, z: -7.2}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 15
+        transformData:
+          position: {x: 0, y: 0, z: 3.6}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
       chestSpawns: []
       groupId: 0
-      waveDropExpericence: 15
-      waveDropGold: 12
+      waveDropExpericence: 34
+      waveDropGold: 18
       rewards:
       - currencyId: gold
-        amount: 12
+        amount: 18
       customWaveEndDelay: -1
       icon: {fileID: 21300000, guid: 58996b765bd63c6408fa88c9b9db2418, type: 3}
       waveMusic: {fileID: 0}
@@ -171,13 +288,123 @@ MonoBehaviour:
             min: 0
             max: 1
             propertyType: 0
+      - enemyType: 9
+        transformData:
+          position: {x: -4.3, y: 0, z: -5.8}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 9
+        transformData:
+          position: {x: 4.3, y: 0, z: -5.8}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 15
+        transformData:
+          position: {x: 0, y: 0, z: -5}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 6
+        transformData:
+          position: {x: -4.7, y: 0, z: 0.2}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 6
+        transformData:
+          position: {x: 4.7, y: 0, z: 0.2}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
       chestSpawns: []
       groupId: 0
-      waveDropExpericence: 15
-      waveDropGold: 14
+      waveDropExpericence: 36
+      waveDropGold: 24
       rewards:
       - currencyId: gold
-        amount: 14
+        amount: 24
       customWaveEndDelay: -1
       icon: {fileID: 21300000, guid: 58996b765bd63c6408fa88c9b9db2418, type: 3}
       waveMusic: {fileID: 0}
@@ -292,13 +519,101 @@ MonoBehaviour:
             min: 0
             max: 1
             propertyType: 0
+      - enemyType: 14
+        transformData:
+          position: {x: -4, y: 0, z: -6.3}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 14
+        transformData:
+          position: {x: 4, y: 0, z: -6.3}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 15
+        transformData:
+          position: {x: 0, y: 0, z: -4.5}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 10
+        transformData:
+          position: {x: -4.5, y: 0, z: 7.0}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
       chestSpawns: []
       groupId: 0
-      waveDropExpericence: 20
-      waveDropGold: 20
+      waveDropExpericence: 40
+      waveDropGold: 26
       rewards:
       - currencyId: gold
-        amount: 20
+        amount: 26
       customWaveEndDelay: -1
       icon: {fileID: 21300000, guid: 58996b765bd63c6408fa88c9b9db2418, type: 3}
       waveMusic: {fileID: 0}
@@ -347,9 +662,141 @@ MonoBehaviour:
             min: 0
             max: 1
             propertyType: 0
+      - enemyType: 15
+        transformData:
+          position: {x: -4.2, y: 0, z: 5.1}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 15
+        transformData:
+          position: {x: 4.2, y: 0, z: -5.0}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 1
+        transformData:
+          position: {x: 4.3, y: 0, z: 5.3}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 1
+        transformData:
+          position: {x: -4.3, y: 0, z: -5.4}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 6
+        transformData:
+          position: {x: 4.6, y: 0, z: 0}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 6
+        transformData:
+          position: {x: -4.6, y: 0, z: 0}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
       chestSpawns: []
       groupId: 0
-      waveDropExpericence: 20
+      waveDropExpericence: 39
       waveDropGold: 25
       rewards:
       - currencyId: gold
@@ -359,7 +806,7 @@ MonoBehaviour:
       waveMusic: {fileID: 0}
     - enemySpawns: []
       chestSpawns:
-      - chestType: 1
+      - chestType: 0
         transformData:
           position: {x: 0, y: 0, z: 0}
           rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
@@ -371,7 +818,7 @@ MonoBehaviour:
       - currencyId: gold
         amount: 0
       customWaveEndDelay: -1
-      icon: {fileID: 21300000, guid: 2255ca2025c73a34abad2b46cb834311, type: 3}
+      icon: {fileID: 21300000, guid: 75d429118cd8b784892af7359e302742, type: 3}
       waveMusic: {fileID: 0}
     - enemySpawns:
       - enemyType: 8
@@ -440,13 +887,123 @@ MonoBehaviour:
             min: 0
             max: 1
             propertyType: 0
+      - enemyType: 3
+        transformData:
+          position: {x: -4.6, y: 0, z: 3.2}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 3
+        transformData:
+          position: {x: 4.6, y: 0, z: 3.2}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 14
+        transformData:
+          position: {x: 0, y: 0, z: -7.8}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 6
+        transformData:
+          position: {x: 0, y: 0, z: 9.0}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 10
+        transformData:
+          position: {x: 3.5, y: 0, z: 8.2}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
       chestSpawns: []
       groupId: 0
-      waveDropExpericence: 20
-      waveDropGold: 25
+      waveDropExpericence: 39
+      waveDropGold: 30
       rewards:
       - currencyId: gold
-        amount: 25
+        amount: 30
       customWaveEndDelay: -1
       icon: {fileID: 21300000, guid: 58996b765bd63c6408fa88c9b9db2418, type: 3}
       waveMusic: {fileID: 0}
@@ -583,13 +1140,79 @@ MonoBehaviour:
             min: 0
             max: 1
             propertyType: 0
+      - enemyType: 14
+        transformData:
+          position: {x: -4.2, y: 0, z: 8.8}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 9
+        transformData:
+          position: {x: 4.6, y: 0, z: -8.4}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 1
+        transformData:
+          position: {x: 0, y: 0, z: -5.2}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
       chestSpawns: []
       groupId: 0
-      waveDropExpericence: 25
-      waveDropGold: 25
+      waveDropExpericence: 39
+      waveDropGold: 30
       rewards:
       - currencyId: gold
-        amount: 25
+        amount: 30
       customWaveEndDelay: -1
       icon: {fileID: 21300000, guid: 58996b765bd63c6408fa88c9b9db2418, type: 3}
       waveMusic: {fileID: 0}
@@ -660,13 +1283,145 @@ MonoBehaviour:
             min: 0
             max: 1
             propertyType: 0
+      - enemyType: 10
+        transformData:
+          position: {x: -4.6, y: 0, z: -4.1}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 10
+        transformData:
+          position: {x: 4.6, y: 0, z: -4.1}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 8
+        transformData:
+          position: {x: 0, y: 0, z: -7.0}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 4
+        transformData:
+          position: {x: -3.6, y: 0, z: 4.2}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 9
+        transformData:
+          position: {x: 3.6, y: 0, z: 4.2}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 6
+        transformData:
+          position: {x: 0, y: 0, z: 8.8}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
       chestSpawns: []
       groupId: 0
-      waveDropExpericence: 25
-      waveDropGold: 30
+      waveDropExpericence: 44
+      waveDropGold: 32
       rewards:
       - currencyId: gold
-        amount: 30
+        amount: 32
       customWaveEndDelay: -1
       icon: {fileID: 21300000, guid: 58996b765bd63c6408fa88c9b9db2418, type: 3}
       waveMusic: {fileID: 0}
@@ -781,19 +1536,129 @@ MonoBehaviour:
             min: 0
             max: 1
             propertyType: 0
+      - enemyType: 1
+        transformData:
+          position: {x: -4.3, y: 0, z: 9.0}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 1
+        transformData:
+          position: {x: 4.3, y: 0, z: 9.0}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 13
+        transformData:
+          position: {x: 0, y: 0, z: -6.8}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 4
+        transformData:
+          position: {x: 4.7, y: 0, z: 0}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 4
+        transformData:
+          position: {x: -4.7, y: 0, z: 0}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
       chestSpawns: []
       groupId: 0
-      waveDropExpericence: 25
-      waveDropGold: 35
+      waveDropExpericence: 44
+      waveDropGold: 36
       rewards:
       - currencyId: gold
-        amount: 35
+        amount: 36
       customWaveEndDelay: -1
       icon: {fileID: 21300000, guid: 58996b765bd63c6408fa88c9b9db2418, type: 3}
       waveMusic: {fileID: 0}
     - enemySpawns: []
       chestSpawns:
-      - chestType: 0
+      - chestType: 2
         transformData:
           position: {x: 0, y: 0, z: 0}
           rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
@@ -805,7 +1670,7 @@ MonoBehaviour:
       - currencyId: gold
         amount: 0
       customWaveEndDelay: -1
-      icon: {fileID: 21300000, guid: 75d429118cd8b784892af7359e302742, type: 3}
+      icon: {fileID: 21300000, guid: b0210b46056e1c44ba640bcef14213c2, type: 3}
       waveMusic: {fileID: 0}
     - enemySpawns:
       - enemyType: 102
@@ -841,13 +1706,79 @@ MonoBehaviour:
             min: 0
             max: 1
             propertyType: 0
+      - enemyType: 15
+        transformData:
+          position: {x: -4.2, y: 0, z: 3.0}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 10
+        transformData:
+          position: {x: 4.2, y: 0, z: 4.0}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 1
+        transformData:
+          position: {x: 4.6, y: 0, z: -5.4}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
       chestSpawns: []
       groupId: 0
-      waveDropExpericence: 80
-      waveDropGold: 100
+      waveDropExpericence: 83
+      waveDropGold: 150
       rewards:
       - currencyId: gold
-        amount: 100
+        amount: 150
       customWaveEndDelay: -1
       icon: {fileID: 21300000, guid: ed6ade05153dc7c42a0e4023c705af01, type: 3}
       waveMusic: {fileID: 11400000, guid: d4ecab5b2d071fc4aa298f085174c5b7, type: 2}
@@ -940,13 +1871,123 @@ MonoBehaviour:
             min: 0
             max: 1
             propertyType: 0
+      - enemyType: 2
+        transformData:
+          position: {x: -4.2, y: 0, z: 8}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 2
+        transformData:
+          position: {x: 4.2, y: 0, z: 8}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 15
+        transformData:
+          position: {x: -4.3, y: 0, z: -6.7}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 15
+        transformData:
+          position: {x: 4.3, y: 0, z: -6.7}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 8
+        transformData:
+          position: {x: 0, y: 0, z: 8.2}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
       chestSpawns: []
       groupId: 0
-      waveDropExpericence: 25
-      waveDropGold: 40
+      waveDropExpericence: 44
+      waveDropGold: 42
       rewards:
       - currencyId: gold
-        amount: 40
+        amount: 42
       customWaveEndDelay: -1
       icon: {fileID: 21300000, guid: 58996b765bd63c6408fa88c9b9db2418, type: 3}
       waveMusic: {fileID: 0}
@@ -1017,13 +2058,145 @@ MonoBehaviour:
             min: 0
             max: 1
             propertyType: 0
+      - enemyType: 10
+        transformData:
+          position: {x: -4.6, y: 0, z: 4.3}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 10
+        transformData:
+          position: {x: 4.6, y: 0, z: 4.3}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 1
+        transformData:
+          position: {x: -3.9, y: 0, z: 8.3}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 9
+        transformData:
+          position: {x: 4.4, y: 0, z: 8.4}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 3
+        transformData:
+          position: {x: 0, y: 0, z: -8.6}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 6
+        transformData:
+          position: {x: 0, y: 0, z: 4.6}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
       chestSpawns: []
       groupId: 0
-      waveDropExpericence: 25
-      waveDropGold: 45
+      waveDropExpericence: 44
+      waveDropGold: 44
       rewards:
       - currencyId: gold
-        amount: 45
+        amount: 44
       customWaveEndDelay: -1
       icon: {fileID: 21300000, guid: 58996b765bd63c6408fa88c9b9db2418, type: 3}
       waveMusic: {fileID: 0}
@@ -1116,13 +2289,123 @@ MonoBehaviour:
             min: 0
             max: 1
             propertyType: 0
+      - enemyType: 1
+        transformData:
+          position: {x: -4.5, y: 0, z: -6.1}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 14
+        transformData:
+          position: {x: 4.5, y: 0, z: -6.1}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 3
+        transformData:
+          position: {x: -4.5, y: 0, z: 8.3}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 3
+        transformData:
+          position: {x: 4.5, y: 0, z: 8.3}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 15
+        transformData:
+          position: {x: 0, y: 0, z: 3.7}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
       chestSpawns: []
       groupId: 0
-      waveDropExpericence: 25
-      waveDropGold: 45
+      waveDropExpericence: 44
+      waveDropGold: 46
       rewards:
       - currencyId: gold
-        amount: 45
+        amount: 46
       customWaveEndDelay: -1
       icon: {fileID: 21300000, guid: 58996b765bd63c6408fa88c9b9db2418, type: 3}
       waveMusic: {fileID: 0}
@@ -1215,9 +2498,119 @@ MonoBehaviour:
             min: 0
             max: 1
             propertyType: 0
+      - enemyType: 8
+        transformData:
+          position: {x: 0, y: 0, z: 5.0}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 15
+        transformData:
+          position: {x: 0, y: 0, z: -7.8}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 4
+        transformData:
+          position: {x: -4.6, y: 0, z: 2}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 1
+        transformData:
+          position: {x: 4.6, y: 0, z: 2}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 3
+        transformData:
+          position: {x: -4.6, y: 0, z: -1.7}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
       chestSpawns: []
       groupId: 0
-      waveDropExpericence: 30
+      waveDropExpericence: 48
       waveDropGold: 50
       rewards:
       - currencyId: gold
@@ -1227,7 +2620,7 @@ MonoBehaviour:
       waveMusic: {fileID: 0}
     - enemySpawns: []
       chestSpawns:
-      - chestType: 1
+      - chestType: 0
         transformData:
           position: {x: 0, y: 0, z: 0}
           rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
@@ -1239,7 +2632,7 @@ MonoBehaviour:
       - currencyId: gold
         amount: 0
       customWaveEndDelay: -1
-      icon: {fileID: 21300000, guid: 2255ca2025c73a34abad2b46cb834311, type: 3}
+      icon: {fileID: 21300000, guid: 75d429118cd8b784892af7359e302742, type: 3}
       waveMusic: {fileID: 0}
     - enemySpawns:
       - enemyType: 5
@@ -1251,7 +2644,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 
+          removeDrop:
           overrideHP: 0
           hp:
             value: 100
@@ -1273,7 +2666,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 
+          removeDrop:
           overrideHP: 0
           hp:
             value: 100
@@ -1295,7 +2688,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 
+          removeDrop:
           overrideHP: 0
           hp:
             value: 100
@@ -1317,7 +2710,117 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 
+          removeDrop:
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 4
+        transformData:
+          position: {x: -4.8, y: 0, z: 4.1}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 4
+        transformData:
+          position: {x: 4.8, y: 0, z: 4.1}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 3
+        transformData:
+          position: {x: -4.7, y: 0, z: -5.8}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 15
+        transformData:
+          position: {x: 4.7, y: 0, z: -5.8}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 10
+        transformData:
+          position: {x: 0, y: 0, z: 10.1}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
           overrideHP: 0
           hp:
             value: 100
@@ -1332,11 +2835,11 @@ MonoBehaviour:
             propertyType: 0
       chestSpawns: []
       groupId: 0
-      waveDropExpericence: 30
-      waveDropGold: 50
+      waveDropExpericence: 48
+      waveDropGold: 54
       rewards:
       - currencyId: gold
-        amount: 50
+        amount: 54
       customWaveEndDelay: -1
       icon: {fileID: 21300000, guid: 58996b765bd63c6408fa88c9b9db2418, type: 3}
       waveMusic: {fileID: 0}
@@ -1350,7 +2853,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 
+          removeDrop:
           overrideHP: 0
           hp:
             value: 100
@@ -1372,7 +2875,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 
+          removeDrop:
           overrideHP: 0
           hp:
             value: 100
@@ -1394,7 +2897,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 
+          removeDrop:
           overrideHP: 0
           hp:
             value: 100
@@ -1416,7 +2919,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 
+          removeDrop:
           overrideHP: 0
           hp:
             value: 100
@@ -1438,7 +2941,95 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 
+          removeDrop:
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 1
+        transformData:
+          position: {x: -4.6, y: 0, z: 8}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 14
+        transformData:
+          position: {x: 4.6, y: 0, z: 8}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 15
+        transformData:
+          position: {x: 0, y: 0, z: -6.9}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 6
+        transformData:
+          position: {x: 0, y: 0, z: 5.2}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
           overrideHP: 0
           hp:
             value: 100
@@ -1453,11 +3044,11 @@ MonoBehaviour:
             propertyType: 0
       chestSpawns: []
       groupId: 0
-      waveDropExpericence: 30
-      waveDropGold: 55
+      waveDropExpericence: 48
+      waveDropGold: 56
       rewards:
       - currencyId: gold
-        amount: 55
+        amount: 56
       customWaveEndDelay: -1
       icon: {fileID: 21300000, guid: 58996b765bd63c6408fa88c9b9db2418, type: 3}
       waveMusic: {fileID: 0}
@@ -1471,7 +3062,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 
+          removeDrop:
           overrideHP: 0
           hp:
             value: 100
@@ -1493,7 +3084,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 
+          removeDrop:
           overrideHP: 0
           hp:
             value: 100
@@ -1515,7 +3106,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 
+          removeDrop:
           overrideHP: 0
           hp:
             value: 100
@@ -1537,7 +3128,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 
+          removeDrop:
           overrideHP: 0
           hp:
             value: 100
@@ -1559,7 +3150,117 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 
+          removeDrop:
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 10
+        transformData:
+          position: {x: -4.5, y: 0, z: 9.1}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 10
+        transformData:
+          position: {x: 4.5, y: 0, z: 9.1}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 9
+        transformData:
+          position: {x: -4.5, y: 0, z: -0.5}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 15
+        transformData:
+          position: {x: 4.4, y: 0, z: 0.4}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 3
+        transformData:
+          position: {x: 0, y: 0, z: -6.2}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
           overrideHP: 0
           hp:
             value: 100
@@ -1574,11 +3275,11 @@ MonoBehaviour:
             propertyType: 0
       chestSpawns: []
       groupId: 0
-      waveDropExpericence: 30
-      waveDropGold: 55
+      waveDropExpericence: 48
+      waveDropGold: 58
       rewards:
       - currencyId: gold
-        amount: 55
+        amount: 58
       customWaveEndDelay: -1
       icon: {fileID: 21300000, guid: 58996b765bd63c6408fa88c9b9db2418, type: 3}
       waveMusic: {fileID: 0}
@@ -1592,7 +3293,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 
+          removeDrop:
           overrideHP: 0
           hp:
             value: 100
@@ -1614,7 +3315,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 
+          removeDrop:
           overrideHP: 0
           hp:
             value: 100
@@ -1636,7 +3337,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 
+          removeDrop:
           overrideHP: 0
           hp:
             value: 100
@@ -1658,7 +3359,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 
+          removeDrop:
           overrideHP: 0
           hp:
             value: 100
@@ -1680,7 +3381,117 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 
+          removeDrop:
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 3
+        transformData:
+          position: {x: 0, y: 0, z: -5.8}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 8
+        transformData:
+          position: {x: -4.2, y: 0, z: 7.6}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 8
+        transformData:
+          position: {x: 4.2, y: 0, z: 7.6}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 1
+        transformData:
+          position: {x: 0, y: 0, z: 5.6}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 14
+        transformData:
+          position: {x: -4.2, y: 0, z: -1.0}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
           overrideHP: 0
           hp:
             value: 100
@@ -1695,7 +3506,7 @@ MonoBehaviour:
             propertyType: 0
       chestSpawns: []
       groupId: 0
-      waveDropExpericence: 30
+      waveDropExpericence: 48
       waveDropGold: 60
       rewards:
       - currencyId: gold
@@ -1705,7 +3516,7 @@ MonoBehaviour:
       waveMusic: {fileID: 0}
     - enemySpawns: []
       chestSpawns:
-      - chestType: 0
+      - chestType: 2
         transformData:
           position: {x: 0, y: 0, z: 0}
           rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
@@ -1717,7 +3528,7 @@ MonoBehaviour:
       - currencyId: gold
         amount: 0
       customWaveEndDelay: -1
-      icon: {fileID: 21300000, guid: 75d429118cd8b784892af7359e302742, type: 3}
+      icon: {fileID: 21300000, guid: b0210b46056e1c44ba640bcef14213c2, type: 3}
       waveMusic: {fileID: 0}
     - enemySpawns:
       - enemyType: 100
@@ -1740,7 +3551,95 @@ MonoBehaviour:
               chance: 100
             selectedZoneId: 0
           dropOverrides: []
-          removeDrop: 
+          removeDrop:
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 3
+        transformData:
+          position: {x: -4.4, y: 0, z: 3.8}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 3
+        transformData:
+          position: {x: 4.4, y: 0, z: 3.8}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 2
+        transformData:
+          position: {x: -4.4, y: 0, z: -6.2}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 1
+        transformData:
+          position: {x: 4.4, y: 0, z: -6.2}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
           overrideHP: 0
           hp:
             value: 100
@@ -1755,11 +3654,11 @@ MonoBehaviour:
             propertyType: 0
       chestSpawns: []
       groupId: 0
-      waveDropExpericence: 100
-      waveDropGold: 150
+      waveDropExpericence: 96
+      waveDropGold: 210
       rewards:
       - currencyId: gold
-        amount: 150
+        amount: 210
       customWaveEndDelay: -1
       icon: {fileID: 21300000, guid: ed6ade05153dc7c42a0e4023c705af01, type: 3}
       waveMusic: {fileID: 11400000, guid: d4ecab5b2d071fc4aa298f085174c5b7, type: 2}
@@ -1773,7 +3672,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 
+          removeDrop:
           overrideHP: 0
           hp:
             value: 100
@@ -1795,7 +3694,161 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 
+          removeDrop:
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 3
+        transformData:
+          position: {x: -4.4, y: 0, z: -6.1}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 3
+        transformData:
+          position: {x: 4.4, y: 0, z: -6.1}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 4
+        transformData:
+          position: {x: -4.6, y: 0, z: 2.3}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 4
+        transformData:
+          position: {x: 4.6, y: 0, z: 2.3}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 13
+        transformData:
+          position: {x: 0, y: 0, z: 6.4}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 8
+        transformData:
+          position: {x: 0, y: 0, z: -5.6}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 1
+        transformData:
+          position: {x: 0, y: 0, z: 10.3}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
           overrideHP: 0
           hp:
             value: 100
@@ -1810,7 +3863,7 @@ MonoBehaviour:
             propertyType: 0
       chestSpawns: []
       groupId: 0
-      waveDropExpericence: 30
+      waveDropExpericence: 44
       waveDropGold: 60
       rewards:
       - currencyId: gold
@@ -1828,7 +3881,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 
+          removeDrop:
           overrideHP: 0
           hp:
             value: 100
@@ -1850,7 +3903,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 
+          removeDrop:
           overrideHP: 0
           hp:
             value: 100
@@ -1872,7 +3925,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 
+          removeDrop:
           overrideHP: 0
           hp:
             value: 100
@@ -1894,7 +3947,139 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 
+          removeDrop:
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 10
+        transformData:
+          position: {x: -4.4, y: 0, z: 5.9}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 10
+        transformData:
+          position: {x: 4.4, y: 0, z: 6}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 15
+        transformData:
+          position: {x: -4.4, y: 0, z: -6.2}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 13
+        transformData:
+          position: {x: 4.4, y: 0, z: -6.2}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 1
+        transformData:
+          position: {x: 0, y: 0, z: -6.6}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 8
+        transformData:
+          position: {x: 0, y: 0, z: 7.0}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
           overrideHP: 0
           hp:
             value: 100
@@ -1909,11 +4094,11 @@ MonoBehaviour:
             propertyType: 0
       chestSpawns: []
       groupId: 0
-      waveDropExpericence: 30
-      waveDropGold: 55
+      waveDropExpericence: 48
+      waveDropGold: 61
       rewards:
       - currencyId: gold
-        amount: 55
+        amount: 61
       customWaveEndDelay: -1
       icon: {fileID: 21300000, guid: 58996b765bd63c6408fa88c9b9db2418, type: 3}
       waveMusic: {fileID: 0}
@@ -1927,7 +4112,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 
+          removeDrop:
           overrideHP: 0
           hp:
             value: 100
@@ -1949,7 +4134,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 
+          removeDrop:
           overrideHP: 0
           hp:
             value: 100
@@ -1971,7 +4156,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 
+          removeDrop:
           overrideHP: 0
           hp:
             value: 100
@@ -1993,7 +4178,139 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 
+          removeDrop:
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 1
+        transformData:
+          position: {x: -4.5, y: 0, z: 6.5}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 1
+        transformData:
+          position: {x: 4.5, y: 0, z: 6.5}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 14
+        transformData:
+          position: {x: -4.5, y: 0, z: -6.0}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 15
+        transformData:
+          position: {x: 4.5, y: 0, z: -6.0}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 10
+        transformData:
+          position: {x: 0, y: 0, z: 4.7}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 8
+        transformData:
+          position: {x: 0, y: 0, z: -4.3}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
           overrideHP: 0
           hp:
             value: 100
@@ -2008,11 +4325,11 @@ MonoBehaviour:
             propertyType: 0
       chestSpawns: []
       groupId: 0
-      waveDropExpericence: 30
-      waveDropGold: 60
+      waveDropExpericence: 48
+      waveDropGold: 63
       rewards:
       - currencyId: gold
-        amount: 60
+        amount: 63
       customWaveEndDelay: -1
       icon: {fileID: 21300000, guid: 58996b765bd63c6408fa88c9b9db2418, type: 3}
       waveMusic: {fileID: 0}
@@ -2026,7 +4343,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 
+          removeDrop:
           overrideHP: 0
           hp:
             value: 100
@@ -2048,7 +4365,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 
+          removeDrop:
           overrideHP: 0
           hp:
             value: 100
@@ -2070,7 +4387,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 
+          removeDrop:
           overrideHP: 0
           hp:
             value: 100
@@ -2092,7 +4409,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 
+          removeDrop:
           overrideHP: 0
           hp:
             value: 100
@@ -2114,7 +4431,117 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 
+          removeDrop:
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 4
+        transformData:
+          position: {x: -4.2, y: 0, z: 9.0}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 4
+        transformData:
+          position: {x: 4.2, y: 0, z: 9.0}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 1
+        transformData:
+          position: {x: -4.7, y: 0, z: -0.1}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 3
+        transformData:
+          position: {x: 4.6, y: 0, z: 0.1}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 14
+        transformData:
+          position: {x: 0, y: 0, z: -8.3}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
           overrideHP: 0
           hp:
             value: 100
@@ -2129,7 +4556,7 @@ MonoBehaviour:
             propertyType: 0
       chestSpawns: []
       groupId: 0
-      waveDropExpericence: 30
+      waveDropExpericence: 48
       waveDropGold: 65
       rewards:
       - currencyId: gold
@@ -2139,7 +4566,7 @@ MonoBehaviour:
       waveMusic: {fileID: 0}
     - enemySpawns: []
       chestSpawns:
-      - chestType: 2
+      - chestType: 0
         transformData:
           position: {x: 0, y: 0, z: 0}
           rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
@@ -2151,7 +4578,7 @@ MonoBehaviour:
       - currencyId: gold
         amount: 0
       customWaveEndDelay: -1
-      icon: {fileID: 21300000, guid: b0210b46056e1c44ba640bcef14213c2, type: 3}
+      icon: {fileID: 21300000, guid: 75d429118cd8b784892af7359e302742, type: 3}
       waveMusic: {fileID: 0}
     - enemySpawns:
       - enemyType: 10
@@ -2163,7 +4590,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 
+          removeDrop:
           overrideHP: 0
           hp:
             value: 100
@@ -2185,7 +4612,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 
+          removeDrop:
           overrideHP: 0
           hp:
             value: 100
@@ -2207,7 +4634,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 
+          removeDrop:
           overrideHP: 0
           hp:
             value: 100
@@ -2229,7 +4656,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 
+          removeDrop:
           overrideHP: 0
           hp:
             value: 100
@@ -2251,7 +4678,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 
+          removeDrop:
           overrideHP: 0
           hp:
             value: 100
@@ -2273,7 +4700,117 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 
+          removeDrop:
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 14
+        transformData:
+          position: {x: 4.6, y: 0, z: 9.2}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 1
+        transformData:
+          position: {x: -4.6, y: 0, z: 9.2}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 13
+        transformData:
+          position: {x: 0, y: 0, z: -6.8}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 8
+        transformData:
+          position: {x: 4.7, y: 0, z: -0.4}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 3
+        transformData:
+          position: {x: -4.7, y: 0, z: -0.6}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
           overrideHP: 0
           hp:
             value: 100
@@ -2288,11 +4825,11 @@ MonoBehaviour:
             propertyType: 0
       chestSpawns: []
       groupId: 0
-      waveDropExpericence: 30
-      waveDropGold: 65
+      waveDropExpericence: 57
+      waveDropGold: 68
       rewards:
       - currencyId: gold
-        amount: 65
+        amount: 68
       customWaveEndDelay: -1
       icon: {fileID: 21300000, guid: 58996b765bd63c6408fa88c9b9db2418, type: 3}
       waveMusic: {fileID: 0}
@@ -2306,7 +4843,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 
+          removeDrop:
           overrideHP: 0
           hp:
             value: 100
@@ -2328,7 +4865,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 
+          removeDrop:
           overrideHP: 0
           hp:
             value: 100
@@ -2350,7 +4887,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 
+          removeDrop:
           overrideHP: 0
           hp:
             value: 100
@@ -2372,7 +4909,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 
+          removeDrop:
           overrideHP: 0
           hp:
             value: 100
@@ -2394,7 +4931,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 
+          removeDrop:
           overrideHP: 0
           hp:
             value: 100
@@ -2416,7 +4953,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 
+          removeDrop:
           overrideHP: 0
           hp:
             value: 100
@@ -2438,7 +4975,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 
+          removeDrop:
           overrideHP: 0
           hp:
             value: 100
@@ -2460,7 +4997,95 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 
+          removeDrop:
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 3
+        transformData:
+          position: {x: -4.6, y: 0, z: 0.2}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 3
+        transformData:
+          position: {x: 4.6, y: 0, z: 0.2}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 4
+        transformData:
+          position: {x: 0, y: 0, z: 4.1}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 14
+        transformData:
+          position: {x: 0, y: 0, z: -8.9}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
           overrideHP: 0
           hp:
             value: 100
@@ -2475,11 +5100,11 @@ MonoBehaviour:
             propertyType: 0
       chestSpawns: []
       groupId: 0
-      waveDropExpericence: 30
-      waveDropGold: 80
+      waveDropExpericence: 57
+      waveDropGold: 74
       rewards:
       - currencyId: gold
-        amount: 80
+        amount: 74
       customWaveEndDelay: -1
       icon: {fileID: 21300000, guid: 58996b765bd63c6408fa88c9b9db2418, type: 3}
       waveMusic: {fileID: 0}
@@ -2493,7 +5118,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 
+          removeDrop:
           overrideHP: 0
           hp:
             value: 100
@@ -2515,7 +5140,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 
+          removeDrop:
           overrideHP: 0
           hp:
             value: 100
@@ -2537,7 +5162,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 
+          removeDrop:
           overrideHP: 0
           hp:
             value: 100
@@ -2559,7 +5184,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 
+          removeDrop:
           overrideHP: 0
           hp:
             value: 100
@@ -2581,7 +5206,139 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 
+          removeDrop:
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 14
+        transformData:
+          position: {x: -4.7, y: 0, z: 8.7}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 10
+        transformData:
+          position: {x: 4.7, y: 0, z: 2.8}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 15
+        transformData:
+          position: {x: -4.6, y: 0, z: -2.5}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 3
+        transformData:
+          position: {x: 0, y: 0, z: -8.2}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 8
+        transformData:
+          position: {x: 0, y: 0, z: 5.1}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 4
+        transformData:
+          position: {x: 4.6, y: 0, z: -8.4}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
           overrideHP: 0
           hp:
             value: 100
@@ -2596,11 +5353,11 @@ MonoBehaviour:
             propertyType: 0
       chestSpawns: []
       groupId: 0
-      waveDropExpericence: 35
-      waveDropGold: 65
+      waveDropExpericence: 57
+      waveDropGold: 76
       rewards:
       - currencyId: gold
-        amount: 65
+        amount: 76
       customWaveEndDelay: -1
       icon: {fileID: 21300000, guid: 58996b765bd63c6408fa88c9b9db2418, type: 3}
       waveMusic: {fileID: 0}
@@ -2614,7 +5371,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 
+          removeDrop:
           overrideHP: 0
           hp:
             value: 100
@@ -2636,7 +5393,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 
+          removeDrop:
           overrideHP: 0
           hp:
             value: 100
@@ -2658,7 +5415,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 
+          removeDrop:
           overrideHP: 0
           hp:
             value: 100
@@ -2680,7 +5437,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 
+          removeDrop:
           overrideHP: 0
           hp:
             value: 100
@@ -2702,7 +5459,139 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 
+          removeDrop:
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 11
+        transformData:
+          position: {x: -4.4, y: 0, z: 6.7}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 11
+        transformData:
+          position: {x: 4.6, y: 0, z: 6.6}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 10
+        transformData:
+          position: {x: 0, y: 0, z: 4.9}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 13
+        transformData:
+          position: {x: 0, y: 0, z: -5.8}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 15
+        transformData:
+          position: {x: 4.5, y: 0, z: -4.2}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 1
+        transformData:
+          position: {x: -4.5, y: 0, z: -4.2}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
           overrideHP: 0
           hp:
             value: 100
@@ -2717,17 +5606,17 @@ MonoBehaviour:
             propertyType: 0
       chestSpawns: []
       groupId: 0
-      waveDropExpericence: 35
-      waveDropGold: 80
+      waveDropExpericence: 57
+      waveDropGold: 78
       rewards:
       - currencyId: gold
-        amount: 80
+        amount: 78
       customWaveEndDelay: -1
       icon: {fileID: 21300000, guid: 58996b765bd63c6408fa88c9b9db2418, type: 3}
       waveMusic: {fileID: 0}
     - enemySpawns: []
       chestSpawns:
-      - chestType: 0
+      - chestType: 2
         transformData:
           position: {x: 0, y: 0, z: 0}
           rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
@@ -2739,7 +5628,7 @@ MonoBehaviour:
       - currencyId: gold
         amount: 0
       customWaveEndDelay: -1
-      icon: {fileID: 21300000, guid: 75d429118cd8b784892af7359e302742, type: 3}
+      icon: {fileID: 21300000, guid: b0210b46056e1c44ba640bcef14213c2, type: 3}
       waveMusic: {fileID: 0}
     - enemySpawns:
       - enemyType: 105
@@ -2786,13 +5675,101 @@ MonoBehaviour:
             min: 0
             max: 1
             propertyType: 0
+      - enemyType: 11
+        transformData:
+          position: {x: -4.4, y: 0, z: 4.6}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 13
+        transformData:
+          position: {x: 4.4, y: 0, z: 3.6}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 14
+        transformData:
+          position: {x: -4.4, y: 0, z: -6}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
+      - enemyType: 15
+        transformData:
+          position: {x: 4.4, y: 0, z: -6}
+          rotation: {x: 0, y: 1, z: 0, w: 0}
+          localScale: {x: 1, y: 1, z: 1}
+        overrideData:
+          bossChestRewards: {fileID: 0}
+          additionalDrop: []
+          dropOverrides: []
+          removeDrop: 000000000100000002000000
+          overrideHP: 0
+          hp:
+            value: 100
+            min: 0
+            max: 1
+            propertyType: 0
+          overrideDamage: 0
+          damage:
+            value: 1
+            min: 0
+            max: 1
+            propertyType: 0
       chestSpawns: []
       groupId: 0
       waveDropExpericence: 0
-      waveDropGold: 250
+      waveDropGold: 360
       rewards:
       - currencyId: gold
-        amount: 250
+        amount: 360
       customWaveEndDelay: -1
       icon: {fileID: 21300000, guid: ed6ade05153dc7c42a0e4023c705af01, type: 3}
       waveMusic: {fileID: 11400000, guid: d4ecab5b2d071fc4aa298f085174c5b7, type: 2}
@@ -2800,7 +5777,7 @@ MonoBehaviour:
     groupId: 0
     roomMusic: {fileID: 0}
     firstWaveStartDelay: 0
-    delayBetweenWaves: 0
+    delayBetweenWaves: 0.75
     delayBeforeExitSpawn: 0
     cameraMovementType: 2
     cameraConfinementPolygon:

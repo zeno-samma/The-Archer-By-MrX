@@ -11,7 +11,8 @@ namespace MrX.Upgrades
 
         protected virtual void OnWaveEnded()
         {
-            StageController.Player.HealProportion(Level.Value / 100f);
+            if (StageController.Room.CurrentWave.EnemySpawns.Count > 0)
+                StageController.Player.HealProportion(Level.Value * StageController.StageData.WaveRecoveryFactor / 100f);
         }
 
         public override void Clear()

@@ -11,7 +11,7 @@ namespace MrX.EditorTools
     {
         private const string OriginalHashKey = "MrX.Verification.OriginalHash";
         private static string OriginalPath => Path.Combine(SerializationHelper.persistentDataPath, SaveManager.SAVE_FILE_NAME_EDITOR);
-        public static string Begin()
+        public static string Begin(bool copyCurrentProfile = false)
         {
             if (EditorApplication.isPlaying) throw new InvalidOperationException("Stop Play before isolating saves.");
             var manager = UnityEngine.Object.FindAnyObjectByType<SaveManager>();
@@ -22,11 +22,15 @@ namespace MrX.EditorTools
             var folder = Path.GetFullPath("Temp/Verification/" + DateTime.UtcNow.ToString("yyyyMMdd-HHmmss"));
             Directory.CreateDirectory(folder);
             var backup = Path.Combine(folder, "original-editor-save.bak");
-            if (File.Exists(OriginalPath)) File.Copy(OriginalPath, backup);
+            if (File.Exists(OriginalPath))
+            {
+                File.Copy(OriginalPath, backup);
+                if (copyCurrentProfile) File.Copy(backup, Path.Combine(folder, SaveManager.SAVE_FILE_NAME_EDITOR));
+            }
             SessionState.SetString(OriginalHashKey, Hash(backup));
             SessionState.SetString(SerializationHelper.VerificationDirectoryKey, folder);
             SerializationHelper.SetVerificationDirectory(folder);
-            return "Fresh isolated profile: " + folder;
+            return (copyCurrentProfile && File.Exists(backup) ? "Copied isolated profile: " : "Fresh isolated profile: ") + folder;
         }
         public static string End()
         {

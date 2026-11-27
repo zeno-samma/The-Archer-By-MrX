@@ -133,6 +133,8 @@ namespace MrX
 
         #endregion
 
+        private int pendingEnemySpawns;
+
         public void LoadWave(bool skipEnemies = false)
         {
             var enemyCounts = new Dictionary<string, int>();
@@ -158,6 +160,7 @@ namespace MrX
     string.Join("|", composition),
     CurrentWave.EnemySpawns.Count);
             StageController.RecalculateEnemyMultipliers();
+            pendingEnemySpawns = skipEnemies ? 0 : CurrentWave.EnemySpawns.Count;
 
             if (!skipEnemies)
             {
@@ -233,8 +236,12 @@ namespace MrX
 
         protected virtual IEnumerator EndWave()
         {
-            RunTelemetry.EndWave();
+            float recovery = StageController.Player.Stats.HPRecoveryStat.Value * StageController.StageData.WaveRecoveryFactor;
+            if (CurrentWave.EnemySpawns.Count > 0 && recovery > 0)
+                StageController.Player.AddHP(recovery);
+
             onWaveEnded?.Invoke();
+            RunTelemetry.EndWave();
 
             if (CurrentWave.WaveMusic != null)
             {
@@ -295,7 +302,8 @@ namespace MrX
                 yield return new WaitUntil(() => !StageController.DropManager.HasAliveIndicators);
             }
 
-            var startWaitingTime = Time.time;
+            float startWaitingTime = Time.time;
+            float nextWaveDelay = CurrentWave.CustomWaveEndDelay < 0 ? RoomData.DelayBetweenWaves : CurrentWave.CustomWaveEndDelay;
 
             if (WaitForLevelUpToEnd)
             {
@@ -328,9 +336,7 @@ namespace MrX
 
                 if (nextWave != null)
                 {
-                    var delay = CurrentWave.CustomWaveEndDelay < 0 ? RoomData.DelayBetweenWaves : CurrentWave.CustomWaveEndDelay;
-                    delay -= startWaitingTime;
-                    if (delay < 0) delay = 0;
+                    float delay = Mathf.Max(0f, nextWaveDelay - (Time.time - startWaitingTime));
 
                     EasingManager.DoAfter(delay, () =>
                     {
@@ -474,7 +480,7 @@ namespace MrX
 
             onEnemyDefeated?.Invoke();
 
-            if (aliveEnemies.Count == 0)
+            if (aliveEnemies.Count == 0 && pendingEnemySpawns == 0)
             {
                 onAllEnemiesDefeated?.Invoke();
 
@@ -503,6 +509,7 @@ namespace MrX
             enemy.SubscribeOnDefeat(OnEnemyDefeated);
 
             aliveEnemies.Add(enemy);
+            pendingEnemySpawns--;
         }
 
         public virtual EnemyBehavior GetClosestEnemy(Vector3 position, Func<EnemyBehavior, bool> validateFunc = null)

@@ -80,7 +80,7 @@ namespace MrX.Player
 
         public AdditiveStat HPRecoveryStat { get; protected set; } = 0;
 
-        public MultiplicativeStat CritDamageMultiplierStat { get; protected set; } = 1;
+        public MultiplicativeStat CritDamageMultiplierStat { get; protected set; } = 1.75f;
 
         public AdditiveStat RevivesStat { get; protected set; } = 0;
 
@@ -172,8 +172,6 @@ namespace MrX.Player
             FrontArrowDamageStat.AddChildStat(AttackDamageStat);
             RearArrowDamageStat.AddChildStat(AttackDamageStat);
             DiagonalArrowDamageStat.AddChildStat(AttackDamageStat);
-
-            CritDamageMultiplierStat.AddMultiplier(heroLevel.GetStatValue(StatType.DamageReduction));
 
             MovementSpeedStat.AddMultiplier(SlowDownMultiplier);
         }

@@ -57,8 +57,9 @@ namespace MrX.StageCreator
             DrawGroupDropDown(roomProperty);
             DrawRoomMusicProperty(roomProperty);
 
-            GUI.enabled = DefaultSceneLoaderActions.Enabled;
-            var tooltip = GUI.enabled ?
+            bool challenge = StageCreatorWindow.Instance.IsChallengeAuthoring;
+            GUI.enabled = DefaultSceneLoaderActions.Enabled && !challenge;
+            var tooltip = challenge ? "Launch this stage from Challenge Playtest." : GUI.enabled ?
                 "Start playmode with and automatically enter selected room" :
                 "Default Scene Loader is disabled. Starting play mode will not load necessary systems and will break the game. \n" +
                 "To enable Default Scene Loader, use 'Tools -> MrX Studio -> Default Scene Loader Enabled'";

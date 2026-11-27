@@ -212,7 +212,7 @@ namespace MrX
             if (!MenuEconomy.TrySpendForNewRun(stage.EnergyCost)) { changingScene = false; return false; }
             var run = SaveManager.GetSave<ContinuePlayingSave>("Continue Playing");
             run.Disable();
-            run.RememberRun(stage.StageId, difficulty);
+            run.RememberRun(stage, difficulty);
             CurrenciesManager.ApplyGameplayAmounts();
             stages.IncrementStageAttempts(stage);
             instance.StartCoroutine(ChangeScene(SceneSettings.MainMenuScene.SceneName, SceneSettings.GameScene.SceneName));

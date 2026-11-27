@@ -32,6 +32,8 @@ namespace MrX.StageCreator
         public static GUIStyle HeaderTextStyle { get; protected set; }
 
         public bool IsTesting { get; set; }
+        [SerializeField] private StageDatabase authoringDatabase;
+        public bool IsChallengeAuthoring => authoringDatabase != null;
 
         #region Properties
 
@@ -59,6 +61,7 @@ namespace MrX.StageCreator
         {
             get
             {
+                if (authoringDatabase != null) return authoringDatabase;
                 if (StageController == null) return null;
                 return StageController.StageDatabase;
             }
@@ -124,6 +127,26 @@ namespace MrX.StageCreator
             wnd.minSize = new Vector2(760, 800);
         }
 
+        public static void OpenChallengeDatabase(StageDatabase database)
+        {
+            OpenWindow();
+            GetWindow<StageCreatorWindow>().SetAuthoringDatabase(database);
+        }
+
+        private void SetAuthoringDatabase(StageDatabase database)
+        {
+            if (authoringDatabase == database) return;
+            Disable();
+            authoringDatabase = database;
+            stageDatabaseObject = null;
+            StageDatabasePage = null;
+            StagePage = null;
+            ContextManager = null;
+            shouldOpenStage = false;
+            CurrentPage = PageType.StageDatabase;
+            Repaint();
+        }
+
         bool shouldOpenStage = false;
 
         protected virtual void OnEnable()
@@ -167,7 +190,8 @@ namespace MrX.StageCreator
             {
                 if (StagePage != null && StagePage.IsOpened)
                 {
-                    if (!IsTesting && string.IsNullOrEmpty(SessionState.GetString(StageDifficultyTrial.StageKey, "")))
+                    if (!IsTesting && !IsChallengeAuthoring &&
+                        string.IsNullOrEmpty(SessionState.GetString(StageDifficultyTrial.StageKey, "")))
                     {
                         StagePage.ApplyTestingData();
                     }
@@ -188,6 +212,16 @@ namespace MrX.StageCreator
                 return;
             }
 
+            if (IsChallengeAuthoring)
+            {
+                EditorGUILayout.LabelField("Challenge Trial Database", EditorStyles.boldLabel);
+                if (GUILayout.Button("Use Journey Stage Database"))
+                {
+                    SetAuthoringDatabase(null);
+                    return;
+                }
+            }
+
             if (StageController == null)
             {
                 EditorGUILayout.LabelField("Stage Controller not found in the scene.");
@@ -203,7 +237,7 @@ namespace MrX.StageCreator
                         if (GUILayout.Button("Open Game Scene"))
                         {
                             var path = AssetDatabase.GetAssetPath(sceneSettings.GameScene.Scene);
-                            EditorSceneManager.OpenScene(path, OpenSceneMode.Single);
+                            EditorSceneManager.OpenScene(path, IsChallengeAuthoring ? OpenSceneMode.Additive : OpenSceneMode.Single);
                         }
                     }
                 }

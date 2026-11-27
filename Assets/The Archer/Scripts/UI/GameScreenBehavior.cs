@@ -33,6 +33,10 @@ namespace MrX.UI
 
         [Space]
         [SerializeField] protected Image blackFadeImage;
+        [SerializeField] private CanvasGroup lowHealthOverlay;
+        [SerializeField, Range(0f, 1f)] private float lowHealthPeakOpacity = 0.09f;
+        [SerializeField, Range(0f, 1f)] private float criticalHealthPeakOpacity = 0.22f;
+        private float healthPulsePhase;
 
         [Space]
         [SerializeField] protected ExperienceUI experienceUI;
@@ -69,6 +73,27 @@ namespace MrX.UI
         protected virtual void OnDisable()
         {
             GameController.InputManager.InputAsset.UI.Settings.performed -= OnSettingsButtonClicked;
+        }
+
+        private void LateUpdate()
+        {
+            if (!lowHealthOverlay) return;
+
+            var player = StageController.Player;
+            float hp = player && player.IsPlaying ? player.NormalizedHP : 0f;
+            if (hp <= 0f || hp > 0.20f || Time.timeScale <= 0f || StageController.IsResultFinalized ||
+                !StageController.StageData.ShowLowHealthWarning || HasAnyOpenedPage())
+            {
+                lowHealthOverlay.alpha = 0f;
+                healthPulsePhase = 0f;
+                return;
+            }
+
+            float urgency = Mathf.InverseLerp(0.20f, 0.10f, hp);
+            healthPulsePhase = Mathf.Repeat(healthPulsePhase + Time.deltaTime * Mathf.Lerp(0.9f, 1.4f, urgency), 1f);
+            float pulse = 0.5f - 0.5f * Mathf.Cos(healthPulsePhase * 2f * Mathf.PI);
+            float peak = Mathf.Lerp(lowHealthPeakOpacity, criticalHealthPeakOpacity, urgency);
+            lowHealthOverlay.alpha = peak * Mathf.Lerp(0.22f, 1f, pulse);
         }
 
         public virtual void HideSideUI()

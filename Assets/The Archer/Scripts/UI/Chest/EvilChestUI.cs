@@ -46,6 +46,7 @@ namespace MrX.UI
         protected UnityAction onClosed;
 
         protected AbilityData abilityData;
+        private int currentHealthCost;
 
         public bool IsOpen { get; protected set; } = false;
 
@@ -94,7 +95,7 @@ namespace MrX.UI
 
                     if (GameController.InputManager.ActiveInput == Input.InputType.Gamepad)
                     {
-                        EventSystem.current.SetSelectedGameObject(acceptButton.gameObject);
+                        SelectAvailableButton();
                     }
                 });
 
@@ -142,7 +143,15 @@ namespace MrX.UI
             title.ResetUI();
 
             descriptionText.alpha = 0;
-            descriptionText.text = string.Format(descriptionTextFormat, Mathf.RoundToInt(StageController.Player.MaxHP * maxHPLossProportion));
+            var player = StageController.Player;
+            float proportion = StageController.StageData.EvilChestCurrentHpCost;
+            currentHealthCost = proportion > 0f ? Mathf.CeilToInt(player.MaxHP * proportion) : 0;
+            acceptButton.interactable = currentHealthCost == 0 || player.HP > currentHealthCost;
+            descriptionText.text = currentHealthCost > 0
+                ? (acceptButton.interactable
+                    ? $"Take the ability and lose {currentHealthCost} current HP."
+                    : $"You need more than {currentHealthCost} HP to take this ability.")
+                : string.Format(descriptionTextFormat, Mathf.RoundToInt(player.MaxHP * maxHPLossProportion));
 
             acceptButton.transform.localScale = Vector3.zero;
             rejectButton.transform.localScale = Vector3.zero;
@@ -168,6 +177,9 @@ namespace MrX.UI
 
         protected virtual void OnAcceptButtonClicked()
         {
+            if (!IsOpen || !acceptButton.isActiveAndEnabled || !acceptButton.IsInteractable()) return;
+            if (currentHealthCost > 0 && !StageController.Player.TryPayHealthCost(currentHealthCost)) return;
+
             GameController.AudioManager.PlayButtonClick();
 
             if (StageController.AbilitiesManager.IsAbilityAquired(abilityData.AbilityType))
@@ -179,9 +191,12 @@ namespace MrX.UI
                 StageController.AbilitiesManager.AddAbility(abilityData);
             }
 
-            var maxHpStat = StageController.Player.Stats.MaxHPStat;
-            var hpLoss = maxHpStat.InitialValue * maxHPLossProportion;
-            maxHpStat.ChangeInitialValue(maxHpStat.InitialValue - hpLoss);
+            if (currentHealthCost == 0)
+            {
+                var maxHpStat = StageController.Player.Stats.MaxHPStat;
+                var hpLoss = maxHpStat.InitialValue * maxHPLossProportion;
+                maxHpStat.ChangeInitialValue(maxHpStat.InitialValue - hpLoss);
+            }
 
             Hide();
         }
@@ -207,8 +222,13 @@ namespace MrX.UI
         {
             if (newInput == Input.InputType.Gamepad)
             {
-                EventSystem.current.SetSelectedGameObject(acceptButton.gameObject);
+                SelectAvailableButton();
             }
+        }
+
+        private void SelectAvailableButton()
+        {
+            EventSystem.current.SetSelectedGameObject(acceptButton.IsInteractable() ? acceptButton.gameObject : rejectButton.gameObject);
         }
     }
 }

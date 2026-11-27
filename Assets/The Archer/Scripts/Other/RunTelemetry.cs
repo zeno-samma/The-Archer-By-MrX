@@ -1,6 +1,7 @@
 using System;
 using System.Globalization;
 using System.IO;
+using MrX.Save;
 using UnityEngine;
 
 namespace MrX
@@ -34,8 +35,8 @@ namespace MrX
         private static RoomSample activeWave;
         private static string runId;
 
-        public static string CsvPath => Path.Combine(Application.persistentDataPath, "room_telemetry.csv");
-        public static string WaveCsvPath => Path.Combine(Application.persistentDataPath, "wave_telemetry.csv");
+        public static string CsvPath => SerializationHelper.GetPersistentFilePath("room_telemetry.csv");
+        public static string WaveCsvPath => SerializationHelper.GetPersistentFilePath("wave_telemetry.csv");
 
         /// <summary>Goi sau khi khoi tao Healthbar cua PLAYER, khong phai Enemy.</summary>
         public static void BindPlayerHealthbar(HealthbarBehavior healthbar)
@@ -167,7 +168,7 @@ namespace MrX
                 if (!File.Exists(WaveCsvPath))
                     File.AppendAllText(
                         WaveCsvPath,
-                        "RunId;Room;Wave;Type;TimeSec;HPStart;HPEnd;MaxHP;DamageTaken;HPAdded;DamageEvents;Result\n"
+                        "RunId;Room;Wave;Type;EnemyCount;EnemyComposition;TimeSec;HPStart;HPEnd;MaxHP;DamageTaken;HPAdded;DamageEvents;Result\n"
                     );
 
                 File.AppendAllText(WaveCsvPath, line + "\n");

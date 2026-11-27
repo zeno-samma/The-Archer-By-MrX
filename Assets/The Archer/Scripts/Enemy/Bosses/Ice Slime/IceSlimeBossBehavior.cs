@@ -4,6 +4,7 @@ using MrX.Projectile;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace MrX.Enemy
 {
@@ -69,6 +70,9 @@ namespace MrX.Enemy
 
         protected List<AbstractProjectile> projectiles = new List<AbstractProjectile>();
         protected List<IceSphereBehavior> iceSpheres = new List<IceSphereBehavior>();
+        private bool pursuingWithCrystals;
+        private bool InChallengeSecondPhase => StageController.StageData.UseChallengeBossPatterns &&
+            healthbar.HP <= healthbar.MaxHP * 0.55f;
 
         protected float IceSphereDamage => Damage * iceSphereDamageMultiplier;
         protected float IceCrystalDamage => Damage * iceCrystalAttackDamageMultiplier;
@@ -100,10 +104,20 @@ namespace MrX.Enemy
             enemyCollider.enabled = true;
 
             int i = 0;
+            bool openedSecondPhase = false;
+            pursuingWithCrystals = false;
 
             while (IsAlive)
             {
                 yield return LocateTarget(0.3f);
+
+                if (!openedSecondPhase && InChallengeSecondPhase)
+                {
+                    openedSecondPhase = true;
+                    yield return IdleCoroutine(0.65f);
+                    yield return IceCrystalAttackCoroutine();
+                    continue;
+                }
 
                 switch (attacksSequence[i % attacksSequence.Count])
                 {
@@ -190,6 +204,7 @@ namespace MrX.Enemy
 
         protected virtual IEnumerator IceCrystalAttackCoroutine()
         {
+            pursuingWithCrystals = InChallengeSecondPhase;
             animator.SetInteger(ATTACK_TYPE_INT, (int)IceSlimeAttackType.IceCrystal);
             animator.SetTrigger(ATTACK_TRIGGER);
 
@@ -200,6 +215,7 @@ namespace MrX.Enemy
             }
 
             animator.SetTrigger(ATTACK_ENDED_TRIGGER);
+            pursuingWithCrystals = false;
         }
 
         protected virtual IEnumerator IcePuddlesAttackCoroutine()
@@ -231,6 +247,7 @@ namespace MrX.Enemy
 
         public override void OnAttackEventFired()
         {
+            if (!IsAlive) return;
             var attackType = (IceSlimeAttackType) animator.GetInteger(ATTACK_TYPE_INT);
 
             switch (attackType)
@@ -240,7 +257,8 @@ namespace MrX.Enemy
                     break;
 
                 case IceSlimeAttackType.IceCrystal:
-                    StartCoroutine(SpawnIceCrystal());
+                    if (!pursuingWithCrystals || !TrySpawnPursuitCrystal())
+                        StartCoroutine(SpawnIceCrystal());
                     break;
 
                 case IceSlimeAttackType.IcePuddles:
@@ -287,24 +305,19 @@ namespace MrX.Enemy
 
         protected virtual IEnumerator SpawnIceCrystal()
         {
-            for(int i = 0; i < iceCrystalsCountPerAttack; i++)
+            int count = iceCrystalsCountPerAttack;
+            for (int i = 0; i < count && IsAlive; i++)
             {
-                var projectile = StageController.ProjectilesManager.GetProjectile(iceCrystalPrefab);
-
+                Vector3 position;
                 if (TryFindTarget())
                 {
-                    projectile.transform.position = GetRandomPositionAroundPointInRadius(Target.Position, 5, 2f, true, IceCrystalPositionValidation, 50);
+                    position = GetRandomPositionAroundPointInRadius(Target.Position, 5, 2f, true, IceCrystalPositionValidation, 50);
                 } else
                 {
-                    projectile.transform.position = GetRandomPositionInRadius(20f, 2f, true);
+                    position = GetRandomPositionInRadius(20f, 2f, true);
                 }
 
-                projectile.Launch(IceCrystalDamage);
-
-                projectile.onProjectileHidden += OnProjectileHidden;
-                projectiles.Add(projectile);
-
-                GameController.AudioManager.PlayAudio(iceCrystalSpawnSound);
+                LaunchIceCrystal(position);
 
                 yield return new WaitForSeconds(timeBetweenIceCrystalSpawns);
                 if(animator.speed < 0.1f)
@@ -312,6 +325,31 @@ namespace MrX.Enemy
                     yield return new WaitUntil(() => animator.speed > 0.1f);
                 }
             }
+        }
+
+        private bool TrySpawnPursuitCrystal()
+        {
+            if (!TryFindTarget() || !NavMesh.SamplePosition(Target.Position, out var ground, 0.75f, NavMesh.AllAreas))
+                return false;
+
+            foreach (var projectile in projectiles)
+            {
+                if (projectile is IceCrystalBehavior && (projectile.transform.position - ground.position).sqrMagnitude < 6.25f)
+                    return true;
+            }
+
+            LaunchIceCrystal(ground.position);
+            return true;
+        }
+
+        private void LaunchIceCrystal(Vector3 position)
+        {
+            var crystal = StageController.ProjectilesManager.GetProjectile(iceCrystalPrefab);
+            crystal.transform.position = position;
+            crystal.onProjectileHidden += OnProjectileHidden;
+            projectiles.Add(crystal);
+            crystal.Launch(IceCrystalDamage);
+            GameController.AudioManager.PlayAudio(iceCrystalSpawnSound);
         }
 
         protected virtual bool IceCrystalPositionValidation(Vector3 position)
@@ -326,7 +364,8 @@ namespace MrX.Enemy
 
         protected virtual IEnumerator SpawnIcePuddles()
         {
-            for(int i = 0; i < icePuddlesCount; i++)
+            int count = icePuddlesCount;
+            for (int i = 0; i < count && IsAlive; i++)
             {
                 var position = GetRandomPositionAroundPointInRadius(Position, 20, 1f, true, IcePuddlesPositionValidation, 50);
 
@@ -364,14 +403,30 @@ namespace MrX.Enemy
 
         protected virtual void SpawnIceShards()
         {
-            var shard = StageController.ProjectilesManager.GetProjectile(iceShardPrefab);
-            shard.transform.position = iceShardSpawnPosition.position;
-            shard.transform.forward = iceShardSpawnPosition.forward.NormalizeXZ();
-
-            shard.onProjectileHidden += OnProjectileHidden;
-            shard.Launch(IceShardDamage);
+            Vector3 forward = iceShardSpawnPosition.forward.NormalizeXZ();
+            float damage = IceShardDamage;
+            if (InChallengeSecondPhase)
+            {
+                LaunchIceShard(Quaternion.Euler(0f, -18f, 0f) * forward, damage * 0.7f);
+                LaunchIceShard(forward, damage * 0.7f);
+                LaunchIceShard(Quaternion.Euler(0f, 18f, 0f) * forward, damage * 0.7f);
+            }
+            else
+            {
+                LaunchIceShard(forward, damage);
+            }
 
             GameController.AudioManager.PlayAudio(iceShardSpawnSound);
+        }
+
+        private void LaunchIceShard(Vector3 direction, float damage)
+        {
+            var shard = StageController.ProjectilesManager.GetProjectile(iceShardPrefab);
+            shard.transform.position = iceShardSpawnPosition.position;
+            shard.transform.forward = direction;
+            shard.onProjectileHidden += OnProjectileHidden;
+            projectiles.Add(shard);
+            shard.Launch(damage);
         }
 
         protected virtual void OnProjectileHidden(AbstractProjectile projectile)
@@ -403,9 +458,9 @@ namespace MrX.Enemy
             waitForSpawnToEnd.Complete();
         }
 
-        public override void OnDefeatEndedEventFired()
+        protected override void Defeat()
         {
-            base.OnDefeatEndedEventFired();
+            base.Defeat();
 
             for(int i = 0; i < projectiles.Count; i++)
             {

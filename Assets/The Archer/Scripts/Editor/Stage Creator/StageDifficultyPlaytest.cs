@@ -20,7 +20,8 @@ namespace MrX.StageCreator
             EditorApplication.playModeStateChanged += OnPlayModeStateChanged;
         }
 
-        public static void Start(StageData stage, StageDifficulty difficulty)
+        public static void Start(StageData stage, StageDifficulty difficulty, StageDatabase balanceDatabase = null,
+            bool copyCurrentProfile = false)
         {
             if (!CanStart || stage == null || !stage.UsesDifficulties || !StageDifficultyTrial.IsValid(difficulty))
                 return;
@@ -28,10 +29,12 @@ namespace MrX.StageCreator
             var menu = AssetDatabase.LoadAssetAtPath<SceneAsset>(MainMenuPath);
             if (menu == null) return;
 
-            Debug.Log(VerificationSession.Begin());
+            Debug.Log(VerificationSession.Begin(copyCurrentProfile));
             SessionState.SetString(OriginalStartSceneKey, AssetDatabase.GetAssetPath(EditorSceneManager.playModeStartScene));
             SessionState.SetString(StageDifficultyTrial.StageKey, stage.StageId);
             SessionState.SetInt(StageDifficultyTrial.EntryDifficultyKey, (int)difficulty);
+            if (balanceDatabase != null)
+                SessionState.SetString(StageDifficultyTrial.BalanceDatabaseKey, AssetDatabase.GetAssetPath(balanceDatabase));
             SessionState.EraseBool(StageDifficultyTrial.SeededKey);
             EditorSceneManager.playModeStartScene = menu;
             EditorApplication.EnterPlaymode();
@@ -49,6 +52,7 @@ namespace MrX.StageCreator
             SessionState.EraseString(StageDifficultyTrial.StageKey);
             SessionState.EraseInt(StageDifficultyTrial.EntryDifficultyKey);
             SessionState.EraseBool(StageDifficultyTrial.SeededKey);
+            SessionState.EraseString(StageDifficultyTrial.BalanceDatabaseKey);
             Debug.Log(VerificationSession.End());
         }
     }

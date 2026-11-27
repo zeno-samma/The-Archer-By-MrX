@@ -239,6 +239,8 @@ namespace MrX.UI
                 while (selectedDifficulty < StageDifficulty.Hard &&
                     StageSave.CanPlayDifficulty(stageData, selectedDifficulty + 1))
                     selectedDifficulty++;
+
+                selectedDifficulty = StageDifficultyTrial.GetPreferredDifficulty(stageData, StageSave, selectedDifficulty);
             }
 
             RefreshStageLockNotice(stageData, stageId);

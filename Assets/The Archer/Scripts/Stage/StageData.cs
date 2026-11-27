@@ -14,6 +14,17 @@ namespace MrX
         [SerializeField, HideInInspector] protected string stageId;
         public string StageId => stageId;
 
+        [SerializeField, HideInInspector] private int layoutRevision;
+        [SerializeField, HideInInspector] private StageData previousRunLayout;
+
+        public int LayoutRevision => layoutRevision;
+
+        internal StageData GetRunLayout(int savedRevision)
+        {
+            return previousRunLayout != null && previousRunLayout.LayoutRevision == savedRevision
+                ? previousRunLayout : this;
+        }
+
         [SerializeField] protected Sprite stageImage;
         public Sprite StageImage => stageImage;
 
@@ -62,6 +73,23 @@ namespace MrX
         [SerializeField, Min(1f)] private float intermediateHpFactor = 1.25f;
         [SerializeField, Min(1f)] private float hardDamageFactor = 1.3f;
         [SerializeField, Min(1f)] private float hardHpFactor = 1.5f;
+
+        [Header("Encounter Tuning")]
+        [SerializeField, Min(1f)] private float bossHpFactor = 1f;
+        [SerializeField, Min(1f)] private float bossDamageFactor = 1f;
+        [SerializeField, Range(0f, 1f)] private float waveRecoveryFactor = 1f;
+        [SerializeField, Range(0f, 1f)] private float normalEnemyRageFactor = 1f;
+        [SerializeField, Range(0f, 1f)] private float evilChestCurrentHpCost;
+        [SerializeField] private bool useChallengeBossPatterns;
+        [SerializeField] private bool showLowHealthWarning;
+
+        public float BossHpFactor => bossHpFactor;
+        public float BossDamageFactor => bossDamageFactor;
+        public float WaveRecoveryFactor => waveRecoveryFactor;
+        public float NormalEnemyRageFactor => normalEnemyRageFactor;
+        public float EvilChestCurrentHpCost => evilChestCurrentHpCost;
+        public bool UseChallengeBossPatterns => useChallengeBossPatterns;
+        public bool ShowLowHealthWarning => showLowHealthWarning;
 
         public bool UsesDifficulties => enableDifficulties;
 

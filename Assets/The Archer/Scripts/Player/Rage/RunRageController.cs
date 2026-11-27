@@ -44,7 +44,8 @@ namespace MrX.Player
         {
             if (player == null || player.HP <= 0f || active) return;
 
-            charge = Mathf.Min(FullCharge, charge + (isBoss ? bossGain : enemyGain));
+            int gain = isBoss ? bossGain : Mathf.RoundToInt(enemyGain * StageController.StageData.NormalEnemyRageFactor);
+            charge = Mathf.Min(FullCharge, charge + gain);
             if (charge < FullCharge)
             {
                 if (view != null) view.ShowCharge(charge);

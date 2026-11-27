@@ -386,6 +386,15 @@ namespace MrX
             }
         }
 
+        public bool TryPayHealthCost(int cost)
+        {
+            if (cost <= 0 || HP <= cost) return false;
+
+            healthbar.Subtract(cost);
+            onHPChanged?.Invoke();
+            return true;
+        }
+
         public virtual void HealProportion(float maxProportionHP, bool withSound = true)
         {
             if (!IsPlaying) return;
