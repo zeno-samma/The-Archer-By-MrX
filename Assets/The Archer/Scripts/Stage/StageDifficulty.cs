@@ -23,12 +23,12 @@ namespace MrX
         {
             if (!IsActive) return stages;
             string path = UnityEditor.SessionState.GetString(BalanceDatabaseKey, "");
-            if (string.IsNullOrEmpty(path) ||
+            if (string.IsNullOrEmpty(path) || path == SourceDatabasePath ||
                 UnityEditor.AssetDatabase.GetAssetPath(source) != SourceDatabasePath) return stages;
 
             if (balanceDatabase == null || UnityEditor.AssetDatabase.GetAssetPath(balanceDatabase) != path)
                 balanceDatabase = UnityEditor.AssetDatabase.LoadAssetAtPath<StageDatabase>(path);
-            return balanceDatabase != null ? balanceDatabase.Stages : stages;
+            return balanceDatabase != null && balanceDatabase != source ? balanceDatabase.Stages : stages;
         }
 #endif
 

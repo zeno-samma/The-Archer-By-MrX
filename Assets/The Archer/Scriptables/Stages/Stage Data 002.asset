@@ -18,7 +18,7 @@ MonoBehaviour:
   previousRunLayout: {fileID: 11400000, guid: fbdbb83e20254110be1951ab36111f68, type: 2}
   stageImage: {fileID: 21300000, guid: 835fd53e229f40f4abdeb6fac765d85d, type: 3}
   journeyMap: {fileID: 2800000, guid: 2a71d852b684d5349ab36bc89a566127, type: 3}
-  journeyBossPrefab: {fileID: 446584557187707321, guid: c7a78230581b266448a85b11142bf10a, type: 3}
+  journeyBossPrefab: {fileID: 2301113974221449785, guid: 7d9f990dbfab9634e9dd514e68725704, type: 3}
   stageName: Ancient Temple
   energyCost: 0
   showStageObjective: 1
@@ -41,6 +41,8 @@ MonoBehaviour:
   waveRecoveryFactor: 0.3
   normalEnemyRageFactor: 0.55
   evilChestCurrentHpCost: 0.22
+  useChallengeBossPatterns: 0
+  showLowHealthWarning: 0
   unlockDescription: Clear Secrets Pyramid on Hard to unlock.
   unlockConditions:
   - rid: 6849199109708185681
@@ -110,7 +112,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -132,7 +134,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -154,7 +156,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -176,7 +178,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -198,7 +200,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -297,7 +299,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -319,7 +321,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -341,7 +343,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -363,7 +365,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -385,7 +387,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -528,7 +530,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -550,7 +552,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -572,7 +574,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -587,14 +589,14 @@ MonoBehaviour:
             propertyType: 0
       - enemyType: 10
         transformData:
-          position: {x: -4.5, y: 0, z: 7.0}
+          position: {x: -4.5, y: 0, z: 7}
           rotation: {x: 0, y: 1, z: 0, w: 0}
           localScale: {x: 1, y: 1, z: 1}
         overrideData:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -671,7 +673,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -686,14 +688,14 @@ MonoBehaviour:
             propertyType: 0
       - enemyType: 15
         transformData:
-          position: {x: 4.2, y: 0, z: -5.0}
+          position: {x: 4.2, y: 0, z: -5}
           rotation: {x: 0, y: 1, z: 0, w: 0}
           localScale: {x: 1, y: 1, z: 1}
         overrideData:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -715,7 +717,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -737,7 +739,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -759,7 +761,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -781,7 +783,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -896,7 +898,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -918,7 +920,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -940,7 +942,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -955,14 +957,14 @@ MonoBehaviour:
             propertyType: 0
       - enemyType: 6
         transformData:
-          position: {x: 0, y: 0, z: 9.0}
+          position: {x: 0, y: 0, z: 9}
           rotation: {x: 0, y: 1, z: 0, w: 0}
           localScale: {x: 1, y: 1, z: 1}
         overrideData:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -984,7 +986,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -1149,7 +1151,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -1171,7 +1173,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -1193,7 +1195,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -1292,7 +1294,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -1314,7 +1316,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -1329,14 +1331,14 @@ MonoBehaviour:
             propertyType: 0
       - enemyType: 8
         transformData:
-          position: {x: 0, y: 0, z: -7.0}
+          position: {x: 0, y: 0, z: -7}
           rotation: {x: 0, y: 1, z: 0, w: 0}
           localScale: {x: 1, y: 1, z: 1}
         overrideData:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -1358,7 +1360,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -1380,7 +1382,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -1402,7 +1404,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -1538,14 +1540,14 @@ MonoBehaviour:
             propertyType: 0
       - enemyType: 1
         transformData:
-          position: {x: -4.3, y: 0, z: 9.0}
+          position: {x: -4.3, y: 0, z: 9}
           rotation: {x: 0, y: 1, z: 0, w: 0}
           localScale: {x: 1, y: 1, z: 1}
         overrideData:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -1560,14 +1562,14 @@ MonoBehaviour:
             propertyType: 0
       - enemyType: 1
         transformData:
-          position: {x: 4.3, y: 0, z: 9.0}
+          position: {x: 4.3, y: 0, z: 9}
           rotation: {x: 0, y: 1, z: 0, w: 0}
           localScale: {x: 1, y: 1, z: 1}
         overrideData:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -1589,7 +1591,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -1611,7 +1613,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -1633,7 +1635,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -1708,14 +1710,14 @@ MonoBehaviour:
             propertyType: 0
       - enemyType: 15
         transformData:
-          position: {x: -4.2, y: 0, z: 3.0}
+          position: {x: -4.2, y: 0, z: 3}
           rotation: {x: 0, y: 1, z: 0, w: 0}
           localScale: {x: 1, y: 1, z: 1}
         overrideData:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -1730,14 +1732,14 @@ MonoBehaviour:
             propertyType: 0
       - enemyType: 10
         transformData:
-          position: {x: 4.2, y: 0, z: 4.0}
+          position: {x: 4.2, y: 0, z: 4}
           rotation: {x: 0, y: 1, z: 0, w: 0}
           localScale: {x: 1, y: 1, z: 1}
         overrideData:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -1759,7 +1761,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -1880,7 +1882,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -1902,7 +1904,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -1924,7 +1926,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -1946,7 +1948,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -1968,7 +1970,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -2067,7 +2069,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -2089,7 +2091,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -2111,7 +2113,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -2133,7 +2135,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -2155,7 +2157,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -2177,7 +2179,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -2298,7 +2300,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -2320,7 +2322,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -2342,7 +2344,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -2364,7 +2366,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -2386,7 +2388,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -2500,14 +2502,14 @@ MonoBehaviour:
             propertyType: 0
       - enemyType: 8
         transformData:
-          position: {x: 0, y: 0, z: 5.0}
+          position: {x: 0, y: 0, z: 5}
           rotation: {x: 0, y: 1, z: 0, w: 0}
           localScale: {x: 1, y: 1, z: 1}
         overrideData:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -2529,7 +2531,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -2551,7 +2553,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -2573,7 +2575,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -2595,7 +2597,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -2644,7 +2646,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop:
+          removeDrop: 
           overrideHP: 0
           hp:
             value: 100
@@ -2666,7 +2668,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop:
+          removeDrop: 
           overrideHP: 0
           hp:
             value: 100
@@ -2688,7 +2690,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop:
+          removeDrop: 
           overrideHP: 0
           hp:
             value: 100
@@ -2710,7 +2712,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop:
+          removeDrop: 
           overrideHP: 0
           hp:
             value: 100
@@ -2732,7 +2734,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -2754,7 +2756,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -2776,7 +2778,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -2798,7 +2800,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -2820,7 +2822,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -2853,7 +2855,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop:
+          removeDrop: 
           overrideHP: 0
           hp:
             value: 100
@@ -2875,7 +2877,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop:
+          removeDrop: 
           overrideHP: 0
           hp:
             value: 100
@@ -2897,7 +2899,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop:
+          removeDrop: 
           overrideHP: 0
           hp:
             value: 100
@@ -2919,7 +2921,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop:
+          removeDrop: 
           overrideHP: 0
           hp:
             value: 100
@@ -2941,7 +2943,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop:
+          removeDrop: 
           overrideHP: 0
           hp:
             value: 100
@@ -2963,7 +2965,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -2985,7 +2987,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -3007,7 +3009,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -3029,7 +3031,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -3062,7 +3064,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop:
+          removeDrop: 
           overrideHP: 0
           hp:
             value: 100
@@ -3084,7 +3086,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop:
+          removeDrop: 
           overrideHP: 0
           hp:
             value: 100
@@ -3106,7 +3108,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop:
+          removeDrop: 
           overrideHP: 0
           hp:
             value: 100
@@ -3128,7 +3130,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop:
+          removeDrop: 
           overrideHP: 0
           hp:
             value: 100
@@ -3150,7 +3152,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop:
+          removeDrop: 
           overrideHP: 0
           hp:
             value: 100
@@ -3172,7 +3174,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -3194,7 +3196,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -3216,7 +3218,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -3238,7 +3240,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -3260,7 +3262,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -3293,7 +3295,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop:
+          removeDrop: 
           overrideHP: 0
           hp:
             value: 100
@@ -3315,7 +3317,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop:
+          removeDrop: 
           overrideHP: 0
           hp:
             value: 100
@@ -3337,7 +3339,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop:
+          removeDrop: 
           overrideHP: 0
           hp:
             value: 100
@@ -3359,7 +3361,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop:
+          removeDrop: 
           overrideHP: 0
           hp:
             value: 100
@@ -3381,7 +3383,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop:
+          removeDrop: 
           overrideHP: 0
           hp:
             value: 100
@@ -3403,7 +3405,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -3425,7 +3427,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -3447,7 +3449,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -3469,7 +3471,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -3484,14 +3486,14 @@ MonoBehaviour:
             propertyType: 0
       - enemyType: 14
         transformData:
-          position: {x: -4.2, y: 0, z: -1.0}
+          position: {x: -4.2, y: 0, z: -1}
           rotation: {x: 0, y: 1, z: 0, w: 0}
           localScale: {x: 1, y: 1, z: 1}
         overrideData:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -3551,7 +3553,7 @@ MonoBehaviour:
               chance: 100
             selectedZoneId: 0
           dropOverrides: []
-          removeDrop:
+          removeDrop: 
           overrideHP: 0
           hp:
             value: 100
@@ -3573,7 +3575,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -3595,7 +3597,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -3617,7 +3619,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -3639,7 +3641,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -3672,7 +3674,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop:
+          removeDrop: 
           overrideHP: 0
           hp:
             value: 100
@@ -3694,7 +3696,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop:
+          removeDrop: 
           overrideHP: 0
           hp:
             value: 100
@@ -3716,7 +3718,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -3738,7 +3740,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -3760,7 +3762,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -3782,7 +3784,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -3804,7 +3806,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -3826,7 +3828,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -3848,7 +3850,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -3881,7 +3883,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop:
+          removeDrop: 
           overrideHP: 0
           hp:
             value: 100
@@ -3903,7 +3905,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop:
+          removeDrop: 
           overrideHP: 0
           hp:
             value: 100
@@ -3925,7 +3927,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop:
+          removeDrop: 
           overrideHP: 0
           hp:
             value: 100
@@ -3947,7 +3949,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop:
+          removeDrop: 
           overrideHP: 0
           hp:
             value: 100
@@ -3969,7 +3971,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -3991,7 +3993,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -4013,7 +4015,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -4035,7 +4037,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -4057,7 +4059,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -4072,14 +4074,14 @@ MonoBehaviour:
             propertyType: 0
       - enemyType: 8
         transformData:
-          position: {x: 0, y: 0, z: 7.0}
+          position: {x: 0, y: 0, z: 7}
           rotation: {x: 0, y: 1, z: 0, w: 0}
           localScale: {x: 1, y: 1, z: 1}
         overrideData:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -4112,7 +4114,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop:
+          removeDrop: 
           overrideHP: 0
           hp:
             value: 100
@@ -4134,7 +4136,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop:
+          removeDrop: 
           overrideHP: 0
           hp:
             value: 100
@@ -4156,7 +4158,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop:
+          removeDrop: 
           overrideHP: 0
           hp:
             value: 100
@@ -4178,7 +4180,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop:
+          removeDrop: 
           overrideHP: 0
           hp:
             value: 100
@@ -4200,7 +4202,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -4222,7 +4224,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -4237,14 +4239,14 @@ MonoBehaviour:
             propertyType: 0
       - enemyType: 14
         transformData:
-          position: {x: -4.5, y: 0, z: -6.0}
+          position: {x: -4.5, y: 0, z: -6}
           rotation: {x: 0, y: 1, z: 0, w: 0}
           localScale: {x: 1, y: 1, z: 1}
         overrideData:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -4259,14 +4261,14 @@ MonoBehaviour:
             propertyType: 0
       - enemyType: 15
         transformData:
-          position: {x: 4.5, y: 0, z: -6.0}
+          position: {x: 4.5, y: 0, z: -6}
           rotation: {x: 0, y: 1, z: 0, w: 0}
           localScale: {x: 1, y: 1, z: 1}
         overrideData:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -4288,7 +4290,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -4310,7 +4312,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -4343,7 +4345,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop:
+          removeDrop: 
           overrideHP: 0
           hp:
             value: 100
@@ -4365,7 +4367,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop:
+          removeDrop: 
           overrideHP: 0
           hp:
             value: 100
@@ -4387,7 +4389,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop:
+          removeDrop: 
           overrideHP: 0
           hp:
             value: 100
@@ -4409,7 +4411,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop:
+          removeDrop: 
           overrideHP: 0
           hp:
             value: 100
@@ -4431,7 +4433,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop:
+          removeDrop: 
           overrideHP: 0
           hp:
             value: 100
@@ -4446,14 +4448,14 @@ MonoBehaviour:
             propertyType: 0
       - enemyType: 4
         transformData:
-          position: {x: -4.2, y: 0, z: 9.0}
+          position: {x: -4.2, y: 0, z: 9}
           rotation: {x: 0, y: 1, z: 0, w: 0}
           localScale: {x: 1, y: 1, z: 1}
         overrideData:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -4468,14 +4470,14 @@ MonoBehaviour:
             propertyType: 0
       - enemyType: 4
         transformData:
-          position: {x: 4.2, y: 0, z: 9.0}
+          position: {x: 4.2, y: 0, z: 9}
           rotation: {x: 0, y: 1, z: 0, w: 0}
           localScale: {x: 1, y: 1, z: 1}
         overrideData:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -4497,7 +4499,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -4519,7 +4521,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -4541,7 +4543,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -4590,7 +4592,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop:
+          removeDrop: 
           overrideHP: 0
           hp:
             value: 100
@@ -4612,7 +4614,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop:
+          removeDrop: 
           overrideHP: 0
           hp:
             value: 100
@@ -4634,7 +4636,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop:
+          removeDrop: 
           overrideHP: 0
           hp:
             value: 100
@@ -4656,7 +4658,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop:
+          removeDrop: 
           overrideHP: 0
           hp:
             value: 100
@@ -4678,7 +4680,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop:
+          removeDrop: 
           overrideHP: 0
           hp:
             value: 100
@@ -4700,7 +4702,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop:
+          removeDrop: 
           overrideHP: 0
           hp:
             value: 100
@@ -4722,7 +4724,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -4744,7 +4746,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -4766,7 +4768,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -4788,7 +4790,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -4810,7 +4812,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -4843,7 +4845,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop:
+          removeDrop: 
           overrideHP: 0
           hp:
             value: 100
@@ -4865,7 +4867,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop:
+          removeDrop: 
           overrideHP: 0
           hp:
             value: 100
@@ -4887,7 +4889,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop:
+          removeDrop: 
           overrideHP: 0
           hp:
             value: 100
@@ -4909,7 +4911,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop:
+          removeDrop: 
           overrideHP: 0
           hp:
             value: 100
@@ -4931,7 +4933,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop:
+          removeDrop: 
           overrideHP: 0
           hp:
             value: 100
@@ -4953,7 +4955,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop:
+          removeDrop: 
           overrideHP: 0
           hp:
             value: 100
@@ -4975,7 +4977,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop:
+          removeDrop: 
           overrideHP: 0
           hp:
             value: 100
@@ -4997,7 +4999,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop:
+          removeDrop: 
           overrideHP: 0
           hp:
             value: 100
@@ -5019,7 +5021,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -5041,7 +5043,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -5063,7 +5065,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -5085,7 +5087,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -5118,7 +5120,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop:
+          removeDrop: 
           overrideHP: 0
           hp:
             value: 100
@@ -5140,7 +5142,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop:
+          removeDrop: 
           overrideHP: 0
           hp:
             value: 100
@@ -5162,7 +5164,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop:
+          removeDrop: 
           overrideHP: 0
           hp:
             value: 100
@@ -5184,7 +5186,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop:
+          removeDrop: 
           overrideHP: 0
           hp:
             value: 100
@@ -5206,7 +5208,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop:
+          removeDrop: 
           overrideHP: 0
           hp:
             value: 100
@@ -5228,7 +5230,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -5250,7 +5252,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -5272,7 +5274,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -5294,7 +5296,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -5316,7 +5318,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -5338,7 +5340,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -5371,7 +5373,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop:
+          removeDrop: 
           overrideHP: 0
           hp:
             value: 100
@@ -5393,7 +5395,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop:
+          removeDrop: 
           overrideHP: 0
           hp:
             value: 100
@@ -5415,7 +5417,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop:
+          removeDrop: 
           overrideHP: 0
           hp:
             value: 100
@@ -5437,7 +5439,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop:
+          removeDrop: 
           overrideHP: 0
           hp:
             value: 100
@@ -5459,7 +5461,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop:
+          removeDrop: 
           overrideHP: 0
           hp:
             value: 100
@@ -5481,7 +5483,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -5503,7 +5505,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -5525,7 +5527,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -5547,7 +5549,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -5569,7 +5571,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -5591,7 +5593,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -5684,7 +5686,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -5706,7 +5708,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -5728,7 +5730,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
@@ -5750,7 +5752,7 @@ MonoBehaviour:
           bossChestRewards: {fileID: 0}
           additionalDrop: []
           dropOverrides: []
-          removeDrop: 000000000100000002000000
+          removeDrop: 000000000100000002000000i
           overrideHP: 0
           hp:
             value: 100
