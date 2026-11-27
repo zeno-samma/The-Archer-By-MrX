@@ -34,8 +34,8 @@ namespace MrX.UI
         [Space]
         [SerializeField] protected Image blackFadeImage;
         [SerializeField] private CanvasGroup lowHealthOverlay;
-        [SerializeField, Range(0f, 1f)] private float lowHealthPeakOpacity = 0.09f;
-        [SerializeField, Range(0f, 1f)] private float criticalHealthPeakOpacity = 0.22f;
+        [SerializeField, Range(0f, 1f)] private float lowHealthPeakOpacity = 0.20f;
+        [SerializeField, Range(0f, 1f)] private float criticalHealthPeakOpacity = 0.48f;
         private float healthPulsePhase;
 
         [Space]

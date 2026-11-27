@@ -598,8 +598,8 @@ MonoBehaviour:
   stageComleteScreen: {fileID: 1273464060}
   blackFadeImage: {fileID: 2134936744}
   lowHealthOverlay: {fileID: 3465001004}
-  lowHealthPeakOpacity: 0.09
-  criticalHealthPeakOpacity: 0.22
+  lowHealthPeakOpacity: 0.20
+  criticalHealthPeakOpacity: 0.48
   experienceUI: {fileID: 690559792}
   bossfightProgressbar: {fileID: 1649165939}
 --- !u!1 &3465001000
@@ -668,10 +668,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: 932c51eb6bcd41299aa256ed9ee076c3, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
-  m_FillCenter: 1
+  m_FillCenter: 0
   m_FillMethod: 4
   m_FillAmount: 1
   m_FillClockwise: 1
