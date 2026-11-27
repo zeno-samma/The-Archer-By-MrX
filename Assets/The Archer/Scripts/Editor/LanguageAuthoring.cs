@@ -23,11 +23,8 @@ namespace MrX.EditorTools
             var font = table != null ? table.latinFont : null;
             if (font == null) throw new System.InvalidOperationException("The translated text font is missing.");
 
-            string missing = new string(table.entries
-                .Where(entry => entry != null && !string.IsNullOrEmpty(entry.vietnamese))
-                .SelectMany(entry => entry.vietnamese)
-                .Where(character => !char.IsControl(character) && !font.HasCharacter(character))
-                .Distinct().ToArray());
+            string missing = new string(GetVietnameseGlyphs(table)
+                .Where(character => !font.HasCharacter(character)).ToArray());
             if (missing.Length == 0) return 0;
 
             var populationMode = font.atlasPopulationMode;
@@ -51,6 +48,12 @@ namespace MrX.EditorTools
             AssetDatabase.SaveAssetIfDirty(font);
             return missing.Length;
         }
+
+        public static IEnumerable<char> GetVietnameseGlyphs(MenuTranslations table) =>
+            table.entries.Where(entry => !string.IsNullOrEmpty(entry?.vietnamese))
+                .SelectMany(entry => entry.vietnamese.Concat(entry.vietnamese.ToUpperInvariant()))
+                .Where(character => !char.IsControl(character))
+                .Distinct();
 
         public static void Install()
         {

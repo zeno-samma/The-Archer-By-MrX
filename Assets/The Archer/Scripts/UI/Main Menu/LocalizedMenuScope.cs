@@ -49,29 +49,26 @@ namespace MrX.UI
             TMPro_EventManager.TEXT_CHANGED_EVENT.Remove(OnTextChanged);
         }
 
-        private Binding Track(TMP_Text label)
+        private void Track(TMP_Text label)
         {
-            if (bindings.TryGetValue(label, out var binding)) return binding;
-            if (label.GetComponentInParent<LocalizedMenuScope>(true) != this) return null;
+            if (bindings.ContainsKey(label) || label.GetComponentInParent<LocalizedMenuScope>(true) != this) return;
             var input = label.GetComponentInParent<TMP_InputField>(true);
-            if (input != null && input.textComponent == label) return null;
+            if (input != null && input.textComponent == label) return;
 
-            binding = new Binding
+            bindings.Add(label, new Binding
             {
                 Font = label.font,
                 Material = label.fontSharedMaterial,
                 Source = label.text
-            };
-            bindings.Add(label, binding);
-            return binding;
+            });
         }
 
         private void OnTextChanged(Object changed)
         {
-            if (!(changed is TMP_Text label) || label == null) return;
-            var binding = Track(label);
-            if (binding != null && label.text != binding.Displayed)
-                Apply(label, binding);
+            // TMP sends this event during canvas rebuild. Register new labels here
+            // and update their text and font together before the next rebuild.
+            if (changed is TMP_Text label && label != null)
+                Track(label);
         }
 
         private void Refresh()
@@ -106,8 +103,12 @@ namespace MrX.UI
             if (font != null && label.font != font)
             {
                 label.font = font;
-                if (translatedFont == null && binding.Material != null)
-                    label.fontSharedMaterial = binding.Material;
+                // A preset for a different atlas would render the right text with the wrong glyphs.
+                var preset = translatedFont == null ? binding.Material : null;
+                var presetAtlas = preset != null ? preset.GetTexture(ShaderUtilities.ID_MainTex) : null;
+                var defaultAtlas = font.material != null ? font.material.GetTexture(ShaderUtilities.ID_MainTex) : null;
+                label.fontSharedMaterial = presetAtlas != null &&
+                    (presetAtlas == font.atlasTexture || presetAtlas == defaultAtlas) ? preset : font.material;
             }
 
             if (label.text != translated) label.text = translated;

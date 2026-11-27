@@ -31,8 +31,8 @@ namespace MrX.EditorTools
                 }
             }
 
-            foreach (char character in table.entries.SelectMany(entry => entry.vietnamese).Distinct())
-                Require(char.IsControl(character) || table.latinFont.HasCharacter(character), "Vietnamese font is missing: " + character);
+            foreach (char character in LanguageAuthoring.GetVietnameseGlyphs(table))
+                Require(table.latinFont.HasCharacter(character), "Vietnamese font is missing: " + character);
 
             Require(table.Translate("START", "vi") == "BẮT ĐẦU", "Static menu label");
             Require(table.Translate("Stage 3", "vi") == "Màn 3", "Dynamic menu label");
