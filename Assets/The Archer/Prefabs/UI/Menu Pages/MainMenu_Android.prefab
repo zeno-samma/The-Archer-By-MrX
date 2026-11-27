@@ -25761,6 +25761,7 @@ GameObject:
   - component: {fileID: 8264223120237676227}
   - component: {fileID: 3712933312953385218}
   - component: {fileID: 7518091367837696979}
+  - component: {fileID: 3264332389116806473}
   m_Layer: 5
   m_Name: Dimed
   m_TagString: Untagged
@@ -25786,7 +25787,7 @@ RectTransform:
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &3712933312953385218
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -25809,14 +25810,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 96274b6f4982041558dfdc5471747076, type: 3}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 39e939b725534e60b1bd4da45c13943a, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -25825,6 +25826,20 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &3264332389116806473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6354902409344396244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86710e43de46f6f4bac7c8e50813a599, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.AspectRatioFitter
+  m_AspectMode: 4
+  m_AspectRatio: 0.44973263
 --- !u!1 &6403168017566721995
 GameObject:
   m_ObjectHideFlags: 0
@@ -49479,6 +49494,18 @@ PrefabInstance:
       propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7871257992306724236, guid: 1317e0958a20648fb9ef30b4962a3425, type: 3}
+      propertyPath: m_Pivot.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7871257992306724237, guid: 1317e0958a20648fb9ef30b4962a3425, type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7871257992306724237, guid: 1317e0958a20648fb9ef30b4962a3425, type: 3}
+      propertyPath: m_Sprite
+      value:
+      objectReference: {fileID: 21300000, guid: 6a99bc83279d48eda7690a4518153ddd, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 7871257993029865783, guid: 1317e0958a20648fb9ef30b4962a3425, type: 3}
@@ -49498,8 +49525,30 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7871257992326526010, guid: 1317e0958a20648fb9ef30b4962a3425, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5517412536102572327}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7871257992306724239, guid: 1317e0958a20648fb9ef30b4962a3425, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 894158221354917261}
   m_SourcePrefab: {fileID: 100100000, guid: 1317e0958a20648fb9ef30b4962a3425, type: 3}
+--- !u!1 &894158221354917260 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7871257992306724239, guid: 1317e0958a20648fb9ef30b4962a3425, type: 3}
+  m_PrefabInstance: {fileID: 3398912318194937743}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &894158221354917261
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 894158221354917260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86710e43de46f6f4bac7c8e50813a599, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.AspectRatioFitter
+  m_AspectMode: 4
+  m_AspectRatio: 0.44973262
 --- !u!224 &4762292509106859263 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7871257993220981616, guid: 1317e0958a20648fb9ef30b4962a3425, type: 3}
@@ -53942,6 +53991,22 @@ PrefabInstance:
       propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
       value: 1801810542
       objectReference: {fileID: 0}
+    - target: {fileID: 6573819801601141902, guid: 1bd849e3442624e8ea1d212432f8c7b2, type: 3}
+      propertyPath: m_Pivot.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6573819801601141901, guid: 1bd849e3442624e8ea1d212432f8c7b2, type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6573819801601141901, guid: 1bd849e3442624e8ea1d212432f8c7b2, type: 3}
+      propertyPath: m_Sprite
+      value:
+      objectReference: {fileID: 21300000, guid: ac40762d308a4fb7880c8cb3190e47e3, type: 3}
+    - target: {fileID: 6573819801601141901, guid: 1bd849e3442624e8ea1d212432f8c7b2, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 6573819801098954377, guid: 1bd849e3442624e8ea1d212432f8c7b2, type: 3}
@@ -53989,7 +54054,29 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6573819800969002775, guid: 1bd849e3442624e8ea1d212432f8c7b2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6136013112189913698}
+    - targetCorrespondingSourceObject: {fileID: 6573819801601141903, guid: 1bd849e3442624e8ea1d212432f8c7b2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 894158221354917259}
   m_SourcePrefab: {fileID: 100100000, guid: 1bd849e3442624e8ea1d212432f8c7b2, type: 3}
+--- !u!1 &894158221354917258 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6573819801601141903, guid: 1bd849e3442624e8ea1d212432f8c7b2, type: 3}
+  m_PrefabInstance: {fileID: 6735185685619628197}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &894158221354917259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 894158221354917258}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86710e43de46f6f4bac7c8e50813a599, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.AspectRatioFitter
+  m_AspectMode: 4
+  m_AspectRatio: 0.44973262
 --- !u!114 &451144970175834032 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6573819800969002773, guid: 1bd849e3442624e8ea1d212432f8c7b2, type: 3}
@@ -54817,11 +54904,49 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -66.5
       objectReference: {fileID: 0}
+    - target: {fileID: 4722666987020720880, guid: ac6f3b1452525ae4294ae32b50cfae33, type: 3}
+      propertyPath: m_Pivot.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6210925758937212478, guid: ac6f3b1452525ae4294ae32b50cfae33, type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6210925758937212478, guid: ac6f3b1452525ae4294ae32b50cfae33, type: 3}
+      propertyPath: m_Sprite
+      value:
+      objectReference: {fileID: 21300000, guid: 9df5fdb1c823408ebc9191de358e1e26, type: 3}
+    - target: {fileID: 6210925758937212478, guid: ac6f3b1452525ae4294ae32b50cfae33, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6494486867650202276, guid: ac6f3b1452525ae4294ae32b50cfae33, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 894158221354917263}
   m_SourcePrefab: {fileID: 100100000, guid: ac6f3b1452525ae4294ae32b50cfae33, type: 3}
+--- !u!1 &894158221354917262 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6494486867650202276, guid: ac6f3b1452525ae4294ae32b50cfae33, type: 3}
+  m_PrefabInstance: {fileID: 6982983971414062187}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &894158221354917263
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 894158221354917262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86710e43de46f6f4bac7c8e50813a599, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.AspectRatioFitter
+  m_AspectMode: 4
+  m_AspectRatio: 0.44973262
 --- !u!224 &8844822260738668181 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1898148595684213502, guid: ac6f3b1452525ae4294ae32b50cfae33, type: 3}

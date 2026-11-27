@@ -22,7 +22,7 @@ namespace MrX
         public static ISaveManager SaveManager { get; protected set; }
         public static ICurrenciesManager CurrenciesManager { get; protected set; }
         public static MenuEconomyService MenuEconomy { get; private set; }
-        private static bool loadingStage;
+        private static bool changingScene;
         public static IVibrationManager VibrationManager { get; protected set; }
         public static IAudioManager AudioManager { get; protected set; }
         public static IInputManager InputManager { get; protected set; }
@@ -49,7 +49,7 @@ namespace MrX
             SaveManager = null;
             CurrenciesManager = null;
             MenuEconomy = null;
-            loadingStage = false;
+            changingScene = false;
             VibrationManager = null;
             AudioManager = null;
             InputManager = null;
@@ -203,18 +203,19 @@ namespace MrX
 
         public static bool TryStartNewRun(StageData stage, StageDifficulty difficulty)
         {
-            if (instance == null || loadingStage || stage == null || MenuEconomy == null) return false;
+            if (instance == null || stage == null || MenuEconomy == null ||
+                !CanChangeScene(SceneSettings.GameScene.SceneName)) return false;
             var stages = SaveManager.GetSave<StageSave>("Stage");
             if (!stages.CanPlayDifficulty(stage, difficulty)) return false;
             // Set the transition guard before wallet events can reenter the start path.
-            loadingStage = true;
-            if (!MenuEconomy.TrySpendForNewRun(stage.EnergyCost)) { loadingStage = false; return false; }
+            changingScene = true;
+            if (!MenuEconomy.TrySpendForNewRun(stage.EnergyCost)) { changingScene = false; return false; }
             var run = SaveManager.GetSave<ContinuePlayingSave>("Continue Playing");
             run.Disable();
             run.RememberRun(stage.StageId, difficulty);
             CurrenciesManager.ApplyGameplayAmounts();
             stages.IncrementStageAttempts(stage);
-            instance.StartCoroutine(StageLoadingCoroutine());
+            instance.StartCoroutine(ChangeScene(SceneSettings.MainMenuScene.SceneName, SceneSettings.GameScene.SceneName));
             SaveManager.Save(false);
             return true;
         }
@@ -222,74 +223,87 @@ namespace MrX
         // Resume and explicit Editor testing keep their existing prepaid entry path.
         public static void LoadStage()
         {
-            if (instance == null || loadingStage) return;
-            loadingStage = true;
-            instance.StartCoroutine(StageLoadingCoroutine());
+            if (instance == null || !CanChangeScene(SceneSettings.GameScene.SceneName)) return;
+            changingScene = true;
+            instance.StartCoroutine(ChangeScene(SceneSettings.MainMenuScene.SceneName, SceneSettings.GameScene.SceneName));
 
             SaveManager.Save(false);
         }
 
         public static void LoadMainMenu()
         {
+            if (instance == null || !CanChangeScene(SceneSettings.MainMenuScene.SceneName)) return;
+            changingScene = true;
+
             bool settled = StageController.IsLoaded && StageController.IsResultFinalized;
             if (!settled) CurrenciesManager.ApplyGameplayAmounts();
 
-            if (instance != null) instance.StartCoroutine(MainMenuLoadingCoroutine());
+            instance.StartCoroutine(ChangeScene(SceneSettings.GameScene.SceneName, SceneSettings.MainMenuScene.SceneName));
 
             if (!settled) SaveManager.Save(false);
         }
 
-        private static IEnumerator StageLoadingCoroutine()
+        private static bool CanChangeScene(string destination)
         {
-            // Debug.Log("Loading Stage...");
-            yield return LoadAsyncScene(SceneSettings.LoadingScene.SceneName, LoadSceneMode.Additive);//Load loading scene
-            yield return UnloadAsyncScene(SceneSettings.MainMenuScene.SceneName);//Unload main menu scene
-            yield return LoadAsyncScene(SceneSettings.GameScene.SceneName, LoadSceneMode.Single);//Load game scene
+            if (changingScene || SceneManager.GetActiveScene().name == destination) return false;
+
+            string loadingScene = SceneSettings.LoadingScene.SceneName;
+            if (Application.CanStreamedLevelBeLoaded(loadingScene) && Application.CanStreamedLevelBeLoaded(destination))
+                return true;
+
+            Debug.LogError($"Cannot change scene to '{destination}'. Check the scene list for '{loadingScene}' and '{destination}'.");
+            return false;
         }
 
-        private static IEnumerator MainMenuLoadingCoroutine()
+        private static IEnumerator ChangeScene(string outgoing, string destination)
         {
-            Debug.Log("[SCENE] 1 - LoadingScene START");
-            yield return LoadAsyncScene(SceneSettings.LoadingScene.SceneName, LoadSceneMode.Additive);
-            Debug.Log("[SCENE] 2 - LoadingScene DONE");
-            Debug.Log("[SCENE] 3 - Unload GameScene START");
-            yield return UnloadAsyncScene(SceneSettings.GameScene.SceneName);
-            Debug.Log("[SCENE] 4 - Unload GameScene DONE");
-            Debug.Log("[SCENE] 5 - MainMenuScene START");
-            yield return LoadAsyncScene(SceneSettings.MainMenuScene.SceneName, LoadSceneMode.Single);
-            Debug.Log("[SCENE] 6 - MainMenuScene DONE");
-
-            loadingStage = false;
-
-            AudioManager.PlayMainMusic();
-        }
-
-        private static IEnumerator UnloadAsyncScene(string sceneName)
-        {
-            var asyncLoad = SceneManager.UnloadSceneAsync(sceneName);
-            asyncLoad.allowSceneActivation = false;
-            //wait until the asynchronous scene fully loads
-            while (!asyncLoad.isDone)
+            LoadingScreenProgress progressView = null;
+            try
             {
-                yield return null;
-            }
-        }
-
-        private static IEnumerator LoadAsyncScene(string sceneName, LoadSceneMode loadSceneMode)
-        {
-            // Debug.Log($"Loading scene {sceneName}...");
-            var asyncLoad = SceneManager.LoadSceneAsync(sceneName, loadSceneMode);
-            asyncLoad.allowSceneActivation = false;
-            //wait until the asynchronous scene fully loads
-            while (!asyncLoad.isDone)
-            {
-                //scene has loaded as much as possible,
-                // the last 10% can't be multi-threaded
-                if (asyncLoad.progress >= 0.9f)
+                string loadingSceneName = SceneSettings.LoadingScene.SceneName;
+                var loadingScene = SceneManager.GetSceneByName(loadingSceneName);
+                if (!loadingScene.isLoaded)
                 {
-                    asyncLoad.allowSceneActivation = true;
+                    yield return SceneManager.LoadSceneAsync(loadingSceneName, LoadSceneMode.Additive);
+                    loadingScene = SceneManager.GetSceneByName(loadingSceneName);
                 }
-                yield return null;
+
+                foreach (var root in loadingScene.GetRootGameObjects())
+                {
+                    if (root.TryGetComponent(out progressView)) break;
+                }
+
+                if (progressView != null)
+                {
+                    // Keep the overlay through single-scene activation so 100% means the destination is loaded.
+                    DontDestroyOnLoad(progressView.gameObject);
+                    yield return null;
+                }
+
+                var outgoingScene = SceneManager.GetSceneByName(outgoing);
+                if (outgoingScene.isLoaded) yield return SceneManager.UnloadSceneAsync(outgoingScene);
+
+                var load = SceneManager.LoadSceneAsync(destination, LoadSceneMode.Single);
+                while (!load.isDone)
+                {
+                    if (progressView != null)
+                        progressView.SetProgress(Mathf.Clamp01(load.progress / 0.9f) * 0.99f);
+                    yield return null;
+                }
+
+                if (progressView != null)
+                {
+                    progressView.SetProgress(1f);
+                    yield return null;
+                }
+
+                if (destination == SceneSettings.MainMenuScene.SceneName)
+                    AudioManager.PlayMainMusic();
+            }
+            finally
+            {
+                if (progressView != null) Destroy(progressView.gameObject);
+                changingScene = false;
             }
         }
     }
